@@ -1,0 +1,117 @@
+generated: '2026-08-02'
+method: derived
+source: openapi/ + https://docs.visier.com/developer/apis/ + https://www.visier.com/trust/compliance/
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: >-
+    Nine OpenAPI documents published at github.com/visier/openapi-clients (res/*.yaml); seven are
+    OpenAPI 3.0.3, two (compensation-benchmarks, skills-intelligence-engine) are 3.0.1.
+- id: openapi-3.1
+  conforms: false
+  evidence: No 3.1 document published as of 2026-08-02.
+- id: oauth2
+  conforms: true
+  evidence: >-
+    OpenAPI securitySchemes declare OAuth2Auth (type oauth2) with authorizationCode and password
+    flows; /v1/auth/oauth2/authorize, /v1/auth/oauth2/token and /v1/auth/oauth2/userinfo are public
+    operations. The Visier Query MCP server additionally supports the SAML 2.0 Bearer Assertion grant
+    (RFC 7522).
+- id: rfc7522-saml2-bearer-assertion
+  conforms: true
+  evidence: MCP set-up docs document a SAML 2.0 Bearer Assertion grant type for Visier OAuth clients.
+- id: openid-connect
+  conforms: false
+  evidence: >-
+    No /.well-known/openid-configuration document was served (404 on visier.com). A /v1/auth/oauth2/
+    userinfo endpoint exists but Visier does not publish an OIDC discovery document or advertise
+    OIDC conformance.
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: false
+  evidence: /.well-known/oauth-authorization-server returned 404 on visier.com. Tenant hosts are not anonymously reachable.
+- id: rfc9116-security-txt
+  conforms: true
+  evidence: https://www.visier.com/.well-known/security.txt returns 200 text/plain with Contact and Encryption fields.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Error responses use application/json with a custom ApiError envelope (message, localizedMessage,
+    rci, code, userError), not application/problem+json.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: >-
+    Deprecation is communicated via notices, docs labels and OpenAPI deprecation flags. No Sunset or
+    Deprecation HTTP headers are documented.
+- id: model-context-protocol
+  conforms: true
+  evidence: >-
+    Visier ships a hosted Query MCP server at https://{vanity_name}.app.visier.com/visier-query-mcp
+    over HTTPS/SSE with OAuth 2.0, exposing tools and prompts. See mcp/visier-mcp.yml.
+- id: a2a-agent-card
+  conforms: false
+  evidence: >-
+    /.well-known/agent-card.json and /.well-known/agent.json both returned 404 on visier.com and
+    www.visier.com on 2026-08-02.
+- id: asyncapi
+  conforms: false
+  evidence: >-
+    Visier has a real event surface (webhooks with 10 documented event types) but publishes no
+    AsyncAPI document. See asyncapi/visier-webhooks.yml.
+- id: json-schema
+  conforms: true
+  evidence: OpenAPI 3.0 components.schemas — 887 distinct schemas across the published collections.
+- id: scim
+  conforms: false
+  evidence: >-
+    Visier ships its own Users / Profiles / Permissions APIs under /v1/admin rather than SCIM 2.0
+    /Users and /Groups resources.
+- id: odata
+  conforms: false
+  evidence: No OData conventions in the published specs.
+- id: json-api
+  conforms: false
+  evidence: Responses are plain JSON DTOs, not JSON:API documents.
+- id: graphql
+  conforms: false
+  evidence: No GraphQL surface documented or discovered.
+- id: grpc
+  conforms: false
+  evidence: No .proto definitions published in the visier GitHub organization or on buf.build.
+- id: soc2
+  conforms: true
+  evidence: >-
+    Listed under "Audits and Certifications" at https://www.visier.com/trust/compliance/. The report
+    itself is customer-gated via the Trust Assurance Package.
+- id: csa-star-level-1
+  conforms: true
+  evidence: Listed under "Audits and Certifications" at https://www.visier.com/trust/compliance/.
+- id: iso-27001
+  conforms: unknown
+  evidence: Not named on Visier's public trust or compliance pages as of 2026-08-02.
+- id: gdpr
+  conforms: unknown
+  evidence: >-
+    Visier names a Data Protection Officer (dpo@visier.com) and publishes a privacy statement, but no
+    explicit GDPR conformance claim was found on the public trust pages.
+- id: hipaa
+  conforms: false
+  evidence: Not claimed on the public trust or compliance pages.
+- id: fedramp
+  conforms: false
+  evidence: Not claimed on the public trust or compliance pages.
+- id: pci-dss
+  conforms: false
+  evidence: Not applicable — Visier is not a payments provider — and not claimed.
+conventions:
+- id: pagination
+  conforms: true
+  style: offset-limit (start/limit, 206 Partial Content on truncation)
+  evidence: conventions/visier-conventions.yml
+- id: idempotency
+  conforms: false
+  evidence: >-
+    No idempotency key header in any published spec or in the API Headers reference. Optimistic
+    locking (Prefer: nvLock) and bulk correlation IDs exist but are not retry-safety keys.
+- id: rate-limit-headers
+  conforms: true
+  evidence: X-RateLimit-Limit-Minute / -Remaining-Minute / -Limit-Hour / -Remaining-Hour on every response.

@@ -1,0 +1,69 @@
+generated: '2026-08-02'
+method: searched
+source: https://docs.visier.com/developer/Embedded/get-started/sdlc.htm
+docs: https://docs.visier.com/developer/Embedded/get-started/sdlc.htm
+public_self_serve_sandbox: false
+summary: >-
+  Visier is an enterprise platform with no public, self-serve sandbox and no published test
+  credentials, test keys, or magic test values. Test-vs-live separation is achieved with separate
+  provisioned ENVIRONMENTS — each a distinct Visier instance with its own SSO, API key and
+  configuration — rather than with a mode flag or a key prefix on a single tenant. Environments are
+  provisioned by Visier during onboarding, so there is nothing here an unaffiliated developer can
+  self-serve.
+separation_model: separate-instances
+key_prefixes: none
+key_prefix_note: >-
+  Visier API keys carry no documented test/live prefix. Which environment a key addresses is
+  determined by the host it is used against ({vanity_name}.api.visier.io per environment).
+environments:
+- name: Development
+  purpose: A safe environment to build and test changes. Separate from the production environment.
+  distinct_instance: true
+  distinct_credentials: true
+  guidance:
+  - Use sample data that resembles your analytic tenants' data but is not customer data.
+  - Do not upload customer data to this environment.
+- name: Validation
+  purpose: Optional intermediate stage between development and production.
+  distinct_instance: true
+  distinct_credentials: true
+  note: >-
+    More than one validation environment may be required. Validation requirements are agreed with
+    Visier during onboarding.
+- name: Production
+  purpose: The live, customer-facing environment where published changes take effect.
+  distinct_instance: true
+  distinct_credentials: true
+test_data:
+  provided_by_visier: false
+  guidance: >-
+    Visier instructs partners to populate development environments with their own synthetic sample
+    data resembling real analytic tenant data. Visier does not publish a fixture set, seeded test
+    tenant, or magic test identifiers.
+in_api_test_affordances:
+- name: Webhook test event
+  operation: Webhooks_SendTestEvent
+  path: POST /v1/op/webhooks/{webhookId}/testEvent
+  description: >-
+    Sends a test event to a registered webhook endpoint — the one genuine "trigger a fixture"
+    affordance in the public API. Use it to verify delivery without waiting for a real platform event.
+  spec: openapi/visier-webhooks-openapi.yaml
+- name: Direct Data Intake sample data load
+  operation: DirectDataIntake_LoadSampleData
+  path: POST /v1/data/directloads/{draftId}/transactions/{transactionId}/{objectName}/sample-data
+  description: Loads sample data into an open Direct Data Intake transaction.
+  spec: openapi/visier-data-in-apis-openapi.yaml
+- name: Transaction rollback
+  operation: DirectDataIntake_RollbackTransaction
+  path: DELETE /v1/data/directloads/{draftId}/transactions/{transactionId}
+  description: >-
+    Discards an in-flight load. The closest thing Visier offers to an undo, and the reason a DDI
+    experiment can be run safely against a real environment.
+  spec: openapi/visier-data-in-apis-openapi.yaml
+- name: Non-versioned / project isolation
+  headers: [ProjectID, NonVersioned]
+  description: >-
+    Model and administration changes run inside a project against a versioned analytic model, so
+    changes can be built and reviewed before being published to production.
+time_simulation: none
+test_cards: not applicable

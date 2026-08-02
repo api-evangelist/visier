@@ -1,0 +1,61 @@
+generated: '2026-08-02'
+method: searched
+source: live probes of the Visier public hosts on 2026-08-02
+hosts_probed:
+- https://www.visier.com
+- https://visier.com
+- https://docs.visier.com
+notes: >-
+  The Visier API host is tenant-scoped (https://{vanity_name}.api.visier.io) and the MCP host is
+  https://{vanity_name}.app.visier.com, so neither resolves anonymously and neither could be probed
+  for /.well-known/ documents. docs.visier.com is a MadCap Flare single-page application that answers
+  HTTP 200 with an HTML shell for every /.well-known/* path — those responses are catch-alls, not
+  documents, and are recorded as false positives rather than hits.
+documents:
+- path: /.well-known/security.txt
+  host: https://www.visier.com
+  status: 200
+  content_type: text/plain
+  file: visier-security.txt
+- path: /.well-known/security@visier.com.pgp.txt
+  host: https://www.visier.com
+  status: 200
+  note: PGP encryption key referenced by security.txt
+- path: /.well-known/openid-configuration
+  host: https://www.visier.com
+  status: 404
+- path: /.well-known/oauth-authorization-server
+  host: https://www.visier.com
+  status: 404
+- path: /.well-known/api-catalog
+  host: https://www.visier.com
+  status: 404
+- path: /.well-known/ai-plugin.json
+  host: https://www.visier.com
+  status: 404
+- path: /.well-known/agent-card.json
+  host: https://www.visier.com
+  status: 404
+- path: /.well-known/agent.json
+  host: https://www.visier.com
+  status: 404
+- path: /llms.txt
+  host: https://www.visier.com
+  status: 404
+- path: /llms.txt
+  host: https://docs.visier.com
+  status: 200
+  result: false-positive
+  note: SPA catch-all returned text/html (4006 bytes) rather than an llms.txt document.
+false_positives:
+- host: https://docs.visier.com
+  paths:
+  - /.well-known/security.txt
+  - /.well-known/openid-configuration
+  - /.well-known/oauth-authorization-server
+  - /.well-known/api-catalog
+  - /.well-known/ai-plugin.json
+  - /.well-known/agent-card.json
+  - /.well-known/agent.json
+  - /llms.txt
+  reason: MadCap Flare SPA catch-all returns HTTP 200 text/html for every unmatched path.

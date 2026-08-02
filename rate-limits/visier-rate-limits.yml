@@ -1,0 +1,36 @@
+generated: '2026-08-02'
+method: searched
+source: https://docs.visier.com/developer/apis/rate-limit.htm
+docs: https://docs.visier.com/developer/apis/rate-limit.htm
+scope: platform-wide default across the Visier public APIs
+rate_limits:
+- name: Per-minute default
+  limit_count: 100
+  interval: minute
+  description: Visier's default rate limit is 100 calls per minute.
+- name: Per-hour default
+  limit_count: 6000
+  interval: hour
+  description: Visier's default rate limit is 6000 calls per hour.
+exceeded:
+  status_code: 429
+  reason: Too Many Requests — API rate limit exceeded.
+  description: >-
+    In the event that you reach or exceed the rate limit, a failure response with an HTTP 429 status
+    code is returned.
+signaling:
+  headers:
+  - name: X-RateLimit-Limit-Minute
+    description: The per-minute call limit.
+  - name: X-RateLimit-Remaining-Minute
+    description: Calls remaining in the current minute window.
+  - name: X-RateLimit-Limit-Hour
+    description: The per-hour call limit.
+  - name: X-RateLimit-Remaining-Hour
+    description: Calls remaining in the current hour window.
+  note: >-
+    Visier returns rate-limit information in every response header. Clients are expected to read the
+    headers and pace themselves rather than relying on 429 backoff alone.
+applies_to:
+- Visier public REST APIs (all collections)
+- Visier Query MCP Server — MCP calls consume the same API rate limits and are rejected over the limit.

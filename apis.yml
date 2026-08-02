@@ -1,18 +1,233 @@
 aid: visier
 name: Visier
-description: 'Visier is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Visier is a workforce and people analytics platform that consolidates HR, talent,
+  compensation, and operational data into a purpose-built people data model, then exposes that model
+  for analysis, planning, and AI-assisted question answering. Visier publishes a broad suite of public
+  REST APIs — Data In (Direct Data Intake, Data Upload, job handling), Data Out (Data Query, Vee,
+  exports), Administration (tenants, users, profiles, permissions, projects), Analytic Model (data
+  model, concepts, metrics, dimensions), Planning, Webhooks, and dataset APIs such as Compensation
+  Benchmarks and the Skills Intelligence Engine. OpenAPI v3 definitions for every collection are
+  published on GitHub at visier/openapi-clients, generated Python SDKs ship to PyPI, and a hosted
+  Visier Query MCP server exposes Vee and data-query tools to MCP clients over OAuth 2.0.'
+image: https://www.visier.com/static/visier-og-image-289b36a6392a307b7342ffcf69bdee4c.jpg
 url: https://raw.githubusercontent.com/api-evangelist/visier/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-02'
 modified: '2026-08-02'
+x-enrichment:
+  date: '2026-08-02'
+  status: enriched
+  artifacts_added: 49
+  pass: local-v1
 tags:
 - Company
-apis: []
+- People Analytics
+- Workforce Analytics
+- Human Resources
+- HR Technology
+- Workforce Planning
+- Analytics
+- Business Intelligence
+- Compensation
+- Skills
+- Artificial Intelligence
+- Model Context Protocol
+apis:
+- aid: visier:administration
+  name: Visier Administration APIs
+  description: 'Administration APIs for managing a Visier deployment: tenants, users, user groups,
+    profiles, permissions, projects, production versions, system status, sources, email domains, and
+    network subnets. 125 operations across 19 tags.'
+  humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
+  baseURL: https://{vanity_name}.api.visier.io
+  tags:
+  - Administration
+  - Tenants
+  - Users
+  - Permissions
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/visier-administration-apis-openapi.yaml
+  - type: Overlay
+    url: overlays/visier-administration-apis-overlay.yaml
+  - type: Documentation
+    url: https://docs.visier.com/developer/apis/administration/user-management/users-api.htm
+- aid: visier:analytic-model
+  name: Visier Analytic Model APIs
+  description: 'Analytic Model APIs for querying and configuring the Visier data model: analytic
+    objects, properties, metrics, dimensions, concepts, object configuration, and personalized alerts.
+    87 operations across 7 tags.'
+  humanURL: https://docs.visier.com/developer/apis/analytic-model/data-model/data-model-api.htm
+  baseURL: https://{vanity_name}.api.visier.io
+  tags:
+  - Analytic Model
+  - Data Model
+  - Metrics
+  - Dimensions
+  - Concepts
+  properties:
+  - type: OpenAPI
+    url: openapi/visier-analytic-model-apis-openapi.yaml
+  - type: Overlay
+    url: overlays/visier-analytic-model-apis-overlay.yaml
+  - type: Documentation
+    url: https://docs.visier.com/developer/apis/analytic-model/concepts/concepts-api.htm
+- aid: visier:authentication
+  name: Visier Authentication APIs
+  description: 'Authentication APIs for obtaining access to the Visier platform: basic authentication
+    for a Visier secure token (VisierASIDToken), impersonation tokens, and OAuth 2.0 authorize/token/
+    userinfo endpoints supporting the authorization code and password grants.'
+  humanURL: https://docs.visier.com/developer/apis/authentication/authentication.htm
+  baseURL: https://{vanity_name}.api.visier.io
+  tags:
+  - Authentication
+  - OAuth
+  - Security
+  properties:
+  - type: OpenAPI
+    url: openapi/visier-authentication-apis-openapi.yaml
+  - type: Overlay
+    url: overlays/visier-authentication-apis-overlay.yaml
+  - type: Documentation
+    url: https://docs.visier.com/developer/apis/authentication/authentication.htm
+- aid: visier:data-in
+  name: Visier Data In APIs
+  description: 'Data In APIs for loading data into Visier: Direct Data Intake (DDI), Data Upload,
+    Data Intake, data and job handling, PGP key management, and table sources. 66 operations across
+    6 tags.'
+  humanURL: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+  baseURL: https://{vanity_name}.api.visier.io
+  tags:
+  - Data In
+  - Data Loading
+  - Direct Data Intake
+  - Jobs
+  - ETL
+  properties:
+  - type: OpenAPI
+    url: openapi/visier-data-in-apis-openapi.yaml
+  - type: Overlay
+    url: overlays/visier-data-in-apis-overlay.yaml
+  - type: Documentation
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+- aid: visier:data-out
+  name: Visier Data Out APIs
+  description: 'Data Out APIs for retrieving information from Visier: the Data Query API (aggregate,
+    list, and snapshot queries), the Vee API for natural-language questions, data version export,
+    source file download, and reporting. 38 operations across 8 tags.'
+  humanURL: https://docs.visier.com/developer/apis/data-out/data-query/data-query-api.htm
+  baseURL: https://{vanity_name}.api.visier.io
+  tags:
+  - Data Out
+  - Data Query
+  - Vee
+  - Analytics
+  - Export
+  properties:
+  - type: OpenAPI
+    url: openapi/visier-data-out-apis-openapi.yaml
+  - type: Overlay
+    url: overlays/visier-data-out-apis-overlay.yaml
+  - type: Documentation
+    url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
+- aid: visier:webhooks
+  name: Visier Webhooks APIs
+  description: 'Webhooks APIs (Beta) for registering your own HTTPS endpoints with Visier and
+    listening for platform events such as job success/failure, data version publish, alert
+    notifications, data upload, plan row promotion, and audit events.'
+  humanURL: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
+  baseURL: https://{vanity_name}.api.visier.io
+  tags:
+  - Webhooks
+  - Events
+  - Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/visier-webhooks-openapi.yaml
+  - type: Webhooks
+    url: asyncapi/visier-webhooks.yml
+  - type: Overlay
+    url: overlays/visier-webhooks-overlay.yaml
+  - type: Documentation
+    url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
+- aid: visier:planning
+  name: Visier Planning Public APIs
+  description: 'Planning APIs for Visier Strategic Workforce Planning: plan administration and
+    plan data load operations for creating, updating, and loading data into workforce plans.'
+  humanURL: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+  baseURL: https://{vanity_name}.api.visier.io
+  tags:
+  - Planning
+  - Workforce Planning
+  - Plans
+  properties:
+  - type: OpenAPI
+    url: openapi/visier-planning-openapi.yaml
+  - type: Overlay
+    url: overlays/visier-planning-overlay.yaml
+  - type: Documentation
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+- aid: visier:compensation-benchmarks
+  name: Visier Compensation Benchmarks API
+  description: 'Dataset API providing access to Visier Compensation Benchmarks: market compensation
+    data by job, location, industry, and company size, for benchmarking pay against external market
+    reference points.'
+  humanURL: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+  baseURL: https://{vanity_name}.api.visier.io
+  tags:
+  - Compensation
+  - Benchmarks
+  - Datasets
+  - Pay Equity
+  properties:
+  - type: OpenAPI
+    url: openapi/visier-compensation-benchmarks-openapi.yaml
+  - type: Overlay
+    url: overlays/visier-compensation-benchmarks-overlay.yaml
+  - type: Documentation
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+- aid: visier:skills-intelligence-engine
+  name: Visier Skills Intelligence Engine API
+  description: 'Skills Intelligence Engine API for skills taxonomy and inference: browse and search
+    skills, skill groups and skill categories, standardize job titles, extract skills from free text,
+    and match skills to jobs.'
+  humanURL: https://docs.visier.com/developer/apis/apis.htm
+  baseURL: https://{vanity_name}.api.visier.io
+  tags:
+  - Skills
+  - Taxonomy
+  - Jobs
+  - Talent
+  properties:
+  - type: OpenAPI
+    url: openapi/visier-skills-intelligence-engine-openapi.yaml
+  - type: Overlay
+    url: overlays/visier-skills-intelligence-engine-overlay.yaml
+  - type: Documentation
+    url: https://docs.visier.com/developer/apis/apis.htm
+- aid: visier:query-mcp
+  name: Visier Query MCP Server
+  description: 'Visier''s hosted Model Context Protocol server, exposing Vee (natural-language
+    workforce question answering) and structured data-query tools to MCP clients such as Claude
+    Desktop and Cursor over HTTPS/SSE, authenticated with OAuth 2.0.'
+  humanURL: https://docs.visier.com/developer/agents/mcp/mcp-server.htm
+  baseURL: https://{vanity_name}.app.visier.com/visier-query-mcp
+  tags:
+  - Model Context Protocol
+  - MCP
+  - Agents
+  - Vee
+  - Artificial Intelligence
+  properties:
+  - type: MCPServer
+    url: mcp/visier-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/visier-tool-crosswalk.yml
+  - type: Documentation
+    url: https://docs.visier.com/developer/agents/mcp/mcp-server-set-up.htm
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +235,78 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://forgeglobal.com/visier_stock/
+  url: https://www.visier.com/
+- type: DeveloperPortal
+  url: https://www.visier.com/developer/
+- type: Documentation
+  url: https://docs.visier.com/developer/Default.htm
+- type: APIReference
+  url: https://docs.visier.com/developer/apis/apis.htm
+- type: GettingStarted
+  url: https://docs.visier.com/developer/apis/apis-get-started-home.htm
+- type: Support
+  url: https://my.visier.com/csm?id=community_home
+- type: Blog
+  url: https://www.visier.com/blog/
+- type: GitHubOrganization
+  url: https://github.com/visier
+- type: SignUp
+  url: https://www.visier.com/login/
+- type: TermsOfService
+  url: https://www.visier.com/terms-of-use-agreement/
+- type: PrivacyPolicy
+  url: https://www.visier.com/privacy/
+- type: Postman
+  url: https://www.postman.com/visier-alpine?tab=collections
+- type: StatusPage
+  url: https://status.visier.com/
+- type: Deprecation
+  url: https://docs.visier.com/developer/apis/version-control.htm
+- type: ChangeLog
+  url: changelog/visier-changelog.yml
+- type: Security
+  url: https://www.visier.com/.well-known/security.txt
+- type: TrustCenter
+  url: security/visier-trust-center.yml
+- type: Compliance
+  url: https://www.visier.com/trust/compliance/
+- type: CLI
+  url: cli/visier-cli.yml
+- type: Sandbox
+  url: sandbox/visier-sandbox.yml
+- type: Components
+  url: components/visier-components.yml
+- type: Packages
+  url: packages/visier-packages.yml
+- type: SDKs
+  url: packages/visier-packages.yml
+- type: WellKnown
+  url: well-known/visier-well-known.yml
+- type: SecurityTxt
+  url: well-known/visier-security.txt
+- type: LLMsTxt
+  url: llms/visier-llms.txt
+- type: Authentication
+  url: authentication/visier-authentication.yml
+- type: OAuthScopes
+  url: scopes/visier-scopes.yml
+- type: Conventions
+  url: conventions/visier-conventions.yml
+- type: RateLimits
+  url: rate-limits/visier-rate-limits.yml
+- type: ErrorCatalog
+  url: errors/visier-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/visier-lifecycle.yml
+- type: Conformance
+  url: conformance/visier-conformance.yml
+- type: DataModel
+  url: data-model/visier-data-model.yml
+- type: DomainSecurity
+  url: security/visier-domain-security.yml
+- type: VulnerabilityDisclosure
+  url: security/visier-vulnerability-disclosure.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/visier-agentic-access.yml

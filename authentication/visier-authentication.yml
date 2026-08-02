@@ -1,0 +1,78 @@
+generated: '2026-08-02'
+method: derived
+source: openapi/visier-administration-apis-openapi.yaml, openapi/visier-analytic-model-apis-openapi.yaml,
+  openapi/visier-authentication-apis-openapi.yaml, openapi/visier-compensation-benchmarks-openapi.yaml,
+  openapi/visier-data-in-apis-openapi.yaml, openapi/visier-data-out-apis-openapi.yaml, openapi/visier-planning-openapi.yaml,
+  openapi/visier-skills-intelligence-engine-openapi.yaml, openapi/visier-webhooks-openapi.yaml
+summary:
+  types:
+  - apiKey
+  - http
+  - oauth2
+  api_key_in:
+  - cookie
+  - header
+  oauth2_flows:
+  - authorizationCode
+  - password
+schemes:
+- name: CookieAuth
+  type: apiKey
+  in: cookie
+  parameter: VisierASIDToken
+  sources:
+  - openapi/visier-administration-apis-openapi.yaml
+  - openapi/visier-analytic-model-apis-openapi.yaml
+  - openapi/visier-authentication-apis-openapi.yaml
+  - openapi/visier-data-in-apis-openapi.yaml
+  - openapi/visier-data-out-apis-openapi.yaml
+  - openapi/visier-planning-openapi.yaml
+  - openapi/visier-webhooks-openapi.yaml
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: apikey
+  sources:
+  - openapi/visier-administration-apis-openapi.yaml
+  - openapi/visier-analytic-model-apis-openapi.yaml
+  - openapi/visier-authentication-apis-openapi.yaml
+  - openapi/visier-compensation-benchmarks-openapi.yaml
+  - openapi/visier-data-in-apis-openapi.yaml
+  - openapi/visier-data-out-apis-openapi.yaml
+  - openapi/visier-planning-openapi.yaml
+  - openapi/visier-webhooks-openapi.yaml
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  sources:
+  - openapi/visier-administration-apis-openapi.yaml
+  - openapi/visier-analytic-model-apis-openapi.yaml
+  - openapi/visier-authentication-apis-openapi.yaml
+  - openapi/visier-data-in-apis-openapi.yaml
+  - openapi/visier-data-out-apis-openapi.yaml
+  - openapi/visier-planning-openapi.yaml
+  - openapi/visier-webhooks-openapi.yaml
+- name: OAuth2Auth
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: /v1/auth/oauth2/authorize
+    tokenUrl: /v1/auth/oauth2/token
+    scopes: 2
+  - flow: password
+    tokenUrl: /v1/auth/oauth2/token
+    scopes: 2
+  sources:
+  - openapi/visier-administration-apis-openapi.yaml
+  - openapi/visier-analytic-model-apis-openapi.yaml
+  - openapi/visier-authentication-apis-openapi.yaml
+  - openapi/visier-data-in-apis-openapi.yaml
+  - openapi/visier-data-out-apis-openapi.yaml
+  - openapi/visier-planning-openapi.yaml
+  - openapi/visier-webhooks-openapi.yaml
+- name: api_key
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  sources:
+  - openapi/visier-skills-intelligence-engine-openapi.yaml

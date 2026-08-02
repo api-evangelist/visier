@@ -1,0 +1,86 @@
+generated: '2026-08-02'
+method: searched
+source: https://docs.visier.com/developer/Visier%20API/integration/embed-api-methods.htm
+docs:
+- https://docs.visier.com/developer/Visier%20API/integration/embed-api-methods.htm
+- https://docs.visier.com/developer/Visier%20API/integration/embed-full-application.htm
+- https://docs.visier.com/developer/Analytics/analyses/analysis-embed.htm
+note: >-
+  Visier Embedded is Visier's client-side surface: partners load a Visier SDK script that exposes a
+  global `visier` function, then embed either individual visualizations or the full Visier
+  application into their own product. This is distinct from the server-side Python SDKs in packages/.
+families:
+- name: Visier Embedding SDK
+  type: javascript-sdk
+  global: visier
+  loader: >-
+    An embedding script placed on the host page downloads Visier's SDK and makes the embedding APIs
+    available through the `visier` function. Visier does not publish a fixed public CDN URL for the
+    loader; the script is provided per embedded-partner deployment.
+  methods:
+  - name: bootstrap
+    signature: bootstrap(visierConfig, fCallback)
+    description: Initializes the application and passes back the SDK instance.
+  - name: bootstrapSession
+    description: Authenticates and creates a session.
+  - name: embedApp
+    signature: embedApp(sIframeId, sUrl)
+    description: Loads the embedded application workflow — the full Visier application in an iframe.
+  - name: embedCharts
+    signature: embedCharts(aChartConfigs)
+    description: Loads the embedded visualization workflow — one or more Visier charts into host DOM elements.
+  - name: get
+    signature: 'get(sResource): Promise<any>'
+    description: Retrieves a resource. Documented resource - APPLICATION_SECTIONS.
+  - name: 'on'
+    signature: on(sEventType, fCallback)
+    description: Registers an event listener.
+  - name: 'off'
+    signature: off(sEventType, fCallback)
+    description: Removes an event listener.
+  - name: trigger
+    signature: trigger(sEventType, ...data)
+    description: Triggers an event.
+  - name: destroy
+    description: Cleans up internal memory.
+  configuration:
+  - name: ChartConfig
+    used_by: embedCharts
+    fields:
+    - name: contentId
+      description: The identifier of the Visier visualization to render.
+    - name: containerId
+      description: The id of the host DOM element the chart renders into.
+    note: >-
+      embedCharts version 2 (Fall 2025) added support for metric card visualizations and summary
+      value display configuration.
+  events:
+    accessor: app.eventType.*
+    categories:
+    - name: session
+      example: VISIER_APP_LOADED
+    - name: error
+      example: AUTO_LOGIN_FAILED
+    - name: info
+      example: EMBEDDED_CHART_RENDERED
+    note: >-
+      Events carry a message code and a localized string, plus a `source` field so a handler can
+      target a specific embedded visualization.
+surfaces:
+- name: Embedded charts
+  description: Individual Visier visualizations rendered into partner-owned DOM containers.
+  method: embedCharts
+- name: Embedded full application
+  description: The complete Visier application embedded in an iframe inside the partner product.
+  method: embedApp
+  docs: https://docs.visier.com/developer/Visier%20API/integration/embed-full-application.htm
+reference_implementation:
+  name: visier/embedding-exemplar
+  url: https://github.com/visier/embedding-exemplar
+  language: javascript
+  description: >-
+    An example partner application that embeds Visier — Visier's own guide for partners embedding
+    Visier into their applications.
+availability: >-
+  Embedded is a partner/OEM capability rather than a self-serve feature; access is provisioned as
+  part of an embedded-partner engagement.

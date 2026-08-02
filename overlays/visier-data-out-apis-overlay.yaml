@@ -1,0 +1,32 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Visier Data Out APIs
+  version: 1.0.0
+extends: openapi/visier-data-out-apis-openapi.yaml
+x-generated: '2026-08-02'
+x-method: generated
+x-source: https://github.com/visier/openapi-clients
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: visier
+    x-apievangelist-area: Data Out
+    x-apievangelist-harvested-from: https://raw.githubusercontent.com/visier/openapi-clients/main/res/data-out-apis.yaml
+    x-apievangelist-operations: 38
+- target: $
+  update:
+    servers:
+    - url: https://{vanity_name}.api.visier.io
+      description: Tenant-scoped Visier API host. {vanity_name} is the customer vanity name from Settings
+        > Single Sign-On.
+      variables:
+        vanity_name:
+          default: vanity
+          description: Visier tenant vanity name.
+- target: $.info
+  update:
+    x-apievangelist-rate-limits: rate-limits/visier-rate-limits.yml
+    x-apievangelist-authentication: authentication/visier-authentication.yml
+    x-apievangelist-conventions: conventions/visier-conventions.yml
+    x-apievangelist-errors: errors/visier-problem-types.yml
+    x-apievangelist-lifecycle: lifecycle/visier-lifecycle.yml

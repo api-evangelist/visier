@@ -1,0 +1,65 @@
+generated: '2026-08-02'
+method: searched
+source: https://github.com/visier/sql-shell
+note: >-
+  Visier ships no general-purpose platform CLI (there is no `visier` binary covering the REST
+  surface). It does publish one first-party command-line tool: the Visier SQL-like Shell, an
+  interactive REPL for issuing Visier SQL-like queries against a tenant. It is catalogued here as the
+  command surface; the distributable itself belongs in packages/.
+clis:
+- name: vsql-shell
+  title: Visier SQL-like Shell
+  official: true
+  repository: https://github.com/visier/sql-shell
+  language: python
+  description: >-
+    An application that allows technical users and builders to issue queries in Visier's SQL-like
+    syntax against the Visier platform, over the public Data Query API.
+  interface: interactive REPL
+  install:
+  - method: build-and-pip
+    steps:
+    - python3 -m venv visier-sql
+    - source visier-sql/bin/activate
+    - pip install -U build
+    - python -m build
+    - pip install dist/visier_sqllike_shell-<version>-py3-none-any.whl
+    note: >-
+      Installs a command line utility named `vsql-shell` in the active virtual environment. Visier
+      does not publish this tool to PyPI as of 2026-08-02; it is built from the repository.
+  run: vsql-shell
+  configuration:
+    style: environment variables
+    variables:
+    - name: VISIER_HOST
+      description: 'Tenant API host, of the form https://{vanity-name}.api.visier.io'
+    - name: VISIER_VANITY
+      description: Visier tenant vanity name.
+    - name: VISIER_APIKEY
+      description: API key issued by Visier.
+    - name: VISIER_USERNAME
+      description: A Visier user granted API access capabilities.
+    - name: VISIER_PASSWORD
+      description: That user's password.
+    - name: VISIER_TARGET_TENANT_ID
+      description: Target (partner sub-)tenant code.
+    note: >-
+      Visier's own README recommends sourcing a .env file only in non-production environments, and
+      reads the password interactively rather than storing it.
+  authentication:
+  - basic
+  - oauth2
+  auth_note: >-
+    The shell uses visier-connector for connectivity; OAuth 2.0 setup is documented in that project.
+  backing_api: openapi/visier-data-out-apis-openapi.yaml
+  backing_operations:
+  - DataQuery_SqlLike
+  dependencies:
+  - https://github.com/visier/connector-python
+related_tools:
+- name: visier-connector
+  url: https://github.com/visier/connector-python
+  description: Python connector library the shell builds on (library, not a CLI).
+- name: api-samples
+  url: https://github.com/visier/api-samples
+  description: Limited-scope sample applications and snippets using the public Visier APIs.

@@ -1,0 +1,196 @@
+generated: '2026-08-02'
+method: searched
+source: https://docs.visier.com/developer/apis/headers.htm
+docs:
+- https://docs.visier.com/developer/apis/apis-get-started-home.htm
+- https://docs.visier.com/developer/apis/headers.htm
+- https://docs.visier.com/developer/apis/status-codes-errors.htm
+- https://docs.visier.com/developer/apis/rate-limit.htm
+- https://docs.visier.com/developer/apis/version-control.htm
+derived_from:
+- openapi/visier-administration-apis-openapi.yaml
+- openapi/visier-analytic-model-apis-openapi.yaml
+- openapi/visier-authentication-apis-openapi.yaml
+- openapi/visier-data-in-apis-openapi.yaml
+- openapi/visier-data-out-apis-openapi.yaml
+- openapi/visier-planning-openapi.yaml
+- openapi/visier-webhooks-openapi.yaml
+- openapi/visier-compensation-benchmarks-openapi.yaml
+- openapi/visier-skills-intelligence-engine-openapi.yaml
+
+base_url:
+  form: https://{vanity_name}.api.visier.io
+  note: >-
+    Every tenant gets a vanity host. The vanity name is visible in Settings > Single Sign-On as part
+    of the service provider endpoint. There is no shared/global API host.
+
+authentication:
+  style: API key plus a token
+  required_always:
+    header: apikey
+    description: Your Visier API key. Required in all API calls.
+  token_options:
+  - name: Basic authentication (Visier secure token)
+    mechanism: cookie
+    cookie: VisierASIDToken
+    obtained_via: POST /v1/admin/visierSecureToken (BasicAuthentication_ASIDTokenAuthentication)
+  - name: OAuth 2.0
+    mechanism: bearer
+    header: Authorization
+    format: JWT
+    grants: [authorization_code, password]
+    authorization_url: /v1/auth/oauth2/authorize
+    token_url: /v1/auth/oauth2/token
+    userinfo_url: /v1/auth/oauth2/userinfo
+    scopes: [read, write]
+  - name: Impersonation
+    mechanism: cookie
+    cookie: VisierImpersonationToken
+    obtained_via: POST /v1/admin/visierImpersonationToken (BasicAuthentication_GenerateImpersonationToken)
+  see_also: authentication/visier-authentication.yml
+
+idempotency:
+  supported: false
+  evidence: >-
+    No Idempotency-Key (or equivalent) header appears in any of the nine published OpenAPI documents,
+    and the API Headers reference (docs.visier.com/developer/apis/headers.htm) documents no
+    idempotency key. Visier instead offers optimistic locking on non-versioned artifacts via the
+    Prefer header (nvLock) and correlation IDs on some bulk requests; those are concurrency and
+    correlation controls, not retry-safety keys.
+  related:
+  - header: Prefer
+    values: nvLock options
+    purpose: Locking behavior for non-versioned artifacts, so that incremental changes across multiple
+      API calls do not overwrite each other.
+  - header: NonVersioned
+    purpose: Controls whether the call executes against versioned or non-versioned artifacts.
+  - parameter: correlationIds
+    location: query
+    purpose: >-
+      Optional correlation identifiers on bulk requests, associating request fields with response
+      fields for requests that lack UUIDs (introduced Winter 2026 for the security/administration APIs).
+
+pagination:
+  style: offset-limit
+  parameters:
+  - name: start
+    location: query
+    description: The index of the first record to return.
+  - name: limit
+    location: query
+    description: The maximum number of records to return.
+  - name: offset
+    location: query
+    description: Used by a small number of operations in place of start.
+  partial_results:
+    status_code: 206
+    description: >-
+      "The number of returned objects is a subset of the available objects, usually due to the limit
+      parameter." Visier signals truncation with HTTP 206 Partial Content rather than a cursor.
+  note: Not every collection operation is paginated; check the operation's parameters in the spec.
+
+multi_tenancy:
+  headers:
+  - name: TargetTenantID
+    description: The tenant that you want to execute the API call from. Present on 269 operations.
+  - name: SessionRepoId
+    description: Optionally specify a session repository ID to overwrite the user's permissions.
+  - name: SessionBasedPermissions
+    description: Assigns user permissions valid only for the specified SessionRepoId.
+  query_parameters:
+  - name: tenantCode
+    description: Target tenant code, on operations that address a specific tenant.
+  note: >-
+    Visier is multi-tenant by design (partners and enterprises administer child tenants), so tenant
+    targeting is a first-class cross-cutting concern rather than an edge case.
+
+projects_and_versions:
+  headers:
+  - name: ProjectID
+    description: The project UUID in which to make your changes. Present on 118 operations.
+  - name: NonVersioned
+    description: Controls whether API calls execute on versioned or non-versioned artifacts.
+  - name: DataVersionID
+    description: Targets a specific data version.
+  note: >-
+    Visier models configuration change as projects against a versioned analytic model; most
+    Administration and Analytic Model write operations are project-scoped.
+
+content_negotiation:
+  headers:
+  - name: Accept
+    description: The content type that you want the API response returned in.
+  - name: Content-Type
+    description: The content type that you're sending in the API request body.
+  - name: Accept-Language
+    description: Specifies request body language for localization in PATCH calls.
+  unacceptable:
+    status_code: 406
+    description: The request content is not acceptable according to the Accept header.
+
+error_envelope:
+  format: custom-json
+  media_type: application/json
+  problem_json: false
+  schema: ApiError
+  fields:
+  - name: message
+    description: The details of the error.
+  - name: localizedMessage
+    description: The localized details of the error.
+  - name: rci
+    description: A root cause identifier that allows Visier to determine the source of the problem.
+  - name: code
+    description: A brief identifier of the type of error.
+  - name: userError
+    type: boolean
+    description: If true, the API error is due to user error.
+  see_also: errors/visier-problem-types.yml
+
+request_tracing:
+  request_id_header: null
+  note: >-
+    Visier does not document a request-id response header. The `rci` (root cause identifier) field on
+    the error envelope is the value Visier support uses to trace a failed call.
+
+versioning:
+  scheme: uri-path
+  example: /v1/data/model/metrics
+  prerelease_prefixes:
+  - v1alpha
+  - v1beta
+  release_types:
+  - name: Major version
+    definition: An API release that contains breaking changes.
+  - name: Current version implementation
+    definition: An API release that contains additive changes that are non-breaking.
+  docs: https://docs.visier.com/developer/apis/version-control.htm
+  see_also: lifecycle/visier-lifecycle.yml
+
+rate_limiting:
+  default_per_minute: 100
+  default_per_hour: 6000
+  exceeded_status: 429
+  headers:
+  - X-RateLimit-Limit-Minute
+  - X-RateLimit-Remaining-Minute
+  - X-RateLimit-Limit-Hour
+  - X-RateLimit-Remaining-Hour
+  see_also: rate-limits/visier-rate-limits.yml
+
+async_operations:
+  pattern: job-based
+  description: >-
+    Long-running data operations (loads, extractions, exports, direct-data-intake transactions) return
+    a job or transaction identifier that the client polls for status.
+  examples:
+  - DataAndJobHandling_JobStatus
+  - DataAndJobHandling_DispatchingJobStatus
+  - DirectDataIntake_JobStatus
+  - DataVersionExport_GetExportJobStatus
+  event_alternative: >-
+    Rather than polling, register a webhook for jobResultSuccess / jobResultFailure — see
+    asyncapi/visier-webhooks.yml.
+  headers:
+  - name: FastMode
+    description: Present on a small number of data-handling operations.

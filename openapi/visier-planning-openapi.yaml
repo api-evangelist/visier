@@ -1,0 +1,1239 @@
+openapi: 3.0.3
+info:
+  title: Visier Planning Public APIs
+  description: Visier APIs for managing your plans through API.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+paths:
+  /v1/planning/data/events:
+    get:
+      tags:
+        - PlanEvents
+      summary: Retrieve planning events
+      description: "Retrieve planning events in bulk. Specify one of `planId` or `mainPlanId`. Use `planId` to retrieve events for a single plan, or `mainPlanId` to retrieve events for a main plan and all its subplans. If both are provided, `planId` takes precedence. If neither are provided, the response includes events for all plans you have access to. Results are sorted oldest first for stable forward pagination.\n\n To retrieve the full details of a single event, including promoted member paths, see `GET /v1/planning/data/events/{eventId}`."
+      operationId: PlanEvents_GetEvents
+      parameters:
+        - name: planId
+          in: query
+          description: "Optionally, specify the unique identifier of the plan to retrieve events for. Specify one of `planId` or `mainPlanId`. If both are provided, `planId` takes precedence and `mainPlanId` is ignored. If both are omitted, the response includes events for all plans you have access to."
+          schema:
+            type: string
+        - name: mainPlanId
+          in: query
+          description: "Optionally, specify the unique identifier of the main plan. When provided, the response includes events for the main plan and all its subplans. Specify one of `planId` or `mainPlanId`. If both are provided, `planId` takes precedence and `mainPlanId` is ignored. If both are omitted, the response includes events for all plans you have access to."
+          schema:
+            type: string
+        - name: fromDate
+          in: query
+          description: Optionally, specify a start date to filter by and return only the events created after it. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
+          schema:
+            type: string
+        - name: toDate
+          in: query
+          description: Optionally, specify an end date to filter by and return only the events created before it. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
+          schema:
+            type: string
+        - name: eventTypes
+          in: query
+          description: Optionally, specify one or more event types to filter by. If omitted, the response includes all event types.
+          schema:
+            type: array
+            items:
+              type: string
+        - name: userFilter
+          in: query
+          description: Optionally, specify the username of the user who triggered the events. If omitted, the response includes events triggered by all users.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: The maximum number of events to return. Default and maximum is 50.
+          schema:
+            type: integer
+            format: int32
+        - name: start
+          in: query
+          description: The index to start retrieving events from, also known as offset. The index begins at 0.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/planning.GetEventsResponse'
+        '404':
+          description: plan not found or not accessible
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/planning.ErrorSummary'
+        '500':
+          description: default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+  /v1/planning/data/events/{eventId}:
+    get:
+      tags:
+        - PlanEvents
+      summary: Retrieve a planning event
+      description: Retrieve a single planning event by its unique identifier. The response includes event metadata and, for promotion events, the full member path for every promoted row. One entry per plan segment. To retrieve event IDs, create a webhook for the `planRowPromotionNotification` event. When the webhook triggers, its payload returns the `eventID`. For more information, see `POST /v1/op/webhooks`.
+      operationId: PlanEvents_GetEvent
+      parameters:
+        - name: eventId
+          in: path
+          description: The unique identifier of the event.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/planning.PlanningEventResponse'
+        '404':
+          description: event not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/planning.ErrorSummary'
+        '500':
+          description: default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+  /v1/planning/data/plans/{planId}:
+    patch:
+      tags:
+        - PlanAdministration
+      summary: Partially update a plan
+      description: Make partial changes to existing plans. The response returns whether each plan was successfully patched or not. When patching objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PATCH` request definition. To retrieve main plan or subplan IDs, see `GET /v1/planning/model/plans`. If the response includes a `parentPlanUuid`, then the plan is a subplan. Use `PATCH` to change specific fields in the plan without affecting omitted fields.
+      operationId: PlanAdministration_PlanAction
+      parameters:
+        - name: planId
+          in: path
+          description: The unique identifier of the plan.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/planning.PlanPatchRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/planning.PlanPatchResponse'
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/planning.ErrorSummary'
+        '403':
+          description: caller is not permitted to share this plan
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/planning.ErrorSummary'
+        '404':
+          description: plan not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/planning.ErrorSummary'
+        '500':
+          description: default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+  /v1/planning/data/plans/{planId}/scenarios/{scenarioId}:
+    patch:
+      tags:
+        - PlanAdministration
+      summary: Partially update a plan scenario
+      description: "Make partial changes to a scenario in an existing plan. The response returns whether the scenario was successfully patched or not. When patching objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PATCH` request definition. To retrieve plan IDs and scenario IDs, see `GET /v1/planning/model/plans`. If the response includes a `parentPlanUuid`, then the plan is a subplan.\n\n Use `PATCH` to change specific fields in the scenario without affecting omitted fields."
+      operationId: PlanAdministration_PatchPlan
+      parameters:
+        - name: planId
+          in: path
+          description: The unique identifier of the main plan or subplan. Use the main plan ID for consolidating, starting collaboration, or ending collaboration. Otherwise, use the subplan ID.
+          required: true
+          schema:
+            type: string
+        - name: scenarioId
+          in: path
+          description: The unique identifier of the plan scenario.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/planning.PlanScenarioPatchRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/planning.PlanScenarioPatchResponse'
+        '500':
+          description: default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/planning.ErrorSummary'
+        '404':
+          description: plan not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/planning.ErrorSummary'
+  /v1/planning/data/plans/{planId}/scenarios/{scenarioId}/cells:
+    patch:
+      tags:
+        - PlanDataLoad
+      summary: Upload plan data
+      description: "Send a file to Visier to modify a plan's data. The file must be in CSV format and match the plan's schema. To get the plan's schema, call `GET /v1/planning/model/plans/{id}?withSchema=true`.\nThe data file must contain the following columns:\n  - `periodId`: From the GET response, use the `date` values in the `timePeriods` array as values in this column.\n  - A column for each `id` value in the `planSegmentLevels` object, where the row value is the `id` of the `members` in the `planSegmentLevelMembers` object.\n  - A column for each  `id` value in the `planItems` object that you want to modify data for, where the row value is the data value."
+      operationId: PlanDataLoad_PlanDataUpload
+      parameters:
+        - name: planId
+          in: path
+          description: The unique identifier of the plan.
+          required: true
+          schema:
+            type: string
+        - name: scenarioId
+          in: path
+          description: The unique identifier of the plan scenario to load data into.
+          required: true
+          schema:
+            type: string
+        - name: calculation
+          in: query
+          description: "Sets the plan values to rollup, distribute, or neither. Valid values:\n  - **ROLLUP**: Roll up loaded data values to parent and ancestor rows. If the data provides a parent value and its child value, this method prioritizes the loaded value for the child and overwrites the parent.\n  - **DISTRIBUTE**: Distribute loaded data values to their children and descendent rows. If the data provides a parent value and its child value, this method prioritizes the parent values and overrides the loaded child value.\n  - **NONE**: The loaded values are not rolled up or distributed. This is the default."
+          required: false
+          schema:
+            type: string
+        - name: currency
+          in: query
+          description: 'The 3-digit ISO 4217 currency code of the data.
+
+            If undefined, default is the plan''s consolidation currency. If the currency is different from the plan''s consolidation currency, the values are converted to the consolidation currency using the conversion rates loaded for the plan''s baseline period.'
+          required: false
+          schema:
+            type: string
+        - name: method
+          in: query
+          description: "Sets how to validate the data being loaded into Visier. Valid values:\n  - **VALIDATE**: Runs a test load through all the validation steps without putting the data into the plan. Use `VALIDATE` to find any errors before using `STRICT_UPLOAD` to load the data.\n  - **SKIP_ERRORS**: Loads all data without errors into the plan. Any rows with errors are excluded from the update to the plan.\n  - **STRICT_UPLOAD**: Loads data into the plan if there are no errors in any row. If there are errors, the load fails. This is the default."
+          required: false
+          schema:
+            type: string
+        - name: TargetTenantID
+          in: header
+          description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The CSV file to load into the plan.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanDataUploadResponseDTO'
+  /v1alpha/planning/data/plans/{planId}/rows:
+    patch:
+      tags:
+        - PlanDataLoad
+      summary: Add or remove plan rows
+      description: "Send a file to Visier to modify a plan's rows. The file must be in CSV format and contain the following columns:\n- `Add/Remove`: In the column, use the value \"Add\" to add the specified row to the plan or \"Remove\" to remove the specified row from the plan.\n- A column for each plan segment level using the IDs from `planSegmentLevels`.\n  - To add a row, use the corresponding segment member ID from `planSegmentLevelMembers`. If the member doesn't exist in the schema, provide a display name. The response returns its assigned segment member ID.\n  - To remove a row, use the corresponding segmentId as the column name and the segment member ID from `planSegmentLevelMembers` as the row value.\n\n<br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued. If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: PlanDataLoad_PlanRowDataLoad
+      parameters:
+        - name: planId
+          in: path
+          description: The unique identifier of the plan.
+          required: true
+          schema:
+            type: string
+        - name: method
+          in: query
+          description: "Sets how to validate the data being loaded into Visier. Valid values:\n  - **VALIDATE**: Runs a test load through all the validation steps without putting the data into the plan. Use `VALIDATE` to find any errors before using `STRICT_UPLOAD` to load the data.\n  - **SKIP_ERRORS**: Loads all data without errors into the plan. Any rows with errors are excluded from the update to the plan.\n  - **STRICT_UPLOAD**: Loads data into the plan if there are no errors in any row. If there are errors, the load fails. This is the default."
+          required: false
+          schema:
+            type: string
+        - name: TargetTenantID
+          in: header
+          description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The CSV file to load into the plan.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanRowDataLoadResponseDTO'
+components:
+  schemas:
+    planning.AssignSubplanActionPayload:
+      type: object
+      properties:
+        assignee:
+          type: string
+          description: The username of the subplan owner.
+        dueDate:
+          type: integer
+          description: The due date of the subplan. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
+          format: int64
+        comment:
+          type: string
+          description: An optional note or instructions for the subplan.
+        rowMembers:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.DimensionMember'
+          description: "The dimension members that identify the parent row at which the subplan is created.\nProvide one entry per dimension you want to pin. Any dimension not specified defaults to the root (All) member.\n\nFor example, to create a subplan for \"Finance Americas\" in Org Level 2 and \"Male\" in Gender:\n```json\n[\n  { \"segmentId\": \"Organization\", \"memberId\": \"[Organization].[Finance Americas]\" },\n  { \"segmentId\": \"Gender\",       \"memberId\": \"[Gender].[Male]\" }\n]\n```\n\nUse `GET /v1/planning/model/plans/{id}?withSchema=true` to discover valid `segmentId` and `memberId` values."
+      description: The details of creating a subplan identified by dimension members.
+      required:
+        - assignee
+        - dueDate
+        - rowMembers
+    planning.AssignSubplansActionPayload:
+      type: object
+      properties:
+        subplans:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.AssignSubplanActionPayload'
+          description: Assign subplans;
+      description: The details of creating a list subplans.
+      required:
+        - subplans
+    planning.BulkPromotionDemotionEventData:
+      type: object
+      properties:
+        promotedRows:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.PromotedRowDTO'
+          description: The rows that were promoted. Each entry represents one promoted row with its dimension members.
+        demotedRows:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.PromotedRowDTO'
+          description: The rows that were demoted. Each entry represents one demoted row with its dimension members.
+      description: Event data for bulkPromotionDemotionEvent events.
+    planning.ConsolidateActionPayload:
+      type: object
+      properties:
+        autoRollup:
+          type: boolean
+          description: "If `true`, consolidated subplan values are rolled up to the parent segment. Default is `true`."
+        includedSubPlans:
+          type: array
+          items:
+            type: string
+          description: "The UUIDs of the subplans to include. If not defined, all submitted subplans will be consolidated."
+      description: The details of consolidating a subplan.
+    planning.DimensionMember:
+      type: object
+      properties:
+        segmentId:
+          type: string
+          description: The unique identifier of the dimension (for example, `Organization`).
+        memberId:
+          type: string
+          description: The unique identifier of the member within the dimension (for example, `[Organization].[Finance Americas]`).
+      description: A dimension member that identifies a position along one dimension in a plan's segmentation.
+      required:
+        - segmentId
+        - memberId
+    planning.EndCollaborationActionPayload:
+      type: object
+      properties:
+        actionWhenUnconsolidatedPlansExists:
+          enum:
+            - Ignore
+            - Revert
+          type: string
+          description: "The action to take when there are unconsolidated subplans for the main plan. Valid values:\n - `Ignore`: Ignore unconsolidated subplans.\n - `Revert`: Ignore all subplans and revert plan values to the state prior to the start of collaboration."
+          format: enum
+      description: The details of ending a collaboration project.
+    planning.ErrorSummary:
+      type: object
+      properties:
+        rci:
+          type: string
+          description: A root cause identifier that allows Visier to determine the source of the problem.
+        message:
+          type: string
+          description: The details of the error and actions you can take to load the data correctly.
+      description: The error details of the unsuccessful action.
+    planning.EventSummaryDTO:
+      type: object
+      properties:
+        eventId:
+          type: string
+          description: The unique identifier of the event.
+        planId:
+          type: string
+          description: The unique identifier of the plan the event belongs to.
+        scenarioId:
+          type: string
+          description: The unique identifier of the scenario in which the event occurred. Only present for scenario-scoped events.
+        mainPlanId:
+          type: string
+          description: The unique identifier of the main plan this plan belongs to. Only present when the plan is a subplan.
+        eventType:
+          enum:
+            - unknownPlanEventType
+            - memberPromoted
+            - autoPromotion
+            - bulkPromotionDemotionEvent
+            - planCreationEvent
+            - planDeletionEvent
+            - planTreeAutoDeletionEvent
+            - orphanedSubplanDeletionEvent
+            - planRenameEvent
+            - planContextAndParameterRenameEvent
+            - planClonedEvent
+            - planPublishedEvent
+            - planOpeningEvent
+            - planSubmissionEvent
+            - planAcceptedEvent
+            - planForceAcceptedEvent
+            - dataLoadEvent
+            - subPlanCreationEvent
+            - subPlanDeletionEvent
+            - subPlanReassignEvent
+            - subPlanPushedEvent
+            - subPlanReopenedEvent
+            - subPlanMergedEvent
+            - planSharingEvent
+            - planUnsharingEvent
+            - sharedUserEditAccessGrantedEvent
+            - sharedUserEditAccessRevokedEvent
+            - collaborationStarted
+            - collaborationEnded
+            - metaDataModifiedEvent
+            - metaDataDimensionsModifiedEvent
+            - metaDataDimensionsAddedEvent
+            - MetaDataDimensionsRemovedEvent
+            - metaDataTimelineModifiedEvent
+            - metaDataVisibleHistoricalPeriodsModifiedEvent
+            - metaDataSeedDateModifiedEvent
+            - metaDataCostsAddedModifiedEvent
+            - metaDataCostsRemovedModifiedEvent
+            - metaDataCostsModifiedEvent
+            - metaDataPlanUsingActualsEvent
+            - metaDataPlanUsingBudgetedEvent
+            - metaDataListPlanInAnalysisEvent
+            - metaDataDontListPlanInAnalysisEvent
+            - addMeasureToMetricBindingEvent
+            - removeMeasureToMetricBindingEvent
+            - modifyMeasureToMetricBindingEvent
+            - scenarioCreationEvent
+            - scenarioResetEvent
+            - scenarioCloneEvent
+            - scenarioRevertEvent
+            - scenarioRevertToSnapshotEvent
+            - scenarioUpdateEvent
+            - scenarioDeletionEvent
+            - scenarioDataChangeEvent
+            - scenarioCostChangeEvent
+            - scenarioSubmissionEvent
+            - scenarioRejectionEvent
+            - scenarioAddedToSubPlan
+            - scenarioDataFixedByPreviousVersionEvent
+            - scenarioDataFitToHeadcountEvent
+            - scenarioDataFitToCostEvent
+            - scenarioDataFitToFTEEvent
+            - scenarioDataFitToCostAndHeadcountEvent
+            - scenarioDataRevenueOptimizationEvent
+            - scenarioDataCostOptimizationEvent
+            - scenarioDataFreezeHiresEvent
+            - attachAssumptionEvent
+            - detachAssumptionEvent
+            - automaticDetachAssumptionEvent
+            - reloadAssumptionEvent
+            - memberAdded
+            - memberRenamed
+            - memberResolvedAsMapped
+            - memberResolvedAsPreserved
+            - memberResolvedAsRemoved
+            - memberResolvedAsAdded
+            - memberRemoved
+            - planCostBudgetChangeEvent
+            - planHeadcountBudgetChangeEvent
+            - scenarioDrillThroughExportEvent
+            - planExportHeadcountEvent
+            - planExportHirecountEvent
+            - planExportTCOWEvent
+            - planExportEvent
+            - planActivityExportEvent
+            - planConsolidationCurrencyUpdateEvent
+            - planDisplayCurrencyUpdateEvent
+            - snapshotCreationEvent
+            - snapshotDeletionEvent
+            - snapshotRenameEvent
+            - explorationSnapshotRenameEvent
+            - updateBaselineEvent
+            - planOfRecordAddEvent
+            - planOfRecordRemoveEvent
+            - copyScenarioDataToCollaborationEvent
+            - backupScenarioCreationEvent
+            - lostSyncedLimitsEvent
+            - planComment
+            - cellComment
+            - cellDeleteComment
+            - cellEditComment
+          type: string
+          description: The type of event.
+          format: enum
+        createdDate:
+          type: string
+          description: The date that the event was created. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
+        user:
+          type: string
+          description: The username of the user who triggered the event.
+      description: Summary of a single planning event without type-specific payload.
+    planning.FailedShareEntry:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The username of the unsuccessful user.
+        errorCode:
+          enum:
+            - PLAN_SHARE_ERROR_UNKNOWN
+            - PLAN_SHARE_ERROR_USER_NOT_FOUND
+            - PLAN_SHARE_ERROR_PERSISTENCE_FAILURE
+          type: string
+          description: The reason that the Share action was unsuccessful.
+          format: enum
+    planning.GetEventsResponse:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.EventSummaryDTO'
+          description: The list of events matching the query filters.
+        limit:
+          type: integer
+          description: The maximum number of events returned. Maximum is 50.
+          format: int32
+        start:
+          type: integer
+          description: The index to start retrieving events from, also known as offset. The index begins at 0.
+          format: int32
+      description: Response for the bulk events listing endpoint.
+    planning.MemberDTO:
+      type: object
+      properties:
+        dimensionId:
+          type: string
+          description: The unique identifier of the dimension. For example, `Location`.
+        levelId:
+          type: string
+          description: The dimension level this member belongs to. For example, `Location_2`.
+        memberId:
+          type: string
+          description: The unique identifier of the member. For example, `[Location].[Canada].[BC]`.
+        displayName:
+          type: string
+          description: The display name of the member. For example, `BC`.
+        namePath:
+          type: array
+          items:
+            type: string
+          description: The path of member names from the root member down to the current member. For example, `[Canada, BC]`.
+      description: A single member at a specific dimension level within the plan's context path.
+    planning.PlanPatchActionResult:
+      type: object
+      properties:
+        planId:
+          type: string
+          description: The UUID of the plan.
+        success:
+          type: boolean
+          description: If `true`, the plan was shared with every requested user.
+        error:
+          allOf:
+            - $ref: '#/components/schemas/planning.ErrorSummary'
+          description: The error details of the unsuccessful action.
+        shareResult:
+          allOf:
+            - $ref: '#/components/schemas/planning.ShareActionResult'
+          description: The result of the Share action.
+    planning.PlanPatchRequest:
+      type: object
+      properties:
+        shareActionPayload:
+          allOf:
+            - $ref: '#/components/schemas/planning.ShareActionPayload'
+          description: The details of sharing a plan.
+      description: "A plan-level action request. Parallel to PlanScenarioPatchRequest but operates on a plan\n (no scenario). Designed to host further plan-level actions over time. The action is\n discriminated by which member of `actionPayload` is set; an unset oneof is a bad request."
+    planning.PlanPatchResponse:
+      type: object
+      properties:
+        actionResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.PlanPatchActionResult'
+          description: The result of the action taken on the plan.
+      description: Response envelope for the plan-level action route.
+    planning.PlanScenarioPatchActionResult:
+      type: object
+      properties:
+        planId:
+          type: string
+          description: The UUID of the main plan or subplan.
+        success:
+          type: boolean
+          description: If `true`, the action was successful.
+        error:
+          allOf:
+            - $ref: '#/components/schemas/planning.ErrorSummary'
+          description: The error details of the unsuccessful action.
+      description: The result of the action taken on the main plan or subplan.
+    planning.PlanScenarioPatchRequest:
+      type: object
+      properties:
+        actionType:
+          enum:
+            - Update
+            - Consolidate
+            - Submit
+            - Reopen
+            - StartCollaboration
+            - EndCollaboration
+            - AssignSubplan
+          type: string
+          description: "The action to perform on the main plan or the subplan, in a specific scenario. Valid values:\n - `Consolidate`: Combine the submitted subplan values into the main plan.\n - `Submit`: Send your completed subplan to the plan coordinator for review.\n - `Reopen`: Reopen consolidated subplans so subplanners can change the values.\n - `StartCollaboration`: Enter collaboration mode, so you can assign subplans to subplanners.\n - `EndCollaboration`:  Regain control of the plan, so you can finalize it and put it into operation."
+          format: enum
+        consolidateActionPayload:
+          allOf:
+            - $ref: '#/components/schemas/planning.ConsolidateActionPayload'
+          description: The details of consolidating a subplan.
+        reopenActionPayload:
+          allOf:
+            - $ref: '#/components/schemas/planning.ReopenActionPayload'
+          description: The details of reopening a subplan.
+        submitActionPayload:
+          allOf:
+            - $ref: '#/components/schemas/planning.SubmitActionPayload'
+          description: The details of submitting a subplan.
+        startCollaborationActionPayload:
+          allOf:
+            - $ref: '#/components/schemas/planning.StartCollaborationActionPayload'
+          description: The details of starting a collaboration project.
+        endCollaborationActionPayload:
+          allOf:
+            - $ref: '#/components/schemas/planning.EndCollaborationActionPayload'
+          description: The details of ending a collaboration project.
+        assignSubplanActionPayload:
+          allOf:
+            - $ref: '#/components/schemas/planning.AssignSubplansActionPayload'
+          description: The details of creating a subplan.
+      description: If consolidating subplans, starting collaboration, or ending collaboration, this is the main plan to update. Otherwise, this is the subplan to update.
+      oneOf:
+        - $ref: '#/components/schemas/PlanPatchConsolidateActionRequest'
+        - $ref: '#/components/schemas/PlanPatchSubmitActionRequest'
+        - $ref: '#/components/schemas/PlanPatchReopenActionRequest'
+        - $ref: '#/components/schemas/PlanPatchStartCollaborationActionRequest'
+        - $ref: '#/components/schemas/PlanPatchEndCollaborationActionRequest'
+        - $ref: '#/components/schemas/PlanPatchAssignSubplanActionRequest'
+      discriminator:
+        propertyName: actionType
+        mapping:
+          Consolidate: '#/components/schemas/PlanPatchConsolidateActionRequest'
+          Submit: '#/components/schemas/PlanPatchSubmitActionRequest'
+          Reopen: '#/components/schemas/PlanPatchReopenActionRequest'
+          StartCollaboration: '#/components/schemas/PlanPatchStartCollaborationActionRequest'
+          EndCollaboration: '#/components/schemas/PlanPatchEndCollaborationActionRequest'
+          AssignSubplan: '#/components/schemas/PlanPatchAssignSubplanActionRequest'
+    planning.PlanScenarioPatchResponse:
+      type: object
+      properties:
+        actionResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.PlanScenarioPatchActionResult'
+          description: The result of the action taken on the main plan or subplan.
+      description: The result of the action taken on the subplan if reopening, or the main plan if consolidating.
+    planning.PlanUserShareEntry:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The username of the user to share the plan with.
+        accessRight:
+          enum:
+            - Viewer
+            - Editor
+            - CoOwner
+          type: string
+          description: "The access level to grant to the user. Valid values:\n - `Viewer`: The user can view the plan but cannot make changes.\n - `Editor`: The user can view and edit the plan.\n - `CoOwner`: The user has the same rights as the plan owner, including sharing the plan."
+          format: enum
+    planning.PlanningEventResponse:
+      type: object
+      properties:
+        eventId:
+          type: string
+          description: The unique identifier of the event.
+        planId:
+          type: string
+          description: The unique identifier of the plan the event belongs to.
+        scenarioId:
+          type: string
+          description: The unique identifier of the scenario in which the event occurred. Only present for scenario-scoped events.
+        mainPlanId:
+          type: string
+          description: The unique identifier of the main plan this plan belongs to. Only present when the plan is a subplan.
+        eventType:
+          enum:
+            - unknownPlanEventType
+            - memberPromoted
+            - autoPromotion
+            - bulkPromotionDemotionEvent
+            - planCreationEvent
+            - planDeletionEvent
+            - planTreeAutoDeletionEvent
+            - orphanedSubplanDeletionEvent
+            - planRenameEvent
+            - planContextAndParameterRenameEvent
+            - planClonedEvent
+            - planPublishedEvent
+            - planOpeningEvent
+            - planSubmissionEvent
+            - planAcceptedEvent
+            - planForceAcceptedEvent
+            - dataLoadEvent
+            - subPlanCreationEvent
+            - subPlanDeletionEvent
+            - subPlanReassignEvent
+            - subPlanPushedEvent
+            - subPlanReopenedEvent
+            - subPlanMergedEvent
+            - planSharingEvent
+            - planUnsharingEvent
+            - sharedUserEditAccessGrantedEvent
+            - sharedUserEditAccessRevokedEvent
+            - collaborationStarted
+            - collaborationEnded
+            - metaDataModifiedEvent
+            - metaDataDimensionsModifiedEvent
+            - metaDataDimensionsAddedEvent
+            - MetaDataDimensionsRemovedEvent
+            - metaDataTimelineModifiedEvent
+            - metaDataVisibleHistoricalPeriodsModifiedEvent
+            - metaDataSeedDateModifiedEvent
+            - metaDataCostsAddedModifiedEvent
+            - metaDataCostsRemovedModifiedEvent
+            - metaDataCostsModifiedEvent
+            - metaDataPlanUsingActualsEvent
+            - metaDataPlanUsingBudgetedEvent
+            - metaDataListPlanInAnalysisEvent
+            - metaDataDontListPlanInAnalysisEvent
+            - addMeasureToMetricBindingEvent
+            - removeMeasureToMetricBindingEvent
+            - modifyMeasureToMetricBindingEvent
+            - scenarioCreationEvent
+            - scenarioResetEvent
+            - scenarioCloneEvent
+            - scenarioRevertEvent
+            - scenarioRevertToSnapshotEvent
+            - scenarioUpdateEvent
+            - scenarioDeletionEvent
+            - scenarioDataChangeEvent
+            - scenarioCostChangeEvent
+            - scenarioSubmissionEvent
+            - scenarioRejectionEvent
+            - scenarioAddedToSubPlan
+            - scenarioDataFixedByPreviousVersionEvent
+            - scenarioDataFitToHeadcountEvent
+            - scenarioDataFitToCostEvent
+            - scenarioDataFitToFTEEvent
+            - scenarioDataFitToCostAndHeadcountEvent
+            - scenarioDataRevenueOptimizationEvent
+            - scenarioDataCostOptimizationEvent
+            - scenarioDataFreezeHiresEvent
+            - attachAssumptionEvent
+            - detachAssumptionEvent
+            - automaticDetachAssumptionEvent
+            - reloadAssumptionEvent
+            - memberAdded
+            - memberRenamed
+            - memberResolvedAsMapped
+            - memberResolvedAsPreserved
+            - memberResolvedAsRemoved
+            - memberResolvedAsAdded
+            - memberRemoved
+            - planCostBudgetChangeEvent
+            - planHeadcountBudgetChangeEvent
+            - scenarioDrillThroughExportEvent
+            - planExportHeadcountEvent
+            - planExportHirecountEvent
+            - planExportTCOWEvent
+            - planExportEvent
+            - planActivityExportEvent
+            - planConsolidationCurrencyUpdateEvent
+            - planDisplayCurrencyUpdateEvent
+            - snapshotCreationEvent
+            - snapshotDeletionEvent
+            - snapshotRenameEvent
+            - explorationSnapshotRenameEvent
+            - updateBaselineEvent
+            - planOfRecordAddEvent
+            - planOfRecordRemoveEvent
+            - copyScenarioDataToCollaborationEvent
+            - backupScenarioCreationEvent
+            - lostSyncedLimitsEvent
+            - planComment
+            - cellComment
+            - cellDeleteComment
+            - cellEditComment
+          type: string
+          description: The type of event.
+          format: enum
+        createdDate:
+          type: string
+          description: The date that the event was created. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
+        user:
+          type: string
+          description: The username of the user who triggered the event.
+        promotionData:
+          $ref: '#/components/schemas/planning.PromotionEventData'
+        bulkPromotionDemotionData:
+          $ref: '#/components/schemas/planning.BulkPromotionDemotionEventData'
+      description: Response for a single planning event.
+    planning.PromotedRowDTO:
+      type: object
+      properties:
+        memberPath:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.MemberDTO'
+          description: One entry per hierarchy level and dimension included in the plan's analysis context.
+      description: The member path for a single promoted row.
+    planning.PromotionEventData:
+      type: object
+      properties:
+        promotedRows:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.PromotedRowDTO'
+          description: The rows that were promoted. Each entry represents one promoted row with its dimension members.
+      description: Event data for memberPromoted and autoPromotion events.
+    planning.ReopenActionPayload:
+      type: object
+      properties:
+        assignee:
+          type: string
+          description: The user that the subplan will be assigned to once reopened. If not defined, it will keep the user that was previously assigned.
+        dueDate:
+          type: string
+          description: "The due date of the subplan in UTC format. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.\n The due date cannot be earlier than today.\n If not defined, the default is based on the length of the collaboration window:\n - Collaboration window between 2 and 14 days: The due date is set to one day before the collaboration window ends.\n - Collaboration window longer than 14 days: The due date is automatically set to 14 days from the start of the collaboration.\n - Collaboration window shorter than 2 days: The due date is automatically set to today."
+      description: The details of reopening a subplan.
+    planning.ShareActionPayload:
+      type: object
+      properties:
+        shares:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.PlanUserShareEntry'
+          description: The list of users the plan is shared with and their access level.
+        comment:
+          type: string
+          description: Optional message included in the notification email.
+        notifyRecipients:
+          type: boolean
+          description: If true, notification emails will be sent to newly shared users. Default is false.
+      description: "The desired sharing state for a plan. `shares` is the complete set of individual user shares\n (full-replace): users not listed lose their individual access."
+    planning.ShareActionResult:
+      type: object
+      properties:
+        failedShares:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.FailedShareEntry'
+          description: The users from the Share request that were unsuccessful.
+      description: Per-user outcome detail for a Share action.
+    planning.StartCollaborationActionPayload:
+      type: object
+      properties:
+        startDate:
+          type: string
+          description: The start date of the collaboration. The default is today. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
+        dueDate:
+          type: string
+          description: The due date of the collaboration. The default is 14 days since the start date. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
+      description: The details of starting a collaboration project.
+    planning.SubmitActionPayload:
+      type: object
+      properties:
+        comment:
+          type: string
+          description: A note or instructions to include when submitting a subplan.
+      description: The details of submitting a subplan.
+    PlanPatchConsolidateActionRequest:
+      type: object
+      title: Consolidate subplans
+      required:
+        - actionType
+        - consolidateActionPayload
+      properties:
+        actionType:
+          description: 'The action to perform on the main plan or the subplan, in a specific scenario. Valid values:
+
+            - `Consolidate`: Combine the submitted subplan values into the main plan.
+
+            - `Submit`: Send your completed subplan to the plan coordinator for review.
+
+            - `Reopen`: Reopen consolidated subplans so subplanners can change the values.
+
+            - `StartCollaboration`: Enter collaboration mode, so you can assign subplans to subplanners.
+
+            - `EndCollaboration`:  Regain control of the plan, so you can finalize it and put it into operation.
+
+            - `AssignSubplan`: Create a new subplan anchored at a specific row in the parent plan.
+
+'
+          type: string
+          enum:
+            - Consolidate
+        consolidateActionPayload:
+          $ref: '#/components/schemas/planning.ConsolidateActionPayload'
+    PlanPatchSubmitActionRequest:
+      type: object
+      title: Submit a plan
+      required:
+        - actionType
+        - submitActionPayload
+      properties:
+        actionType:
+          description: 'The action to perform on the main plan or the subplan, in a specific scenario. Valid values:
+
+            - `Consolidate`: Combine the submitted subplan values into the main plan.
+
+            - `Submit`: Send your completed subplan to the plan coordinator for review.
+
+            - `Reopen`: Reopen consolidated subplans so subplanners can change the values.
+
+            - `StartCollaboration`: Enter collaboration mode, so you can assign subplans to subplanners.
+
+            - `EndCollaboration`:  Regain control of the plan, so you can finalize it and put it into operation.
+
+            - `AssignSubplan`: Create a new subplan anchored at a specific row in the parent plan.
+
+'
+          type: string
+          enum:
+            - Submit
+        submitActionPayload:
+          $ref: '#/components/schemas/planning.SubmitActionPayload'
+    PlanPatchReopenActionRequest:
+      type: object
+      title: Reopen a plan
+      required:
+        - actionType
+        - reopenActionPayload
+      properties:
+        actionType:
+          description: 'The action to perform on the main plan or the subplan, in a specific scenario. Valid values:
+
+            - `Consolidate`: Combine the submitted subplan values into the main plan.
+
+            - `Submit`: Send your completed subplan to the plan coordinator for review.
+
+            - `Reopen`: Reopen consolidated subplans so subplanners can change the values.
+
+            - `StartCollaboration`: Enter collaboration mode, so you can assign subplans to subplanners.
+
+            - `EndCollaboration`:  Regain control of the plan, so you can finalize it and put it into operation.
+
+            - `AssignSubplan`: Create a new subplan anchored at a specific row in the parent plan.
+
+'
+          type: string
+          enum:
+            - Reopen
+        reopenActionPayload:
+          $ref: '#/components/schemas/planning.ReopenActionPayload'
+    PlanPatchStartCollaborationActionRequest:
+      type: object
+      title: Start Collaboration on a plan
+      required:
+        - actionType
+        - startCollaborationActionPayload
+      properties:
+        actionType:
+          description: 'The action to perform on the main plan or the subplan, in a specific scenario. Valid values:
+
+            - `Consolidate`: Combine the submitted subplan values into the main plan.
+
+            - `Submit`: Send your completed subplan to the plan coordinator for review.
+
+            - `Reopen`: Reopen consolidated subplans so subplanners can change the values.
+
+            - `StartCollaboration`: Enter collaboration mode, so you can assign subplans to subplanners.
+
+            - `EndCollaboration`:  Regain control of the plan, so you can finalize it and put it into operation.
+
+            - `AssignSubplan`: Create a new subplan anchored at a specific row in the parent plan.
+
+'
+          type: string
+          enum:
+            - StartCollaboration
+        startCollaborationActionPayload:
+          $ref: '#/components/schemas/planning.StartCollaborationActionPayload'
+    PlanPatchEndCollaborationActionRequest:
+      type: object
+      title: End Collaboration on a plan
+      required:
+        - actionType
+        - endCollaborationActionPayload
+      properties:
+        actionType:
+          description: 'The action to perform on the main plan or the subplan, in a specific scenario. Valid values:
+
+            - `Consolidate`: Combine the submitted subplan values into the main plan.
+
+            - `Submit`: Send your completed subplan to the plan coordinator for review.
+
+            - `Reopen`: Reopen consolidated subplans so subplanners can change the values.
+
+            - `StartCollaboration`: Enter collaboration mode, so you can assign subplans to subplanners.
+
+            - `EndCollaboration`:  Regain control of the plan, so you can finalize it and put it into operation.
+
+            - `AssignSubplan`: Create a new subplan anchored at a specific row in the parent plan.
+
+'
+          type: string
+          enum:
+            - EndCollaboration
+        endCollaborationActionPayload:
+          $ref: '#/components/schemas/planning.EndCollaborationActionPayload'
+    PlanPatchAssignSubplanActionRequest:
+      type: object
+      title: Assign a subplan
+      required:
+        - actionType
+        - assignSubplanActionPayload
+      properties:
+        actionType:
+          description: 'The action to perform on the main plan or the subplan, in a specific scenario. Valid values:
+
+            - `Consolidate`: Combine the submitted subplan values into the main plan.
+
+            - `Submit`: Send your completed subplan to the plan coordinator for review.
+
+            - `Reopen`: Reopen consolidated subplans so subplanners can change the values.
+
+            - `StartCollaboration`: Enter collaboration mode, so you can assign subplans to subplanners.
+
+            - `EndCollaboration`:  Regain control of the plan, so you can finalize it and put it into operation.
+
+            - `AssignSubplan`: Create a new subplan anchored at a specific row in the parent plan.
+
+'
+          type: string
+          enum:
+            - AssignSubplan
+        assignSubplanActionPayload:
+          $ref: '#/components/schemas/planning.AssignSubplansActionPayload'
+    PlanDataUploadResponseDTO:
+      type: object
+      properties:
+        updatedCellsCount:
+          type: integer
+          description: The number of cells that were updated from the data load process.
+        potentialUpdatedCellsCount:
+          type: integer
+          description: The number of cells that would have been updated if all changes were saved.
+        errors:
+          type: array
+          description: The collection of errors encountered during the data load process.
+          items:
+            $ref: '#/components/schemas/planning.PlanDataLoadErrorDTO'
+        changelists:
+          type: array
+          description: 'The collection of changes grouped by plan item made during the data load process.
+
+            This list only contains the changes specified by the load.
+
+            If you indicated in the request that the changes are to be rolled up or distributed,
+
+            the values modified as a result of the calculations are not listed here.'
+          items:
+            $ref: '#/components/schemas/PlanDataLoadChangeListDTO'
+    PlanDataLoadChangeListDTO:
+      type: object
+      properties:
+        planItem:
+          type: string
+          description: The ID of the plan item.
+        changes:
+          type: array
+          description: The collection of changes made for the plan item.
+          items:
+            $ref: '#/components/schemas/PlanDataLoadChangeDTO'
+    PlanDataLoadChangeDTO:
+      type: object
+      properties:
+        rowMembers:
+          type: array
+          description: The collection of member ids that describe the row in the plan.
+          items:
+            type: string
+        period:
+          type: string
+          description: The display name of the time period.
+        oldValue:
+          type: number
+          format: double
+          description: The value that was replaced.
+        newValue:
+          type: number
+          format: double
+          description: The new value loaded into the plan from the data load.
+    PlanRowDataLoadResponseDTO:
+      type: object
+      properties:
+        addedRowsCount:
+          type: integer
+          description: The number of rows added to the plan.
+        removedRowsCount:
+          type: integer
+          description: The number of rows removed from the plan.
+        potentialAddedRowsCount:
+          type: integer
+          description: The number of rows that could have been added to the plan.
+        potentialRemovedRowsCount:
+          type: integer
+          description: The number of rows that could have been removed from the plan.
+        errors:
+          type: array
+          description: The errors that occurred while loading the data.
+          items:
+            $ref: '#/components/schemas/planning.PlanDataLoadErrorDTO'
+        customMembers:
+          type: array
+          description: The custom members and their corresponding IDs in the plan.
+          items:
+            $ref: '#/components/schemas/planning.PlanSegmentLevelMemberDTO'
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+tags:
+  - name: PlanAdministration
+    x-displayName: Plan Administration
+    description: Manage collaboration projects in your plans, including actions such as consolidating and reopening subplans.
+  - name: PlanDataLoad
+    x-displayName: Plan Data Load
+    description: Send data directly to your plan's scenario and optionally add or remove rows from your plan.
+  - name: PlanEvents
+    x-displayName: Plan Events
+    description: Retrieve details about planning events such as member promotions and row changes.
+security:
+  - ApiKeyAuth: []
+    BearerAuth: []
+  - ApiKeyAuth: []
+    CookieAuth: []
+  - ApiKeyAuth: []
+    OAuth2Auth: []
+x-tagGroups:
+  - name: planning
+    tags:
+      - PlanAdministration
+      - PlanDataLoad
+      - PlanEvents

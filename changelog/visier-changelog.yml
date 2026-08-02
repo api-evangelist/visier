@@ -1,0 +1,89 @@
+generated: '2026-08-02'
+method: searched
+source: https://docs.visier.com/developer/Release%20Notes/release-notes.htm
+docs: https://docs.visier.com/developer/Release%20Notes/release-notes.htm
+scheme: seasonal
+cadence: quarterly (Winter, Spring, Summer, Fall)
+current_version: Spring 2026
+api_versioning: uri-path (/v1, /v2; /v1alpha and /v1beta for pre-release surfaces)
+spec_version_stamp: 22222222.99201.3040
+spec_version_note: >-
+  The published OpenAPI documents carry a build-style info.version (22222222.99201.3040) that tracks
+  the generator/build rather than a semantic API version. Consumers should read the URI-path version.
+history_available_from: Winter 2023
+entries:
+- version: Spring 2026
+  date: '2026'
+  url: https://docs.visier.com/developer/Release%20Notes/2026/S26-release-notes.htm
+  note: Listed on the release-notes index; page content is behind the docs sign-in prompt and was not harvested.
+- version: Winter 2026
+  date: '2026'
+  url: https://docs.visier.com/developer/Release%20Notes/2026/W26-release-notes.htm
+  breaking: false
+  additions:
+  - title: Correlation IDs for Security APIs
+    description: >-
+      Optional correlation ID on bulk API requests, associating request fields with response fields.
+      Useful for requests that lack UUIDs.
+  - title: NACE Industry Classification
+    description: >-
+      New industryInfo field on newly created tenants supporting NAICS and NACE industry codes,
+      replacing the previous industryCode field which supported NAICS only.
+  changes:
+  - title: Optional Request Locking for User Group APIs
+    date: '2026-05-13'
+    description: >-
+      Optional header to lock non-versioned API calls across three user group endpoints, preventing
+      incremental changes in multiple API calls from overwriting each other.
+  deprecations: []
+- version: Fall 2025
+  date: '2025'
+  url: https://docs.visier.com/developer/Release%20Notes/2025/F25-release-notes.htm
+  breaking: false
+  additions:
+  - title: Users V3 API (General Availability)
+    date: '2025-02-11'
+    description: Promoted to GA; supports update or insert (upsert) of a user.
+  - title: Vee API (General Availability)
+    description: >-
+      Generally available for integration into digital assistants and search. Update routes by
+      replacing v1alpha with v1.
+  - title: Non-Versioned Security Header (General Availability)
+    date: '2025-02-04'
+    description: >-
+      Promoted to GA for frequent, small-scale security updates and rapidly changing organizational
+      structures.
+  - title: Visier Query MCP Server (Alpha)
+    description: >-
+      New Model Context Protocol server connecting MCP-compatible applications such as Claude Desktop
+      to Visier APIs.
+  changes:
+  - title: Users V1 API fix
+    date: '2025-02-11'
+    description: >-
+      Resolved an issue where dynamically assigned user groups were not returned with the
+      assignedUserGroups=true parameter.
+  - title: embedCharts version 2
+    description: Added support for metric card visualizations and summary value display configuration.
+  deprecations: []
+older_releases:
+- Summer 2025
+- Spring 2025
+- Winter 2025
+- Fall 2024
+- Summer 2024
+- Spring 2024
+- Winter 2024
+- Fall 2023
+- Summer 2023
+- Spring 2023
+- Winter 2023
+related:
+- name: Vee Release Notes
+  url: https://docs.visier.com/developer/Release%20Notes/Vee/vee-release-notes.htm
+  note: Vee ships on its own cadence outside the seasonal releases.
+- name: OpenAPI change history
+  url: https://github.com/visier/openapi-clients/commits/main
+  note: >-
+    Visier publishes spec changes to github.com/visier/openapi-clients, so the git history of
+    res/*.yaml is a second, finer-grained changelog for the contract itself.

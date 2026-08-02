@@ -1,0 +1,90 @@
+generated: '2026-08-02'
+method: searched
+source: https://docs.visier.com/developer/apis/version-control.htm
+docs: https://docs.visier.com/developer/apis/version-control.htm
+versioning:
+  scheme: uri-path
+  current: v1
+  examples:
+  - /v1/data/model/metrics
+  - /v2/compensation-benchmarks/jobs
+  prerelease_prefixes:
+  - v1alpha
+  - v1beta
+  release_types:
+  - name: Major version
+    definition: An API release that contains breaking changes.
+  - name: Current version implementation
+    definition: An API release that contains additive changes that are non-breaking.
+  policy: >-
+    Visier releases new changes for current API versions if the changes are additive and have no
+    impact on current API integrations. Consumers do not have to update their integration unless they
+    want the new additive changes.
+  docs: https://docs.visier.com/developer/apis/version-control.htm
+deprecation:
+  policy_url: https://docs.visier.com/developer/apis/version-control.htm
+  published: true
+  announcement_contents:
+  - what is deprecated
+  - announcement date
+  - end-of-support date
+  channels:
+  - Formal deprecation notices ("Deprecation Notice: API Features")
+  - API documentation updated with deprecation labels and migration guidance
+  - OpenAPI definitions flagged with deprecation indicators
+  sunset_header: false
+  deprecation_header: false
+  notes: >-
+    Visier communicates deprecation through notices, docs labels and the OpenAPI `deprecated` flag,
+    not through RFC 8594 Sunset / Deprecation HTTP headers. API versions marked for deprecation do
+    not receive additive changes.
+  minimum_notice_period: not published
+release_cadence:
+  scheme: seasonal
+  releases_per_year: 4
+  names: [Winter, Spring, Summer, Fall]
+  release_notes: https://docs.visier.com/developer/Release%20Notes/release-notes.htm
+  latest_observed: Winter 2026
+status_page: https://status.visier.com/
+sla:
+  url: null
+  note: No public SLA / uptime target document was found on the Visier public site; SLA terms are contractual.
+maturity_labels:
+  observed_in_docs:
+  - name: Alpha
+    apis: [Table Source, Data Version Export, Source Files Download, Reporting, Consolidated Analytics,
+      Email Domains, Network Subnets, Release Versions, Dimensions, Analytic Objects, Metrics,
+      Personalized Alerts, Plan Row Data Load]
+  - name: Beta
+    apis: [Webhooks, Sources]
+  - name: Limited Availability
+    apis: [Data Intake]
+  note: >-
+    Maturity is signalled both in the docs and in the URI path — alpha surfaces sit under /v1alpha.
+deprecated_operations: []
+deprecated_operations_note: >-
+  No operation in the nine harvested OpenAPI documents carries `deprecated: true` as of 2026-08-02.
+  Visier does flag deprecation at the schema-property level, which is where its OpenAPI deprecation
+  indicators actually appear.
+deprecated_fields:
+- schema: dataservices.common.DimensionMemberReferenceDTO
+  property: memberId
+  sources:
+  - openapi/visier-analytic-model-apis-openapi.yaml
+  - openapi/visier-data-out-apis-openapi.yaml
+- schema: dataservices.query.AggregateQueryExecutionOptionsDTO
+  property: currencyConversionMode
+  sources:
+  - openapi/visier-data-out-apis-openapi.yaml
+- schema: dataservices.query.ListQueryExecutionOptionsDTO
+  property: currencyConversionMode
+  sources:
+  - openapi/visier-data-out-apis-openapi.yaml
+- schema: dataservices.query.SqlLikeQueryExecutionDTO
+  property: options
+  sources:
+  - openapi/visier-data-out-apis-openapi.yaml
+- schema: admin.TenantManagementAPIUpdateRequestDTO
+  property: tenantShortName
+  sources:
+  - openapi/visier-administration-apis-openapi.yaml

@@ -1,0 +1,90 @@
+generated: '2026-08-02'
+method: searched
+source: openapi/visier-webhooks-openapi.yaml + https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
+spec_type: Webhooks
+asyncapi_published: false
+asyncapi_note: >-
+  Visier publishes no AsyncAPI document. It does publish a real, machine-readable webhook management
+  surface: an OpenAPI for the Webhooks APIs (github.com/visier/openapi-clients res/webhooks.yaml) plus
+  a documented enumeration of event types. This artifact captures the event catalog derived from that
+  spec's designer.webhook.WebhookEventTypeDTO enumeration and the webhook docs. The event payload
+  schemas Visier POSTs to subscriber endpoints are not published in the OpenAPI — only the
+  subscription-management shapes are — so no payload schemas are recorded here.
+status: beta
+docs: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
+delivery:
+  style: HTTPS POST to a subscriber-registered endpoint
+  description: >-
+    Register your own HTTPS endpoint with Visier and listen for specific events. When an event occurs,
+    Visier sends an API request to the registered endpoint.
+  authentication:
+    - type: basic
+      note: >-
+        Webhook credentials are managed separately from the webhook definition
+        (designer.webhook.WebhookBasicAuthCredentialDTO) and referenced by credentialReference.
+  test_support:
+    operation: Webhooks_SendTestEvent
+    path: POST /v1/op/webhooks/{webhookId}/testEvent
+    description: Send a test event to a registered webhook endpoint.
+  status_monitoring:
+    operations:
+    - Webhooks_GetWebhooksStatus
+    path: GET /v1/op/webhooks-status
+events:
+- name: jobResultSuccess
+  description: A job completed successfully.
+- name: jobResultFailure
+  description: A job failed to complete.
+- name: jobReschedule
+  description: A job was rescheduled.
+- name: dvPublish
+  description: A data version published to production.
+- name: alertNotification
+  description: A personalized alert notification was triggered.
+- name: smartCompNotification
+  description: A Smart Compensation event notification was triggered. Available for Embedded Partners.
+- name: dataUploadNotification
+  description: A data file was uploaded.
+- name: systemAlertNotification
+  description: A system event alert notification was triggered.
+- name: planRowPromotionNotification
+  description: A row in a plan was promoted.
+- name: auditEvent
+  description: An audit event was triggered.
+management_operations:
+- operationId: Webhooks_GetAllWebhooks
+  method: GET
+  path: /v1/op/webhooks
+  summary: Retrieve a list of webhooks
+- operationId: Webhooks_CreateWebhook
+  method: POST
+  path: /v1/op/webhooks
+  summary: Create a webhook
+- operationId: Webhooks_GetWebhook
+  method: GET
+  path: /v1/op/webhooks/{webhookId}
+  summary: Retrieve a webhook's details
+- operationId: Webhooks_UpdateWebhook
+  method: PUT
+  path: /v1/op/webhooks/{webhookId}
+  summary: Update a webhook's details
+- operationId: Webhooks_DeleteWebhook
+  method: DELETE
+  path: /v1/op/webhooks/{webhookId}
+  summary: Delete a webhook
+- operationId: Webhooks_UpdateWebhookCredentials
+  method: PUT
+  path: /v1/op/webhooks/{webhookId}/credentials
+  summary: Update a webhook's credentials
+- operationId: Webhooks_DeleteWebhookCredentials
+  method: DELETE
+  path: /v1/op/webhooks/{webhookId}/credentials
+  summary: Delete a webhook's credentials
+- operationId: Webhooks_GetWebhooksStatus
+  method: GET
+  path: /v1/op/webhooks-status
+  summary: Retrieve webhook statuses
+- operationId: Webhooks_SendTestEvent
+  method: POST
+  path: /v1/op/webhooks/{webhookId}/testEvent
+  summary: Test a webhook

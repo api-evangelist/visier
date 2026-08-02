@@ -1,0 +1,89 @@
+generated: '2026-08-02'
+method: derived
+source: openapi/visier-administration-apis-openapi.yaml, openapi/visier-analytic-model-apis-openapi.yaml,
+  openapi/visier-authentication-apis-openapi.yaml, openapi/visier-data-in-apis-openapi.yaml,
+  openapi/visier-data-out-apis-openapi.yaml, openapi/visier-planning-openapi.yaml, openapi/visier-webhooks-openapi.yaml
+schemes:
+- name: OAuth2Auth
+  source: openapi/visier-administration-apis-openapi.yaml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: /v1/auth/oauth2/authorize
+    tokenUrl: /v1/auth/oauth2/token
+  - flow: password
+    tokenUrl: /v1/auth/oauth2/token
+- name: OAuth2Auth
+  source: openapi/visier-analytic-model-apis-openapi.yaml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: /v1/auth/oauth2/authorize
+    tokenUrl: /v1/auth/oauth2/token
+  - flow: password
+    tokenUrl: /v1/auth/oauth2/token
+- name: OAuth2Auth
+  source: openapi/visier-authentication-apis-openapi.yaml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: /v1/auth/oauth2/authorize
+    tokenUrl: /v1/auth/oauth2/token
+  - flow: password
+    tokenUrl: /v1/auth/oauth2/token
+- name: OAuth2Auth
+  source: openapi/visier-data-in-apis-openapi.yaml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: /v1/auth/oauth2/authorize
+    tokenUrl: /v1/auth/oauth2/token
+  - flow: password
+    tokenUrl: /v1/auth/oauth2/token
+- name: OAuth2Auth
+  source: openapi/visier-data-out-apis-openapi.yaml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: /v1/auth/oauth2/authorize
+    tokenUrl: /v1/auth/oauth2/token
+  - flow: password
+    tokenUrl: /v1/auth/oauth2/token
+- name: OAuth2Auth
+  source: openapi/visier-planning-openapi.yaml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: /v1/auth/oauth2/authorize
+    tokenUrl: /v1/auth/oauth2/token
+  - flow: password
+    tokenUrl: /v1/auth/oauth2/token
+- name: OAuth2Auth
+  source: openapi/visier-webhooks-openapi.yaml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: /v1/auth/oauth2/authorize
+    tokenUrl: /v1/auth/oauth2/token
+  - flow: password
+    tokenUrl: /v1/auth/oauth2/token
+scopes:
+- scope: read
+  description: Grants read access
+  flows:
+  - authorizationCode
+  - password
+  sources:
+  - openapi/visier-administration-apis-openapi.yaml
+  - openapi/visier-analytic-model-apis-openapi.yaml
+  - openapi/visier-authentication-apis-openapi.yaml
+  - openapi/visier-data-in-apis-openapi.yaml
+  - openapi/visier-data-out-apis-openapi.yaml
+  - openapi/visier-planning-openapi.yaml
+  - openapi/visier-webhooks-openapi.yaml
+- scope: write
+  description: Grants write access
+  flows:
+  - authorizationCode
+  - password
+  sources:
+  - openapi/visier-administration-apis-openapi.yaml
+  - openapi/visier-analytic-model-apis-openapi.yaml
+  - openapi/visier-authentication-apis-openapi.yaml
+  - openapi/visier-data-in-apis-openapi.yaml
+  - openapi/visier-data-out-apis-openapi.yaml
+  - openapi/visier-planning-openapi.yaml
+  - openapi/visier-webhooks-openapi.yaml

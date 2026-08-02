@@ -1,0 +1,48 @@
+generated: '2026-08-02'
+method: searched
+probe: true
+source: https://www.visier.com/trust/
+url: https://www.visier.com/trust/
+name: Visier Trust Services Program
+sections:
+- name: Trust
+  url: https://www.visier.com/trust/
+- name: Compliance
+  url: https://www.visier.com/trust/compliance/
+- name: System Status
+  url: https://status.visier.com/
+certifications:
+- SOC 2
+- CSA STAR Level 1
+certifications_note: >-
+  Verified on https://www.visier.com/trust/compliance/ under "Audits and Certifications" on
+  2026-08-02. Visier does not publish the SOC 2 report itself; existing customers access it through
+  the Visier Service Portal Trust Assurance & Artifacts knowledge base. No ISO 27001, HIPAA, FedRAMP
+  or PCI DSS claim was found on the public trust pages — absence is recorded as observed, not asserted.
+programs:
+- name: Trust Assurance Package (TAP)
+  description: >-
+    Visier's bundle of security, privacy and compliance artifacts made available to customers,
+    including the SOC 2 report, via the Visier Service Portal.
+  access: customers only
+contacts:
+- purpose: security
+  email: security@visier.com
+- purpose: privacy
+  email: privacy@visier.com
+- purpose: data protection officer
+  email: dpo@visier.com
+related_pages:
+- name: Privacy statement
+  url: https://www.visier.com/privacy/
+- name: Terms of use
+  url: https://www.visier.com/terms-of-use-agreement/
+- name: security.txt
+  url: https://www.visier.com/.well-known/security.txt
+evidence:
+- source: https://www.visier.com/trust/
+  http_status: 200
+  keywords: [trust services program, information security, privacy, governance risk and compliance]
+- source: https://www.visier.com/trust/compliance/
+  http_status: 200
+  keywords: [soc 2, csa star level 1, audits and certifications, trust assurance package]

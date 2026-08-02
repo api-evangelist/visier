@@ -1,0 +1,101 @@
+generated: '2026-08-02'
+method: generated
+source: openapi/ (9 documents, 366 operations) + Visier developer documentation
+note: >-
+  Visier publishes no AGENTS.md or provider-authored agent skills. These are API Evangelist packaged
+  operating instructions, one per marquee flow, with every operationId verified verbatim against the
+  harvested OpenAPI documents.
+skills:
+- file: visier-authenticate.md
+  name: Authenticate against the Visier API
+  api: openapi/visier-authentication-apis-openapi.yaml
+  operations:
+  - BasicAuthentication_ASIDTokenAuthentication
+  - OAuth2_OAuth2Authorize
+  - OAuth2_OAuth2Token
+  - OAuth2_UserInfo
+  - BasicAuthentication_GenerateImpersonationToken
+- file: visier-query-workforce-metrics.md
+  name: Query workforce metrics from Visier
+  api: openapi/visier-data-out-apis-openapi.yaml
+  operations:
+  - DataModel_AnalyticObjects
+  - DataModel_Metrics
+  - DataModel_Metric
+  - DataModel_MetricDimensions
+  - DataModel_Dimensions
+  - DataModel_Members
+  - DataQuery_Aggregate
+  - DataQuery_List
+  - Query_Snapshot
+- file: visier-ask-vee.md
+  name: Ask Vee a natural-language workforce question
+  api: openapi/visier-data-out-apis-openapi.yaml
+  operations:
+  - VeeV1_VeeStatus
+  - VeeV1_VeeSampleQuestions
+  - VeeV1_VeeSampleQuestionCategories
+  - VeeV1_VeeQuestionRequest
+  - VeeV1_VeeFeedback
+- file: visier-direct-data-intake.md
+  name: Load data into Visier with Direct Data Intake
+  api: openapi/visier-data-in-apis-openapi.yaml
+  operations:
+  - DirectDataIntake_GetConfig
+  - DirectDataIntake_PutConfig
+  - DirectDataIntake_ObjectSchema
+  - DirectDataIntake_StartTransaction
+  - DirectDataIntake_LoadSampleData
+  - DirectDataIntake_JobStatus
+  - DirectDataIntake_CommitTransaction
+  - DirectDataIntake_RollbackTransaction
+  - DirectDataIntake_ListTransactions
+- file: visier-subscribe-to-platform-events.md
+  name: Subscribe to Visier platform events with webhooks
+  api: openapi/visier-webhooks-openapi.yaml
+  operations:
+  - Webhooks_GetAllWebhooks
+  - Webhooks_CreateWebhook
+  - Webhooks_GetWebhook
+  - Webhooks_UpdateWebhook
+  - Webhooks_DeleteWebhook
+  - Webhooks_UpdateWebhookCredentials
+  - Webhooks_DeleteWebhookCredentials
+  - Webhooks_SendTestEvent
+  - Webhooks_GetWebhooksStatus
+- file: visier-benchmark-compensation.md
+  name: Benchmark pay with Visier Compensation Benchmarks
+  api: openapi/visier-compensation-benchmarks-openapi.yaml
+  operations:
+  - GetInfo
+  - GetJobsV2
+  - SearchJobs
+  - StandardizeJobsInBulk
+  - GetJobHierarchies
+  - GetLocations
+  - SearchLocationsInBulk
+  - GetIndustries
+  - GetCompanySizes
+  - GetCareerLevels
+  - SearchCareerLevelsInBulk
+  - GetSalaryBenchmark
+  - GetSalaryBenchmarksInBulk
+  - SubmitSalaryBenchmarkFeedback
+  - GetTaxonomyChangeInfo
+- file: visier-skills-intelligence.md
+  name: Extract and match skills with the Visier Skills Intelligence Engine
+  api: openapi/visier-skills-intelligence-engine-openapi.yaml
+  operations:
+  - ListSkills
+  - GetSkill
+  - SearchSkill
+  - ExtractSkills
+  - MatchSkills
+  - ListSkillGroups
+  - GetSkillGroup
+  - ListSkillCategories
+  - GetSkillCategory
+  - ListJobs
+  - GetJob
+  - SearchJob
+  - StandardizeJobs

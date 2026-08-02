@@ -1,0 +1,158 @@
+generated: '2026-08-02'
+method: derived
+source: mcp/visier-mcp.yml + openapi/visier-data-out-apis-openapi.yaml + openapi/visier-analytic-model-apis-openapi.yaml
+notes: >-
+  Visier documents its data-query MCP tools as "structured wrappers around Visier's public data query
+  APIs", which makes the binding below a documented relationship rather than an inferred one — but the
+  live tools/list manifest is tenant-scoped and OAuth-gated, so wire-level tool ids and inputSchemas
+  could not be introspected. Rows are therefore mapped by published display name and semantics, and
+  confidence is set accordingly. Each bound tool's real input contract is the referenced operation's
+  parameters + requestBody in the OpenAPI.
+surfaces:
+  openapi:
+  - file: openapi/visier-data-out-apis-openapi.yaml
+    operations: 38
+  - file: openapi/visier-analytic-model-apis-openapi.yaml
+    operations: 87
+  graphql:
+    present: false
+  mcp:
+    url: https://{vanity_name}.app.visier.com/visier-query-mcp
+    gated: true
+    gate: OAuth 2.0, tenant-scoped host
+crosswalk:
+- tool: Ask Vee AI agent
+  category: vee
+  rest:
+  - VeeV1_VeeQuestionRequest
+  binding: rest
+  confidence: high
+  note: >-
+    POST /v1/vee/question in the Data Out APIs is the public Vee question endpoint; the MCP tool is
+    the agent-facing wrapper. VeeV1_VeeFeedback (POST /v1/vee/feedback) is the sibling feedback
+    operation and is not exposed as an MCP tool.
+- tool: Get sample Vee questions
+  category: vee
+  rest:
+  - VeeV1_VeeSampleQuestions
+  - VeeV1_VeeSampleQuestionCategories
+  binding: rest
+  confidence: high
+- tool: Run an aggregate metric query
+  category: data-query
+  rest:
+  - DataQuery_Aggregate
+  binding: rest
+  confidence: high
+- tool: Run a list query
+  category: data-query
+  rest:
+  - DataQuery_List
+  binding: rest
+  confidence: high
+- tool: Search analytic objects
+  category: data-query
+  rest:
+  - DataModel_AnalyticObjects
+  - DataModel_AnalyticObject
+  binding: rest
+  confidence: medium
+  note: Fans out to the analytic-object list and detail operations in the Analytic Model APIs.
+- tool: Search properties for an analytic object
+  category: data-query
+  rest:
+  - DataModel_Properties
+  - DataModel_Property
+  binding: rest
+  confidence: medium
+- tool: Search metrics
+  category: data-query
+  rest:
+  - DataModel_Metrics
+  - DataModel_Metric
+  binding: rest
+  confidence: medium
+- tool: Search dimensions for a metric
+  category: data-query
+  rest:
+  - DataModel_MetricDimensions
+  binding: rest
+  confidence: high
+- tool: Search dimensions for an analytic object
+  category: data-query
+  rest:
+  - DataModel_Dimensions
+  - DataModel_Dimension
+  binding: rest
+  confidence: high
+- tool: Search dimension members for filtering
+  category: data-query
+  rest:
+  - DataModel_Members
+  - DataModel_Member
+  binding: rest
+  confidence: high
+- tool: Get an object reference graph
+  category: data-query
+  rest:
+  - DataModel_AnalyticObject
+  - DataModel_Dimensions
+  binding: rest
+  confidence: low
+  note: >-
+    No single public REST operation returns an object reference graph. Visier states the data-query
+    tools are wrappers over the public data query APIs and that results are shaped for LLM
+    consumption (e.g. returning only top dimension members), so this tool is most likely a
+    server-side composite over the analytic-object and dimension operations. Recorded as low
+    confidence rather than asserted.
+mcp_only: []
+rest_only:
+- capability: Data query — snapshot and SQL-like
+  operations:
+  - Query_Snapshot
+  - DataQuery_SqlLike
+  - DataQuery_ConnectorVersion
+- capability: Vee feedback and status
+  operations:
+  - VeeV1_VeeFeedback
+  - VeeV1_VeeStatus
+  - VeeV1_VeeSampleQuestionCategory
+- capability: Data version export
+  operations:
+  - DataVersionExport_GetAvailableDataVersions
+  - DataVersionExport_GetAvailableExports
+  - DataVersionExport_GetExport
+  - DataVersionExport_ScheduleExportJob
+  - DataVersionExport_GetExportJobStatus
+- capability: Data export connectors
+  operations:
+  - DataExportConnectorsAPI_ListConnectors
+  - DataExportConnectorsAPI_DispatchJob
+  - DataExportConnectorsAPI_ListCredentials
+  - DataExportConnectorsAPI_CreateCredential
+  - DataExportConnectorsAPI_GetJobStatus
+- capability: Search and reporting
+  operations:
+  - Search_SimpleSearchDocumentHeaders
+  - Search_ContextSearchDocumentHeaders
+- capability: Analytic model write operations (properties, dimensions, concepts, object configuration)
+  operations:
+  - DataModel_CreateProperties
+  - DataModel_PutProperties
+  - DataModel_UpdateProperties
+  - DataModel_DeleteProperties
+  - DataModel_UpdateDimensions
+- capability: Everything in the Administration, Data In, Planning, Webhooks, Compensation Benchmarks and Skills Intelligence Engine collections
+  note: >-
+    The Visier Query MCP server is read/query oriented. No administration, data-loading, planning,
+    webhook-management, compensation-benchmark or skills-intelligence operation has an MCP tool.
+coverage:
+  tools_named: 11
+  tools_bound: 11
+  tools_bound_high_confidence: 7
+  tools_bound_medium_confidence: 3
+  tools_bound_low_confidence: 1
+  mcp_only: 0
+  rest_operations_total: 366
+  rest_operations_in_query_surface: 125
+  rest_operations_with_a_tool: 15

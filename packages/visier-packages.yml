@@ -1,0 +1,107 @@
+generated: '2026-08-02'
+method: searched
+source: https://pypi.org/user/visier/ + https://github.com/visier
+notes: >-
+  Visier generates its client libraries from the OpenAPI v3 definitions published at
+  github.com/visier/openapi-clients. Python is the only first-party SDK language Visier ships today;
+  no first-party npm, Maven Central, NuGet, RubyGems, Packagist, crates.io or Go module packages were
+  found on 2026-08-02. The recommended entry point is the single visier-platform-sdk package, which
+  bundles every API collection; the per-collection visier-api-* packages are the generated parts.
+packages:
+- language: python
+  registry: pypi
+  name: visier-platform-sdk
+  version: 22222222.99201.3040
+  url: https://pypi.org/project/visier-platform-sdk/
+  source: https://github.com/visier/python-sdk
+  install: pip install visier-platform-sdk
+  official: true
+  description: Visier Platform Python SDK — single package providing access to all Visier API collections.
+- language: python
+  registry: pypi
+  name: visier-api-core
+  version: 22222222.99201.1906
+  url: https://pypi.org/project/visier-api-core/
+  install: pip install visier-api-core
+  official: true
+  description: Core client, configuration and authentication (API key, basic, OAuth 2.0) shared by the generated Visier API packages.
+- language: python
+  registry: pypi
+  name: visier-api-administration
+  version: 22222222.99201.1906
+  url: https://pypi.org/project/visier-api-administration/
+  install: pip install visier-api-administration
+  official: true
+  description: Generated client for the Visier Administration APIs.
+- language: python
+  registry: pypi
+  name: visier-api-analytic-model
+  version: 22222222.99201.1906
+  url: https://pypi.org/project/visier-api-analytic-model/
+  install: pip install visier-api-analytic-model
+  official: true
+  description: Generated client for the Visier Analytic Model APIs.
+- language: python
+  registry: pypi
+  name: visier-api-data-in
+  version: 22222222.99201.1906
+  url: https://pypi.org/project/visier-api-data-in/
+  install: pip install visier-api-data-in
+  official: true
+  description: Generated client for the Visier Data In APIs.
+- language: python
+  registry: pypi
+  name: visier-api-data-out
+  version: 22222222.99201.1906
+  url: https://pypi.org/project/visier-api-data-out/
+  install: pip install visier-api-data-out
+  official: true
+  description: Generated client for the Visier Data Out APIs.
+- language: python
+  registry: pypi
+  name: visier-connector
+  version: 0.9.19
+  url: https://pypi.org/project/visier-connector/
+  source: https://github.com/visier/connector-python
+  install: pip install visier-connector
+  official: true
+  description: Visier Python Connector — lightweight connector for querying Visier People data.
+registries_probed:
+- registry: pypi
+  result: 6 first-party packages found
+- registry: npm
+  result: no first-party package (@visier/sdk, visier, visier-sdk, @visier/embedded all 404)
+- registry: maven-central
+  result: none found
+- registry: nuget
+  result: none found
+- registry: pkg.go.dev
+  result: none found
+- registry: rubygems
+  result: none found
+- registry: packagist
+  result: none found
+- registry: crates.io
+  result: none found
+related_repositories:
+- name: visier/openapi-clients
+  url: https://github.com/visier/openapi-clients
+  description: OpenAPI v3 definitions for Visier public APIs (the source the SDKs are generated from).
+- name: visier/python-sdk
+  url: https://github.com/visier/python-sdk
+  description: Visier Platform Python SDK.
+- name: visier/connector-python
+  url: https://github.com/visier/connector-python
+  description: Python connector to query Visier People data.
+- name: visier/sql-shell
+  url: https://github.com/visier/sql-shell
+  description: Python application for running Visier SQL-like queries.
+- name: visier/api-samples
+  url: https://github.com/visier/api-samples
+  description: Sample applications and snippets using public Visier APIs.
+- name: visier/sample-langchain-mcp-client
+  url: https://github.com/visier/sample-langchain-mcp-client
+  description: Sample LangChain-based MCP client for the Visier Query MCP server.
+- name: visier/embedding-exemplar
+  url: https://github.com/visier/embedding-exemplar
+  description: Example partner application that embeds Visier.

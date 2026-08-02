@@ -1,0 +1,126 @@
+generated: '2026-08-02'
+method: searched
+source: https://docs.visier.com/developer/apis/status-codes-errors.htm
+derived_from:
+- openapi/visier-administration-apis-openapi.yaml
+- openapi/visier-analytic-model-apis-openapi.yaml
+- openapi/visier-data-in-apis-openapi.yaml
+- openapi/visier-data-out-apis-openapi.yaml
+- openapi/visier-planning-openapi.yaml
+- openapi/visier-webhooks-openapi.yaml
+- openapi/visier-compensation-benchmarks-openapi.yaml
+- openapi/visier-skills-intelligence-engine-openapi.yaml
+docs: https://docs.visier.com/developer/apis/status-codes-errors.htm
+format: custom-json
+rfc9457: false
+media_type: application/json
+envelope:
+  schema: ApiError
+  alternates:
+  - planning.ErrorSummary
+  - Status
+  fields:
+  - name: message
+    type: string
+    description: The details of the error.
+  - name: localizedMessage
+    type: string
+    description: The localized details of the error.
+  - name: rci
+    type: string
+    description: A root cause identifier that allows Visier to determine the source of the problem.
+  - name: code
+    type: string
+    description: A brief identifier of the type of error.
+  - name: userError
+    type: boolean
+    description: If true, the API error is due to user error.
+statuses:
+- status: 200
+  title: OK
+  description: The request ran successfully.
+- status: 201
+  title: Created
+  description: New objects created successfully, such as a new user.
+- status: 204
+  title: No Content
+  description: The server successfully fulfilled the request and there is no additional content to send in the response.
+- status: 206
+  title: Partial Content
+  description: The number of returned objects is a subset of the available objects, usually due to the limit parameter.
+- status: 207
+  title: Multi-Status
+  description: The message body may contain a number of separate response codes, depending on how many sub-requests were made.
+- status: 400
+  title: Bad Request
+  description: The API request failed given the parameters provided, such as missing or invalid parameters.
+  occurrences_in_specs: 30
+- status: 401
+  title: Unauthorized
+  description: The API request failed because the authentication credentials expired.
+- status: 403
+  title: Forbidden
+  description: The user made a request to the API, but is prohibited from running it successfully, such as due to insufficient privileges.
+  occurrences_in_specs: 1
+- status: 404
+  title: Not Found
+  description: The user made a request to the API for a method or resource that does not exist.
+  occurrences_in_specs: 4
+- status: 406
+  title: Not Acceptable
+  description: The request content is not acceptable according to the Accept header.
+- status: 429
+  title: Too Many Requests
+  description: API rate limit exceeded.
+  remediation: Read X-RateLimit-Remaining-Minute / X-RateLimit-Remaining-Hour and pace requests. See rate-limits/visier-rate-limits.yml.
+- status: 500
+  title: Internal Server Error
+  description: An unexpected exception occurred on the server.
+  occurrences_in_specs: 34
+- status: 501
+  title: Not Implemented
+  description: The request failed due to using an unimplemented feature.
+- status: 502
+  title: Bad Gateway
+  description: An unexpected exception occurred on the server.
+- status: 504
+  title: Gateway Timeout
+  description: The server is taking too long to respond and the request timed out.
+  occurrences_in_specs: 30
+problems:
+- name: Invalid IDs
+  likely_status: 400
+  cause: Requests contain typos, incorrect names, or IDs violating character constraints.
+  remediation: Verify the input and adjust the ID.
+- name: Object Already Exists
+  likely_status: 400
+  cause: Creating an object with a duplicate ID.
+  remediation: Ensure IDs are unique.
+- name: Insufficient Profile Capabilities
+  likely_status: 403
+  cause: The user lacks the required profile permissions.
+  remediation: Contact your administrator for the required capabilities.
+- name: Insufficient Analytic Capabilities
+  likely_status: 403
+  cause: User permissions prevent the requested action.
+  remediation: Request the required capabilities from your administrator.
+- name: Insufficient Data Access
+  likely_status: 403
+  cause: The user cannot view the requested data.
+  remediation: Request data access from your administrator.
+- name: Insufficient Access to Tenant
+  likely_status: 403
+  cause: The user lacks access to the target tenant.
+  remediation: Verify the tenant code or request tenant access.
+- name: Request Data is Malformed
+  likely_status: 400
+  cause: The data format is incorrect or exceeds limits.
+  remediation: Verify format and data size compliance.
+- name: Expected Data Version is Not Available
+  likely_status: 400
+  cause: The data version is outdated or unavailable.
+  remediation: Generate and publish a new data version.
+notes: >-
+  Visier does not use RFC 9457 application/problem+json. Errors are returned as application/json with
+  the ApiError envelope above. The Planning APIs use planning.ErrorSummary and the Webhooks APIs use
+  a Status schema; both carry equivalent message/code semantics.

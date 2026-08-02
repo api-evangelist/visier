@@ -1,0 +1,360 @@
+generated: '2026-08-02'
+method: derived
+source: openapi/ (9 documents, 901 component schemas, 366 operations)
+docs:
+- https://docs.visier.com/developer/apis/analytic-model/data-model/data-model-api.htm
+- https://docs.visier.com/developer/apis/analytic-model/concepts/concepts-api.htm
+notes: >-
+  Visier's public API surface has two distinct object layers that should not be conflated. The
+  ANALYTIC MODEL layer is metadata about the tenant's people data — analytic objects, their
+  properties, the metrics computed over them, and the dimensions/members used to slice them. The
+  PLATFORM layer is the tenant's own administration objects — tenants, users, profiles, permissions,
+  projects, data versions, jobs, webhooks. The entity graph below is derived from the URI hierarchy
+  and schema $ref structure of the published OpenAPI, which is where Visier makes containment
+  explicit (e.g. /v1/data/model/analytic-objects/{objectId}/dimensions/{dimensionId}/members).
+
+domains:
+- name: Analytic Model
+  description: Metadata describing the tenant's people data model.
+  root_path: /v1/data/model
+  spec: openapi/visier-analytic-model-apis-openapi.yaml
+- name: Data Query
+  description: Aggregate, list, snapshot and SQL-like queries executed against the analytic model.
+  root_path: /v1/data/query
+  spec: openapi/visier-data-out-apis-openapi.yaml
+- name: Administration
+  description: Tenants, users, user groups, profiles, permissions, data access sets, projects.
+  root_path: /v1/admin
+  spec: openapi/visier-administration-apis-openapi.yaml
+- name: Operations
+  description: Data versions, data uploads, connectors, jobs, webhooks.
+  root_path: /v1/op
+  spec: openapi/visier-data-in-apis-openapi.yaml
+- name: Direct Data Intake
+  description: Draft-scoped transactional data loading.
+  root_path: /v1/data/directloads
+  spec: openapi/visier-data-in-apis-openapi.yaml
+- name: Planning
+  description: Plan models, plans, scenarios, cells, rows, plan events.
+  root_path: /v1/planning
+  spec: openapi/visier-planning-openapi.yaml
+- name: Compensation Benchmarks
+  description: External market compensation reference data.
+  root_path: /v1/compensation-benchmarks
+  spec: openapi/visier-compensation-benchmarks-openapi.yaml
+- name: Skills Intelligence Engine
+  description: Skills and jobs taxonomy plus inference operations.
+  root_path: /v1
+  spec: openapi/visier-skills-intelligence-engine-openapi.yaml
+
+entities:
+- name: AnalyticObject
+  domain: Analytic Model
+  id_field: id
+  operations: [DataModel_AnalyticObjects, DataModel_AnalyticObject]
+  relationships:
+  - type: has_many
+    target: Property
+    via: objectId
+    operation: DataModel_Properties
+  - type: has_many
+    target: Dimension
+    via: objectId
+    operation: DataModel_Dimensions
+  - type: has_many
+    target: Metric
+    via: id
+    operation: DataModel_AnalyticMetrics
+  - type: has_many
+    target: SelectionConcept
+    via: objectId
+    operation: DataModel_SelectionConcepts
+- name: Property
+  domain: Analytic Model
+  id_field: id
+  belongs_to: AnalyticObject
+  via: objectId
+  operations: [DataModel_Properties, DataModel_Property, DataModel_CreateProperties, DataModel_PutProperties,
+    DataModel_UpdateProperties, DataModel_DeleteProperties]
+- name: Dimension
+  domain: Analytic Model
+  id_field: id
+  belongs_to: AnalyticObject
+  via: objectId
+  operations: [DataModel_Dimensions, DataModel_Dimension, DataModel_UpdateDimensions]
+  relationships:
+  - type: has_many
+    target: DimensionMember
+    via: dimensionId
+    operation: DataModel_Members
+- name: DimensionMember
+  domain: Analytic Model
+  id_field: id
+  belongs_to: Dimension
+  via: dimensionId
+  operations: [DataModel_Members, DataModel_Member]
+  schema: dataservices.common.DimensionMemberReferenceDTO
+- name: Metric
+  domain: Analytic Model
+  id_field: id
+  operations: [DataModel_Metrics, DataModel_Metric]
+  relationships:
+  - type: has_many
+    target: Dimension
+    via: metricId
+    operation: DataModel_MetricDimensions
+  - type: has_many
+    target: SelectionConcept
+    via: metricId
+    operation: DataModel_MetricSelectionConcepts
+  - type: belongs_to
+    target: AnalyticObject
+    via: id
+    operation: DataModel_AnalyticMetrics
+- name: SelectionConcept
+  domain: Analytic Model
+  id_field: id
+  operations: [DataModel_SelectionConcepts, DataModel_SelectionConcept, DataModel_MetricSelectionConcepts]
+- name: Currency
+  domain: Analytic Model
+  id_field: id
+  operations: [DataModel_Currencies, DataModel_Currency]
+  relationships:
+  - type: has_many
+    target: CurrencyRate
+    via: id
+    operation: DataModel_CurrencyRates
+- name: Prediction
+  domain: Analytic Model
+  id_field: id
+  operations: [DataModel_Predictions, DataModel_Prediction]
+- name: PlanModel
+  domain: Planning
+  id_field: id
+  operations: [DataModel_PlanningModels, DataModel_PlanningModel]
+  relationships:
+  - type: has_many
+    target: Plan
+    via: modelId
+    operation: DataModel_PlanningPlans
+  - type: has_many
+    target: Metric
+    via: id
+    operation: DataModel_PlanningMetrics
+- name: Plan
+  domain: Planning
+  id_field: planId
+  belongs_to: PlanModel
+  via: modelId
+  operations: [DataModel_PlanningPlans, DataModel_PlanningPlan, DataModel_PlanDataLoadlList,
+    DataModel_PlanInfoWithSchema, PlanAdministration_PlanAction]
+  relationships:
+  - type: has_many
+    target: Scenario
+    via: scenarioId
+    operation: PlanAdministration_PatchPlan
+  - type: has_many
+    target: PlanRow
+    via: planId
+    operation: PlanDataLoad_PlanRowDataLoad
+- name: Scenario
+  domain: Planning
+  id_field: scenarioId
+  belongs_to: Plan
+  via: planId
+  operations: [PlanAdministration_PatchPlan, PlanDataLoad_PlanDataUpload]
+  relationships:
+  - type: has_many
+    target: PlanCell
+    via: scenarioId
+    operation: PlanDataLoad_PlanDataUpload
+- name: PlanEvent
+  domain: Planning
+  id_field: eventId
+  operations: [PlanEvents_GetEvents, PlanEvents_GetEvent]
+- name: Tenant
+  domain: Administration
+  id_field: tenantCode
+  root_path: /v1/admin/tenants
+  relationships:
+  - type: has_many
+    target: User
+    via: tenantCode
+  - type: has_many
+    target: Project
+    via: tenantCode
+  schema: admin.TenantManagementAPIUpdateRequestDTO
+- name: User
+  domain: Administration
+  id_field: userId
+  root_path: /v1/admin/users
+  relationships:
+  - type: has_many
+    target: Profile
+    via: assignedProfiles
+  - type: has_many
+    target: Permission
+    via: assignedPermissions
+  - type: has_many
+    target: UserGroup
+    via: assignedUserGroups
+- name: UserGroup
+  domain: Administration
+  id_field: id
+  root_path: /v1/admin/user-groups
+  belongs_to: Tenant
+- name: Profile
+  domain: Administration
+  id_field: id
+  root_path: /v1/admin/profiles
+- name: Permission
+  domain: Administration
+  id_field: id
+  root_path: /v1/admin/permissions
+  relationships:
+  - type: has_many
+    target: DataAccessSet
+    via: id
+- name: DataAccessSet
+  domain: Administration
+  id_field: id
+  root_path: /v1/admin/data-access-sets
+- name: Project
+  domain: Administration
+  id_field: ProjectID
+  root_path: /v1/admin/projects
+  note: >-
+    Project is also a cross-cutting request header (ProjectID) on 118 operations — most model and
+    administration writes execute inside a project.
+- name: DataVersion
+  domain: Operations
+  id_field: DataVersionID
+  operations: [DataAndJobHandling_LatestEnabledDV, DataAndJobHandling_DisableDV]
+  note: Publishing a data version emits the dvPublish webhook event.
+- name: Job
+  domain: Operations
+  id_field: jobId
+  operations: [DataAndJobHandling_JobStatus, DataAndJobHandling_CancelJobs,
+    DataAndJobHandling_DispatchingJobStatus, DataAndJobHandling_ExtractionJobAndStatus,
+    DataAndJobHandling_ProcessingJobAndStatus]
+  relationships:
+  - type: has_many
+    target: Job
+    via: jobId
+    note: A dispatching job fans out into extraction and processing jobs.
+  events: [jobResultSuccess, jobResultFailure, jobReschedule]
+- name: DataUpload
+  domain: Operations
+  operations: [DataAndJobHandling_RetrieveDataUploads, DataAndJobHandling_IncludeDataUploads,
+    DataAndJobHandling_ExcludeDataUplaods]
+  events: [dataUploadNotification]
+- name: DataConnector
+  domain: Operations
+  operations: [DataAndJobHandling_DataConnectors, DataAndJobHandling_ListConnectorSettings,
+    DataAndJobHandling_SetConnectorSetting]
+  relationships:
+  - type: has_one
+    target: ConnectorCredential
+    via: credentialId
+    operation: DataAndJobHandling_AssignConnectorCredential
+- name: DirectLoadDraft
+  domain: Direct Data Intake
+  id_field: draftId
+  relationships:
+  - type: has_many
+    target: DirectLoadTransaction
+    via: draftId
+    operation: DirectDataIntake_ListTransactions
+  - type: has_one
+    target: DirectLoadConfig
+    via: draftId
+    operation: DirectDataIntake_GetConfig
+- name: DirectLoadTransaction
+  domain: Direct Data Intake
+  id_field: transactionId
+  belongs_to: DirectLoadDraft
+  via: draftId
+  lifecycle: [DirectDataIntake_StartTransaction, DirectDataIntake_LoadSampleData,
+    DirectDataIntake_CommitTransaction, DirectDataIntake_RollbackTransaction]
+  note: >-
+    The one genuinely transactional surface in the Visier API — start, load, then commit or roll back.
+- name: Webhook
+  domain: Operations
+  id_field: webhookId
+  operations: [Webhooks_GetAllWebhooks, Webhooks_CreateWebhook, Webhooks_GetWebhook,
+    Webhooks_UpdateWebhook, Webhooks_DeleteWebhook, Webhooks_SendTestEvent]
+  relationships:
+  - type: has_one
+    target: WebhookCredential
+    via: credentialReference
+    operation: Webhooks_UpdateWebhookCredentials
+  see_also: asyncapi/visier-webhooks.yml
+- name: Skill
+  domain: Skills Intelligence Engine
+  id_field: id
+  operations: [ListSkills, GetSkill, SearchSkill, ExtractSkills, MatchSkills]
+  relationships:
+  - type: belongs_to
+    target: SkillGroup
+  - type: belongs_to
+    target: SkillCategory
+- name: SkillGroup
+  domain: Skills Intelligence Engine
+  id_field: id
+  operations: [ListSkillGroups, GetSkillGroup]
+- name: SkillCategory
+  domain: Skills Intelligence Engine
+  id_field: id
+  operations: [ListSkillCategories, GetSkillCategory]
+- name: LibraryJob
+  domain: Skills Intelligence Engine
+  id_field: id
+  operations: [ListJobs, GetJob, SearchJob, StandardizeJobs]
+  relationships:
+  - type: has_many
+    target: Skill
+    via: MatchSkills
+- name: BenchmarkJob
+  domain: Compensation Benchmarks
+  operations: [GetJobsV1, GetJobsV2, SearchJobs, StandardizeJobsInBulk, GetJobHierarchies]
+  relationships:
+  - type: has_many
+    target: SalaryBenchmark
+    via: job
+- name: SalaryBenchmark
+  domain: Compensation Benchmarks
+  schema: BenchmarkValue
+  operations: [GetSalaryBenchmark, GetSalaryBenchmarksInBulk]
+  dimensions: [BenchmarkJob, Location, Industry, CompanySize, CareerLevel]
+- name: Location
+  domain: Compensation Benchmarks
+  operations: [GetLocations, SearchLocationsInBulk]
+- name: Industry
+  domain: Compensation Benchmarks
+  operations: [GetIndustries]
+- name: CompanySize
+  domain: Compensation Benchmarks
+  operations: [GetCompanySizes]
+- name: CareerLevel
+  domain: Compensation Benchmarks
+  operations: [GetCareerLevels, SearchCareerLevelsInBulk]
+
+schema_namespaces:
+- namespace: servicing
+  schemas: 352
+- namespace: designer
+  schemas: 112
+- namespace: dataservices
+  schemas: 102
+- namespace: admin
+  schemas: 101
+- namespace: platform
+  schemas: 59
+- namespace: planning
+  schemas: 39
+- namespace: data_in
+  schemas: 36
+- namespace: analysis
+  schemas: 29
+- namespace: authentication
+  schemas: 5
