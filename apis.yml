@@ -13,7 +13,7 @@ image: https://www.visier.com/static/visier-og-image-289b36a6392a307b7342ffcf69b
 url: https://raw.githubusercontent.com/api-evangelist/visier/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-08-02'
 modified: '2026-08-02'
 x-enrichment:
