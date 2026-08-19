@@ -1,0 +1,1695 @@
+{
+  "item": [
+    {
+      "id": "8cb2fb60-dca5-4de6-8df0-156c9bd0c76c",
+      "name": "TenantsV1",
+      "description": {
+        "content": "Create analytic tenants, retrieve tenant information, and validate metric values.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "21c7798c-e6aa-4d6f-b93d-2c8e3c7638df",
+          "name": "Retrieve a list of all analytic tenants",
+          "request": {
+            "name": "Retrieve a list of all analytic tenants",
+            "description": {
+              "content": "Retrieve the full list of analytic tenants managed by you with their current states and the\n content modules assigned to them, and all other relevant details for the tenants if requested.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "tenants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The limit of analytic tenant details to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<integer>",
+                  "description": "The index to start retrieving results from, also known as offset. The index begins at 0."
+                },
+                {
+                  "disabled": false,
+                  "key": "details",
+                  "value": "<boolean>",
+                  "description": "If `true`, the response returns information about the data version and modules."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "10705ed3-6a04-4653-8ece-06b8c47263cf",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "tenants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "details",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tenants\": [\n    {\n      \"tenantCode\": \"string\",\n      \"tenantDisplayName\": \"string\",\n      \"status\": \"string\",\n      \"provisionDate\": \"string\",\n      \"currentDataVersion\": \"string\",\n      \"dataVersionDate\": \"string\",\n      \"modules\": [\n        {\n          \"displayName\": \"string\",\n          \"symbolName\": \"string\",\n          \"moduleSettings\": {\n            \"unavailableForAssignment\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"specialHandlingInstruction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"locale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"displayName\": \"string\",\n          \"symbolName\": \"string\",\n          \"moduleSettings\": {\n            \"unavailableForAssignment\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"specialHandlingInstruction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"locale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"industryCode\": 8856,\n      \"canAdministerOtherTenants\": false,\n      \"embeddableDomains\": [\n        \"string\",\n        \"string\"\n      ],\n      \"customProperties\": [\n        {\n          \"key\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"key\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"ssoInstanceIssuers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"vanityUrlName\": \"string\",\n      \"allowedOAuthIdpUrlDomains\": [\n        \"string\",\n        \"string\"\n      ],\n      \"manuallyAddedModules\": [\n        {\n          \"displayName\": \"string\",\n          \"symbolName\": \"string\",\n          \"moduleSettings\": {\n            \"unavailableForAssignment\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"specialHandlingInstruction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"locale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"displayName\": \"string\",\n          \"symbolName\": \"string\",\n          \"moduleSettings\": {\n            \"unavailableForAssignment\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"specialHandlingInstruction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"locale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    {\n      \"tenantCode\": \"string\",\n      \"tenantDisplayName\": \"string\",\n      \"status\": \"string\",\n      \"provisionDate\": \"string\",\n      \"currentDataVersion\": \"string\",\n      \"dataVersionDate\": \"string\",\n      \"modules\": [\n        {\n          \"displayName\": \"string\",\n          \"symbolName\": \"string\",\n          \"moduleSettings\": {\n            \"unavailableForAssignment\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"specialHandlingInstruction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"locale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"displayName\": \"string\",\n          \"symbolName\": \"string\",\n          \"moduleSettings\": {\n            \"unavailableForAssignment\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"specialHandlingInstruction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"locale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"industryCode\": 8762,\n      \"canAdministerOtherTenants\": false,\n      \"embeddableDomains\": [\n        \"string\",\n        \"string\"\n      ],\n      \"customProperties\": [\n        {\n          \"key\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"key\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"ssoInstanceIssuers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"vanityUrlName\": \"string\",\n      \"allowedOAuthIdpUrlDomains\": [\n        \"string\",\n        \"string\"\n      ],\n      \"manuallyAddedModules\": [\n        {\n          \"displayName\": \"string\",\n          \"symbolName\": \"string\",\n          \"moduleSettings\": {\n            \"unavailableForAssignment\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"specialHandlingInstruction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"locale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"displayName\": \"string\",\n          \"symbolName\": \"string\",\n          \"moduleSettings\": {\n            \"unavailableForAssignment\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"specialHandlingInstruction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"locale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    }\n  ],\n  \"limit\": 1952,\n  \"start\": 4163\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8476cc75-07c5-486a-b42c-454af83ba033",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "tenants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "details",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5c13413-2531-4232-8a9c-7ec41fd22f63",
+          "name": "Add an analytic tenant",
+          "request": {
+            "name": "Add an analytic tenant",
+            "description": {
+              "content": "Prior to processing and loading an analytic tenant's data files, you must provision, or create, that tenant.\n A provisioned analytic tenant is automatically enabled. If the tenant's data is loaded after provisioning, that\n data is immediately accessible by their users.\n\n Create an analytic tenant and identify the applications assigned to the tenant. Visier\n organizes content under a set of modules.\n\n Contact Visier Support to determine the list of modules allocated to you.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "tenants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenantCode\": \"<string>\",\n  \"tenantDisplayName\": \"<string>\",\n  \"purchasedModules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"industryCode\": \"<uint32>\",\n  \"embeddableDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customProperties\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"ssoInstanceIssuers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"allowedOAuthIdpUrlDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "06574c44-361d-4a7d-8a28-ccd7577aa7f3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "tenants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenantCode\": \"<string>\",\n  \"tenantDisplayName\": \"<string>\",\n  \"purchasedModules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"industryCode\": \"<uint32>\",\n  \"embeddableDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customProperties\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"ssoInstanceIssuers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"allowedOAuthIdpUrlDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tenantCode\": \"<string>\",\n  \"tenantDisplayName\": \"<string>\",\n  \"purchasedModules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"industryCode\": \"<uint32>\",\n  \"embeddableDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customProperties\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"ssoInstanceIssuers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"allowedOAuthIdpUrlDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4f139b2-19c8-4176-82f4-1b638f4f0148",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "tenants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenantCode\": \"<string>\",\n  \"tenantDisplayName\": \"<string>\",\n  \"purchasedModules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"industryCode\": \"<uint32>\",\n  \"embeddableDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customProperties\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"ssoInstanceIssuers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"allowedOAuthIdpUrlDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4adb5ba7-ad30-4539-ac8b-e307b53f5914",
+          "name": "Add analytic tenants",
+          "request": {
+            "name": "Add analytic tenants",
+            "description": {
+              "content": "Prior to processing and loading an analytic tenant's data files, you must provision, or create, that tenant.\n A provisioned analytic tenant is automatically enabled. If the tenant's data is loaded after provisioning, that\n data is immediately accessible by their users.\n\n Create one or more analytic tenants and identify the applications assigned to the tenants. The maximum number of tenants to create in one request is 200.\n\n Contact Visier Support to determine the list of modules allocated to you.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "tenants",
+                "batch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenants\": [\n    {\n      \"tenantCode\": \"<string>\",\n      \"tenantDisplayName\": \"<string>\",\n      \"purchasedModules\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"industryCode\": \"<uint32>\",\n      \"embeddableDomains\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"customProperties\": [\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"ssoInstanceIssuers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allowedOAuthIdpUrlDomains\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"tenantCode\": \"<string>\",\n      \"tenantDisplayName\": \"<string>\",\n      \"purchasedModules\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"industryCode\": \"<uint32>\",\n      \"embeddableDomains\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"customProperties\": [\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"ssoInstanceIssuers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allowedOAuthIdpUrlDomains\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a02db551-f3eb-4319-8577-fa2ba93b3532",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "tenants",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenants\": [\n    {\n      \"tenantCode\": \"<string>\",\n      \"tenantDisplayName\": \"<string>\",\n      \"purchasedModules\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"industryCode\": \"<uint32>\",\n      \"embeddableDomains\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"customProperties\": [\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"ssoInstanceIssuers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allowedOAuthIdpUrlDomains\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"tenantCode\": \"<string>\",\n      \"tenantDisplayName\": \"<string>\",\n      \"purchasedModules\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"industryCode\": \"<uint32>\",\n      \"embeddableDomains\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"customProperties\": [\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"ssoInstanceIssuers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allowedOAuthIdpUrlDomains\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tenants\": [\n    {\n      \"tenantCode\": \"<string>\",\n      \"tenantDisplayName\": \"<string>\",\n      \"purchasedModules\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"industryCode\": \"<uint32>\",\n      \"embeddableDomains\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"customProperties\": [\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"ssoInstanceIssuers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allowedOAuthIdpUrlDomains\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"tenantCode\": \"<string>\",\n      \"tenantDisplayName\": \"<string>\",\n      \"purchasedModules\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"industryCode\": \"<uint32>\",\n      \"embeddableDomains\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"customProperties\": [\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"ssoInstanceIssuers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allowedOAuthIdpUrlDomains\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce4f8f5e-d7d0-425e-9676-fe9ce944dd25",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "tenants",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenants\": [\n    {\n      \"tenantCode\": \"<string>\",\n      \"tenantDisplayName\": \"<string>\",\n      \"purchasedModules\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"industryCode\": \"<uint32>\",\n      \"embeddableDomains\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"customProperties\": [\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"ssoInstanceIssuers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allowedOAuthIdpUrlDomains\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"tenantCode\": \"<string>\",\n      \"tenantDisplayName\": \"<string>\",\n      \"purchasedModules\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"industryCode\": \"<uint32>\",\n      \"embeddableDomains\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"customProperties\": [\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"ssoInstanceIssuers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allowedOAuthIdpUrlDomains\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "334484bd-bd98-493a-9510-25e48915692c",
+          "name": "Retrieve an analytic tenant's details",
+          "request": {
+            "name": "Retrieve an analytic tenant's details",
+            "description": {
+              "content": "Retrieve all details for a specified analytic tenant. Doing so allows you to see the current state\n of the tenant, the content modules assigned to it, and all other relevant details for the tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "tenants",
+                ":tenantId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenantId",
+                  "description": "(Required) The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e3f9ee93-32c1-4447-a5f1-613d1bd65ab4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "tenants",
+                    ":tenantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantId",
+                      "description": "(Required) The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tenantCode\": \"string\",\n  \"tenantDisplayName\": \"string\",\n  \"status\": \"string\",\n  \"provisionDate\": \"string\",\n  \"currentDataVersion\": \"string\",\n  \"dataVersionDate\": \"string\",\n  \"modules\": [\n    {\n      \"displayName\": \"string\",\n      \"symbolName\": \"string\",\n      \"moduleSettings\": {\n        \"unavailableForAssignment\": true,\n        \"specialHandlingInstruction\": \"string\",\n        \"locale\": \"string\"\n      }\n    },\n    {\n      \"displayName\": \"string\",\n      \"symbolName\": \"string\",\n      \"moduleSettings\": {\n        \"unavailableForAssignment\": true,\n        \"specialHandlingInstruction\": \"string\",\n        \"locale\": \"string\"\n      }\n    }\n  ],\n  \"industryCode\": 5764,\n  \"canAdministerOtherTenants\": true,\n  \"embeddableDomains\": [\n    \"string\",\n    \"string\"\n  ],\n  \"customProperties\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"ssoInstanceIssuers\": [\n    \"string\",\n    \"string\"\n  ],\n  \"vanityUrlName\": \"string\",\n  \"allowedOAuthIdpUrlDomains\": [\n    \"string\",\n    \"string\"\n  ],\n  \"manuallyAddedModules\": [\n    {\n      \"displayName\": \"string\",\n      \"symbolName\": \"string\",\n      \"moduleSettings\": {\n        \"unavailableForAssignment\": false,\n        \"specialHandlingInstruction\": \"string\",\n        \"locale\": \"string\"\n      }\n    },\n    {\n      \"displayName\": \"string\",\n      \"symbolName\": \"string\",\n      \"moduleSettings\": {\n        \"unavailableForAssignment\": false,\n        \"specialHandlingInstruction\": \"string\",\n        \"locale\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2143b7e1-6e66-41e9-8d86-b361f5c12ba1",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "tenants",
+                    ":tenantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantId",
+                      "description": "(Required) The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5cb0c338-a46b-44a0-b720-e759e21606cb",
+          "name": "Update an analytic tenant",
+          "request": {
+            "name": "Update an analytic tenant",
+            "description": {
+              "content": "You may need to update analytic tenants as they grow and as your organization upgrades the content available to\n them. You may also encounter a scenario where an analytic tenant transitions across different industries.\n\n To ensure that the analytic tenant receives accurate benchmarks and predictive functionality, update their\n industry code in the Visier system.\n\n You can use this API to update any field on an analytic tenant, except `tenantCode`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "tenants",
+                ":tenantId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenantId",
+                  "description": "(Required) The ID of the tenant to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenantDisplayName\": \"<string>\",\n  \"industryCode\": \"<integer>\",\n  \"purchasedModules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"embeddableDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customProperties\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"ssoInstanceIssuers\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "51e0d021-2aad-4b09-8170-063b8c208254",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "tenants",
+                    ":tenantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantId",
+                      "description": "(Required) The ID of the tenant to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenantDisplayName\": \"<string>\",\n  \"industryCode\": \"<integer>\",\n  \"purchasedModules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"embeddableDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customProperties\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"ssoInstanceIssuers\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tenantCode\": \"<string>\",\n  \"tenantDisplayName\": \"<string>\",\n  \"purchasedModules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"industryCode\": \"<uint32>\",\n  \"embeddableDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customProperties\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"ssoInstanceIssuers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"allowedOAuthIdpUrlDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d7af0ac-a05f-4a08-9149-c4f4bd3b29bc",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "tenants",
+                    ":tenantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantId",
+                      "description": "(Required) The ID of the tenant to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenantDisplayName\": \"<string>\",\n  \"industryCode\": \"<integer>\",\n  \"purchasedModules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"embeddableDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customProperties\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"ssoInstanceIssuers\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7fcec007-c930-4b56-bffd-e560aef5ec5c",
+          "name": "Deprovision an analytic tenant",
+          "request": {
+            "name": "Deprovision an analytic tenant",
+            "description": {
+              "content": "Warning! Deprovisioning an analytic tenant is not reversible.\n Before deprovisioning, you must disable an analytic tenant. For more information, see **`/v1/admin/tenants/{tenantId}/disable`**.\n\n This API removes an analytic tenant permanently from the Visier system. If you are unsure whether an analytic tenant\n may be re-enabled on any of the Visier modules at any time, you may instead want to disable the analytic tenant.\n\n If successful, the response returns the status \"Deprovisioned\". This indicates that the tenant is scheduled for\n deprovisioning, which may take several days to complete.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "tenants",
+                ":tenantId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenantId",
+                  "description": "(Required) The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5d3f9d23-7822-4f1f-a119-5047944922ad",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "tenants",
+                    ":tenantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantId",
+                      "description": "(Required) The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tenantCode\": \"string\",\n  \"status\": \"string\",\n  \"tenantDisplayName\": \"string\",\n  \"canAdministerOtherTenants\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a845c83b-83f1-41ba-b264-79999159b538",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "tenants",
+                    ":tenantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantId",
+                      "description": "(Required) The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b367b7e-0f63-48d6-a1df-ea93a5ba05c3",
+          "name": "Disable an analytic tenant",
+          "request": {
+            "name": "Disable an analytic tenant",
+            "description": {
+              "content": "Disable an analytic tenant and remove access to Visier visualizations for the tenant's users.\n\n You must disable an analytic tenant before deprovisioning, or removing, it from the system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "tenants",
+                ":tenantId",
+                "disable"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenantId",
+                  "description": "(Required) The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c21d9844-98ea-424d-8c8a-c5b25abe5eb8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "tenants",
+                    ":tenantId",
+                    "disable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantId",
+                      "description": "(Required) The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tenantCode\": \"string\",\n  \"status\": \"string\",\n  \"tenantDisplayName\": \"string\",\n  \"canAdministerOtherTenants\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b685063-74bf-4512-aab7-a44d752dea10",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "tenants",
+                    ":tenantId",
+                    "disable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantId",
+                      "description": "(Required) The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f31cd1cc-51df-478e-9099-58abacb82df6",
+          "name": "Enable an analytic tenant",
+          "request": {
+            "name": "Enable an analytic tenant",
+            "description": {
+              "content": "An analytic tenant is enabled when you provision or create the tenant.\n\n Use this API to enable a tenant that you have specifically disabled; for example, if you previously did not\n want that tenant to have access to Visier visualizations, but now do.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "tenants",
+                ":tenantId",
+                "enable"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenantId",
+                  "description": "(Required) The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c8c1cc2e-7baa-4e88-92f4-989cd7fddf58",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "tenants",
+                    ":tenantId",
+                    "enable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantId",
+                      "description": "(Required) The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tenantCode\": \"string\",\n  \"status\": \"string\",\n  \"tenantDisplayName\": \"string\",\n  \"canAdministerOtherTenants\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f1bcd16-087e-402f-a274-f15bfc9c6b42",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "tenants",
+                    ":tenantId",
+                    "enable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantId",
+                      "description": "(Required) The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34ee7b92-fe69-40df-8aaa-387bc7d8a1bc",
+          "name": "Validate metric values for all analytic tenants",
+          "request": {
+            "name": "Validate metric values for all analytic tenants",
+            "description": {
+              "content": "As you onboard more analytic tenants, you can validate the data visible to your users to ensure it matches the\n source systems from which it was exported and that it matches what your expectations are for this data.\n\n The metric values included in the response are the tenant's configured summary metrics. Administrators can\n configure summary metrics in a project:\n - Sign in to Visier as an administrator.\n - In a project, on the navigation bar, click the **Home** button.\n - Click **Dashboard**, and then click **Edit Summary Metrics**.\n - Select the metrics that you want to validate, and then close the **Summary Metrics** dialog.\n - Publish the project to production.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "op",
+                "validation",
+                "tenants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The limit of analytic tenant details to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<integer>",
+                  "description": "The index to start retrieving results from, also known as offset. The index begins at 0."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cf2d3baa-c625-40a5-ba85-5c20f5f841a8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "validation",
+                    "tenants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tenants\": [\n    {\n      \"tenantCode\": \"string\",\n      \"dataVersion\": \"string\",\n      \"dataVersionDate\": \"string\",\n      \"metrics\": [\n        {\n          \"symbolName\": \"string\",\n          \"displayName\": \"string\",\n          \"value\": 1857.2156305353649\n        },\n        {\n          \"symbolName\": \"string\",\n          \"displayName\": \"string\",\n          \"value\": 2579.066634054632\n        }\n      ]\n    },\n    {\n      \"tenantCode\": \"string\",\n      \"dataVersion\": \"string\",\n      \"dataVersionDate\": \"string\",\n      \"metrics\": [\n        {\n          \"symbolName\": \"string\",\n          \"displayName\": \"string\",\n          \"value\": 9046.673127572765\n        },\n        {\n          \"symbolName\": \"string\",\n          \"displayName\": \"string\",\n          \"value\": 5974.280720743847\n        }\n      ]\n    }\n  ],\n  \"limit\": 6735,\n  \"start\": 239\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "313403fa-021c-42e3-a9be-3258d221ccef",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "validation",
+                    "tenants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a192e944-a5a8-4bd1-b84e-c1eb8697d477",
+          "name": "Validate an analytic tenant's metric values",
+          "request": {
+            "name": "Validate an analytic tenant's metric values",
+            "description": {
+              "content": "Retrieve the metric values for an individual analytic tenant. The metric values included in the\n response are the tenant's configured summary metrics. Administrators can configure summary metrics in a project:\n - Sign in to Visier as an administrator.\n - In a project, on the navigation bar, click the **Home button**.\n - Click **Dashboard**, and then click **Edit Summary Metrics**.\n - Select the metrics that you want to validate, and then close the **Summary Metrics** dialog.\n - Publish the project to production.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "op",
+                "validation",
+                "tenants",
+                ":tenantId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenantId",
+                  "description": "(Required) The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3ed93a11-4666-4417-995a-f9a04be0121d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "validation",
+                    "tenants",
+                    ":tenantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantId",
+                      "description": "(Required) The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tenantCode\": \"string\",\n  \"dataVersion\": \"string\",\n  \"dataVersionDate\": \"string\",\n  \"metrics\": [\n    {\n      \"symbolName\": \"string\",\n      \"displayName\": \"string\",\n      \"value\": 7312.7098748078415\n    },\n    {\n      \"symbolName\": \"string\",\n      \"displayName\": \"string\",\n      \"value\": 1452.373819065551\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6f0ba10-be03-453d-b1e6-95d16310fbde",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "validation",
+                    "tenants",
+                    ":tenantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantId",
+                      "description": "(Required) The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "533c9100-34c2-487c-94cb-626ac75ec64f",
+    "name": "Visier Administration Tenants V1 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.",
+      "type": "text/plain"
+    }
+  }
+}

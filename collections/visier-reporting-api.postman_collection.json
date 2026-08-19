@@ -1,0 +1,1087 @@
+{
+  "item": [
+    {
+      "id": "94ae9479-6a51-4dad-a7db-3ec6aa4a98be",
+      "name": "Reporting",
+      "description": {
+        "content": "Create, retrieve, delete, copy, and download reports.\n<br>**Note**: This API is available for Embedded Partners.\n<br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\nIf you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dfd673e1-a7dc-465a-be5e-25e6c9be421b",
+          "name": "Retrieve a list of reports",
+          "request": {
+            "name": "Retrieve a list of reports",
+            "description": {
+              "content": "Retrieve a list of reports. The response returns information such as the unique ID, title, description, owner, and the allowed actions you can take on the report.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "reporting",
+                "reports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Optionally, specify the number of reports to return. If omitted, the request uses the default value of 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<integer>",
+                  "description": "Optionally, specify the zero-based index of the report to start fetching from. If omitted, the request uses the default value of 0."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f52a2f70-b563-4430-a2ff-f7df1f4caf27",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "reporting",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reports\": [\n    {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"updatedTime\": \"string\",\n      \"isPublishedReport\": true,\n      \"owner\": \"string\",\n      \"isOwnedByUser\": true,\n      \"allowedActions\": [\n        \"download\",\n        \"edit\"\n      ],\n      \"link\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"updatedTime\": \"string\",\n      \"isPublishedReport\": true,\n      \"owner\": \"string\",\n      \"isOwnedByUser\": true,\n      \"allowedActions\": [\n        \"edit\",\n        \"download\"\n      ],\n      \"link\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37fe51bc-4d96-4286-9c7e-cccbd62e34af",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "reporting",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60cabca5-adc2-4617-b780-bfdae32910b2",
+          "name": "Create a report",
+          "request": {
+            "name": "Create a report",
+            "description": {
+              "content": "Create a new report with a title and description. To edit other contents of the report, such as columns and group bys, navigate to the Reports room in Visier.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "reporting",
+                "reports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c72098f3-ba21-48b1-9303-e6993a3a4020",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "reporting",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"title\": \"string\",\n  \"description\": \"string\",\n  \"updatedTime\": \"string\",\n  \"isPublishedReport\": true,\n  \"owner\": \"string\",\n  \"isOwnedByUser\": false,\n  \"allowedActions\": [\n    \"duplicate\",\n    \"share\"\n  ],\n  \"link\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87d05337-dbe4-40a2-9838-f97d3fb166b1",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "reporting",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5518b08-da06-4922-8a14-ea51a99b29fa",
+          "name": "Retrieve a report's details",
+          "request": {
+            "name": "Retrieve a report's details",
+            "description": {
+              "content": "Retrieve the details of a specific report. The response returns information such as title, description, owner, and the allowed actions you can take on the report. You must know the ID of the report to retrieve its details. To retrieve report IDs, see `GET /v1alpha/reporting/reports`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "reporting",
+                "reports",
+                ":reportId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reportId",
+                  "description": "(Required) The unique identifier of the report you want to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3ae01960-70b5-4c34-b5e5-67986cee82ce",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "reporting",
+                    "reports",
+                    ":reportId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reportId",
+                      "description": "(Required) The unique identifier of the report you want to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"title\": \"string\",\n  \"description\": \"string\",\n  \"updatedTime\": \"string\",\n  \"isPublishedReport\": true,\n  \"owner\": \"string\",\n  \"isOwnedByUser\": false,\n  \"allowedActions\": [\n    \"duplicate\",\n    \"share\"\n  ],\n  \"link\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "097427fe-f8e4-4f7d-821e-e5cd8084c317",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "reporting",
+                    "reports",
+                    ":reportId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reportId",
+                      "description": "(Required) The unique identifier of the report you want to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c79f549d-4093-47ca-974a-f0c7f00a00c8",
+          "name": "Duplicate a report",
+          "request": {
+            "name": "Duplicate a report",
+            "description": {
+              "content": "Make a copy of an existing report. You must know the ID of the report to copy it. To retrieve report IDs, see `GET /v1alpha/reporting/reports`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "reporting",
+                "reports",
+                ":reportId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reportId",
+                  "description": "(Required) The unique identifier of the report you want to duplicate."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8f3d0217-628f-41da-aec7-802381f6b5cf",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "reporting",
+                    "reports",
+                    ":reportId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reportId",
+                      "description": "(Required) The unique identifier of the report you want to duplicate."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"title\": \"string\",\n  \"description\": \"string\",\n  \"updatedTime\": \"string\",\n  \"isPublishedReport\": true,\n  \"owner\": \"string\",\n  \"isOwnedByUser\": false,\n  \"allowedActions\": [\n    \"duplicate\",\n    \"share\"\n  ],\n  \"link\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99f2ea74-da7b-4552-8f57-3c929e99f2d1",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "reporting",
+                    "reports",
+                    ":reportId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reportId",
+                      "description": "(Required) The unique identifier of the report you want to duplicate."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dfd6f0d9-279e-4758-8e6f-59b08e5c569e",
+          "name": "Delete a report",
+          "request": {
+            "name": "Delete a report",
+            "description": {
+              "content": "Delete a report in the tenant. You must know the ID of the report to delete it. To retrieve report IDs, see `GET /v1alpha/reporting/reports`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "reporting",
+                "reports",
+                ":reportId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reportId",
+                  "description": "(Required) The unique identifier of the report you want to delete."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f9d3fba6-0571-471f-8a9a-38adcf648287",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "reporting",
+                    "reports",
+                    ":reportId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reportId",
+                      "description": "(Required) The unique identifier of the report you want to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9f4b0aa-382c-4ab7-8de9-b73160402b0d",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "reporting",
+                    "reports",
+                    ":reportId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reportId",
+                      "description": "(Required) The unique identifier of the report you want to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f8692a2f-097a-4387-ab45-9fe076e7f2d8",
+          "name": "Download a report",
+          "request": {
+            "name": "Download a report",
+            "description": {
+              "content": "Download a report as a CSV file. The returned CSV file contains the data in the report. You must know the ID of the report to download it. To retrieve report IDs, see `GET /v1alpha/reporting/reports`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "reporting",
+                "report-data",
+                ":reportId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reportId",
+                  "description": "(Required) The unique identifier of the report you want to download."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0ebd7838-70b8-4264-849d-4810a48e51eb",
+              "name": "Report data response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "reporting",
+                    "report-data",
+                    ":reportId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reportId",
+                      "description": "(Required) The unique identifier of the report you want to download."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "db1245de-9a9c-4f95-a001-c2a934c225d0",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "reporting",
+                    "report-data",
+                    ":reportId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reportId",
+                      "description": "(Required) The unique identifier of the report you want to download."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2d16276a-b97d-4254-afc2-f13e5e53d397",
+    "name": "Visier Data Out Reporting API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for getting data out of Visier, such as aggregate data and data version information.",
+      "type": "text/plain"
+    }
+  }
+}

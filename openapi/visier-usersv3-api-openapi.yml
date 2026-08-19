@@ -1,0 +1,235 @@
+openapi: 3.2.0
+info:
+  title: Visier Administration Users V3 API
+  description: Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: UsersV3
+  x-displayName: Users V3
+  description: 'Manage users within an organization. Users V3 offers the ability to update or insert (upsert) a user. '
+paths:
+  /v3/admin/users/{username}:
+    put:
+      tags:
+      - UsersV3
+      summary: Update or insert (upsert) a user
+      description: "Update a user if the user exists, otherwise create a new user. Use the user's `username` to specify the user to update or create.\n\n In `PUT` requests, the definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the request, those values are removed from the user if the user exists."
+      operationId: UsersV3_UpdateUsers
+      parameters:
+      - name: username
+        in: path
+        description: The username of the user to update if the user exists, otherwise creates a new user.
+        required: true
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      - name: Prefer
+        in: header
+        description: 'When `NonVersioned: true`, use `Prefer` to optionally specify if API calls should be subject to locking. Locking prevents incremental changes in multiple API calls from overwriting each other. The `Prefer` header works alongside a tenant feature flag. When enabled, the default is `nvLock=global`. When disabled, the default is not to lock API calls. Contact Visier Technical Support to enable the tenant feature flag.
+
+          Valid values for the `Prefer` header:
+
+          * `nvLock=global`: Run API calls sequentially. Sequential API calls prevent calls from unintentionally overwriting each other.
+
+          * `nvLock=artifact`: Allow API calls in parallel. Parallel API calls only work if the calls do not conflict with each other. If a change wasn''t applied, the request fails and returns the HTTP 409 conflict error. Run the request again until successful.
+
+          * `nvLock=none`: Disable the global lock if the tenant feature flag is enabled.'
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.UserV3ApiRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.UserV3ApiResponseDTO'
+components:
+  schemas:
+    servicing.UserV3ApiResponseDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The unique identifier associated with the user.
+        username:
+          type: string
+          description: The user's username. This is typically the user's email, such as john@jupiter.com.
+        displayName:
+          type: string
+          description: An identifiable name to display within Visier. For example, "John Smith".
+        employeeId:
+          type: string
+          description: If applicable, and if available, the user employee ID in the data.
+        accountEnabled:
+          type: string
+          description: If true, the user account is enabled.
+        email:
+          type: string
+          description: The user's email address.
+        userGroupIds:
+          type: array
+          items:
+            type: string
+          description: The unique identifiers associated with each user groups.
+        profileIds:
+          type: array
+          items:
+            type: string
+          description: The unique identifiers associated with each profile.
+        permissionIds:
+          type: array
+          items:
+            type: string
+          description: The unique identifiers associated with each permission.
+      description: The result of the update or insert (upsert) request.
+    servicing.ProfileAssignmentDTO:
+      type: object
+      properties:
+        profileId:
+          type: string
+          description: The unique identifier associated with the profile.
+        validityStartTime:
+          type: string
+          description: The inclusive start date and time when this profile is active. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
+        validityEndTime:
+          type: string
+          description: The exclusive end date and time when this profile is no longer active. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
+      description: The profiles associated with the user.
+    servicing.UserV3ApiRequestDTO:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The user's username. This is typically the user's email, such as john@jupiter.com. If a user's username changes, they must authenticate using the new username.
+        displayName:
+          type: string
+          description: An identifiable name to display within Visier. For example, "John Smith".
+        employeeId:
+          type: string
+          description: If applicable, and if available, the user employee ID in the data.
+        accountEnabled:
+          type: string
+          description: If true, the user account is enabled.
+        email:
+          type: string
+          description: The user's email address.
+        userGroupIds:
+          type: array
+          items:
+            type: string
+          description: The user groups to assign to the user.
+        permissionIds:
+          type: array
+          items:
+            type: string
+          description: The permissions to assign to the user.
+        profileAssignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ProfileAssignmentDTO'
+          description: The profiles to assign to the user.
+      description: The updates to make to a user, or the user to create.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: administration
+  tags:
+  - Projects
+  - ProductionVersions
+  - UsersV3
+  - UsersV2
+  - UserGroupsV2
+  - UsersV1
+  - Profiles
+  - Permissions
+  - TenantsV2
+  - TenantsV1
+  - ConsolidatedAnalytics
+  - Sources
+  - SystemStatus
+  - EmailDomains
+  - EncryptionKeys
+  - NetworkSubnets
+  - SidecarSolutions
+  - ReleaseVersionConfiguration
+  - VeeConfiguration

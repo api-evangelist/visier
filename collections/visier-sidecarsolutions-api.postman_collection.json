@@ -1,0 +1,479 @@
+{
+  "item": [
+    {
+      "id": "d4873458-9770-4285-9053-eb43fdcb7f5b",
+      "name": "SidecarSolutions",
+      "description": {
+        "content": "Manage your sidecar solution's configuration. A sidecar solution is a unique solution built using the Visier platform, such as Smart Compensation. Use this API to retrieve the current settings, update the settings to new values, or delete existing settings.\n<br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\nIf you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "497c939c-13f8-47fe-a5dc-b20963a75127",
+          "name": "Retrieve a sidecar solution's settings",
+          "request": {
+            "name": "Retrieve a sidecar solution's settings",
+            "description": {
+              "content": "Retrieve the settings for a specific sidecar solution. You must know the solution ID of your sidecar solution. To get the ID, contact Visier Technical Support.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "admin",
+                "sidecar-app-configs",
+                ":applicationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "applicationId",
+                  "description": "(Required) The unique identifier of the solution to configure."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1b9af323-3eac-4e09-b413-c127178e86e8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "admin",
+                    "sidecar-app-configs",
+                    ":applicationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique identifier of the solution to configure."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"configs\": [\n    {\n      \"key\": \"string\",\n      \"singleConfigItem\": {\n        \"value\": \"string\"\n      },\n      \"multiValueConfigItem\": {\n        \"values\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    {\n      \"key\": \"string\",\n      \"singleConfigItem\": {\n        \"value\": \"string\"\n      },\n      \"multiValueConfigItem\": {\n        \"values\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    }\n  ],\n  \"applicationId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5148cfba-d7b1-4f7a-96e0-7e5e5a3ef891",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "admin",
+                    "sidecar-app-configs",
+                    ":applicationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique identifier of the solution to configure."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8872e3bc-f6ef-47fa-bbcd-1ecb69ac81ea",
+          "name": "Update a sidecar solution's settings",
+          "request": {
+            "name": "Update a sidecar solution's settings",
+            "description": {
+              "content": "Update a sidecar solution's settings. The response returns the settings after updating. When updating setting, we recommend that you first retrieve the existing settings using `GET`. You can use the `GET` response in your `PUT` request definition.\n\n In `PUT` requests, the definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "admin",
+                "sidecar-app-configs",
+                ":applicationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "applicationId",
+                  "description": "(Required) The unique identifier of the solution to configure."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"configs\": [\n    {\n      \"key\": \"<string>\",\n      \"singleConfigItem\": {\n        \"value\": \"<string>\"\n      },\n      \"multiValueConfigItem\": {\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"key\": \"<string>\",\n      \"singleConfigItem\": {\n        \"value\": \"<string>\"\n      },\n      \"multiValueConfigItem\": {\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"applicationId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "761419b8-007b-48e8-be71-ec705a241092",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "admin",
+                    "sidecar-app-configs",
+                    ":applicationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique identifier of the solution to configure."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"configs\": [\n    {\n      \"key\": \"<string>\",\n      \"singleConfigItem\": {\n        \"value\": \"<string>\"\n      },\n      \"multiValueConfigItem\": {\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"key\": \"<string>\",\n      \"singleConfigItem\": {\n        \"value\": \"<string>\"\n      },\n      \"multiValueConfigItem\": {\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"applicationId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"configs\": [\n    {\n      \"key\": \"<string>\",\n      \"singleConfigItem\": {\n        \"value\": \"<string>\"\n      },\n      \"multiValueConfigItem\": {\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"key\": \"<string>\",\n      \"singleConfigItem\": {\n        \"value\": \"<string>\"\n      },\n      \"multiValueConfigItem\": {\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"applicationId\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5937763-32dc-410a-80c3-8aef9de8dcc1",
+          "name": "Delete a sidecar solution's settings",
+          "request": {
+            "name": "Delete a sidecar solution's settings",
+            "description": {
+              "content": "Delete the settings for a sidecar solution. This deletes all the settings for the solution.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "admin",
+                "sidecar-app-configs",
+                ":applicationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "applicationId",
+                  "description": "(Required) The unique identifier of the solution to configure."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"applicationId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "889a8d79-998c-468d-8419-f264484a21e5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "admin",
+                    "sidecar-app-configs",
+                    ":applicationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique identifier of the solution to configure."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "592b466f-d53a-4f39-8191-21c6e4c5b1a0",
+    "name": "Visier Administration Sidecar Solutions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.",
+      "type": "text/plain"
+    }
+  }
+}

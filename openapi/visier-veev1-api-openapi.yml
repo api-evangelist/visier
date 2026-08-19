@@ -1,0 +1,624 @@
+openapi: 3.2.0
+info:
+  title: Visier Data Out Vee V1 API
+  description: Visier APIs for getting data out of Visier, such as aggregate data and data version information.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: VeeV1
+  x-displayName: Vee V1
+  description: Use Vee through Visier APIs, such as asking questions, submitting feedback, and getting sample questions.
+paths:
+  /v1/vee/feedback:
+    post:
+      tags:
+      - VeeV1
+      summary: Submit Vee feedback
+      description: "Give Vee feedback for a previous answer. To submit feedback, include:\n * The conversation details from the `/question` response.\n * A rating of Vee's answer. If `isApproved` is `true`, Vee answered the question correctly. If `isApproved` is `false`, Vee's answer was incorrect or lacked details.\n * A description of how Vee should have answered the question or how Vee can improve the answer, such as \"Expected Headcount metric, but Vee returned Average Headcount\"."
+      operationId: VeeV1_VeeFeedback
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/analysis.common.VeeFeedbackDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analysis.common.VeeStatusCodeDTO'
+  /v1/vee/question:
+    post:
+      tags:
+      - VeeV1
+      summary: Ask Vee a question
+      description: "Use plain language to ask Vee a people question. Use body parameters to specify how Vee should respond, such as returning a visualization, data, or rewording the question.\n\n The response always returns a `conversationState` object containing a unique ID for the conversation. To ask a follow-up question or continue the conversation with Vee, include the `conversationState` from the response in your next `/question` call. To submit feedback about Vee's answer, copy the entire response into your `/feedback` call."
+      operationId: VeeV1_VeeQuestionRequest
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/analysis.common.VeeQuestionDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analysis.common.VeeResponseDTO'
+  /v1/vee/sample-question-categories:
+    get:
+      tags:
+      - VeeV1
+      summary: Retrieve a list of Vee question categories
+      description: Get a list of categories for the Vee sample questions displayed in the conversation interface.
+      operationId: VeeV1_VeeSampleQuestionCategories
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analysis.common.VeeQuestionCategoriesAPIResponseDTO'
+  /v1/vee/sample-question-categories/{questionCategoryId}:
+    get:
+      tags:
+      - VeeV1
+      summary: Retrieve a Vee question category's details
+      description: Get the details of a specific Vee sample question category where the ID is the `categoryID` returned by `GET /v1/vee/sample-question-categories`.
+      operationId: VeeV1_VeeSampleQuestionCategory
+      parameters:
+      - name: questionCategoryId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analysis.common.VeeQuestionCategoryAPIResponseDTO'
+  /v1/vee/sample-questions:
+    get:
+      tags:
+      - VeeV1
+      summary: Retrieve a list of sample questions to ask Vee
+      description: "Get a list of sample questions to help you start using Vee. The response returns a list of questions that you can ask Vee, such as \"What is the turnover rate?\".\n You may occasionally encounter a sample question that can't be answered due to data availability or your data access"
+      operationId: VeeV1_VeeSampleQuestions
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analysis.common.VeeSampleQuestionLibraryDTO'
+  /v1/vee/status:
+    get:
+      tags:
+      - VeeV1
+      summary: Check the overall current status of Vee
+      description: "Check the current overall status of Vee.\n\n The overall status is one of:\n * `UP` :  Vee is operational.\n * `DOWN`: Vee is not operational."
+      operationId: VeeV1_VeeStatus
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/systemstatus.VeeStatusDTO'
+components:
+  schemas:
+    analysis.common.VeeQuestionCategoryAPIResponseDTO:
+      type: object
+      properties:
+        categoryId:
+          type: string
+          description: The unique identifier of the question category.
+        basicInformation:
+          allOf:
+          - $ref: '#/components/schemas/analysis.common.VeeCategoryBasicInformationDTO'
+          description: Information that identifies and describes the question category, such as its display name and description.
+        categoryIcon:
+          allOf:
+          - $ref: '#/components/schemas/analysis.common.VeeQuestionCategoryIconDTO'
+          description: The icon for the question category.
+      description: Information about the Vee question category.
+    analysis.common.VeeConversationStateDTO:
+      type: object
+      properties:
+        questionState:
+          type: array
+          items:
+            type: string
+          description: The unique identifier of the conversation with Vee.
+    analysis.common.VeeResponseSchemaReferenceDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of an attribute in the visualization; for example, Gender.
+        paths:
+          type: array
+          items:
+            type: string
+          description: The hierarchy path of an attribute in the visualization; for example, Employee.Gender.
+    analysis.common.VeeDataDTO:
+      type: object
+      properties:
+        dataJson:
+          type: string
+          description: A JSON string of fields and numerical values representing the data contributing to Vee's answer. For example, the number of employees per gender in Vee's answer.
+        context:
+          type: string
+          description: The filter applied to the visualization generated by Vee. For example, a time filter of April 2024.
+    analysis.common.VeeSampleQuestionLibraryDTO:
+      type: object
+      properties:
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/analysis.common.VeeSampleQuestionDTO'
+          description: A list of sample questions to help your users start using Vee.
+      description: A list of sample questions to ask Vee.
+    analysis.common.VeeQuestionDTO:
+      type: object
+      properties:
+        question:
+          type: string
+          description: The question to ask Vee. If asking a follow-up question or continuing a conversation with Vee, specify the `conversationState` object from the question's response.
+        conversationState:
+          allOf:
+          - $ref: '#/components/schemas/analysis.common.VeeConversationStateDTO'
+          description: The unique identifier of the conversation with Vee. If empty, starts a new conversation with Vee. If asking a follow-up question or continuing a conversation with Vee, specify the `conversationState` object from the question's response. To submit feedback about Vee's answer, copy the entire response into your `/feedback` call.
+        options:
+          allOf:
+          - $ref: '#/components/schemas/analysis.common.VeeOptionsDTO'
+          description: Options to specify how Vee should respond to a question.
+        maxViewDetailsMembers:
+          type: integer
+          description: The maximum number of members to return in Detailed View. At maximum chart size (1600 by 900 pixels), a maximum of 16 members can be shown in the chart.
+          format: uint32
+      description: The request body fields to ask Vee a question.
+    analysis.common.VeeClarificationDTO:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Returned if Vee needs more context to answer your question.
+        questions:
+          type: array
+          items:
+            type: string
+          description: Additional questions you can ask that are similar or related to your question.
+        metrics:
+          type: array
+          items:
+            type: string
+          description: Suggested metrics to look at that are similar or related to your question.
+        dimensions:
+          type: array
+          items:
+            type: string
+          description: Suggested dimensions to look at that are similar or related to your question.
+        filters:
+          type: array
+          items:
+            type: string
+          description: Suggested filters that could be a better fit for the data.
+        attributes:
+          type: array
+          items:
+            type: string
+          description: Suggested attributes to look at that are similar or related to your question.
+    analysis.common.VeeRelatedDocumentListDTO:
+      type: object
+      properties:
+        analyses:
+          type: array
+          items:
+            $ref: '#/components/schemas/analysis.common.VeeRelatedDocumentDTO'
+          description: A list of related analyses.
+        reports:
+          type: array
+          items:
+            $ref: '#/components/schemas/analysis.common.VeeRelatedDocumentDTO'
+          description: A list of related reports. Reports are available for Embedded Partners.
+      description: A list of related analyses and reports that may be relevant to the question. Reports are available for Embedded Partners.
+    analysis.common.VeeVisualDTO:
+      type: object
+      properties:
+        image:
+          type: string
+          description: A PNG visualization encoded in a base64 string.
+        title:
+          type: string
+          description: The visualization title.
+        context:
+          type: string
+          description: Any filters applied to the visualization. For example, a time filter of April 2024.
+    analysis.common.VeeQuestionCategoriesAPIResponseDTO:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/analysis.common.VeeQuestionCategoryAPIResponseDTO'
+          description: A list of available categories for Vee sample questions.
+      description: The Vee question categories.
+    analysis.common.VeeSuggestionDTO:
+      type: object
+      properties:
+        suggestion:
+          type: string
+          description: The follow-up question in plain text.
+      description: A suggested follow-up question.
+    analysis.common.VeeStatusCodeDTO:
+      type: object
+      properties:
+        statusCode:
+          enum:
+          - UNDEFINED
+          - VEE_API_SUCCESS
+          - VEE_API_WARNING
+          - VEE_API_ERROR
+          type: string
+          description: A status code indicating whether or not Vee successfully answered the question.
+          format: enum
+        statusMsg:
+          type: string
+          description: Additional information about whether or not Vee successfully answered the question.
+    analysis.common.VeeQuestionCategoryIconDTO:
+      type: object
+      properties:
+        base64Image:
+          type: string
+          description: The Base64 value for the category icon image.
+        backgroundColor:
+          type: string
+          description: The HEX color code of the background color for the category icon. This is useful if the icon is transparent.
+      description: An icon associated with the Vee question category.
+    analysis.common.VeeConversationDTO:
+      type: object
+      properties:
+        conversationState:
+          allOf:
+          - $ref: '#/components/schemas/analysis.common.VeeConversationStateDTO'
+          description: The conversation's details. To submit feedback about Vee's answer, copy the entire conversation state from the `/question` response into your `/feedback` call.
+    systemstatus.VeeStatusDTO:
+      type: object
+      properties:
+        overall:
+          type: string
+          description: The overall status of Vee.
+    analysis.common.VeeSampleQuestionDTO:
+      type: object
+      properties:
+        question:
+          type: string
+          description: A question in plain language.
+        questionId:
+          type: string
+          description: The unique identifier of the sample question.
+        categoryId:
+          type: string
+          description: The unique identifier of the question category.
+        isAssignedToUser:
+          type: boolean
+          description: If `true`, the sample question is spotlighted for at least one of the user's user groups.
+    analysis.common.VeeCorrectionsDTO:
+      type: object
+      properties:
+        warning:
+          type: array
+          items:
+            enum:
+            - VEE_NO_WARNING
+            - VEE_WARNING_RESPONSE_NOT_FOUND
+            - VEE_WARNING_RESPONSE_LOW_CONFIDENCE
+            - VEE_WARNING_RESPONSE_FOUND_CLOSE_MATCH
+            - VEE_WARNING_NO_ACCESS
+            - VEE_WARNING_TIME_SELECTION_ADJUSTED
+            - VEE_WARNING_FILTER_DROPPED
+            - VEE_WARNING_ROUNDING_ADJUSTED
+            - VEE_WARNING_FIRST_PERSON_FILTER_DROPPED
+            - VEE_WARNING_NOT_READY
+            - VEE_WARNING_RESPONSE_NOT_FOUND_IN_TIME_PERIOD
+            type: string
+            format: enum
+          description: A list of warnings from Vee that accompanies an unsure answer; for example, Vee might return a close match warning if Vee finds multiple employees named Adam that relate to your question.
+        clarifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/analysis.common.VeeClarificationDTO'
+          description: A list of clarifying questions if Vee needs more context to answer your question; for example, if asking about someone named Adam, Vee might clarify which Adam by asking for Adam's email address.
+    analysis.common.VeeCategoryBasicInformationDTO:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The user-friendly name for the category. For example, "About individuals".
+        description:
+          type: string
+          description: A short description of the category.
+      description: Information that identifies and describes the question category, such as its display name and description.
+    analysis.common.VeeResponseSchemaDTO:
+      type: object
+      properties:
+        metrics:
+          type: array
+          items:
+            type: string
+          description: A list of the metrics that contribute to Vee's answer.
+        dimensions:
+          type: array
+          items:
+            $ref: '#/components/schemas/analysis.common.VeeResponseSchemaReferenceDTO'
+          description: A list of the dimensions that contribute to Vee's answer.
+        concepts:
+          type: array
+          items:
+            $ref: '#/components/schemas/analysis.common.VeeResponseSchemaReferenceDTO'
+          description: A list of the concepts that contribute to Vee's answer.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    analysis.common.VeeFeedbackDTO:
+      type: object
+      properties:
+        conversation:
+          allOf:
+          - $ref: '#/components/schemas/analysis.common.VeeConversationDTO'
+          description: Details of the Vee conversation you want to provide feedback about.
+        isApproved:
+          type: boolean
+          description: If `true`, Vee answered the question correctly. If `false`, Vee's answer was incorrect or lacked details.
+        description:
+          type: string
+          description: A description of how Vee should have answered the question or how Vee can improve the answer; for example, "Expected Headcount metric, but Vee returned Average Headcount".
+      description: The request body fields to submit Vee feedback.
+    analysis.common.VeeResponseDTO:
+      type: object
+      properties:
+        conversationState:
+          allOf:
+          - $ref: '#/components/schemas/analysis.common.VeeConversationStateDTO'
+          description: The current conversation's details. To ask a follow-up question or continue the conversation with Vee, include the `conversationState` from the response in your next `/question` call. To submit feedback about Vee's answer, copy the entire response into your `/feedback` call.
+        statusCode:
+          allOf:
+          - $ref: '#/components/schemas/analysis.common.VeeStatusCodeDTO'
+          description: A status code indicating whether or not Vee successfully answered the question.
+        narrative:
+          type: string
+          description: Vee's answer to the question.
+        chartUrl:
+          type: string
+          description: A URL to view the visualization in Visier. If a click-through link is configured, this field will show a custom URL that redirects users to the relevant content in your portal. To configure a click-through link, see `POST /v2/admin/tenants`.
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/analysis.common.VeeResponseSchemaDTO'
+          description: The metrics, dimensions, and concepts that contribute to Vee's answer.
+        corrections:
+          type: array
+          items:
+            $ref: '#/components/schemas/analysis.common.VeeCorrectionsDTO'
+          description: A list of corrections and clarifications if the question was ambiguous or Vee was unsure in the answer.
+        data:
+          allOf:
+          - $ref: '#/components/schemas/analysis.common.VeeDataDTO'
+          description: Returned if `includeData` is `true`. Provides additional data relevant to the question, such as the visualization data and any filters applied to the visualization.
+        visual:
+          allOf:
+          - $ref: '#/components/schemas/analysis.common.VeeVisualDTO'
+          description: A base64 string-encoded PNG of a visualization generated by Vee to answer a question. For example, Vee can return a Breakdown visualization if asked about the headcount in each organization.
+        rewordedQuestion:
+          type: string
+          description: Vee's plain language interpretation of the original question. For example, if you asked "what is the headcount by gender in each org?", Vee might reword the question as "What is the gender breakdown of our workforce by organization this month?".
+        relatedDocuments:
+          allOf:
+          - $ref: '#/components/schemas/analysis.common.VeeRelatedDocumentListDTO'
+          description: A list of related analyses and reports that may be relevant to the question. Reports are available for Embedded Partners.
+        suggestions:
+          type: array
+          items:
+            $ref: '#/components/schemas/analysis.common.VeeSuggestionDTO'
+          description: A list of suggested follow-up questions.
+      description: The response after asking Vee a question.
+    analysis.common.VeeOptionsDTO:
+      type: object
+      properties:
+        includeVisual:
+          type: boolean
+          description: If `true`, returns a base64 string-encoded PNG of a rendered visualization with Vee's answer. Default is `false`.
+        visualOptions:
+          allOf:
+          - $ref: '#/components/schemas/analysis.common.VeeVisualOptionsDTO'
+          description: Specify how to render the visualization.
+        includeData:
+          type: boolean
+          description: If `true`, returns additional data relevant to the question, including `dataJson` (visualization data) and `context` (filters applied to the visualization). Default is `false`.
+        dataFormat:
+          enum:
+          - json
+          type: string
+          description: 'The format to return visualization data in. Valid values: `json`.'
+          format: enum
+        includeRewordedQuestion:
+          type: boolean
+          description: If `true`, returns Vee's plain language interpretation of the original question. For example, if you asked "what is the headcount by gender in each org?", Vee might reword the question as "What is the gender breakdown of our workforce by organization this month?". Default is `false`.
+        includeDetailData:
+          type: boolean
+          description: If `true`, returns detail data relevant to the question. Default is `false`.
+        includeRelatedAnalyses:
+          type: boolean
+          description: If `true`, returns related analyses. Default is `false`.
+        includeRelatedReports:
+          type: boolean
+          description: If `true`, returns related reports. Default is `false`. Reports are available for Embedded Partners.
+        includeSuggestions:
+          type: boolean
+          description: If `true`, returns suggested follow-up questions. Default is `false`.
+    analysis.common.VeeVisualOptionsDTO:
+      type: object
+      properties:
+        width:
+          type: integer
+          description: The pixel width of the rendered visualization. Default is 600. Valid values are between 160 and 1600.
+          format: uint32
+        height:
+          type: integer
+          description: The pixel height of the rendered visualization. Default is 338. Valid values are between 90 and 900.
+          format: uint32
+    analysis.common.VeeRelatedDocumentDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier (UUID) of the document.
+        title:
+          type: string
+          description: The document's display name.
+        description:
+          type: string
+          description: A description of the document.
+        url:
+          type: string
+          description: A direct URL to view the document in Visier, or the click-through link for Embedded Partners if configured.
+      description: Information about a related analysis or report. Reports are available for Embedded Partners.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: data out
+  tags:
+  - DataQuery
+  - DataVersionExport
+  - VeeV1
+  - VeeV2
+  - Search
+  - SourceFilesDownload
+  - Reporting
+  - DataExportConnectorsAPI

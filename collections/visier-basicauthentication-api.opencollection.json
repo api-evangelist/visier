@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Authentication Basic Authentication API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BasicAuthentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request a Visier authentication token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/admin/visierSecureToken",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Generate a secure ASID token."
+        },
+        {
+          "info": {
+            "name": "Request an impersonation token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/admin/visierImpersonationToken",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "TargetUsername",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "write",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, the token grants read and write impersonation. The impersonated user must have the WriteImpersonated profile capability. Default is `false` and grants read only impersonation."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "apikey",
+              "value": "{{apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Generate an impersonation token for the given username. The requesting user must have the Impersonator profile. The impersonated user must have the Read Impersonated or Write Impersonated profile. Supports impersonating users within the same tenant or in an analytic tenant by specifying a`TargetTenantID`. After receiving the token, use the header `Cookie:VisierImpersonationToken` to make API requests as the impersonated user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

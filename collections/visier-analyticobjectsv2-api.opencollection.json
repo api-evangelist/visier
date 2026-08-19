@@ -1,0 +1,233 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Analytic Model Analytic Objects V2 API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AnalyticObjectsV2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of analytic objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2alpha/data/model/analytic-objects",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the analytic object to retrieve. If undefined, retrieves all analytic object types. Valid values:\n - `subject`: Retrieves subject analytic objects.\n - `event`: Retrieves event analytic objects."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "The level of information to retrieve for the analytic object. Valid values:\n - `basic`: Retrieves the analytic object's UUID, object name, and basic information. This is the default.\n - `details`: Retrieves the `basic` details and additional configurations, such as properties, dimensions, and references.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+              },
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "query",
+                "description": "The analytic object names to return in the response. When combined with `uuid`, the results return objects that match either the `objectName` or `uuid`."
+              },
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The analytic object UUIDs to return in the response. When combined with `objectName`, the results return objects that match either the `objectName` or `uuid`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all analytic objects in your Visier tenant.\n \n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Create analytic objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2alpha/data/model/analytic-objects",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create new analytic objects. The response returns whether each analytic object was successfully created or not.\n When creating objects, assign a unique object name but don't set a UUID. Visier generates UUIDs for new objects.\n \n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager ("
+        },
+        {
+          "info": {
+            "name": "Update analytic objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v2alpha/data/model/analytic-objects",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace existing analytic objects. The response returns whether each analytic object was successfully updated or not. When updating objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PUT` request definition.\n\n In `PUT` calls, the definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed from the analy"
+        },
+        {
+          "info": {
+            "name": "Partially update analytic objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v2alpha/data/model/analytic-objects",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Make partial changes to existing analytic objects. The response returns whether each analytic object was successfully patched or not. When patching objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PATCH` request definition.\n\n Unlike `PUT`, which completely replaces the analytic object definition, use `PATCH` to change specific fields in the analytic object without affecting omitted fields. To replace an analytic object's ent"
+        },
+        {
+          "info": {
+            "name": "Delete analytic objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v2alpha/data/model/analytic-objects",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete existing analytic objects. The response returns whether each analytic object was successfully deleted or not.\n \n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Revert analytic objects to Blueprint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2alpha/data/model/analytic-objects/revert-to-parent",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Revert analytic objects to their Blueprint state. The response returns whether each analytic object was successfully reverted or not.\n You can revert tenant override objects to Blueprint. If you execute the revert operation on a:\n - Blueprint object: Nothing happens. The object is inherited from the parent and there is nothing to revert on this tenant.\n - Tenant override object: The object reverts to the Blueprint version or, for administrating tenants who revert an analytic tenant's object, the"
+        },
+        {
+          "info": {
+            "name": "Retrieve an analytic object's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2alpha/data/model/analytic-objects/:objectNameOrUuid",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objectNameOrUuid",
+                "value": "",
+                "type": "path",
+                "description": "The object name or UUID of the analytic object to retrieve."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "The level of information to retrieve for the analytic object. Valid values:\n - `basic`: Retrieves the analytic object's UUID, object name, and basic information.\n - `details`: Retrieves the `basic` details and additional configurations, such as properties, dimensions, and references. This is the default.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a specific analytic object, such as its properties, dimensions, and references.\n \n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

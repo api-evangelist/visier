@@ -1,0 +1,261 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Analytic Model Metrics V2 API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MetricsV2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of metrics by analytic object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2alpha/data/model/analytic-objects/:analyticObjectName/metrics",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "analyticObjectName",
+                "value": "",
+                "type": "path",
+                "description": "The object name of the analytic object from which to retrieve metrics."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the metric to retrieve. Omit to retrieve all supported metric types. Valid values:\n - `simple`: Retrieves all simple metrics. A simple metric is a metric based on one or more analytic objects.\n - `derived`: Retrieves all derived metrics. A derived metric is a metric based on a simple metric."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "The level of information to retrieve for the metric. Valid values:\n - `basic`: Retrieves the metric's UUID, object name, and basic information. This is the default.\n - `details`: Retrieves the `basic` details and additional configurations, such as `visibleInAnalytics`.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+              },
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "query",
+                "description": "The metric object names to return in the response. When combined with `uuid`, the results return objects that match either the `objectName` or `uuid`."
+              },
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The metric UUIDs to return in the response. When combined with `objectName`, the results return objects that match either the `objectName` or `uuid`."
+              }
+            ]
+          },
+          "docs": "Retrieve all the simple or derived metrics for a specific analytic object. By default, the response will return the `basic` representation of the metric definitions.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2alpha/data/model/metrics",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the metric to retrieve. Omit to retrieve all supported metric types. Valid values:\n - `simple`: Retrieves all simple metrics. A simple metric is a metric based on one or more analytic objects.\n - `derived`: Retrieves all derived metrics. A derived metric is a metric based on a simple metric."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "The level of information to retrieve for the metric. Valid values:\n - `basic`: Retrieves the metric's UUID, object name, and basic information. This is the default.\n - `details`: Retrieves the `basic` details and additional configurations, such as `visibleInAnalytics`.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+              },
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "query",
+                "description": "The metric object names to return in the response. When combined with `uuid`, the results return objects that match either the `objectName` or `uuid`."
+              },
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The metric UUIDs to return in the response. When combined with `objectName`, the results return objects that match either the `objectName` or `uuid`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all simple or derived metrics in your Visier tenant. By default, the response will return the `basic` representation of the metric definitions.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Create metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2alpha/data/model/metrics",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create new simple or derived metrics. The response returns whether each metric was successfully created or not.\n When creating objects, assign a unique object name but don't set a UUID. Visier generates UUIDs for new objects.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (C"
+        },
+        {
+          "info": {
+            "name": "Update metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v2alpha/data/model/metrics",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update existing simple or derived metrics. The response returns whether each metric was successfully updated or not. When updating objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PUT` request definition.\n\n In `PUT` calls, the definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed from the metric"
+        },
+        {
+          "info": {
+            "name": "Partially update metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v2alpha/data/model/metrics",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Make partial changes to existing simple or derived metrics. The response returns whether each metric was successfully patched or not. When patching objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PATCH` request definition.\n\n Unlike `PUT`, which completely replaces the metric definition, use `PATCH` to change specific fields in the metric without affecting omitted fields. To replace a metric's entire definition, see the `PUT"
+        },
+        {
+          "info": {
+            "name": "Delete metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v2alpha/data/model/metrics",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete existing simple or derived metrics. The response returns whether each metric was successfully deleted or not.\n\n **Note**: Deleting a simple metric will also delete any derived metrics that depend on it. Derived metrics cannot exist without their base metric.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please "
+        },
+        {
+          "info": {
+            "name": "Retrieve a metric's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2alpha/data/model/metrics/:metricId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "metricId",
+                "value": "",
+                "type": "path",
+                "description": "The object name or UUID of the metric to retrieve."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "The level of information to retrieve for the metric. Valid values:\n - `basic`: Retrieves the metric's UUID, object name, and basic information.\n - `details`: Retrieves the `basic` details and additional configurations, such as `visibleInAnalytics`. This is the default.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a specific simple or derived metric, such as its metric type and description. By default, the response will return the detailed representation of the metric definition.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

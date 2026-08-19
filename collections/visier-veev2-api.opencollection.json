@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Data Out Vee V2 API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "VeeV2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of sample questions to ask Vee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/vee/sample-questions",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get a list of sample questions to help you start using Vee. The response returns a list of questions that you can ask Vee, such as \"What is the turnover rate?\".\n You may occasionally encounter a sample question that can't be answered due to data availability or your data access"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

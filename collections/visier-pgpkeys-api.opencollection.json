@@ -1,0 +1,114 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Data In PGP Keys API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PGPKeys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all PGP public keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/api/pgp-keys",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all PGP public keys in your tenant."
+        },
+        {
+          "info": {
+            "name": "Download a public encryption key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/api/pgp-keys",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a key pair and retrieve the public key that you can use to encrypt your data to send to Visier. \n \n In the request body, optionally set the UTC expiration date for the key pair in ISO-8601 format. Must be between 2 and 10 years. Default is 2 years."
+        },
+        {
+          "info": {
+            "name": "Retrieve a PGP public key using the key ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/api/pgp-keys/:keyID",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "keyID",
+                "value": "",
+                "type": "path",
+                "description": "The key ID of the generated key pair in 16-letter hexadecimal format, including leading zeros."
+              }
+            ]
+          },
+          "docs": "If you know your PGP key ID, use it to retrieve the PGP public key. To get a list of all key IDs, see `Retrieve all PGP public keys`."
+        },
+        {
+          "info": {
+            "name": "Delete a PGP key pair",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/api/pgp-keys/:keyID",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "keyID",
+                "value": "",
+                "type": "path",
+                "description": "The key ID of the generated key pair in 16-letter hexadecimal format, including leading zeros."
+              }
+            ]
+          },
+          "docs": "Delete a PGP key pair using a key ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

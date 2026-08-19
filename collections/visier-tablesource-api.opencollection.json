@@ -1,0 +1,498 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Data In Table Source API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TableSource",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve table sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/data/table-sources/tables",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of table sources to return. Default is 100."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The index to start retrieving results from, also known as offset. The index begins at 0."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of table source configurations. Table sources are SQL-accessible tables that can store and manage data directly within Visier.\n \n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Create a table source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1alpha/data/table-sources/tables",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a table source configuration. Table sources define the structure and metadata for SQL-accessible tables in Visier.\n\n When creating objects, assign a unique object name but don't set a UUID. Visier generates UUIDs for new objects.\n \n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Succes"
+        },
+        {
+          "info": {
+            "name": "Retrieve a table source",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/data/table-sources/tables/:tableId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tableId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the table source."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific table source configuration by its unique identifier.\n \n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Update a table source",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1alpha/data/table-sources/tables/:tableId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tableId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the table source to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing table source configuration. Use this to modify the structure, columns, or metadata of a table source.\n \n In `PUT` requests, the definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed from the table source. \n \n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, "
+        },
+        {
+          "info": {
+            "name": "Delete a table source",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1alpha/data/table-sources/tables/:tableId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tableId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the table source."
+              }
+            ]
+          },
+          "docs": "Delete a table source configuration. This removes the table source definition but does not delete the associated data.\n \n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Retrieve a table source's metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/data/table-sources/tables/:tableId/metadata",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tableId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the table source for which to retrieve metadata."
+              }
+            ]
+          },
+          "docs": "Retrieve previously-stored metadata for a table source, such as the key-value pairs to apply to the table if you commit the transaction. To store metadata for a table source, use the `setMetadata` action in `POST /v1alpha/data/table-sources/transactions/{transactionId}/jobs`.\n\n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this A"
+        },
+        {
+          "info": {
+            "name": "Regenerate a materialized view",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1alpha/data/table-sources/tables/:tableId/regenerate",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tableId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the table source."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run a SQL job to manually refresh the dataset during troubleshooting, query updates, or when manual data fetching is required.\n\n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Start a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1alpha/data/table-sources/transactions",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start a transaction for SQL operations on table sources. Transactions provide isolation for multiple operations and allow for rollback if needed.\n\n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Retrieve a transaction's status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/data/table-sources/transactions/:transactionId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the transaction."
+              },
+              {
+                "name": "summaryOnly",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, the response omits the `children` array and returns only the `summary` counts. Use for polling. Default is `false`."
+              }
+            ]
+          },
+          "docs": "Retrieve the current status and details of a specific transaction. If the transaction was dispatched to analytic tenants, the response includes the status of each analytic tenant's transaction in the `children` field.\n\n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em"
+        },
+        {
+          "info": {
+            "name": "Extend a transaction's expiry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1alpha/data/table-sources/transactions/:transactionId/extend",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the transaction to extend."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Extend the expiry time of an open transaction.\n\n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Upload an input file to a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1alpha/data/table-sources/transactions/:transactionId/inputs/:filename",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the transaction."
+              },
+              {
+                "name": "filename",
+                "value": "",
+                "type": "path",
+                "description": "The name of the file to upload. The input will be accessible with this filename during job execution."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Send input files to a transaction. SQL operations can reference an input file within a job as if it were a local, temporary view. For example, the input file can contain data to insert into your sources, IDs to match against to change or delete rows, or any other input for your SQL query.\n \n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested i"
+        },
+        {
+          "info": {
+            "name": "Run a SQL job within a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1alpha/data/table-sources/transactions/:transactionId/jobs",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the transaction."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute a SQL job within a transaction. Jobs can contain multiple SQL operations including queries, inserts, updates, deletes, and merge operations.\n \n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Retrieve a job's status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/data/table-sources/transactions/:transactionId/jobs/:jobId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the transaction."
+              },
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the job."
+              },
+              {
+                "name": "summaryOnly",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, the response includes the overall status and summary counts,\n and omits per-tenant job statuses. Useful for large multi-tenant jobs. Default is `false`."
+              }
+            ]
+          },
+          "docs": "Retrieve the status of a SQL job and any child jobs spawned from it. Use the job ID returned by `POST /v1alpha/data/table-sources/transactions/{transactionId}/jobs` to retrieve the job's status.\n\n If the job was dispatched across multiple tenants, the response includes per-tenant status details along with aggregated summary counts.\n\n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notic"
+        },
+        {
+          "info": {
+            "name": "Download an output file from a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/data/table-sources/transactions/:transactionId/outputs/:filename",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the transaction."
+              },
+              {
+                "name": "filename",
+                "value": "",
+                "type": "path",
+                "description": "The name of the file to download. This should be the filename specified in an output of an action during job execution."
+              }
+            ]
+          },
+          "docs": "Download an output file generated by a SQL operation within a transaction. To generate output files, use the `QUERY` action and `output` parameter in `POST /v1alpha/data/table-sources/transactions/{transactionId}/jobs`.\n\n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</"
+        },
+        {
+          "info": {
+            "name": "List output file parts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/data/table-sources/transactions/:transactionId/outputs/:filename/parts",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the transaction."
+              },
+              {
+                "name": "filename",
+                "value": "",
+                "type": "path",
+                "description": "The name of the output file to list parts for."
+              }
+            ]
+          },
+          "docs": "List the parts of a multi-part output file. SQL operations generate output files within a transaction. Each part is a complete, self-contained file in the output format. Parts are 0-indexed. For an output with `numberOfParts: 3`, the part numbers are 0, 1, and 2.  For large output files, download by file part for better performance.\n\n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation noti"
+        },
+        {
+          "info": {
+            "name": "Download an output file part",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/data/table-sources/transactions/:transactionId/outputs/:filename/parts/:partIndex",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the transaction."
+              },
+              {
+                "name": "filename",
+                "value": "",
+                "type": "path",
+                "description": "The name of the output file to download a part of."
+              },
+              {
+                "name": "partIndex",
+                "value": "",
+                "type": "path",
+                "description": "The zero-based index of the part to download."
+              }
+            ]
+          },
+          "docs": "Download a single part of a multi-part output file. SQL operations generate output files within a transaction. Each part is a complete, self-contained file in the output format. Parts are 0-indexed. For an output with `numberOfParts: 3`, the part numbers are 0, 1, and 2.  For large output files, download by file part for better performance.\n\n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecat"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

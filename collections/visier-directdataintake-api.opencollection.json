@@ -1,0 +1,341 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Data In Direct Data Intake API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DirectDataIntake",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the direct data intake configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/data/directloads/:draftId/configs",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "draftId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the project to load data into. Currently, the only supported value is `prod` to update the production version."
+              }
+            ]
+          },
+          "docs": "Get the direct data intake configuration."
+        },
+        {
+          "info": {
+            "name": "Update the direct data intake configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/data/directloads/:draftId/configs",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "draftId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the project to load data into. Currently, the only supported value is `prod` to update the production version."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configure the data intake settings, such as the direct data intake job type. Only provide values for the configuration options that should change.\n\n Configuration options that are not present in the PUT request are ignored and left unchanged."
+        },
+        {
+          "info": {
+            "name": "Retrieve an object's data load schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/data/directloads/:draftId/schemas/:objectName",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "draftId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the project to load data into. Currently, the only supported value is `prod` to update the production version."
+              },
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the object to return the load schema for."
+              }
+            ]
+          },
+          "docs": "Gets the load schema for a specified object. The object's load schema represents the structure that the data upload file must follow to upload data to the object.\n\n In the load schema, the listed columns must be present in the data file as column headers and exactly match the load schema (case sensitive), however,  only the columns whose `isMandatory` field is `true` must contain values in the data file."
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of open transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/data/directloads/:draftId/transactions",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "draftId",
+                "value": "",
+                "type": "path",
+                "description": "Optionally specify the unique identifier of a project to retrieve open transactions from. Currently, the only supported value is `prod` to retrieve open transactions for the production version."
+              }
+            ]
+          },
+          "docs": "Get a list of all open transactions. Doesn't return committed transactions or rolled back transactions."
+        },
+        {
+          "info": {
+            "name": "Start a direct data intake transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/data/directloads/:draftId/transactions",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "draftId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the project to load data into. Currently, the only supported value is `prod` to update the production version."
+              }
+            ]
+          },
+          "docs": "Create a transaction to contain your data files. To upload files to objects in Visier, you must first start a transaction.\n\n After starting a transaction and uploading files to the transaction, you can commit the transaction to process the uploaded files or roll back the transaction to discard the uploaded files."
+        },
+        {
+          "info": {
+            "name": "Check transaction status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/data/directloads/:draftId/transactions/:transactionId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "draftId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the project to load data into. Currently, the only supported value is `prod` to update the production version."
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the transaction."
+              }
+            ]
+          },
+          "docs": "Retrieve the status of a committed transaction's processing job."
+        },
+        {
+          "info": {
+            "name": "Commit a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/data/directloads/:draftId/transactions/:transactionId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "draftId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the project to load data into. Currently, the only supported value is `prod` to update the production version."
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the transaction."
+              }
+            ]
+          },
+          "docs": "Process a transaction and its uploaded data files. This starts a processing job to load the data files into Visier.\n\n After committing a transaction, you cannot upload additional files to the transaction. Use the `Check transaction status` endpoint to monitor the progress of the processing job."
+        },
+        {
+          "info": {
+            "name": "Roll back a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/data/directloads/:draftId/transactions/:transactionId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "draftId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the project to load data into. Currently, the only supported value is `prod` to update the production version."
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the transaction."
+              }
+            ]
+          },
+          "docs": "Rolls back the specified transaction. This discards all files uploaded within the transaction and deletes the transaction.\n\n After rolling back a transaction, you cannot use the transaction to upload data files."
+        },
+        {
+          "info": {
+            "name": "Load sample data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/data/directloads/:draftId/transactions/:transactionId/:objectName/sample-data",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "draftId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "sampleName",
+                "value": "",
+                "type": "query",
+                "description": "The name of the target object to load sample data. Sample data is available for:\n * `employee`: The Employee subject.\n * `employee_exit`: The Employee Exit event.\n * `employment_start`: The Employment Start event.\n * `organization_hierarchy`: The Organization Hierarchy dimension."
+              }
+            ]
+          },
+          "docs": "Load sample data in a previously-created transaction. The data is not processed in Visier until you commit the transaction. Sample data is available for `employee`, `employee_exit`, `employment_start`, and `organization_hierarchy`."
+        },
+        {
+          "info": {
+            "name": "Upload files",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/data/directloads/:draftId/transactions/:transactionId/:objectName",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "draftId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the project to load data into. Currently, the only supported value is `prod` to update the production version."
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the transaction to load data files into."
+              },
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the object to upload the data to.\n\nIf uploading data to a multi-value property (MVP), specify the property in `{object}--{property}` format; for example, `Employee--Employee_Budgeted_Compensation`."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Send upload files to a previously-created transaction. Each upload file is associated with a target object in Visier. The files are not processed in Visier until you commit the transaction."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

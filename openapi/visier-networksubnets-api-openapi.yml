@@ -1,0 +1,184 @@
+openapi: 3.2.0
+info:
+  title: Visier Administration Network Subnets API
+  description: Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: NetworkSubnets
+  x-displayName: Network Subnets
+  description: 'Manage the IP addresses that can call Visier APIs.
+
+    <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
+paths:
+  /v1alpha/admin/api-network-subnets:
+    get:
+      tags:
+      - NetworkSubnets
+      summary: Retrieve a list of API network subnets
+      description: "Retrieve a list of all IP addresses that can call Visier APIs.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: NetworkSubnets_GetApiSubnets
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin.NetworkSubnetsMessageResponse'
+    put:
+      tags:
+      - NetworkSubnets
+      summary: Update API network subnets
+      description: "Overwrite the existing list of IP addresses that can call Visier APIs with a new list. IP addresses must use the Classless Inter-Domain Routing (CIDR) format: xxx.xxx.xxx.xxx/xx.\n\n When updating allowed network subnets, the definition in your API call replaces the prior definition. You must provide the entire definition in the PUT call. If you omit IP addresses from the update request, those IP addresses are removed from the allowlist We recommend that you retrieve the current list of allowed network subnets before you update the list.\n\n **Note**: By updating the allowed network subnets, you may remove your current IP address from the allowlist. If this happens, you will lock yourself out from making additional API calls. Visier does not allow lock outs unless you set `confirmLockout` to `true`. Default is `false`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: NetworkSubnets_SetApiSubnets
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/admin.NetworkSubnetsMessageRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin.NetworkSubnetsMessageResponse'
+    post:
+      tags:
+      - NetworkSubnets
+      summary: Add API network subnets
+      description: "Add IP addresses to the list of allowed network subnets that can call Visier APIs. IP addresses must use the Classless Inter-Domain Routing (CIDR) format: xxx.xxx.xxx.xxx/xx.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: NetworkSubnets_AddApiSubnets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/admin.NetworkSubnetsMessageRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin.NetworkSubnetsMessageResponse'
+    delete:
+      tags:
+      - NetworkSubnets
+      summary: Delete API network subnets
+      description: "Remove IP addresses from the list of allowed network subnets that can call Visier APIs. IP addresses must use the Classless Inter-Domain Routing (CIDR) format: xxx.xxx.xxx.xxx/xx.\n\n When updating allowed network subnets, the definition in your API call replaces the prior definition. You must provide the entire definition in the PUT call. If you omit IP addresses from the update request, those IP addresses are removed from the allowlist We recommend that you retrieve the current list of allowed network subnets before you update the list.\n\n **Note**: By deleting the allowed network subnets, you may remove your current IP address from the allowlist. If this happens, you will lock yourself out from making additional API calls. Visier does not allow lock outs unless you set `confirmLockout` to `true`. Default is `false`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: NetworkSubnets_DeleteApiSubnets
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/admin.NetworkSubnetsMessageRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin.NetworkSubnetsMessageResponse'
+components:
+  schemas:
+    admin.NetworkSubnetsMessageResponse:
+      type: object
+      properties:
+        networkSubnetsForApi:
+          type: array
+          items:
+            type: string
+          description: The IP addresses that are allowed to call Visier APIs.
+      description: The list of IP addresses that are allowed to call Visier APIs.
+    admin.NetworkSubnetsMessageRequest:
+      type: object
+      properties:
+        networkSubnetsForApi:
+          type: array
+          items:
+            type: string
+          description: The IP addresses in the request.
+        confirmLockout:
+          type: boolean
+          description: If `true`, you acknowledge that the API call removes your IP address from the list of allowed network subnets and you will not be able to call Visier APIs from your current IP address. Default is `false`. To avoid this, add your current IP address to the allowed network subnets list.
+      description: The IP addresses to modify in the API network subnet allowlist.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: administration
+  tags:
+  - Projects
+  - ProductionVersions
+  - UsersV3
+  - UsersV2
+  - UserGroupsV2
+  - UsersV1
+  - Profiles
+  - Permissions
+  - TenantsV2
+  - TenantsV1
+  - ConsolidatedAnalytics
+  - Sources
+  - SystemStatus
+  - EmailDomains
+  - EncryptionKeys
+  - NetworkSubnets
+  - SidecarSolutions
+  - ReleaseVersionConfiguration
+  - VeeConfiguration

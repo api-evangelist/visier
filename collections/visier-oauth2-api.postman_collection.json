@@ -1,0 +1,746 @@
+{
+  "item": [
+    {
+      "id": "3d9cc213-d1ae-4cf8-b8f7-064285c303af",
+      "name": "OAuth2",
+      "description": {
+        "content": "Request an authentication token through OAuth 2.0 with Open ID Connect (OIDC). With OAuth 2.0 with OIDC, use an OAuth 2.0 grant to request an authentication token. \nThe response returns a JSON Web Token (JWT) that you can use in your API calls.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4cb658c5-d95f-436c-a7ff-31d9ec4c179e",
+          "name": "Retrieve user-specific metadata",
+          "request": {
+            "name": "Retrieve user-specific metadata",
+            "description": {
+              "content": "Retrieve user-specific metadata, such as a user's ID, username, and profile capabilities.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "oauth2",
+                "userinfo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "includeTenantDetails",
+                  "value": "<boolean>",
+                  "description": "If `true`, includes tenant details in the response. Default is `false`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4620065a-ec40-4d1a-80ad-21aa3af07143",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "oauth2",
+                    "userinfo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includeTenantDetails",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sub\": \"string\",\n  \"name\": \"string\",\n  \"email\": \"string\",\n  \"visier:user_id\": \"string\",\n  \"visier:capabilities\": {\n    \"capabilityGroups\": [\n      {\n        \"group\": \"DirectPublish\",\n        \"accessLevel\": \"NoAccess\",\n        \"viewLevel\": \"Detailed\",\n        \"apiAccessLevel\": \"Write\",\n        \"apiViewLevel\": \"Embedded\"\n      },\n      {\n        \"group\": \"Translation\",\n        \"accessLevel\": \"NoAccess\",\n        \"viewLevel\": \"Certified\",\n        \"apiAccessLevel\": \"Write\",\n        \"apiViewLevel\": \"Embedded\"\n      }\n    ]\n  },\n  \"visier:subnets\": {\n    \"accessType\": \"All\",\n    \"subnets\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"visier:export_subnets\": {\n    \"accessType\": \"Unknown\",\n    \"subnets\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"visier:tenant_details\": {\n    \"details\": [\n      {\n        \"tenantCode\": \"string\",\n        \"displayName\": \"string\",\n        \"properties\": {\n          \"vanityUrlName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"tenantCode\": \"string\",\n        \"displayName\": \"string\",\n        \"properties\": {\n          \"vanityUrlName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ]\n  },\n  \"visier:tenant_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04416417-5035-4d14-8e10-262e7054d159",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "oauth2",
+                    "userinfo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includeTenantDetails",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "086c346b-deba-429f-90aa-81f4bd85255a",
+          "name": "Request an authorization code",
+          "request": {
+            "name": "Request an authorization code",
+            "description": {
+              "content": "Request an authorization code for the authorization_code grant type. Not required in other OAuth 2.0 grant types.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "oauth2",
+                "authorize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "redirect_uri",
+                  "value": "<string>",
+                  "description": "The optional URI to redirect to after authorization."
+                },
+                {
+                  "disabled": false,
+                  "key": "response_type",
+                  "value": "<string>",
+                  "description": "(Required) The response type. Must be `code`."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the pre-registered client application."
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "The OAuth 2.0 scope of the authorization request. Default is `read`. If the scope includes `visier:login:bypass_users`, then the redirect login URL ends in \"/auth/admin\" instead of \"/auth\". This allows single sign-on (SSO) Bypass Users to login through Visier instead of being redirected to the SSO login page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": [
+            {
+              "id": "ebb24d1c-e475-4e6d-9ce8-60052d7481f1",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "oauth2",
+                    "authorize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "redirect_uri",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "response_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16d72a79-c885-406a-8e9f-d4e863233caa",
+              "name": "Redirect to authorization page.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "oauth2",
+                    "authorize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "redirect_uri",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "response_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Multiple Choices",
+              "code": 300,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "073d7e82-2c76-4b21-8df0-9706ac3f15a4",
+          "name": "Request a JSON Web Token",
+          "request": {
+            "name": "Request a JSON Web Token",
+            "description": {
+              "content": "Use an OAuth 2.0 grant type to request a JWT.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "oauth2",
+                "token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "grant_type",
+                  "value": "<string>",
+                  "description": "The grant type. Supported values:\n- `authorization_code`: The authorization code grant type.\n- `password`: The password grant type.\n- `urn:ietf:params:oauth:grant-type:saml2-bearer`: The saml2-bearer grant type.\n- `urn:visier:params:oauth:grant-type:asid-token`: The ASID token grant type."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "The ID of the pre-registered client application."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_secret",
+                  "value": "<string>",
+                  "description": "The secret of the pre-registered client application."
+                },
+                {
+                  "disabled": false,
+                  "key": "redirect_uri",
+                  "value": "<string>",
+                  "description": "The optional URI to redirect to after authorization."
+                },
+                {
+                  "disabled": false,
+                  "key": "code",
+                  "value": "<string>",
+                  "description": "The authorization code. Applicable only for authorization code grant type."
+                },
+                {
+                  "disabled": false,
+                  "key": "username",
+                  "value": "<string>",
+                  "description": "The username of the user to authenticate. Applicable only for password grant type."
+                },
+                {
+                  "disabled": false,
+                  "key": "password",
+                  "value": "<string>",
+                  "description": "The password of the user to authenticate. Applicable only for password grant type."
+                },
+                {
+                  "disabled": false,
+                  "key": "asid_token",
+                  "value": "<string>",
+                  "description": "The ASID token. Applicable only for ASID token grant type."
+                },
+                {
+                  "disabled": false,
+                  "key": "assertion",
+                  "value": "<string>",
+                  "description": "The SAML assertion. Applicable only for saml2-bearer grant type."
+                },
+                {
+                  "disabled": false,
+                  "key": "refresh_token",
+                  "value": "<string>",
+                  "description": "The refresh token. Applicable only for refresh_token grant type."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "01b3af97-351a-4f97-b91f-5aa7ca97d20d",
+              "name": "Returns access and refresh tokens along with the expiration time.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "oauth2",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The grant type. Supported values:\n- `authorization_code`: The authorization code grant type.\n- `password`: The password grant type.\n- `urn:ietf:params:oauth:grant-type:saml2-bearer`: The saml2-bearer grant type.\n- `urn:visier:params:oauth:grant-type:asid-token`: The ASID token grant type.",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ID of the pre-registered client application.",
+                        "type": "text/plain"
+                      },
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The secret of the pre-registered client application.",
+                        "type": "text/plain"
+                      },
+                      "key": "client_secret",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The optional URI to redirect to after authorization.",
+                        "type": "text/plain"
+                      },
+                      "key": "redirect_uri",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The authorization code. Applicable only for authorization code grant type.",
+                        "type": "text/plain"
+                      },
+                      "key": "code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The username of the user to authenticate. Applicable only for password grant type.",
+                        "type": "text/plain"
+                      },
+                      "key": "username",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The password of the user to authenticate. Applicable only for password grant type.",
+                        "type": "text/plain"
+                      },
+                      "key": "password",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ASID token. Applicable only for ASID token grant type.",
+                        "type": "text/plain"
+                      },
+                      "key": "asid_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The SAML assertion. Applicable only for saml2-bearer grant type.",
+                        "type": "text/plain"
+                      },
+                      "key": "assertion",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The refresh token. Applicable only for refresh_token grant type.",
+                        "type": "text/plain"
+                      },
+                      "key": "refresh_token",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_token\": \"string\",\n  \"refresh_token\": \"string\",\n  \"id_token\": \"string\",\n  \"token_type\": \"string\",\n  \"expires_in\": 9963\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a3be90e-fd3f-437d-9a4a-b38b22be070b",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "oauth2",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The grant type. Supported values:\n- `authorization_code`: The authorization code grant type.\n- `password`: The password grant type.\n- `urn:ietf:params:oauth:grant-type:saml2-bearer`: The saml2-bearer grant type.\n- `urn:visier:params:oauth:grant-type:asid-token`: The ASID token grant type.",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ID of the pre-registered client application.",
+                        "type": "text/plain"
+                      },
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The secret of the pre-registered client application.",
+                        "type": "text/plain"
+                      },
+                      "key": "client_secret",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The optional URI to redirect to after authorization.",
+                        "type": "text/plain"
+                      },
+                      "key": "redirect_uri",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The authorization code. Applicable only for authorization code grant type.",
+                        "type": "text/plain"
+                      },
+                      "key": "code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The username of the user to authenticate. Applicable only for password grant type.",
+                        "type": "text/plain"
+                      },
+                      "key": "username",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The password of the user to authenticate. Applicable only for password grant type.",
+                        "type": "text/plain"
+                      },
+                      "key": "password",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ASID token. Applicable only for ASID token grant type.",
+                        "type": "text/plain"
+                      },
+                      "key": "asid_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The SAML assertion. Applicable only for saml2-bearer grant type.",
+                        "type": "text/plain"
+                      },
+                      "key": "assertion",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The refresh token. Applicable only for refresh_token grant type.",
+                        "type": "text/plain"
+                      },
+                      "key": "refresh_token",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c35a99cb-db4a-44eb-a682-8abeeb49864f",
+    "name": "Visier Authentication O Auth2 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for authenticating with Visier. To use Visier's public APIs, you must first authenticate yourself as a Visier user who is allowed to use Visier APIs.",
+      "type": "text/plain"
+    }
+  }
+}

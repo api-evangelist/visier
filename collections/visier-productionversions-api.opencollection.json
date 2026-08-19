@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Administration Production Versions API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ProductionVersions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of all production versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/production-versions",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of production versions to return. Default is 400."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The starting index of the first production version to return. Default is 0."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all projects that were published to production, ordered from latest published to earliest published."
+        },
+        {
+          "info": {
+            "name": "Perform an operation on production versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/admin/production-versions",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform operations on production versions, such as exporting a production project's committed changes. \n \n If exporting, please specify `Accept: application/zip, application/json` in the header. The API returns exported changes in ZIP format and error messages in JSON format. If your request returns an error and it doesn't accept `application/json`, you will receive an HTTP 406 status code instead of the appropriate error response body."
+        },
+        {
+          "info": {
+            "name": "Perform an operation on a production version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/admin/production-versions/:productionVersionId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "productionVersionId",
+                "value": "",
+                "type": "path",
+                "description": "The production version to use as the target of the operation; for example, the production version to roll back to for the `rollBackTo` operation."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform operations on a specific production version. The following operations are supported:\n * `rollBackTo`: Create a project that rolls back the production version to the specified version. The project contains uncommitted changes that reverse the published versions after the target production version."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

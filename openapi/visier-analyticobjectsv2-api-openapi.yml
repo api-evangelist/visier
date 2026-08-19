@@ -1,0 +1,1071 @@
+openapi: 3.2.0
+info:
+  title: Visier Analytic Model Analytic Objects V2 API
+  description: Visier APIs for retrieving and configuring your analytic model in Visier.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: AnalyticObjectsV2
+  x-displayName: Analytic Objects V2
+  description: 'Create, retrieve, update, and delete analytic objects in your analytic model. You can create, update, and delete one or more analytic objects in an API call.
+
+    The supported analytic objects are <em>subjects</em> (entities that evolve over time) and <em>events</em> (things that happen to subjects at specific points in time).
+
+    <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
+paths:
+  /v2alpha/data/model/analytic-objects:
+    get:
+      tags:
+      - AnalyticObjectsV2
+      summary: Retrieve a list of analytic objects
+      description: "Retrieve a list of all analytic objects in your Visier tenant.\n \n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: AnalyticObjectsV2_GetAllAnalyticObjects
+      parameters:
+      - name: type
+        in: query
+        description: "The type of the analytic object to retrieve. If undefined, retrieves all analytic object types. Valid values:\n - `subject`: Retrieves subject analytic objects.\n - `event`: Retrieves event analytic objects."
+        schema:
+          type: array
+          items:
+            enum:
+            - subject
+            - event
+            type: string
+            format: enum
+      - name: with
+        in: query
+        description: "The level of information to retrieve for the analytic object. Valid values:\n - `basic`: Retrieves the analytic object's UUID, object name, and basic information. This is the default.\n - `details`: Retrieves the `basic` details and additional configurations, such as properties, dimensions, and references.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+        schema:
+          type: array
+          items:
+            enum:
+            - basic
+            - details
+            - version
+            type: string
+            format: enum
+      - name: objectName
+        in: query
+        description: The analytic object names to return in the response. When combined with `uuid`, the results return objects that match either the `objectName` or `uuid`.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: uuid
+        in: query
+        description: The analytic object UUIDs to return in the response. When combined with `objectName`, the results return objects that match either the `objectName` or `uuid`.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.v2.objectconfiguration.AnalyticObjectResponseDTO'
+    put:
+      tags:
+      - AnalyticObjectsV2
+      summary: Update analytic objects
+      description: "Replace existing analytic objects. The response returns whether each analytic object was successfully updated or not. When updating objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PUT` request definition.\n\n In `PUT` calls, the definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed from the analytic object. To partially update an analytic object, see the `PATCH` method.\n \n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: AnalyticObjectsV2_PutAnalyticObjects
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.v2.objectconfiguration.AnalyticObjectRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.BulkChangeResponseDTO'
+    post:
+      tags:
+      - AnalyticObjectsV2
+      summary: Create analytic objects
+      description: "Create new analytic objects. The response returns whether each analytic object was successfully created or not.\n When creating objects, assign a unique object name but don't set a UUID. Visier generates UUIDs for new objects.\n \n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: AnalyticObjectsV2_CreateAnalyticObjects
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.v2.objectconfiguration.AnalyticObjectRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.BulkChangeResponseDTO'
+    delete:
+      tags:
+      - AnalyticObjectsV2
+      summary: Delete analytic objects
+      description: "Delete existing analytic objects. The response returns whether each analytic object was successfully deleted or not.\n \n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: AnalyticObjectsV2_DeleteAnalyticObjects
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.v2.objectconfiguration.AnalyticObjectDeleteRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.BulkChangeResponseDTO'
+    patch:
+      tags:
+      - AnalyticObjectsV2
+      summary: Partially update analytic objects
+      description: "Make partial changes to existing analytic objects. The response returns whether each analytic object was successfully patched or not. When patching objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PATCH` request definition.\n\n Unlike `PUT`, which completely replaces the analytic object definition, use `PATCH` to change specific fields in the analytic object without affecting omitted fields. To replace an analytic object's entire definition, see the `PUT` method.\n \n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: AnalyticObjectsV2_PatchAnalyticObjects
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.v2.objectconfiguration.AnalyticObjectRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.BulkChangeResponseDTO'
+  /v2alpha/data/model/analytic-objects/revert-to-parent:
+    post:
+      tags:
+      - AnalyticObjectsV2
+      summary: Revert analytic objects to Blueprint
+      description: "Revert analytic objects to their Blueprint state. The response returns whether each analytic object was successfully reverted or not.\n You can revert tenant override objects to Blueprint. If you execute the revert operation on a:\n - Blueprint object: Nothing happens. The object is inherited from the parent and there is nothing to revert on this tenant.\n - Tenant override object: The object reverts to the Blueprint version or, for administrating tenants who revert an analytic tenant's object, the administrating tenant's object version.\n - Tenant object: The API request fails. The object is unique to your tenant and no Blueprint version exists.\n \n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: AnalyticObjectsV2_RevertAnalyticObjects
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.v2.objectconfiguration.AnalyticObjectRevertRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.BulkChangeResponseDTO'
+  /v2alpha/data/model/analytic-objects/{objectNameOrUuid}:
+    get:
+      tags:
+      - AnalyticObjectsV2
+      summary: Retrieve an analytic object's details
+      description: "Retrieve the details of a specific analytic object, such as its properties, dimensions, and references.\n \n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: AnalyticObjectsV2_GetOneAnalyticObject
+      parameters:
+      - name: objectNameOrUuid
+        in: path
+        description: The object name or UUID of the analytic object to retrieve.
+        required: true
+        schema:
+          type: string
+      - name: with
+        in: query
+        description: "The level of information to retrieve for the analytic object. Valid values:\n - `basic`: Retrieves the analytic object's UUID, object name, and basic information.\n - `details`: Retrieves the `basic` details and additional configurations, such as properties, dimensions, and references. This is the default.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+        schema:
+          type: array
+          items:
+            enum:
+            - basic
+            - details
+            - version
+            type: string
+            format: enum
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.v2.objectconfiguration.AnalyticObjectWithContextDTO'
+components:
+  schemas:
+    servicing.v2.objectconfiguration.LocalOrSharedDimensionListDTO:
+      type: object
+      properties:
+        dimensions:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.LocalOrSharedDimensionDTO'
+          description: A list of local (not shared) or shared dimensions.
+      description: A list of dimensions associated with an analytic object. Dimensions can be local (not shared) or shared.
+    servicing.v2.objectconfiguration.PropertyDefinitionListDTO:
+      type: object
+      properties:
+        properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.PropertyDefinitionDTO'
+          description: The list of properties.
+      description: The list of properties.
+    servicing.v2.objectconfiguration.PropertyDefinitionDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: The UUID identifying the property.
+        objectName:
+          type: string
+          description: The object name of the property.
+        basicInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.BasicInformationDTO'
+          description: Fields that identify and describe the property, such as its display name, description, and explanation.
+        details:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.PropertyTypeDetailsDTO'
+          description: The property type and its details.
+        tagList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.TagReferenceListDTO'
+          description: A list of tags assigned to the object.
+        includeWithVee:
+          type: boolean
+          description: If `true`, the object is available in Vee's responses.
+        versionInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.VersionInformationDTO'
+          description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
+    servicing.SynonymListDTO:
+      type: object
+      properties:
+        synonyms:
+          type: array
+          items:
+            type: string
+          description: Alternative words or phrases for the object.
+      description: The object's synonyms.
+    servicing.v2.objectconfiguration.AnalyticObjectDetailsDTO:
+      type: object
+      properties:
+        subject:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.SubjectDetailsDTO'
+          description: Information about the subject, such as its caption, default metric, and attributes.
+        event:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.EventDetailsDTO'
+          description: Information about the event, such as its subject, default metric, and attributes.
+      description: Information about the analytic objects.
+    servicing.SuccessfulChangeDTO:
+      type: object
+      properties:
+        executionContext:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExecutionContextDTO'
+          description: The tenant and, optionally, project that change was made on.
+        objectName:
+          type: string
+          description: The object name of the object that was changed.
+        uuid:
+          type: string
+          description: The UUID of the object that was changed.
+        displayName:
+          type: string
+          description: The display name of the object that was changed.
+    servicing.v2.objectconfiguration.PropertyDependencyDTO:
+      type: object
+      properties:
+        analyticObjectName:
+          type: string
+          description: The analytic object associated with the dimension. Must be the analytic object's object name; for example, Employee_Experience.
+        propertyObjectName:
+          type: string
+          description: The display name of the property associated with the dimension. Must be the property's qualified name; for example, Candidate.Location.
+      description: Each analytic object and property associated with the dimension.
+    servicing.v2.objectconfiguration.SubjectDetailsDTO:
+      type: object
+      properties:
+        conceptionEvent:
+          type: string
+          description: The conception event defines the start of the validity interval for a subject.
+        terminationEvent:
+          type: string
+          description: The termination event defines the end of the validity interval for a subject.
+        instanceCaption:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.CaptionDTO'
+          description: The property that labels members. The instance caption displays the property in Detailed View and makes the subject available in the Compare room.
+        secondaryCaptionList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.CaptionListDTO'
+          description: Additional properties for more identification of subject members or event occurrences.
+        enablePrimaryKeyDimension:
+          type: boolean
+          description: If `true`, the subject's primary key or caption can be used as a group by and filter.
+        enableLargeDimensionSearch:
+          type: boolean
+          description: If `true`, you can search for members in a dimension with more than 300,000 members. Default is `false` to help with performance.
+        defaultMetric:
+          type: string
+          description: The default metric associated with an analytic object for system alerts and preventing empty chart states.
+        dataCategory:
+          type: string
+          description: The data category for this analytic object. Options include Tenant (default) and Usage (processes Visier usage information).
+        includeWithVee:
+          type: boolean
+          description: If `true`, the object is available in Vee's responses.
+        propertyList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.PropertyDefinitionListDTO'
+          description: The subject's properties, such as employee ID, name, and location.
+        dimensionList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.LocalOrSharedDimensionListDTO'
+          description: The subject's dimensions, such as department, job title, and location.
+        subjectReferenceList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.SubjectReferenceListDTO'
+          description: The analytic object's references.
+      description: Information about the subject, such as its caption, default metric, and attributes.
+    servicing.v2.objectconfiguration.AnalyticObjectRevertRequestDTO:
+      type: object
+      properties:
+        analyticObjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.AnalyticObjectRevertWithContextDTO'
+          description: The analytic objects to revert.
+      description: The request to revert analytic objects.
+    servicing.v2.objectconfiguration.AnalyticObjectDeleteWithContextDTO:
+      type: object
+      properties:
+        executionContext:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExecutionContextDTO'
+          description: The context of the API request, such as the tenant code and project ID.
+        analyticObject:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ObjectIdDTO'
+          description: Information identifying the analytic object to delete.
+      description: Information about the analytic object to delete and the context of the API request.
+    servicing.v2.objectconfiguration.PropertyDependencyListDTO:
+      type: object
+      properties:
+        propertyDependencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.PropertyDependencyDTO'
+          description: Each analytic object and property associated with the dimension.
+      description: The dimension's associated analytic objects and properties.
+    servicing.v2.objectconfiguration.SimplePropertyTypeDTO:
+      type: object
+      properties:
+        dataType:
+          type: string
+          description: "The property's data type. Valid values:\n\n `Number`, `Integer`, `Ordinal`, `Categorical`, `Currency`, `Boolean`, `Percent`,\n `IntegerPercent`, `PercentNoScaling`, `PercentagePoint`, `String`, `Text`, `LargeText`,\n `Date`, `HourDuration`, `DayDuration`, `MonthDuration`, `YearDuration`."
+        primitiveType:
+          type: string
+          description: The primitive data type, such as String, Integer, or Boolean.
+      description: A simple property that provides single-level detail to an analytic object and contains one value at a time.
+    servicing.v2.objectconfiguration.AnalyticObjectResponseDTO:
+      type: object
+      properties:
+        analyticObjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.AnalyticObjectWithContextDTO'
+          description: The returned analytic objects.
+      description: The analytic objects in the response.
+    servicing.v2.objectconfiguration.CaptionListDTO:
+      type: object
+      properties:
+        captions:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.CaptionDTO'
+          description: The list of captions for the subject or event.
+      description: A collection of captions used to identify subject members or event occurrences. Each caption specifies the analytic object and the property used for identification.
+    servicing.ExecutionContextDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant code.
+        projectId:
+          type: string
+          description: The project ID.
+      description: The context of the API request, such as the tenant code and project ID.
+    servicing.v2.objectconfiguration.AnalyticObjectRequestDTO:
+      type: object
+      properties:
+        analyticObjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.AnalyticObjectWithContextDTO'
+          description: The analytic objects in the request.
+      description: The analytic objects to create or update.
+    servicing.v2.objectconfiguration.AnalyticObjectDefinitionDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: The UUID identifying the analytic object.
+        objectName:
+          type: string
+          description: The object name of the analytic object.
+        basicInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.BasicInformationDTO'
+          description: Fields that identify and describe the analytic object, such as its display name, description, and explanation.
+        details:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.AnalyticObjectDetailsDTO'
+          description: The analytic object type and its details.
+        tagList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.TagReferenceListDTO'
+          description: A list of tags assigned to the object.
+        versionInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.VersionInformationDTO'
+          description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
+      description: Information about the analytic object.
+    servicing.TagReferenceListDTO:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.TagReferenceDTO'
+          description: A list of tags assigned to the object.
+      description: The tags assigned to the object.
+    servicing.ObjectIdDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: The UUID identifying the object.
+        objectName:
+          type: string
+          description: The object name of the object.
+      description: The identifier for the object.
+    servicing.v2.objectconfiguration.LevelListDTO:
+      type: object
+      properties:
+        levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.LevelDTO'
+          description: The list of dimension levels.
+      description: The levels in a leveled dimension or parent-child dimension.
+    servicing.v2.objectconfiguration.EventDetailsDTO:
+      type: object
+      properties:
+        occurrenceCaption:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.CaptionDTO'
+          description: The property that labels occurrences. The occurrence caption displays the property in Detailed View and makes the event available in the Compare room.
+        secondaryCaptionList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.CaptionListDTO'
+          description: Secondary captions for additional identification of event occurrences.
+        subject:
+          type: string
+          description: The subject that the event is associated with. Subjects are entities that evolve over time with attributes captured over time.
+        enableEndingEvent:
+          type: boolean
+          description: If `true`, this event causes the record to become nonactive.
+        defaultMetric:
+          type: string
+          description: The default metric associated with an analytic object for system alerts and preventing empty chart states.
+        dataCategory:
+          type: string
+          description: The data category for this analytic object. Options include Tenant (default) and Usage (processes Visier usage information).
+        enableEndData:
+          type: boolean
+          description: If `true`, the event's end date corresponds with the event table's metadata. If `false`, the event's end date is inherited from its associated subject.
+        includeWithVee:
+          type: boolean
+          description: If `true`, the object is available in Vee's responses.
+        propertyList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.PropertyDefinitionListDTO'
+          description: The event's properties, such as event ID, name, and date.
+        dimensionList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.LocalOrSharedDimensionListDTO'
+          description: The event's dimensions, such as event type, location, and time.
+        subjectReferenceList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.SubjectReferenceListDTO'
+          description: The analytic object's references.
+      description: Information about the event, such as its subject, default metric, and attributes.
+    servicing.FailedChangeDTO:
+      type: object
+      properties:
+        executionContext:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExecutionContextDTO'
+          description: The tenant and, optionally, project that change was attempted on.
+        objectName:
+          type: string
+          description: The object name of the object that was attempted to be changed.
+        uuid:
+          type: string
+          description: The UUID of the object that was attempted to be changed.
+        displayName:
+          type: string
+          description: The display name of the object that was attempted to be changed.
+        messages:
+          type: array
+          items:
+            type: string
+          description: The error messages.
+    servicing.v2.objectconfiguration.AnalyticObjectRevertWithContextDTO:
+      type: object
+      properties:
+        executionContext:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExecutionContextDTO'
+          description: The context of the API request, such as the tenant code and project ID.
+        analyticObject:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ObjectIdDTO'
+          description: Information identifying the analytic object to revert.
+      description: Information about the analytic object to revert and the context of the API request.
+    servicing.v2.objectconfiguration.LocalOrSharedDimensionDTO:
+      type: object
+      properties:
+        local:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.DimensionDTO'
+          description: A local (not shared) dimension that is associated with one analytic object and cannot be shared with other objects.
+        shared:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.DimensionReferenceDTO'
+          description: A reference to a shared dimension that is associated with one or more objects.
+      description: Whether a dimension is local (not shared) or shared. Shared dimensions can be associated with more than one analytic object. Local dimensions can only be associated with one analytic object.
+    servicing.v2.objectconfiguration.AnalyticObjectDeleteRequestDTO:
+      type: object
+      properties:
+        analyticObjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.AnalyticObjectDeleteWithContextDTO'
+          description: The analytic objects to delete.
+      description: The request to delete analytic objects.
+    servicing.TagReferenceDTO:
+      type: object
+      properties:
+        objectName:
+          type: string
+          description: The object name of the tag.
+      description: A reference to a tag.
+    servicing.AnalyticObjectReferenceDTO:
+      type: object
+      properties:
+        objectName:
+          type: string
+          description: The unique identifier name of the referenced analytic object.
+      description: A reference to an analytic object that relates to another object in the system.
+    servicing.BulkChangeResponseDTO:
+      type: object
+      properties:
+        successes:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.SuccessfulChangeDTO'
+          description: The list of successful changes.
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.FailedChangeDTO'
+          description: The list of failed changes.
+    servicing.AnalyticObjectReferenceListDTO:
+      type: object
+      properties:
+        analyticObjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.AnalyticObjectReferenceDTO'
+          description: The list of analytic object references.
+      description: A collection of references to analytic objects that relate to another object in the system.
+    servicing.v2.objectconfiguration.LeveledDetailsDTO:
+      type: object
+      properties:
+        levelList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.LevelListDTO'
+          description: The levels in the dimension.
+        hideNullValues:
+          type: boolean
+          description: If `true`, the dimension hides null values in visualizations. Default is `false`.
+        enableLargeDimensionSearch:
+          type: boolean
+          description: If `true`, you can search for members in a dimension with more than 300,000 members. Default is `false` to help with performance.
+        analyticObjectList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.AnalyticObjectReferenceListDTO'
+          description: The analytic objects associated with the dimension.
+        useMappingDisplayName:
+          type: boolean
+          description: If `true`, you can map a dimension member's object name and display name using different source columns. If `false`, the same column is used to map both the object name and display name.
+      description: The leveled dimension's configuration, such as its levels and settings.
+    servicing.v2.objectconfiguration.LevelDTO:
+      type: object
+      properties:
+        objectName:
+          type: string
+          description: The object name of the level.
+        displayName:
+          type: string
+          description: The display name of the level.
+        description:
+          type: string
+          description: The description of the level.
+        type:
+          type: string
+          description: The level data type, such as string or ordinal.
+        propertyDependencyList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.PropertyDependencyListDTO'
+          description: The references for the level properties.
+        uuid:
+          type: string
+          description: The unique identifier of the dimension level.
+      description: A level in a leveled dimension or parent-child dimension.
+    servicing.v2.objectconfiguration.MultiValuePropertyTypeDTO:
+      type: object
+      properties:
+        dataType:
+          type: string
+          description: The data type associated with the multi-value property.
+      description: A property type for a single attribute that can have several valid values at the same time. For example, Employee Education may have values for year, school, and certification.
+    servicing.v2.objectconfiguration.DimensionDetailsDTO:
+      type: object
+      properties:
+        leveled:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.LeveledDetailsDTO'
+          description: The leveled dimension's configuration, such as its levels and settings.
+        parentChild:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.ParentChildDetailsDTO'
+          description: The parent-child dimension's configuration, such as its levels and name property.
+      description: The dimension type and its details.
+    servicing.v2.objectconfiguration.PropertyTypeDetailsDTO:
+      type: object
+      properties:
+        simple:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.SimplePropertyTypeDTO'
+          description: The simple property type, which provides a single value directly from the data.
+        calculated:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.CalculatedPropertyTypeDTO'
+          description: The calculated property type, which derives its value using a formula.
+        multiValue:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.MultiValuePropertyTypeDTO'
+          description: A property type for a single attribute that can have several valid values at the same time. For example, Employee Education may have values for year, school, and certification.
+      description: The property type.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    servicing.v2.objectconfiguration.CalculatedPropertyTypeDTO:
+      type: object
+      properties:
+        dataType:
+          type: string
+          description: "The property's data type. Valid values:\n\n `Number`, `Integer`, `Ordinal`, `Categorical`, `Currency`, `Boolean`, `Percent`,\n `IntegerPercent`, `PercentNoScaling`, `PercentagePoint`, `String`, `Text`, `LargeText`,\n `Date`, `HourDuration`, `DayDuration`, `MonthDuration`, `YearDuration`."
+        primitiveType:
+          type: string
+          description: The primitive data type, such as String, Integer, or Boolean.
+        formula:
+          type: string
+          description: The property's formula written in Visier Formula Language (VFL).
+      description: A calculated property that takes a value that comes directly from the data and creates a new value through a formula.
+    servicing.VersionInformationDTO:
+      type: object
+      properties:
+        versionType:
+          enum:
+          - Unknown
+          - BP
+          - Tenant
+          - TenantOverride
+          - TenantShared
+          - Draft
+          type: string
+          description: "Indicates where the object originates from and whether the object has been modified. Valid values:\n - `Unknown`: The source is not known.\n - `BP`: The object originates from Visier's Blueprint and is not changed at the tenant level.\n - `Tenant`: The object only exists in the tenant and doesn't exist in Visier's Blueprint.\n - `TenantOverride`: The object originates from Visier's Blueprint and is changed at the tenant level.\n - `TenantShared`: The object is non-versioned, only exists in the tenant and doesn’t exist in Visier's Blueprint, and is shareable with other users in the tenant.\n - `Draft`: The object only exists in the specified draft project."
+          format: enum
+        edited:
+          type: string
+          description: The UTC time of the latest change in ISO 8601 format. For example, `2023-10-01T12:00:00Z`.
+        editor:
+          type: string
+          description: The user who made the latest change.
+      description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
+    servicing.v2.objectconfiguration.CaptionDTO:
+      type: object
+      properties:
+        analyticObjects:
+          type: array
+          items:
+            type: string
+          description: The analytic object associated with the caption.
+        property:
+          type: string
+          description: The property to use as a caption.
+      description: A property to identify a subject member or event occurrence. For example, the Employee subject uses the captions Full Name and Job Name to identify specific employees.
+    servicing.BasicInformationDTO:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The user-friendly name for the object.
+        shortDisplayName:
+          type: string
+          description: A shortened version of the display name. If the object is visible in the solution experience, this name is displayed in visualization titles.
+        description:
+          type: string
+          description: A short description of the object. Descriptions provide in-context help for your users while working in Visier.
+        explanation:
+          type: string
+          description: A longer description of the object that typically includes a definition, calculation details, and other guidance about how to use the object.
+        designerNotes:
+          type: string
+          description: An admin-only description of the object that provides design-specific information or considerations.
+        synonymList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.SynonymListDTO'
+          description: Alternative words or phrases for the object.
+      description: Fields that identify and describe the object, such as its display name, description, and explanation.
+    servicing.v2.objectconfiguration.DimensionDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: The unique identifier of the dimension.
+        objectName:
+          type: string
+          description: The unique name of the dimension.
+        basicInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.BasicInformationDTO'
+          description: Fields that identify and describe the dimension, such as its display name, description, and explanation.
+        details:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.DimensionDetailsDTO'
+          description: The dimension type and its details.
+        tagList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.TagReferenceListDTO'
+          description: A list of tags assigned to the object.
+        visibleInAnalytics:
+          type: boolean
+          description: If `true`, the object is visible to end users in the solution.
+        includeWithVee:
+          type: boolean
+          description: If `true`, the object is available in Vee's responses.
+        versionInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.VersionInformationDTO'
+          description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
+      description: Information about the dimension.
+    servicing.v2.objectconfiguration.SubjectReferenceDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: The UUID of the reference.
+        objectName:
+          type: string
+          description: The object name of the reference.
+        basicInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.BasicInformationDTO'
+          description: Fields that identify and describe the analytic object, such as its display name, description, and explanation.
+        tagList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.TagReferenceListDTO'
+          description: A list of tags assigned to the object.
+        direction:
+          enum:
+          - forward
+          - reverse
+          type: string
+          description: "The direction of the reference between analytic objects.\n - `forward`: The reference direction is `forward`. For example, the object references to Employee.\n - `reverse`: The reference direction is `reverse`. For example, the object reference comes from Employee.\n \n **Note**: `GET` responses return forward and reverse references.\n `POST`, `PUT`, and `PATCH` requests ignore `reverse` references because the platform automatically creates a corresponding reverse reference for every forward reference.\n For example, to create a reverse reference from Subject A to Subject B, create a forward reference from Subject B to Subject A."
+          format: enum
+        subject:
+          type: string
+          description: The subject that the reference is associated with.
+        binding:
+          type: boolean
+          description: If `true`, the reference is binding. A binding reference requires a value in the reference subject; for example, the reference between Applicant and Requisition is binding, meaning that applicants must always have an associated Requisition ID. If `false`, the reference is non-binding. A non-binding reference doesn't require a value in the reference subject; for example, the reference between Employee and Applicant is non-binding, meaning that an employee does not require an associated Applicant ID. This is the default and expected behavior for most references.
+        visibleInAnalytics:
+          type: boolean
+          description: If `true`, the object is visible to end users in the solution.
+      description: Information about forward or reverse references between analytic objects.
+    servicing.v2.objectconfiguration.DimensionReferenceDTO:
+      type: object
+      properties:
+        objectName:
+          type: string
+          description: The object name of the dimension.
+      description: A reference to a shared dimension associated with the analytic object. Shared dimensions can be associated with more than one analytic object.
+    servicing.v2.objectconfiguration.SubjectReferenceListDTO:
+      type: object
+      properties:
+        subjectReferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.SubjectReferenceDTO'
+          description: The analytic object's references.
+      description: The analytic object's references.
+    servicing.v2.objectconfiguration.CustomPropertyListDTO:
+      type: object
+      properties:
+        propertyNames:
+          type: array
+          items:
+            type: string
+          description: The list of custom property names.
+      description: The custom properties in a parent-child dimension.
+    servicing.v2.objectconfiguration.AnalyticObjectWithContextDTO:
+      type: object
+      properties:
+        executionContext:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExecutionContextDTO'
+          description: The context of the API request, such as the tenant code and project ID.
+        analyticObject:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.AnalyticObjectDefinitionDTO'
+          description: Information about the analytic object, such as its UUID and object name.
+      description: Information about the analytic object and the context of the API request, such as the tenant code and project ID.
+    servicing.v2.objectconfiguration.ParentChildDetailsDTO:
+      type: object
+      properties:
+        levelList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.LevelListDTO'
+          description: The levels in the dimension.
+        hideNullValues:
+          type: boolean
+          description: If `true`, the dimension hides null values in visualizations. Default is `false`.
+        enableLargeDimensionSearch:
+          type: boolean
+          description: If `true`, you can search for members in a dimension with more than 300,000 members. Default is `false` to help with performance.
+        id:
+          type: string
+          description: The primary key for the member and is automatically generated from the data source.
+        parentId:
+          type: string
+          description: The foreign key for the member used to associate a parent member and is automatically generated from the data source.
+        name:
+          type: string
+          description: The member name corresponding with the ID (or primary key).
+        analyticObjectList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.AnalyticObjectReferenceListDTO'
+          description: The analytic objects associated with the dimension.
+        customPropertyList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.CustomPropertyListDTO'
+          description: The custom properties in the dimension.
+      description: The parent-child dimension's configuration, such as its levels and name property.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: analytic model
+  tags:
+  - DataModel
+  - ObjectConfiguration
+  - ConceptsV2
+  - DimensionsV2
+  - AnalyticObjectsV2
+  - MetricsV2
+  - PersonalizedAlerts

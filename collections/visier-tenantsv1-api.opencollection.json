@@ -1,0 +1,242 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Administration Tenants V1 API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TenantsV1",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of all analytic tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/tenants",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The limit of analytic tenant details to retrieve."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The index to start retrieving results from, also known as offset. The index begins at 0."
+              },
+              {
+                "name": "details",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, the response returns information about the data version and modules."
+              }
+            ]
+          },
+          "docs": "Retrieve the full list of analytic tenants managed by you with their current states and the\n content modules assigned to them, and all other relevant details for the tenants if requested."
+        },
+        {
+          "info": {
+            "name": "Add an analytic tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/admin/tenants",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Prior to processing and loading an analytic tenant's data files, you must provision, or create, that tenant.\n A provisioned analytic tenant is automatically enabled. If the tenant's data is loaded after provisioning, that\n data is immediately accessible by their users.\n\n Create an analytic tenant and identify the applications assigned to the tenant. Visier\n organizes content under a set of modules.\n\n Contact Visier Support to determine the list of modules allocated to you."
+        },
+        {
+          "info": {
+            "name": "Add analytic tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/admin/tenants/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Prior to processing and loading an analytic tenant's data files, you must provision, or create, that tenant.\n A provisioned analytic tenant is automatically enabled. If the tenant's data is loaded after provisioning, that\n data is immediately accessible by their users.\n\n Create one or more analytic tenants and identify the applications assigned to the tenants. The maximum number of tenants to create in one request is 200.\n\n Contact Visier Support to determine the list of modules allocated to you"
+        },
+        {
+          "info": {
+            "name": "Retrieve an analytic tenant's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/tenants/:tenantId",
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+              }
+            ]
+          },
+          "docs": "Retrieve all details for a specified analytic tenant. Doing so allows you to see the current state\n of the tenant, the content modules assigned to it, and all other relevant details for the tenant."
+        },
+        {
+          "info": {
+            "name": "Update an analytic tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/admin/tenants/:tenantId",
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tenant to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "You may need to update analytic tenants as they grow and as your organization upgrades the content available to\n them. You may also encounter a scenario where an analytic tenant transitions across different industries.\n\n To ensure that the analytic tenant receives accurate benchmarks and predictive functionality, update their\n industry code in the Visier system.\n\n You can use this API to update any field on an analytic tenant, except `tenantCode`."
+        },
+        {
+          "info": {
+            "name": "Deprovision an analytic tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/admin/tenants/:tenantId",
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+              }
+            ]
+          },
+          "docs": "Warning! Deprovisioning an analytic tenant is not reversible.\n Before deprovisioning, you must disable an analytic tenant. For more information, see **`/v1/admin/tenants/{tenantId}/disable`**.\n\n This API removes an analytic tenant permanently from the Visier system. If you are unsure whether an analytic tenant\n may be re-enabled on any of the Visier modules at any time, you may instead want to disable the analytic tenant.\n\n If successful, the response returns the status \"Deprovisioned\". This ind"
+        },
+        {
+          "info": {
+            "name": "Disable an analytic tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/admin/tenants/:tenantId/disable",
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+              }
+            ]
+          },
+          "docs": "Disable an analytic tenant and remove access to Visier visualizations for the tenant's users.\n\n You must disable an analytic tenant before deprovisioning, or removing, it from the system."
+        },
+        {
+          "info": {
+            "name": "Enable an analytic tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/admin/tenants/:tenantId/enable",
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+              }
+            ]
+          },
+          "docs": "An analytic tenant is enabled when you provision or create the tenant.\n\n Use this API to enable a tenant that you have specifically disabled; for example, if you previously did not\n want that tenant to have access to Visier visualizations, but now do."
+        },
+        {
+          "info": {
+            "name": "Validate metric values for all analytic tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/op/validation/tenants",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The limit of analytic tenant details to retrieve."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The index to start retrieving results from, also known as offset. The index begins at 0."
+              }
+            ]
+          },
+          "docs": "As you onboard more analytic tenants, you can validate the data visible to your users to ensure it matches the\n source systems from which it was exported and that it matches what your expectations are for this data.\n\n The metric values included in the response are the tenant's configured summary metrics. Administrators can\n configure summary metrics in a project:\n - Sign in to Visier as an administrator.\n - In a project, on the navigation bar, click the **Home** button.\n - Click **Dashboard**, a"
+        },
+        {
+          "info": {
+            "name": "Validate an analytic tenant's metric values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/op/validation/tenants/:tenantId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+              }
+            ]
+          },
+          "docs": "Retrieve the metric values for an individual analytic tenant. The metric values included in the\n response are the tenant's configured summary metrics. Administrators can configure summary metrics in a project:\n - Sign in to Visier as an administrator.\n - In a project, on the navigation bar, click the **Home button**.\n - Click **Dashboard**, and then click **Edit Summary Metrics**.\n - Select the metrics that you want to validate, and then close the **Summary Metrics** dialog.\n - Publish the proje"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

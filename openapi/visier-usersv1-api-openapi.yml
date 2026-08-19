@@ -1,0 +1,1510 @@
+openapi: 3.2.0
+info:
+  title: Visier Administration Users V1 API
+  description: Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: UsersV1
+  x-displayName: Users V1
+  description: 'Manage users within an organization, such as assigning permissions to users and retrieving user permission assignments and application logs.
+
+    <br>**Tip:** Visier recommends that administrating tenant users focus primarily on managing users at the administrating tenant level. These users likely belong directly to your organization, such as customer support, customer value managers, account executives, and customer success. These users work with clients to manage their day-to-day solution needs'
+paths:
+  /v1/admin/permissions/users:
+    put:
+      tags:
+      - UsersV1
+      summary: Assign permissions to users
+      description: "This API allows you to assign a permission to specific users. Administrating tenant users can assign permissions\n to users in the administrating tenant and in the analytic tenants those users belong to.\n\n To assign permissions to users in a project for the administrating tenant, provide a project UUID in the `ProjectID` request header.\n Administrating tenants can assign permissions to users in analytic tenants by providing a tenant code and project ID in the request body."
+      operationId: UsersV1_AssignPermissions
+      parameters:
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request. If omitted, the request uses the production version.
+        schema:
+          type: string
+          format: uuid
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      - name: SessionBasedPermissions
+        in: header
+        description: If `true`, the API call assigns user permissions that are only valid for the specified `SessionRepoId` without creating a new production version. When a user signs in to your application with the `SessionRepoId`, their session-based permissions are valid until the user session ends. Cannot be `true` if `NonVersioned` is `true`. Default is `false`.<br>**Note:** <em>This header is in **limited availability**. If you are interested in using it, please contact your Customer Success Manager (CSM).</em>
+        schema:
+          type: boolean
+      - name: SessionRepoId
+        in: header
+        description: Optionally, specify a session repository ID to overwrite the user's permissions that are associated with the `SessionRepoId`. Only valid with `SessionBasedPermissions`. If omitted and `SessionBasedPermissions` is `true`, the API creates a new `SessionRepoId`.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.AssignRevokePermissionsRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.AssignRevokePermissionsResponseDTO'
+    delete:
+      tags:
+      - UsersV1
+      summary: Remove permissions from users
+      description: "This API allows you to remove a permission from specific users. Administrating tenant users can remove permissions\n from users in the administrating tenant and in the analytic tenants those users belong to.\n\n To remove permission from users in a project for the administrating tenant, provide a project UUID in the `ProjectID` request header.\n Administrating tenants can remove permissions from users in analytic tenants by providing a tenant code and project ID in the request body."
+      operationId: UsersV1_RemovePermissions
+      parameters:
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request. If omitted, the request uses the production version.
+        schema:
+          type: string
+          format: uuid
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.AssignRevokePermissionsRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.AssignRevokePermissionsResponseDTO'
+  /v1/admin/permissions/{permissionId}/users:
+    get:
+      tags:
+      - UsersV1
+      summary: Retrieve users that are assigned a specific permission
+      description: "This API allows you to retrieve all the users that are assigned a specified permission. You must know the ID\n of the permission you want to retrieve users for.\n\n To specify the project in which to retrieve users assigned to a specific permission for the login tenant, provide\n a project UUID in the `ProjectID` request header. If omitted, the request retrieves users assigned to a specific permission from production."
+      operationId: UsersV1_GetPermissionAssignedUsers
+      parameters:
+      - name: permissionId
+        in: path
+        description: The unique identifier of the permission you want to retrieve users for.
+        required: true
+        schema:
+          type: string
+      - name: includeUserGroups
+        in: query
+        description: "If `true`, the response returns a list of all users that are assigned the permission, including users that are\n assigned the permission through a user group.\n If `false`, the response returns a list of the users that are directly assigned the permission."
+        schema:
+          type: boolean
+      - name: tenantFilter
+        in: query
+        description: Specify the tenant to retrieve the list of users from.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: The number of results to return. The maximum number of tenants to retrieve is 100.
+        schema:
+          type: integer
+          format: int32
+      - name: start
+        in: query
+        description: The index to start retrieving results from, also known as offset. The index begins at 0.
+        schema:
+          type: integer
+          format: int32
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request. If omitted, the request uses the production version.
+        schema:
+          type: string
+          format: uuid
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.PermissionAssignedUsersDTO'
+  /v1/admin/user-groups:
+    get:
+      tags:
+      - UsersV1
+      summary: Retrieve a list of all user groups
+      description: "This API allows you to retrieve the full list of user groups in a tenant.\n\n To specify the project in which to retrieve user groups for a tenant, provide a project UUID in the `ProjectID` request header. If omitted, the request retrieves user information from production."
+      operationId: UsersV1_GetAllUserGroups
+      parameters:
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to retrieve the list of user groups from.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: The number of results to return. The maximum number of users to retrieve is 1000.
+        schema:
+          type: integer
+          format: uint32
+      - name: start
+        in: query
+        description: The index to start retrieving results from, also known as offset.
+        schema:
+          type: integer
+          format: uint32
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request. If omitted, the request uses the production version.
+        schema:
+          type: string
+          format: uuid
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin.UserGroupsGetAPIResponseDTO'
+  /v1/admin/user-groups/permissions:
+    put:
+      tags:
+      - UsersV1
+      summary: Assign permissions to user groups
+      description: "This API allows you to assign a permission to specific user groups. This assigns the permission to all users in the user group.\n\n To assign permissions to user groups in a project, provide a project UUID in the `ProjectID` request header."
+      operationId: UsersV1_AssignPermissionsToUserGroups
+      parameters:
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request. If omitted, the request uses the production version.
+        schema:
+          type: string
+          format: uuid
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/admin.PermissionsToUserGroupsRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin.PermissionsToUserGroupForTenantDTO'
+    delete:
+      tags:
+      - UsersV1
+      summary: Remove permissions from user groups
+      description: "This API allows you to remove a permission from specific user groups.\n\n To remove permissions from user groups in a project, provide a project UUID in the `ProjectID` request header."
+      operationId: UsersV1_RevokePermissionsFromUserGroups
+      parameters:
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request. If omitted, the request uses the production version.
+        schema:
+          type: string
+          format: uuid
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/admin.PermissionsToUserGroupsRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin.PermissionsToUserGroupForTenantDTO'
+  /v1/admin/user-groups/users:
+    put:
+      tags:
+      - UsersV1
+      summary: Assign users to user groups
+      description: "This API allows you to assign users to specific user groups.\n\n To assign users to user groups in a project for the administrating tenant, provide a project UUID in the `ProjectID` request header.\n Administrating tenants can assign users to user groups in multiple analytic tenants by providing a tenant code and project ID in the request body.\n\n We recommend that administrating tenants set the analytic tenant in which to execute the API call using the `TargetTenantID` request header."
+      operationId: UsersV1_AddUsersToUserGroup
+      parameters:
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request. If omitted, the request uses the production version.
+        schema:
+          type: string
+          format: uuid
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      - name: Prefer
+        in: header
+        description: 'When `NonVersioned: true`, use `Prefer` to optionally specify if API calls should be subject to locking. Locking prevents incremental changes in multiple API calls from overwriting each other. The `Prefer` header works alongside a tenant feature flag. When enabled, the default is `nvLock=global`. When disabled, the default is not to lock API calls. Contact Visier Technical Support to enable the tenant feature flag.
+
+          Valid values for the `Prefer` header:
+
+          * `nvLock=global`: Run API calls sequentially. Sequential API calls prevent calls from unintentionally overwriting each other.
+
+          * `nvLock=artifact`: Allow API calls in parallel. Parallel API calls only work if the calls do not conflict with each other. If a change wasn''t applied, the request fails and returns the HTTP 409 conflict error. Run the request again until successful.
+
+          * `nvLock=none`: Disable the global lock if the tenant feature flag is enabled.'
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/admin.UsersToUserGroupsRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin.SecurityAssignmentResponseDTO'
+    delete:
+      tags:
+      - UsersV1
+      summary: Remove users from user groups
+      description: "This API allows you to remove users from specific user groups.\n\n To remove users from user groups in a project for the administrating tenant, provide a project UUID in the `ProjectID` request header.\n Administrating tenants can remove users to user groups in multiple analytic tenants by providing a tenant code and project ID in the request body.\n\n We recommend that administrating tenants set the analytic tenant in which to execute the API call using the `TargetTenantID` request header."
+      operationId: UsersV1_RemoveUsersFromUserGroup
+      parameters:
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request. If omitted, the request uses the production version.
+        schema:
+          type: string
+          format: uuid
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      - name: Prefer
+        in: header
+        description: 'When `NonVersioned: true`, use `Prefer` to optionally specify if API calls should be subject to locking. Locking prevents incremental changes in multiple API calls from overwriting each other. The `Prefer` header works alongside a tenant feature flag. When enabled, the default is `nvLock=global`. When disabled, the default is not to lock API calls. Contact Visier Technical Support to enable the tenant feature flag.
+
+          Valid values for the `Prefer` header:
+
+          * `nvLock=global`: Run API calls sequentially. Sequential API calls prevent calls from unintentionally overwriting each other.
+
+          * `nvLock=artifact`: Allow API calls in parallel. Parallel API calls only work if the calls do not conflict with each other. If a change wasn''t applied, the request fails and returns the HTTP 409 conflict error. Run the request again until successful.
+
+          * `nvLock=none`: Disable the global lock if the tenant feature flag is enabled.'
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/admin.UsersToUserGroupsRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin.SecurityAssignmentResponseDTO'
+  /v1/admin/user-groups/{userGroupId}/users:
+    get:
+      tags:
+      - UsersV1
+      summary: Retrieve a list of user group users
+      description: "This API allows you to retrieve the list of users explicitly assigned to a user group. Users that are implicitly\n included in the user group through the user group's dynamic filters are not returned by this endpoint.\n\n To specify the project in which to retrieve user group users for the login tenant, provide\n a project UUID in the `ProjectID` request header. If omitted, the request retrieves user group users from production."
+      operationId: UsersV1_GetUserGroupUsers
+      parameters:
+      - name: userGroupId
+        in: path
+        description: The ID of user group.
+        required: true
+        schema:
+          type: string
+      - name: tenantFilter
+        in: query
+        description: Specifies the tenant to retrieve the list of users from.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: The number of results to return. The maximum number of tenants to retrieve is 100.
+        schema:
+          type: integer
+          format: uint32
+      - name: start
+        in: query
+        description: The index to start retrieving results from, also known as offset. The index begins at 0.
+        schema:
+          type: integer
+          format: uint32
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request. If omitted, the request uses the production version.
+        schema:
+          type: string
+          format: uuid
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin.UserGroupsUsersDTO'
+  /v1/admin/users:
+    get:
+      tags:
+      - UsersV1
+      summary: Retrieve a list of all users
+      description: "This API allows you to retrieve the full list of users and their current states.\n\n To specify the project in which to retrieve user information, provide a project UUID in the `ProjectID` request header. If omitted, the request retrieves user information from production."
+      operationId: UsersV1_GetAllUsers
+      parameters:
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to retrieve a list of users from.
+        schema:
+          type: string
+      - name: assignedProfiles
+        in: query
+        description: If true, the response returns a list of the user's assigned profiles.
+        schema:
+          type: boolean
+      - name: assignedPermissions
+        in: query
+        description: If true, the response returns the user's assigned permissions.
+        schema:
+          type: boolean
+      - name: assignedUserGroups
+        in: query
+        description: If true, the response returns the user's assigned user groups.
+        schema:
+          type: boolean
+      - name: limit
+        in: query
+        description: The number of results to return. The maximum number of users to retrieve is 1000.
+        schema:
+          type: integer
+          format: uint32
+      - name: start
+        in: query
+        description: The index to start retrieving results from, also known as offset. The index begins at 0.
+        schema:
+          type: integer
+          format: uint32
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request. If omitted, the request uses the production version.
+        schema:
+          type: string
+          format: uuid
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.AllUsersGetAPIResponseDTO'
+    post:
+      tags:
+      - UsersV1
+      summary: Add a user
+      description: Create a new user. Administrating tenant users can specify the tenant in which to add a user.
+      operationId: UsersV1_AddUser
+      parameters:
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to create a user in.
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.UserCreationAPIRequestDTO'
+        required: true
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCreationAPIResponseDTO'
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+  /v1/admin/users/{userId}:
+    get:
+      tags:
+      - UsersV1
+      summary: Retrieve a user's details
+      description: "This API allows you to retrieve all details for a specified user.\n\n To specify the project in which to retrieve user information, provide a project UUID in the `ProjectID` request header. If omitted, the request retrieves user information from production."
+      operationId: UsersV1_GetUserDetail
+      parameters:
+      - name: userId
+        in: path
+        description: The ID of the user you want to retrieve.
+        required: true
+        schema:
+          type: string
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to retrieve a user from.
+        schema:
+          type: string
+      - name: assignedProfiles
+        in: query
+        description: If true, the response returns a list of the user's assigned profiles.
+        schema:
+          type: boolean
+      - name: assignedPermissions
+        in: query
+        description: If true, the response returns the user's assigned permissions.
+        schema:
+          type: boolean
+      - name: assignedUserGroups
+        in: query
+        description: If true, the response returns the user's assigned user groups.
+        schema:
+          type: boolean
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request. If omitted, the request uses the production version.
+        schema:
+          type: string
+          format: uuid
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.UserGetAPIResponseDTO'
+    put:
+      tags:
+      - UsersV1
+      summary: Update a user
+      description: Update an existing user's information, such as their display name or if the user is enabled in Visier.
+      operationId: UsersV1_UpdateUser
+      parameters:
+      - name: userId
+        in: path
+        description: The ID of the user you want to update.
+        required: true
+        schema:
+          type: string
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to update a user in.
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.UserUpdateAPIRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.UserUpdateAPIRequestDTO'
+    delete:
+      tags:
+      - UsersV1
+      summary: Delete a user
+      description: Delete an existing user. Administrating tenant users can specify the tenant from which to delete a user.
+      operationId: UsersV1_DeleteUser
+      parameters:
+      - name: userId
+        in: path
+        description: The ID of the user you want to delete.
+        required: true
+        schema:
+          type: string
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to delete a user in.
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin.DeleteUserResponse'
+  /v1/admin/users/reports/application-logs:
+    get:
+      tags:
+      - UsersV1
+      summary: Retrieve the Application Logs
+      description: "This API allows you to export the Application Logs for a tenant. The Application Logs track information about your\n users and how they are using the application. Performing regular audits will help you identify potential security\n issues and keep your data safe. As part of user management, download the Application Logs to monitor user activity\n and logon events to ensure your users are performing authorized activities. \n\n Application logs are retained in the system for 180 days.\n\n Administrating tenant users can export application logs for the administrating tenant and the analytic tenants\n those users belong to."
+      operationId: UsersV1_GetApplicationLogsXLSX
+      parameters:
+      - name: startTime
+        in: query
+        description: An inclusive date-time in milliseconds to start retrieving Application Logs from.
+        schema:
+          type: string
+        examples:
+          startTime:
+            value: 1738368000000
+            description: The start time 2025-02-01:00:00:00 GTM in milliseconds.
+      - name: endTime
+        in: query
+        description: An exclusive date-time in milliseconds to stop retrieving Application Logs from.
+        schema:
+          type: string
+        examples:
+          endTime:
+            value: 1740787200000
+            description: The end time 2025-03-01:00:00:00 GTM in milliseconds.
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to retrieve Application Logs from.
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An XLSX file.
+          content:
+            application/vnd.ms-excel:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+  /v1/admin/users/{userId}/reports/data-security:
+    get:
+      tags:
+      - UsersV1
+      summary: Retrieve the Data Security Report
+      description: "This API allows you to export the data security report of a user. The Data Security Report provides information\n about a specific user to see which populations and properties that user has access to as a result of the\n permissions assigned to them.\n\n Administrating tenant users can export the report for users in the administrating tenant and the analytic\n tenants those users belong to."
+      operationId: UsersV1_GetDataSecurityReportXLSX
+      parameters:
+      - name: userId
+        in: path
+        description: The ID of the user to retrieve the report for.
+        required: true
+        schema:
+          type: string
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to retrieve the Data Security Report from.
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An XLSX file.
+          content:
+            application/vnd.ms-excel:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+  /v1/admin/users/reports/profile-assignments:
+    get:
+      tags:
+      - UsersV1
+      summary: Retrieve user profile assignments in XLSX format
+      description: "This API allows you to export the profiles assigned to each user. This report details the profiles assigned to\n each user and the profile validity period.\n\n Administrating tenant users can export profile assignments for the administrating tenant and the analytic tenants\n those users belong to."
+      operationId: UsersV1_GetProfileAssignmentsXLSX
+      parameters:
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to retrieve profile assignments from.
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An XLSX file.
+          content:
+            application/vnd.ms-excel:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+  /v1/admin/users/reports/permission-assignments:
+    get:
+      tags:
+      - UsersV1
+      summary: Retrieve user permissions in XLSX format
+      description: "This API allows you to export the user permission assignments for a tenant. The permission assignments report\n provides a summary of the permissions your users have been assigned and how each permission is being used across\n your user base, as well as the users that do not have any permissions assigned to them.\n\n Administrating tenant users can export permission assignments for the administrating tenant and the analytic\n tenants those users belong to."
+      operationId: UsersV1_GetUserPermissionsXLSX
+      parameters:
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to retrieve the permission assignments report from.
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An XLSX file.
+          content:
+            application/vnd.ms-excel:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+  /v1/admin/users/reports/permissions-list:
+    get:
+      tags:
+      - UsersV1
+      summary: Retrieve a list of all permissions in XLSX format
+      description: "This API allows you to export the list of permissions in a tenant. This report includes the permission name,\n permission description, and permission ID for all permissions in the tenant.\n\n Administrating tenant users can export permissions lists for the administrating tenant and the analytic tenants\n those users belong to."
+      operationId: UsersV1_GetAllPermissionsXLSX
+      parameters:
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to retrieve permissions from.
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An XLSX file.
+          content:
+            application/vnd.ms-excel:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+components:
+  schemas:
+    admin.UserGroupsUsersDTO:
+      type: object
+      properties:
+        tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserGroupsUsersForTenantDTO'
+          description: A list of objects representing the users that are explicitly assigned to the user group, organized by the tenants the users belong to.
+        limit:
+          type: integer
+          description: The limit of results to return. The maximum value is 1000.
+          format: uint32
+        start:
+          type: integer
+          description: The index to start retrieving values from, also known as offset. The index begins at 0.
+          format: uint32
+    UserCreationAPIResponseDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The unique identifier associated with the user.
+        username:
+          type: string
+          description: The user's username. This is typically the user's email, such as john@jupiter.com.
+        displayName:
+          type: string
+          description: An identifiable name to display within Visier. For example, "John Smith".
+        employeeId:
+          type: string
+          description: If applicable, and if available, the user employee ID in the data.
+        accountEnabled:
+          type: string
+          description: If true, the user account is enabled.
+        email:
+          type: string
+          description: The user's email address.
+    servicing.UserCreationAPIRequestDTO:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The user's username. This is typically the user's email, such as john@visier.com.
+        displayName:
+          type: string
+          description: An identifiable name to display within Visier. For example, "John Smith".
+        employeeId:
+          type: string
+          description: If applicable, and if available, the user employee ID in the data.
+        accountEnabled:
+          type: string
+          description: If false, the user account is disabled.
+        email:
+          type: string
+          description: The user's email. This is used if the user's email is different from their username. For example, "john.doe@visier.com".
+    servicing.AssignRevokePermissionsRequestDTO:
+      type: object
+      properties:
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.AssignRevokePermissionRequestDTO'
+          description: A list of objects representing the permissions to assign to or remove from users.
+        targetProjectForTenantsList:
+          allOf:
+          - $ref: '#/components/schemas/admin.TargetProjectForTenantsListDTO'
+          description: "Administrating tenants can specify the tenants and projects in which to assign permissions to users or remove permissions from users. Specify one `projectId` per `tenantCode`.\n If omitted, the request is immediately published to production or applied to the `ProjectID` in the request header, if available, for the administrating tenant or TargetTenantID, if available."
+      description: "Set permissions request\n List of permissionId with assign to user Ids"
+    servicing.PermissionAssignedForLocalTenantDTO:
+      type: object
+      properties:
+        permissionId:
+          type: string
+          description: The unique identifier associated with the permission.
+        displayName:
+          type: string
+          description: An identifiable permission name to display in Visier, such as "Diversity Access".
+        description:
+          type: string
+          description: A user-defined description of the permission.
+    servicing.PermissionAssignedByTenantDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The unique identifier associated with the tenant.
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.PermissionAssignedUserDTO'
+          description: A list of objects representing the users that the permission is assigned to.
+      description: The users assigned a specific permission, grouped by tenant.
+    admin.PermissionsToUserGroupsRequestDTO:
+      type: object
+      properties:
+        userGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.PermissionsToUserGroupRequestDTO'
+          description: A list of objects representing the user groups and permissions to assign or remove.
+    servicing.AllPermissionsAssignedForLocalTenantDTO:
+      type: object
+      properties:
+        assignedPermissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.PermissionAssignedForLocalTenantDTO'
+          description: A list of objects representing the user's permissions.
+    servicing.LastLoginDTO:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          description: The time that the user last logged into Visier.
+    servicing.AllUsersGetAPIResponseDTO:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.UserGetAPIResponseDTO'
+          description: A list of available users.
+        limit:
+          type: integer
+          description: The number of results to return. The maximum number of users to retrieve is 1000.
+          format: uint32
+        start:
+          type: integer
+          description: The index to start retrieving results from, also known as offset. The index begins at 0.
+          format: uint32
+    servicing.PermissionAssignedUserDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The unique identifier associated with the user.
+        username:
+          type: string
+          description: The user's username. This is typically the user's email, such as john@visier.com.
+        permissionFrom:
+          type: string
+          description: "The method through which the user was assigned the permission. The permission may be assigned through\n the following options:\n  - User: The permission was directly assigned to the user.\n  - UserGroup: The permission was assigned because the user belongs to a user group that is assigned the permission.\n  - UserAndUserGroup: The permission was directly assigned to the user and assigned because the user belongs to\n    a user group that is assigned the permission."
+      description: The user and the method through which the user was assigned the permission.
+    admin.PermissionsToUserGroupRequestDTO:
+      type: object
+      properties:
+        userGroupId:
+          type: string
+          description: The unique identifier associated with the user group.
+        permissionsIds:
+          type: array
+          items:
+            type: string
+          description: A list of strings representing the unique permission IDs to assign.
+    servicing.AssignRevokePermissionByTenantDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The unique identifier associated with the tenant.
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.AssignRevokePermissionByPermissionDTO'
+          description: A list of objects representing the assigned or removed permissions.
+        status:
+          enum:
+          - Unknown
+          - Succeed
+          - Failed
+          type: string
+          description: The state of the permission assignment. Valid values are Succeed or Failed.
+          format: enum
+        message:
+          type: string
+          description: A detailed description of the request outcome, if available.
+        projectId:
+          type: string
+          description: The ID of the project that the change was made in, if applicable.
+      description: The permissions organized by tenant.
+    servicing.AssignRevokePermissionByPermissionDTO:
+      type: object
+      properties:
+        permission:
+          $ref: '#/components/schemas/servicing.PermissionAssignedForLocalTenantDTO'
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.AssignRevokePermissionByUserDTO'
+          description: A list of objects representing the users that was permission was assigned to or removed from.
+      description: The results of the permission assignment or removal.
+    admin.DeleteUserResponse:
+      type: object
+      properties: {}
+    servicing.ProfileAssignedForLocalTenantDTO:
+      type: object
+      properties:
+        profileId:
+          type: string
+          description: The unique identifier associated with the profile.
+        displayName:
+          type: string
+          description: An identifiable profile name to display in Visier, such as "Partner Service Manager".
+        validityStartTime:
+          type: string
+          description: An inclusive date-time when this profile is active.
+        validityEndTime:
+          type: string
+          description: An exclusive date-time when this profile is no longer active.
+        capabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.CapabilitiesDTO'
+          description: A list of objects representing the access that this profile has for the capabilities of this profile.
+        additionalCapabilities:
+          allOf:
+          - $ref: '#/components/schemas/servicing.AdditionalCapabilitiesDTO'
+          description: A list of the additional capabilities that are assigned to this profile.
+    admin.UsersToUserGroupRequestDTO:
+      type: object
+      properties:
+        userGroupId:
+          type: string
+          description: The unique identifier associated with the user group.
+        userIds:
+          type: array
+          items:
+            type: string
+          description: A list of strings representing unique user IDs to assign to or remove from the user group. The maximum number of `userIds` per user group is 100.
+    servicing.AdditionalCapabilitiesDTO:
+      type: object
+      properties:
+        additionalCapabilities:
+          type: array
+          items:
+            type: string
+          description: The additional capabilities assigned to this profile.
+    admin.SecurityAssignmentResponseDTO:
+      type: object
+      properties:
+        tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.TenantAssignmentsDTO'
+          description: A list of objects representing the tenants and users that were assigned to or removed from user groups.
+    servicing.AllProfileAssignedForLocalTenantDTO:
+      type: object
+      properties:
+        assignedProfiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ProfileAssignedForLocalTenantDTO'
+          description: A list of objects representing the user profiles assigned to the user and their validity range.
+    servicing.AssignRevokePermissionByUserDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The unique identifier associated with the user.
+        username:
+          type: string
+          description: The user's username. This is typically the user's email, such as john@visier.com.
+        message:
+          type: string
+          description: A meaningful message about the user permission.
+      description: The results of the permission assignment or removal by user.
+    admin.UserGroupsUsersForTenantDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The unique identifier associated with the tenant.
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.SimpleUserDTO'
+          description: A list of objects representing the users in the user group.
+    servicing.AssignRevokePermissionRequestDTO:
+      type: object
+      properties:
+        permissionId:
+          type: string
+          description: The unique identifier associated with a permission.
+        userIds:
+          type: array
+          items:
+            type: string
+          description: A list of strings representing unique user IDs.
+      description: "Set permission detail\n permissionId with assign to userIds"
+    servicing.CapabilitiesDTO:
+      type: object
+      properties:
+        capability:
+          type: string
+          description: The name of the capability.
+        accessLevel:
+          type: string
+          description: The access level of the profile for the given capability.
+        viewLevel:
+          type: string
+          description: The view level of the profile for the given capability.
+    servicing.UserUpdateAPIRequestDTO:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: An identifiable name to display within Visier. For example, "John Smith".
+        employeeId:
+          type: string
+          description: If applicable, and if available, the user employee ID in the data.
+        accountEnabled:
+          type: string
+          description: If true, the user account is enabled.
+        email:
+          type: string
+          description: The user's email address.
+        username:
+          type: string
+          description: The user's username. This is typically the user's email, such as john@jupiter.com. If a user's username changes, they must authenticate using the new username.
+    servicing.UserGroupAssignedForLocalTenantDTO:
+      type: object
+      properties:
+        userGroupId:
+          type: string
+          description: The user group ID.
+        displayName:
+          type: string
+          description: An identifiable user group name to display in Visier, such as "Leadership User Group".
+    admin.UserSecurityAssignmentsDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier associated with the user group.
+        name:
+          type: string
+          description: The name of the user group.
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.SimpleUserDTO'
+          description: A list of objects representing the users assigned to or removed from the user group.
+    servicing.PermissionAssignedUsersDTO:
+      type: object
+      properties:
+        tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.PermissionAssignedByTenantDTO'
+          description: A list of objects representing the users that are assigned the specific permission, organized by the tenants the users belong to.
+        limit:
+          type: integer
+          description: The number of results to return. The maximum number of tenants to retrieve is 100.
+          format: uint32
+        start:
+          type: integer
+          description: The index of the tenant to start retrieving results from, also known as offset. The index begins at 0.
+          format: uint32
+      description: Users that are assigned a specific permission.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    admin.TargetProjectForTenantsListDTO:
+      type: object
+      properties:
+        targetProjectForTenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.TargetProjectForTenantDTO'
+          description: "Administrating tenants can specify the tenants and projects in which to make assignments to users. Specify one `projectId` per `tenantCode`.\n If omitted, the request is immediately published to production or applied to the `ProjectID` in the request header, if available, for the administrating tenant or TargetTenantID, if available."
+    admin.TargetProjectForTenantDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant code.
+        projectId:
+          type: string
+          description: The project in which to make changes for the tenant.
+    admin.SimpleUserDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The unique identifier associated with the user.
+        username:
+          type: string
+          description: The user's username. This is typically the user's email, such as john@visier.com.
+    admin.UsersToUserGroupsRequestDTO:
+      type: object
+      properties:
+        userGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UsersToUserGroupRequestDTO'
+          description: A list of objects representing the user groups and users to assign or remove.
+        targetProjectForTenantsList:
+          allOf:
+          - $ref: '#/components/schemas/admin.TargetProjectForTenantsListDTO'
+          description: "Administrating tenants can specify the tenants and projects in which to assign users to user groups or remove users from user groups. Specify one `projectId` per `tenantCode`.\n If omitted, the request is immediately published to production or applied to the ProjectID in the request header, if available, for the administrating tenant or TargetTenantID, if available."
+    admin.PermissionResponseDTO:
+      type: object
+      properties:
+        permissionId:
+          type: string
+          description: The unique identifier associated with the permission.
+        displayName:
+          type: string
+          description: An identifiable permission name to display in Visier, such as "Diversity Access".
+    servicing.AssignRevokePermissionsResponseDTO:
+      type: object
+      properties:
+        tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.AssignRevokePermissionByTenantDTO'
+          description: A list of objects representing the users that were assigned permissions, organized by the tenants the users belong to.
+        sessionRepoId:
+          type: string
+      description: The results of the permission assignment or removal.
+    admin.PermissionsToUserGroupForTenantDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The unique identifier associated with the tenant.
+        status:
+          type: string
+          description: The state of the permission assignment or removal. Valid values are Succeed or Failed.
+        message:
+          type: string
+          description: A detailed description of the request outcome, if available.
+        userGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserGroupGetAPIResponseDTO'
+          description: A list of objects representing user groups and the permissions to assign to or remove from them.
+    servicing.AllUserGroupsAssignedForLocalTenantDTO:
+      type: object
+      properties:
+        assignedUserGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.UserGroupAssignedForLocalTenantDTO'
+          description: A list of objects representing the available user groups.
+    admin.TenantAssignmentsDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The unique identifier associated with the tenant.
+        status:
+          enum:
+          - Unknown
+          - Succeed
+          - Failed
+          type: string
+          description: The state of the user group assignment. Valid values are Succeed or Failed.
+          format: enum
+        message:
+          type: string
+          description: A detailed description of the request outcome, if available.
+        assignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserSecurityAssignmentsDTO'
+          description: A list of objects representing the user group and user assignments.
+        projectId:
+          type: string
+          description: The ID of the project that the change was made in, if applicable.
+    admin.UserGroupGetAPIResponseDTO:
+      type: object
+      properties:
+        userGroupId:
+          type: string
+          description: The unique identifier associated with the user group.
+        displayName:
+          type: string
+          description: An identifiable user group name to display in Visier, such as "Leadership User Group".
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.PermissionResponseDTO'
+          description: A list of objects representing the user's permissions.
+    admin.UserGroupsGetAPIResponseDTO:
+      type: object
+      properties:
+        userGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserGroupGetAPIResponseDTO'
+          description: A list of user groups.
+        limit:
+          type: integer
+          description: The number of results to return. The maximum number of users to retrieve is 1000.
+          format: uint32
+        start:
+          type: integer
+          description: The index to start retrieving results from, also known as offset.
+          format: uint32
+    servicing.UserGetAPIResponseDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The unique identifier associated with the user.
+        username:
+          type: string
+          description: The user's username. This is typically the user's email, such as john@jupiter.com.
+        displayName:
+          type: string
+          description: An identifiable name to display within Visier. For example, "John Smith".
+        employeeId:
+          type: string
+          description: If applicable, and if available, the user employee ID in the data.
+        accountEnabled:
+          type: boolean
+          description: If false, the user account is disabled.
+        profiles:
+          allOf:
+          - $ref: '#/components/schemas/servicing.AllProfileAssignedForLocalTenantDTO'
+          description: A list of objects representing the list of available profiles. Not returned if the user has no profiles.
+        permissions:
+          allOf:
+          - $ref: '#/components/schemas/servicing.AllPermissionsAssignedForLocalTenantDTO'
+          description: A list of objects representing the user's permissions.
+        userGroups:
+          allOf:
+          - $ref: '#/components/schemas/servicing.AllUserGroupsAssignedForLocalTenantDTO'
+          description: A list of objects representing the available user groups.
+        lastLogin:
+          allOf:
+          - $ref: '#/components/schemas/servicing.LastLoginDTO'
+          description: An object that represents the time that the user last logged into Visier.
+        email:
+          type: string
+          description: The user's email address.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: administration
+  tags:
+  - Projects
+  - ProductionVersions
+  - UsersV3
+  - UsersV2
+  - UserGroupsV2
+  - UsersV1
+  - Profiles
+  - Permissions
+  - TenantsV2
+  - TenantsV1
+  - ConsolidatedAnalytics
+  - Sources
+  - SystemStatus
+  - EmailDomains
+  - EncryptionKeys
+  - NetworkSubnets
+  - SidecarSolutions
+  - ReleaseVersionConfiguration
+  - VeeConfiguration

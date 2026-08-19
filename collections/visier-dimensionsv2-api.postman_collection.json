@@ -1,0 +1,1701 @@
+{
+  "item": [
+    {
+      "id": "392828f5-defa-4b8f-8f7d-50368da155b8",
+      "name": "DimensionsV2",
+      "description": {
+        "content": "Create, retrieve, update, and delete dimensions in your analytic model. You can create, update, and delete one or more dimensions in an API call.\n<br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\nIf you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4048339d-4aee-4118-b52e-420745c74451",
+          "name": "Retrieve a list of dimensions by analytic object",
+          "request": {
+            "name": "Retrieve a list of dimensions by analytic object",
+            "description": {
+              "content": "Retrieve all the dimensions for a specific analytic object. The response returns the details of all dimensions for the analytic object, including object names, dimension types, and descriptions.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2alpha",
+                "data",
+                "model",
+                "analytic-objects",
+                ":analyticObjectId",
+                "dimensions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<enum>",
+                  "description": "The type of the dimension to retrieve. Valid values:\n - `leveled`: Retrieves leveled dimensions.\n - `parentChild`: Retrieves parent-child dimensions."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<enum>",
+                  "description": "The type of the dimension to retrieve. Valid values:\n - `leveled`: Retrieves leveled dimensions.\n - `parentChild`: Retrieves parent-child dimensions."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<enum>",
+                  "description": "The level of information to retrieve for the dimension. Valid values:\n - `basic`: Retrieves the dimension's UUID, object name, and basic information. This is the default.\n - `details`: Retrieves the `basic` details and additional configurations, such as levels and settings.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<enum>",
+                  "description": "The level of information to retrieve for the dimension. Valid values:\n - `basic`: Retrieves the dimension's UUID, object name, and basic information. This is the default.\n - `details`: Retrieves the `basic` details and additional configurations, such as levels and settings.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+                },
+                {
+                  "disabled": false,
+                  "key": "objectName",
+                  "value": "<string>",
+                  "description": "The dimension object names to return in the response. When combined with `uuid`, the results return objects that match either the `objectName` or `uuid`."
+                },
+                {
+                  "disabled": false,
+                  "key": "objectName",
+                  "value": "<string>",
+                  "description": "The dimension object names to return in the response. When combined with `uuid`, the results return objects that match either the `objectName` or `uuid`."
+                },
+                {
+                  "disabled": false,
+                  "key": "uuid",
+                  "value": "<string>",
+                  "description": "The dimension UUIDs to return in the response. When combined with `objectName`, the results return objects that match either the `objectName` or `uuid`."
+                },
+                {
+                  "disabled": false,
+                  "key": "uuid",
+                  "value": "<string>",
+                  "description": "The dimension UUIDs to return in the response. When combined with `objectName`, the results return objects that match either the `objectName` or `uuid`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "analyticObjectId",
+                  "description": "(Required) The object name or UUID of the analytic object from which to retrieve dimensions."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a project in which to make the request.",
+                "key": "ProjectID",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "251c055b-1c6c-42c9-953f-c90947b301e7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2alpha",
+                    "data",
+                    "model",
+                    "analytic-objects",
+                    ":analyticObjectId",
+                    "dimensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<enum>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<enum>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<enum>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<enum>"
+                    },
+                    {
+                      "key": "objectName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "objectName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "analyticObjectId",
+                      "description": "(Required) The object name or UUID of the analytic object from which to retrieve dimensions."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"dimensions\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"string\",\n        \"projectId\": \"string\"\n      },\n      \"dimension\": {\n        \"uuid\": \"string\",\n        \"objectName\": \"string\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": true,\n        \"includeWithVee\": true,\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"string\",\n        \"projectId\": \"string\"\n      },\n      \"dimension\": {\n        \"uuid\": \"string\",\n        \"objectName\": \"string\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": false,\n        \"includeWithVee\": false,\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1bd3caf8-e9cd-4db1-adb0-e7d7502ab229",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2alpha",
+                    "data",
+                    "model",
+                    "analytic-objects",
+                    ":analyticObjectId",
+                    "dimensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<enum>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<enum>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<enum>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<enum>"
+                    },
+                    {
+                      "key": "objectName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "objectName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "analyticObjectId",
+                      "description": "(Required) The object name or UUID of the analytic object from which to retrieve dimensions."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6ab89c6-0121-4dbc-8186-0f7e250abe08",
+          "name": "Retrieve a list of dimensions",
+          "request": {
+            "name": "Retrieve a list of dimensions",
+            "description": {
+              "content": "Retrieve a list of all dimensions in your Visier tenant. You can optionally filter dimensions by dimension type or analytic object.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2alpha",
+                "data",
+                "model",
+                "dimensions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<enum>",
+                  "description": "The type of the dimension to retrieve. If undefined, retrieves all dimension types. Valid values:\n - `leveled`: Retrieves leveled dimensions.\n - `parentChild`: Retrieves parent-child dimensions."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<enum>",
+                  "description": "The type of the dimension to retrieve. If undefined, retrieves all dimension types. Valid values:\n - `leveled`: Retrieves leveled dimensions.\n - `parentChild`: Retrieves parent-child dimensions."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<enum>",
+                  "description": "The level of information to retrieve for the dimension. Valid values:\n - `basic`: Retrieves the dimension's UUID, object name, and basic information. This is the default.\n - `details`: Retrieves the `basic` details and additional configurations, such as levels and settings.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<enum>",
+                  "description": "The level of information to retrieve for the dimension. Valid values:\n - `basic`: Retrieves the dimension's UUID, object name, and basic information. This is the default.\n - `details`: Retrieves the `basic` details and additional configurations, such as levels and settings.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+                },
+                {
+                  "disabled": false,
+                  "key": "analyticObjectName",
+                  "value": "<string>",
+                  "description": "The object names of the analytic objects from which to retrieve dimensions. Default is to return dimensions from all analytic objects."
+                },
+                {
+                  "disabled": false,
+                  "key": "analyticObjectName",
+                  "value": "<string>",
+                  "description": "The object names of the analytic objects from which to retrieve dimensions. Default is to return dimensions from all analytic objects."
+                },
+                {
+                  "disabled": false,
+                  "key": "analyticObjectUuid",
+                  "value": "<string>",
+                  "description": "The UUIDs of the analytic objects from which to retrieve dimensions. Default is to return dimensions from all analytic objects."
+                },
+                {
+                  "disabled": false,
+                  "key": "analyticObjectUuid",
+                  "value": "<string>",
+                  "description": "The UUIDs of the analytic objects from which to retrieve dimensions. Default is to return dimensions from all analytic objects."
+                },
+                {
+                  "disabled": false,
+                  "key": "objectName",
+                  "value": "<string>",
+                  "description": "The dimension object names to return in the response. When combined with `uuid`, the results return objects that match either the `objectName` or `uuid`."
+                },
+                {
+                  "disabled": false,
+                  "key": "objectName",
+                  "value": "<string>",
+                  "description": "The dimension object names to return in the response. When combined with `uuid`, the results return objects that match either the `objectName` or `uuid`."
+                },
+                {
+                  "disabled": false,
+                  "key": "uuid",
+                  "value": "<string>",
+                  "description": "The dimension UUIDs to return in the response. When combined with `objectName`, the results return objects that match either the `objectName` or `uuid`."
+                },
+                {
+                  "disabled": false,
+                  "key": "uuid",
+                  "value": "<string>",
+                  "description": "The dimension UUIDs to return in the response. When combined with `objectName`, the results return objects that match either the `objectName` or `uuid`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a project in which to make the request.",
+                "key": "ProjectID",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4da4080e-73cb-4a6c-b80d-718ea6601d41",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2alpha",
+                    "data",
+                    "model",
+                    "dimensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<enum>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<enum>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<enum>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<enum>"
+                    },
+                    {
+                      "key": "analyticObjectName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "analyticObjectName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "analyticObjectUuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "analyticObjectUuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "objectName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "objectName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"dimensions\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"string\",\n        \"projectId\": \"string\"\n      },\n      \"dimension\": {\n        \"uuid\": \"string\",\n        \"objectName\": \"string\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": false,\n        \"includeWithVee\": false,\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"string\",\n        \"projectId\": \"string\"\n      },\n      \"dimension\": {\n        \"uuid\": \"string\",\n        \"objectName\": \"string\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": true,\n        \"includeWithVee\": true,\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51faabbb-f103-4b3e-ac78-892d99df9eed",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2alpha",
+                    "data",
+                    "model",
+                    "dimensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<enum>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<enum>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<enum>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<enum>"
+                    },
+                    {
+                      "key": "analyticObjectName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "analyticObjectName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "analyticObjectUuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "analyticObjectUuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "objectName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "objectName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "24fefac4-94d7-4707-98fd-01825cb7737f",
+          "name": "Update dimensions",
+          "request": {
+            "name": "Update dimensions",
+            "description": {
+              "content": "Update existing dimensions. The response returns whether each dimension was successfully updated or not. When updating objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PUT` request definition.\n\n In `PUT` calls, the definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed from the dimension. To partially update a dimension, see the `PATCH` method.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2alpha",
+                "data",
+                "model",
+                "dimensions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a project in which to make the request.",
+                "key": "ProjectID",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dimensions\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": \"<boolean>\",\n        \"includeWithVee\": \"<boolean>\",\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": \"<boolean>\",\n        \"includeWithVee\": \"<boolean>\",\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e78f21cb-17b5-4138-b414-0a1f3eb4c0ad",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2alpha",
+                    "data",
+                    "model",
+                    "dimensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dimensions\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": \"<boolean>\",\n        \"includeWithVee\": \"<boolean>\",\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": \"<boolean>\",\n        \"includeWithVee\": \"<boolean>\",\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"successes\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"objectName\": \"string\",\n      \"uuid\": \"string\",\n      \"displayName\": \"string\"\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"objectName\": \"string\",\n      \"uuid\": \"string\",\n      \"displayName\": \"string\"\n    }\n  ],\n  \"failures\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"objectName\": \"string\",\n      \"uuid\": \"string\",\n      \"displayName\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"objectName\": \"string\",\n      \"uuid\": \"string\",\n      \"displayName\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5f428dd-5e6d-4e3b-9cbc-597fb6b9b032",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2alpha",
+                    "data",
+                    "model",
+                    "dimensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dimensions\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": \"<boolean>\",\n        \"includeWithVee\": \"<boolean>\",\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": \"<boolean>\",\n        \"includeWithVee\": \"<boolean>\",\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5db72858-9c56-4645-9004-54ec96412a57",
+          "name": "Create dimensions",
+          "request": {
+            "name": "Create dimensions",
+            "description": {
+              "content": "Create new dimensions. The response returns whether each dimension was successfully created or not.\n When creating objects, assign a unique object name but don't set a UUID. Visier generates UUIDs for new objects.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2alpha",
+                "data",
+                "model",
+                "dimensions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a project in which to make the request.",
+                "key": "ProjectID",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dimensions\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": \"<boolean>\",\n        \"includeWithVee\": \"<boolean>\",\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": \"<boolean>\",\n        \"includeWithVee\": \"<boolean>\",\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bed05d5f-2882-43bb-bcb3-da1227a0f5f0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2alpha",
+                    "data",
+                    "model",
+                    "dimensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dimensions\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": \"<boolean>\",\n        \"includeWithVee\": \"<boolean>\",\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": \"<boolean>\",\n        \"includeWithVee\": \"<boolean>\",\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"successes\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"objectName\": \"string\",\n      \"uuid\": \"string\",\n      \"displayName\": \"string\"\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"objectName\": \"string\",\n      \"uuid\": \"string\",\n      \"displayName\": \"string\"\n    }\n  ],\n  \"failures\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"objectName\": \"string\",\n      \"uuid\": \"string\",\n      \"displayName\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"objectName\": \"string\",\n      \"uuid\": \"string\",\n      \"displayName\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d930fe48-7a03-40d3-a47e-ddf4c9474450",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2alpha",
+                    "data",
+                    "model",
+                    "dimensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dimensions\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": \"<boolean>\",\n        \"includeWithVee\": \"<boolean>\",\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": \"<boolean>\",\n        \"includeWithVee\": \"<boolean>\",\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2146f305-e2d1-4bfc-ac07-804bc14f9856",
+          "name": "Delete dimensions",
+          "request": {
+            "name": "Delete dimensions",
+            "description": {
+              "content": "Delete existing dimensions. The response returns whether each dimension was successfully deleted or not.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2alpha",
+                "data",
+                "model",
+                "dimensions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a project in which to make the request.",
+                "key": "ProjectID",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dimensions\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\"\n      }\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "385e6ad6-3b40-4967-9106-5521b3ed34d5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2alpha",
+                    "data",
+                    "model",
+                    "dimensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dimensions\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\"\n      }\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"successes\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"objectName\": \"string\",\n      \"uuid\": \"string\",\n      \"displayName\": \"string\"\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"objectName\": \"string\",\n      \"uuid\": \"string\",\n      \"displayName\": \"string\"\n    }\n  ],\n  \"failures\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"objectName\": \"string\",\n      \"uuid\": \"string\",\n      \"displayName\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"objectName\": \"string\",\n      \"uuid\": \"string\",\n      \"displayName\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0c1d278-039e-48e9-ab3e-e302f2153464",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2alpha",
+                    "data",
+                    "model",
+                    "dimensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dimensions\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\"\n      }\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5add60e5-30f8-40e1-bc55-12bb2fc2af4f",
+          "name": "Partially update dimensions",
+          "request": {
+            "name": "Partially update dimensions",
+            "description": {
+              "content": "Make partial changes to existing dimensions. The response returns whether each dimension was successfully patched or not. When patching objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PATCH` request definition.\n\n Unlike `PUT`, which completely replaces the dimension definition, use `PATCH` to change specific fields in the dimension without affecting omitted fields. To replace a dimension's entire definition, see the `PUT` method.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2alpha",
+                "data",
+                "model",
+                "dimensions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a project in which to make the request.",
+                "key": "ProjectID",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dimensions\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": \"<boolean>\",\n        \"includeWithVee\": \"<boolean>\",\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": \"<boolean>\",\n        \"includeWithVee\": \"<boolean>\",\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3bd239b9-758e-473b-bc6c-6e37ab92c6f6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2alpha",
+                    "data",
+                    "model",
+                    "dimensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dimensions\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": \"<boolean>\",\n        \"includeWithVee\": \"<boolean>\",\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": \"<boolean>\",\n        \"includeWithVee\": \"<boolean>\",\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"successes\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"objectName\": \"string\",\n      \"uuid\": \"string\",\n      \"displayName\": \"string\"\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"objectName\": \"string\",\n      \"uuid\": \"string\",\n      \"displayName\": \"string\"\n    }\n  ],\n  \"failures\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"objectName\": \"string\",\n      \"uuid\": \"string\",\n      \"displayName\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"objectName\": \"string\",\n      \"uuid\": \"string\",\n      \"displayName\": \"string\",\n      \"messages\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f78ad17d-e143-4a02-ae7a-aeded96647f0",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2alpha",
+                    "data",
+                    "model",
+                    "dimensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dimensions\": [\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": \"<boolean>\",\n        \"includeWithVee\": \"<boolean>\",\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"executionContext\": {\n        \"tenantCode\": \"<string>\",\n        \"projectId\": \"<string>\"\n      },\n      \"dimension\": {\n        \"uuid\": \"<string>\",\n        \"objectName\": \"<string>\",\n        \"basicInformation\": {\n          \"displayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"shortDisplayName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"explanation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"designerNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"synonymList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"leveled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentChild\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tagList\": {\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"visibleInAnalytics\": \"<boolean>\",\n        \"includeWithVee\": \"<boolean>\",\n        \"versionInformation\": {\n          \"versionType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"edited\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"editor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e40e087-60cc-4772-b940-a374ab4b4477",
+          "name": "Retrieve a dimension's details",
+          "request": {
+            "name": "Retrieve a dimension's details",
+            "description": {
+              "content": "Retrieve the details of a specific dimension, such as its dimension type and description.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2alpha",
+                "data",
+                "model",
+                "dimensions",
+                ":dimensionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<enum>",
+                  "description": "The level of information to retrieve for the dimension. Valid values:\n - `basic`: Retrieves the dimension's UUID, object name, and basic information.\n - `details`: Retrieves the `basic` details and additional configurations, such as levels and settings. This is the default.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<enum>",
+                  "description": "The level of information to retrieve for the dimension. Valid values:\n - `basic`: Retrieves the dimension's UUID, object name, and basic information.\n - `details`: Retrieves the `basic` details and additional configurations, such as levels and settings. This is the default.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dimensionId",
+                  "description": "(Required) The object name or UUID of the dimension to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a project in which to make the request.",
+                "key": "ProjectID",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c5e35976-b1f9-45d9-8185-1f5f7060b0f4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2alpha",
+                    "data",
+                    "model",
+                    "dimensions",
+                    ":dimensionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with",
+                      "value": "<enum>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<enum>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dimensionId",
+                      "description": "(Required) The object name or UUID of the dimension to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"executionContext\": {\n    \"tenantCode\": \"<string>\",\n    \"projectId\": \"<string>\"\n  },\n  \"dimension\": {\n    \"uuid\": \"<string>\",\n    \"objectName\": \"<string>\",\n    \"basicInformation\": {\n      \"displayName\": \"string\",\n      \"shortDisplayName\": \"string\",\n      \"description\": \"string\",\n      \"explanation\": \"string\",\n      \"designerNotes\": \"string\",\n      \"synonymList\": {\n        \"synonyms\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"details\": {\n      \"leveled\": {\n        \"levelList\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"hideNullValues\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"enableLargeDimensionSearch\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"analyticObjectList\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"useMappingDisplayName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"parentChild\": {\n        \"levelList\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"hideNullValues\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"enableLargeDimensionSearch\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"parentId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"analyticObjectList\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"customPropertyList\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"tagList\": {\n      \"tags\": [\n        {\n          \"objectName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"objectName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    \"visibleInAnalytics\": \"<boolean>\",\n    \"includeWithVee\": \"<boolean>\",\n    \"versionInformation\": {\n      \"versionType\": \"Unknown\",\n      \"edited\": \"string\",\n      \"editor\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6eeb2b80-b147-4a89-807e-27654ea30fd9",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2alpha",
+                    "data",
+                    "model",
+                    "dimensions",
+                    ":dimensionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with",
+                      "value": "<enum>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<enum>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dimensionId",
+                      "description": "(Required) The object name or UUID of the dimension to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "65149311-59bd-4708-80b2-00ff17c65c87",
+    "name": "Visier Analytic Model Dimensions V2 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for retrieving and configuring your analytic model in Visier.",
+      "type": "text/plain"
+    }
+  }
+}

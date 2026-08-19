@@ -1,0 +1,1671 @@
+openapi: 3.2.0
+info:
+  title: Visier Administration Permissions API
+  description: Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: Permissions
+  description: Manage permissions in Visier, such as retrieving the details of a permission, content package, or data access set, creating new permissions and data access sets, and updating or deleting permissions. To assign permissions to users, see Users V1.
+paths:
+  /v1/admin/capabilities:
+    get:
+      tags:
+      - Permissions
+      summary: Retrieve a list of all permission capabilities
+      description: "Retrieve all the permission capabilities in your tenant.\n You can use the returned capabilities in other API calls when creating or updating permissions to assign the capability to the permission.\n\n To specify the project in which to retrieve the permission capabilities, provide a project UUID in the `ProjectID` request header."
+      operationId: Permissions_GetCapabilities
+      parameters:
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to retrieve the capabilities from.
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.GetCapabilitiesAPIResponseDTO'
+  /v1/admin/capabilities/{capabilityId}:
+    get:
+      tags:
+      - Permissions
+      summary: Retrieve a permission capability's details
+      description: "Retrieve the details of a specific capability.\n\n To specify the project in which to retrieve the permission capability, provide a project UUID in the `ProjectID` request header."
+      operationId: Permissions_GetCapability
+      parameters:
+      - name: capabilityId
+        in: path
+        description: The unique identifier of the capability you want to retrieve.
+        required: true
+        schema:
+          type: string
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to retrieve a capability from.
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.CapabilityDTO'
+  /v1/admin/content-packages:
+    get:
+      tags:
+      - Permissions
+      summary: Retrieve a list of all content packages
+      description: "Retrieve the list of available content packages.\n You can use the returned content packages in other API calls when creating or updating permissions to add the content package to the permission.\n\n To specify the project in which to retrieve the available content packages, provide a project UUID in the `ProjectID` request header."
+      operationId: Permissions_GetContentPackages
+      parameters:
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to retrieve the content packages from.
+        schema:
+          type: string
+      - name: searchString
+        in: query
+        description: "Optional search string to return only content packages whose display name or description contains that search string.\n If searchString is empty or not provided, the response returns a list of all content packages."
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.GetContentPackagesAPIResponseDTO'
+  /v1/admin/content-packages/{contentPackageId}:
+    get:
+      tags:
+      - Permissions
+      summary: Retrieve a content package's details
+      description: "Retrieve the details of a specific content package.\n\n To specify the project in which to retrieve a content package, provide a project UUID in the `ProjectID` request header."
+      operationId: Permissions_GetContentPackage
+      parameters:
+      - name: contentPackageId
+        in: path
+        description: The unique identifier of the content package you want to retrieve.
+        required: true
+        schema:
+          type: string
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to retrieve a content package from.
+        schema:
+          type: string
+      - name: with
+        in: query
+        description: "Controls the amount of detail to return in the response. Omit to return basic information.\n * `details`: Include the content package's artifacts, grouped by artifact type."
+        schema:
+          type: array
+          items:
+            type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.ContentPackageDTO'
+  /v1/admin/data-access-sets:
+    get:
+      tags:
+      - Permissions
+      summary: Retrieve a list of all data access sets
+      description: "Retrieve a list of all shareable data access sets. Data access sets define the level of access that users have to properties and property values for the analytic object in a permission. Data access sets also grant access to properties of subjects that are referenced by the analytic object in the permission.\n You can assign data access sets to a permission when creating or updating permissions.\n\n To specify the project in which to retrieve the shareable data access sets, provide a project UUID in the `ProjectID` request header.\n\n **Note:** If the number of valid data access sets exceeds the default limit of 100, the response status code is 206. To retrieve more than 100 data access sets, set `limit` to a higher number."
+      operationId: Permissions_GetDataAccessSets
+      parameters:
+      - name: analyticObjectId
+        in: query
+        description: Specify the analytic object ID to retrieve the shareable data access sets for. Default is all analytic objects.
+        schema:
+          type: string
+      - name: with
+        in: query
+        description: "The information about the data access set to include in the request response.\n * If empty, returns basic information for the data access set, including its unique ID, display name, description, and analytic object ID.\n * If `details`, returns basic information and property data access information (`propertyAccessConfigs`)."
+        schema:
+          type: array
+          items:
+            type: string
+      - name: limit
+        in: query
+        description: The maximum number of data access sets to return. Default is 100. Maximum is 1000.
+        schema:
+          type: integer
+          format: int32
+      - name: correlationIds
+        in: query
+        description: "If defined, `correlationIds` limits the response to the data access sets associated with the specified correlation IDs.\n You can specify multiple correlation IDs in the `correlationIds` parameter separated by commas; for example, `correlationIds=123,abc,456`.\n\n **Note**:\n - Correlation IDs must be between 3 and 64 characters long and may only contain alphanumeric characters, underscores and hyphens.\n - Correlation IDs have a lifetime of up to 7 days after creation. After a correlation ID expires, you can only retrieve specific data access sets using the data access set ID.\n - Correlation IDs are optional during data access set creation and are only applicable to those objects created with a defined correlation ID."
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.GetDataAccessSetsAPIResponseDTO'
+    put:
+      tags:
+      - Permissions
+      summary: Update shareable data access sets
+      description: "Update shareable data access sets. Shareable data access sets let you reuse common data access configurations in multiple permissions.\n\n To specify the project in which to update shareable data access sets, provide a project UUID in the `ProjectID` request header."
+      operationId: Permissions_UpdateDataAccessSets
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.BulkDataAccessSetRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.BulkDataAccessSetResponseDTO'
+    post:
+      tags:
+      - Permissions
+      summary: Create shareable data access sets
+      description: "Create shareable data access sets. Shareable data access sets let you reuse common data access configurations in multiple permissions.\n\n To specify the project in which to create shareable data access sets, provide a project UUID in the `ProjectID` request header."
+      operationId: Permissions_CreateDataAccessSets
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.BulkDataAccessSetRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.BulkDataAccessSetResponseDTO'
+    delete:
+      tags:
+      - Permissions
+      summary: Delete shareable data access sets
+      description: "Delete shareable data access sets.\n\n To specify the project in which to delete shareable data access sets, provide a project UUID in the `ProjectID` request header."
+      operationId: Permissions_DeleteDataAccessSets
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.BulkDataAccessSetDeleteRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.BulkDataAccessSetResponseDTO'
+  /v1/admin/data-access-sets/revert-to-parent:
+    post:
+      tags:
+      - Permissions
+      summary: Revert data access sets
+      description: "Revert a shareable data access set to its parent version. For example, if you revert a:\n - Tenant override object: The object reverts to the Blueprint version or, for administrating tenants who revert an analytic tenant's object, the administrating tenant's object version.\n - Tenant object: The API request fails. The object is unique to your tenant and no parent version exists.\n - Blueprint object: Nothing happens. The object is inherited from the parent and there is nothing to revert on this tenant."
+      operationId: Permissions_RevertDataAccessSetsToParent
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.BulkDataAccessSetRevertRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.BulkDataAccessSetResponseDTO'
+  /v1/admin/data-access-sets/{dataAccessSetId}:
+    get:
+      tags:
+      - Permissions
+      summary: Retrieve a data access set's details
+      description: "Retrieve the details of a specific shareable data access set. You must know the ID of the data access set to retrieve its details. To retrieve data access set IDs, see `GET v1/admin/data-access-sets`.\n\n To specify the project in which to retrieve the shareable data access set, provide a project UUID in the `ProjectID` request header."
+      operationId: Permissions_GetDataAccessSet
+      parameters:
+      - name: dataAccessSetId
+        in: path
+        description: The unique identifier of the data access set you want to retrieve.
+        required: true
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.DataAccessSetDTO'
+  /v1/admin/data-security-objects:
+    get:
+      tags:
+      - Permissions
+      summary: Retrieve a list of data security objects
+      description: "Retrieve the list of available data security objects.\n Data security objects are analytic objects and their related objects that are available to define\n permissions' data security profiles.\n\n To specify the project in which to retrieve the available data security objects, provide a project UUID in the `ProjectID` request header."
+      operationId: Permissions_GetDataSecurityObjects
+      parameters:
+      - name: id
+        in: query
+        description: "The unique identifiers of the data security objects (analytic objects) to retrieve.\n Default is all data security objects."
+        schema:
+          type: array
+          items:
+            type: string
+      - name: includeDetails
+        in: query
+        description: "If `true`, the response includes the analytic objects (display name, ID, and object type), related objects,\n securable properties, and securable dimensions. If `false`, the response only includes analytic objects\n (display name, ID, and object type). Default is `false`."
+        schema:
+          type: boolean
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to retrieve data security objects from.
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.GetDataSecurityObjectsAPIResponseDTO'
+  /v1/admin/permissions:
+    get:
+      tags:
+      - Permissions
+      summary: Retrieve a list of all permissions
+      description: "Retrieve the full list of user permissions in your tenant.\n\n To specify the project in which to retrieve permissions, provide a project UUID in the `ProjectID` request header."
+      operationId: Permissions_GetPermissions
+      parameters:
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to retrieve the permissions from.
+        schema:
+          type: string
+      - name: includeDetails
+        in: query
+        description: "If `true`, returns the permission's details. If `false`, only returns the permissions' ID, display name,\n and description. Default is `false`."
+        schema:
+          type: boolean
+      - name: includeDetailsWithStatus
+        in: query
+        description: "If `true`, returns the validity statuses for the permission's properties in data access sets and the\n permission's dimensions, dimension members, and hierarchy properties in member filters. If `false`,\n doesn't return validity status information. Default is `false`."
+        schema:
+          type: boolean
+      - name: correlationIds
+        in: query
+        description: "If defined, `correlationIds` limits the response to the permissions associated with the specified correlation IDs.\n You can specify multiple correlation IDs in the `correlationIds` parameter separated by commas; for example, `correlationIds=123,abc,456`.\n\n **Note**:\n - Correlation IDs must be between 3 and 64 characters long and may only contain alphanumeric characters, underscores and hyphens.\n - Correlation IDs have a lifetime of up to 7 days after creation. After a correlation ID expires, you can only retrieve specific permissions using the permission ID.\n - Correlation IDs are optional during permission creation and are only applicable to those objects created with a defined correlation ID."
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.GetPermissionsAPIResponseDTO'
+    put:
+      tags:
+      - Permissions
+      summary: Update permissions
+      description: "Update existing permissions.\n\n To specify the project in which to update permissions, provide a project UUID in the `ProjectID` request header."
+      operationId: Permissions_UpdatePermissions
+      parameters:
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to update permissions in.
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      - name: FastMode
+        in: header
+        description: If `true`, the API skips loading the tenant's data environment. Use `FastMode` to reduce latency when you don't need to perform dynamic permission checks, such as checking for the Super Admin permission assignment. Without the environment, permission checks that depend on dynamic, data-driven security, such as group assignments using dynamic populations, fall back to checks resolvable from the requesting user's static user group or direct assignments. Default is `false`.
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/admin.PermissionsListDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.PermissionBulkOperationResponseDTO'
+    post:
+      tags:
+      - Permissions
+      summary: Create permissions
+      description: "Create new permissions. Administrating tenant users can specify the tenant in which to add these permissions.\n\n To specify the project in which to create permissions, provide a project UUID in the `ProjectID` request header."
+      operationId: Permissions_CreatePermissions
+      parameters:
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to create permissions in.
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      - name: FastMode
+        in: header
+        description: If `true`, the API skips loading the tenant's data environment. Use `FastMode` to reduce latency when you don't need to perform dynamic permission checks, such as checking for the Super Admin permission assignment. Without the environment, permission checks that depend on dynamic, data-driven security, such as group assignments using dynamic populations, fall back to checks resolvable from the requesting user's static user group or direct assignments. Default is `false`.
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/admin.PermissionsListDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.PermissionBulkOperationResponseDTO'
+    delete:
+      tags:
+      - Permissions
+      summary: Delete permissions
+      description: "Delete existing permissions.\n\n To specify the project in which to delete permissions, provide a project UUID in the `ProjectID` request header."
+      operationId: Permissions_DeletePermissions
+      parameters:
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to delete permissions from.
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.DeletePermissionsRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.PermissionBulkOperationResponseDTO'
+  /v1/admin/permissions/revert-to-parent:
+    post:
+      tags:
+      - Permissions
+      summary: Revert permissions
+      description: "Revert a permission to its parent version. For example, if you revert a:\n - Tenant override object: The object reverts to the Blueprint version or, for administrating tenants who revert an analytic tenant's object, the administrating tenant's object version.\n - Tenant object: The API request fails. The object is unique to your tenant and no parent version exists.\n - Blueprint object: Nothing happens. The object is inherited from the parent and there is nothing to revert on this tenant."
+      operationId: Permissions_RevertPermissionsToParent
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.RevertPermissionsRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.PermissionBulkOperationResponseDTO'
+  /v1/admin/permissions/{permissionId}:
+    get:
+      tags:
+      - Permissions
+      summary: Retrieve a permission's details
+      description: "Retrieve the details for a specified permission.\n\n To specify the project in which to retrieve the permission, provide a project UUID in the `ProjectID` request header."
+      operationId: Permissions_GetPermission
+      parameters:
+      - name: permissionId
+        in: path
+        description: The unique identifier of the permission you want to retrieve.
+        required: true
+        schema:
+          type: string
+      - name: tenantCode
+        in: query
+        description: Specify the tenant to retrieve a permission from.
+        schema:
+          type: string
+      - name: includeDetailsWithStatus
+        in: query
+        description: "If `true`, returns the validity statuses for the permission's properties in data access sets and the\n permission's dimensions, dimension members, and hierarchy properties in member filters. If `false`,\n doesn't return validity status information. Default is `false`."
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      - name: NonVersioned
+        in: header
+        description: If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.
+        schema:
+          type: boolean
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.PermissionDTO'
+  /v1/admin/security-artifacts/sync-to-non-versioned:
+    post:
+      tags:
+      - Permissions
+      summary: Synchronize versioned security artifacts
+      description: "Copies permissions, data access sets, user groups, and user direct assignments from the versioned environment to the non-versioned environment. This operation immediately applies the security configurations, independent of data versioning.\n\n The versioned environment utilizes projects and data versions while the non-versioned environment applies changes directly.\n\n This endpoint always synchronizes permissions and data access sets. You can optionally synchronize user group assignments and direct permissions assignments to users.\n\n Use this to apply security configurations immediately without waiting for data version changes. This is particularly useful for administrating tenants syncing security artifacts to analytic tenants."
+      operationId: Permissions_SyncToNonVersioned
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.NonVersionedSyncRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.NonVersionedSyncResponseDTO'
+components:
+  schemas:
+    admin.PermissionsListDTO:
+      type: object
+      properties:
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.PermissionDTO'
+          description: The list of permissions that will be created or updated
+    servicing.DataSecurityProfileDTO:
+      type: object
+      properties:
+        analyticObjectId:
+          type: string
+          description: The unique ID of the analytic object assigned data security in this permission.
+        propertySetConfig:
+          allOf:
+          - $ref: '#/components/schemas/servicing.PropertySetConfigDTO'
+          description: A list of objects representing the data access for an analytic object’s properties.
+        allDataPointAccess:
+          type: boolean
+          description: If `true`, the permission grants access to the entire population. If `false`, define `memberFilterConfigs` to set custom population access.
+        memberFilterConfigs:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.MemberFilterConfigDTO'
+          description: Custom filters that define population access for an item in the permission.
+        inheritedAccessConfigs:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.InheritedAccessConfigDTO'
+          description: "The events and related objects inherited from the analytic object.\n By default, all events and related objects associated with the analytic object will be inherited from the analytic object in a permission.\n For example, if you assign access to Employee, then access to the Employee Exit event is inherited in the permission.\n To remove access to an event or related object, add the object to `inheritedAccessConfigs` with `removeAccess`: true.\n To add custom filters to an event or related object, add the object to `inheritedAccessConfigs` and define `memberFilterConfigs`."
+        inheritedReferenceMemberFilterConfig:
+          allOf:
+          - $ref: '#/components/schemas/servicing.InheritedReferenceMemberFilterConfigDTO'
+          description: "Configures the analytic object to inherit population access filters from. The target analytic object must be assigned population access in the permission and have a binding (strong) reference from the source analytic object.\n * For example, assume `Applicant` -> `Requisition` is configured to be a binding (strong) reference.\n For `Applicant` (source analytic object) to inherit population access filters from `Requisition` (target analytic object), in the Applicant `dataSecurityProfile`, set `inheritedReferenceMemberFilterConfig` to `Requisition`. In this example, Applicant will inherit filters from Requisition because Requsition is assigned data security in this permission and there is a binding (strong) reference from Applicant to Requisition."
+        analyticObjectStatus:
+          enum:
+          - Unset
+          - Valid
+          - NoData
+          - NotFound
+          type: string
+          description: "The analytic object's validity status. Valid values: Valid, NoData, NotFound.\n * **Valid**: The object exists and has loaded data.\n * **NoData**: The object exists but doesn't have loaded data.\n * **NotFound**: The object doesn't exist."
+          format: enum
+    servicing.TargetsForAllDataCategoriesDTO:
+      type: object
+      properties:
+        accessToAllTargets:
+          type: boolean
+          description: If `true`, the permission grants access to all targets in all data categories. Default is `false`.
+        targetIds:
+          type: array
+          items:
+            type: string
+          description: Distinct targets to grant access to. A target can be the name of an analytic object, parent-child dimension or multi-valued property. This value is ignored if `accessToAllTargets` is `true`.
+    servicing.PermissionFailureDTO:
+      type: object
+      properties:
+        permissionId:
+          type: string
+          description: The unique identifier associated with the permission.
+        displayName:
+          type: string
+          description: An identifiable permission name to display in Visier, such as "Diversity Access".
+        error:
+          allOf:
+          - $ref: '#/components/schemas/servicing.PermissionErrorDTO'
+          description: The error associated with the failure.
+        correlationId:
+          type: string
+          description: An identifier to associate the matching request field. Only returned if a `correlationId` was defined for the corresponding request field.
+    servicing.RevertPermissionsRequestDTO:
+      type: object
+      properties:
+        permissionIds:
+          type: array
+          items:
+            type: string
+          description: The identifiers of the permissions to revert.
+    servicing.ShareableDataAccessSet:
+      type: object
+      properties:
+        dataAccessSetId:
+          type: string
+          description: The unique identifier of the shareable data access set.
+    servicing.RoleModulesConfigDTO:
+      type: object
+      properties:
+        contentPackageIds:
+          type: array
+          items:
+            type: string
+          description: The unique IDs of the content packages assigned to the permission.
+    servicing.GetCapabilitiesAPIResponseDTO:
+      type: object
+      properties:
+        capabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.CapabilityDTO'
+          description: A list of objects representing the available capabilities.
+    servicing.ContentPackageDTO:
+      type: object
+      properties:
+        contentPackageId:
+          type: string
+          description: The unique ID of the content package.
+        displayName:
+          type: string
+          description: An identifiable content package name to display in Visier, such as "Talent Acquisition Core Content".
+        description:
+          type: string
+          description: A description of the content package.
+        artifactsByType:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ContentPackageArtifactTypeDTO'
+          description: The artifacts explicitly included in the content package, grouped by artifact type. Only populated when the request includes `with=details`.
+    servicing.TargetSecurityConfigDTO:
+      type: object
+      properties:
+        targetSecurityForAll:
+          allOf:
+          - $ref: '#/components/schemas/servicing.TargetsForAllDataCategoriesDTO'
+          description: The data security for targets in all data categories in the permission.
+        targetSecurityProfiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.TargetsForDataCategoryDTO'
+          description: The data security for targets in specific data categories in the permission.
+    servicing.DataAccessSetIdDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the data access set.
+    servicing.DeletePermissionsRequestDTO:
+      type: object
+      properties:
+        permissionIds:
+          type: array
+          items:
+            type: string
+          description: The identifiers of the permissions to delete.
+    servicing.PropertySetConfigDTO:
+      type: object
+      properties:
+        propertyAccessConfigs:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.PropertyAccessConfigDTO'
+          description: The data access for a property.
+        shareableDataAccessSet:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ShareableDataAccessSet'
+          description: A shareable data access set. Shareable data access sets may be linked in multiple permissions.
+    servicing.ContentPackageArtifactDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: The unique identifier of the artifact, if it is identified by a UUID rather than an object name.
+        objectName:
+          type: string
+          description: The object name of the artifact, if it is identified by object name rather than a UUID.
+        displayName:
+          type: string
+          description: The display name of the artifact, if resolvable.
+        canFilterBy:
+          type: boolean
+          description: If `true`, this artifact is available to filter by. Only present for `dimension` and `keyGroup` artifacts.
+        canGroupBy:
+          type: boolean
+          description: If `true`, this artifact is available to group by. Only present for `dimension` and `keyGroup` artifacts.
+    servicing.NonVersionedSyncErrorDTO:
+      type: object
+      properties:
+        type:
+          enum:
+          - UserGroups
+          - UserDirectAssignments
+          - DataAccessSets
+          - Permissions
+          - Unknown
+          type: string
+          description: The type of artifact that failed to synchronize.
+          format: enum
+        objectId:
+          type: string
+          description: The unique identifier of the artifact that failed, for example permission ID, user group ID, and user ID. Not provided for system-level errors.
+        displayName:
+          type: string
+          description: The display name of the artifact that failed, for example `Diversity Access` and `Leadership Group`. Not provided for system-level errors or user direct assignments.
+        message:
+          type: string
+          description: Human-readable error message describing what went wrong.
+      description: Detailed error information for a synchronization failure.
+    servicing.ContentPackageArtifactTypeDTO:
+      type: object
+      properties:
+        artifactType:
+          type: string
+          description: The category of the content package item, such as `metric`, `dimension`, `keyGroup`, `planModel`, `guidebookTopic`, `analysis`, `report`, or `dataConnector`.
+        artifacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ContentPackageArtifactDTO'
+          description: The items of this category included in the content package.
+    servicing.PermissionBulkOperationResponseDTO:
+      type: object
+      properties:
+        successes:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.PermissionSuccessDTO'
+          description: The successfully processed permissions.
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.PermissionFailureDTO'
+          description: The permissions that did not process and any relevant error information.
+    servicing.SecurableDimensionDTO:
+      type: object
+      properties:
+        dimensionId:
+          type: string
+          description: The dimension ID.
+        displayName:
+          type: string
+          description: An identifiable dimension name to display in Visier, such as "Contract Type".
+        analyticObjectIds:
+          type: array
+          items:
+            type: string
+          description: A list of analytic object IDs.
+        hierarchyProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.HierarchyPropertyDTO'
+          description: The list of hierarchies you can map to a user in a permission's dynamic filter.
+    servicing.NonVersionedSyncResponseDTO:
+      type: object
+      properties:
+        status:
+          enum:
+          - Unknown
+          - Success
+          - Failed
+          type: string
+          description: "The status of the sync operation. Valid values:\n - `Success`: All artifacts synchronized successfully.\n - `Failed`: One or more errors occurred during synchronization."
+          format: enum
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.NonVersionedSyncErrorDTO'
+          description: "List of detailed errors that occurred during synchronization. Each error includes the artifact type, identifier, display name, and human-readable message.\n Empty if status is `Success`. Contains one or more errors if status is `Failed`.\n Common error types include: duplicate artifacts, missing parent artifacts, invalid references, and data inconsistencies."
+      description: Response from non-versioned synchronization operation.
+    servicing.GetDataSecurityObjectsAPIResponseDTO:
+      type: object
+      properties:
+        analyticObjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.AnalyticObjectDTO'
+          description: A list of analytic objects and their related objects that are available to define data access to.
+    servicing.MemberFilterConfigDTO:
+      type: object
+      properties:
+        dimensionFilters:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.DimensionFilterDTO'
+          description: "A list of objects representing the custom filters that define population access for the item. \n A custom filter can be a \"member filter\" (`staticDimensionFilter`) or a \"dynamic filter\" (`dynamicDimensionFilter`)."
+    servicing.BulkDataAccessSetResponseDTO:
+      type: object
+      properties:
+        successes:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.DataAccessSetSuccessDTO'
+          description: The successfully created data access sets.
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.DataAccessSetFailureDTO'
+          description: The data access sets that failed to be created and any relevant error information.
+    servicing.UserPropertyDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name property to map to in the dynamic filter. Valid values are one of `username`, `email`, `employeeId`.
+    servicing.GetPermissionsAPIResponseDTO:
+      type: object
+      properties:
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.PermissionDTO'
+          description: A list of objects representing the available permissions.
+      description: List of available permissions
+    servicing.PermissionErrorDTO:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+        rci:
+          type: string
+          description: A root cause identifier that allows Visier to determine the source of the problem.
+    servicing.CapabilityDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The unique name of the capability.
+        displayName:
+          type: string
+          description: An identifiable capability name to display in Visier, such as "Schedule Analysis".
+        description:
+          type: string
+          description: A description of the capability.
+    servicing.TargetsForDataCategoryDTO:
+      type: object
+      properties:
+        dataCategoryId:
+          type: string
+          description: The unique identifier of the data category for which the target access definition applies.
+        accessToAllTargets:
+          type: boolean
+          description: If `true`, the permission grants access to all targets in all data categories. Default is `false`.
+        targetIds:
+          type: array
+          items:
+            type: string
+          description: Distinct targets to grant access to. A target can be the name of an analytic object, parent-child dimension or multi-valued property. This value is ignored if `accessToAllTargets` is `true`.
+    servicing.NonVersionedSyncRequestDTO:
+      type: object
+      properties:
+        syncTypes:
+          type: array
+          items:
+            enum:
+            - UserGroups
+            - UserDirectAssignments
+            type: string
+            format: enum
+          description: "Optional types to synchronize. Specify which artifact types to include in the sync operation. Valid values:\n - `UserGroups`: Synchronizes user group assignments.\n - `UserDirectAssignments`: Synchronizes direct permission assignments to users.\n\n Data Access Sets and Permissions are always synchronized regardless of this setting."
+      description: "Request to copy permissions, data access sets, user groups, and user direct assignments from the versioned environment to the non-versioned environment. This operation immediately applies the security configurations, independent of data versioning.\n This endpoint always synchronizes permissions and data access sets. You can optionally synchronize user group assignments and direct permissions assignments to users."
+    servicing.GetDataAccessSetsAPIResponseDTO:
+      type: object
+      properties:
+        dataAccessSets:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.DataAccessSetDTO'
+          description: A list of objects representing the shareable data access sets.
+    servicing.RelatedAnalyticObjectDTO:
+      type: object
+      properties:
+        analyticObjectId:
+          type: string
+          description: The analytic object ID.
+        displayName:
+          type: string
+          description: An identifiable analytic object name to display in Visier, such as "Recognition".
+    servicing.DynamicDimensionFilterDTO:
+      type: object
+      properties:
+        dimensionId:
+          type: string
+          description: The dimension ID associated with the filter.
+        subjectReferencePath:
+          type: array
+          items:
+            type: string
+          description: The subject reference path.
+        dynamicPropertyMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.DynamicPropertyMappingDTO'
+          description: The properties assigned population access in the dynamic filter.
+        dimensionStatus:
+          enum:
+          - Unset
+          - Valid
+          - NoData
+          - NotFound
+          type: string
+          description: "The dimension's validity status. Valid values: Valid, NoData, NotFound.\n * **Valid**: The object exists and has loaded data.\n * **NoData**: The object exists but doesn't have loaded data.\n * **NotFound**: The object doesn't exist."
+          format: enum
+    servicing.InheritedReferenceMemberFilterConfigDTO:
+      type: object
+      properties:
+        targetAnalyticObjectId:
+          type: string
+          description: 'The unique ID of the analytic object that the source
+
+            analytic object should inherit filters from. The target analytic object must have a binding (strong) reference from the source analytic object.'
+        analyticObjectReference:
+          type: string
+          description: 'The optional object name of a binding (strong) reference to the target analytic object. If not specified, uses the first binding reference from the source
+
+            to the target analytic object.'
+    servicing.AdminCapabilityConfigDTO:
+      type: object
+      properties:
+        allCapabilitiesAccess:
+          type: boolean
+          description: If `true`, the permission has all possible capabilities.
+        capabilities:
+          type: array
+          items:
+            type: string
+          description: A list of the capabilities assigned in the permission. Not required if `allCapabilitiesAccess` is true.
+    servicing.DataAccessSetDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the data access set.
+        displayName:
+          type: string
+          description: An identifiable data access set name to display in Visier, such as "Aggregate(Employee)".
+        description:
+          type: string
+          description: A description of the data access set.
+        analyticObjectId:
+          type: string
+          description: The unique ID of the analytic object that the data access set is for.
+        propertyAccessConfigs:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.PropertyAccessConfigDTO'
+          description: The data access assigned to properties in the data access set.
+        correlationId:
+          type: string
+          description: "An optional identifier to associate bulk request fields with their corresponding response fields. Correlation IDs may be between 3 and 64 characters long and\n consist of alphanumeric characters, `-`, and `_`.\n\n **Note**:\n - Each request field must have a unique `correlationId`.\n - Cannot reuse a `correlationId` in subsequent `POST` requests while the ID is still active. A `correlationId` is active for 7 days after creation."
+    servicing.SourceSecurityProfileDTO:
+      type: object
+      properties:
+        sourceId:
+          type: string
+          description: The unique identifier of the source. Required to update source security. To retrieve source IDs, see `GET /v1/op/data-sources`.
+    servicing.BulkDataAccessSetDeleteRequestDTO:
+      type: object
+      properties:
+        shareablePropertyAccessConfigs:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.DataAccessSetIdDTO'
+          description: The data access sets to be deleted.
+    servicing.HierarchyPropertyDTO:
+      type: object
+      properties:
+        hierarchyPropertyId:
+          type: string
+          description: The unique ID of the property.
+        displayName:
+          type: string
+          description: An identifiable property name to display in Visier, such as "Name Property".
+    servicing.DimensionFilterDTO:
+      type: object
+      properties:
+        staticDimensionFilter:
+          $ref: '#/components/schemas/servicing.StaticDimensionFilterDTO'
+        dynamicDimensionFilter:
+          $ref: '#/components/schemas/servicing.DynamicDimensionFilterDTO'
+    servicing.MemberSelectionDTO:
+      type: object
+      properties:
+        namePath:
+          type: array
+          items:
+            type: string
+          description: The member name path.
+        excluded:
+          type: boolean
+          description: If `true`, population access is granted for all members except this member.
+        dimensionMemberStatus:
+          enum:
+          - Unset
+          - Valid
+          - NoData
+          - NotFound
+          type: string
+          description: "The dimension member's validity status. Valid values: Valid, NotFound.\n * **Valid**: The object exists and has loaded data.\n * **NotFound**: The object doesn't exist."
+          format: enum
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    servicing.SecurablePropertyDTO:
+      type: object
+      properties:
+        propertyId:
+          type: string
+          description: The property ID.
+        displayName:
+          type: string
+          description: An identifiable property name to display in Visier, such as "Job Pay Level".
+        analyticObjectId:
+          type: string
+          description: The property's analytic object ID.
+        isPrimaryKey:
+          type: boolean
+          description: If true, this property is the analytic object's primary key.
+        referenceSymbolName:
+          type: string
+          description: The reference symbol name.
+    servicing.DataAccessSetSuccessDTO:
+      type: object
+      properties:
+        dataAccessSetId:
+          type: string
+          description: The unique identifier associated with the created data access set.
+        displayName:
+          type: string
+          description: An identifiable data access set name to display in Visier, such as "Detailed(Employee)".
+        correlationId:
+          type: string
+          description: An identifier to associate the matching request field. Only returned if a `correlationId` was defined for the corresponding request field.
+    servicing.BulkDataAccessSetRevertRequestDTO:
+      type: object
+      properties:
+        shareablePropertyAccessConfigs:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.DataAccessSetIdDTO'
+          description: The data access sets to be reverted.
+    servicing.DataAccessSetErrorDTO:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+        rci:
+          type: string
+          description: A root cause identifier that allows Visier to determine the source of the problem.
+    servicing.SourceSecurityConfigDTO:
+      type: object
+      properties:
+        sourceSecurityProfiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.SourceSecurityProfileDTO'
+          description: The sources this permission grants access to.
+        hasWriteAccessToAllSources:
+          type: boolean
+          description: If `true`, the permission grants the ability to create, read, update, and delete all sources. Default is `false`.
+    servicing.StaticDimensionFilterDTO:
+      type: object
+      properties:
+        dimensionId:
+          type: string
+          description: The dimension ID associated with the filter.
+        subjectReferencePath:
+          type: array
+          items:
+            type: string
+          description: The subject reference path.
+        memberSelections:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.MemberSelectionDTO'
+          description: A list of objects representing the dimension members assigned population access in the member filter.
+        dimensionStatus:
+          enum:
+          - Unset
+          - Valid
+          - NoData
+          - NotFound
+          type: string
+          description: "The dimension's validity status. Valid values: Valid, NoData, NotFound.\n * **Valid**: The object exists and has loaded data.\n * **NoData**: The object exists but doesn't have loaded data.\n * **NotFound**: The object doesn't exist."
+          format: enum
+    servicing.PropertyAccessConfigDTO:
+      type: object
+      properties:
+        propertyId:
+          type: string
+          description: The property ID associated with the property access configuration.
+        analyticObjectId:
+          type: string
+          description: The analytic object ID of the property.
+        analyticObjectReferencePaths:
+          type: array
+          items:
+            type: string
+          description: The path to the analytic object reference. Empty if the configuration is not a reference.
+        accessLevel:
+          enum:
+          - None
+          - Aggregate
+          - Detailed
+          type: string
+          description: "The access level of the property. Valid values are: `Aggregate`, `Detailed`.\n * **Aggregate**: The property can only be accessed as part of an aggregate.\n * **Detailed**: The property can be accessed at a detailed level."
+          format: enum
+        propertyStatus:
+          enum:
+          - Unset
+          - Valid
+          - NoData
+          - NotFound
+          type: string
+          description: "The property's validity status. Valid values: `Valid`, `NoData`, `NotFound`.\n * **Valid**: The object exists and has loaded data.\n * **NoData**: The object exists but doesn't have loaded data.\n * **NotFound**: The object doesn't exist."
+          format: enum
+    servicing.GetContentPackagesAPIResponseDTO:
+      type: object
+      properties:
+        contentPackages:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ContentPackageDTO'
+          description: A list of objects representing the available content packages.
+    servicing.DynamicPropertyMappingDTO:
+      type: object
+      properties:
+        hierarchyPropertyId:
+          type: string
+          description: The unique ID of the property.
+        userProperty:
+          allOf:
+          - $ref: '#/components/schemas/servicing.UserPropertyDTO'
+          description: The user property that you want to link the name property or organization head to.
+        hierarchyPropertyStatus:
+          enum:
+          - Unset
+          - Valid
+          - NoData
+          - NotFound
+          type: string
+          description: "The property's validity status. Valid values: `Valid`, `NotFound`.\n * **Valid**: The object exists and has loaded data.\n * **NotFound**: The object doesn't exist."
+          format: enum
+    servicing.InheritedAccessConfigDTO:
+      type: object
+      properties:
+        analyticObjectId:
+          type: string
+          description: The analytic object ID associated with the inherited access configuration.
+        removeAccess:
+          type: boolean
+          description: The flag for removing access to the inherited analytic object.
+        memberFilterConfigs:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.MemberFilterConfigDTO'
+          description: Custom filters that define population access for an inherited analytic object in the permission.
+    servicing.BulkDataAccessSetRequestDTO:
+      type: object
+      properties:
+        shareablePropertyAccessConfigs:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.DataAccessSetDTO'
+          description: The data access sets to be created or updated.
+    servicing.AnalyticObjectDTO:
+      type: object
+      properties:
+        analyticObjectId:
+          type: string
+          description: The unique ID of the analytic object.
+        displayName:
+          type: string
+          description: An identifiable name to display in Visier, such as "Employee".
+        objectType:
+          enum:
+          - Event
+          - Subject
+          - BusinessOutcomeOverlay
+          - PlanOrBudgetOverlay
+          - ExternalBenchmark
+          - VisierBenchmark
+          - UsageOverlay
+          - OtherOverlay
+          - InternalComparison
+          - PlanAnalyticObject
+          type: string
+          description: The analytic object type.
+          format: enum
+        relatedObjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.RelatedAnalyticObjectDTO'
+          description: The analytic objects related to the data security object.
+        securableProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.SecurablePropertyDTO'
+          description: All available properties from the data security object and its related analytic objects that you can configure data access for.
+        securableDimensions:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.SecurableDimensionDTO'
+          description: A list of dimensions that are available to define population access filters in the permission.
+    servicing.DataAccessSetFailureDTO:
+      type: object
+      properties:
+        dataAccessSetId:
+          type: string
+          description: The unique identifier associated with the data access set.
+        displayName:
+          type: string
+          description: An identifiable data access set name to display in Visier, such as "Detailed(Employee)".
+        error:
+          allOf:
+          - $ref: '#/components/schemas/servicing.DataAccessSetErrorDTO'
+          description: The error associated with the failure.
+        correlationId:
+          type: string
+          description: An identifier to associate the matching request field. Only returned if a `correlationId` was defined for the corresponding request field.
+    servicing.PermissionSuccessDTO:
+      type: object
+      properties:
+        permissionId:
+          type: string
+          description: The unique identifier associated with the permission.
+        displayName:
+          type: string
+          description: An identifiable permission name to display in Visier, such as "Diversity Access".
+        correlationId:
+          type: string
+          description: An identifier to associate the matching request field. Only returned if a `correlationId` was defined for the corresponding request field.
+    servicing.PermissionDTO:
+      type: object
+      properties:
+        permissionId:
+          type: string
+          description: The unique identifier associated with the permission.
+        displayName:
+          type: string
+          description: An identifiable permission name to display in Visier, such as "Diversity Access".
+        description:
+          type: string
+          description: A user-defined description of the permission.
+        dataSecurityProfiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.DataSecurityProfileDTO'
+          description: A list of objects representing the data security for each item in a permission.
+        adminCapabilityConfig:
+          allOf:
+          - $ref: '#/components/schemas/servicing.AdminCapabilityConfigDTO'
+          description: The capabilities assigned in the permission.
+        roleModulesConfig:
+          allOf:
+          - $ref: '#/components/schemas/servicing.RoleModulesConfigDTO'
+          description: A list of content packages assigned to the permission.
+        sourceSecurityConfig:
+          allOf:
+          - $ref: '#/components/schemas/servicing.SourceSecurityConfigDTO'
+          description: "The sources assigned in the permission.\n <br>**Note:** <em>This field is in **limited availability**. If you are interested in using it, please contact your Customer Success Manager (CSM).</em>"
+        targetSecurityConfig:
+          allOf:
+          - $ref: '#/components/schemas/servicing.TargetSecurityConfigDTO'
+          description: "A list of data categories and their targets assigned in the permission.\n <br>**Note:** <em>This field is in **limited availability**. If you are interested in using it, please contact your Customer Success Manager (CSM).</em>"
+        correlationId:
+          type: string
+          description: "An optional identifier to associate bulk request fields with their corresponding response fields. Correlation IDs may be between 3 and 64 characters long and\n consist of alphanumeric characters, `-`, and `_`.\n\n **Note**:\n - Each request field must have a unique `correlationId`.\n - Cannot reuse a `correlationId` in subsequent POST requests while the ID is still active. A `correlationId` is active for 7 days after creation."
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: administration
+  tags:
+  - Projects
+  - ProductionVersions
+  - UsersV3
+  - UsersV2
+  - UserGroupsV2
+  - UsersV1
+  - Profiles
+  - Permissions
+  - TenantsV2
+  - TenantsV1
+  - ConsolidatedAnalytics
+  - Sources
+  - SystemStatus
+  - EmailDomains
+  - EncryptionKeys
+  - NetworkSubnets
+  - SidecarSolutions
+  - ReleaseVersionConfiguration
+  - VeeConfiguration

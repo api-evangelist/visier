@@ -1,0 +1,2667 @@
+{
+  "item": [
+    {
+      "id": "b8adccfc-6f02-47d9-b719-a279e058cf3d",
+      "name": "Skills Library",
+      "description": {
+        "content": "Access over 14,000 skills and get complete skill details in 27 languages, such as alternative titles, descriptions, and hierarchies.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6236f247-f7c0-408d-90f5-0dd24885e969",
+          "name": "Get skill details by ID",
+          "request": {
+            "name": "Get skill details by ID",
+            "description": {
+              "content": "If you know the ID of a skill, use this endpoint to retrieve information such as display name, description, Automation Index, Remote Work Index, and alternative names.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "skills",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the skill to retrieve details for.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                "key": "Accept-Language",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "66b015c3-b547-41c3-9bbb-d88c0537d9c4",
+              "name": "Details of the requested skill.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skills",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the skill to retrieve details for.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"skillGroupId\": \"string\",\n  \"skillCategoryId\": \"string\",\n  \"isKnowledge\": true,\n  \"skillType\": \"string\",\n  \"alternativeTitles\": [\n    \"string\",\n    \"string\"\n  ],\n  \"remoteIndex\": 2559.5948256363754,\n  \"automationIndex\": 1648\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "daf91181-cfd8-45c4-abac-a5b2f7a7fe1d",
+              "name": "The API request failed given the parameters provided, such as missing or invalid parameters.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skills",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the skill to retrieve details for.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65e91a75-7af2-4955-9cbe-cece4885839d",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skills",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the skill to retrieve details for.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9c112b1-e236-4e6d-8a76-d6032dbadc9f",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skills",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the skill to retrieve details for.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "319cfda0-cd35-4943-aab4-3c931065ec02",
+          "name": "Retrieve a list of skills",
+          "request": {
+            "name": "Retrieve a list of skills",
+            "description": {
+              "content": "Use this endpoint to retrieve all skills in Visier's Skills Library.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "skills"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "skillGroupId",
+                  "value": "<string>",
+                  "description": "Filter only skills that belong to a certain skill group.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "skillCategoryId",
+                  "value": "<string>",
+                  "description": "Filter only skills that belong to a certain skill category.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                "key": "Accept-Language",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8ef2b056-7124-4faf-b277-2a52c9fcbbbc",
+              "name": "List of skills.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skills"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skillGroupId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skillCategoryId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3110897e-1be2-42e4-8718-02d0b48be583",
+              "name": "The API request failed given the parameters provided, such as missing or invalid parameters.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skills"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skillGroupId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skillCategoryId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6248d8fd-0161-47bf-9fd9-b04eaa188bb3",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skills"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skillGroupId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skillCategoryId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "884d5d90-b66f-4459-a6ce-abf65f1dd92d",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skills"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skillGroupId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skillCategoryId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0c1115f-4946-4e5a-b326-fde41570bca1",
+          "name": "Search skills",
+          "request": {
+            "name": "Search skills",
+            "description": {
+              "content": "Retrieve a list of skills that match a specified search term.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "skills",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "term",
+                  "value": "<string>",
+                  "description": "(Required) The term to search for. The search term must be URL encoded and the minimum length is 3 characters.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                "key": "Accept-Language",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "811fdf02-677a-4801-bafc-a1a09b82ffac",
+              "name": "List of skills matching the search term.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skills",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c46e0df-d270-4257-aaa3-aefe331b9432",
+              "name": "The API request failed given the parameters provided, such as missing or invalid parameters.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skills",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4325910-70a8-491b-843f-59991ac54fc1",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skills",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "799c31e7-5be7-46f5-8bd2-d72d6b1224e7",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skills",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "628f191a-0ec5-447e-adb5-9068cf0f1cf4",
+          "name": "Extract skills from text",
+          "request": {
+            "name": "Extract skills from text",
+            "description": {
+              "content": "Extract the relevant skills from text such as job descriptions and course outlines.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "skills",
+                "extract"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                "key": "Accept-Language",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"<string>\",\n  \"languageCode\": \"<string>\",\n  \"limit\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4ae5429b-bfff-4d81-8282-be3922d2dbdb",
+              "name": "List of skills extracted from the text.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skills",
+                    "extract"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"<string>\",\n  \"languageCode\": \"<string>\",\n  \"limit\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"score\": 3740\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"score\": 4620\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "248dd009-b0b6-406f-8bb7-c5fb2f610d84",
+              "name": "The API request failed given the parameters provided, such as missing or invalid parameters.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skills",
+                    "extract"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"<string>\",\n  \"languageCode\": \"<string>\",\n  \"limit\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14b933e3-4625-4a73-8aed-a5c2bf245ec0",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skills",
+                    "extract"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"<string>\",\n  \"languageCode\": \"<string>\",\n  \"limit\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b646d14e-4443-4661-ab85-b140613770dd",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skills",
+                    "extract"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"<string>\",\n  \"languageCode\": \"<string>\",\n  \"limit\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1c513e67-832f-495e-9a61-8e993716a5c1",
+          "name": "Match a skill set to a group of skill sets (targets)",
+          "request": {
+            "name": "Match a skill set to a group of skill sets (targets)",
+            "description": {
+              "content": "Find the best match between a skill set and a group of skill sets (targets). The response returns a ranking of the targets with the best match appearing at the top of the list.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "skills",
+                "match"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"skillSet\": [\n    \"<string>\"\n  ],\n  \"targetSkillSets\": [\n    [\n      \"<string>\"\n    ]\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d1011946-431c-40f5-a755-fdafcbb98fc9",
+              "name": "Ranked list of skill sets (targets) with the best match appearing at the top of the list. The integer value indicates the position of the target in the request body.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skills",
+                    "match"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"skillSet\": [\n    \"<string>\"\n  ],\n  \"targetSkillSets\": [\n    [\n      \"<string>\"\n    ]\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  0,\n  2,\n  1\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a656ce9c-350d-4eda-8891-18518ff1c27e",
+              "name": "The API request failed given the parameters provided, such as missing or invalid parameters.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skills",
+                    "match"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"skillSet\": [\n    \"<string>\"\n  ],\n  \"targetSkillSets\": [\n    [\n      \"<string>\"\n    ]\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe82679a-8b49-4185-94cf-d886938d31ef",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skills",
+                    "match"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"skillSet\": [\n    \"<string>\"\n  ],\n  \"targetSkillSets\": [\n    [\n      \"<string>\"\n    ]\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e61355e2-01a9-4b62-950e-b7c7ce696ef4",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skills",
+                    "match"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"skillSet\": [\n    \"<string>\"\n  ],\n  \"targetSkillSets\": [\n    [\n      \"<string>\"\n    ]\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79951fb1-b054-4bc8-ae84-d23c7443686d",
+          "name": "Get skill group details by ID",
+          "request": {
+            "name": "Get skill group details by ID",
+            "description": {
+              "content": "If you know the ID of a skill group, use this endpoint to retrieve information such as display name, description, Automation Index, Remote Work Index, and alternative names.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "skill-groups",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the skill group to retrieve details for.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                "key": "Accept-Language",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4995ff33-8675-437a-ac1f-0bd733c3ef3f",
+              "name": "Details of the requested skill group.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skill-groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the skill group to retrieve details for.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"skillCategoryId\": \"string\",\n  \"skills\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"skillGroupId\": \"string\",\n      \"skillCategoryId\": \"string\",\n      \"isKnowledge\": true,\n      \"skillType\": \"string\",\n      \"alternativeTitles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"remoteIndex\": 2691.3678707136023,\n      \"automationIndex\": 5635\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"skillGroupId\": \"string\",\n      \"skillCategoryId\": \"string\",\n      \"isKnowledge\": false,\n      \"skillType\": \"string\",\n      \"alternativeTitles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"remoteIndex\": 9067.740386135187,\n      \"automationIndex\": 1290\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0fb3f7c-a355-4564-b060-d102368c6b09",
+              "name": "The API request failed given the parameters provided, such as missing or invalid parameters.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skill-groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the skill group to retrieve details for.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2fcea0c-2481-4d2e-a28f-d754c931ae0d",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skill-groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the skill group to retrieve details for.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8bcb0a3-2ed7-4d7d-8de7-c4e7abc43a4c",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skill-groups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the skill group to retrieve details for.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb2c07d2-e713-4cd3-82ee-95d2511aa26e",
+          "name": "Retrieve a list of skill groups",
+          "request": {
+            "name": "Retrieve a list of skill groups",
+            "description": {
+              "content": "Use this endpoint to retrieve all skill groups in Visier's Skills Library.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "skill-groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "skillCategoryId",
+                  "value": "<string>",
+                  "description": "Filter only skills that belong to a certain skill category.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                "key": "Accept-Language",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "91ecb0a9-10be-413b-a1aa-1887a249c51d",
+              "name": "List of skill groups.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skill-groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skillCategoryId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6251d60f-769f-4388-8f3f-f6ce1ea99874",
+              "name": "The API request failed given the parameters provided, such as missing or invalid parameters.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skill-groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skillCategoryId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a92ce677-f7e4-4233-84d6-99f888b4e604",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skill-groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skillCategoryId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc217b02-3884-4e5d-a42c-f902df15c7d7",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skill-groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skillCategoryId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c1433758-69c4-440d-8c65-3c4db216c72c",
+          "name": "Get skill category details by ID",
+          "request": {
+            "name": "Get skill category details by ID",
+            "description": {
+              "content": "If you know the ID of a skill category, use this endpoint to retrieve information such as display name, description, Automation Index, Remote Work Index, and alternative names.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "skill-categories",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the skill category to retrieve details for.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                "key": "Accept-Language",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f40b2926-45e3-4cb5-9bcb-07bd7325d784",
+              "name": "Details of the requested skill category.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skill-categories",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the skill category to retrieve details for.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"skillGroups\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"skillCategoryId\": \"string\",\n      \"skills\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"skillGroupId\": \"string\",\n          \"skillCategoryId\": \"string\",\n          \"isKnowledge\": true,\n          \"skillType\": \"string\",\n          \"alternativeTitles\": [\n            \"string\",\n            \"string\"\n          ],\n          \"remoteIndex\": 5669.4406055354775,\n          \"automationIndex\": 1112\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"skillGroupId\": \"string\",\n          \"skillCategoryId\": \"string\",\n          \"isKnowledge\": true,\n          \"skillType\": \"string\",\n          \"alternativeTitles\": [\n            \"string\",\n            \"string\"\n          ],\n          \"remoteIndex\": 9752.916558199438,\n          \"automationIndex\": 7473\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"skillCategoryId\": \"string\",\n      \"skills\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"skillGroupId\": \"string\",\n          \"skillCategoryId\": \"string\",\n          \"isKnowledge\": false,\n          \"skillType\": \"string\",\n          \"alternativeTitles\": [\n            \"string\",\n            \"string\"\n          ],\n          \"remoteIndex\": 9693.654547060863,\n          \"automationIndex\": 344\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"skillGroupId\": \"string\",\n          \"skillCategoryId\": \"string\",\n          \"isKnowledge\": true,\n          \"skillType\": \"string\",\n          \"alternativeTitles\": [\n            \"string\",\n            \"string\"\n          ],\n          \"remoteIndex\": 3599.9837690594472,\n          \"automationIndex\": 873\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99b51a4e-5e9d-41cc-96f9-cb9ec8685c82",
+              "name": "The API request failed given the parameters provided, such as missing or invalid parameters.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skill-categories",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the skill category to retrieve details for.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f889190-bf07-4a7c-bfc1-58770650a420",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skill-categories",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the skill category to retrieve details for.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "637f76d4-84e8-4c68-9ded-d08c87c89bc7",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skill-categories",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the skill category to retrieve details for.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "680d9a73-d780-4975-99e6-bbe48c88c89b",
+          "name": "Retrieve a list of skill categories",
+          "request": {
+            "name": "Retrieve a list of skill categories",
+            "description": {
+              "content": "Use this endpoint to retrieve all skill categories in Visier's Skills Library.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "skill-categories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                "key": "Accept-Language",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d37be22c-3d55-461c-9402-8a2917bfc970",
+              "name": "List of skill categories.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skill-categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60a62c4d-7bbc-4a21-986c-0bd75176025d",
+              "name": "The API request failed given the parameters provided, such as missing or invalid parameters.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skill-categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55047cd2-4b37-477c-8706-ab85e7dc743c",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skill-categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7fbb93a-8e4c-47d8-9965-e56806dc1469",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "skill-categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows you to specify if you want the output to be in one of the accepted languages.\n\nFormat: **ISO 639-1** language code. For a list of supported languages, see \"Supported Languages\" in the Skills Intelligence Engine API documentation.\n\nIf no value is specified, the response language is English.\n",
+                    "key": "Accept-Language",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a51ef0b1-62cc-4a2a-b957-bf1ee1243763",
+    "name": "Skills Intelligence Engine Skills Library API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Everything you need to power skills and turn them into actions.\n",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Analytic Model Object Configuration API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ObjectConfiguration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all calculation concepts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/calculation-concepts",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve the calculation concepts available in production."
+        },
+        {
+          "info": {
+            "name": "Retrieve the configuration of a calculation concept",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/calculation-concepts/:conceptId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "conceptId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the concept to retrieve the configuration for."
+              }
+            ]
+          },
+          "docs": "Retrieve the configuration details of a calculation concept in production."
+        },
+        {
+          "info": {
+            "name": "Map dimension members to nodes in a calculation concept",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/admin/calculation-concepts/:conceptId/configure",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "conceptId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the concept to configure."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Map dimension members to nodes in a calculation concept.\n The changes are applied in a new project and published to production.\n\n The body of this API is the source of truth for dimension members mapped to the concept. For example, if a node in\n the body does not have any dimension members, all existing dimension members mapped to that node will be removed."
+        },
+        {
+          "info": {
+            "name": "Retrieve all selection concepts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/selection-concepts",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve the selection concepts available in production."
+        },
+        {
+          "info": {
+            "name": "Retrieve the configuration of a selection concept",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/selection-concepts/:conceptId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "conceptId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the concept to retrieve the configuration for."
+              }
+            ]
+          },
+          "docs": "Retrieve the configuration details of a selection concept in production."
+        },
+        {
+          "info": {
+            "name": "Map dimension members to a selection concept",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/admin/selection-concepts/:conceptId/configure",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "conceptId",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the concept to configure."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Map dimension members to a selection concept.\n The changes are applied to a new project and published to production.\n\n The body of this API is the source of truth for dimension members mapped to the concept. For example, if a node in\n the body does not have any dimension members, all existing dimension members mapped to that node will be removed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

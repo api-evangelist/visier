@@ -1,0 +1,146 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Analytic Model Personalized Alerts API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PersonalizedAlerts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve personalized alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/alerts"
+          },
+          "docs": "Get all personalized alerts you have access to. The response returns each alert’s ID, creator, and whether the alert is enabled or disabled.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Create a personalized alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1alpha/alerts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new personalized alert. In the request body, define the alert’s display name and its trigger criteria, including the metric, filters, time periods, and threshold value.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Retrieve a personalized alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/alerts/:alertId",
+            "params": [
+              {
+                "name": "alertId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the details of a specific personalized alert. You must know the ID of the alert to retrieve its details. To retrieve all alert IDs, see `GET /v1alpha/alerts`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Update a personalized alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1alpha/alerts/:alertId",
+            "params": [
+              {
+                "name": "alertId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the alert."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Make changes to an existing personalized alert. You can only update alerts that you created. You must know the ID of the alert to update it. To retrieve all alert IDs, see `GET /v1alpha/alerts`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Delete a personalized alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1alpha/alerts/:alertId",
+            "params": [
+              {
+                "name": "alertId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the alert."
+              }
+            ]
+          },
+          "docs": "Delete a personalized alert. You can only delete alerts that you created. Alternatively, to disable an alert, see `PUT /v1alpha/alerts/{alertId}/recipient-status`. You must know the ID of the alert to delete it. To retrieve all alert IDs, see `GET /v1alpha/alerts`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please "
+        },
+        {
+          "info": {
+            "name": "Enable or disable a personalized alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1alpha/alerts/:alertId/recipient-status",
+            "params": [
+              {
+                "name": "alertId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the alert."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enable or disable a personalized alert. Disabling an alert removes it from your Home room and future email digests. You can re-enable an alert at any time.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Retrieve personalized alerts notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/notifications"
+          },
+          "docs": "Get all the notifications for your active personalized alerts from the last 30 days. For all active alerts, the response returns the date that the alert was triggered and the alert’s trigger criteria.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

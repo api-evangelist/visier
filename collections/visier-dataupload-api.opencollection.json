@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Data In Data Upload API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DataUpload",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload a data file to Visier",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/data/upload/files/:filename",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "filename",
+                "value": "",
+                "type": "path",
+                "description": "The filename of the data file to upload, including the file extension (such as .zip or .csv)."
+              }
+            ]
+          },
+          "docs": "Use this API to upload data files to Visier. You can upload ZIP, CSV, XLS, and XLSX filetypes in plaintext or encrypted with Visier's PGP key.\n\n Use of this API requires client redirect. This API redirects requests directly to Visier's upload infrastructure to support long-running uploads. \n To ensure efficient uploading, we recommend that you use an HTTP client that supports the 100 Continue status code.\n\n The maximum file upload size is 500 MB. We recommend using SFTP for larger file sizes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

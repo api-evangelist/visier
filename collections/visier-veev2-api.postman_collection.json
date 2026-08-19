@@ -1,0 +1,194 @@
+{
+  "item": [
+    {
+      "id": "9f0b1ffc-625f-4e82-81be-17007c826dd8",
+      "name": "VeeV2",
+      "description": {
+        "content": "Use Vee through Visier APIs, such as getting sample questions. Vee V2 improves upon Vee V1 by aligning response field names with the Vee UI.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e59a7946-7b22-41f2-bda8-8b37d731612c",
+          "name": "Retrieve a list of sample questions to ask Vee",
+          "request": {
+            "name": "Retrieve a list of sample questions to ask Vee",
+            "description": {
+              "content": "Get a list of sample questions to help you start using Vee. The response returns a list of questions that you can ask Vee, such as \"What is the turnover rate?\".\n You may occasionally encounter a sample question that can't be answered due to data availability or your data access",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "vee",
+                "sample-questions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "03011ddd-ad14-4f2c-a206-03154623d14f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "vee",
+                    "sample-questions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"questions\": [\n    {\n      \"question\": \"string\",\n      \"questionId\": \"string\",\n      \"categoryId\": \"string\",\n      \"isSpotlightedForUser\": true\n    },\n    {\n      \"question\": \"string\",\n      \"questionId\": \"string\",\n      \"categoryId\": \"string\",\n      \"isSpotlightedForUser\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21fe5dbc-1aea-4931-b8c6-cb5de6b86b85",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "vee",
+                    "sample-questions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "eac51e07-f936-405f-bfec-56e40ab42e69",
+    "name": "Visier Data Out Vee V2 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for getting data out of Visier, such as aggregate data and data version information.",
+      "type": "text/plain"
+    }
+  }
+}

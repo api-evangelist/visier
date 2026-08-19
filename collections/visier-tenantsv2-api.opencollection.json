@@ -1,0 +1,189 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Administration Tenants V2 API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TenantsV2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of all analytic tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/admin/tenants",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The limit of analytic tenants to return. The limit is `1000` if the following fields are not included in the `mask`.\n  - `homeAnalysisId`\n  - `homeAnalysisByUserGroup`\n  - `clickThroughLink`\n  - `defaultCurrency`\n\n The limit is `400` if any of the above fields are included in the `mask` or if `mask` is not specified."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The starting index of the first tenant to return. Default is 0."
+              },
+              {
+                "name": "mask",
+                "value": "",
+                "type": "query",
+                "description": "A list of fields to include in the response, separated by commas. If not specified, includes all fields in the response. Valid values:\n  - `tenantCode`\n  - `tenantDisplayName`\n  - `currentDataVersion`\n  - `traits`\n  - `dataVersionDate`\n  - `provisionDate`\n  - `vanityUrlName`\n  - `status`\n  - `canAdministerOtherTenants`\n  - `industryCode`\n  - `industryInfo`\n  - `purchasedModules`\n  - `manuallyAddedModules`\n  - `embeddableDomains`\n  - `allowedOAuthIdpUrlDomains`\n  - `customProperties`\n  - `ssoInstanceIssuers`\n  - `homeAnalysisId`\n  - `homeAnalysisByUserGroup`\n  - `clickThroughLink`\n  - `clickThroughLinkEnabled`\n  - `defaultCurrency`\n  - `primaryBusinessLocation`\n  - `effectiveIndustryCode`\n  - `companySize`\n\n If `mask` is specified in both request body and on the query string, the effective `mask` is the set union of both inputs."
+              },
+              {
+                "name": "dataProfile",
+                "value": "",
+                "type": "query",
+                "description": "Returns tenants with the specified data profile. Valid values: `Regular`, `Integration`, `Demo`, `Cat`, `Test`, `ProductIntelligence`. If omitted, returns all tenants."
+              },
+              {
+                "name": "tenantCodes",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated string of the tenants to retrieve details for. Specify tenant codes in one of the following formats:\n - Full tenant code. Example: `WFF_j1r~c1o`.\n - Short tenant code. Example: `c1o`.\n\n Use the same format for all tenants. Do not use both formats in one request.\n\n Examples:\n - Full: `tenantCodes=WFF_j1r~c1o,WFF_j1r~e1a,WFF_j1r~i1o`\n - Short: `tenantCodes=c1o,e1a,i1o`\n\n The limit of analytic tenants to return is `1000` if the following fields are not included in the `mask` argument.\n  - `homeAnalysisId`\n  - `homeAnalysisByUserGroup`\n  - `clickThroughLink`\n  - `defaultCurrency`\n\n The limit is `400` if any of the above fields are included in the `mask` or if `mask` is not specified.\n\n **Note:** It is recommended to use the request body for long lists of tenant codes. The specified tenant codes are combined (set union)\n with the `tenantCodes` query parameter if values for both are provided."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve the full list of analytic tenants managed by you with their current states and the content\n modules assigned to them, and all other relevant details for the tenants if requested."
+        },
+        {
+          "info": {
+            "name": "Add an analytic tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2/admin/tenants",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Prior to processing and loading an analytic tenant's data files, you must provision, or create, that tenant. A\n provisioned analytic tenant is automatically enabled. If the tenant's data is loaded after provisioning, that data\n is immediately accessible by their users.\n\n Create an analytic tenant and identify the\n applications assigned to the tenant. Visier organizes content under a set of modules.\n\n Contact Visier Support to determine the list of modules allocated to you.\n\n **Note:** API reques"
+        },
+        {
+          "info": {
+            "name": "Retrieve an analytic tenant's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/admin/tenants/:tenantId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tenant to retrieve."
+              },
+              {
+                "name": "mask",
+                "value": "",
+                "type": "query",
+                "description": "A list of fields to include in the response, separated by commas. If not specified, includes all fields in the response. Valid values:\n  - `tenantCode`\n  - `tenantDisplayName`\n  - `currentDataVersion`\n  - `traits`\n  - `dataVersionDate`\n  - `provisionDate`\n  - `vanityUrlName`\n  - `status`\n  - `canAdministerOtherTenants`\n  - `industryCode`\n  - `industryInfo`\n  - `purchasedModules`\n  - `manuallyAddedModules`\n  - `embeddableDomains`\n  - `allowedOAuthIdpUrlDomains`\n  - `customProperties`\n  - `ssoInstanceIssuers`\n  - `homeAnalysisId`\n  - `homeAnalysisByUserGroup`\n  - `clickThroughLink`\n  - `clickThroughLinkEnabled`\n  - `defaultCurrency`\n  - `primaryBusinessLocation`\n  - `effectiveIndustryCode`\n  - `companySize`\n\n If `mask` is specified in both request body and on the query string, the effective `mask` is the set union of both inputs."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve the details for a specified analytic tenant. Doing so allows you to see the current state\n of the tenant, the content modules assigned to it, and all other relevant details for the tenant."
+        },
+        {
+          "info": {
+            "name": "Update an analytic tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v2/admin/tenants/:tenantId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tenant to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "You may need to update analytic tenants as they grow and as your organization upgrades the content available to them.\n You may also encounter a scenario where an analytic tenant transitions across different industries. To make updates\n to your tenants, use this API.\n\n * To ensure that the analytic tenant receives accurate benchmarks and predictive functionality, update their industry code in the Visier system.\n * To programmatically assign the Home analysis that analytic tenants see at login, us"
+        },
+        {
+          "info": {
+            "name": "Deprovision an analytic tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v2/admin/tenants/:tenantId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+              }
+            ]
+          },
+          "docs": "<em>Warning! Deprovisioning an analytic tenant is not reversible.</em>\n Before deprovisioning, you must disable an analytic tenant. For more information, see **`/v1/admin/tenants/{tenantId}/disable`**.\n\n This API removes an analytic tenant permanently from the Visier system. If you are unsure whether an analytic tenant\n may be re-enabled on any of the Visier modules at any time, you may instead want to disable the analytic tenant.\n\n If successful, the response returns the status \"Deprovisioned\"."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

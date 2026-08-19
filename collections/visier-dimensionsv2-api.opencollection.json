@@ -1,0 +1,273 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Analytic Model Dimensions V2 API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DimensionsV2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of dimensions by analytic object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2alpha/data/model/analytic-objects/:analyticObjectId/dimensions",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "analyticObjectId",
+                "value": "",
+                "type": "path",
+                "description": "The object name or UUID of the analytic object from which to retrieve dimensions."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the dimension to retrieve. Valid values:\n - `leveled`: Retrieves leveled dimensions.\n - `parentChild`: Retrieves parent-child dimensions."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "The level of information to retrieve for the dimension. Valid values:\n - `basic`: Retrieves the dimension's UUID, object name, and basic information. This is the default.\n - `details`: Retrieves the `basic` details and additional configurations, such as levels and settings.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+              },
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "query",
+                "description": "The dimension object names to return in the response. When combined with `uuid`, the results return objects that match either the `objectName` or `uuid`."
+              },
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The dimension UUIDs to return in the response. When combined with `objectName`, the results return objects that match either the `objectName` or `uuid`."
+              }
+            ]
+          },
+          "docs": "Retrieve all the dimensions for a specific analytic object. The response returns the details of all dimensions for the analytic object, including object names, dimension types, and descriptions.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of dimensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2alpha/data/model/dimensions",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the dimension to retrieve. If undefined, retrieves all dimension types. Valid values:\n - `leveled`: Retrieves leveled dimensions.\n - `parentChild`: Retrieves parent-child dimensions."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "The level of information to retrieve for the dimension. Valid values:\n - `basic`: Retrieves the dimension's UUID, object name, and basic information. This is the default.\n - `details`: Retrieves the `basic` details and additional configurations, such as levels and settings.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+              },
+              {
+                "name": "analyticObjectName",
+                "value": "",
+                "type": "query",
+                "description": "The object names of the analytic objects from which to retrieve dimensions. Default is to return dimensions from all analytic objects."
+              },
+              {
+                "name": "analyticObjectUuid",
+                "value": "",
+                "type": "query",
+                "description": "The UUIDs of the analytic objects from which to retrieve dimensions. Default is to return dimensions from all analytic objects."
+              },
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "query",
+                "description": "The dimension object names to return in the response. When combined with `uuid`, the results return objects that match either the `objectName` or `uuid`."
+              },
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The dimension UUIDs to return in the response. When combined with `objectName`, the results return objects that match either the `objectName` or `uuid`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all dimensions in your Visier tenant. You can optionally filter dimensions by dimension type or analytic object.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Create dimensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2alpha/data/model/dimensions",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create new dimensions. The response returns whether each dimension was successfully created or not.\n When creating objects, assign a unique object name but don't set a UUID. Visier generates UUIDs for new objects.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Update dimensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v2alpha/data/model/dimensions",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update existing dimensions. The response returns whether each dimension was successfully updated or not. When updating objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PUT` request definition.\n\n In `PUT` calls, the definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed from the dimension. To part"
+        },
+        {
+          "info": {
+            "name": "Partially update dimensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v2alpha/data/model/dimensions",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Make partial changes to existing dimensions. The response returns whether each dimension was successfully patched or not. When patching objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PATCH` request definition.\n\n Unlike `PUT`, which completely replaces the dimension definition, use `PATCH` to change specific fields in the dimension without affecting omitted fields. To replace a dimension's entire definition, see the `PUT` m"
+        },
+        {
+          "info": {
+            "name": "Delete dimensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v2alpha/data/model/dimensions",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete existing dimensions. The response returns whether each dimension was successfully deleted or not.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Retrieve a dimension's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2alpha/data/model/dimensions/:dimensionId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dimensionId",
+                "value": "",
+                "type": "path",
+                "description": "The object name or UUID of the dimension to retrieve."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "The level of information to retrieve for the dimension. Valid values:\n - `basic`: Retrieves the dimension's UUID, object name, and basic information.\n - `details`: Retrieves the `basic` details and additional configurations, such as levels and settings. This is the default.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a specific dimension, such as its dimension type and description.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

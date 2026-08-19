@@ -1,0 +1,236 @@
+openapi: 3.2.0
+info:
+  title: Visier Data In PGP Keys API
+  description: Visier APIs for sending data to Visier and running data load jobs.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: PGPKeys
+  x-displayName: PGP Keys
+  description: 'The Pretty Good Privacy (PGP) Keys API generates key pairs and provides a public key to encrypt data that you send to Visier. PGP encryption adds an additional layer of security against data disclosure.
+
+    <br><br>After you generate a key pair and retrieve the public encryption key, you can encrypt your data files before sending them to Visier. When Visier receives files encrypted with the public key, we retrieve the associated private key to decrypt and process the file.'
+paths:
+  /v1/api/pgp-keys:
+    get:
+      tags:
+      - PGPKeys
+      summary: Retrieve all PGP public keys
+      description: Retrieve a list of all PGP public keys in your tenant.
+      operationId: PGPKeys_GetAllPGPPublicKeys
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/designer.crypto.PublicKeysDTO'
+    post:
+      tags:
+      - PGPKeys
+      summary: Download a public encryption key
+      description: "Generate a key pair and retrieve the public key that you can use to encrypt your data to send to Visier. \n \n In the request body, optionally set the UTC expiration date for the key pair in ISO-8601 format. Must be between 2 and 10 years. Default is 2 years."
+      operationId: PGPKeys_GeneratePGPKeyPair
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/designer.crypto.KeyPairGenerateRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/designer.crypto.PublicKeyDTO'
+  /v1/api/pgp-keys/{keyID}:
+    get:
+      tags:
+      - PGPKeys
+      summary: Retrieve a PGP public key using the key ID
+      description: If you know your PGP key ID, use it to retrieve the PGP public key. To get a list of all key IDs, see `Retrieve all PGP public keys`.
+      operationId: PGPKeys_GetPGPPublicKey
+      parameters:
+      - name: keyID
+        in: path
+        description: The key ID of the generated key pair in 16-letter hexadecimal format, including leading zeros.
+        required: true
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/designer.crypto.PublicKeyDTO'
+    delete:
+      tags:
+      - PGPKeys
+      summary: Delete a PGP key pair
+      description: Delete a PGP key pair using a key ID.
+      operationId: PGPKeys_DeletePGPKeyPair
+      parameters:
+      - name: keyID
+        in: path
+        description: The key ID of the generated key pair in 16-letter hexadecimal format, including leading zeros.
+        required: true
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/designer.crypto.KeyPairDeleteResponseDTO'
+components:
+  schemas:
+    designer.crypto.KeyPairGenerateRequestDTO:
+      type: object
+      properties:
+        expirationDate:
+          type: string
+          description: The UTC expiration date of the key in ISO-8601 format. Must be between 2 and 10 years. Default is 2 years.
+    designer.crypto.KeyPairDeleteResponseDTO:
+      type: object
+      properties:
+        keyID:
+          type: string
+          description: The key ID in 16-letter hexadecimal format, including leading zeros.
+    designer.crypto.PublicKeysDTO:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.crypto.PublicKeyDTO'
+          description: A list of the tenant's public keys.
+    designer.crypto.PublicKeyDTO:
+      type: object
+      properties:
+        keyID:
+          type: string
+          description: The key ID of the generated key pair in 16-letter hexadecimal format, including leading zeros.
+        dateGenerated:
+          type: string
+          description: The UTC date that the key pair was generated in milliseconds since the Unix epoch.
+        expiryDate:
+          type: string
+          description: The UTC expiration date of the key in milliseconds since the Unix epoch.
+        recipient:
+          type: string
+          description: The tenant code and creation date in milliseconds of the PGP key; for example, WFF_j1r_13490234234.
+        publicKey:
+          type: string
+          description: The public key of the generated key pair.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: data in
+  tags:
+  - DirectDataIntake
+  - DataIntake
+  - DataAndJobHandling
+  - PGPKeys
+  - DataUpload
+  - TableSource

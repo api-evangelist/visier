@@ -1,0 +1,676 @@
+openapi: 3.2.0
+info:
+  title: Compensation Benchmarks API
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: '1.0'
+  description: 'Get benchmark values.
+
+    '
+tags:
+- name: Benchmarks
+  description: 'Get benchmark values.
+
+    '
+paths:
+  /v1/compensation-benchmarks/base-salary:
+    get:
+      summary: Get base salary benchmark value
+      tags:
+      - Benchmarks
+      operationId: GetSalaryBenchmark
+      description: 'Retrieve the base salary benchmark value.
+
+        '
+      parameters:
+      - name: job
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'The job member ID.
+
+          '
+      - name: industry
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'The industry member ID. If the ID is not provided, the response returns the benchmark value across all industries.
+
+          '
+      - name: naicsCode
+        in: query
+        required: false
+        schema:
+          type: string
+        description: "The North American Industry Classification System (NAICS) code. \n\nIf the NAICS code is not provided, the response returns the benchmark value across all industries.\nIf both `naicsCode` and `industry` are provided, the response returns the benchmark value for the `industry` parameter. The entered `naicsCode` will not be applied.\n"
+      - name: location
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'The location member ID. If the ID is not provided, the response returns the benchmark value across all locations.
+
+          '
+      - name: companySize
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'The company size member ID. If the ID is not provided, the response returns the benchmark value across all company sizes.
+
+          '
+      - name: careerLevel
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'The career level member ID. If the ID is not provided, the response returns the benchmark value across all career levels.
+
+          '
+      - name: matchDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'The date on which the career level was matched in `yyyy-MM-dd` format. A `matchDate` allows precise migration of career levels according to job architecture changes released since the match was made. If `matchDate` is not available, the migration assumes the most recent possible match date for the provided career level.
+
+          '
+      responses:
+        '200':
+          description: 'The requested base salary benchmark value.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BenchmarkValue'
+        '400':
+          description: 'The API request failed given the parameters provided, such as missing parameters, invalid parameters, or there is no benchmark value available.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: 'An unexpected exception occurred on the server.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '504':
+          description: 'The server is taking too long to respond and the request timed out.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        credentials: ${apigateway_role}
+        httpMethod: POST
+        uri: ${lambda-get-salary-arn}
+      security:
+      - api_key: []
+  /v1/compensation-benchmarks/base-salary/feedback:
+    post:
+      summary: Submit feedback to improve salary benchmark values
+      tags:
+      - Benchmarks
+      operationId: SubmitSalaryBenchmarkFeedback
+      description: "Give feedback for a salary benchmark value returned by `GET /v1/compensation-benchmarks/base-salary` or `/base-salaries`. To submit feedback, include the benchmark value's:\n  * ID values you defined in `GET /v1/compensation-benchmarks/base-salary` or `/base-salaries`.\n  * `referenceDate` and `releaseDate` returned by `GET /v1/compensation-benchmarks/base-salary` or `/base-salaries`.\n  * Optional `additionalComments` up to 750 characters.\n"
+      requestBody:
+        description: 'The feedback to submit.
+
+          '
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalaryBenchmarkFeedbackInput'
+        required: true
+      responses:
+        '204':
+          description: 'Your feedback has been submitted successfully.
+
+            '
+        '400':
+          description: 'Your feedback could not be submitted. Ensure all mandatory fields are included in the request body.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: 'An unexpected exception occurred on the server.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '504':
+          description: 'The server is taking too long to respond and the request timed out.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+      x-amazon-apigateway-integration:
+        credentials: ${apigateway_role}
+        httpMethod: POST
+        uri: ${lambda-submit-benchmark-feedback-arn}
+        type: aws_proxy
+      security:
+      - api_key: []
+  /v1/compensation-benchmarks/base-salaries:
+    post:
+      summary: Get salary benchmark values in bulk
+      tags:
+      - Benchmarks
+      operationId: GetSalaryBenchmarksInBulk
+      description: 'Retrieve multiple base salary benchmark values in a single request.
+
+        '
+      requestBody:
+        description: 'A batch request takes a JSON object consisting of an array of your requests. You can batch up to 1000 individual requests in one API call.
+
+          '
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalaryBenchmarkInputs'
+        required: true
+      responses:
+        '200':
+          description: "The bulk request was completed. Review the responses individually to see which actions were successful. \nIf you receive a 400 status code for an individual response, it indicates missing parameters, invalid members, or no benchmark values were found.\n"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalaryBenchmarksBatchProcessingOutputs'
+        '400':
+          description: 'The API request failed due to invalid JSON input, empty input or it exceeded the bulk size limit of 1000 individual requests.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: 'An unexpected exception occurred on the server.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '504':
+          description: 'The server is taking too long to respond and the request timed out.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        credentials: ${apigateway_role}
+        httpMethod: POST
+        uri: ${lambda-get-batch-benchmarks-arn}
+      security:
+      - api_key: []
+  /v1/compensation-benchmarks/info:
+    get:
+      summary: Get benchmark metadata
+      tags:
+      - Benchmarks
+      operationId: GetInfo
+      description: 'Retrieve metadata that summarizes the benchmark dataset and API such as the release date.
+
+        '
+      responses:
+        '200':
+          description: 'Metadata that summarizes the benchmark dataset and API such as the release date.
+
+            '
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BenchmarkInfo'
+        '500':
+          description: 'An unexpected exception occurred on the server.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '504':
+          description: 'The server is taking too long to respond and the request timed out.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        credentials: ${apigateway_role}
+        httpMethod: POST
+        uri: ${lambda-get-info-arn}
+      security:
+      - api_key: []
+components:
+  schemas:
+    SalaryBenchmarksBatchProcessingFailureOutput:
+      title: SalaryBenchmarksBatchProcessingFailureOutput
+      description: 'Error description for individual requests within a bulk request.
+
+        '
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: 'A unique identifier of the individual requests.
+
+            '
+        httpStatus:
+          type: string
+          description: 'A three-digit code that indicates the outcome of a request.
+
+            '
+        message:
+          type: string
+          description: 'The details of the error.
+
+            '
+        rci:
+          type: string
+          description: 'A root cause identifier that allows Visier to determine the source of the problem.
+
+            '
+        errorCode:
+          type: string
+          description: 'A brief identifier of the type of error.
+
+            '
+      required:
+      - uuid
+      - httpStatus
+      - message
+      - rci
+      - errorCode
+    SalaryBenchmarksBatchProcessingSuccessfulOutput:
+      description: 'The compensation benchmark values for individual requests within a bulk request.
+
+        '
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: 'A unique identifier of the individual requests.
+
+            '
+        percentile10:
+          type: integer
+          description: 'The 10th percentile base pay.
+
+            '
+        percentile25:
+          type: integer
+          description: 'The 25th percentile base pay.
+
+            '
+        percentile50:
+          type: integer
+          description: 'The 50th percentile base pay.
+
+            '
+        percentile75:
+          type: integer
+          description: 'The 75th percentile base pay.
+
+            '
+        percentile90:
+          type: integer
+          description: 'The 90th percentile base pay.
+
+            '
+        alignedRangeMin:
+          type: integer
+          description: 'The lower bound of salaries that are aligned with the market.
+
+            '
+        alignedRangeMax:
+          type: integer
+          description: 'The upper bound of salaries that are aligned with the market.
+
+            '
+        referenceDate:
+          type: string
+          description: 'The date that benchmark values are calculated for.
+
+            '
+        releaseDate:
+          type: string
+          description: 'The date that benchmark values are released.
+
+            '
+        industryId:
+          type: string
+          description: 'The industry member ID for the returned benchmarks.
+
+            '
+        careerLevelId:
+          type: string
+          description: 'The career level member ID for the returned benchmarks.
+
+            '
+      required:
+      - uuid
+      - percentile10
+      - percentile25
+      - percentile50
+      - percentile75
+      - percentile90
+      - alignedRangeMin
+      - alignedRangeMax
+      - referenceDate
+      - releaseDate
+      - industryId
+      - careerLevelId
+    ApiError:
+      title: ApiError
+      description: 'Description of an API error.
+
+        '
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: 'A brief identifier of the type of error.
+
+            '
+        message:
+          type: string
+          description: 'The details of the error.
+
+            '
+        rci:
+          type: string
+          description: 'A root cause identifier that allows Visier to determine the source of the problem.
+
+            '
+      required:
+      - errorCode
+      - message
+      - rci
+    SalaryBenchmarkInputs:
+      description: 'A list of salary query parameters for bulk operation. The maximum batch size is 1000.
+
+        '
+      type: array
+      items:
+        title: SalaryBenchmarkInput
+        type: object
+        properties:
+          uuid:
+            type: string
+            description: 'A unique identifier of the individual requests.
+
+              '
+          job:
+            type: string
+            description: 'The job member ID.
+
+              '
+          industry:
+            type: string
+            description: 'The industry member ID. If the ID is not provided, the response returns the benchmark value across all industries.
+
+              '
+          naicsCode:
+            type: string
+            description: 'The North American Industry Classification System (NAICS) code.
+
+
+              If the NAICS code is not provided, the response returns the benchmark value across all industries.
+
+              If both `naicsCode` and `industry` are provided, the response returns the benchmark value for the `industry` parameter. The entered `naicsCode` will not be applied.
+
+              '
+          location:
+            type: string
+            description: 'The location member ID. If the ID is not provided, the response returns the benchmark value across all locations.
+
+              '
+          companySize:
+            type: string
+            description: 'The company size member ID. If the ID is not provided, the response returns the benchmark value across all company sizes.
+
+              '
+          careerLevel:
+            type: string
+            description: 'The career level member ID. If the ID is not provided, the response returns the benchmark value across all career levels.
+
+              '
+          matchDate:
+            type: string
+            description: 'The date on which the career level was matched in `yyyy-MM-dd` format. A `matchDate` allows precise migration of career levels according to job architecture changes released since the match was made. If `matchDate` is not available, the migration assumes the most recent possible match date for the provided career level.
+
+              '
+        required:
+        - uuid
+        - job
+    SalaryBenchmarksBatchProcessingOutputs:
+      description: 'All operations in the bulk request were completed.
+
+        '
+      type: object
+      properties:
+        successes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SalaryBenchmarksBatchProcessingSuccessfulOutput'
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/SalaryBenchmarksBatchProcessingFailureOutput'
+    BenchmarkInfo:
+      title: BenchmarkInfo
+      description: 'Metadata that summarizes the benchmark dataset and API such as the release date.
+
+        '
+      type: object
+      properties:
+        referenceDate:
+          type: string
+          description: 'The date that benchmark values are calculated for.
+
+            '
+        releaseDate:
+          type: string
+          description: 'The date that benchmark values are released.
+
+            '
+        apiReleaseDate:
+          type: string
+          description: 'The date that API changes are released.
+
+            '
+      required:
+      - referenceDate
+      - releaseDate
+      - apiReleaseDate
+    BenchmarkValue:
+      title: BenchmarkValue
+      description: 'The compensation benchmark value.
+
+        '
+      type: object
+      properties:
+        percentile10:
+          type: integer
+          description: 'The 10th percentile base pay.
+
+            '
+        percentile25:
+          type: integer
+          description: 'The 25th percentile base pay.
+
+            '
+        percentile50:
+          type: integer
+          description: 'The 50th percentile base pay.
+
+            '
+        percentile75:
+          type: integer
+          description: 'The 75th percentile base pay.
+
+            '
+        percentile90:
+          type: integer
+          description: 'The 90th percentile base pay.
+
+            '
+        alignedRangeMin:
+          type: integer
+          description: 'The lower bound of salaries that are aligned with the market.
+
+            '
+        alignedRangeMax:
+          type: integer
+          description: 'The upper bound of salaries that are aligned with the market.
+
+            '
+        referenceDate:
+          type: string
+          description: 'The date that benchmark values are calculated for.
+
+            '
+        releaseDate:
+          type: string
+          description: 'The date that benchmark values are released.
+
+            '
+        industryId:
+          type: string
+          description: 'The industry member ID for the returned benchmarks.
+
+            '
+        careerLevelId:
+          type: string
+          description: 'The career level member ID for the returned benchmarks.
+
+            '
+      required:
+      - percentile10
+      - percentile25
+      - percentile50
+      - percentile75
+      - percentile90
+      - alignedRangeMin
+      - alignedRangeMax
+      - referenceDate
+      - releaseDate
+      - industryId
+      - careerLevelId
+    SalaryBenchmarkFeedbackInput:
+      title: SalaryBenchmarkFeedbackInput
+      description: 'The salary benchmark value for which to submit feedback.
+
+        '
+      type: object
+      properties:
+        job:
+          type: string
+          description: 'The job member ID for the salary benchmark.
+
+            '
+        location:
+          type: string
+          description: 'The location member ID for the salary benchmark.
+
+            '
+        careerLevel:
+          type: string
+          description: 'The career level member ID for the salary benchmark.
+
+            '
+        industry:
+          type: string
+          description: 'The industry member ID for the salary benchmark.
+
+            '
+        companySize:
+          type: string
+          description: 'The company size member ID for the salary benchmark.
+
+            '
+        referenceDate:
+          type: string
+          description: 'The date that benchmark values are calculated for. The format is YYYY-MM-DD.
+
+            '
+        releaseDate:
+          type: string
+          description: 'The date that benchmark values are released. The format is YYYY-MM-DD.
+
+            '
+        naicsCode:
+          type: string
+          description: 'If provided, the `naicsCode` in `GET /v1/compensation-benchmarks/base-salary` or `/base-salaries`.
+
+            '
+        additionalComments:
+          type: string
+          description: 'Optional written feedback about the salary benchmark values.
+
+            The maximum is 750 characters.
+
+            '
+      required:
+      - job
+      - location
+      - careerLevel
+      - industry
+      - companySize
+      - referenceDate
+      - releaseDate
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: apikey
+      x-amazon-apigateway-api-key-source: HEADER
+x-amazon-apigateway-gateway-responses:
+  MISSING_AUTHENTICATION_TOKEN:
+    statusCode: 404
+    responseParameters: {}
+    responseTemplates:
+      application/json: '{"errorCode":"USER_INPUT_ERROR","message":"Resource not found","rci":"RCI9000001"}'
+  DEFAULT_4XX:
+    statusCode: 500
+    responseParameters: {}
+    responseTemplates:
+      application/json: '{"errorCode":"INTERNAL_SERVER_ERROR","message":"Internal server error","rci":"RCI9000002"}'
+  DEFAULT_5XX:
+    statusCode: 500
+    responseParameters: {}
+    responseTemplates:
+      application/json: '{"errorCode":"INTERNAL_SERVER_ERROR","message":"Internal server error","rci":"RCI9000003"}'
+x-tagGroups:
+- name: compensation benchmarks
+  tags:
+  - Benchmarks
+  - Dimensions

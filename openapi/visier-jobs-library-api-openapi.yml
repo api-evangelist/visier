@@ -1,0 +1,581 @@
+openapi: 3.2.0
+info:
+  title: Skills Intelligence Engine Jobs Library API
+  description: 'Everything you need to power skills and turn them into actions.
+
+    '
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 1.0.0
+tags:
+- name: Jobs Library
+  description: 'Access over 3,300 standard jobs and get complete details in 27 languages, such as alternative titles, descriptions, and skills.
+
+    '
+paths:
+  /v1/jobs/{id}:
+    get:
+      summary: Get job details by ID
+      tags:
+      - Jobs Library
+      operationId: GetJob
+      description: 'If you know the ID of a job, use this endpoint to retrieve information such as display name, description, Automation Index, Remote Work Index, alternative names, and skills.
+
+        '
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: 'The ID of the job to retrieve details for.
+
+          '
+      - name: Accept-Language
+        in: header
+        schema:
+          type: string
+        description: 'Allows you to specify if you want the output to be in one of the accepted languages.
+
+
+          Format: **ISO 639-1** language code. For a list of supported languages, see "Supported Languages" in the Skills Intelligence Engine API documentation.
+
+
+          If no value is specified, the response language is English.
+
+          '
+      responses:
+        '200':
+          description: 'Details of the requested job.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '400':
+          description: 'The API request failed given the parameters provided, such as missing or invalid parameters.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: 'An unexpected exception occurred on the server.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '504':
+          description: 'The server is taking too long to respond and the request timed out.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        credentials: ${apigateway_role}
+        httpMethod: POST
+        uri: ${lambda-get-job-arn}
+      security:
+      - api_key: []
+  /v1/jobs:
+    get:
+      summary: Retrieve a list of jobs
+      tags:
+      - Jobs Library
+      operationId: ListJobs
+      description: 'Use this endpoint to retrieve all the jobs in Visier''s Jobs Library.
+
+        '
+      parameters:
+      - name: Accept-Language
+        in: header
+        schema:
+          type: string
+        description: 'Allows you to specify if you want the output to be in one of the accepted languages.
+
+
+          Format: **ISO 639-1** language code. For a list of supported languages, see "Supported Languages" in the Skills Intelligence Engine API documentation.
+
+
+          If no value is specified, the response language is English.
+
+          '
+      responses:
+        '200':
+          description: 'List of jobs.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobList'
+        '400':
+          description: 'The API request failed given the parameters provided, such as missing or invalid parameters.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: 'An unexpected exception occurred on the server.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '504':
+          description: 'The server is taking too long to respond and the request timed out.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        credentials: ${apigateway_role}
+        httpMethod: POST
+        uri: ${lambda-list-jobs-arn}
+      security:
+      - api_key: []
+  /v1/jobs/search:
+    get:
+      summary: Search jobs
+      tags:
+      - Jobs Library
+      operationId: SearchJob
+      description: 'Retrieve a list of jobs that match a specified search term.
+
+        '
+      parameters:
+      - name: term
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'The term to search for. The search term must be URL encoded and the minimum length is 3 characters.
+
+          '
+      - name: Accept-Language
+        in: header
+        schema:
+          type: string
+        description: 'Allows you to specify if you want the output to be in one of the accepted languages.
+
+
+          Format: **ISO 639-1** language code. For a list of supported languages, see "Supported Languages" in the Skills Intelligence Engine API documentation.
+
+
+          If no value is specified, the response language is English.
+
+          '
+      responses:
+        '200':
+          description: 'List of jobs matching the search term.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobList'
+        '400':
+          description: 'The API request failed given the parameters provided, such as missing or invalid parameters.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: 'An unexpected exception occurred on the server.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '504':
+          description: 'The server is taking too long to respond and the request timed out.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        credentials: ${apigateway_role}
+        httpMethod: POST
+        uri: ${lambda-search-job-arn}
+      security:
+      - api_key: []
+  /v1/jobs/standardize:
+    post:
+      summary: Standardize custom job titles
+      tags:
+      - Jobs Library
+      operationId: StandardizeJobs
+      description: 'Find the top standardized job matches for any custom job title and optional NAICS code.
+
+        '
+      requestBody:
+        description: 'The custom job titles that you want to retrieve standardized jobs for and the optional NAICS code to retrieve industry specific jobs.
+
+
+          The minimum length is 3 characters and the maximum length is 100 characters. You can submit up to 10 custom job titles per request.
+
+          '
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobStandardizationInputSkills'
+        required: true
+      responses:
+        '200':
+          description: 'The top standardized job matches for each custom job title.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStandardizationOutputSkills'
+        '400':
+          description: 'The API request failed given the parameters provided, such as missing or invalid parameters.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: 'An unexpected exception occurred on the server.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '504':
+          description: 'The server is taking too long to respond and the request timed out.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+      x-amazon-apigateway-integration:
+        credentials: ${apigateway_role}
+        httpMethod: POST
+        uri: ${lambda-standardize-job-arn}
+        type: aws_proxy
+      security:
+      - api_key: []
+components:
+  schemas:
+    Skill:
+      description: 'The details describing a skill.
+
+        '
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'The unique ID of the skill.
+
+            '
+        name:
+          type: string
+          description: 'The localized display name of the skill.
+
+            '
+        description:
+          type: string
+          description: 'The localized description of the skill.
+
+            '
+        skillGroupId:
+          type: string
+          description: 'ID of the skill group that this skill belongs to.
+
+            '
+        skillCategoryId:
+          type: string
+          description: "ID of the skill category that this skill belongs to. \n"
+        isKnowledge:
+          type: boolean
+          description: 'Indicates whether the skill is a knowledge skill.
+
+            '
+        skillType:
+          type: string
+          description: 'The type of skill. Valid values are `Soft`, `Hard`, and `Unknown`.
+
+            '
+        alternativeTitles:
+          type: array
+          items:
+            type: string
+          description: 'List of alternative localized names for this skill.
+
+            '
+        remoteIndex:
+          type: number
+          description: 'The Remote Index represents how readily a skill can be done through remote work. The index ranges from 0 to 100, where a value of 100 means the skill can be done entirely remotely.
+
+
+            This field will be omitted if remotability is not applicable to the skill.
+
+            '
+        automationIndex:
+          type: integer
+          description: 'The Automation Index represents how readily a skill can be automated. The index ranges from 0 to 100, where a value of 100 means the skill is completely automatable.
+
+
+            This field will be omitted if automation is not applicable to the skill.
+
+            '
+      required:
+      - id
+      - name
+      - description
+      - skillGroupId
+      - skillCategoryId
+      - isKnowledge
+      - skillType
+      - alternativeTitles
+    JobList:
+      type: array
+      items:
+        type: object
+        title: JobEntry
+        properties:
+          id:
+            type: string
+            description: 'The unique ID of the job.
+
+              '
+          name:
+            type: string
+            description: 'The localized display name of the job.
+
+              '
+          description:
+            type: string
+            description: 'The localized description of the job.
+
+              '
+        required:
+        - id
+        - name
+        - description
+    JobStandardizationOutputSkills:
+      type: array
+      items:
+        title: OutputEntry
+        type: object
+        properties:
+          job:
+            type: string
+            description: 'The custom job title input.
+
+              '
+          matches:
+            type: array
+            description: 'The top standardized job matches.
+
+              '
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: 'The unique ID of the job.
+
+                    '
+                name:
+                  type: string
+                  description: 'The localized display name of the job.
+
+                    '
+                description:
+                  type: string
+                  description: 'The localized description of the job.
+
+                    '
+                score:
+                  type: integer
+                  description: 'The score representing the confidence level of the match between the standardized job and the custom job title input. The score ranges from 0 to 100.
+
+                    '
+              required:
+              - id
+              - name
+              - description
+              - score
+        required:
+        - job
+        - matches
+    ApiError:
+      title: ApiError
+      description: 'Description of an API error.
+
+        '
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: 'A brief identifier of the type of error.
+
+            '
+        message:
+          type: string
+          description: 'The details of the error.
+
+            '
+        rci:
+          type: string
+          description: 'A root cause identifier that allows Visier to determine the source of the problem.
+
+            '
+      required:
+      - errorCode
+      - message
+      - rci
+    Job:
+      description: 'Details describing a job.
+
+        '
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'The unique ID of the job.
+
+            '
+        name:
+          type: string
+          description: 'The localized display name of the job.
+
+            '
+        description:
+          type: string
+          description: 'The localized description of the job.
+
+            '
+        iscoCode:
+          type: string
+          description: 'The International Standard Classification of Occupations (ISCO) code of the job.
+
+
+            This field will be omitted if the job is not associated with an ISCO code.
+
+            '
+        socCode:
+          type: string
+          description: 'The Standard Occupational Classification (SOC) code of the job.
+
+
+            This field will be omitted if the job is not associated with a SOC code.
+
+            '
+        alternativeTitles:
+          type: array
+          items:
+            type: string
+          description: 'List of alternative localized names for this job.
+
+            '
+        essentialSkills:
+          type: array
+          items:
+            $ref: '#/components/schemas/Skill'
+          description: 'List of essential skills for this job.
+
+            '
+        optionalSkills:
+          type: array
+          items:
+            $ref: '#/components/schemas/Skill'
+          description: 'List of optional skills for this job.
+
+            '
+        remoteIndex:
+          type: number
+          description: 'The Remote Index represents how readily a job can be done through remote work. The index ranges from 0 to 100, where a value of 100 means the job can be done entirely remotely.
+
+
+            This field will be omitted if remotability is not applicable to the job.
+
+            '
+        automationIndex:
+          type: integer
+          description: 'The Automation Index represents how readily a job can be automated. The index ranges from 0 to 100, where a value of 100 means the job is completely automatable.
+
+
+            This field will be omitted if automation is not applicable to the job.
+
+            '
+      required:
+      - id
+      - name
+      - description
+      - alternativeTitles
+      - essentialSkills
+      - optionalSkills
+    JobStandardizationInputSkills:
+      description: 'The custom job titles to standardize.
+
+        '
+      type: object
+      properties:
+        jobs:
+          type: array
+          items:
+            type: string
+        naicsCode:
+          type: string
+          description: 'The North American Industry Classification System (NAICS) code.
+
+
+            If `naicsCode` is provided, the most relevant job titles associated with the naicsCode are returned first.
+
+            '
+      required:
+      - jobs
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: x-api-key
+      x-amazon-apigateway-api-key-source: HEADER
+x-amazon-apigateway-gateway-responses:
+  MISSING_AUTHENTICATION_TOKEN:
+    statusCode: 404
+    responseParameters: {}
+    responseTemplates:
+      application/json: '{"errorCode":"USER_INPUT_ERROR","message":"Resource not found","rci":"RCI9000001"}'
+  DEFAULT_4XX:
+    statusCode: 500
+    responseParameters: {}
+    responseTemplates:
+      application/json: '{"errorCode":"INTERNAL_SERVER_ERROR","message":"Internal server error","rci":"RCI9000002"}'
+  DEFAULT_5XX:
+    statusCode: 500
+    responseParameters: {}
+    responseTemplates:
+      application/json: '{"errorCode":"INTERNAL_SERVER_ERROR","message":"Internal server error","rci":"RCI9000003"}'
+x-tagGroups:
+- name: skills intelligence
+  tags:
+  - Jobs Library
+  - Skills Library

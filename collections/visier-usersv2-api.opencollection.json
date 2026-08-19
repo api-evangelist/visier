@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Administration Users V2 API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "UsersV2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add users",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2/admin/users",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to create a user in."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create new users. Administrating tenant users can specify the tenant in which to add these users."
+        },
+        {
+          "info": {
+            "name": "Update users",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v2/admin/users",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to update a user in."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing user's information, such as their display name or if the user is enabled in Visier."
+        },
+        {
+          "info": {
+            "name": "Delete users",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v2/admin/users",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to delete a user in."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete an existing user. Administrating tenant users can specify the tenant from which to delete a user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

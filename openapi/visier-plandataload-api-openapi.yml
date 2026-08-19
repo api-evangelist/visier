@@ -1,0 +1,238 @@
+openapi: 3.2.0
+info:
+  title: Visier Planning Public Plan Data Load API
+  description: Visier APIs for managing your plans through API.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: PlanDataLoad
+  x-displayName: Plan Data Load
+  description: Send data directly to your plan's scenario and optionally add or remove rows from your plan.
+paths:
+  /v1/planning/data/plans/{planId}/scenarios/{scenarioId}/cells:
+    patch:
+      tags:
+      - PlanDataLoad
+      summary: Upload plan data
+      description: "Send a file to Visier to modify a plan's data. The file must be in CSV format and match the plan's schema. To get the plan's schema, call `GET /v1/planning/model/plans/{id}?withSchema=true`.\nThe data file must contain the following columns:\n  - `periodId`: From the GET response, use the `date` values in the `timePeriods` array as values in this column.\n  - A column for each `id` value in the `planSegmentLevels` object, where the row value is the `id` of the `members` in the `planSegmentLevelMembers` object.\n  - A column for each  `id` value in the `planItems` object that you want to modify data for, where the row value is the data value."
+      operationId: PlanDataLoad_PlanDataUpload
+      parameters:
+      - name: planId
+        in: path
+        description: The unique identifier of the plan.
+        required: true
+        schema:
+          type: string
+      - name: scenarioId
+        in: path
+        description: The unique identifier of the plan scenario to load data into.
+        required: true
+        schema:
+          type: string
+      - name: calculation
+        in: query
+        description: "Sets the plan values to rollup, distribute, or neither. Valid values:\n  - **ROLLUP**: Roll up loaded data values to parent and ancestor rows. If the data provides a parent value and its child value, this method prioritizes the loaded value for the child and overwrites the parent.\n  - **DISTRIBUTE**: Distribute loaded data values to their children and descendent rows. If the data provides a parent value and its child value, this method prioritizes the parent values and overrides the loaded child value.\n  - **NONE**: The loaded values are not rolled up or distributed. This is the default."
+        required: false
+        schema:
+          type: string
+      - name: currency
+        in: query
+        description: 'The 3-digit ISO 4217 currency code of the data.
+
+          If undefined, default is the plan''s consolidation currency. If the currency is different from the plan''s consolidation currency, the values are converted to the consolidation currency using the conversion rates loaded for the plan''s baseline period.'
+        required: false
+        schema:
+          type: string
+      - name: method
+        in: query
+        description: "Sets how to validate the data being loaded into Visier. Valid values:\n  - **VALIDATE**: Runs a test load through all the validation steps without putting the data into the plan. Use `VALIDATE` to find any errors before using `STRICT_UPLOAD` to load the data.\n  - **SKIP_ERRORS**: Loads all data without errors into the plan. Any rows with errors are excluded from the update to the plan.\n  - **STRICT_UPLOAD**: Loads data into the plan if there are no errors in any row. If there are errors, the load fails. This is the default."
+        required: false
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The CSV file to load into the plan.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanDataUploadResponseDTO'
+  /v1alpha/planning/data/plans/{planId}/rows:
+    patch:
+      tags:
+      - PlanDataLoad
+      summary: Add or remove plan rows
+      description: "Send a file to Visier to modify a plan's rows. The file must be in CSV format and contain the following columns:\n- `Add/Remove`: In the column, use the value \"Add\" to add the specified row to the plan or \"Remove\" to remove the specified row from the plan.\n- A column for each plan segment level using the IDs from `planSegmentLevels`.\n  - To add a row, use the corresponding segment member ID from `planSegmentLevelMembers`. If the member doesn't exist in the schema, provide a display name. The response returns its assigned segment member ID.\n  - To remove a row, use the corresponding segmentId as the column name and the segment member ID from `planSegmentLevelMembers` as the row value.\n\n<br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued. If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: PlanDataLoad_PlanRowDataLoad
+      parameters:
+      - name: planId
+        in: path
+        description: The unique identifier of the plan.
+        required: true
+        schema:
+          type: string
+      - name: method
+        in: query
+        description: "Sets how to validate the data being loaded into Visier. Valid values:\n  - **VALIDATE**: Runs a test load through all the validation steps without putting the data into the plan. Use `VALIDATE` to find any errors before using `STRICT_UPLOAD` to load the data.\n  - **SKIP_ERRORS**: Loads all data without errors into the plan. Any rows with errors are excluded from the update to the plan.\n  - **STRICT_UPLOAD**: Loads data into the plan if there are no errors in any row. If there are errors, the load fails. This is the default."
+        required: false
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The CSV file to load into the plan.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanRowDataLoadResponseDTO'
+components:
+  schemas:
+    PlanDataUploadResponseDTO:
+      type: object
+      properties:
+        updatedCellsCount:
+          type: integer
+          description: The number of cells that were updated from the data load process.
+        potentialUpdatedCellsCount:
+          type: integer
+          description: The number of cells that would have been updated if all changes were saved.
+        errors:
+          type: array
+          description: The collection of errors encountered during the data load process.
+          items:
+            $ref: '#/components/schemas/planning.PlanDataLoadErrorDTO'
+        changelists:
+          type: array
+          description: 'The collection of changes grouped by plan item made during the data load process.
+
+            This list only contains the changes specified by the load.
+
+            If you indicated in the request that the changes are to be rolled up or distributed,
+
+            the values modified as a result of the calculations are not listed here.'
+          items:
+            $ref: '#/components/schemas/PlanDataLoadChangeListDTO'
+    PlanRowDataLoadResponseDTO:
+      type: object
+      properties:
+        addedRowsCount:
+          type: integer
+          description: The number of rows added to the plan.
+        removedRowsCount:
+          type: integer
+          description: The number of rows removed from the plan.
+        potentialAddedRowsCount:
+          type: integer
+          description: The number of rows that could have been added to the plan.
+        potentialRemovedRowsCount:
+          type: integer
+          description: The number of rows that could have been removed from the plan.
+        errors:
+          type: array
+          description: The errors that occurred while loading the data.
+          items:
+            $ref: '#/components/schemas/planning.PlanDataLoadErrorDTO'
+        customMembers:
+          type: array
+          description: The custom members and their corresponding IDs in the plan.
+          items:
+            $ref: '#/components/schemas/planning.PlanSegmentLevelMemberDTO'
+    PlanDataLoadChangeListDTO:
+      type: object
+      properties:
+        planItem:
+          type: string
+          description: The ID of the plan item.
+        changes:
+          type: array
+          description: The collection of changes made for the plan item.
+          items:
+            $ref: '#/components/schemas/PlanDataLoadChangeDTO'
+    PlanDataLoadChangeDTO:
+      type: object
+      properties:
+        rowMembers:
+          type: array
+          description: The collection of member ids that describe the row in the plan.
+          items:
+            type: string
+        period:
+          type: string
+          description: The display name of the time period.
+        oldValue:
+          type: number
+          format: double
+          description: The value that was replaced.
+        newValue:
+          type: number
+          format: double
+          description: The new value loaded into the plan from the data load.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: planning
+  tags:
+  - PlanAdministration
+  - PlanDataLoad
+  - PlanEvents

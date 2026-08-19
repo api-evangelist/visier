@@ -1,0 +1,261 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Analytic Model Concepts V2 API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ConceptsV2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of concepts by analytic object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/data/model/analytic-objects/:analyticObjectName/concepts",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "analyticObjectName",
+                "value": "",
+                "type": "path",
+                "description": "The object name of the analytic object from which to retrieve concepts."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the concept to retrieve. Omit to retrieve all supported concept types. Valid values:\n - `process`: Retrieves all process concepts.\n - `selection`: Retrieves all member selection concepts and calculated selection concepts."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "The level of information to retrieve for the concept. Valid values:\n - `basic`: Retrieves the concept's UUID, object name, and basic information. This is the default.\n - `details`: Retrieves the `basic` details and additional configurations, such as `visibleInAnalytics`.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+              },
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "query",
+                "description": "The concept object names to return in the response. When combined with `uuid`, the results return objects that match either the `objectName` or `uuid`."
+              },
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The concept UUIDs to return in the response. When combined with `objectName`, the results return objects that match either the `objectName` or `uuid`."
+              }
+            ]
+          },
+          "docs": "Retrieve all the concepts for a specific analytic object. The response returns the details of all concepts for the analytic object, including object names, concept types, and descriptions."
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of concepts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/data/model/concepts",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the concept to retrieve. Omit to retrieve all supported concept types. Valid values:\n - `process`: Retrieves all process concepts.\n - `selection`: Retrieves all member selection concepts and calculated selection concepts."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "The level of information to retrieve for the concept. Valid values:\n - `basic`: Retrieves the concept's UUID, object name, and basic information. This is the default.\n - `details`: Retrieves the `basic` details and additional configurations, such as `visibleInAnalytics`.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+              },
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "query",
+                "description": "The concept object names to return in the response. When combined with `uuid`, the results return objects that match either the `objectName` or `uuid`."
+              },
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "The concept UUIDs to return in the response. When combined with `objectName`, the results return objects that match either the `objectName` or `uuid`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all concepts in your Visier tenant."
+        },
+        {
+          "info": {
+            "name": "Create concepts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2/data/model/concepts",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create new concepts. The response returns whether each concept was successfully created or not.\n When creating objects, assign a unique object name but don't set a UUID. Visier generates UUIDs for new objects."
+        },
+        {
+          "info": {
+            "name": "Update concepts",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v2/data/model/concepts",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update existing concepts. The response returns whether each concept was successfully updated or not. When updating objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PUT` request definition.\n\n In `PUT` calls, the definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed from the concept. To partially "
+        },
+        {
+          "info": {
+            "name": "Partially update concepts",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v2/data/model/concepts",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Make partial changes to existing concepts. The response returns whether each concept was successfully patched or not. When patching objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PATCH` request definition.\n\n Unlike `PUT`, which completely replaces the concept definition, use `PATCH` to change specific fields in the concept without affecting omitted fields. To replace a concept's entire definition, see the `PUT` method."
+        },
+        {
+          "info": {
+            "name": "Delete concepts",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v2/data/model/concepts",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete existing concepts. The response returns whether each concept was successfully deleted or not."
+        },
+        {
+          "info": {
+            "name": "Retrieve a concept's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/data/model/concepts/:conceptId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "conceptId",
+                "value": "",
+                "type": "path",
+                "description": "The object name or UUID of the concept to retrieve."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "The level of information to retrieve for the concept. Valid values:\n - `basic`: Retrieves the concept's UUID, object name, and basic information.\n - `details`: Retrieves the `basic` details and additional configurations, such as `visibleInAnalytics`. This is the default.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a specific concept, such as its concept type and description."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

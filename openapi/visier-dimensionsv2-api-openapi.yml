@@ -1,0 +1,799 @@
+openapi: 3.2.0
+info:
+  title: Visier Analytic Model Dimensions V2 API
+  description: Visier APIs for retrieving and configuring your analytic model in Visier.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: DimensionsV2
+  x-displayName: Dimensions V2
+  description: 'Create, retrieve, update, and delete dimensions in your analytic model. You can create, update, and delete one or more dimensions in an API call.
+
+    <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
+paths:
+  /v2alpha/data/model/analytic-objects/{analyticObjectId}/dimensions:
+    get:
+      tags:
+      - DimensionsV2
+      summary: Retrieve a list of dimensions by analytic object
+      description: "Retrieve all the dimensions for a specific analytic object. The response returns the details of all dimensions for the analytic object, including object names, dimension types, and descriptions.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: DimensionsV2_GetAnalyticObjectDimensions
+      parameters:
+      - name: analyticObjectId
+        in: path
+        description: The object name or UUID of the analytic object from which to retrieve dimensions.
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: "The type of the dimension to retrieve. Valid values:\n - `leveled`: Retrieves leveled dimensions.\n - `parentChild`: Retrieves parent-child dimensions."
+        schema:
+          type: array
+          items:
+            enum:
+            - leveled
+            - parentChild
+            type: string
+            format: enum
+      - name: with
+        in: query
+        description: "The level of information to retrieve for the dimension. Valid values:\n - `basic`: Retrieves the dimension's UUID, object name, and basic information. This is the default.\n - `details`: Retrieves the `basic` details and additional configurations, such as levels and settings.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+        schema:
+          type: array
+          items:
+            enum:
+            - basic
+            - details
+            - version
+            type: string
+            format: enum
+      - name: objectName
+        in: query
+        description: The dimension object names to return in the response. When combined with `uuid`, the results return objects that match either the `objectName` or `uuid`.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: uuid
+        in: query
+        description: The dimension UUIDs to return in the response. When combined with `objectName`, the results return objects that match either the `objectName` or `uuid`.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.v2.objectconfiguration.DimensionResponseDTO'
+  /v2alpha/data/model/dimensions:
+    get:
+      tags:
+      - DimensionsV2
+      summary: Retrieve a list of dimensions
+      description: "Retrieve a list of all dimensions in your Visier tenant. You can optionally filter dimensions by dimension type or analytic object.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: DimensionsV2_GetAllDimensions
+      parameters:
+      - name: type
+        in: query
+        description: "The type of the dimension to retrieve. If undefined, retrieves all dimension types. Valid values:\n - `leveled`: Retrieves leveled dimensions.\n - `parentChild`: Retrieves parent-child dimensions."
+        schema:
+          type: array
+          items:
+            enum:
+            - leveled
+            - parentChild
+            type: string
+            format: enum
+      - name: with
+        in: query
+        description: "The level of information to retrieve for the dimension. Valid values:\n - `basic`: Retrieves the dimension's UUID, object name, and basic information. This is the default.\n - `details`: Retrieves the `basic` details and additional configurations, such as levels and settings.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+        schema:
+          type: array
+          items:
+            enum:
+            - basic
+            - details
+            - version
+            type: string
+            format: enum
+      - name: analyticObjectName
+        in: query
+        description: The object names of the analytic objects from which to retrieve dimensions. Default is to return dimensions from all analytic objects.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: analyticObjectUuid
+        in: query
+        description: The UUIDs of the analytic objects from which to retrieve dimensions. Default is to return dimensions from all analytic objects.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: objectName
+        in: query
+        description: The dimension object names to return in the response. When combined with `uuid`, the results return objects that match either the `objectName` or `uuid`.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: uuid
+        in: query
+        description: The dimension UUIDs to return in the response. When combined with `objectName`, the results return objects that match either the `objectName` or `uuid`.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.v2.objectconfiguration.DimensionResponseDTO'
+    put:
+      tags:
+      - DimensionsV2
+      summary: Update dimensions
+      description: "Update existing dimensions. The response returns whether each dimension was successfully updated or not. When updating objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PUT` request definition.\n\n In `PUT` calls, the definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed from the dimension. To partially update a dimension, see the `PATCH` method.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: DimensionsV2_PutDimensions
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.v2.objectconfiguration.DimensionRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.BulkChangeResponseDTO'
+    post:
+      tags:
+      - DimensionsV2
+      summary: Create dimensions
+      description: "Create new dimensions. The response returns whether each dimension was successfully created or not.\n When creating objects, assign a unique object name but don't set a UUID. Visier generates UUIDs for new objects.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: DimensionsV2_CreateDimensions
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.v2.objectconfiguration.DimensionRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.BulkChangeResponseDTO'
+    delete:
+      tags:
+      - DimensionsV2
+      summary: Delete dimensions
+      description: "Delete existing dimensions. The response returns whether each dimension was successfully deleted or not.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: DimensionsV2_DeleteDimensions
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.v2.objectconfiguration.DimensionDeleteRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.BulkChangeResponseDTO'
+    patch:
+      tags:
+      - DimensionsV2
+      summary: Partially update dimensions
+      description: "Make partial changes to existing dimensions. The response returns whether each dimension was successfully patched or not. When patching objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PATCH` request definition.\n\n Unlike `PUT`, which completely replaces the dimension definition, use `PATCH` to change specific fields in the dimension without affecting omitted fields. To replace a dimension's entire definition, see the `PUT` method.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: DimensionsV2_PatchDimensions
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.v2.objectconfiguration.DimensionRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.BulkChangeResponseDTO'
+  /v2alpha/data/model/dimensions/{dimensionId}:
+    get:
+      tags:
+      - DimensionsV2
+      summary: Retrieve a dimension's details
+      description: "Retrieve the details of a specific dimension, such as its dimension type and description.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: DimensionsV2_GetOneDimension
+      parameters:
+      - name: dimensionId
+        in: path
+        description: The object name or UUID of the dimension to retrieve.
+        required: true
+        schema:
+          type: string
+      - name: with
+        in: query
+        description: "The level of information to retrieve for the dimension. Valid values:\n - `basic`: Retrieves the dimension's UUID, object name, and basic information.\n - `details`: Retrieves the `basic` details and additional configurations, such as levels and settings. This is the default.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+        schema:
+          type: array
+          items:
+            enum:
+            - basic
+            - details
+            - version
+            type: string
+            format: enum
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.v2.objectconfiguration.DimensionWithContextDTO'
+components:
+  schemas:
+    servicing.SynonymListDTO:
+      type: object
+      properties:
+        synonyms:
+          type: array
+          items:
+            type: string
+          description: Alternative words or phrases for the object.
+      description: The object's synonyms.
+    servicing.v2.objectconfiguration.DimensionResponseDTO:
+      type: object
+      properties:
+        dimensions:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.DimensionWithContextDTO'
+          description: The returned dimensions.
+      description: The dimensions in the response.
+    servicing.SuccessfulChangeDTO:
+      type: object
+      properties:
+        executionContext:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExecutionContextDTO'
+          description: The tenant and, optionally, project that change was made on.
+        objectName:
+          type: string
+          description: The object name of the object that was changed.
+        uuid:
+          type: string
+          description: The UUID of the object that was changed.
+        displayName:
+          type: string
+          description: The display name of the object that was changed.
+    servicing.v2.objectconfiguration.PropertyDependencyDTO:
+      type: object
+      properties:
+        analyticObjectName:
+          type: string
+          description: The analytic object associated with the dimension. Must be the analytic object's object name; for example, Employee_Experience.
+        propertyObjectName:
+          type: string
+          description: The display name of the property associated with the dimension. Must be the property's qualified name; for example, Candidate.Location.
+      description: Each analytic object and property associated with the dimension.
+    servicing.v2.objectconfiguration.PropertyDependencyListDTO:
+      type: object
+      properties:
+        propertyDependencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.PropertyDependencyDTO'
+          description: Each analytic object and property associated with the dimension.
+      description: The dimension's associated analytic objects and properties.
+    servicing.ExecutionContextDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant code.
+        projectId:
+          type: string
+          description: The project ID.
+      description: The context of the API request, such as the tenant code and project ID.
+    servicing.TagReferenceListDTO:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.TagReferenceDTO'
+          description: A list of tags assigned to the object.
+      description: The tags assigned to the object.
+    servicing.v2.objectconfiguration.DimensionWithContextDTO:
+      type: object
+      properties:
+        executionContext:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExecutionContextDTO'
+          description: The context of the API request, such as the tenant code and project ID.
+        dimension:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.DimensionDTO'
+          description: Information about the dimension.
+      description: Information about the dimension and the context of the API request, such as the tenant code and project ID.
+    servicing.ObjectIdDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: The UUID identifying the object.
+        objectName:
+          type: string
+          description: The object name of the object.
+      description: The identifier for the object.
+    servicing.v2.objectconfiguration.LevelListDTO:
+      type: object
+      properties:
+        levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.LevelDTO'
+          description: The list of dimension levels.
+      description: The levels in a leveled dimension or parent-child dimension.
+    servicing.FailedChangeDTO:
+      type: object
+      properties:
+        executionContext:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExecutionContextDTO'
+          description: The tenant and, optionally, project that change was attempted on.
+        objectName:
+          type: string
+          description: The object name of the object that was attempted to be changed.
+        uuid:
+          type: string
+          description: The UUID of the object that was attempted to be changed.
+        displayName:
+          type: string
+          description: The display name of the object that was attempted to be changed.
+        messages:
+          type: array
+          items:
+            type: string
+          description: The error messages.
+    servicing.v2.objectconfiguration.DimensionRequestDTO:
+      type: object
+      properties:
+        dimensions:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.DimensionWithContextDTO'
+          description: The dimensions in the request.
+      description: The dimensions in the API request.
+    servicing.TagReferenceDTO:
+      type: object
+      properties:
+        objectName:
+          type: string
+          description: The object name of the tag.
+      description: A reference to a tag.
+    servicing.AnalyticObjectReferenceDTO:
+      type: object
+      properties:
+        objectName:
+          type: string
+          description: The unique identifier name of the referenced analytic object.
+      description: A reference to an analytic object that relates to another object in the system.
+    servicing.BulkChangeResponseDTO:
+      type: object
+      properties:
+        successes:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.SuccessfulChangeDTO'
+          description: The list of successful changes.
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.FailedChangeDTO'
+          description: The list of failed changes.
+    servicing.AnalyticObjectReferenceListDTO:
+      type: object
+      properties:
+        analyticObjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.AnalyticObjectReferenceDTO'
+          description: The list of analytic object references.
+      description: A collection of references to analytic objects that relate to another object in the system.
+    servicing.v2.objectconfiguration.LeveledDetailsDTO:
+      type: object
+      properties:
+        levelList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.LevelListDTO'
+          description: The levels in the dimension.
+        hideNullValues:
+          type: boolean
+          description: If `true`, the dimension hides null values in visualizations. Default is `false`.
+        enableLargeDimensionSearch:
+          type: boolean
+          description: If `true`, you can search for members in a dimension with more than 300,000 members. Default is `false` to help with performance.
+        analyticObjectList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.AnalyticObjectReferenceListDTO'
+          description: The analytic objects associated with the dimension.
+        useMappingDisplayName:
+          type: boolean
+          description: If `true`, you can map a dimension member's object name and display name using different source columns. If `false`, the same column is used to map both the object name and display name.
+      description: The leveled dimension's configuration, such as its levels and settings.
+    servicing.v2.objectconfiguration.LevelDTO:
+      type: object
+      properties:
+        objectName:
+          type: string
+          description: The object name of the level.
+        displayName:
+          type: string
+          description: The display name of the level.
+        description:
+          type: string
+          description: The description of the level.
+        type:
+          type: string
+          description: The level data type, such as string or ordinal.
+        propertyDependencyList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.PropertyDependencyListDTO'
+          description: The references for the level properties.
+        uuid:
+          type: string
+          description: The unique identifier of the dimension level.
+      description: A level in a leveled dimension or parent-child dimension.
+    servicing.v2.objectconfiguration.DimensionDetailsDTO:
+      type: object
+      properties:
+        leveled:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.LeveledDetailsDTO'
+          description: The leveled dimension's configuration, such as its levels and settings.
+        parentChild:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.ParentChildDetailsDTO'
+          description: The parent-child dimension's configuration, such as its levels and name property.
+      description: The dimension type and its details.
+    servicing.v2.objectconfiguration.DimensionDeleteRequestDTO:
+      type: object
+      properties:
+        dimensions:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.DimensionDeleteWithContextDTO'
+          description: The dimensions in the request.
+      description: The dimensions to delete.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    servicing.VersionInformationDTO:
+      type: object
+      properties:
+        versionType:
+          enum:
+          - Unknown
+          - BP
+          - Tenant
+          - TenantOverride
+          - TenantShared
+          - Draft
+          type: string
+          description: "Indicates where the object originates from and whether the object has been modified. Valid values:\n - `Unknown`: The source is not known.\n - `BP`: The object originates from Visier's Blueprint and is not changed at the tenant level.\n - `Tenant`: The object only exists in the tenant and doesn't exist in Visier's Blueprint.\n - `TenantOverride`: The object originates from Visier's Blueprint and is changed at the tenant level.\n - `TenantShared`: The object is non-versioned, only exists in the tenant and doesn’t exist in Visier's Blueprint, and is shareable with other users in the tenant.\n - `Draft`: The object only exists in the specified draft project."
+          format: enum
+        edited:
+          type: string
+          description: The UTC time of the latest change in ISO 8601 format. For example, `2023-10-01T12:00:00Z`.
+        editor:
+          type: string
+          description: The user who made the latest change.
+      description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
+    servicing.v2.objectconfiguration.DimensionDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: The unique identifier of the dimension.
+        objectName:
+          type: string
+          description: The unique name of the dimension.
+        basicInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.BasicInformationDTO'
+          description: Fields that identify and describe the dimension, such as its display name, description, and explanation.
+        details:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.DimensionDetailsDTO'
+          description: The dimension type and its details.
+        tagList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.TagReferenceListDTO'
+          description: A list of tags assigned to the object.
+        visibleInAnalytics:
+          type: boolean
+          description: If `true`, the object is visible to end users in the solution.
+        includeWithVee:
+          type: boolean
+          description: If `true`, the object is available in Vee's responses.
+        versionInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.VersionInformationDTO'
+          description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
+      description: Information about the dimension.
+    servicing.BasicInformationDTO:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The user-friendly name for the object.
+        shortDisplayName:
+          type: string
+          description: A shortened version of the display name. If the object is visible in the solution experience, this name is displayed in visualization titles.
+        description:
+          type: string
+          description: A short description of the object. Descriptions provide in-context help for your users while working in Visier.
+        explanation:
+          type: string
+          description: A longer description of the object that typically includes a definition, calculation details, and other guidance about how to use the object.
+        designerNotes:
+          type: string
+          description: An admin-only description of the object that provides design-specific information or considerations.
+        synonymList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.SynonymListDTO'
+          description: Alternative words or phrases for the object.
+      description: Fields that identify and describe the object, such as its display name, description, and explanation.
+    servicing.v2.objectconfiguration.CustomPropertyListDTO:
+      type: object
+      properties:
+        propertyNames:
+          type: array
+          items:
+            type: string
+          description: The list of custom property names.
+      description: The custom properties in a parent-child dimension.
+    servicing.v2.objectconfiguration.DimensionDeleteWithContextDTO:
+      type: object
+      properties:
+        executionContext:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExecutionContextDTO'
+          description: The context of the API request, such as the tenant code and project ID.
+        dimension:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ObjectIdDTO'
+          description: Information identifying the dimension to delete.
+      description: Information about the dimension to delete and the context of the API request, such as the tenant code and project ID.
+    servicing.v2.objectconfiguration.ParentChildDetailsDTO:
+      type: object
+      properties:
+        levelList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.LevelListDTO'
+          description: The levels in the dimension.
+        hideNullValues:
+          type: boolean
+          description: If `true`, the dimension hides null values in visualizations. Default is `false`.
+        enableLargeDimensionSearch:
+          type: boolean
+          description: If `true`, you can search for members in a dimension with more than 300,000 members. Default is `false` to help with performance.
+        id:
+          type: string
+          description: The primary key for the member and is automatically generated from the data source.
+        parentId:
+          type: string
+          description: The foreign key for the member used to associate a parent member and is automatically generated from the data source.
+        name:
+          type: string
+          description: The member name corresponding with the ID (or primary key).
+        analyticObjectList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.AnalyticObjectReferenceListDTO'
+          description: The analytic objects associated with the dimension.
+        customPropertyList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.CustomPropertyListDTO'
+          description: The custom properties in the dimension.
+      description: The parent-child dimension's configuration, such as its levels and name property.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: analytic model
+  tags:
+  - DataModel
+  - ObjectConfiguration
+  - ConceptsV2
+  - DimensionsV2
+  - AnalyticObjectsV2
+  - MetricsV2
+  - PersonalizedAlerts

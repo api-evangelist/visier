@@ -1,0 +1,396 @@
+{
+  "item": [
+    {
+      "id": "08e4764f-0f63-4af7-b056-3a3777f53a44",
+      "name": "PlanDataLoad",
+      "description": {
+        "content": "Send data directly to your plan's scenario and optionally add or remove rows from your plan.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cd4c2df7-8bb6-4881-8bc1-ca5e1dcc7cf0",
+          "name": "Upload plan data",
+          "request": {
+            "name": "Upload plan data",
+            "description": {
+              "content": "Send a file to Visier to modify a plan's data. The file must be in CSV format and match the plan's schema. To get the plan's schema, call `GET /v1/planning/model/plans/{id}?withSchema=true`.\nThe data file must contain the following columns:\n  - `periodId`: From the GET response, use the `date` values in the `timePeriods` array as values in this column.\n  - A column for each `id` value in the `planSegmentLevels` object, where the row value is the `id` of the `members` in the `planSegmentLevelMembers` object.\n  - A column for each  `id` value in the `planItems` object that you want to modify data for, where the row value is the data value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "planning",
+                "data",
+                "plans",
+                ":planId",
+                "scenarios",
+                ":scenarioId",
+                "cells"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "calculation",
+                  "value": "<string>",
+                  "description": "Sets the plan values to rollup, distribute, or neither. Valid values:\n  - **ROLLUP**: Roll up loaded data values to parent and ancestor rows. If the data provides a parent value and its child value, this method prioritizes the loaded value for the child and overwrites the parent.\n  - **DISTRIBUTE**: Distribute loaded data values to their children and descendent rows. If the data provides a parent value and its child value, this method prioritizes the parent values and overrides the loaded child value.\n  - **NONE**: The loaded values are not rolled up or distributed. This is the default."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "The 3-digit ISO 4217 currency code of the data.\nIf undefined, default is the plan's consolidation currency. If the currency is different from the plan's consolidation currency, the values are converted to the consolidation currency using the conversion rates loaded for the plan's baseline period."
+                },
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>",
+                  "description": "Sets how to validate the data being loaded into Visier. Valid values:\n  - **VALIDATE**: Runs a test load through all the validation steps without putting the data into the plan. Use `VALIDATE` to find any errors before using `STRICT_UPLOAD` to load the data.\n  - **SKIP_ERRORS**: Loads all data without errors into the plan. Any rows with errors are excluded from the update to the plan.\n  - **STRICT_UPLOAD**: Loads data into the plan if there are no errors in any row. If there are errors, the load fails. This is the default."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) The unique identifier of the plan."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scenarioId",
+                  "description": "(Required) The unique identifier of the plan scenario to load data into."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "The CSV file to load into the plan."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "64f3d183-c5ce-47fa-9999-f053a935f218",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "planning",
+                    "data",
+                    "plans",
+                    ":planId",
+                    "scenarios",
+                    ":scenarioId",
+                    "cells"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calculation",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) The unique identifier of the plan."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scenarioId",
+                      "description": "(Required) The unique identifier of the plan scenario to load data into."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "The CSV file to load into the plan.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"updatedCellsCount\": 847,\n  \"potentialUpdatedCellsCount\": 8677,\n  \"errors\": [\n    {\n      \"value\": \"reference #/components/schemas/planning.PlanDataLoadErrorDTO not found in the OpenAPI spec\"\n    },\n    {\n      \"value\": \"reference #/components/schemas/planning.PlanDataLoadErrorDTO not found in the OpenAPI spec\"\n    }\n  ],\n  \"changelists\": [\n    {\n      \"planItem\": \"string\",\n      \"changes\": [\n        {\n          \"rowMembers\": [\n            \"string\",\n            \"string\"\n          ],\n          \"period\": \"string\",\n          \"oldValue\": 1037.0993748607548,\n          \"newValue\": 1044.8553868892518\n        },\n        {\n          \"rowMembers\": [\n            \"string\",\n            \"string\"\n          ],\n          \"period\": \"string\",\n          \"oldValue\": 90.62560272157683,\n          \"newValue\": 1465.9544247499746\n        }\n      ]\n    },\n    {\n      \"planItem\": \"string\",\n      \"changes\": [\n        {\n          \"rowMembers\": [\n            \"string\",\n            \"string\"\n          ],\n          \"period\": \"string\",\n          \"oldValue\": 7058.847677631938,\n          \"newValue\": 9355.612350722677\n        },\n        {\n          \"rowMembers\": [\n            \"string\",\n            \"string\"\n          ],\n          \"period\": \"string\",\n          \"oldValue\": 7362.449878667403,\n          \"newValue\": 6241.664077219329\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8033321e-fe87-47d5-994f-f22a2baa9b42",
+          "name": "Add or remove plan rows",
+          "request": {
+            "name": "Add or remove plan rows",
+            "description": {
+              "content": "Send a file to Visier to modify a plan's rows. The file must be in CSV format and contain the following columns:\n- `Add/Remove`: In the column, use the value \"Add\" to add the specified row to the plan or \"Remove\" to remove the specified row from the plan.\n- A column for each plan segment level using the IDs from `planSegmentLevels`.\n  - To add a row, use the corresponding segment member ID from `planSegmentLevelMembers`. If the member doesn't exist in the schema, provide a display name. The response returns its assigned segment member ID.\n  - To remove a row, use the corresponding segmentId as the column name and the segment member ID from `planSegmentLevelMembers` as the row value.\n\n<br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued. If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "planning",
+                "data",
+                "plans",
+                ":planId",
+                "rows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>",
+                  "description": "Sets how to validate the data being loaded into Visier. Valid values:\n  - **VALIDATE**: Runs a test load through all the validation steps without putting the data into the plan. Use `VALIDATE` to find any errors before using `STRICT_UPLOAD` to load the data.\n  - **SKIP_ERRORS**: Loads all data without errors into the plan. Any rows with errors are excluded from the update to the plan.\n  - **STRICT_UPLOAD**: Loads data into the plan if there are no errors in any row. If there are errors, the load fails. This is the default."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) The unique identifier of the plan."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "The CSV file to load into the plan."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f50ee2a5-c94a-4eea-84e4-a1a176b1f6e3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "planning",
+                    "data",
+                    "plans",
+                    ":planId",
+                    "rows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) The unique identifier of the plan."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "The CSV file to load into the plan.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "type": "file"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"addedRowsCount\": 8921,\n  \"removedRowsCount\": 9585,\n  \"potentialAddedRowsCount\": 8035,\n  \"potentialRemovedRowsCount\": 124,\n  \"errors\": [\n    {\n      \"value\": \"reference #/components/schemas/planning.PlanDataLoadErrorDTO not found in the OpenAPI spec\"\n    },\n    {\n      \"value\": \"reference #/components/schemas/planning.PlanDataLoadErrorDTO not found in the OpenAPI spec\"\n    }\n  ],\n  \"customMembers\": [\n    {\n      \"value\": \"reference #/components/schemas/planning.PlanSegmentLevelMemberDTO not found in the OpenAPI spec\"\n    },\n    {\n      \"value\": \"reference #/components/schemas/planning.PlanSegmentLevelMemberDTO not found in the OpenAPI spec\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ecff535f-1b3a-4c97-ad9d-15e38f94aeae",
+    "name": "Visier Planning Public Plan Data Load API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for managing your plans through API.",
+      "type": "text/plain"
+    }
+  }
+}

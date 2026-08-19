@@ -1,0 +1,162 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Data Out Data Version Export API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DataVersionExport",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of all data versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/data/data-version-exports/data-versions",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all data versions in the tenant.\n\n **Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Retrieve the details of all data version exports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/data/data-version-exports/exports",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve the information for all available data version exports.\n **Note:** Data version exports are available for 14 days after export job completes.\n\n **Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Retrieve the details of a data version export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/data/data-version-exports/exports/:exportUuid",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "exportUuid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the data version export."
+              }
+            ]
+          },
+          "docs": "Retrieve information for a specific data version export.\n **Note:** Data version exports are available for 14 days after export job completes.\n\n **Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Schedule a data version export job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1alpha/data/data-version-exports/jobs",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Schedule a data version export job. The job schedules immediately and will begin when resources are available. The response returns a `jobUuid` that you can use to check the export job status.\n\n **Note:** There is a limit of 10 export jobs per tenant per day.\n\n **Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact yo"
+        },
+        {
+          "info": {
+            "name": "Retrieve a data version export job's status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/data/data-version-exports/jobs/:jobUuid",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobUuid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the data version export job."
+              }
+            ]
+          },
+          "docs": "Retrieve the status of a data version export job. After the job completes successfully, this endpoint returns an `exportUuid` that you can use to retrieve the export information and download export files.\n\n **Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Download a file from a data version export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/data/data-version-exports/exports/:exportUuid/files/:fileId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "exportUuid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the data version export."
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The unique integer identifier of the file within the data version export."
+              }
+            ]
+          },
+          "docs": "This API allows you to download a file from a data version export.\nData version export files are in CSV format, compressed with gzip."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

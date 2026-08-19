@@ -11,11 +11,10 @@ server:
   url: https://{vanity_name}.app.visier.com/visier-query-mcp
   streaming: Server-Sent Events (SSE) over HTTPS
   tenant_scoped: true
-  note: >-
-    The server URL is tenant-scoped. {vanity_name} is the customer's Visier vanity name, found under
-    Settings > Single Sign-On (for example, a service provider endpoint of
-    https://jupiter.visier.com/VServer/auth means the vanity name is "jupiter"). There is no
-    anonymous/global MCP endpoint, so a live tools/list introspection could not be performed.
+  note: The server URL is tenant-scoped. {vanity_name} is the customer's Visier vanity name, found under
+    Settings > Single Sign-On (for example, a service provider endpoint of https://jupiter.visier.com/VServer/auth
+    means the vanity name is "jupiter"). There is no anonymous/global MCP endpoint, so a live tools/list
+    introspection could not be performed.
 authentication:
   type: oauth2
   grants:
@@ -23,27 +22,25 @@ authentication:
   - urn:ietf:params:oauth:grant-type:saml2-bearer
   access_token_lifetime: 60 minutes
   refresh_token_lifetime: configurable
-  resource_parameter: >-
-    OAuth requests must include the `resource` parameter set to the Visier Query MCP server URL.
+  resource_parameter: OAuth requests must include the `resource` parameter set to the Visier Query MCP
+    server URL.
   required_capabilities:
   - Query MCP Server
   - Vee Core (required for the Vee tools)
   - OAuth 2.0 Client Registration (administrators, to register the client)
 introspection:
   tools_list_probed: false
-  reason: >-
-    The endpoint is tenant-scoped and OAuth-gated; no anonymous host resolves. Tool input schemas
-    require authenticated tools/list introspection against a customer tenant. The tool list below is
-    taken verbatim from Visier's published documentation (display names, not wire-level tool ids).
+  reason: The endpoint is tenant-scoped and OAuth-gated; no anonymous host resolves. Tool input schemas
+    require authenticated tools/list introspection against a customer tenant. The tool list below is taken
+    verbatim from Visier's published documentation (display names, not wire-level tool ids).
 clients_documented:
 - Claude Desktop
 - Cursor
 tools:
 - name: Ask Vee AI agent
   category: vee
-  description: >-
-    Ask a natural-language workforce question. Vee interprets the intent, determines how to query the
-    tenant's Visier data, and returns a natural-language response.
+  description: Ask a natural-language workforce question. Vee interprets the intent, determines how to
+    query the tenant's Visier data, and returns a natural-language response.
 - name: Get sample Vee questions
   category: vee
   description: Retrieve sample questions Vee is able to answer.
@@ -76,32 +73,37 @@ tools:
   description: Search dimension members, for building filters on a query.
 prompts:
 - name: Employee analysis instructions
-  description: >-
-    Instructions to analyze data on a specific employee — jobs, organizations, tenure, compensation,
-    performance, risk of resignation, and related analytic objects, optionally compared against
-    organization-wide metrics.
+  description: Instructions to analyze data on a specific employee — jobs, organizations, tenure, compensation,
+    performance, risk of resignation, and related analytic objects, optionally compared against organization-wide
+    metrics.
 - name: Candidate analysis instructions
-  description: >-
-    Instructions to analyze data on a specific candidate — job, employer, location, skills, and
-    related analytic objects.
+  description: Instructions to analyze data on a specific candidate — job, employer, location, skills,
+    and related analytic objects.
 - name: Requisition analysis instructions
-  description: >-
-    Instructions to analyze and compare the applicants for a specific requisition — job, location,
+  description: Instructions to analyze and compare the applicants for a specific requisition — job, location,
     reason, status, and related analytic objects.
 limitations:
 - Results reflect the tenant's data as of the latest data load in Visier.
-- Visier API rate limits apply to MCP calls (100 calls/minute, 6000 calls/hour); calls over the limit are rejected.
+- Visier API rate limits apply to MCP calls (100 calls/minute, 6000 calls/hour); calls over the limit
+  are rejected.
 - Natural-language understanding depends on the connected AI client's model.
 security_considerations:
-- >-
-  Visier documents lethal-trifecta / indirect prompt-injection risk and advises against connecting
-  untrusted MCP servers to agents that also access Visier MCP.
-- >-
-  The customer is the controller of the decision to send Visier data to third-party AI tools; use of
-  those tools is governed by the customer's own agreement with the tool provider.
+- Visier documents lethal-trifecta / indirect prompt-injection risk and advises against connecting untrusted
+  MCP servers to agents that also access Visier MCP.
+- The customer is the controller of the decision to send Visier data to third-party AI tools; use of those
+  tools is governed by the customer's own agreement with the tool provider.
 x-evidence:
   fetched: '2026-08-02'
   urls:
   - https://docs.visier.com/developer/agents/mcp/mcp-server.htm
   - https://docs.visier.com/developer/agents/mcp/mcp-server-set-up.htm
   http_status: 200
+deployment:
+  mode: none
+  endpoint: https://{vanity_name}.app.visier.com/visier-query-mcp
+  verified: probed
+  probe: dead
+  note: the endpoint this manifest claimed did not answer; recorded as none rather than deleted so the
+    claim stays auditable
+  checked: '2026-08-12'
+  source: catalog MCP census

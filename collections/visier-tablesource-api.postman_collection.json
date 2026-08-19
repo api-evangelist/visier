@@ -1,0 +1,3216 @@
+{
+  "item": [
+    {
+      "id": "b735590e-18e2-43cc-8de0-ea9b006d7775",
+      "name": "TableSource",
+      "description": {
+        "content": "Use row-based management for your source data in Visier. The Table Source API supports direct SQL-based data modifications, eliminating concerns about file management or override behavior. Use the API to create, modify, and delete tables. Use SQL statements to query, insert, update, delete, and merge data into tables with transactions. You can reference the tables by mappings, just like other sources, to load data into an analytic object in a data version.\n<br><br>\n**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.</em>",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e622035a-6b8d-469c-8470-b551cb999896",
+          "name": "Retrieve table sources",
+          "request": {
+            "name": "Retrieve table sources",
+            "description": {
+              "content": "Retrieve a list of table source configurations. Table sources are SQL-accessible tables that can store and manage data directly within Visier.\n \n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "table-sources",
+                "tables"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The maximum number of table sources to return. Default is 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<integer>",
+                  "description": "The index to start retrieving results from, also known as offset. The index begins at 0."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3bd48be8-972d-4b3c-83ff-9f2923d1feec",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "tables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tables\": [\n    {\n      \"uuid\": \"string\",\n      \"objectName\": \"string\",\n      \"basicInformation\": {\n        \"displayName\": \"string\",\n        \"shortDisplayName\": \"string\",\n        \"description\": \"string\",\n        \"explanation\": \"string\",\n        \"designerNotes\": \"string\",\n        \"synonymList\": {\n          \"synonyms\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"columns\": [\n        {\n          \"name\": \"string\",\n          \"dataType\": \"TENANT_ID\",\n          \"isPrimaryTimestamp\": false\n        },\n        {\n          \"name\": \"string\",\n          \"dataType\": \"DATE\",\n          \"isPrimaryTimestamp\": false\n        }\n      ],\n      \"canChildrenInherit\": true,\n      \"canChildrenInheritData\": true,\n      \"excludeFromAutoProcessing\": false,\n      \"snapshotRetentionDays\": 4555,\n      \"materializedView\": {\n        \"enabled\": false,\n        \"query\": \"string\",\n        \"dependencies\": [\n          {\n            \"upstreamTable\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"joinFilter\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"upstreamTable\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"joinFilter\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"filterInheritedDataByTenant\": true\n    },\n    {\n      \"uuid\": \"string\",\n      \"objectName\": \"string\",\n      \"basicInformation\": {\n        \"displayName\": \"string\",\n        \"shortDisplayName\": \"string\",\n        \"description\": \"string\",\n        \"explanation\": \"string\",\n        \"designerNotes\": \"string\",\n        \"synonymList\": {\n          \"synonyms\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"columns\": [\n        {\n          \"name\": \"string\",\n          \"dataType\": \"DATE_TIME\",\n          \"isPrimaryTimestamp\": false\n        },\n        {\n          \"name\": \"string\",\n          \"dataType\": \"JSON\",\n          \"isPrimaryTimestamp\": false\n        }\n      ],\n      \"canChildrenInherit\": false,\n      \"canChildrenInheritData\": false,\n      \"excludeFromAutoProcessing\": false,\n      \"snapshotRetentionDays\": 3960,\n      \"materializedView\": {\n        \"enabled\": false,\n        \"query\": \"string\",\n        \"dependencies\": [\n          {\n            \"upstreamTable\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"joinFilter\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"upstreamTable\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"joinFilter\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"filterInheritedDataByTenant\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ba9c99f-d59c-4535-992b-56f5790fad9a",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "tables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ece5d88-5c9a-4295-99f8-2b6720725a56",
+          "name": "Create a table source",
+          "request": {
+            "name": "Create a table source",
+            "description": {
+              "content": "Create a table source configuration. Table sources define the structure and metadata for SQL-accessible tables in Visier.\n\n When creating objects, assign a unique object name but don't set a UUID. Visier generates UUIDs for new objects.\n \n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "table-sources",
+                "tables"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uuid\": \"<string>\",\n  \"objectName\": \"<string>\",\n  \"basicInformation\": {\n    \"displayName\": \"<string>\",\n    \"shortDisplayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"explanation\": \"<string>\",\n    \"designerNotes\": \"<string>\",\n    \"synonymList\": {\n      \"synonyms\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"columns\": [\n    {\n      \"name\": \"<string>\",\n      \"dataType\": \"<enum>\",\n      \"isPrimaryTimestamp\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"dataType\": \"<enum>\",\n      \"isPrimaryTimestamp\": \"<boolean>\"\n    }\n  ],\n  \"canChildrenInherit\": \"<boolean>\",\n  \"canChildrenInheritData\": \"<boolean>\",\n  \"excludeFromAutoProcessing\": \"<boolean>\",\n  \"snapshotRetentionDays\": \"<integer>\",\n  \"materializedView\": {\n    \"enabled\": \"<boolean>\",\n    \"query\": \"<string>\",\n    \"dependencies\": [\n      {\n        \"upstreamTable\": \"<string>\",\n        \"joinFilter\": \"<string>\"\n      },\n      {\n        \"upstreamTable\": \"<string>\",\n        \"joinFilter\": \"<string>\"\n      }\n    ]\n  },\n  \"filterInheritedDataByTenant\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0f20fe51-9bb2-4bd9-ad39-4e1dd3d4b8e5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "tables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"<string>\",\n  \"objectName\": \"<string>\",\n  \"basicInformation\": {\n    \"displayName\": \"<string>\",\n    \"shortDisplayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"explanation\": \"<string>\",\n    \"designerNotes\": \"<string>\",\n    \"synonymList\": {\n      \"synonyms\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"columns\": [\n    {\n      \"name\": \"<string>\",\n      \"dataType\": \"<enum>\",\n      \"isPrimaryTimestamp\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"dataType\": \"<enum>\",\n      \"isPrimaryTimestamp\": \"<boolean>\"\n    }\n  ],\n  \"canChildrenInherit\": \"<boolean>\",\n  \"canChildrenInheritData\": \"<boolean>\",\n  \"excludeFromAutoProcessing\": \"<boolean>\",\n  \"snapshotRetentionDays\": \"<integer>\",\n  \"materializedView\": {\n    \"enabled\": \"<boolean>\",\n    \"query\": \"<string>\",\n    \"dependencies\": [\n      {\n        \"upstreamTable\": \"<string>\",\n        \"joinFilter\": \"<string>\"\n      },\n      {\n        \"upstreamTable\": \"<string>\",\n        \"joinFilter\": \"<string>\"\n      }\n    ]\n  },\n  \"filterInheritedDataByTenant\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"<string>\",\n  \"objectName\": \"<string>\",\n  \"basicInformation\": {\n    \"displayName\": \"<string>\",\n    \"shortDisplayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"explanation\": \"<string>\",\n    \"designerNotes\": \"<string>\",\n    \"synonymList\": {\n      \"synonyms\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"columns\": [\n    {\n      \"name\": \"<string>\",\n      \"dataType\": \"<enum>\",\n      \"isPrimaryTimestamp\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"dataType\": \"<enum>\",\n      \"isPrimaryTimestamp\": \"<boolean>\"\n    }\n  ],\n  \"canChildrenInherit\": \"<boolean>\",\n  \"canChildrenInheritData\": \"<boolean>\",\n  \"excludeFromAutoProcessing\": \"<boolean>\",\n  \"snapshotRetentionDays\": \"<integer>\",\n  \"materializedView\": {\n    \"enabled\": \"<boolean>\",\n    \"query\": \"<string>\",\n    \"dependencies\": [\n      {\n        \"upstreamTable\": \"<string>\",\n        \"joinFilter\": \"<string>\"\n      },\n      {\n        \"upstreamTable\": \"<string>\",\n        \"joinFilter\": \"<string>\"\n      }\n    ]\n  },\n  \"filterInheritedDataByTenant\": \"<boolean>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b24307b5-8691-420e-a831-b2a45d9fd1b8",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "tables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"<string>\",\n  \"objectName\": \"<string>\",\n  \"basicInformation\": {\n    \"displayName\": \"<string>\",\n    \"shortDisplayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"explanation\": \"<string>\",\n    \"designerNotes\": \"<string>\",\n    \"synonymList\": {\n      \"synonyms\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"columns\": [\n    {\n      \"name\": \"<string>\",\n      \"dataType\": \"<enum>\",\n      \"isPrimaryTimestamp\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"dataType\": \"<enum>\",\n      \"isPrimaryTimestamp\": \"<boolean>\"\n    }\n  ],\n  \"canChildrenInherit\": \"<boolean>\",\n  \"canChildrenInheritData\": \"<boolean>\",\n  \"excludeFromAutoProcessing\": \"<boolean>\",\n  \"snapshotRetentionDays\": \"<integer>\",\n  \"materializedView\": {\n    \"enabled\": \"<boolean>\",\n    \"query\": \"<string>\",\n    \"dependencies\": [\n      {\n        \"upstreamTable\": \"<string>\",\n        \"joinFilter\": \"<string>\"\n      },\n      {\n        \"upstreamTable\": \"<string>\",\n        \"joinFilter\": \"<string>\"\n      }\n    ]\n  },\n  \"filterInheritedDataByTenant\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4b022b8-417e-4978-82d5-e8723d473527",
+          "name": "Retrieve a table source",
+          "request": {
+            "name": "Retrieve a table source",
+            "description": {
+              "content": "Retrieve a specific table source configuration by its unique identifier.\n \n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "table-sources",
+                "tables",
+                ":tableId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tableId",
+                  "description": "(Required) The unique identifier of the table source."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "76f33397-eca5-4437-bba9-67f7c606ee78",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "tables",
+                    ":tableId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableId",
+                      "description": "(Required) The unique identifier of the table source."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"<string>\",\n  \"objectName\": \"<string>\",\n  \"basicInformation\": {\n    \"displayName\": \"<string>\",\n    \"shortDisplayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"explanation\": \"<string>\",\n    \"designerNotes\": \"<string>\",\n    \"synonymList\": {\n      \"synonyms\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"columns\": [\n    {\n      \"name\": \"<string>\",\n      \"dataType\": \"<enum>\",\n      \"isPrimaryTimestamp\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"dataType\": \"<enum>\",\n      \"isPrimaryTimestamp\": \"<boolean>\"\n    }\n  ],\n  \"canChildrenInherit\": \"<boolean>\",\n  \"canChildrenInheritData\": \"<boolean>\",\n  \"excludeFromAutoProcessing\": \"<boolean>\",\n  \"snapshotRetentionDays\": \"<integer>\",\n  \"materializedView\": {\n    \"enabled\": \"<boolean>\",\n    \"query\": \"<string>\",\n    \"dependencies\": [\n      {\n        \"upstreamTable\": \"<string>\",\n        \"joinFilter\": \"<string>\"\n      },\n      {\n        \"upstreamTable\": \"<string>\",\n        \"joinFilter\": \"<string>\"\n      }\n    ]\n  },\n  \"filterInheritedDataByTenant\": \"<boolean>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "485b7af5-5d8d-40ca-97f4-6a362461cc13",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "tables",
+                    ":tableId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableId",
+                      "description": "(Required) The unique identifier of the table source."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd101c08-e94c-43e5-99cc-14ca770a59a4",
+          "name": "Update a table source",
+          "request": {
+            "name": "Update a table source",
+            "description": {
+              "content": "Update an existing table source configuration. Use this to modify the structure, columns, or metadata of a table source.\n \n In `PUT` requests, the definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed from the table source. \n \n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "table-sources",
+                "tables",
+                ":tableId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tableId",
+                  "description": "(Required) The unique identifier of the table source to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uuid\": \"<string>\",\n  \"objectName\": \"<string>\",\n  \"basicInformation\": {\n    \"displayName\": \"<string>\",\n    \"shortDisplayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"explanation\": \"<string>\",\n    \"designerNotes\": \"<string>\",\n    \"synonymList\": {\n      \"synonyms\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"columns\": [\n    {\n      \"name\": \"<string>\",\n      \"dataType\": \"<enum>\",\n      \"isPrimaryTimestamp\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"dataType\": \"<enum>\",\n      \"isPrimaryTimestamp\": \"<boolean>\"\n    }\n  ],\n  \"canChildrenInherit\": \"<boolean>\",\n  \"canChildrenInheritData\": \"<boolean>\",\n  \"excludeFromAutoProcessing\": \"<boolean>\",\n  \"snapshotRetentionDays\": \"<integer>\",\n  \"materializedView\": {\n    \"enabled\": \"<boolean>\",\n    \"query\": \"<string>\",\n    \"dependencies\": [\n      {\n        \"upstreamTable\": \"<string>\",\n        \"joinFilter\": \"<string>\"\n      },\n      {\n        \"upstreamTable\": \"<string>\",\n        \"joinFilter\": \"<string>\"\n      }\n    ]\n  },\n  \"filterInheritedDataByTenant\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ea9fd86-bba3-464c-9382-f7e424f746dd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "tables",
+                    ":tableId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableId",
+                      "description": "(Required) The unique identifier of the table source to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"<string>\",\n  \"objectName\": \"<string>\",\n  \"basicInformation\": {\n    \"displayName\": \"<string>\",\n    \"shortDisplayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"explanation\": \"<string>\",\n    \"designerNotes\": \"<string>\",\n    \"synonymList\": {\n      \"synonyms\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"columns\": [\n    {\n      \"name\": \"<string>\",\n      \"dataType\": \"<enum>\",\n      \"isPrimaryTimestamp\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"dataType\": \"<enum>\",\n      \"isPrimaryTimestamp\": \"<boolean>\"\n    }\n  ],\n  \"canChildrenInherit\": \"<boolean>\",\n  \"canChildrenInheritData\": \"<boolean>\",\n  \"excludeFromAutoProcessing\": \"<boolean>\",\n  \"snapshotRetentionDays\": \"<integer>\",\n  \"materializedView\": {\n    \"enabled\": \"<boolean>\",\n    \"query\": \"<string>\",\n    \"dependencies\": [\n      {\n        \"upstreamTable\": \"<string>\",\n        \"joinFilter\": \"<string>\"\n      },\n      {\n        \"upstreamTable\": \"<string>\",\n        \"joinFilter\": \"<string>\"\n      }\n    ]\n  },\n  \"filterInheritedDataByTenant\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"<string>\",\n  \"objectName\": \"<string>\",\n  \"basicInformation\": {\n    \"displayName\": \"<string>\",\n    \"shortDisplayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"explanation\": \"<string>\",\n    \"designerNotes\": \"<string>\",\n    \"synonymList\": {\n      \"synonyms\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"columns\": [\n    {\n      \"name\": \"<string>\",\n      \"dataType\": \"<enum>\",\n      \"isPrimaryTimestamp\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"dataType\": \"<enum>\",\n      \"isPrimaryTimestamp\": \"<boolean>\"\n    }\n  ],\n  \"canChildrenInherit\": \"<boolean>\",\n  \"canChildrenInheritData\": \"<boolean>\",\n  \"excludeFromAutoProcessing\": \"<boolean>\",\n  \"snapshotRetentionDays\": \"<integer>\",\n  \"materializedView\": {\n    \"enabled\": \"<boolean>\",\n    \"query\": \"<string>\",\n    \"dependencies\": [\n      {\n        \"upstreamTable\": \"<string>\",\n        \"joinFilter\": \"<string>\"\n      },\n      {\n        \"upstreamTable\": \"<string>\",\n        \"joinFilter\": \"<string>\"\n      }\n    ]\n  },\n  \"filterInheritedDataByTenant\": \"<boolean>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e496aa5-e3db-4c49-a2ec-dab8a1a285ff",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "tables",
+                    ":tableId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableId",
+                      "description": "(Required) The unique identifier of the table source to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"<string>\",\n  \"objectName\": \"<string>\",\n  \"basicInformation\": {\n    \"displayName\": \"<string>\",\n    \"shortDisplayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"explanation\": \"<string>\",\n    \"designerNotes\": \"<string>\",\n    \"synonymList\": {\n      \"synonyms\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"columns\": [\n    {\n      \"name\": \"<string>\",\n      \"dataType\": \"<enum>\",\n      \"isPrimaryTimestamp\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"dataType\": \"<enum>\",\n      \"isPrimaryTimestamp\": \"<boolean>\"\n    }\n  ],\n  \"canChildrenInherit\": \"<boolean>\",\n  \"canChildrenInheritData\": \"<boolean>\",\n  \"excludeFromAutoProcessing\": \"<boolean>\",\n  \"snapshotRetentionDays\": \"<integer>\",\n  \"materializedView\": {\n    \"enabled\": \"<boolean>\",\n    \"query\": \"<string>\",\n    \"dependencies\": [\n      {\n        \"upstreamTable\": \"<string>\",\n        \"joinFilter\": \"<string>\"\n      },\n      {\n        \"upstreamTable\": \"<string>\",\n        \"joinFilter\": \"<string>\"\n      }\n    ]\n  },\n  \"filterInheritedDataByTenant\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "231e0470-35fb-4f1d-8285-e40058d929da",
+          "name": "Delete a table source",
+          "request": {
+            "name": "Delete a table source",
+            "description": {
+              "content": "Delete a table source configuration. This removes the table source definition but does not delete the associated data.\n \n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "table-sources",
+                "tables",
+                ":tableId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tableId",
+                  "description": "(Required) The unique identifier of the table source."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "684f1e55-18be-4229-8736-5794f69c51c5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "tables",
+                    ":tableId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableId",
+                      "description": "(Required) The unique identifier of the table source."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a4df0df0-f5ab-483e-8a2f-2ee97377feb6",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "tables",
+                    ":tableId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableId",
+                      "description": "(Required) The unique identifier of the table source."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c85d70d3-435e-41bd-8cfa-f463d3beeed4",
+          "name": "Retrieve a table source's metadata",
+          "request": {
+            "name": "Retrieve a table source's metadata",
+            "description": {
+              "content": "Retrieve previously-stored metadata for a table source, such as the key-value pairs to apply to the table if you commit the transaction. To store metadata for a table source, use the `setMetadata` action in `POST /v1alpha/data/table-sources/transactions/{transactionId}/jobs`.\n\n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "table-sources",
+                "tables",
+                ":tableId",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tableId",
+                  "description": "(Required) The unique identifier of the table source for which to retrieve metadata."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "772eefc6-7beb-483c-a2de-730d9cbff8de",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "tables",
+                    ":tableId",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableId",
+                      "description": "(Required) The unique identifier of the table source for which to retrieve metadata."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tableId\": \"string\",\n  \"transactionId\": \"string\",\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"recordCount\": \"string\",\n  \"recordsUpdatedAt\": \"string\",\n  \"dataFilesSizeBytes\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61177879-39b2-4dea-8cc6-a469ec23f3ed",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "tables",
+                    ":tableId",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableId",
+                      "description": "(Required) The unique identifier of the table source for which to retrieve metadata."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5df6c25e-f141-494f-94ad-f7b888dcf73c",
+          "name": "Regenerate a materialized view",
+          "request": {
+            "name": "Regenerate a materialized view",
+            "description": {
+              "content": "Run a SQL job to manually refresh the dataset during troubleshooting, query updates, or when manual data fetching is required.\n\n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "table-sources",
+                "tables",
+                ":tableId",
+                "regenerate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tableId",
+                  "description": "(Required) The unique identifier of the table source."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tableId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0cff2ad7-9909-40ca-83db-e2aaf54bcf0f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "tables",
+                    ":tableId",
+                    "regenerate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableId",
+                      "description": "(Required) The unique identifier of the table source."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tableId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"string\",\n  \"tableAccess\": {\n    \"read\": [\n      \"string\",\n      \"string\"\n    ],\n    \"write\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7e1bce1-ec34-4cf6-9d7f-0340f212e3de",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "tables",
+                    ":tableId",
+                    "regenerate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableId",
+                      "description": "(Required) The unique identifier of the table source."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tableId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f6d9890-f167-4e02-b55f-20d65ff46178",
+          "name": "Start a transaction",
+          "request": {
+            "name": "Start a transaction",
+            "description": {
+              "content": "Start a transaction for SQL operations on table sources. Transactions provide isolation for multiple operations and allow for rollback if needed.\n\n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "table-sources",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"expireAfterSeconds\": \"<integer>\",\n  \"tablesToModify\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5301a1a5-fb47-4695-9c97-e069ded57732",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expireAfterSeconds\": \"<integer>\",\n  \"tablesToModify\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"status\": \"OPEN\",\n  \"createdAt\": \"string\",\n  \"createdBy\": \"string\",\n  \"expireAt\": \"string\",\n  \"startedAt\": \"string\",\n  \"closedAt\": \"string\",\n  \"tablesToModify\": [\n    \"string\",\n    \"string\"\n  ],\n  \"children\": [\n    {\n      \"tenantCode\": \"string\",\n      \"status\": \"COMMITTED\",\n      \"startedAt\": \"string\",\n      \"closedAt\": \"string\"\n    },\n    {\n      \"tenantCode\": \"string\",\n      \"status\": \"ROLLED_BACK\",\n      \"startedAt\": \"string\",\n      \"closedAt\": \"string\"\n    }\n  ],\n  \"summary\": {\n    \"open\": 1263,\n    \"resolving\": 3494,\n    \"committed\": 1617,\n    \"rolledBack\": 3667\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d942d13-2256-4eb6-be47-63437a4faa7a",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expireAfterSeconds\": \"<integer>\",\n  \"tablesToModify\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d791be98-74da-4073-9fed-173453d55620",
+          "name": "Retrieve a transaction's status",
+          "request": {
+            "name": "Retrieve a transaction's status",
+            "description": {
+              "content": "Retrieve the current status and details of a specific transaction. If the transaction was dispatched to analytic tenants, the response includes the status of each analytic tenant's transaction in the `children` field.\n\n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "table-sources",
+                "transactions",
+                ":transactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "summaryOnly",
+                  "value": "<boolean>",
+                  "description": "If `true`, the response omits the `children` array and returns only the `summary` counts. Use for polling. Default is `false`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) The unique identifier of the transaction."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c4e809a4-f714-45e0-8670-492296dc5b1d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "transactions",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summaryOnly",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique identifier of the transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"status\": \"ROLLED_BACK\",\n  \"createdAt\": \"string\",\n  \"createdBy\": \"string\",\n  \"expireAt\": \"string\",\n  \"startedAt\": \"string\",\n  \"closedAt\": \"string\",\n  \"tablesToModify\": [\n    \"string\",\n    \"string\"\n  ],\n  \"children\": [\n    {\n      \"tenantCode\": \"string\",\n      \"status\": \"ROLLED_BACK\",\n      \"startedAt\": \"string\",\n      \"closedAt\": \"string\"\n    },\n    {\n      \"tenantCode\": \"string\",\n      \"status\": \"OPEN\",\n      \"startedAt\": \"string\",\n      \"closedAt\": \"string\"\n    }\n  ],\n  \"summary\": {\n    \"open\": 9332,\n    \"resolving\": 6513,\n    \"committed\": 5723,\n    \"rolledBack\": 5458\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25dc327a-94b0-4e58-bb33-fa06bfd1733d",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "transactions",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summaryOnly",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique identifier of the transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c55d52a3-101d-4689-81c8-11f088f6200e",
+          "name": "Extend a transaction's expiry",
+          "request": {
+            "name": "Extend a transaction's expiry",
+            "description": {
+              "content": "Extend the expiry time of an open transaction.\n\n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "table-sources",
+                "transactions",
+                ":transactionId",
+                "extend"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) The unique identifier of the transaction to extend."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"expireAfterSeconds\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2bef7c29-c85f-4a24-be97-98609373ffe4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "transactions",
+                    ":transactionId",
+                    "extend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique identifier of the transaction to extend."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expireAfterSeconds\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"status\": \"ROLLED_BACK\",\n  \"createdAt\": \"string\",\n  \"createdBy\": \"string\",\n  \"expireAt\": \"string\",\n  \"startedAt\": \"string\",\n  \"closedAt\": \"string\",\n  \"tablesToModify\": [\n    \"string\",\n    \"string\"\n  ],\n  \"children\": [\n    {\n      \"tenantCode\": \"string\",\n      \"status\": \"ROLLED_BACK\",\n      \"startedAt\": \"string\",\n      \"closedAt\": \"string\"\n    },\n    {\n      \"tenantCode\": \"string\",\n      \"status\": \"OPEN\",\n      \"startedAt\": \"string\",\n      \"closedAt\": \"string\"\n    }\n  ],\n  \"summary\": {\n    \"open\": 9332,\n    \"resolving\": 6513,\n    \"committed\": 5723,\n    \"rolledBack\": 5458\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee2901fc-6bb3-47c6-92fe-779228b4fcf8",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "transactions",
+                    ":transactionId",
+                    "extend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique identifier of the transaction to extend."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expireAfterSeconds\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97bc6b4b-29c7-418c-9b48-9de82855bc90",
+          "name": "Upload an input file to a transaction",
+          "request": {
+            "name": "Upload an input file to a transaction",
+            "description": {
+              "content": "Send input files to a transaction. SQL operations can reference an input file within a job as if it were a local, temporary view. For example, the input file can contain data to insert into your sources, IDs to match against to change or delete rows, or any other input for your SQL query.\n \n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "table-sources",
+                "transactions",
+                ":transactionId",
+                "inputs",
+                ":filename"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) The unique identifier of the transaction."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "filename",
+                  "description": "(Required) The name of the file to upload. The input will be accessible with this filename during job execution."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "The input file to upload. The file is accessible during SQL job execution as a temporary view using the provided filename."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "414fe039-8593-472f-b919-9461fccacef7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "transactions",
+                    ":transactionId",
+                    "inputs",
+                    ":filename"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique identifier of the transaction."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filename",
+                      "description": "(Required) The name of the file to upload. The input will be accessible with this filename during job execution."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "The input file to upload. The file is accessible during SQL job execution as a temporary view using the provided filename.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "785ea186-5769-41a0-9513-1b817a28fc5a",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "transactions",
+                    ":transactionId",
+                    "inputs",
+                    ":filename"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique identifier of the transaction."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filename",
+                      "description": "(Required) The name of the file to upload. The input will be accessible with this filename during job execution."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "The input file to upload. The file is accessible during SQL job execution as a temporary view using the provided filename.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f88b8ced-4a93-4274-99bd-8c50c373fecc",
+          "name": "Run a SQL job within a transaction",
+          "request": {
+            "name": "Run a SQL job within a transaction",
+            "description": {
+              "content": "Execute a SQL job within a transaction. Jobs can contain multiple SQL operations including queries, inserts, updates, deletes, and merge operations.\n \n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "table-sources",
+                "transactions",
+                ":transactionId",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) The unique identifier of the transaction."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"actions\": [\n    {\n      \"query\": {\n        \"query\": \"<string>\",\n        \"timeoutSeconds\": \"<integer>\",\n        \"output\": {\n          \"format\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"filename\": \"<string>\"\n        },\n        \"rollbackOnEmpty\": \"<boolean>\"\n      },\n      \"upsert\": {\n        \"source\": \"<string>\",\n        \"target\": \"<string>\",\n        \"keys\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"replace\": {\n        \"source\": \"<string>\",\n        \"target\": \"<string>\"\n      },\n      \"rollback\": {},\n      \"commit\": {},\n      \"process\": {\n        \"projectId\": \"<string>\",\n        \"versionId\": \"<string>\",\n        \"dataCategoryIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"deferTimeNotAfter\": \"<string>\"\n      },\n      \"setMetadata\": {\n        \"table\": \"<string>\",\n        \"metadata\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        },\n        \"applyToUnmodifiedTenants\": \"<boolean>\"\n      },\n      \"reset\": {\n        \"table\": \"<string>\",\n        \"asOfTimestamp\": \"<string>\"\n      }\n    },\n    {\n      \"query\": {\n        \"query\": \"<string>\",\n        \"timeoutSeconds\": \"<integer>\",\n        \"output\": {\n          \"format\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"filename\": \"<string>\"\n        },\n        \"rollbackOnEmpty\": \"<boolean>\"\n      },\n      \"upsert\": {\n        \"source\": \"<string>\",\n        \"target\": \"<string>\",\n        \"keys\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"replace\": {\n        \"source\": \"<string>\",\n        \"target\": \"<string>\"\n      },\n      \"rollback\": {},\n      \"commit\": {},\n      \"process\": {\n        \"projectId\": \"<string>\",\n        \"versionId\": \"<string>\",\n        \"dataCategoryIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"deferTimeNotAfter\": \"<string>\"\n      },\n      \"setMetadata\": {\n        \"table\": \"<string>\",\n        \"metadata\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        \"applyToUnmodifiedTenants\": \"<boolean>\"\n      },\n      \"reset\": {\n        \"table\": \"<string>\",\n        \"asOfTimestamp\": \"<string>\"\n      }\n    }\n  ],\n  \"tenants\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"inputs\": [\n    {\n      \"id\": \"<string>\",\n      \"filename\": \"<string>\",\n      \"format\": {\n        \"csv\": {\n          \"header\": \"<boolean>\"\n        },\n        \"parquet\": {}\n      },\n      \"tenantCodeColumn\": \"<string>\",\n      \"prependAdminTenantCode\": \"<boolean>\",\n      \"inputDistributionMode\": \"<enum>\",\n      \"fileContainerName\": \"<string>\",\n      \"filenames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"filename\": \"<string>\",\n      \"format\": {\n        \"csv\": {\n          \"header\": \"<boolean>\"\n        },\n        \"parquet\": {}\n      },\n      \"tenantCodeColumn\": \"<string>\",\n      \"prependAdminTenantCode\": \"<boolean>\",\n      \"inputDistributionMode\": \"<enum>\",\n      \"fileContainerName\": \"<string>\",\n      \"filenames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"keepTransactionOpenOnError\": \"<boolean>\",\n  \"preconditions\": [\n    {\n      \"table\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\",\n        \"key_3\": \"<string>\"\n      }\n    },\n    {\n      \"table\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4c016591-f5b1-41eb-a78e-1e1f49d3e343",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "transactions",
+                    ":transactionId",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique identifier of the transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"actions\": [\n    {\n      \"query\": {\n        \"query\": \"<string>\",\n        \"timeoutSeconds\": \"<integer>\",\n        \"output\": {\n          \"format\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"filename\": \"<string>\"\n        },\n        \"rollbackOnEmpty\": \"<boolean>\"\n      },\n      \"upsert\": {\n        \"source\": \"<string>\",\n        \"target\": \"<string>\",\n        \"keys\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"replace\": {\n        \"source\": \"<string>\",\n        \"target\": \"<string>\"\n      },\n      \"rollback\": {},\n      \"commit\": {},\n      \"process\": {\n        \"projectId\": \"<string>\",\n        \"versionId\": \"<string>\",\n        \"dataCategoryIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"deferTimeNotAfter\": \"<string>\"\n      },\n      \"setMetadata\": {\n        \"table\": \"<string>\",\n        \"metadata\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        \"applyToUnmodifiedTenants\": \"<boolean>\"\n      },\n      \"reset\": {\n        \"table\": \"<string>\",\n        \"asOfTimestamp\": \"<string>\"\n      }\n    },\n    {\n      \"query\": {\n        \"query\": \"<string>\",\n        \"timeoutSeconds\": \"<integer>\",\n        \"output\": {\n          \"format\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"filename\": \"<string>\"\n        },\n        \"rollbackOnEmpty\": \"<boolean>\"\n      },\n      \"upsert\": {\n        \"source\": \"<string>\",\n        \"target\": \"<string>\",\n        \"keys\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"replace\": {\n        \"source\": \"<string>\",\n        \"target\": \"<string>\"\n      },\n      \"rollback\": {},\n      \"commit\": {},\n      \"process\": {\n        \"projectId\": \"<string>\",\n        \"versionId\": \"<string>\",\n        \"dataCategoryIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"deferTimeNotAfter\": \"<string>\"\n      },\n      \"setMetadata\": {\n        \"table\": \"<string>\",\n        \"metadata\": {\n          \"key_0\": \"<string>\"\n        },\n        \"applyToUnmodifiedTenants\": \"<boolean>\"\n      },\n      \"reset\": {\n        \"table\": \"<string>\",\n        \"asOfTimestamp\": \"<string>\"\n      }\n    }\n  ],\n  \"tenants\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"inputs\": [\n    {\n      \"id\": \"<string>\",\n      \"filename\": \"<string>\",\n      \"format\": {\n        \"csv\": {\n          \"header\": \"<boolean>\"\n        },\n        \"parquet\": {}\n      },\n      \"tenantCodeColumn\": \"<string>\",\n      \"prependAdminTenantCode\": \"<boolean>\",\n      \"inputDistributionMode\": \"<enum>\",\n      \"fileContainerName\": \"<string>\",\n      \"filenames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"filename\": \"<string>\",\n      \"format\": {\n        \"csv\": {\n          \"header\": \"<boolean>\"\n        },\n        \"parquet\": {}\n      },\n      \"tenantCodeColumn\": \"<string>\",\n      \"prependAdminTenantCode\": \"<boolean>\",\n      \"inputDistributionMode\": \"<enum>\",\n      \"fileContainerName\": \"<string>\",\n      \"filenames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"keepTransactionOpenOnError\": \"<boolean>\",\n  \"preconditions\": [\n    {\n      \"table\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": \"<string>\"\n      }\n    },\n    {\n      \"table\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"string\",\n  \"tableAccess\": {\n    \"read\": [\n      \"string\",\n      \"string\"\n    ],\n    \"write\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3780ecbf-6d77-4f07-9e2a-09ef9ea9a286",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "transactions",
+                    ":transactionId",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique identifier of the transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"actions\": [\n    {\n      \"query\": {\n        \"query\": \"<string>\",\n        \"timeoutSeconds\": \"<integer>\",\n        \"output\": {\n          \"format\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"filename\": \"<string>\"\n        },\n        \"rollbackOnEmpty\": \"<boolean>\"\n      },\n      \"upsert\": {\n        \"source\": \"<string>\",\n        \"target\": \"<string>\",\n        \"keys\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"replace\": {\n        \"source\": \"<string>\",\n        \"target\": \"<string>\"\n      },\n      \"rollback\": {},\n      \"commit\": {},\n      \"process\": {\n        \"projectId\": \"<string>\",\n        \"versionId\": \"<string>\",\n        \"dataCategoryIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"deferTimeNotAfter\": \"<string>\"\n      },\n      \"setMetadata\": {\n        \"table\": \"<string>\",\n        \"metadata\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        \"applyToUnmodifiedTenants\": \"<boolean>\"\n      },\n      \"reset\": {\n        \"table\": \"<string>\",\n        \"asOfTimestamp\": \"<string>\"\n      }\n    },\n    {\n      \"query\": {\n        \"query\": \"<string>\",\n        \"timeoutSeconds\": \"<integer>\",\n        \"output\": {\n          \"format\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"filename\": \"<string>\"\n        },\n        \"rollbackOnEmpty\": \"<boolean>\"\n      },\n      \"upsert\": {\n        \"source\": \"<string>\",\n        \"target\": \"<string>\",\n        \"keys\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"replace\": {\n        \"source\": \"<string>\",\n        \"target\": \"<string>\"\n      },\n      \"rollback\": {},\n      \"commit\": {},\n      \"process\": {\n        \"projectId\": \"<string>\",\n        \"versionId\": \"<string>\",\n        \"dataCategoryIds\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"deferTimeNotAfter\": \"<string>\"\n      },\n      \"setMetadata\": {\n        \"table\": \"<string>\",\n        \"metadata\": {\n          \"key_0\": \"<string>\"\n        },\n        \"applyToUnmodifiedTenants\": \"<boolean>\"\n      },\n      \"reset\": {\n        \"table\": \"<string>\",\n        \"asOfTimestamp\": \"<string>\"\n      }\n    }\n  ],\n  \"tenants\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"inputs\": [\n    {\n      \"id\": \"<string>\",\n      \"filename\": \"<string>\",\n      \"format\": {\n        \"csv\": {\n          \"header\": \"<boolean>\"\n        },\n        \"parquet\": {}\n      },\n      \"tenantCodeColumn\": \"<string>\",\n      \"prependAdminTenantCode\": \"<boolean>\",\n      \"inputDistributionMode\": \"<enum>\",\n      \"fileContainerName\": \"<string>\",\n      \"filenames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"filename\": \"<string>\",\n      \"format\": {\n        \"csv\": {\n          \"header\": \"<boolean>\"\n        },\n        \"parquet\": {}\n      },\n      \"tenantCodeColumn\": \"<string>\",\n      \"prependAdminTenantCode\": \"<boolean>\",\n      \"inputDistributionMode\": \"<enum>\",\n      \"fileContainerName\": \"<string>\",\n      \"filenames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"keepTransactionOpenOnError\": \"<boolean>\",\n  \"preconditions\": [\n    {\n      \"table\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": \"<string>\"\n      }\n    },\n    {\n      \"table\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8d1b457-45b0-4b41-a118-0a7750760ccb",
+          "name": "Retrieve a job's status",
+          "request": {
+            "name": "Retrieve a job's status",
+            "description": {
+              "content": "Retrieve the status of a SQL job and any child jobs spawned from it. Use the job ID returned by `POST /v1alpha/data/table-sources/transactions/{transactionId}/jobs` to retrieve the job's status.\n\n If the job was dispatched across multiple tenants, the response includes per-tenant status details along with aggregated summary counts.\n\n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "table-sources",
+                "transactions",
+                ":transactionId",
+                "jobs",
+                ":jobId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "summaryOnly",
+                  "value": "<boolean>",
+                  "description": "If `true`, the response includes the overall status and summary counts,\n and omits per-tenant job statuses. Useful for large multi-tenant jobs. Default is `false`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) The unique identifier of the transaction."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jobId",
+                  "description": "(Required) The unique identifier of the job."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "866a1147-475f-4e82-9dbd-9ddb429f8094",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "transactions",
+                    ":transactionId",
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summaryOnly",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique identifier of the transaction."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The unique identifier of the job."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"PENDING\",\n  \"summary\": {\n    \"pending\": 2097,\n    \"running\": 1640,\n    \"succeeded\": 7217,\n    \"failed\": 3570\n  },\n  \"processingSummary\": {\n    \"pending\": 5940,\n    \"running\": 1322,\n    \"succeeded\": 2760,\n    \"failed\": 480\n  },\n  \"tenants\": [\n    {\n      \"tenantCode\": \"string\",\n      \"status\": \"PROCESSING_FAILED\",\n      \"message\": \"string\",\n      \"processingJobIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"jobId\": \"string\"\n    },\n    {\n      \"tenantCode\": \"string\",\n      \"status\": \"UNKNOWN\",\n      \"message\": \"string\",\n      \"processingJobIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"jobId\": \"string\"\n    }\n  ],\n  \"jobId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15ce9c84-79aa-4ce0-9aed-16ef76aa60a3",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "transactions",
+                    ":transactionId",
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summaryOnly",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique identifier of the transaction."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The unique identifier of the job."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c33414a3-7393-47d8-852b-3933cbf3e6f2",
+          "name": "Download an output file from a transaction",
+          "request": {
+            "name": "Download an output file from a transaction",
+            "description": {
+              "content": "Download an output file generated by a SQL operation within a transaction. To generate output files, use the `QUERY` action and `output` parameter in `POST /v1alpha/data/table-sources/transactions/{transactionId}/jobs`.\n\n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "table-sources",
+                "transactions",
+                ":transactionId",
+                "outputs",
+                ":filename"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) The unique identifier of the transaction."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "filename",
+                  "description": "(Required) The name of the file to download. This should be the filename specified in an output of an action during job execution."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b7c13a85-5d36-4bd9-bc57-989426485dad",
+              "name": "File contents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "transactions",
+                    ":transactionId",
+                    "outputs",
+                    ":filename"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique identifier of the transaction."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filename",
+                      "description": "(Required) The name of the file to download. This should be the filename specified in an output of an action during job execution."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "580a0b87-45c2-47fb-bfa4-b0c40aa37d7a",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "transactions",
+                    ":transactionId",
+                    "outputs",
+                    ":filename"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique identifier of the transaction."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filename",
+                      "description": "(Required) The name of the file to download. This should be the filename specified in an output of an action during job execution."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "12c60203-2b7e-452d-99be-8b4ee0e83408",
+          "name": "List output file parts",
+          "request": {
+            "name": "List output file parts",
+            "description": {
+              "content": "List the parts of a multi-part output file. SQL operations generate output files within a transaction. Each part is a complete, self-contained file in the output format. Parts are 0-indexed. For an output with `numberOfParts: 3`, the part numbers are 0, 1, and 2.  For large output files, download by file part for better performance.\n\n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "table-sources",
+                "transactions",
+                ":transactionId",
+                "outputs",
+                ":filename",
+                "parts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) The unique identifier of the transaction."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "filename",
+                  "description": "(Required) The name of the output file to list parts for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7345807b-f3ae-44a2-aa59-999bd7a83f04",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "transactions",
+                    ":transactionId",
+                    "outputs",
+                    ":filename",
+                    "parts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique identifier of the transaction."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filename",
+                      "description": "(Required) The name of the output file to list parts for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"filename\": \"string\",\n  \"numberOfParts\": 5725\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d754aaf6-04e7-4d92-8b3b-0e46b265023a",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "transactions",
+                    ":transactionId",
+                    "outputs",
+                    ":filename",
+                    "parts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique identifier of the transaction."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filename",
+                      "description": "(Required) The name of the output file to list parts for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f53541b8-78d7-465f-96c1-8e08cba7f092",
+          "name": "Download an output file part",
+          "request": {
+            "name": "Download an output file part",
+            "description": {
+              "content": "Download a single part of a multi-part output file. SQL operations generate output files within a transaction. Each part is a complete, self-contained file in the output format. Parts are 0-indexed. For an output with `numberOfParts: 3`, the part numbers are 0, 1, and 2.  For large output files, download by file part for better performance.\n\n <br>**Note**: <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "table-sources",
+                "transactions",
+                ":transactionId",
+                "outputs",
+                ":filename",
+                "parts",
+                ":partIndex"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) The unique identifier of the transaction."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "filename",
+                  "description": "(Required) The name of the output file to download a part of."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "partIndex",
+                  "description": "(Required) The zero-based index of the part to download."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a73a33c5-ba54-4a4a-bf6b-2587ac8b7350",
+              "name": "File contents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "transactions",
+                    ":transactionId",
+                    "outputs",
+                    ":filename",
+                    "parts",
+                    ":partIndex"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique identifier of the transaction."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filename",
+                      "description": "(Required) The name of the output file to download a part of."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "partIndex",
+                      "description": "(Required) The zero-based index of the part to download."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8f818e82-5047-43e4-a687-0f41a5631292",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "table-sources",
+                    "transactions",
+                    ":transactionId",
+                    "outputs",
+                    ":filename",
+                    "parts",
+                    ":partIndex"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique identifier of the transaction."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filename",
+                      "description": "(Required) The name of the output file to download a part of."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "partIndex",
+                      "description": "(Required) The zero-based index of the part to download."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "65d3f7d9-20fc-4ce8-ad3a-3f88a81b1588",
+    "name": "Visier Data In Table Source API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for sending data to Visier and running data load jobs.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1603 @@
+{
+  "item": [
+    {
+      "id": "b8435d83-59ec-433a-bf82-b2eccc8838d2",
+      "name": "DataExportConnectorsAPI",
+      "description": {
+        "content": "Manage data export connectors and credentials, and run data export connector jobs. Data export connectors send Visier data to external systems, such as Databricks or Snowflake. Use these APIs to manage the credentials for authenticating with destinations, validate that credentials work, list available data export connectors, and dispatch connector jobs.\n<br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\nIf you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e66b5b14-0dbb-4263-85b2-0efcdbdfc531",
+          "name": "Retrieve data export connectors",
+          "request": {
+            "name": "Retrieve data export connectors",
+            "description": {
+              "content": "Retrieve a list of data export connectors. Each data export connector defines the Data Exports it runs and the credentials it uses.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "export-connectors",
+                "connectors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9654a827-2ffd-4081-96d9-a2905bf46c81",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "export-connectors",
+                    "connectors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"connectors\": [\n    {\n      \"id\": \"string\",\n      \"objectName\": \"string\",\n      \"basicInformation\": {\n        \"displayName\": \"string\",\n        \"shortDisplayName\": \"string\",\n        \"description\": \"string\",\n        \"explanation\": \"string\",\n        \"designerNotes\": \"string\",\n        \"synonymList\": {\n          \"synonyms\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"links\": [\n        {\n          \"linkedDataExport\": {\n            \"dataExportId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tableName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"linkedDataExport\": {\n            \"dataExportId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tableName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"credentialIds\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"objectName\": \"string\",\n      \"basicInformation\": {\n        \"displayName\": \"string\",\n        \"shortDisplayName\": \"string\",\n        \"description\": \"string\",\n        \"explanation\": \"string\",\n        \"designerNotes\": \"string\",\n        \"synonymList\": {\n          \"synonyms\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"links\": [\n        {\n          \"linkedDataExport\": {\n            \"dataExportId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tableName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"linkedDataExport\": {\n            \"dataExportId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tableName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"credentialIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "133fd183-80c0-479a-a306-a500ca9bbf35",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "export-connectors",
+                    "connectors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7fbfbc57-46e9-46e7-abfb-2158c0997f14",
+          "name": "Run a data export connector job",
+          "request": {
+            "name": "Run a data export connector job",
+            "description": {
+              "content": "Dispatch a job for the specified data export connector. The job runs the connector's exports using the production version. The response returns an `id` that you can use to monitor the job's progress with `GET /v1alpha/data/export-connectors/jobs/{jobId}`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "export-connectors",
+                "connectors",
+                ":connectorId",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "connectorId",
+                  "description": "(Required) The unique identifier of the data export connector to run a job for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c66aa36e-27f8-45b5-bd24-028ba087556e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "export-connectors",
+                    "connectors",
+                    ":connectorId",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "connectorId",
+                      "description": "(Required) The unique identifier of the data export connector to run a job for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ab58543-f498-4e4f-8003-65c64b31b640",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "export-connectors",
+                    "connectors",
+                    ":connectorId",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "connectorId",
+                      "description": "(Required) The unique identifier of the data export connector to run a job for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ad70cd9-98db-4084-a820-60476fb72b24",
+          "name": "Retrieve data export connector credentials",
+          "request": {
+            "name": "Retrieve data export connector credentials",
+            "description": {
+              "content": "Retrieve a list of data export connector credentials. The response returns each credential's identifying fields and authentication parameters. Sensitive fields, such as secrets and private keys, are masked.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "export-connectors",
+                "credentials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "271194f2-7b47-47e0-8afc-6166cf365ace",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "export-connectors",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"credentials\": [\n    {\n      \"id\": \"string\",\n      \"basicInformation\": {\n        \"displayName\": \"string\",\n        \"shortDisplayName\": \"string\",\n        \"description\": \"string\",\n        \"explanation\": \"string\",\n        \"designerNotes\": \"string\",\n        \"synonymList\": {\n          \"synonyms\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"parameters\": {\n        \"databricks\": {\n          \"description\": \"Credentials for Databricks.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"basicInformation\": {\n        \"displayName\": \"string\",\n        \"shortDisplayName\": \"string\",\n        \"description\": \"string\",\n        \"explanation\": \"string\",\n        \"designerNotes\": \"string\",\n        \"synonymList\": {\n          \"synonyms\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"parameters\": {\n        \"databricks\": {\n          \"description\": \"Credentials for Databricks.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3324213-59a9-4736-aff7-328c858aec50",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "export-connectors",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "990b423f-30fd-42e8-bdc6-786c459fefe1",
+          "name": "Create a data export connector credential",
+          "request": {
+            "name": "Create a data export connector credential",
+            "description": {
+              "content": "Create a data export connector credential. Credentials authenticate with external systems, such as Databricks or Snowflake. When creating a credential, do not provide an `id`. Visier generates the credential ID automatically.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "export-connectors",
+                "credentials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"basicInformation\": {\n    \"displayName\": \"<string>\",\n    \"shortDisplayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"explanation\": \"<string>\",\n    \"designerNotes\": \"<string>\",\n    \"synonymList\": {\n      \"synonyms\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"parameters\": {\n    \"databricks\": {\n      \"workspaceUrl\": \"<string>\",\n      \"catalog\": \"<string>\",\n      \"schema\": \"<string>\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bdfbd986-b237-402a-8b8e-b7a90a9b095e",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "export-connectors",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"basicInformation\": {\n    \"displayName\": \"<string>\",\n    \"shortDisplayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"explanation\": \"<string>\",\n    \"designerNotes\": \"<string>\",\n    \"synonymList\": {\n      \"synonyms\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"parameters\": {\n    \"databricks\": {\n      \"workspaceUrl\": \"<string>\",\n      \"catalog\": \"<string>\",\n      \"schema\": \"<string>\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"basicInformation\": {\n    \"displayName\": \"<string>\",\n    \"shortDisplayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"explanation\": \"<string>\",\n    \"designerNotes\": \"<string>\",\n    \"synonymList\": {\n      \"synonyms\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"parameters\": {\n    \"databricks\": {\n      \"workspaceUrl\": \"<string>\",\n      \"catalog\": \"<string>\",\n      \"schema\": \"<string>\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d686b10c-1887-4686-8cb7-b298cd24ac5a",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "export-connectors",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"basicInformation\": {\n    \"displayName\": \"<string>\",\n    \"shortDisplayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"explanation\": \"<string>\",\n    \"designerNotes\": \"<string>\",\n    \"synonymList\": {\n      \"synonyms\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"parameters\": {\n    \"databricks\": {\n      \"workspaceUrl\": \"<string>\",\n      \"catalog\": \"<string>\",\n      \"schema\": \"<string>\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c7a36a9-6c99-44c2-a32b-acf680e94696",
+          "name": "Validate a data export connector credential",
+          "request": {
+            "name": "Validate a data export connector credential",
+            "description": {
+              "content": "Validate that a data export connector credential can connect to its destination. Validation runs asynchronously. The response returns an `id` that you can use to poll for the validation result with `GET /v1alpha/data/export-connectors/credentials/validations/{id}`.\n\n Specify an `id` to validate an existing credential or `parameters` to validate a new set of credential values without persisting the credentials.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "export-connectors",
+                "credentials",
+                "validations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d84a5c27-af59-4567-a274-0074483962ee",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "export-connectors",
+                    "credentials",
+                    "validations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9058a61c-9587-43d9-9a63-4550744d31ca",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "export-connectors",
+                    "credentials",
+                    "validations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "35c39c47-9f8c-4713-b8bd-aea8c3da10cd",
+          "name": "Retrieve a data export connector credential's validation result",
+          "request": {
+            "name": "Retrieve a data export connector credential's validation result",
+            "description": {
+              "content": "Retrieve the validation results for a credential. Use the `id` returned by `POST /v1alpha/data/export-connectors/credentials/validations`.\n\n Validation runs asynchronously. Poll this endpoint until the result is available.\n * While validation is still in progress, the response is `200 OK` with a `null` body. Continue polling.\n * After validation completes, the response is `200 OK` with a body indicating whether the validation succeeded and listing any errors.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "export-connectors",
+                "credentials",
+                "validations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the credential validation request."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12a93241-74c1-4e05-a5f4-9a04febdc1f4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "export-connectors",
+                    "credentials",
+                    "validations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the credential validation request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"rci\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"rci\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24a97edb-a524-4eb7-b582-5e3390bac3ca",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "export-connectors",
+                    "credentials",
+                    "validations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the credential validation request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0213e6a-647f-4fb4-9bea-83b72de06511",
+          "name": "Retrieve a data export connector credential",
+          "request": {
+            "name": "Retrieve a data export connector credential",
+            "description": {
+              "content": "Retrieve a specific data export connector credential by its unique identifier. Sensitive fields, such as secrets and private keys, are masked.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "export-connectors",
+                "credentials",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the data export connector credential."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e362e42a-ff03-4585-8f48-e14a547f452d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "export-connectors",
+                    "credentials",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the data export connector credential."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"basicInformation\": {\n    \"displayName\": \"<string>\",\n    \"shortDisplayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"explanation\": \"<string>\",\n    \"designerNotes\": \"<string>\",\n    \"synonymList\": {\n      \"synonyms\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"parameters\": {\n    \"databricks\": {\n      \"workspaceUrl\": \"<string>\",\n      \"catalog\": \"<string>\",\n      \"schema\": \"<string>\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65cc7b29-d0ed-4fe4-b52f-3e0f956ee61c",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "export-connectors",
+                    "credentials",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the data export connector credential."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "54b5c62a-d9d6-4f66-948c-c7833f47c9e6",
+          "name": "Update a data export connector credential",
+          "request": {
+            "name": "Update a data export connector credential",
+            "description": {
+              "content": "Update an existing data export connector credential. The definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. Provide sensitive fields, such as secrets and private keys, in plain text.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "export-connectors",
+                "credentials",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the data export connector credential to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"basicInformation\": {\n    \"displayName\": \"<string>\",\n    \"shortDisplayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"explanation\": \"<string>\",\n    \"designerNotes\": \"<string>\",\n    \"synonymList\": {\n      \"synonyms\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"parameters\": {\n    \"databricks\": {\n      \"workspaceUrl\": \"<string>\",\n      \"catalog\": \"<string>\",\n      \"schema\": \"<string>\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dfaab81c-52f2-4e77-8ca9-a5564b2944b5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "export-connectors",
+                    "credentials",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the data export connector credential to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"basicInformation\": {\n    \"displayName\": \"<string>\",\n    \"shortDisplayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"explanation\": \"<string>\",\n    \"designerNotes\": \"<string>\",\n    \"synonymList\": {\n      \"synonyms\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"parameters\": {\n    \"databricks\": {\n      \"workspaceUrl\": \"<string>\",\n      \"catalog\": \"<string>\",\n      \"schema\": \"<string>\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"basicInformation\": {\n    \"displayName\": \"<string>\",\n    \"shortDisplayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"explanation\": \"<string>\",\n    \"designerNotes\": \"<string>\",\n    \"synonymList\": {\n      \"synonyms\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"parameters\": {\n    \"databricks\": {\n      \"workspaceUrl\": \"<string>\",\n      \"catalog\": \"<string>\",\n      \"schema\": \"<string>\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e0fd04e-43e7-4f6e-b1ed-21d02395cd81",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "export-connectors",
+                    "credentials",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the data export connector credential to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"basicInformation\": {\n    \"displayName\": \"<string>\",\n    \"shortDisplayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"explanation\": \"<string>\",\n    \"designerNotes\": \"<string>\",\n    \"synonymList\": {\n      \"synonyms\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"parameters\": {\n    \"databricks\": {\n      \"workspaceUrl\": \"<string>\",\n      \"catalog\": \"<string>\",\n      \"schema\": \"<string>\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d9813ef-4df5-426a-bd43-7e3ed82780c6",
+          "name": "Delete a data export connector credential",
+          "request": {
+            "name": "Delete a data export connector credential",
+            "description": {
+              "content": "Delete a data export connector credential.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "export-connectors",
+                "credentials",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the data export connector credential."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4cdce5af-7122-4569-8525-117dac199bff",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "export-connectors",
+                    "credentials",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the data export connector credential."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bed1027f-2820-483a-9c71-00257cc1e344",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "export-connectors",
+                    "credentials",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the data export connector credential."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a574c198-1f5b-4bd7-a1a2-4949c5bbb2c0",
+          "name": "Retrieve a data export connector job's status",
+          "request": {
+            "name": "Retrieve a data export connector job's status",
+            "description": {
+              "content": "Retrieve the status of a data export connector job. Use the `id` returned by `POST /v1alpha/data/export-connectors/connectors/{connectorId}/jobs`. The response returns the job's status, any error message, and the statuses of its spawned sync jobs. A sync job sends the data from Visier to the target system, such as Databricks or Snowflake.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "data",
+                "export-connectors",
+                "jobs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the data export connector job."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3bb18509-056a-404a-a894-86241d19fc7a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "export-connectors",
+                    "jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the data export connector job."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"errorMessage\": \"string\",\n  \"syncJobs\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"errorMessage\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"errorMessage\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c8ecc87-894d-4336-9d50-41b1ed4f06a9",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "data",
+                    "export-connectors",
+                    "jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the data export connector job."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e64cd45d-0a5c-436b-af77-87106ee05ee0",
+    "name": "Visier Data Out Data Export Connectors API API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for getting data out of Visier, such as aggregate data and data version information.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,252 @@
+openapi: 3.2.0
+info:
+  title: Visier Administration Sources API
+  description: Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: Sources
+  description: 'Export and import sources in Visier.
+
+    <br>**Note:** <em>This API is in **beta**. While in beta, APIs are interface-stable and implementation may change without notice. Rarely, interface changes may occur that are not backwards-compatible and require advance communication.
+
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
+paths:
+  /v1beta/admin/sources:
+    post:
+      tags:
+      - Sources
+      summary: Perform an operation on all sources
+      description: "Perform operations on all sources. The following operations are supported:\n * `exportSources`: Export a ZIP file that contains a list of all sources in the application.\n * `cloneFilesIntoSource`: Clone a source's files into a different source.\n\n <br>**Note:** <em>This API is in **beta**. While in beta, APIs are interface-stable and implementation may change without notice. Rarely, interface changes may occur that are not backwards-compatible and require advance communication.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: Sources_RunSourcesOperation
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.SourcesAPIOperationRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.ExportSourcesAPIOperationResponseDTO'
+    put:
+      tags:
+      - Sources
+      summary: Import a list of sources
+      description: 'Import a list of sources in ZIP format. The file must be an export from `POST /v1beta/admin/sources`. Use this API after making changes in a development environment to copy the changes to your production environment.
+
+
+        <br>**Note:** <em>This API is in **beta**. While in beta, APIs are interface-stable and implementation may change without notice. Rarely, interface changes may occur that are not backwards-compatible and require advance communication.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
+      operationId: Sources_PutSources
+      parameters:
+      - name: replaceAllExistingSources
+        in: query
+        description: If `false`, adds the sources from the ZIP to the sources in the target tenant. If `true`, removes all sources in the target tenant and adds the sources from the ZIP. Default is `false`.
+        schema:
+          type: boolean
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/zip:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourcesAPIPutResponseDTO'
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+components:
+  schemas:
+    servicing.CloneFilesIntoSourceParametersDTO:
+      type: object
+      properties:
+        originSource:
+          type: string
+          description: The unique identifier of the source to clone files from.
+        targetSource:
+          type: string
+          description: The unique identifier of the source to clone files into.
+        dateRange:
+          allOf:
+          - $ref: '#/components/schemas/servicing.DateRangeDTO'
+          description: The date range of the files to clone. If undefined, clones all files.
+      description: The parameters for the `cloneFilesIntoSource` option, such as the source to clone files from, the source to clone files into, and the date range of the files to clone.
+    servicing.ExportSourcesAPIOperationResponseDTO:
+      type: object
+      properties: {}
+    SourceImportResultSummaryDTO:
+      type: object
+      properties:
+        created:
+          type: integer
+          description: The number of imported sources that were newly created in the target tenant.
+          format: int32
+        updated:
+          type: integer
+          description: The number of imported sources that already existed and were updated in the target tenant.
+          format: int32
+        ignored:
+          type: integer
+          description: The number of imported sources that already existed and were unchanged in the target tenant.
+          format: int32
+        deleted:
+          type: integer
+          description: The number of imported sources that existed in the target tenant prior to the import and were deleted during the import.
+          format: int32
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    servicing.DateRangeDTO:
+      type: object
+      properties:
+        start:
+          type: string
+          description: The start date in ISO 8601 format.
+        end:
+          type: string
+          description: The end date in ISO 8601 format. If undefined, the end date is the current date.
+      description: The range of dates for the request.
+    servicing.SourcesAPIOperationRequestDTO:
+      type: object
+      properties:
+        operation:
+          enum:
+          - unknownSourcesAPIOperation
+          - exportSources
+          - cloneFilesIntoSource
+          type: string
+          description: "The operation to perform. Valid values:\n * `exportSources`: Export sources from the tenant. If successful, returns a ZIP file containing a compressed JSON file with the sources.\n * `cloneFilesIntoSource`: Clone a source's files into a different source. If successful, returns a receiving job ID. Use the job ID to monitor the cloning results."
+          format: enum
+        exportSourcesParameters:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExportSourcesParametersDTO'
+          description: The parameters for the `exportSources` option. If neither parameter is specified, exports all sources. If both parameters are specified, exports the sources that match values from both parameters.
+        cloneFilesIntoSourceParameters:
+          allOf:
+          - $ref: '#/components/schemas/servicing.CloneFilesIntoSourceParametersDTO'
+          description: The parameters for the `cloneFilesIntoSource` option, such as the source to clone files from, the source to clone files into, and the date range of the files to clone.
+    SourcesAPIPutResponseDTO:
+      type: object
+      properties:
+        summary:
+          allOf:
+          - $ref: '#/components/schemas/SourceImportResultSummaryDTO'
+          description: The changes made to the sources during the operation.
+    servicing.ExportSourcesParametersDTO:
+      type: object
+      properties:
+        sourceUuids:
+          type: array
+          items:
+            type: string
+          description: The UUIDs of the sources to export. If specified, exports only the listed sources.
+        sourceObjectNames:
+          type: array
+          items:
+            type: string
+          description: The object names of the sources to export. If specified, exports only the listed sources.
+      description: The parameters for the `exportSources` option. If neither parameter is specified, exports all sources. If both parameters are specified, exports the sources that match values from both parameters.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: administration
+  tags:
+  - Projects
+  - ProductionVersions
+  - UsersV3
+  - UsersV2
+  - UserGroupsV2
+  - UsersV1
+  - Profiles
+  - Permissions
+  - TenantsV2
+  - TenantsV1
+  - ConsolidatedAnalytics
+  - Sources
+  - SystemStatus
+  - EmailDomains
+  - EncryptionKeys
+  - NetworkSubnets
+  - SidecarSolutions
+  - ReleaseVersionConfiguration
+  - VeeConfiguration

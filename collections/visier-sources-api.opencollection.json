@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Administration Sources API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Perform an operation on all sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1beta/admin/sources",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform operations on all sources. The following operations are supported:\n * `exportSources`: Export a ZIP file that contains a list of all sources in the application.\n * `cloneFilesIntoSource`: Clone a source's files into a different source.\n\n <br>**Note:** <em>This API is in **beta**. While in beta, APIs are interface-stable and implementation may change without notice. Rarely, interface changes may occur that are not backwards-compatible and require advance communication.\n If you are interes"
+        },
+        {
+          "info": {
+            "name": "Import a list of sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1beta/admin/sources",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "replaceAllExistingSources",
+                "value": "",
+                "type": "query",
+                "description": "If `false`, adds the sources from the ZIP to the sources in the target tenant. If `true`, removes all sources in the target tenant and adds the sources from the ZIP. Default is `false`."
+              }
+            ]
+          },
+          "docs": "Import a list of sources in ZIP format. The file must be an export from `POST /v1beta/admin/sources`. Use this API after making changes in a development environment to copy the changes to your production environment.\n\n<br>**Note:** <em>This API is in **beta**. While in beta, APIs are interface-stable and implementation may change without notice. Rarely, interface changes may occur that are not backwards-compatible and require advance communication.\nIf you are interested in using this API, please"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

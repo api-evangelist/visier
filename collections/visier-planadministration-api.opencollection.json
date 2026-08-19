@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Planning Public Plan Administration API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PlanAdministration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Partially update a plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/planning/data/plans/:planId",
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the plan."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Make partial changes to existing plans. The response returns whether each plan was successfully patched or not. When patching objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PATCH` request definition. To retrieve main plan or subplan IDs, see `GET /v1/planning/model/plans`. If the response includes a `parentPlanUuid`, then the plan is a subplan. Use `PATCH` to change specific fields in the plan without affecting omitted fie"
+        },
+        {
+          "info": {
+            "name": "Partially update a plan scenario",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/planning/data/plans/:planId/scenarios/:scenarioId",
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the main plan or subplan. Use the main plan ID for consolidating, starting collaboration, or ending collaboration. Otherwise, use the subplan ID."
+              },
+              {
+                "name": "scenarioId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the plan scenario."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Make partial changes to a scenario in an existing plan. The response returns whether the scenario was successfully patched or not. When patching objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PATCH` request definition. To retrieve plan IDs and scenario IDs, see `GET /v1/planning/model/plans`. If the response includes a `parentPlanUuid`, then the plan is a subplan.\n\n Use `PATCH` to change specific fields in the scenario wit"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

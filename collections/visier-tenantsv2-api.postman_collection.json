@@ -1,0 +1,1061 @@
+{
+  "item": [
+    {
+      "id": "1cbb686f-2dee-4f6e-939d-112e2d75f610",
+      "name": "TenantsV2",
+      "description": {
+        "content": "Create analytic tenants, deprovision tenants, retrieve tenant information, and update tenant information. Tenants V2 improves upon Tenants V1 in the following ways:\n  * Programmatically assign a Home analysis to your analytic tenants.\n  * Specify whether to merge or replace values when updating the details of an analytic tenant.\n  * Specify the property fields to include in the response for GET requests.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "29ab1d74-24c9-42f1-9b4d-7763fcc71e38",
+          "name": "Retrieve a list of all analytic tenants",
+          "request": {
+            "name": "Retrieve a list of all analytic tenants",
+            "description": {
+              "content": "Retrieve the full list of analytic tenants managed by you with their current states and the content\n modules assigned to them, and all other relevant details for the tenants if requested.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "admin",
+                "tenants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The limit of analytic tenants to return. The limit is `1000` if the following fields are not included in the `mask`.\n  - `homeAnalysisId`\n  - `homeAnalysisByUserGroup`\n  - `clickThroughLink`\n  - `defaultCurrency`\n\n The limit is `400` if any of the above fields are included in the `mask` or if `mask` is not specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<integer>",
+                  "description": "The starting index of the first tenant to return. Default is 0."
+                },
+                {
+                  "disabled": false,
+                  "key": "mask",
+                  "value": "<string>",
+                  "description": "A list of fields to include in the response, separated by commas. If not specified, includes all fields in the response. Valid values:\n  - `tenantCode`\n  - `tenantDisplayName`\n  - `currentDataVersion`\n  - `traits`\n  - `dataVersionDate`\n  - `provisionDate`\n  - `vanityUrlName`\n  - `status`\n  - `canAdministerOtherTenants`\n  - `industryCode`\n  - `industryInfo`\n  - `purchasedModules`\n  - `manuallyAddedModules`\n  - `embeddableDomains`\n  - `allowedOAuthIdpUrlDomains`\n  - `customProperties`\n  - `ssoInstanceIssuers`\n  - `homeAnalysisId`\n  - `homeAnalysisByUserGroup`\n  - `clickThroughLink`\n  - `clickThroughLinkEnabled`\n  - `defaultCurrency`\n  - `primaryBusinessLocation`\n  - `effectiveIndustryCode`\n  - `companySize`\n\n If `mask` is specified in both request body and on the query string, the effective `mask` is the set union of both inputs."
+                },
+                {
+                  "disabled": false,
+                  "key": "dataProfile",
+                  "value": "<string>",
+                  "description": "Returns tenants with the specified data profile. Valid values: `Regular`, `Integration`, `Demo`, `Cat`, `Test`, `ProductIntelligence`. If omitted, returns all tenants."
+                },
+                {
+                  "disabled": false,
+                  "key": "tenantCodes",
+                  "value": "<string>",
+                  "description": "A comma-separated string of the tenants to retrieve details for. Specify tenant codes in one of the following formats:\n - Full tenant code. Example: `WFF_j1r~c1o`.\n - Short tenant code. Example: `c1o`.\n\n Use the same format for all tenants. Do not use both formats in one request.\n\n Examples:\n - Full: `tenantCodes=WFF_j1r~c1o,WFF_j1r~e1a,WFF_j1r~i1o`\n - Short: `tenantCodes=c1o,e1a,i1o`\n\n The limit of analytic tenants to return is `1000` if the following fields are not included in the `mask` argument.\n  - `homeAnalysisId`\n  - `homeAnalysisByUserGroup`\n  - `clickThroughLink`\n  - `defaultCurrency`\n\n The limit is `400` if any of the above fields are included in the `mask` or if `mask` is not specified.\n\n **Note:** It is recommended to use the request body for long lists of tenant codes. The specified tenant codes are combined (set union)\n with the `tenantCodes` query parameter if values for both are provided."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenantCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"mask\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bed23309-db50-4033-93b3-50ea0dff3681",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "admin",
+                    "tenants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "mask",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dataProfile",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tenantCodes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenantCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"mask\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tenants\": [\n    {\n      \"tenantCode\": \"string\",\n      \"tenantDisplayName\": \"string\",\n      \"status\": \"string\",\n      \"provisionDate\": \"string\",\n      \"currentDataVersion\": \"string\",\n      \"dataVersionDate\": \"string\",\n      \"purchasedModules\": [\n        \"string\",\n        \"string\"\n      ],\n      \"industryCode\": 3912,\n      \"primaryBusinessLocation\": {\n        \"countryCode\": \"string\",\n        \"postalCode\": \"string\"\n      },\n      \"canAdministerOtherTenants\": true,\n      \"embeddableDomains\": [\n        \"string\",\n        \"string\"\n      ],\n      \"customProperties\": [\n        {\n          \"key\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"key\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"ssoInstanceIssuers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"vanityUrlName\": \"string\",\n      \"homeAnalysisId\": \"string\",\n      \"homeAnalysisByUserGroup\": [\n        {\n          \"userGroupId\": \"string\",\n          \"homeAnalysisId\": \"string\"\n        },\n        {\n          \"userGroupId\": \"string\",\n          \"homeAnalysisId\": \"string\"\n        }\n      ],\n      \"clickThroughLink\": \"string\",\n      \"clickThroughLinkEnabled\": \"string\",\n      \"defaultCurrency\": \"string\",\n      \"allowedOAuthIdpUrlDomains\": [\n        \"string\",\n        \"string\"\n      ],\n      \"effectiveIndustryCode\": 6152,\n      \"companySize\": 9886,\n      \"traits\": {\n        \"aggregationRights\": false,\n        \"tenantType\": \"ENTERPRISE\",\n        \"dataProfileType\": \"Demo\"\n      },\n      \"industryInfo\": {\n        \"industryCode\": \"string\",\n        \"industryClassificationType\": \"NACE\"\n      },\n      \"manuallyAddedModules\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"tenantCode\": \"string\",\n      \"tenantDisplayName\": \"string\",\n      \"status\": \"string\",\n      \"provisionDate\": \"string\",\n      \"currentDataVersion\": \"string\",\n      \"dataVersionDate\": \"string\",\n      \"purchasedModules\": [\n        \"string\",\n        \"string\"\n      ],\n      \"industryCode\": 955,\n      \"primaryBusinessLocation\": {\n        \"countryCode\": \"string\",\n        \"postalCode\": \"string\"\n      },\n      \"canAdministerOtherTenants\": true,\n      \"embeddableDomains\": [\n        \"string\",\n        \"string\"\n      ],\n      \"customProperties\": [\n        {\n          \"key\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"key\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"ssoInstanceIssuers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"vanityUrlName\": \"string\",\n      \"homeAnalysisId\": \"string\",\n      \"homeAnalysisByUserGroup\": [\n        {\n          \"userGroupId\": \"string\",\n          \"homeAnalysisId\": \"string\"\n        },\n        {\n          \"userGroupId\": \"string\",\n          \"homeAnalysisId\": \"string\"\n        }\n      ],\n      \"clickThroughLink\": \"string\",\n      \"clickThroughLinkEnabled\": \"string\",\n      \"defaultCurrency\": \"string\",\n      \"allowedOAuthIdpUrlDomains\": [\n        \"string\",\n        \"string\"\n      ],\n      \"effectiveIndustryCode\": 2729,\n      \"companySize\": 6847,\n      \"traits\": {\n        \"aggregationRights\": false,\n        \"tenantType\": \"SMB_CUSTOMER\",\n        \"dataProfileType\": \"DataProfileUnknown\"\n      },\n      \"industryInfo\": {\n        \"industryCode\": \"string\",\n        \"industryClassificationType\": \"UNKNOWN_CLASSIFICATION\"\n      },\n      \"manuallyAddedModules\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"limit\": 4217,\n  \"start\": 6040\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ddbec80-d486-4247-8ef1-e823bb20f818",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "admin",
+                    "tenants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "mask",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dataProfile",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tenantCodes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenantCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"mask\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a604582-f6c6-4038-8df7-c93742217050",
+          "name": "Add an analytic tenant",
+          "request": {
+            "name": "Add an analytic tenant",
+            "description": {
+              "content": "Prior to processing and loading an analytic tenant's data files, you must provision, or create, that tenant. A\n provisioned analytic tenant is automatically enabled. If the tenant's data is loaded after provisioning, that data\n is immediately accessible by their users.\n\n Create an analytic tenant and identify the\n applications assigned to the tenant. Visier organizes content under a set of modules.\n\n Contact Visier Support to determine the list of modules allocated to you.\n\n **Note:** API requests that contain `homeAnalysisId`, `homeAnalysisByUserGroup`, `clickThroughLink`, or\n `defaultCurrency` take longer to run because they require publishing a project to production.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "admin",
+                "tenants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenantCode\": \"<string>\",\n  \"tenantDisplayName\": \"<string>\",\n  \"tenantShortName\": \"<string>\",\n  \"vanityUrlName\": \"<string>\",\n  \"industryCode\": \"<uint32>\",\n  \"primaryBusinessLocation\": {\n    \"countryCode\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  },\n  \"purchasedModules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"embeddableDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customProperties\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"ssoInstanceIssuers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"homeAnalysisId\": \"<string>\",\n  \"homeAnalysisByUserGroup\": [\n    {\n      \"userGroupId\": \"<string>\",\n      \"homeAnalysisId\": \"<string>\"\n    },\n    {\n      \"userGroupId\": \"<string>\",\n      \"homeAnalysisId\": \"<string>\"\n    }\n  ],\n  \"updateAction\": \"<enum>\",\n  \"enabled\": \"<boolean>\",\n  \"clickThroughLink\": \"<string>\",\n  \"defaultCurrency\": \"<string>\",\n  \"allowedOAuthIdpUrlDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traits\": {\n    \"aggregationRights\": \"<boolean>\",\n    \"tenantType\": \"<enum>\",\n    \"dataProfileType\": \"<enum>\"\n  },\n  \"forceLoginsWithSessionBasedPermissions\": \"<boolean>\",\n  \"industryInfo\": {\n    \"industryCode\": \"<string>\",\n    \"industryClassificationType\": \"<enum>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6eed6efa-cf42-4651-98b2-38f0b609dbd1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "admin",
+                    "tenants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenantCode\": \"<string>\",\n  \"tenantDisplayName\": \"<string>\",\n  \"tenantShortName\": \"<string>\",\n  \"vanityUrlName\": \"<string>\",\n  \"industryCode\": \"<uint32>\",\n  \"primaryBusinessLocation\": {\n    \"countryCode\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  },\n  \"purchasedModules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"embeddableDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customProperties\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"ssoInstanceIssuers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"homeAnalysisId\": \"<string>\",\n  \"homeAnalysisByUserGroup\": [\n    {\n      \"userGroupId\": \"<string>\",\n      \"homeAnalysisId\": \"<string>\"\n    },\n    {\n      \"userGroupId\": \"<string>\",\n      \"homeAnalysisId\": \"<string>\"\n    }\n  ],\n  \"updateAction\": \"<enum>\",\n  \"enabled\": \"<boolean>\",\n  \"clickThroughLink\": \"<string>\",\n  \"defaultCurrency\": \"<string>\",\n  \"allowedOAuthIdpUrlDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traits\": {\n    \"aggregationRights\": \"<boolean>\",\n    \"tenantType\": \"<enum>\",\n    \"dataProfileType\": \"<enum>\"\n  },\n  \"forceLoginsWithSessionBasedPermissions\": \"<boolean>\",\n  \"industryInfo\": {\n    \"industryCode\": \"<string>\",\n    \"industryClassificationType\": \"<enum>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tenantCode\": \"string\",\n  \"tenantDisplayName\": \"string\",\n  \"industryCode\": 6692,\n  \"primaryBusinessLocation\": {\n    \"countryCode\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  },\n  \"purchasedModules\": [\n    \"string\",\n    \"string\"\n  ],\n  \"embeddableDomains\": [\n    \"string\",\n    \"string\"\n  ],\n  \"customProperties\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"ssoInstanceIssuers\": [\n    \"string\",\n    \"string\"\n  ],\n  \"homeAnalysisId\": \"string\",\n  \"homeAnalysisByUserGroup\": [\n    {\n      \"userGroupId\": \"<string>\",\n      \"homeAnalysisId\": \"<string>\"\n    },\n    {\n      \"userGroupId\": \"<string>\",\n      \"homeAnalysisId\": \"<string>\"\n    }\n  ],\n  \"status\": \"string\",\n  \"clickThroughLink\": \"string\",\n  \"vanityUrlName\": \"string\",\n  \"defaultCurrency\": \"string\",\n  \"allowedOAuthIdpUrlDomains\": [\n    \"string\",\n    \"string\"\n  ],\n  \"forceLoginsWithSessionBasedPermissions\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50d448da-0678-471c-8a93-b2755e633293",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "admin",
+                    "tenants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenantCode\": \"<string>\",\n  \"tenantDisplayName\": \"<string>\",\n  \"tenantShortName\": \"<string>\",\n  \"vanityUrlName\": \"<string>\",\n  \"industryCode\": \"<uint32>\",\n  \"primaryBusinessLocation\": {\n    \"countryCode\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  },\n  \"purchasedModules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"embeddableDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customProperties\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"ssoInstanceIssuers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"homeAnalysisId\": \"<string>\",\n  \"homeAnalysisByUserGroup\": [\n    {\n      \"userGroupId\": \"<string>\",\n      \"homeAnalysisId\": \"<string>\"\n    },\n    {\n      \"userGroupId\": \"<string>\",\n      \"homeAnalysisId\": \"<string>\"\n    }\n  ],\n  \"updateAction\": \"<enum>\",\n  \"enabled\": \"<boolean>\",\n  \"clickThroughLink\": \"<string>\",\n  \"defaultCurrency\": \"<string>\",\n  \"allowedOAuthIdpUrlDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traits\": {\n    \"aggregationRights\": \"<boolean>\",\n    \"tenantType\": \"<enum>\",\n    \"dataProfileType\": \"<enum>\"\n  },\n  \"forceLoginsWithSessionBasedPermissions\": \"<boolean>\",\n  \"industryInfo\": {\n    \"industryCode\": \"<string>\",\n    \"industryClassificationType\": \"<enum>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4b7e47b-6de6-41f3-96fe-235ff0ad2a47",
+          "name": "Retrieve an analytic tenant's details",
+          "request": {
+            "name": "Retrieve an analytic tenant's details",
+            "description": {
+              "content": "Retrieve the details for a specified analytic tenant. Doing so allows you to see the current state\n of the tenant, the content modules assigned to it, and all other relevant details for the tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "admin",
+                "tenants",
+                ":tenantId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "mask",
+                  "value": "<string>",
+                  "description": "A list of fields to include in the response, separated by commas. If not specified, includes all fields in the response. Valid values:\n  - `tenantCode`\n  - `tenantDisplayName`\n  - `currentDataVersion`\n  - `traits`\n  - `dataVersionDate`\n  - `provisionDate`\n  - `vanityUrlName`\n  - `status`\n  - `canAdministerOtherTenants`\n  - `industryCode`\n  - `industryInfo`\n  - `purchasedModules`\n  - `manuallyAddedModules`\n  - `embeddableDomains`\n  - `allowedOAuthIdpUrlDomains`\n  - `customProperties`\n  - `ssoInstanceIssuers`\n  - `homeAnalysisId`\n  - `homeAnalysisByUserGroup`\n  - `clickThroughLink`\n  - `clickThroughLinkEnabled`\n  - `defaultCurrency`\n  - `primaryBusinessLocation`\n  - `effectiveIndustryCode`\n  - `companySize`\n\n If `mask` is specified in both request body and on the query string, the effective `mask` is the set union of both inputs."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenantId",
+                  "description": "(Required) The ID of the tenant to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mask\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d1100de7-4289-418f-99ab-511d34c7d87d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "admin",
+                    "tenants",
+                    ":tenantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "mask",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantId",
+                      "description": "(Required) The ID of the tenant to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mask\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tenantCode\": \"string\",\n  \"tenantDisplayName\": \"string\",\n  \"status\": \"string\",\n  \"provisionDate\": \"string\",\n  \"currentDataVersion\": \"string\",\n  \"dataVersionDate\": \"string\",\n  \"purchasedModules\": [\n    \"string\",\n    \"string\"\n  ],\n  \"industryCode\": 9683,\n  \"primaryBusinessLocation\": {\n    \"countryCode\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  },\n  \"canAdministerOtherTenants\": true,\n  \"embeddableDomains\": [\n    \"string\",\n    \"string\"\n  ],\n  \"customProperties\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"ssoInstanceIssuers\": [\n    \"string\",\n    \"string\"\n  ],\n  \"vanityUrlName\": \"string\",\n  \"homeAnalysisId\": \"string\",\n  \"homeAnalysisByUserGroup\": [\n    {\n      \"userGroupId\": \"<string>\",\n      \"homeAnalysisId\": \"<string>\"\n    },\n    {\n      \"userGroupId\": \"<string>\",\n      \"homeAnalysisId\": \"<string>\"\n    }\n  ],\n  \"clickThroughLink\": \"string\",\n  \"clickThroughLinkEnabled\": \"string\",\n  \"defaultCurrency\": \"string\",\n  \"allowedOAuthIdpUrlDomains\": [\n    \"string\",\n    \"string\"\n  ],\n  \"effectiveIndustryCode\": 478,\n  \"companySize\": 1552,\n  \"traits\": {\n    \"aggregationRights\": \"<boolean>\",\n    \"tenantType\": \"<enum>\",\n    \"dataProfileType\": \"<enum>\"\n  },\n  \"industryInfo\": {\n    \"industryCode\": \"<string>\",\n    \"industryClassificationType\": \"<enum>\"\n  },\n  \"manuallyAddedModules\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2da02f12-f572-4877-a4f9-f71c2e86fb5b",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "admin",
+                    "tenants",
+                    ":tenantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "mask",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantId",
+                      "description": "(Required) The ID of the tenant to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mask\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88db82b0-0a9d-4df9-b7a0-0a8733aaf292",
+          "name": "Update an analytic tenant",
+          "request": {
+            "name": "Update an analytic tenant",
+            "description": {
+              "content": "You may need to update analytic tenants as they grow and as your organization upgrades the content available to them.\n You may also encounter a scenario where an analytic tenant transitions across different industries. To make updates\n to your tenants, use this API.\n\n * To ensure that the analytic tenant receives accurate benchmarks and predictive functionality, update their industry code in the Visier system.\n * To programmatically assign the Home analysis that analytic tenants see at login, use this API to set the default Home analysis for a tenant and specific user groups of that tenant.\n\n You can use this API to update any field on an analytic tenant, except `tenantCode`.\n\n **Note:** API requests that contain `homeAnalysisId`, `homeAnalysisByUserGroup`, `clickThroughLink`, or\n `defaultCurrency` take longer to run because they require publishing a project to production.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "admin",
+                "tenants",
+                ":tenantId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenantId",
+                  "description": "(Required) The ID of the tenant to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenantCode\": \"<string>\",\n  \"tenantDisplayName\": \"<string>\",\n  \"tenantShortName\": \"<string>\",\n  \"vanityUrlName\": \"<string>\",\n  \"industryCode\": \"<uint32>\",\n  \"primaryBusinessLocation\": {\n    \"countryCode\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  },\n  \"purchasedModules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"embeddableDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customProperties\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"ssoInstanceIssuers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"homeAnalysisId\": \"<string>\",\n  \"homeAnalysisByUserGroup\": [\n    {\n      \"userGroupId\": \"<string>\",\n      \"homeAnalysisId\": \"<string>\"\n    },\n    {\n      \"userGroupId\": \"<string>\",\n      \"homeAnalysisId\": \"<string>\"\n    }\n  ],\n  \"updateAction\": \"<enum>\",\n  \"enabled\": \"<boolean>\",\n  \"clickThroughLink\": \"<string>\",\n  \"defaultCurrency\": \"<string>\",\n  \"allowedOAuthIdpUrlDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traits\": {\n    \"aggregationRights\": \"<boolean>\",\n    \"tenantType\": \"<enum>\",\n    \"dataProfileType\": \"<enum>\"\n  },\n  \"forceLoginsWithSessionBasedPermissions\": \"<boolean>\",\n  \"industryInfo\": {\n    \"industryCode\": \"<string>\",\n    \"industryClassificationType\": \"<enum>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "081b9968-94ab-4f83-b391-34c2c4cbf725",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "admin",
+                    "tenants",
+                    ":tenantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantId",
+                      "description": "(Required) The ID of the tenant to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenantCode\": \"<string>\",\n  \"tenantDisplayName\": \"<string>\",\n  \"tenantShortName\": \"<string>\",\n  \"vanityUrlName\": \"<string>\",\n  \"industryCode\": \"<uint32>\",\n  \"primaryBusinessLocation\": {\n    \"countryCode\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  },\n  \"purchasedModules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"embeddableDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customProperties\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"ssoInstanceIssuers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"homeAnalysisId\": \"<string>\",\n  \"homeAnalysisByUserGroup\": [\n    {\n      \"userGroupId\": \"<string>\",\n      \"homeAnalysisId\": \"<string>\"\n    },\n    {\n      \"userGroupId\": \"<string>\",\n      \"homeAnalysisId\": \"<string>\"\n    }\n  ],\n  \"updateAction\": \"<enum>\",\n  \"enabled\": \"<boolean>\",\n  \"clickThroughLink\": \"<string>\",\n  \"defaultCurrency\": \"<string>\",\n  \"allowedOAuthIdpUrlDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traits\": {\n    \"aggregationRights\": \"<boolean>\",\n    \"tenantType\": \"<enum>\",\n    \"dataProfileType\": \"<enum>\"\n  },\n  \"forceLoginsWithSessionBasedPermissions\": \"<boolean>\",\n  \"industryInfo\": {\n    \"industryCode\": \"<string>\",\n    \"industryClassificationType\": \"<enum>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tenantCode\": \"string\",\n  \"tenantDisplayName\": \"string\",\n  \"industryCode\": 7568,\n  \"primaryBusinessLocation\": {\n    \"countryCode\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  },\n  \"purchasedModules\": [\n    \"string\",\n    \"string\"\n  ],\n  \"embeddableDomains\": [\n    \"string\",\n    \"string\"\n  ],\n  \"customProperties\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"ssoInstanceIssuers\": [\n    \"string\",\n    \"string\"\n  ],\n  \"homeAnalysisId\": \"string\",\n  \"homeAnalysisByUserGroup\": [\n    {\n      \"userGroupId\": \"<string>\",\n      \"homeAnalysisId\": \"<string>\"\n    },\n    {\n      \"userGroupId\": \"<string>\",\n      \"homeAnalysisId\": \"<string>\"\n    }\n  ],\n  \"status\": \"string\",\n  \"clickThroughLink\": \"string\",\n  \"vanityUrlName\": \"string\",\n  \"defaultCurrency\": \"string\",\n  \"allowedOAuthIdpUrlDomains\": [\n    \"string\",\n    \"string\"\n  ],\n  \"forceLoginsWithSessionBasedPermissions\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76939c12-04b4-487e-8878-c0d1f5bd919d",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "admin",
+                    "tenants",
+                    ":tenantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantId",
+                      "description": "(Required) The ID of the tenant to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenantCode\": \"<string>\",\n  \"tenantDisplayName\": \"<string>\",\n  \"tenantShortName\": \"<string>\",\n  \"vanityUrlName\": \"<string>\",\n  \"industryCode\": \"<uint32>\",\n  \"primaryBusinessLocation\": {\n    \"countryCode\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  },\n  \"purchasedModules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"embeddableDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customProperties\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"ssoInstanceIssuers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"homeAnalysisId\": \"<string>\",\n  \"homeAnalysisByUserGroup\": [\n    {\n      \"userGroupId\": \"<string>\",\n      \"homeAnalysisId\": \"<string>\"\n    },\n    {\n      \"userGroupId\": \"<string>\",\n      \"homeAnalysisId\": \"<string>\"\n    }\n  ],\n  \"updateAction\": \"<enum>\",\n  \"enabled\": \"<boolean>\",\n  \"clickThroughLink\": \"<string>\",\n  \"defaultCurrency\": \"<string>\",\n  \"allowedOAuthIdpUrlDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traits\": {\n    \"aggregationRights\": \"<boolean>\",\n    \"tenantType\": \"<enum>\",\n    \"dataProfileType\": \"<enum>\"\n  },\n  \"forceLoginsWithSessionBasedPermissions\": \"<boolean>\",\n  \"industryInfo\": {\n    \"industryCode\": \"<string>\",\n    \"industryClassificationType\": \"<enum>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b051f702-98ea-48ad-8d24-73dba9ce8d2d",
+          "name": "Deprovision an analytic tenant",
+          "request": {
+            "name": "Deprovision an analytic tenant",
+            "description": {
+              "content": "<em>Warning! Deprovisioning an analytic tenant is not reversible.</em>\n Before deprovisioning, you must disable an analytic tenant. For more information, see **`/v1/admin/tenants/{tenantId}/disable`**.\n\n This API removes an analytic tenant permanently from the Visier system. If you are unsure whether an analytic tenant\n may be re-enabled on any of the Visier modules at any time, you may instead want to disable the analytic tenant.\n\n If successful, the response returns the status \"Deprovisioned\". This indicates that the tenant is scheduled for\n deprovisioning, which may take several days to complete.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "admin",
+                "tenants",
+                ":tenantId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenantId",
+                  "description": "(Required) The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bbc73d3e-86b1-43b0-a183-a93037442451",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "admin",
+                    "tenants",
+                    ":tenantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantId",
+                      "description": "(Required) The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tenantCode\": \"string\",\n  \"status\": \"string\",\n  \"tenantDisplayName\": \"string\",\n  \"canAdministerOtherTenants\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "435e0c29-6b9f-465f-9bd9-a76dc335184a",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "admin",
+                    "tenants",
+                    ":tenantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantId",
+                      "description": "(Required) The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e53df602-1366-4ec8-9048-df678d7c4ceb",
+    "name": "Visier Administration Tenants V2 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.",
+      "type": "text/plain"
+    }
+  }
+}

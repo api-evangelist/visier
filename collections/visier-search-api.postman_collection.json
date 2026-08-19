@@ -1,0 +1,434 @@
+{
+  "item": [
+    {
+      "id": "77c07ee6-c877-4bd7-b012-ac439b9b46db",
+      "name": "Search",
+      "description": {
+        "content": "Search for documents, such as analyses, in Visier.\n<br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\nIf you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e207c631-d136-4e24-afd6-aac21b3b2f55",
+          "name": "Perform a simple search for Visier document headers",
+          "request": {
+            "name": "Perform a simple search for Visier document headers",
+            "description": {
+              "content": "Perform a simple search for Visier document headers, such as analysis titles. Simple search doesn't support keywords, Boolean expressions, or any other advanced search features.\n Example: `GET /v1alpha/search/simple/document-headers?q=My+Query&limit=10` returns the first 10 document headers that best match the query string `My Query`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "search",
+                "simple",
+                "document-headers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "The search query string. The results include document headers that match the search string. Search string is case-insensitive and supports partial matches. Search string must be at least 2 characters up to a maximum of 200 characters."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The maximum number of results to return. Defaults to 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The index to start retrieving results from, also known as offset. Defaults to 0."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a89443cc-4900-4d27-98c8-7d06e4fb24a1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "search",
+                    "simple",
+                    "document-headers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentHeaders\": [\n    {\n      \"displayName\": \"string\",\n      \"description\": \"string\",\n      \"relevance\": 265.7034963435179,\n      \"viewLink\": {\n        \"href\": \"string\",\n        \"verb\": \"string\"\n      }\n    },\n    {\n      \"displayName\": \"string\",\n      \"description\": \"string\",\n      \"relevance\": 9141.92474615654,\n      \"viewLink\": {\n        \"href\": \"string\",\n        \"verb\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d436d86-a69f-4feb-97c5-4439170d81bd",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "search",
+                    "simple",
+                    "document-headers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e05bf213-f672-4f43-8a12-53895d93f80a",
+          "name": "Search for Visier objects",
+          "request": {
+            "name": "Search for Visier objects",
+            "description": {
+              "content": "Perform a search for Visier objects, such as metrics, dimensions, dimension members, concepts, analytic objects, and properties.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "search",
+                "visier-objects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a project in which to make the request. If omitted, the request uses the production version.",
+                "key": "ProjectID",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"objectType\": \"<enum>\",\n  \"limit\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"mask\": \"<string>\",\n  \"includeDocumentIdSearch\": \"<boolean>\",\n  \"dimensionSearchContext\": {\n    \"analyticObjectId\": \"<string>\",\n    \"metricId\": \"<string>\"\n  },\n  \"conceptSearchContext\": {\n    \"analyticObjectId\": \"<string>\",\n    \"metricId\": \"<string>\"\n  },\n  \"dimensionMemberSearchContext\": {\n    \"analyticObjectId\": \"<string>\",\n    \"dimensionId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"leafMembersOnly\": \"<boolean>\"\n  },\n  \"propertySearchContext\": {\n    \"analyticObjectId\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ea064695-313f-43dd-87ab-456df5d5658f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "search",
+                    "visier-objects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request. If omitted, the request uses the production version.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"objectType\": \"<enum>\",\n  \"limit\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"mask\": \"<string>\",\n  \"includeDocumentIdSearch\": \"<boolean>\",\n  \"dimensionSearchContext\": {\n    \"analyticObjectId\": \"<string>\",\n    \"metricId\": \"<string>\"\n  },\n  \"conceptSearchContext\": {\n    \"analyticObjectId\": \"<string>\",\n    \"metricId\": \"<string>\"\n  },\n  \"dimensionMemberSearchContext\": {\n    \"analyticObjectId\": \"<string>\",\n    \"dimensionId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"leafMembersOnly\": \"<boolean>\"\n  },\n  \"propertySearchContext\": {\n    \"analyticObjectId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"resultsForQuery\": [\n        {\n          \"id\": \"string\",\n          \"displayName\": \"string\",\n          \"matchedField\": \"string\",\n          \"matchScore\": 287.42840118698655,\n          \"description\": \"string\",\n          \"explanation\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"qualifyingPath\": \"string\",\n          \"metadata\": {}\n        },\n        {\n          \"id\": \"string\",\n          \"displayName\": \"string\",\n          \"matchedField\": \"string\",\n          \"matchScore\": 5798.560435781598,\n          \"description\": \"string\",\n          \"explanation\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"qualifyingPath\": \"string\",\n          \"metadata\": {}\n        }\n      ]\n    },\n    {\n      \"resultsForQuery\": [\n        {\n          \"id\": \"string\",\n          \"displayName\": \"string\",\n          \"matchedField\": \"string\",\n          \"matchScore\": 2811.2159958448156,\n          \"description\": \"string\",\n          \"explanation\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"qualifyingPath\": \"string\",\n          \"metadata\": {}\n        },\n        {\n          \"id\": \"string\",\n          \"displayName\": \"string\",\n          \"matchedField\": \"string\",\n          \"matchScore\": 2608.8256194493097,\n          \"description\": \"string\",\n          \"explanation\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"qualifyingPath\": \"string\",\n          \"metadata\": {}\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1b6e444-00e5-40f9-9651-125bfddf2984",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "search",
+                    "visier-objects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request. If omitted, the request uses the production version.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"objectType\": \"<enum>\",\n  \"limit\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"mask\": \"<string>\",\n  \"includeDocumentIdSearch\": \"<boolean>\",\n  \"dimensionSearchContext\": {\n    \"analyticObjectId\": \"<string>\",\n    \"metricId\": \"<string>\"\n  },\n  \"conceptSearchContext\": {\n    \"analyticObjectId\": \"<string>\",\n    \"metricId\": \"<string>\"\n  },\n  \"dimensionMemberSearchContext\": {\n    \"analyticObjectId\": \"<string>\",\n    \"dimensionId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"leafMembersOnly\": \"<boolean>\"\n  },\n  \"propertySearchContext\": {\n    \"analyticObjectId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bb94f744-0291-4639-a9f1-e8104b57039a",
+    "name": "Visier Data Out Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for getting data out of Visier, such as aggregate data and data version information.",
+      "type": "text/plain"
+    }
+  }
+}

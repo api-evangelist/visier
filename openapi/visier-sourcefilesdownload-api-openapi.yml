@@ -1,0 +1,190 @@
+openapi: 3.2.0
+info:
+  title: Visier Data Out Source Files Download API
+  description: Visier APIs for getting data out of Visier, such as aggregate data and data version information.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: SourceFilesDownload
+  x-displayName: Source Files Download
+  description: 'Download a tenants source files.
+
+    <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
+paths:
+  /v1alpha/op/data/source-files:
+    get:
+      tags:
+      - SourceFilesDownload
+      summary: Download source files
+      description: "Download a tenant's source files. You can download all included source files or specify a list of sources to download. Use object names or unique identifiers to specify the list of sources. Excluded source files will not be downloaded.\n\n If `minTimestamp` and `maxTimestamp` are defined, downloads the source files uploaded within the specified time range for all sources or the specified sources.\n\n Administrating tenants can specify the tenant from which to download sources using the `TargetTenantID` header.\n\n **Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: SourceFilesDownload_DownloadSourceFiles
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/designer.DownloadSourceFilesDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/designer.DownloadSourceFilesResponseDTO'
+        '200':
+          description: File contents
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/designer.DownloadSourceFilesResponseDTO'
+            application/zip:
+              schema:
+                type: string
+                format: binary
+  /v1alpha/op/data/source-files/{identifier}:
+    get:
+      tags:
+      - SourceFilesDownload
+      summary: Download a source file
+      description: "Download a single source file in ZIP format. You must know the `identifier` of the file to download it. To retrieve file identifiers, see `GET /v1alpha/op/data/uploaded-files`.\n\n Administrating tenants can specify the tenant from which to download sources using the `TargetTenantID` header.\n\n **Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: SourceFilesDownload_DownloadSourceFile
+      parameters:
+      - name: identifier
+        in: path
+        description: The unique identifier of the source file you want to download.
+        required: true
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/designer.DownloadSourceFilesResponseDTO'
+components:
+  schemas:
+    designer.DownloadSourceFilesResponseDTO:
+      type: object
+      properties:
+        status:
+          type: string
+          description: The download request status, such as `Error`.
+        messages:
+          type: string
+          description: A description of the request status.
+    designer.DownloadSourceFilesDTO:
+      type: object
+      properties:
+        downloadAll:
+          type: boolean
+          description: If `true`, downloads all uploaded files for all sources. Default is `false`.
+        sources:
+          type: array
+          items:
+            type: string
+          description: A comma-separated list of strings representing the object name of each source to download.
+        sourceIds:
+          type: array
+          items:
+            type: string
+          description: A comma-separated list of strings representing the unique identifier of each source to download.
+        minTimestamp:
+          type: string
+          description: The earliest upload time to download files from in ISO 8601 format, such as `"2001-10-25T13:45:35.999"`. If omitted, downloads files from the earliest available time.
+        maxTimestamp:
+          type: string
+          description: The latest upload time to download files up to in ISO 8601 format, such as `"2001-10-25T13:45:35.999"`. If omitted, downloads files up to the latest available time.
+        minSnapshotTimestamp:
+          type: string
+          description: The earliest snapshot time to download files from in ISO 8601 format, such as `"2001-10-25T13:45:35.999"`. If omitted, downloads files from the earliest available time.
+        maxSnapshotTimestamp:
+          type: string
+          description: The latest snapshot time to download files up to in ISO 8601 format, such as `"2001-10-25T13:45:35.999"`. If omitted, downloads files up to the latest available time.
+        includeNonActiveFiles:
+          type: boolean
+          description: If `true`, includes excluded files in download. Default is `false`.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: data out
+  tags:
+  - DataQuery
+  - DataVersionExport
+  - VeeV1
+  - VeeV2
+  - Search
+  - SourceFilesDownload
+  - Reporting
+  - DataExportConnectorsAPI

@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Authentication O Auth2 API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OAuth2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve user-specific metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/auth/oauth2/userinfo",
+            "params": [
+              {
+                "name": "includeTenantDetails",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, includes tenant details in the response. Default is `false`."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve user-specific metadata, such as a user's ID, username, and profile capabilities."
+        },
+        {
+          "info": {
+            "name": "Request an authorization code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/auth/oauth2/authorize",
+            "params": [
+              {
+                "name": "redirect_uri",
+                "value": "",
+                "type": "query",
+                "description": "The optional URI to redirect to after authorization."
+              },
+              {
+                "name": "response_type",
+                "value": "",
+                "type": "query",
+                "description": "The response type. Must be `code`."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the pre-registered client application."
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "The OAuth 2.0 scope of the authorization request. Default is `read`. If the scope includes `visier:login:bypass_users`, then the redirect login URL ends in \"/auth/admin\" instead of \"/auth\". This allows single sign-on (SSO) Bypass Users to login through Visier instead of being redirected to the SSO login page."
+              }
+            ]
+          },
+          "docs": "Request an authorization code for the authorization_code grant type. Not required in other OAuth 2.0 grant types."
+        },
+        {
+          "info": {
+            "name": "Request a JSON Web Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/auth/oauth2/token",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Use an OAuth 2.0 grant type to request a JWT."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

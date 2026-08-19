@@ -1,0 +1,1034 @@
+{
+  "item": [
+    {
+      "id": "bbec1ad2-d386-4069-b045-9379bb767b60",
+      "name": "DataQuery",
+      "description": {
+        "content": "Query against your data in Visier to get aggregate and list data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "88524573-cc6a-49b5-9925-df639183aa7e",
+          "name": "Query aggregate data",
+          "request": {
+            "name": "Query aggregate data",
+            "description": {
+              "content": "To retrieve aggregated values from your data in Visier, you can perform an aggregation. Usually, an aggregation\n retrieves values over a period of time, such as multiple months. You can also group and filter your data in an\n aggregation query to retrieve detailed information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "data",
+                "query",
+                "aggregate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a project in which to make the request. If omitted, the request uses the production version.",
+                "key": "ProjectID",
+                "value": "<uuid>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a data version against which to execute the query. If omitted, the request uses the current project's data version or the production version if no project is specified.",
+                "key": "DataVersionID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": {\n    \"source\": {\n      \"formula\": \"<string>\",\n      \"metric\": \"<string>\",\n      \"metrics\": {\n        \"columns\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"filters\": [\n      {\n        \"formula\": \"<string>\",\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberSet\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"values\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"cohort\": {\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"exclude\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeInterval\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"formula\": \"<string>\",\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberSet\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"values\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"cohort\": {\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"exclude\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeInterval\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ],\n    \"axes\": [\n      {\n        \"formula\": \"<string>\",\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionMemberSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"members\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberMapSelection\": {\n          \"memberMap\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"targetDimensionName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"members\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"numericRanges\": {\n          \"property\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ranges\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeNegative\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeIndependentZeroRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeAllMember\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionLevelSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionLeafMemberSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionDataMemberSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionLevelWithUncategorizedValueSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tableAxisOptions\": {\n          \"memberDisplayMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"columnName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sortAndLimitOptions\": {\n          \"sort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"limit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"formula\": \"<string>\",\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionMemberSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"members\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberMapSelection\": {\n          \"memberMap\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"targetDimensionName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"members\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"numericRanges\": {\n          \"property\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ranges\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeNegative\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeIndependentZeroRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeAllMember\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionLevelSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionLeafMemberSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionDataMemberSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionLevelWithUncategorizedValueSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tableAxisOptions\": {\n          \"memberDisplayMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"columnName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sortAndLimitOptions\": {\n          \"sort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"limit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ],\n    \"timeIntervals\": {\n      \"fromInstant\": \"<string>\",\n      \"intervalPeriodType\": \"<enum>\",\n      \"intervalPeriodCount\": \"<integer>\",\n      \"intervalCount\": \"<integer>\",\n      \"direction\": \"<enum>\",\n      \"shift\": {\n        \"description\": \"The amount of time to shift the time interval by, such as backward by one year.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"trailingPeriodType\": \"<enum>\",\n      \"trailingPeriodCount\": \"<integer>\"\n    },\n    \"parameterValues\": [\n      {\n        \"memberValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimensionId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"referencePath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"values\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"numericValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"planValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"planId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scenarioId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"snapshotId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"aggregationTypeValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"aggregationOptionId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"subjectMemberSetValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyNamePaths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"valueNamePaths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"memberValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimensionId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"referencePath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"values\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"numericValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"planValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"planId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scenarioId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"snapshotId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"aggregationTypeValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"aggregationOptionId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"subjectMemberSetValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyNamePaths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"valueNamePaths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ]\n  },\n  \"options\": {\n    \"calendarType\": \"<enum>\",\n    \"currencyConversionMode\": \"<enum>\",\n    \"currencyConversionDate\": \"<string>\",\n    \"lineageDepth\": \"<integer>\",\n    \"zeroVisibility\": \"<enum>\",\n    \"nullVisibility\": \"<enum>\",\n    \"cellDistributionOptions\": {\n      \"binCount\": \"<integer>\"\n    },\n    \"axisVisibility\": \"<enum>\",\n    \"enableSparseResults\": \"<boolean>\",\n    \"internal\": {\n      \"sparseHandlingMode\": \"<enum>\",\n      \"alignTimeAxisToPeriodEnd\": \"<boolean>\"\n    },\n    \"enableDescendingSpace\": \"<boolean>\",\n    \"currencyConversionCode\": \"<string>\",\n    \"memberDisplayMode\": \"<enum>\",\n    \"axesOverallValueMode\": \"<enum>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "97cb777a-9ee1-4a23-b4a9-c8a708971175",
+              "name": "Aggregate query response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "data",
+                    "query",
+                    "aggregate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request. If omitted, the request uses the production version.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a data version against which to execute the query. If omitted, the request uses the current project's data version or the production version if no project is specified.",
+                    "key": "DataVersionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"source\": {\n      \"formula\": \"<string>\",\n      \"metric\": \"<string>\",\n      \"metrics\": {\n        \"columns\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"filters\": [\n      {\n        \"formula\": \"<string>\",\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberSet\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"values\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"cohort\": {\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"exclude\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeInterval\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"formula\": \"<string>\",\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberSet\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"values\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"cohort\": {\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"exclude\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeInterval\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ],\n    \"axes\": [\n      {\n        \"formula\": \"<string>\",\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionMemberSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"members\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberMapSelection\": {\n          \"memberMap\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"targetDimensionName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"members\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"numericRanges\": {\n          \"property\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ranges\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeNegative\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeIndependentZeroRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeAllMember\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionLevelSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionLeafMemberSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionDataMemberSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionLevelWithUncategorizedValueSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tableAxisOptions\": {\n          \"memberDisplayMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"columnName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sortAndLimitOptions\": {\n          \"sort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"limit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"formula\": \"<string>\",\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionMemberSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"members\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberMapSelection\": {\n          \"memberMap\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"targetDimensionName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"members\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"numericRanges\": {\n          \"property\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ranges\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeNegative\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeIndependentZeroRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeAllMember\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionLevelSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionLeafMemberSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionDataMemberSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionLevelWithUncategorizedValueSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tableAxisOptions\": {\n          \"memberDisplayMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"columnName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sortAndLimitOptions\": {\n          \"sort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"limit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ],\n    \"timeIntervals\": {\n      \"fromInstant\": \"<string>\",\n      \"intervalPeriodType\": \"<enum>\",\n      \"intervalPeriodCount\": \"<integer>\",\n      \"intervalCount\": \"<integer>\",\n      \"direction\": \"<enum>\",\n      \"shift\": {\n        \"description\": \"The amount of time to shift the time interval by, such as backward by one year.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"trailingPeriodType\": \"<enum>\",\n      \"trailingPeriodCount\": \"<integer>\"\n    },\n    \"parameterValues\": [\n      {\n        \"memberValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimensionId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"referencePath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"values\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"numericValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"planValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"planId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scenarioId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"snapshotId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"aggregationTypeValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"aggregationOptionId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"subjectMemberSetValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyNamePaths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"valueNamePaths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"memberValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimensionId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"referencePath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"values\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"numericValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"planValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"planId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scenarioId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"snapshotId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"aggregationTypeValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"aggregationOptionId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"subjectMemberSetValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyNamePaths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"valueNamePaths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ]\n  },\n  \"options\": {\n    \"calendarType\": \"<enum>\",\n    \"currencyConversionMode\": \"<enum>\",\n    \"currencyConversionDate\": \"<string>\",\n    \"lineageDepth\": \"<integer>\",\n    \"zeroVisibility\": \"<enum>\",\n    \"nullVisibility\": \"<enum>\",\n    \"cellDistributionOptions\": {\n      \"binCount\": \"<integer>\"\n    },\n    \"axisVisibility\": \"<enum>\",\n    \"enableSparseResults\": \"<boolean>\",\n    \"internal\": {\n      \"sparseHandlingMode\": \"<enum>\",\n      \"alignTimeAxisToPeriodEnd\": \"<boolean>\"\n    },\n    \"enableDescendingSpace\": \"<boolean>\",\n    \"currencyConversionCode\": \"<string>\",\n    \"memberDisplayMode\": \"<enum>\",\n    \"axesOverallValueMode\": \"<enum>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cellSet\": {\n    \"cells\": [\n      {\n        \"value\": \"string\",\n        \"support\": \"string\",\n        \"coordinates\": [\n          5105,\n          2688\n        ],\n        \"distribution\": [\n          {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"support\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"support\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      {\n        \"value\": \"string\",\n        \"support\": \"string\",\n        \"coordinates\": [\n          479,\n          3745\n        ],\n        \"distribution\": [\n          {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"support\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"support\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    ],\n    \"axes\": [\n      {\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"positions\": [\n          {\n            \"path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"displayName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"displayNamePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"displayName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"displayNamePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      {\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"positions\": [\n          {\n            \"path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"displayName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"displayNamePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"displayName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"displayNamePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    ],\n    \"lineage\": {\n      \"cellSets\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/dataservices.query.CellSetDTO detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/dataservices.query.CellSetDTO detected>\"\n        }\n      ],\n      \"op\": \"string\"\n    }\n  },\n  \"error\": {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"allErrors\": [\n      {\n        \"errorCode\": \"string\",\n        \"message\": \"string\",\n        \"allErrorDetails\": [\n          {\n            \"objectType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"queryIndex\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"columnIndex\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"error\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"objectType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"queryIndex\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"columnIndex\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"error\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      {\n        \"errorCode\": \"string\",\n        \"message\": \"string\",\n        \"allErrorDetails\": [\n          {\n            \"objectType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"queryIndex\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"columnIndex\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"error\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"objectType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"queryIndex\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"columnIndex\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"error\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f48988d1-31e3-4fdb-a36d-0d0b6aedc5ee",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "data",
+                    "query",
+                    "aggregate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request. If omitted, the request uses the production version.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a data version against which to execute the query. If omitted, the request uses the current project's data version or the production version if no project is specified.",
+                    "key": "DataVersionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"source\": {\n      \"formula\": \"<string>\",\n      \"metric\": \"<string>\",\n      \"metrics\": {\n        \"columns\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"filters\": [\n      {\n        \"formula\": \"<string>\",\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberSet\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"values\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"cohort\": {\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"exclude\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeInterval\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"formula\": \"<string>\",\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberSet\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"values\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"cohort\": {\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"exclude\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeInterval\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ],\n    \"axes\": [\n      {\n        \"formula\": \"<string>\",\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionMemberSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"members\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberMapSelection\": {\n          \"memberMap\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"targetDimensionName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"members\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"numericRanges\": {\n          \"property\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ranges\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeNegative\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeIndependentZeroRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeAllMember\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionLevelSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionLeafMemberSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionDataMemberSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionLevelWithUncategorizedValueSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tableAxisOptions\": {\n          \"memberDisplayMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"columnName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sortAndLimitOptions\": {\n          \"sort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"limit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"formula\": \"<string>\",\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionMemberSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"members\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberMapSelection\": {\n          \"memberMap\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"targetDimensionName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"members\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"numericRanges\": {\n          \"property\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ranges\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeNegative\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeIndependentZeroRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeAllMember\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionLevelSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionLeafMemberSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionDataMemberSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimensionLevelWithUncategorizedValueSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"tableAxisOptions\": {\n          \"memberDisplayMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"columnName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sortAndLimitOptions\": {\n          \"sort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"limit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ],\n    \"timeIntervals\": {\n      \"fromInstant\": \"<string>\",\n      \"intervalPeriodType\": \"<enum>\",\n      \"intervalPeriodCount\": \"<integer>\",\n      \"intervalCount\": \"<integer>\",\n      \"direction\": \"<enum>\",\n      \"shift\": {\n        \"description\": \"The amount of time to shift the time interval by, such as backward by one year.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"trailingPeriodType\": \"<enum>\",\n      \"trailingPeriodCount\": \"<integer>\"\n    },\n    \"parameterValues\": [\n      {\n        \"memberValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimensionId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"referencePath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"values\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"numericValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"planValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"planId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scenarioId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"snapshotId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"aggregationTypeValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"aggregationOptionId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"subjectMemberSetValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyNamePaths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"valueNamePaths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"memberValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimensionId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"referencePath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"values\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"numericValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"planValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"planId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scenarioId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"snapshotId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"aggregationTypeValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"aggregationOptionId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"subjectMemberSetValue\": {\n          \"parameterId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyNamePaths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"valueNamePaths\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ]\n  },\n  \"options\": {\n    \"calendarType\": \"<enum>\",\n    \"currencyConversionMode\": \"<enum>\",\n    \"currencyConversionDate\": \"<string>\",\n    \"lineageDepth\": \"<integer>\",\n    \"zeroVisibility\": \"<enum>\",\n    \"nullVisibility\": \"<enum>\",\n    \"cellDistributionOptions\": {\n      \"binCount\": \"<integer>\"\n    },\n    \"axisVisibility\": \"<enum>\",\n    \"enableSparseResults\": \"<boolean>\",\n    \"internal\": {\n      \"sparseHandlingMode\": \"<enum>\",\n      \"alignTimeAxisToPeriodEnd\": \"<boolean>\"\n    },\n    \"enableDescendingSpace\": \"<boolean>\",\n    \"currencyConversionCode\": \"<string>\",\n    \"memberDisplayMode\": \"<enum>\",\n    \"axesOverallValueMode\": \"<enum>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7978f9f8-3291-462d-8ee6-10abcd14960b",
+          "name": "Retrieve a data out connector's latest version",
+          "request": {
+            "name": "Retrieve a data out connector's latest version",
+            "description": {
+              "content": "Retrieve the latest released version of a data out connector. Use this endpoint to automate checking connector release versions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "data",
+                "query",
+                "connector-version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "connectorId",
+                  "value": "<enum>",
+                  "description": "The name of the connector for which to retrieve the latest version. Valid values:\n - `powerbi`: Retrieve the latest version of Visier's Power BI connector.\n - `tableau`: Retrieve the latest version of Visier's Tableau connector."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": [
+            {
+              "id": "f5396fdf-90c1-4972-bd3c-9910b54733c7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "data",
+                    "query",
+                    "connector-version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "connectorId",
+                      "value": "<enum>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"string\",\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "567c16dc-9ceb-4bee-b4f1-d538f8eada53",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "data",
+                    "query",
+                    "connector-version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "connectorId",
+                      "value": "<enum>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9097d8c9-24f1-4ff4-a321-d70cbc321348",
+          "name": "Query a list of details",
+          "request": {
+            "name": "Query a list of details",
+            "description": {
+              "content": "To retrieve a list of values for specific objects, you can perform a list query. A list query provides information\n about values for selected data points, and is not an aggregated value. In Visier's interface, a list query is\n comparable to View Details for a specific data point in a visualization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "data",
+                "query",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a project in which to make the request. If omitted, the request uses the production version.",
+                "key": "ProjectID",
+                "value": "<uuid>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a data version against which to execute the query. If omitted, the request uses the data version released by the current project or production version, if no project is specified.",
+                "key": "DataVersionID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source\": {\n    \"formula\": \"<string>\",\n    \"metric\": \"<string>\",\n    \"analyticObject\": \"<string>\",\n    \"textConcept\": \"<string>\"\n  },\n  \"columns\": [\n    {\n      \"columnName\": \"<string>\",\n      \"columnDefinition\": {\n        \"formula\": \"<string>\",\n        \"property\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberMapProperty\": {\n          \"memberMap\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"targetDimensionName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"effectiveDateProperty\": {},\n        \"dimensionLevelSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberValueMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepth\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"columnName\": \"<string>\",\n      \"columnDefinition\": {\n        \"formula\": \"<string>\",\n        \"property\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberMapProperty\": {\n          \"memberMap\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"targetDimensionName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"effectiveDateProperty\": {},\n        \"dimensionLevelSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberValueMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepth\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ],\n  \"sortOptions\": [\n    {\n      \"columnIndex\": \"<integer>\",\n      \"sortDirection\": \"<enum>\"\n    },\n    {\n      \"columnIndex\": \"<integer>\",\n      \"sortDirection\": \"<enum>\"\n    }\n  ],\n  \"filters\": [\n    {\n      \"formula\": \"<string>\",\n      \"selectionConcept\": {\n        \"name\": \"<string>\",\n        \"qualifyingPath\": \"<string>\"\n      },\n      \"memberSet\": {\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"cohort\": {\n        \"keyGroup\": {\n          \"filters\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"exclude\": \"<boolean>\",\n        \"timeInterval\": {\n          \"description\": \"The time at which to apply the key group, such as a specific day or period of months.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"formula\": \"<string>\",\n      \"selectionConcept\": {\n        \"name\": \"<string>\",\n        \"qualifyingPath\": \"<string>\"\n      },\n      \"memberSet\": {\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"cohort\": {\n        \"keyGroup\": {\n          \"filters\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"exclude\": \"<boolean>\",\n        \"timeInterval\": {\n          \"description\": \"The time at which to apply the key group, such as a specific day or period of months.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"timeInterval\": {\n    \"fromInstant\": \"<string>\",\n    \"intervalPeriodType\": \"<enum>\",\n    \"intervalPeriodCount\": \"<integer>\",\n    \"direction\": \"<enum>\",\n    \"shift\": {\n      \"periodType\": \"<enum>\",\n      \"periodCount\": \"<integer>\",\n      \"direction\": \"<enum>\"\n    }\n  },\n  \"parameterValues\": [\n    {\n      \"memberValue\": {\n        \"parameterId\": \"<string>\",\n        \"dimensionId\": \"<string>\",\n        \"referencePath\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"numericValue\": {\n        \"parameterId\": \"<string>\",\n        \"value\": \"<double>\"\n      },\n      \"planValue\": {\n        \"parameterId\": \"<string>\",\n        \"planId\": \"<string>\",\n        \"scenarioId\": \"<string>\",\n        \"snapshotId\": \"<string>\"\n      },\n      \"aggregationTypeValue\": {\n        \"parameterId\": \"<string>\",\n        \"aggregationOptionId\": \"<string>\"\n      },\n      \"subjectMemberSetValue\": {\n        \"parameterId\": \"<string>\",\n        \"keyNamePaths\": [\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"valueNamePaths\": [\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"memberValue\": {\n        \"parameterId\": \"<string>\",\n        \"dimensionId\": \"<string>\",\n        \"referencePath\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"numericValue\": {\n        \"parameterId\": \"<string>\",\n        \"value\": \"<double>\"\n      },\n      \"planValue\": {\n        \"parameterId\": \"<string>\",\n        \"planId\": \"<string>\",\n        \"scenarioId\": \"<string>\",\n        \"snapshotId\": \"<string>\"\n      },\n      \"aggregationTypeValue\": {\n        \"parameterId\": \"<string>\",\n        \"aggregationOptionId\": \"<string>\"\n      },\n      \"subjectMemberSetValue\": {\n        \"parameterId\": \"<string>\",\n        \"keyNamePaths\": [\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"valueNamePaths\": [\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    }\n  ],\n  \"options\": {\n    \"limit\": \"<integer>\",\n    \"queryMode\": \"<enum>\",\n    \"omitHeader\": \"<boolean>\",\n    \"calendarType\": \"<enum>\",\n    \"currencyConversionMode\": \"<enum>\",\n    \"currencyConversionDate\": \"<string>\",\n    \"page\": \"<integer>\",\n    \"multipleTables\": \"<boolean>\",\n    \"currencyConversionCode\": \"<string>\",\n    \"recordMode\": \"<enum>\",\n    \"dateTimeDisplayMode\": \"<enum>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c8f81b98-f964-4131-801e-65d129120850",
+              "name": "List query response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "data",
+                    "query",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request. If omitted, the request uses the production version.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a data version against which to execute the query. If omitted, the request uses the data version released by the current project or production version, if no project is specified.",
+                    "key": "DataVersionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"formula\": \"<string>\",\n    \"metric\": \"<string>\",\n    \"analyticObject\": \"<string>\",\n    \"textConcept\": \"<string>\"\n  },\n  \"columns\": [\n    {\n      \"columnName\": \"<string>\",\n      \"columnDefinition\": {\n        \"formula\": \"<string>\",\n        \"property\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberMapProperty\": {\n          \"memberMap\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"targetDimensionName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"effectiveDateProperty\": {},\n        \"dimensionLevelSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberValueMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepth\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"columnName\": \"<string>\",\n      \"columnDefinition\": {\n        \"formula\": \"<string>\",\n        \"property\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberMapProperty\": {\n          \"memberMap\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"targetDimensionName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"effectiveDateProperty\": {},\n        \"dimensionLevelSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberValueMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepth\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ],\n  \"sortOptions\": [\n    {\n      \"columnIndex\": \"<integer>\",\n      \"sortDirection\": \"<enum>\"\n    },\n    {\n      \"columnIndex\": \"<integer>\",\n      \"sortDirection\": \"<enum>\"\n    }\n  ],\n  \"filters\": [\n    {\n      \"formula\": \"<string>\",\n      \"selectionConcept\": {\n        \"name\": \"<string>\",\n        \"qualifyingPath\": \"<string>\"\n      },\n      \"memberSet\": {\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"cohort\": {\n        \"keyGroup\": {\n          \"filters\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"exclude\": \"<boolean>\",\n        \"timeInterval\": {\n          \"description\": \"The time at which to apply the key group, such as a specific day or period of months.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"formula\": \"<string>\",\n      \"selectionConcept\": {\n        \"name\": \"<string>\",\n        \"qualifyingPath\": \"<string>\"\n      },\n      \"memberSet\": {\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"cohort\": {\n        \"keyGroup\": {\n          \"filters\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"exclude\": \"<boolean>\",\n        \"timeInterval\": {\n          \"description\": \"The time at which to apply the key group, such as a specific day or period of months.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"timeInterval\": {\n    \"fromInstant\": \"<string>\",\n    \"intervalPeriodType\": \"<enum>\",\n    \"intervalPeriodCount\": \"<integer>\",\n    \"direction\": \"<enum>\",\n    \"shift\": {\n      \"periodType\": \"<enum>\",\n      \"periodCount\": \"<integer>\",\n      \"direction\": \"<enum>\"\n    }\n  },\n  \"parameterValues\": [\n    {\n      \"memberValue\": {\n        \"parameterId\": \"<string>\",\n        \"dimensionId\": \"<string>\",\n        \"referencePath\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"numericValue\": {\n        \"parameterId\": \"<string>\",\n        \"value\": \"<double>\"\n      },\n      \"planValue\": {\n        \"parameterId\": \"<string>\",\n        \"planId\": \"<string>\",\n        \"scenarioId\": \"<string>\",\n        \"snapshotId\": \"<string>\"\n      },\n      \"aggregationTypeValue\": {\n        \"parameterId\": \"<string>\",\n        \"aggregationOptionId\": \"<string>\"\n      },\n      \"subjectMemberSetValue\": {\n        \"parameterId\": \"<string>\",\n        \"keyNamePaths\": [\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"valueNamePaths\": [\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"memberValue\": {\n        \"parameterId\": \"<string>\",\n        \"dimensionId\": \"<string>\",\n        \"referencePath\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"numericValue\": {\n        \"parameterId\": \"<string>\",\n        \"value\": \"<double>\"\n      },\n      \"planValue\": {\n        \"parameterId\": \"<string>\",\n        \"planId\": \"<string>\",\n        \"scenarioId\": \"<string>\",\n        \"snapshotId\": \"<string>\"\n      },\n      \"aggregationTypeValue\": {\n        \"parameterId\": \"<string>\",\n        \"aggregationOptionId\": \"<string>\"\n      },\n      \"subjectMemberSetValue\": {\n        \"parameterId\": \"<string>\",\n        \"keyNamePaths\": [\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"valueNamePaths\": [\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    }\n  ],\n  \"options\": {\n    \"limit\": \"<integer>\",\n    \"queryMode\": \"<enum>\",\n    \"omitHeader\": \"<boolean>\",\n    \"calendarType\": \"<enum>\",\n    \"currencyConversionMode\": \"<enum>\",\n    \"currencyConversionDate\": \"<string>\",\n    \"page\": \"<integer>\",\n    \"multipleTables\": \"<boolean>\",\n    \"currencyConversionCode\": \"<string>\",\n    \"recordMode\": \"<enum>\",\n    \"dateTimeDisplayMode\": \"<enum>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"header\": {\n    \"@type\": \"string\",\n    \"key_0\": false\n  },\n  \"rows\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": 9463,\n      \"key_1\": true\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4f72005-4fb0-4d3c-962d-b2a7a26ea52c",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "data",
+                    "query",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request. If omitted, the request uses the production version.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a data version against which to execute the query. If omitted, the request uses the data version released by the current project or production version, if no project is specified.",
+                    "key": "DataVersionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"formula\": \"<string>\",\n    \"metric\": \"<string>\",\n    \"analyticObject\": \"<string>\",\n    \"textConcept\": \"<string>\"\n  },\n  \"columns\": [\n    {\n      \"columnName\": \"<string>\",\n      \"columnDefinition\": {\n        \"formula\": \"<string>\",\n        \"property\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberMapProperty\": {\n          \"memberMap\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"targetDimensionName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"effectiveDateProperty\": {},\n        \"dimensionLevelSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberValueMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepth\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"columnName\": \"<string>\",\n      \"columnDefinition\": {\n        \"formula\": \"<string>\",\n        \"property\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberMapProperty\": {\n          \"memberMap\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"targetDimensionName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"effectiveDateProperty\": {},\n        \"dimensionLevelSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberValueMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepth\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ],\n  \"sortOptions\": [\n    {\n      \"columnIndex\": \"<integer>\",\n      \"sortDirection\": \"<enum>\"\n    },\n    {\n      \"columnIndex\": \"<integer>\",\n      \"sortDirection\": \"<enum>\"\n    }\n  ],\n  \"filters\": [\n    {\n      \"formula\": \"<string>\",\n      \"selectionConcept\": {\n        \"name\": \"<string>\",\n        \"qualifyingPath\": \"<string>\"\n      },\n      \"memberSet\": {\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"cohort\": {\n        \"keyGroup\": {\n          \"filters\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"exclude\": \"<boolean>\",\n        \"timeInterval\": {\n          \"description\": \"The time at which to apply the key group, such as a specific day or period of months.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"formula\": \"<string>\",\n      \"selectionConcept\": {\n        \"name\": \"<string>\",\n        \"qualifyingPath\": \"<string>\"\n      },\n      \"memberSet\": {\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"cohort\": {\n        \"keyGroup\": {\n          \"filters\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"exclude\": \"<boolean>\",\n        \"timeInterval\": {\n          \"description\": \"The time at which to apply the key group, such as a specific day or period of months.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"timeInterval\": {\n    \"fromInstant\": \"<string>\",\n    \"intervalPeriodType\": \"<enum>\",\n    \"intervalPeriodCount\": \"<integer>\",\n    \"direction\": \"<enum>\",\n    \"shift\": {\n      \"periodType\": \"<enum>\",\n      \"periodCount\": \"<integer>\",\n      \"direction\": \"<enum>\"\n    }\n  },\n  \"parameterValues\": [\n    {\n      \"memberValue\": {\n        \"parameterId\": \"<string>\",\n        \"dimensionId\": \"<string>\",\n        \"referencePath\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"numericValue\": {\n        \"parameterId\": \"<string>\",\n        \"value\": \"<double>\"\n      },\n      \"planValue\": {\n        \"parameterId\": \"<string>\",\n        \"planId\": \"<string>\",\n        \"scenarioId\": \"<string>\",\n        \"snapshotId\": \"<string>\"\n      },\n      \"aggregationTypeValue\": {\n        \"parameterId\": \"<string>\",\n        \"aggregationOptionId\": \"<string>\"\n      },\n      \"subjectMemberSetValue\": {\n        \"parameterId\": \"<string>\",\n        \"keyNamePaths\": [\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"valueNamePaths\": [\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"memberValue\": {\n        \"parameterId\": \"<string>\",\n        \"dimensionId\": \"<string>\",\n        \"referencePath\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"numericValue\": {\n        \"parameterId\": \"<string>\",\n        \"value\": \"<double>\"\n      },\n      \"planValue\": {\n        \"parameterId\": \"<string>\",\n        \"planId\": \"<string>\",\n        \"scenarioId\": \"<string>\",\n        \"snapshotId\": \"<string>\"\n      },\n      \"aggregationTypeValue\": {\n        \"parameterId\": \"<string>\",\n        \"aggregationOptionId\": \"<string>\"\n      },\n      \"subjectMemberSetValue\": {\n        \"parameterId\": \"<string>\",\n        \"keyNamePaths\": [\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"valueNamePaths\": [\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    }\n  ],\n  \"options\": {\n    \"limit\": \"<integer>\",\n    \"queryMode\": \"<enum>\",\n    \"omitHeader\": \"<boolean>\",\n    \"calendarType\": \"<enum>\",\n    \"currencyConversionMode\": \"<enum>\",\n    \"currencyConversionDate\": \"<string>\",\n    \"page\": \"<integer>\",\n    \"multipleTables\": \"<boolean>\",\n    \"currencyConversionCode\": \"<string>\",\n    \"recordMode\": \"<enum>\",\n    \"dateTimeDisplayMode\": \"<enum>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd628268-f8ea-4974-a5f0-92b6196fc13c",
+          "name": "Query a series of detailed snapshots",
+          "request": {
+            "name": "Query a series of detailed snapshots",
+            "description": {
+              "content": "To retrieve a collection of `list` query-style snapshots taken at the defined intervals, execute a `snapshot` query.\n Each snapshot in the result is associated with a timestamp, or the \"effective date\" at which date snapshot data was valid.\n This API allows you to request a detailed time series from Visier.\n\n Structurally, a `snapshot` query is similar to a `list` query, but has the following differences:\n * The `snapshot` query may contain a column, `effectiveDateProperty`, that specifies the time for each snapshot. To include the `effectiveDateProperty` column, add the following object to the columns array:\n    ```json\n    {\n        \"columnName\": \"Snapshot_Date\",\n        \"columnDefinition\": {\n            \"effectiveDateProperty\": {}\n        }\n    }\n    ```\n * The `snapshot` query uses `timeIntervals` (like an `aggregate` query) instead of `timeInterval` (like a `list` query) because the `snapshot` query\n    must specify the number of snapshots to generate. To specify the number of snapshots to generate, use the `intervalCount` property in the `timeIntervals` object, as shown next.\n    ```json\n    {\n        \"timeIntervals\": {\n        \"fromDateTime\": \"2022-01-01\",\n        \"intervalPeriodType\": \"MONTH\",\n        \"intervalPeriodCount\": 6,\n        \"intervalCount\": 4\n    }\n    ```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "data",
+                "query",
+                "snapshot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a project in which to make the request. If omitted, the request uses the production version.",
+                "key": "ProjectID",
+                "value": "<uuid>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a data version against which to execute the query. If omitted, the request uses the data version released by the current project or production version, if no project is specified.",
+                "key": "DataVersionID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source\": {\n    \"formula\": \"<string>\",\n    \"metric\": \"<string>\",\n    \"analyticObject\": \"<string>\",\n    \"textConcept\": \"<string>\"\n  },\n  \"columns\": [\n    {\n      \"columnName\": \"<string>\",\n      \"columnDefinition\": {\n        \"formula\": \"<string>\",\n        \"property\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberMapProperty\": {\n          \"memberMap\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"targetDimensionName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"effectiveDateProperty\": {},\n        \"dimensionLevelSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberValueMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepth\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"columnName\": \"<string>\",\n      \"columnDefinition\": {\n        \"formula\": \"<string>\",\n        \"property\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberMapProperty\": {\n          \"memberMap\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"targetDimensionName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"effectiveDateProperty\": {},\n        \"dimensionLevelSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberValueMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepth\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ],\n  \"sortOptions\": [\n    {\n      \"columnIndex\": \"<integer>\",\n      \"sortDirection\": \"<enum>\"\n    },\n    {\n      \"columnIndex\": \"<integer>\",\n      \"sortDirection\": \"<enum>\"\n    }\n  ],\n  \"filters\": [\n    {\n      \"formula\": \"<string>\",\n      \"selectionConcept\": {\n        \"name\": \"<string>\",\n        \"qualifyingPath\": \"<string>\"\n      },\n      \"memberSet\": {\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"cohort\": {\n        \"keyGroup\": {\n          \"filters\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"exclude\": \"<boolean>\",\n        \"timeInterval\": {\n          \"description\": \"The time at which to apply the key group, such as a specific day or period of months.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"formula\": \"<string>\",\n      \"selectionConcept\": {\n        \"name\": \"<string>\",\n        \"qualifyingPath\": \"<string>\"\n      },\n      \"memberSet\": {\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"cohort\": {\n        \"keyGroup\": {\n          \"filters\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"exclude\": \"<boolean>\",\n        \"timeInterval\": {\n          \"description\": \"The time at which to apply the key group, such as a specific day or period of months.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"timeIntervals\": {\n    \"fromInstant\": \"<string>\",\n    \"intervalPeriodType\": \"<enum>\",\n    \"intervalPeriodCount\": \"<integer>\",\n    \"intervalCount\": \"<integer>\",\n    \"direction\": \"<enum>\",\n    \"shift\": {\n      \"periodType\": \"<enum>\",\n      \"periodCount\": \"<integer>\",\n      \"direction\": \"<enum>\"\n    },\n    \"trailingPeriodType\": \"<enum>\",\n    \"trailingPeriodCount\": \"<integer>\"\n  },\n  \"parameterValues\": [\n    {\n      \"memberValue\": {\n        \"parameterId\": \"<string>\",\n        \"dimensionId\": \"<string>\",\n        \"referencePath\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"numericValue\": {\n        \"parameterId\": \"<string>\",\n        \"value\": \"<double>\"\n      },\n      \"planValue\": {\n        \"parameterId\": \"<string>\",\n        \"planId\": \"<string>\",\n        \"scenarioId\": \"<string>\",\n        \"snapshotId\": \"<string>\"\n      },\n      \"aggregationTypeValue\": {\n        \"parameterId\": \"<string>\",\n        \"aggregationOptionId\": \"<string>\"\n      },\n      \"subjectMemberSetValue\": {\n        \"parameterId\": \"<string>\",\n        \"keyNamePaths\": [\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"valueNamePaths\": [\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"memberValue\": {\n        \"parameterId\": \"<string>\",\n        \"dimensionId\": \"<string>\",\n        \"referencePath\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"numericValue\": {\n        \"parameterId\": \"<string>\",\n        \"value\": \"<double>\"\n      },\n      \"planValue\": {\n        \"parameterId\": \"<string>\",\n        \"planId\": \"<string>\",\n        \"scenarioId\": \"<string>\",\n        \"snapshotId\": \"<string>\"\n      },\n      \"aggregationTypeValue\": {\n        \"parameterId\": \"<string>\",\n        \"aggregationOptionId\": \"<string>\"\n      },\n      \"subjectMemberSetValue\": {\n        \"parameterId\": \"<string>\",\n        \"keyNamePaths\": [\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"valueNamePaths\": [\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    }\n  ],\n  \"options\": {\n    \"limit\": \"<integer>\",\n    \"queryMode\": \"<enum>\",\n    \"omitHeader\": \"<boolean>\",\n    \"calendarType\": \"<enum>\",\n    \"currencyConversionDate\": \"<string>\",\n    \"page\": \"<integer>\",\n    \"multipleTables\": \"<boolean>\",\n    \"currencyConversionCode\": \"<string>\",\n    \"dateTimeDisplayMode\": \"<enum>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9a4608bb-1efb-47f7-92f6-286849d8af04",
+              "name": "List query response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "data",
+                    "query",
+                    "snapshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request. If omitted, the request uses the production version.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a data version against which to execute the query. If omitted, the request uses the data version released by the current project or production version, if no project is specified.",
+                    "key": "DataVersionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"formula\": \"<string>\",\n    \"metric\": \"<string>\",\n    \"analyticObject\": \"<string>\",\n    \"textConcept\": \"<string>\"\n  },\n  \"columns\": [\n    {\n      \"columnName\": \"<string>\",\n      \"columnDefinition\": {\n        \"formula\": \"<string>\",\n        \"property\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberMapProperty\": {\n          \"memberMap\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"targetDimensionName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"effectiveDateProperty\": {},\n        \"dimensionLevelSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberValueMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepth\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"columnName\": \"<string>\",\n      \"columnDefinition\": {\n        \"formula\": \"<string>\",\n        \"property\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberMapProperty\": {\n          \"memberMap\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"targetDimensionName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"effectiveDateProperty\": {},\n        \"dimensionLevelSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberValueMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepth\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ],\n  \"sortOptions\": [\n    {\n      \"columnIndex\": \"<integer>\",\n      \"sortDirection\": \"<enum>\"\n    },\n    {\n      \"columnIndex\": \"<integer>\",\n      \"sortDirection\": \"<enum>\"\n    }\n  ],\n  \"filters\": [\n    {\n      \"formula\": \"<string>\",\n      \"selectionConcept\": {\n        \"name\": \"<string>\",\n        \"qualifyingPath\": \"<string>\"\n      },\n      \"memberSet\": {\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"cohort\": {\n        \"keyGroup\": {\n          \"filters\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"exclude\": \"<boolean>\",\n        \"timeInterval\": {\n          \"description\": \"The time at which to apply the key group, such as a specific day or period of months.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"formula\": \"<string>\",\n      \"selectionConcept\": {\n        \"name\": \"<string>\",\n        \"qualifyingPath\": \"<string>\"\n      },\n      \"memberSet\": {\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"cohort\": {\n        \"keyGroup\": {\n          \"filters\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"exclude\": \"<boolean>\",\n        \"timeInterval\": {\n          \"description\": \"The time at which to apply the key group, such as a specific day or period of months.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"timeIntervals\": {\n    \"fromInstant\": \"<string>\",\n    \"intervalPeriodType\": \"<enum>\",\n    \"intervalPeriodCount\": \"<integer>\",\n    \"intervalCount\": \"<integer>\",\n    \"direction\": \"<enum>\",\n    \"shift\": {\n      \"periodType\": \"<enum>\",\n      \"periodCount\": \"<integer>\",\n      \"direction\": \"<enum>\"\n    },\n    \"trailingPeriodType\": \"<enum>\",\n    \"trailingPeriodCount\": \"<integer>\"\n  },\n  \"parameterValues\": [\n    {\n      \"memberValue\": {\n        \"parameterId\": \"<string>\",\n        \"dimensionId\": \"<string>\",\n        \"referencePath\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"numericValue\": {\n        \"parameterId\": \"<string>\",\n        \"value\": \"<double>\"\n      },\n      \"planValue\": {\n        \"parameterId\": \"<string>\",\n        \"planId\": \"<string>\",\n        \"scenarioId\": \"<string>\",\n        \"snapshotId\": \"<string>\"\n      },\n      \"aggregationTypeValue\": {\n        \"parameterId\": \"<string>\",\n        \"aggregationOptionId\": \"<string>\"\n      },\n      \"subjectMemberSetValue\": {\n        \"parameterId\": \"<string>\",\n        \"keyNamePaths\": [\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"valueNamePaths\": [\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"memberValue\": {\n        \"parameterId\": \"<string>\",\n        \"dimensionId\": \"<string>\",\n        \"referencePath\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"numericValue\": {\n        \"parameterId\": \"<string>\",\n        \"value\": \"<double>\"\n      },\n      \"planValue\": {\n        \"parameterId\": \"<string>\",\n        \"planId\": \"<string>\",\n        \"scenarioId\": \"<string>\",\n        \"snapshotId\": \"<string>\"\n      },\n      \"aggregationTypeValue\": {\n        \"parameterId\": \"<string>\",\n        \"aggregationOptionId\": \"<string>\"\n      },\n      \"subjectMemberSetValue\": {\n        \"parameterId\": \"<string>\",\n        \"keyNamePaths\": [\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"valueNamePaths\": [\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    }\n  ],\n  \"options\": {\n    \"limit\": \"<integer>\",\n    \"queryMode\": \"<enum>\",\n    \"omitHeader\": \"<boolean>\",\n    \"calendarType\": \"<enum>\",\n    \"currencyConversionDate\": \"<string>\",\n    \"page\": \"<integer>\",\n    \"multipleTables\": \"<boolean>\",\n    \"currencyConversionCode\": \"<string>\",\n    \"dateTimeDisplayMode\": \"<enum>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"header\": {\n    \"@type\": \"string\",\n    \"key_0\": 955.8934174000577,\n    \"key_1\": 6048.55301513437,\n    \"key_2\": 9277\n  },\n  \"rows\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": false,\n      \"key_1\": \"string\"\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f116c974-10ff-4943-a264-5af71ae2e9ab",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "data",
+                    "query",
+                    "snapshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request. If omitted, the request uses the production version.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a data version against which to execute the query. If omitted, the request uses the data version released by the current project or production version, if no project is specified.",
+                    "key": "DataVersionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"formula\": \"<string>\",\n    \"metric\": \"<string>\",\n    \"analyticObject\": \"<string>\",\n    \"textConcept\": \"<string>\"\n  },\n  \"columns\": [\n    {\n      \"columnName\": \"<string>\",\n      \"columnDefinition\": {\n        \"formula\": \"<string>\",\n        \"property\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberMapProperty\": {\n          \"memberMap\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"targetDimensionName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"effectiveDateProperty\": {},\n        \"dimensionLevelSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberValueMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepth\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"columnName\": \"<string>\",\n      \"columnDefinition\": {\n        \"formula\": \"<string>\",\n        \"property\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"selectionConcept\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"memberMapProperty\": {\n          \"memberMap\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"targetDimensionName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"effectiveDateProperty\": {},\n        \"dimensionLevelSelection\": {\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberValueMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"levelDepth\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ],\n  \"sortOptions\": [\n    {\n      \"columnIndex\": \"<integer>\",\n      \"sortDirection\": \"<enum>\"\n    },\n    {\n      \"columnIndex\": \"<integer>\",\n      \"sortDirection\": \"<enum>\"\n    }\n  ],\n  \"filters\": [\n    {\n      \"formula\": \"<string>\",\n      \"selectionConcept\": {\n        \"name\": \"<string>\",\n        \"qualifyingPath\": \"<string>\"\n      },\n      \"memberSet\": {\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"cohort\": {\n        \"keyGroup\": {\n          \"filters\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"exclude\": \"<boolean>\",\n        \"timeInterval\": {\n          \"description\": \"The time at which to apply the key group, such as a specific day or period of months.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"formula\": \"<string>\",\n      \"selectionConcept\": {\n        \"name\": \"<string>\",\n        \"qualifyingPath\": \"<string>\"\n      },\n      \"memberSet\": {\n        \"dimension\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifyingPath\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"cohort\": {\n        \"keyGroup\": {\n          \"filters\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"exclude\": \"<boolean>\",\n        \"timeInterval\": {\n          \"description\": \"The time at which to apply the key group, such as a specific day or period of months.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"timeIntervals\": {\n    \"fromInstant\": \"<string>\",\n    \"intervalPeriodType\": \"<enum>\",\n    \"intervalPeriodCount\": \"<integer>\",\n    \"intervalCount\": \"<integer>\",\n    \"direction\": \"<enum>\",\n    \"shift\": {\n      \"periodType\": \"<enum>\",\n      \"periodCount\": \"<integer>\",\n      \"direction\": \"<enum>\"\n    },\n    \"trailingPeriodType\": \"<enum>\",\n    \"trailingPeriodCount\": \"<integer>\"\n  },\n  \"parameterValues\": [\n    {\n      \"memberValue\": {\n        \"parameterId\": \"<string>\",\n        \"dimensionId\": \"<string>\",\n        \"referencePath\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"numericValue\": {\n        \"parameterId\": \"<string>\",\n        \"value\": \"<double>\"\n      },\n      \"planValue\": {\n        \"parameterId\": \"<string>\",\n        \"planId\": \"<string>\",\n        \"scenarioId\": \"<string>\",\n        \"snapshotId\": \"<string>\"\n      },\n      \"aggregationTypeValue\": {\n        \"parameterId\": \"<string>\",\n        \"aggregationOptionId\": \"<string>\"\n      },\n      \"subjectMemberSetValue\": {\n        \"parameterId\": \"<string>\",\n        \"keyNamePaths\": [\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"valueNamePaths\": [\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"memberValue\": {\n        \"parameterId\": \"<string>\",\n        \"dimensionId\": \"<string>\",\n        \"referencePath\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"values\": {\n          \"included\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"excluded\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"numericValue\": {\n        \"parameterId\": \"<string>\",\n        \"value\": \"<double>\"\n      },\n      \"planValue\": {\n        \"parameterId\": \"<string>\",\n        \"planId\": \"<string>\",\n        \"scenarioId\": \"<string>\",\n        \"snapshotId\": \"<string>\"\n      },\n      \"aggregationTypeValue\": {\n        \"parameterId\": \"<string>\",\n        \"aggregationOptionId\": \"<string>\"\n      },\n      \"subjectMemberSetValue\": {\n        \"parameterId\": \"<string>\",\n        \"keyNamePaths\": [\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePath\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"valueNamePaths\": [\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"namePaths\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    }\n  ],\n  \"options\": {\n    \"limit\": \"<integer>\",\n    \"queryMode\": \"<enum>\",\n    \"omitHeader\": \"<boolean>\",\n    \"calendarType\": \"<enum>\",\n    \"currencyConversionDate\": \"<string>\",\n    \"page\": \"<integer>\",\n    \"multipleTables\": \"<boolean>\",\n    \"currencyConversionCode\": \"<string>\",\n    \"dateTimeDisplayMode\": \"<enum>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1a72b51-3010-4848-ac77-ba211bfc6dd6",
+          "name": "Query aggregate or list data using SQL-like syntax",
+          "request": {
+            "name": "Query aggregate or list data using SQL-like syntax",
+            "description": {
+              "content": "To retrieve a list of values for specific objects or aggregate values from metrics, you can write queries using SQL-like syntax.\n The response format matches the query type whether aggregate or list. If requested, aggregate query results may be flattened into tabular format.\n\n A SQL-like query is an aggregate if it contains at least one metric. Aggregate queries must specify a time interval divided into periods; for example:\n ```sql\n SELECT\n   employeeCount() AS \"Employee Count\",\n   level(Gender, \"Gender\") AS Gender\n FROM\n   Employee\n WHERE\n  Visier_Time IN periods(date(\"2023-01-01\"), 4, period(3, Month));\n ```\n\n A SQL-like query is a list if it does not contain any metrics. List queries define time intervals as simple intervals; for example:\n ```sql\n SELECT\n   EmployeeID AS \"Employee ID\",\n   level(Gender, \"Gender\") AS Gender\n FROM\n   Employee\n WHERE\n  Visier_Time BETWEEN date(\"2022-01-01\") AND date(\"2023-01-01\");\n ```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "data",
+                "query",
+                "sql"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a project in which to make the request. If omitted, the request uses the production version.",
+                "key": "ProjectID",
+                "value": "<uuid>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a data version against which to execute the query. If omitted, the request uses the data version released by the current project or production version, if no project is specified.",
+                "key": "DataVersionID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"options\": {\n    \"calendarType\": \"<enum>\",\n    \"currencyConversionMode\": \"<enum>\",\n    \"currencyConversionDate\": \"<string>\",\n    \"lineageDepth\": \"<integer>\",\n    \"zeroVisibility\": \"<enum>\",\n    \"nullVisibility\": \"<enum>\",\n    \"cellDistributionOptions\": {\n      \"binCount\": \"<integer>\"\n    },\n    \"axisVisibility\": \"<enum>\",\n    \"enableSparseResults\": \"<boolean>\",\n    \"internal\": {\n      \"sparseHandlingMode\": \"<enum>\",\n      \"alignTimeAxisToPeriodEnd\": \"<boolean>\"\n    },\n    \"enableDescendingSpace\": \"<boolean>\",\n    \"currencyConversionCode\": \"<string>\",\n    \"memberDisplayMode\": \"<enum>\",\n    \"axesOverallValueMode\": \"<enum>\"\n  },\n  \"aggregateQueryOptions\": {\n    \"calendarType\": \"<enum>\",\n    \"currencyConversionMode\": \"<enum>\",\n    \"currencyConversionDate\": \"<string>\",\n    \"lineageDepth\": \"<integer>\",\n    \"zeroVisibility\": \"<enum>\",\n    \"nullVisibility\": \"<enum>\",\n    \"cellDistributionOptions\": {\n      \"binCount\": \"<integer>\"\n    },\n    \"axisVisibility\": \"<enum>\",\n    \"enableSparseResults\": \"<boolean>\",\n    \"internal\": {\n      \"sparseHandlingMode\": \"<enum>\",\n      \"alignTimeAxisToPeriodEnd\": \"<boolean>\"\n    },\n    \"enableDescendingSpace\": \"<boolean>\",\n    \"currencyConversionCode\": \"<string>\",\n    \"memberDisplayMode\": \"<enum>\",\n    \"axesOverallValueMode\": \"<enum>\"\n  },\n  \"listQueryOptions\": {\n    \"limit\": \"<integer>\",\n    \"queryMode\": \"<enum>\",\n    \"omitHeader\": \"<boolean>\",\n    \"calendarType\": \"<enum>\",\n    \"currencyConversionMode\": \"<enum>\",\n    \"currencyConversionDate\": \"<string>\",\n    \"page\": \"<integer>\",\n    \"multipleTables\": \"<boolean>\",\n    \"currencyConversionCode\": \"<string>\",\n    \"recordMode\": \"<enum>\",\n    \"dateTimeDisplayMode\": \"<enum>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ac3f23de-86e2-447f-b913-6f74347773cd",
+              "name": "List query response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "data",
+                    "query",
+                    "sql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request. If omitted, the request uses the production version.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a data version against which to execute the query. If omitted, the request uses the data version released by the current project or production version, if no project is specified.",
+                    "key": "DataVersionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"options\": {\n    \"calendarType\": \"<enum>\",\n    \"currencyConversionMode\": \"<enum>\",\n    \"currencyConversionDate\": \"<string>\",\n    \"lineageDepth\": \"<integer>\",\n    \"zeroVisibility\": \"<enum>\",\n    \"nullVisibility\": \"<enum>\",\n    \"cellDistributionOptions\": {\n      \"binCount\": \"<integer>\"\n    },\n    \"axisVisibility\": \"<enum>\",\n    \"enableSparseResults\": \"<boolean>\",\n    \"internal\": {\n      \"sparseHandlingMode\": \"<enum>\",\n      \"alignTimeAxisToPeriodEnd\": \"<boolean>\"\n    },\n    \"enableDescendingSpace\": \"<boolean>\",\n    \"currencyConversionCode\": \"<string>\",\n    \"memberDisplayMode\": \"<enum>\",\n    \"axesOverallValueMode\": \"<enum>\"\n  },\n  \"aggregateQueryOptions\": {\n    \"calendarType\": \"<enum>\",\n    \"currencyConversionMode\": \"<enum>\",\n    \"currencyConversionDate\": \"<string>\",\n    \"lineageDepth\": \"<integer>\",\n    \"zeroVisibility\": \"<enum>\",\n    \"nullVisibility\": \"<enum>\",\n    \"cellDistributionOptions\": {\n      \"binCount\": \"<integer>\"\n    },\n    \"axisVisibility\": \"<enum>\",\n    \"enableSparseResults\": \"<boolean>\",\n    \"internal\": {\n      \"sparseHandlingMode\": \"<enum>\",\n      \"alignTimeAxisToPeriodEnd\": \"<boolean>\"\n    },\n    \"enableDescendingSpace\": \"<boolean>\",\n    \"currencyConversionCode\": \"<string>\",\n    \"memberDisplayMode\": \"<enum>\",\n    \"axesOverallValueMode\": \"<enum>\"\n  },\n  \"listQueryOptions\": {\n    \"limit\": \"<integer>\",\n    \"queryMode\": \"<enum>\",\n    \"omitHeader\": \"<boolean>\",\n    \"calendarType\": \"<enum>\",\n    \"currencyConversionMode\": \"<enum>\",\n    \"currencyConversionDate\": \"<string>\",\n    \"page\": \"<integer>\",\n    \"multipleTables\": \"<boolean>\",\n    \"currencyConversionCode\": \"<string>\",\n    \"recordMode\": \"<enum>\",\n    \"dateTimeDisplayMode\": \"<enum>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"header\": {\n    \"key_0\": \"string\"\n  },\n  \"rows\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58a6beda-7578-432c-a5c5-b984c5cffc81",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "data",
+                    "query",
+                    "sql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request. If omitted, the request uses the production version.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a data version against which to execute the query. If omitted, the request uses the data version released by the current project or production version, if no project is specified.",
+                    "key": "DataVersionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"options\": {\n    \"calendarType\": \"<enum>\",\n    \"currencyConversionMode\": \"<enum>\",\n    \"currencyConversionDate\": \"<string>\",\n    \"lineageDepth\": \"<integer>\",\n    \"zeroVisibility\": \"<enum>\",\n    \"nullVisibility\": \"<enum>\",\n    \"cellDistributionOptions\": {\n      \"binCount\": \"<integer>\"\n    },\n    \"axisVisibility\": \"<enum>\",\n    \"enableSparseResults\": \"<boolean>\",\n    \"internal\": {\n      \"sparseHandlingMode\": \"<enum>\",\n      \"alignTimeAxisToPeriodEnd\": \"<boolean>\"\n    },\n    \"enableDescendingSpace\": \"<boolean>\",\n    \"currencyConversionCode\": \"<string>\",\n    \"memberDisplayMode\": \"<enum>\",\n    \"axesOverallValueMode\": \"<enum>\"\n  },\n  \"aggregateQueryOptions\": {\n    \"calendarType\": \"<enum>\",\n    \"currencyConversionMode\": \"<enum>\",\n    \"currencyConversionDate\": \"<string>\",\n    \"lineageDepth\": \"<integer>\",\n    \"zeroVisibility\": \"<enum>\",\n    \"nullVisibility\": \"<enum>\",\n    \"cellDistributionOptions\": {\n      \"binCount\": \"<integer>\"\n    },\n    \"axisVisibility\": \"<enum>\",\n    \"enableSparseResults\": \"<boolean>\",\n    \"internal\": {\n      \"sparseHandlingMode\": \"<enum>\",\n      \"alignTimeAxisToPeriodEnd\": \"<boolean>\"\n    },\n    \"enableDescendingSpace\": \"<boolean>\",\n    \"currencyConversionCode\": \"<string>\",\n    \"memberDisplayMode\": \"<enum>\",\n    \"axesOverallValueMode\": \"<enum>\"\n  },\n  \"listQueryOptions\": {\n    \"limit\": \"<integer>\",\n    \"queryMode\": \"<enum>\",\n    \"omitHeader\": \"<boolean>\",\n    \"calendarType\": \"<enum>\",\n    \"currencyConversionMode\": \"<enum>\",\n    \"currencyConversionDate\": \"<string>\",\n    \"page\": \"<integer>\",\n    \"multipleTables\": \"<boolean>\",\n    \"currencyConversionCode\": \"<string>\",\n    \"recordMode\": \"<enum>\",\n    \"dateTimeDisplayMode\": \"<enum>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "828f48dc-c8a3-41ce-94b0-ccdc5d41d8d5",
+    "name": "Visier Data Out Data Query API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for getting data out of Visier, such as aggregate data and data version information.",
+      "type": "text/plain"
+    }
+  }
+}

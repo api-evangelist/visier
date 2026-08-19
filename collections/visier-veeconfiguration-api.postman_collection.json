@@ -1,0 +1,1932 @@
+{
+  "item": [
+    {
+      "id": "791191dd-95e6-4244-8597-15451455d1c3",
+      "name": "VeeConfiguration",
+      "description": {
+        "content": "Manage Vee v2 instructions and safeguards for a tenant. Instructions guide Vee's behavior when responding to queries. Safeguards prevent Vee from responding to certain types of queries.\n<br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\nIf you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f0d2c297-e9ec-42ea-b634-85f5259097aa",
+          "name": "Retrieve Vee instructions",
+          "request": {
+            "name": "Retrieve Vee instructions",
+            "description": {
+              "content": "Retrieve all Vee instructions for a tenant. Administrating tenants can specify the tenant from which to retrieve instructions using the `TargetTenantID` header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "vee",
+                "instructions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "Optionally filter instructions by category. When omitted, all instructions are returned."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ece2c629-03a3-4f0c-b45c-1789121b83c7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "vee",
+                    "instructions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instructions\": [\n    {\n      \"instructionId\": \"string\",\n      \"displayName\": \"string\",\n      \"content\": \"string\",\n      \"category\": \"INSTRUCTION_DATA_GATHERING\",\n      \"userGroupIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"versionInformation\": {\n        \"versionType\": \"TenantOverride\",\n        \"edited\": \"string\",\n        \"editor\": \"string\"\n      }\n    },\n    {\n      \"instructionId\": \"string\",\n      \"displayName\": \"string\",\n      \"content\": \"string\",\n      \"category\": \"INSTRUCTION_RESPONSE_STYLE\",\n      \"userGroupIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"versionInformation\": {\n        \"versionType\": \"Tenant\",\n        \"edited\": \"string\",\n        \"editor\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f14dac45-f5a0-4473-b95f-331db45c6c59",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "vee",
+                    "instructions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "adb77655-4781-4ec6-88c6-905294f69f51",
+          "name": "Create a Vee instruction",
+          "request": {
+            "name": "Create a Vee instruction",
+            "description": {
+              "content": "Create a new Vee instruction for a tenant. Administrating tenants can specify the tenant in which to create the instruction using the `TargetTenantID` header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "vee",
+                "instructions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a project in which to make the request.",
+                "key": "ProjectID",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"instructionId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"content\": \"<string>\",\n  \"category\": \"<enum>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionInformation\": {\n    \"versionType\": \"<enum>\",\n    \"edited\": \"<string>\",\n    \"editor\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "97dbe668-d02e-42a2-8666-d97261f14d3d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "vee",
+                    "instructions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"instructionId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"content\": \"<string>\",\n  \"category\": \"<enum>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionInformation\": {\n    \"versionType\": \"<enum>\",\n    \"edited\": \"<string>\",\n    \"editor\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instructionId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"content\": \"<string>\",\n  \"category\": \"<enum>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionInformation\": {\n    \"versionType\": \"<enum>\",\n    \"edited\": \"<string>\",\n    \"editor\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bde71d54-544a-49fa-a89e-49face043a76",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "vee",
+                    "instructions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"instructionId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"content\": \"<string>\",\n  \"category\": \"<enum>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionInformation\": {\n    \"versionType\": \"<enum>\",\n    \"edited\": \"<string>\",\n    \"editor\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "03cc404d-cf4e-4d56-a5e7-8b2fc6343cd3",
+          "name": "Retrieve a Vee instruction's details",
+          "request": {
+            "name": "Retrieve a Vee instruction's details",
+            "description": {
+              "content": "Retrieve the details of a specific Vee instruction. Administrating tenants can specify the tenant from which to retrieve the instruction using the `TargetTenantID` header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "vee",
+                "instructions",
+                ":instructionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "instructionId",
+                  "description": "(Required) The ID of the Vee instruction to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "727715a7-c54f-47ef-997a-d2239b5520a5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "vee",
+                    "instructions",
+                    ":instructionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "instructionId",
+                      "description": "(Required) The ID of the Vee instruction to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instructionId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"content\": \"<string>\",\n  \"category\": \"<enum>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionInformation\": {\n    \"versionType\": \"<enum>\",\n    \"edited\": \"<string>\",\n    \"editor\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe4e38a4-7a13-43d3-bea9-34b8416e26cc",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "vee",
+                    "instructions",
+                    ":instructionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "instructionId",
+                      "description": "(Required) The ID of the Vee instruction to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71f32e0e-c6bf-418c-a48c-ed0f12e1887c",
+          "name": "Update a Vee instruction",
+          "request": {
+            "name": "Update a Vee instruction",
+            "description": {
+              "content": "Update an existing Vee instruction. The instruction definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values for optional fields, those values reset to their respective defaults.\n\n Administrating tenants can specify the tenant in which to update the instruction using the `TargetTenantID` header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "vee",
+                "instructions",
+                ":instructionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "instructionId",
+                  "description": "(Required) The ID of the Vee instruction to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a project in which to make the request.",
+                "key": "ProjectID",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"instructionId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"content\": \"<string>\",\n  \"category\": \"<enum>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionInformation\": {\n    \"versionType\": \"<enum>\",\n    \"edited\": \"<string>\",\n    \"editor\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "761c0267-8d4f-4500-aa5f-4c5ba1e2bb98",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "vee",
+                    "instructions",
+                    ":instructionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "instructionId",
+                      "description": "(Required) The ID of the Vee instruction to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"instructionId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"content\": \"<string>\",\n  \"category\": \"<enum>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionInformation\": {\n    \"versionType\": \"<enum>\",\n    \"edited\": \"<string>\",\n    \"editor\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instructionId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"content\": \"<string>\",\n  \"category\": \"<enum>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionInformation\": {\n    \"versionType\": \"<enum>\",\n    \"edited\": \"<string>\",\n    \"editor\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9cab1636-9766-4755-9208-3994077cf788",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "vee",
+                    "instructions",
+                    ":instructionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "instructionId",
+                      "description": "(Required) The ID of the Vee instruction to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"instructionId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"content\": \"<string>\",\n  \"category\": \"<enum>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionInformation\": {\n    \"versionType\": \"<enum>\",\n    \"edited\": \"<string>\",\n    \"editor\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e43caaf8-38cb-4907-84e2-f894d156b665",
+          "name": "Delete a Vee instruction",
+          "request": {
+            "name": "Delete a Vee instruction",
+            "description": {
+              "content": "Delete a Vee instruction by its unique identifier. Administrating tenants can specify the tenant from which to delete the instruction using the `TargetTenantID` header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "vee",
+                "instructions",
+                ":instructionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "instructionId",
+                  "description": "(Required) The ID of the Vee instruction to delete."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a project in which to make the request.",
+                "key": "ProjectID",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8c83c64d-abcc-48f5-b79b-1f043e71b296",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "vee",
+                    "instructions",
+                    ":instructionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "instructionId",
+                      "description": "(Required) The ID of the Vee instruction to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instructionId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"content\": \"<string>\",\n  \"category\": \"<enum>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionInformation\": {\n    \"versionType\": \"<enum>\",\n    \"edited\": \"<string>\",\n    \"editor\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63435564-fb21-4d55-ab09-829fbfed8264",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "vee",
+                    "instructions",
+                    ":instructionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "instructionId",
+                      "description": "(Required) The ID of the Vee instruction to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82b7262a-0ae7-4407-9c7e-47da62e2c304",
+          "name": "Retrieve Vee safeguards",
+          "request": {
+            "name": "Retrieve Vee safeguards",
+            "description": {
+              "content": "Retrieve all Vee safeguards for a tenant. Administrating tenants can specify the tenant from which to retrieve safeguards using the `TargetTenantID` header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "vee",
+                "safeguards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3c948a8c-4e67-4abe-8e5b-7b9a16f4634e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "vee",
+                    "safeguards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"safeguards\": [\n    {\n      \"safeguardId\": \"string\",\n      \"displayName\": \"string\",\n      \"content\": \"string\",\n      \"customResponse\": \"string\",\n      \"userGroupIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"versionInformation\": {\n        \"versionType\": \"<enum>\",\n        \"edited\": \"<string>\",\n        \"editor\": \"<string>\"\n      }\n    },\n    {\n      \"safeguardId\": \"string\",\n      \"displayName\": \"string\",\n      \"content\": \"string\",\n      \"customResponse\": \"string\",\n      \"userGroupIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"versionInformation\": {\n        \"versionType\": \"<enum>\",\n        \"edited\": \"<string>\",\n        \"editor\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f23925d8-c55d-4d3d-a6ae-ca53400c8f3d",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "vee",
+                    "safeguards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "57bf6878-c667-4d92-9239-5050c774b81e",
+          "name": "Create a Vee safeguard",
+          "request": {
+            "name": "Create a Vee safeguard",
+            "description": {
+              "content": "Create a new Vee safeguard for a tenant. Administrating tenants can specify the tenant in which to create the safeguard using the `TargetTenantID` header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "vee",
+                "safeguards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a project in which to make the request.",
+                "key": "ProjectID",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"safeguardId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"content\": \"<string>\",\n  \"customResponse\": \"<string>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionInformation\": {\n    \"versionType\": \"<enum>\",\n    \"edited\": \"<string>\",\n    \"editor\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6ca0263-c545-4d74-92c9-0115023908eb",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "vee",
+                    "safeguards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"safeguardId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"content\": \"<string>\",\n  \"customResponse\": \"<string>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionInformation\": {\n    \"versionType\": \"<enum>\",\n    \"edited\": \"<string>\",\n    \"editor\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"safeguardId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"content\": \"<string>\",\n  \"customResponse\": \"<string>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionInformation\": {\n    \"versionType\": \"<enum>\",\n    \"edited\": \"<string>\",\n    \"editor\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f786e5f-0399-49ca-a495-161b5dd205a0",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "vee",
+                    "safeguards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"safeguardId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"content\": \"<string>\",\n  \"customResponse\": \"<string>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionInformation\": {\n    \"versionType\": \"<enum>\",\n    \"edited\": \"<string>\",\n    \"editor\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b617bbe-fdec-45e8-a28e-ff7e05627125",
+          "name": "Retrieve a Vee safeguard's details",
+          "request": {
+            "name": "Retrieve a Vee safeguard's details",
+            "description": {
+              "content": "Retrieve the details of a specific Vee safeguard. Administrating tenants can specify the tenant from which to retrieve the safeguard using the `TargetTenantID` header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "vee",
+                "safeguards",
+                ":safeguardId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "safeguardId",
+                  "description": "(Required) The ID of the Vee safeguard to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8df85e93-571c-45c4-9067-b11aa92df612",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "vee",
+                    "safeguards",
+                    ":safeguardId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "safeguardId",
+                      "description": "(Required) The ID of the Vee safeguard to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"safeguardId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"content\": \"<string>\",\n  \"customResponse\": \"<string>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionInformation\": {\n    \"versionType\": \"<enum>\",\n    \"edited\": \"<string>\",\n    \"editor\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59caed28-bb57-41de-9d4a-2f9db3f52e2f",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "vee",
+                    "safeguards",
+                    ":safeguardId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "safeguardId",
+                      "description": "(Required) The ID of the Vee safeguard to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4059b5ee-6f5c-4074-848b-10d780e91a1c",
+          "name": "Update a Vee safeguard",
+          "request": {
+            "name": "Update a Vee safeguard",
+            "description": {
+              "content": "Update an existing Vee safeguard. The safeguard definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values for optional fields, those values reset to their respective defaults.\n\n Administrating tenants can specify the tenant in which to update the safeguard using the `TargetTenantID` header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "vee",
+                "safeguards",
+                ":safeguardId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "safeguardId",
+                  "description": "(Required) The ID of the Vee safeguard to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a project in which to make the request.",
+                "key": "ProjectID",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"safeguardId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"content\": \"<string>\",\n  \"customResponse\": \"<string>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionInformation\": {\n    \"versionType\": \"<enum>\",\n    \"edited\": \"<string>\",\n    \"editor\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bbea6139-8837-40bc-8b34-bdd899b1eed5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "vee",
+                    "safeguards",
+                    ":safeguardId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "safeguardId",
+                      "description": "(Required) The ID of the Vee safeguard to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"safeguardId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"content\": \"<string>\",\n  \"customResponse\": \"<string>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionInformation\": {\n    \"versionType\": \"<enum>\",\n    \"edited\": \"<string>\",\n    \"editor\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"safeguardId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"content\": \"<string>\",\n  \"customResponse\": \"<string>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionInformation\": {\n    \"versionType\": \"<enum>\",\n    \"edited\": \"<string>\",\n    \"editor\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3027be32-49ee-437c-9f32-04bf9b3dc2c3",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "vee",
+                    "safeguards",
+                    ":safeguardId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "safeguardId",
+                      "description": "(Required) The ID of the Vee safeguard to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"safeguardId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"content\": \"<string>\",\n  \"customResponse\": \"<string>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionInformation\": {\n    \"versionType\": \"<enum>\",\n    \"edited\": \"<string>\",\n    \"editor\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a95c173-bca5-49fd-be6a-8bcd898cbca2",
+          "name": "Delete a Vee safeguard",
+          "request": {
+            "name": "Delete a Vee safeguard",
+            "description": {
+              "content": "Delete a Vee safeguard by its unique identifier. Administrating tenants can specify the tenant from which to delete the safeguard using the `TargetTenantID` header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "vee",
+                "safeguards",
+                ":safeguardId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "safeguardId",
+                  "description": "(Required) The ID of the Vee safeguard to delete."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a project in which to make the request.",
+                "key": "ProjectID",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3bf458c8-d186-48f9-8351-ef543b1bd5c3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "vee",
+                    "safeguards",
+                    ":safeguardId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "safeguardId",
+                      "description": "(Required) The ID of the Vee safeguard to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"safeguardId\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"content\": \"<string>\",\n  \"customResponse\": \"<string>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionInformation\": {\n    \"versionType\": \"<enum>\",\n    \"edited\": \"<string>\",\n    \"editor\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef32467f-611c-4f0e-92c6-c006c71f4a8a",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "vee",
+                    "safeguards",
+                    ":safeguardId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "safeguardId",
+                      "description": "(Required) The ID of the Vee safeguard to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "28b6bd27-bb3e-432a-8c71-1d8c088aa19c",
+    "name": "Visier Administration Vee Configuration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.",
+      "type": "text/plain"
+    }
+  }
+}

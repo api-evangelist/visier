@@ -1,0 +1,770 @@
+openapi: 3.2.0
+info:
+  title: Visier Administration Profiles API
+  description: Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: Profiles
+  description: Manage the profiles assigned to users, such as assigning or removing a profile from a list of users and retrieving profile details. Administrating tenant users can manage profiles at the administrating tenant level and analytic tenant level.
+paths:
+  /v1/admin/profiles:
+    get:
+      tags:
+      - Profiles
+      summary: Retrieve a list of all profiles
+      description: "Get a list of all available profiles. For administrating tenants,\n this retrieves all administrating tenant profiles."
+      operationId: Profiles_GetAllProfiles
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.ProfilesGetAPIResponseDTO'
+  /v1/admin/profiles/accessible-tenants:
+    get:
+      tags:
+      - Profiles
+      summary: Retrieve a list of analytic tenant profiles
+      description: "Retrieve a list of profiles available for analytic tenants.\n\n **Note:** Administrating tenants only."
+      operationId: Profiles_GetAnalyticProfiles
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.ProfilesGetAPIResponseDTO'
+  /v1/admin/profiles/accessible-tenants/{profileId}:
+    get:
+      tags:
+      - Profiles
+      summary: Retrieve the details of an analytic tenant profile
+      description: "Get the details of an analytic tenant profile.\n\n **Note:** Administrating tenants only."
+      operationId: Profiles_GetAnalyticProfileDetail
+      parameters:
+      - name: profileId
+        in: path
+        description: The ID of the profile to retrieve details for.
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.ProfileGetAPIResponseDTO'
+  /v1/admin/profiles/accessible-tenants/{profileId}/assign:
+    put:
+      tags:
+      - Profiles
+      summary: Assign an analytic tenant profile to administrating tenant users
+      description: "Assign an analytic tenant profile to a list of administrating tenant users\n for a list of analytic tenants.\n\n **Note:**\n  - Administrating tenants only.\n  - You can revoke a profile from a user with this request by updating the validityEndTime to be\n    \"less than\" the current time (that is, in the past)."
+      operationId: Profiles_AssignAnalyticProfile
+      parameters:
+      - name: profileId
+        in: path
+        description: The ID of the profile to assign.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.AccessibleTenantProfileAssignmentRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.AccessibleTenantProfileAssignmentResponseDTO'
+  /v1/admin/profiles/accessible-tenants/{profileId}/remove:
+    delete:
+      tags:
+      - Profiles
+      summary: Remove an analytic tenant profile from administrating tenant users
+      description: "Remove an analytic tenant profile from a list of administrating tenant users for a list of analytic tenants.\n\n **Note:** Administrating tenants only."
+      operationId: Profiles_RemoveAnalyticProfile
+      parameters:
+      - name: profileId
+        in: path
+        description: The ID of the profile to remove.
+        required: true
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.AccessibleTenantProfileRevokeRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.AccessibleTenantProfileRevokeResponseDTO'
+  /v1/admin/profiles/{profileId}:
+    get:
+      tags:
+      - Profiles
+      summary: Retrieve the details of a profile
+      description: "Get the details of a specific profile. For administrating tenants, this retrieves\n the details of administrating tenant profiles."
+      operationId: Profiles_GetProfileDetail
+      parameters:
+      - name: profileId
+        in: path
+        description: The ID of the profile to retrieve details for.
+        required: true
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.ProfileGetAPIResponseDTO'
+  /v1/admin/profiles/{profileId}/assign:
+    put:
+      tags:
+      - Profiles
+      summary: Assign a profile to a list of users
+      description: "Assign a profile to a list of users. For administrating tenants,\n this assigns an administrating tenant profile to a list of users."
+      operationId: Profiles_AssignProfile
+      parameters:
+      - name: profileId
+        in: path
+        description: The ID of the profile to assign to a list of users.
+        required: true
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.LocalTenantProfileAssignmentRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.LocalTenantProfileAssignmentResponseDTO'
+  /v1/admin/profiles/{profileId}/remove:
+    delete:
+      tags:
+      - Profiles
+      summary: Remove a profile from a list of users
+      description: "Remove a profile from a list of users. For administrating tenants, this\n removes an administrating tenant profile from a list of users."
+      operationId: Profiles_RemoveProfile
+      parameters:
+      - name: profileId
+        in: path
+        description: The ID of the profile to remove to a list of users.
+        required: true
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.LocalTenantProfileRevokeRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.LocalTenantProfileRevokeResponseDTO'
+  /v1/admin/users/{userId}/accessible-tenant-profiles:
+    get:
+      tags:
+      - Profiles
+      summary: Retrieve an administrating tenant user's analytic tenant profiles
+      description: "Retrieve a specified user's assigned profiles for analytic tenants.\n\n **Note:** Administrating tenants only."
+      operationId: Profiles_GetAnalyticUserProfile
+      parameters:
+      - name: userId
+        in: path
+        description: The ID of the user you want to retrieve.
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.AllProfileAssignedForAccessibleTenantDTO'
+  /v1/admin/users/{userId}/profiles:
+    get:
+      tags:
+      - Profiles
+      summary: Retrieve a user's profiles
+      description: "Retrieve a specified user's assigned profiles. For administrating tenants,\n this retrieves a user's administrating tenant profiles."
+      operationId: Profiles_GetUserProfile
+      parameters:
+      - name: userId
+        in: path
+        description: The ID of the user you want to retrieve.
+        required: true
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.AllProfileAssignedForLocalTenantDTO'
+components:
+  schemas:
+    servicing.FailedAccessibleTenantProfileAssignmentDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The impacted user ID.
+        tenantCode:
+          type: string
+          description: The tenant code.
+        forAllChildren:
+          type: boolean
+          description: If true, the target assignment is for all analytic tenants.
+        error:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ErrorDTO'
+          description: The details about the error.
+    servicing.SuccessfulLocalTenantProfileAssignmentDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The user ID.
+    servicing.LocalTenantProfileRevokeRequestDTO:
+      type: object
+      properties:
+        targetUserIds:
+          type: array
+          items:
+            type: string
+          description: A list of users to remove this profile from.
+    servicing.FailedLocalTenantProfileAssignmentDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The impacted user ID.
+        error:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ErrorDTO'
+          description: The details about the error.
+    servicing.ReducedErrorDTO:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+          description: A meaningful message for the end user.
+    servicing.AccessibleTenantProfileAssignmentResponseDTO:
+      type: object
+      properties:
+        errors:
+          type: boolean
+          description: If true, an error is generated by the request.
+        badTenantCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.TenantCodeErrorDTO'
+          description: A list of objects representing any tenants that returned errors.
+        badUserIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.UserIdErrorDTO'
+          description: A list of objects representing the user IDs that may not be valid.
+        failedAssignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.FailedAccessibleTenantProfileAssignmentDTO'
+          description: A list of objects representing any errors during the assignment operation.
+        successfulAssignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.SuccessfulAccessibleTenantProfileAssignmentDTO'
+          description: A list of user IDs that were successfully assigned the profiles.
+    servicing.FailedLocalTenantProfileRevokeDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The impacted user ID.
+        message:
+          type: string
+          description: The details about the error.
+    servicing.LocalTenantProfileAssignmentResponseDTO:
+      type: object
+      properties:
+        errors:
+          type: boolean
+          description: If true, an error was generated by the request.
+        badUserIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.UserIdErrorDTO'
+          description: A list of objects representing the user IDs that may not be valid.
+        failedAssignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.FailedLocalTenantProfileAssignmentDTO'
+          description: A list of objects representing any errors that occurred during the assignment operation.
+        successfulAssignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.SuccessfulLocalTenantProfileAssignmentDTO'
+          description: A list of the user IDs that were successfully assigned the profile.
+    servicing.SuccessfulAccessibleTenantProfileAssignmentDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The user ID.
+        tenantCode:
+          type: string
+          description: The tenant code.
+        forAllChildren:
+          type: boolean
+          description: If true, the target assignment is for all analytic tenants.
+    servicing.AccessibleTenantProfileRevokeRequestDTO:
+      type: object
+      properties:
+        targetUserIds:
+          type: array
+          items:
+            type: string
+          description: A list of users to remove this profile from.
+        targetTenantCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.TargetTenantCodeDTO'
+          description: A list of objects representing the  analytic tenants for removing profiles from each target user ID.
+    servicing.ProfileAssignedForLocalTenantDTO:
+      type: object
+      properties:
+        profileId:
+          type: string
+          description: The unique identifier associated with the profile.
+        displayName:
+          type: string
+          description: An identifiable profile name to display in Visier, such as "Partner Service Manager".
+        validityStartTime:
+          type: string
+          description: An inclusive date-time when this profile is active.
+        validityEndTime:
+          type: string
+          description: An exclusive date-time when this profile is no longer active.
+        capabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.CapabilitiesDTO'
+          description: A list of objects representing the access that this profile has for the capabilities of this profile.
+        additionalCapabilities:
+          allOf:
+          - $ref: '#/components/schemas/servicing.AdditionalCapabilitiesDTO'
+          description: A list of the additional capabilities that are assigned to this profile.
+    servicing.ProfileGetAPIResponseDTO:
+      type: object
+      properties:
+        profileId:
+          type: string
+          description: The unique identifier associated with the profile.
+        displayName:
+          type: string
+          description: An identifiable profile name to display in Visier. For example, "Partner Service Manager".
+        capabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.CapabilitiesDTO'
+          description: A list of objects representing the access that this profile has for the capabilities of this profile.
+        additionalCapabilities:
+          type: array
+          items:
+            type: string
+          description: A list of the additional capabilities that are assigned to this profile.
+    servicing.ProfileAssignedForAccessibleTenantDTO:
+      type: object
+      properties:
+        profileId:
+          type: string
+          description: The unique identifier associated with the profile.
+        displayName:
+          type: string
+          description: An identifiable profile name to display in Visier such as "Partner Service Manager".
+        tenantCode:
+          type: string
+          description: The tenant code of the analytic tenant on which this profile is assigned.
+        forAllChildren:
+          type: boolean
+          description: If true, the profile is assigned for all the analytic tenants of the administrating tenant.
+        validityStartTime:
+          type: string
+          description: "An inclusive date-time when this profile is active.\n\n Note: Long.Min_Value means that startTime is undefined."
+        validityEndTime:
+          type: string
+          description: "An exclusive date-time when this profile is no longer active.\n\n Note: Long.Max_Value means that endTime is undefined and is equivalent to permanent access."
+    servicing.AdditionalCapabilitiesDTO:
+      type: object
+      properties:
+        additionalCapabilities:
+          type: array
+          items:
+            type: string
+          description: The additional capabilities assigned to this profile.
+    servicing.AllProfileAssignedForLocalTenantDTO:
+      type: object
+      properties:
+        assignedProfiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ProfileAssignedForLocalTenantDTO'
+          description: A list of objects representing the user profiles assigned to the user and their validity range.
+    servicing.TargetTenantCodeDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant code.
+        forAllChildren:
+          type: boolean
+          description: If true, the assignment is for all the analytic tenants of the specified tenant.
+    servicing.ReducedTenantCodeErrorDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The bad tenant code.
+        forAllChildren:
+          type: boolean
+          description: If true, the assignment is for all the analytic tenants of the specified tenant.
+        error:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ReducedErrorDTO'
+          description: The details about the error.
+    servicing.ErrorDTO:
+      type: object
+      properties:
+        rootCauseId:
+          type: string
+          description: The root cause identifier that allows Visier to determine the source of the problem.
+        errorCode:
+          type: string
+          description: A brief identifier of the type of error.
+        errorMessage:
+          type: string
+          description: A description of the error that occurred.
+    servicing.ProfilesGetAPIResponseDTO:
+      type: object
+      properties:
+        profiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ProfileGetAPIResponseDTO'
+          description: A list of objects representing the available profiles.
+    servicing.CapabilitiesDTO:
+      type: object
+      properties:
+        capability:
+          type: string
+          description: The name of the capability.
+        accessLevel:
+          type: string
+          description: The access level of the profile for the given capability.
+        viewLevel:
+          type: string
+          description: The view level of the profile for the given capability.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    servicing.AllProfileAssignedForAccessibleTenantDTO:
+      type: object
+      properties:
+        assignedProfilesForAccessibleTenant:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ProfileAssignedForAccessibleTenantDTO'
+          description: A list of objects representing the user profiles assigned to the user and their validity range.
+    servicing.AccessibleTenantProfileAssignmentRequestDTO:
+      type: object
+      properties:
+        targetUserIds:
+          type: array
+          items:
+            type: string
+          description: A list of users to assign this profile.
+        targetTenantCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.TargetTenantCodeDTO'
+          description: A list of objects representing the  analytic tenants for profiles assigned to the users.
+        validityStartTime:
+          type: string
+          description: An inclusive date-time when this profile is active.
+        validityEndTime:
+          type: string
+          description: An exclusive date-time when this profile is no longer active.
+    servicing.UserIdErrorDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The bad user ID.
+        error:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ErrorDTO'
+          description: The details about the error.
+    servicing.LocalTenantProfileRevokeResponseDTO:
+      type: object
+      properties:
+        failed:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.FailedLocalTenantProfileRevokeDTO'
+          description: A list of objects representing any errors that occurred during the assignment operation.
+        succeeded:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.SuccessfulLocalTenantProfileAssignmentDTO'
+          description: A list of the user IDs that successfully had a profile removed.
+    servicing.LocalTenantProfileAssignmentRequestDTO:
+      type: object
+      properties:
+        targetUserIds:
+          type: array
+          items:
+            type: string
+          description: A list of users to assign this profile.
+        validityStartTime:
+          type: string
+          description: An inclusive date-time when this profile is active.
+        validityEndTime:
+          type: string
+          description: An exclusive date-time when this profile is no longer active.
+    servicing.TenantCodeErrorDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The bad tenant code.
+        forAllChildren:
+          type: boolean
+          description: If true, the target assignment is for all analytic tenants.
+        error:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ErrorDTO'
+          description: The details about the error.
+    servicing.AccessibleTenantProfileRevokeResponseDTO:
+      type: object
+      properties:
+        badTenantCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ReducedTenantCodeErrorDTO'
+          description: A list of objects representing any tenants that returned errors.
+        badUserIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ReducedUserIdErrorDTO'
+          description: A list of objects representing the user IDs that may not be valid.
+        unaffectedUsers:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.SuccessfulLocalTenantProfileAssignmentDTO'
+          description: A list of objects representing the valid user IDs that were not affected.
+        succeeded:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.SuccessfulLocalTenantProfileAssignmentDTO'
+          description: A list of objects representing the valid user IDs that succeeded.
+    servicing.ReducedUserIdErrorDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The bad user ID.
+        error:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ReducedErrorDTO'
+          description: The details about the error.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: administration
+  tags:
+  - Projects
+  - ProductionVersions
+  - UsersV3
+  - UsersV2
+  - UserGroupsV2
+  - UsersV1
+  - Profiles
+  - Permissions
+  - TenantsV2
+  - TenantsV1
+  - ConsolidatedAnalytics
+  - Sources
+  - SystemStatus
+  - EmailDomains
+  - EncryptionKeys
+  - NetworkSubnets
+  - SidecarSolutions
+  - ReleaseVersionConfiguration
+  - VeeConfiguration

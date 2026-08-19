@@ -1,0 +1,4182 @@
+{
+  "item": [
+    {
+      "id": "854e497e-9450-4c83-940b-62f03249b46b",
+      "name": "Dimensions",
+      "description": {
+        "content": "Discover dimensions and members.\n\nA dimension organizes unique values of an attribute into a list or a hierarchical structure of members. \nThe structure can be navigated to discover the members, and the members can be used to look up benchmark values.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ec9210c4-9941-478b-bfb1-845d1fa645e4",
+          "name": "Get jobs V1",
+          "request": {
+            "name": "Get jobs V1",
+            "description": {
+              "content": "Retrieve a list of all the jobs in Visier's ontology. A new version of this endpoint is now available. For more information, see `GET /v2/compensation-benchmarks/jobs`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "compensation-benchmarks",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "hierarchy",
+                  "value": "<string>",
+                  "description": "The ID of the job hierarchy to navigate.\n\nIf not provided, Visier's default job hierarchy is used. In the default hierarchy, jobs are organized into three levels with domain and subdomain groupings.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "parent",
+                  "value": "<string>",
+                  "description": "The ID of the parent member.\n\nIf the ID is provided, the response returns the immediate children of the parent member.\n\nTo get the top-level members, use the value `root`.\n\nMember availability and the parent-child relationship depends on the selected hierarchy. Please refer to the `hierarchy` parameter.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "term",
+                  "value": "<string>",
+                  "description": "The input search term. The job members that are the most semantically similar to the search term are returned with the most relevant job members displayed first. \nYour search term may not be included in the results as semantic search goes beyond keyword matching and attempts to interpret the meaning behind the query to provide search results.\n\nThe minimum length is 2 characters and the maximum length is 100 characters.\n\n***The search term must be URL encoded.***\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "naicsCode",
+                  "value": "<string>",
+                  "description": "The North American Industry Classification System (NAICS) code.\n\nIf `naicsCode` is provided, `term` is required. The most relevant job members associated with the naicsCode are returned first.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "hasBenchmarkValue",
+                  "value": "<boolean>",
+                  "description": "Filter members based on the availability of benchmark values. \nIf `true`, members with benchmark values are returned. \nIf `false`, members without benchmark values are returned. \nIf no value is specified, all members are returned.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "semanticOnly",
+                  "value": "<boolean>",
+                  "description": "If `true`, only semantic search will be used to find matches. Ensure the parameter `lexicalOnly` is set to `false`.\nDefault is `false`. By default, both semantic and lexical search are used to find matches.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "lexicalOnly",
+                  "value": "<boolean>",
+                  "description": "If `true`, only lexical search will be used to find matches. Ensure the parameter `semanticOnly` is set to `false`. \nDefault is `false`. By default, both semantic and lexical search are used to find matches.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "typicalTitlesSearch",
+                  "value": "<boolean>",
+                  "description": "If `true`, similar job titles for a job member are included in the lexical search for matches.\nDefault is `false`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "showHierarchy",
+                  "value": "<boolean>",
+                  "description": "If `true`, returns members in a tree structure based on the occupation hierarchy.\nDefault is `false`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeArchived",
+                  "value": "<boolean>",
+                  "description": "If `true`, both `active` and `archived` members are returned. Default is `false`. Members are archived when taxonomy changes are made.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0b74a882-edb0-4228-bf6f-7ce767f0c791",
+              "name": "List of job members.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hierarchy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "semanticOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "lexicalOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "typicalTitlesSearch",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "showHierarchy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"hasBenchmarkValue\": true,\n    \"hasChildren\": true,\n    \"status\": \"active\",\n    \"displayId\": \"string\",\n    \"shortDescriptionSections\": [\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      }\n    ],\n    \"jobDomain\": \"string\",\n    \"jobSubdomain\": \"string\",\n    \"typicalTitles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"relatedJobs\": [\n      \"string\",\n      \"string\"\n    ],\n    \"naicsId\": \"string\",\n    \"naicsName\": \"string\",\n    \"naicsDescription\": \"string\",\n    \"socCode\": \"string\",\n    \"socName\": \"string\",\n    \"socCodes\": {},\n    \"socNames\": {}\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"hasBenchmarkValue\": true,\n    \"hasChildren\": true,\n    \"status\": \"archived\",\n    \"displayId\": \"string\",\n    \"shortDescriptionSections\": [\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      }\n    ],\n    \"jobDomain\": \"string\",\n    \"jobSubdomain\": \"string\",\n    \"typicalTitles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"relatedJobs\": [\n      \"string\",\n      \"string\"\n    ],\n    \"naicsId\": \"string\",\n    \"naicsName\": \"string\",\n    \"naicsDescription\": \"string\",\n    \"socCode\": \"string\",\n    \"socName\": \"string\",\n    \"socCodes\": {},\n    \"socNames\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eecd71c2-0582-4f89-b3b1-1923943d2cb4",
+              "name": "The API request failed given the parameters provided, such as missing or invalid parameters.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hierarchy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "semanticOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "lexicalOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "typicalTitlesSearch",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "showHierarchy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2030f833-be60-46b6-83c3-ca60b79a2600",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hierarchy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "semanticOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "lexicalOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "typicalTitlesSearch",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "showHierarchy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4cd5ec9-936b-4933-bcd4-c7cf91a900e6",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hierarchy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "semanticOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "lexicalOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "typicalTitlesSearch",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "showHierarchy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30bde95e-9ad1-4207-855c-63b775bd31af",
+          "name": "Get jobs V2",
+          "request": {
+            "name": "Get jobs V2",
+            "description": {
+              "content": "Retrieve a list of all the jobs in Visier's ontology. Jobs V2 improves upon Jobs V1 in the following ways:\n- Supports pagination through the `page` and `limit` parameters.\n- Returns both the short and long versions of job descriptions and job typical titles.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "compensation-benchmarks",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "hierarchy",
+                  "value": "<string>",
+                  "description": "The ID of the job hierarchy to navigate.\n\nIf not provided, Visier's default job hierarchy is used. In the default hierarchy, jobs are organized into three levels with domain and subdomain groupings.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "parent",
+                  "value": "<string>",
+                  "description": "The ID of the parent member.\n\nIf the ID is provided, the response returns the immediate children of the parent member.\n\nTo get the top-level members, use the value `root`.\n\nMember availability and the parent-child relationship depends on the selected hierarchy. Please refer to the `hierarchy` parameter.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "term",
+                  "value": "<string>",
+                  "description": "The input search term. The job members that are the most semantically similar to the search term are returned with the most relevant job members displayed first. \nYour search term may not be included in the results as semantic search goes beyond keyword matching and attempts to interpret the meaning behind the query to provide search results.\n\nThe minimum length is 2 characters and the maximum length is 100 characters.\n\n***The search term must be URL encoded.***\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "naicsCode",
+                  "value": "<string>",
+                  "description": "The North American Industry Classification System (NAICS) code.\n\nIf `naicsCode` is provided, `term` is required. The most relevant job members associated with the naicsCode are returned first.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "hasBenchmarkValue",
+                  "value": "<boolean>",
+                  "description": "Filter members based on the availability of benchmark values. \nIf `true`, members with benchmark values are returned. \nIf `false`, members without benchmark values are returned. \nIf no value is specified, all members are returned.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "semanticOnly",
+                  "value": "<boolean>",
+                  "description": "If `true`, only semantic search will be used to find matches. Ensure the parameter `lexicalOnly` is set to `false`.\nDefault is `false`. By default, both semantic and lexical search are used to find matches.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "lexicalOnly",
+                  "value": "<boolean>",
+                  "description": "If `true`, only lexical search will be used to find matches. Ensure the parameter `semanticOnly` is set to `false`. \nDefault is `false`. By default, both semantic and lexical search are used to find matches.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "typicalTitlesSearch",
+                  "value": "<boolean>",
+                  "description": "If `true`, similar job titles for a job member are included in the lexical search for matches.\nDefault is `false`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "showHierarchy",
+                  "value": "<boolean>",
+                  "description": "If `true`, returns members in a tree structure based on the occupation hierarchy.\nDefault is `false`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeArchived",
+                  "value": "<boolean>",
+                  "description": "If `true`, both `active` and `archived` members are returned. Default is `false`. Members are archived when taxonomy changes are made.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "The subset of the overall result set to return. The number of rows per page is equal to `limit`, except the last page which may contain fewer rows. Page is an index that begins at 0. The index to start retrieving results is calculated by multiplying `page` by `limit`. Default is to return results for page 0.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The maximum number of entries to return. Default and maximum are 1000 entries.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6c7be750-ab3e-4911-af9e-5e0b61f9f315",
+              "name": "List of job members.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "compensation-benchmarks",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hierarchy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "semanticOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "lexicalOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "typicalTitlesSearch",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "showHierarchy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"hasBenchmarkValue\": false,\n    \"hasChildren\": true,\n    \"status\": \"active\",\n    \"displayId\": \"string\",\n    \"shortDescriptionSections\": [\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      }\n    ],\n    \"jobDomain\": \"string\",\n    \"jobSubdomain\": \"string\",\n    \"typicalTitles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"relatedJobs\": [\n      \"string\",\n      \"string\"\n    ],\n    \"naicsId\": \"string\",\n    \"naicsName\": \"string\",\n    \"naicsDescription\": \"string\",\n    \"socCode\": \"string\",\n    \"socName\": \"string\",\n    \"socCodes\": {},\n    \"socNames\": {}\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"hasBenchmarkValue\": false,\n    \"hasChildren\": true,\n    \"status\": \"active\",\n    \"displayId\": \"string\",\n    \"shortDescriptionSections\": [\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      }\n    ],\n    \"jobDomain\": \"string\",\n    \"jobSubdomain\": \"string\",\n    \"typicalTitles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"relatedJobs\": [\n      \"string\",\n      \"string\"\n    ],\n    \"naicsId\": \"string\",\n    \"naicsName\": \"string\",\n    \"naicsDescription\": \"string\",\n    \"socCode\": \"string\",\n    \"socName\": \"string\",\n    \"socCodes\": {},\n    \"socNames\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb3dbd35-6981-455e-bd78-d2febc0a9e96",
+              "name": "The API request failed given the parameters provided, such as missing or invalid parameters.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "compensation-benchmarks",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hierarchy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "semanticOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "lexicalOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "typicalTitlesSearch",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "showHierarchy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71302c82-99d7-4c4f-aea3-d3fb1fc8b967",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "compensation-benchmarks",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hierarchy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "semanticOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "lexicalOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "typicalTitlesSearch",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "showHierarchy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e45457da-cc28-466b-9f5e-d85455dadfac",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "compensation-benchmarks",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hierarchy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "semanticOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "lexicalOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "typicalTitlesSearch",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "showHierarchy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b90e9cde-52b6-4ee3-bd85-abab3bd89b56",
+          "name": "Standardize custom job titles in bulk",
+          "request": {
+            "name": "Standardize custom job titles in bulk",
+            "description": {
+              "content": "Find the top standardized job matches for any custom job title and optional NAICS code in bulk.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "compensation-benchmarks",
+                "jobs",
+                "standardize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"terms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"naicsCode\": \"<string>\",\n  \"numMatches\": 5,\n  \"semanticOnly\": false,\n  \"lexicalOnly\": false,\n  \"typicalTitlesSearch\": false,\n  \"includeArchived\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "888f70db-f5d0-4934-9a08-1342e707396f",
+              "name": "The top standardized job matches for each custom job title.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "jobs",
+                    "standardize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"terms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"naicsCode\": \"<string>\",\n  \"numMatches\": 5,\n  \"semanticOnly\": false,\n  \"lexicalOnly\": false,\n  \"typicalTitlesSearch\": false,\n  \"includeArchived\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"job\": \"string\",\n    \"matches\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"hasBenchmarkValue\": false,\n        \"hasChildren\": true,\n        \"status\": \"active\",\n        \"displayId\": \"string\",\n        \"shortDescriptionSections\": [\n          {\n            \"label\": \"string\",\n            \"text\": \"string\"\n          },\n          {\n            \"label\": \"string\",\n            \"text\": \"string\"\n          }\n        ],\n        \"jobDomain\": \"string\",\n        \"jobSubdomain\": \"string\",\n        \"typicalTitles\": [\n          \"string\",\n          \"string\"\n        ],\n        \"relatedJobs\": [\n          \"string\",\n          \"string\"\n        ],\n        \"naicsId\": \"string\",\n        \"naicsName\": \"string\",\n        \"naicsDescription\": \"string\",\n        \"socCode\": \"string\",\n        \"socName\": \"string\",\n        \"socCodes\": {},\n        \"socNames\": {}\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"hasBenchmarkValue\": true,\n        \"hasChildren\": true,\n        \"status\": \"active\",\n        \"displayId\": \"string\",\n        \"shortDescriptionSections\": [\n          {\n            \"label\": \"string\",\n            \"text\": \"string\"\n          },\n          {\n            \"label\": \"string\",\n            \"text\": \"string\"\n          }\n        ],\n        \"jobDomain\": \"string\",\n        \"jobSubdomain\": \"string\",\n        \"typicalTitles\": [\n          \"string\",\n          \"string\"\n        ],\n        \"relatedJobs\": [\n          \"string\",\n          \"string\"\n        ],\n        \"naicsId\": \"string\",\n        \"naicsName\": \"string\",\n        \"naicsDescription\": \"string\",\n        \"socCode\": \"string\",\n        \"socName\": \"string\",\n        \"socCodes\": {},\n        \"socNames\": {}\n      }\n    ]\n  },\n  {\n    \"job\": \"string\",\n    \"matches\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"hasBenchmarkValue\": false,\n        \"hasChildren\": false,\n        \"status\": \"archived\",\n        \"displayId\": \"string\",\n        \"shortDescriptionSections\": [\n          {\n            \"label\": \"string\",\n            \"text\": \"string\"\n          },\n          {\n            \"label\": \"string\",\n            \"text\": \"string\"\n          }\n        ],\n        \"jobDomain\": \"string\",\n        \"jobSubdomain\": \"string\",\n        \"typicalTitles\": [\n          \"string\",\n          \"string\"\n        ],\n        \"relatedJobs\": [\n          \"string\",\n          \"string\"\n        ],\n        \"naicsId\": \"string\",\n        \"naicsName\": \"string\",\n        \"naicsDescription\": \"string\",\n        \"socCode\": \"string\",\n        \"socName\": \"string\",\n        \"socCodes\": {},\n        \"socNames\": {}\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"hasBenchmarkValue\": true,\n        \"hasChildren\": false,\n        \"status\": \"archived\",\n        \"displayId\": \"string\",\n        \"shortDescriptionSections\": [\n          {\n            \"label\": \"string\",\n            \"text\": \"string\"\n          },\n          {\n            \"label\": \"string\",\n            \"text\": \"string\"\n          }\n        ],\n        \"jobDomain\": \"string\",\n        \"jobSubdomain\": \"string\",\n        \"typicalTitles\": [\n          \"string\",\n          \"string\"\n        ],\n        \"relatedJobs\": [\n          \"string\",\n          \"string\"\n        ],\n        \"naicsId\": \"string\",\n        \"naicsName\": \"string\",\n        \"naicsDescription\": \"string\",\n        \"socCode\": \"string\",\n        \"socName\": \"string\",\n        \"socCodes\": {},\n        \"socNames\": {}\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7de42703-6cec-4f76-9a71-9c70d14c1201",
+              "name": "The API request failed given the parameters provided, such as missing or invalid parameters.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "jobs",
+                    "standardize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"terms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"naicsCode\": \"<string>\",\n  \"numMatches\": 5,\n  \"semanticOnly\": false,\n  \"lexicalOnly\": false,\n  \"typicalTitlesSearch\": false,\n  \"includeArchived\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "217c8413-2c9e-4d69-9d66-a0babdff46b9",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "jobs",
+                    "standardize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"terms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"naicsCode\": \"<string>\",\n  \"numMatches\": 5,\n  \"semanticOnly\": false,\n  \"lexicalOnly\": false,\n  \"typicalTitlesSearch\": false,\n  \"includeArchived\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "edf921be-e953-4db4-8f8a-54728a7f2d6b",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "jobs",
+                    "standardize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"terms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"naicsCode\": \"<string>\",\n  \"numMatches\": 5,\n  \"semanticOnly\": false,\n  \"lexicalOnly\": false,\n  \"typicalTitlesSearch\": false,\n  \"includeArchived\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd7c5d30-0e97-4c50-ade1-ad85adc734c5",
+          "name": "Get job hierarchies",
+          "request": {
+            "name": "Get job hierarchies",
+            "description": {
+              "content": "Retrieve a list of all hierarchies used to organize jobs.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "compensation-benchmarks",
+                "jobs",
+                "hierarchies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "naicsCode",
+                  "value": "<string>",
+                  "description": "The North American Industry Classification System (NAICS) code.\n\nIf provided, the response returns the hierarchies associated with the code.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "23c85606-494a-40fb-be0a-05cdfd58bef9",
+              "name": "List of hierarchies.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "jobs",
+                    "hierarchies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7834fe2-007d-4698-acd8-eee83e503b05",
+              "name": "The API request failed given the parameters provided, such as missing or invalid parameters.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "jobs",
+                    "hierarchies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b616656-bf07-4c9c-8d9e-0f9cd488158a",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "jobs",
+                    "hierarchies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33dee103-9516-4b4d-ab68-b56c25f0deb7",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "jobs",
+                    "hierarchies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28d7e26d-b2d8-41d8-9897-03c24f4457c1",
+          "name": "Search jobs by IDs",
+          "request": {
+            "name": "Search jobs by IDs",
+            "description": {
+              "content": "Retrieve a matching job for each specified job ID.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "compensation-benchmarks",
+                "jobs",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "24aad4e4-127c-43cc-922f-0774d68ab833",
+              "name": "The request was completed. Review the responses individually to see which actions were successful. \nIf you receive a 400 status code for an individual input, it indicates an invalid job ID or no job was found.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "jobs",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"successes\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"hasBenchmarkValue\": false,\n      \"hasChildren\": true,\n      \"status\": \"archived\",\n      \"displayId\": \"string\",\n      \"shortDescriptionSections\": [\n        {\n          \"label\": \"string\",\n          \"text\": \"string\"\n        },\n        {\n          \"label\": \"string\",\n          \"text\": \"string\"\n        }\n      ],\n      \"jobDomain\": \"string\",\n      \"jobSubdomain\": \"string\",\n      \"typicalTitles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"relatedJobs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"naicsId\": \"string\",\n      \"naicsName\": \"string\",\n      \"naicsDescription\": \"string\",\n      \"socCode\": \"string\",\n      \"socName\": \"string\",\n      \"socCodes\": {},\n      \"socNames\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"hasBenchmarkValue\": true,\n      \"hasChildren\": true,\n      \"status\": \"active\",\n      \"displayId\": \"string\",\n      \"shortDescriptionSections\": [\n        {\n          \"label\": \"string\",\n          \"text\": \"string\"\n        },\n        {\n          \"label\": \"string\",\n          \"text\": \"string\"\n        }\n      ],\n      \"jobDomain\": \"string\",\n      \"jobSubdomain\": \"string\",\n      \"typicalTitles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"relatedJobs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"naicsId\": \"string\",\n      \"naicsName\": \"string\",\n      \"naicsDescription\": \"string\",\n      \"socCode\": \"string\",\n      \"socName\": \"string\",\n      \"socCodes\": {},\n      \"socNames\": {}\n    }\n  ],\n  \"failures\": [\n    {\n      \"httpStatus\": \"string\",\n      \"message\": \"string\",\n      \"rci\": \"string\",\n      \"errorCode\": \"string\"\n    },\n    {\n      \"httpStatus\": \"string\",\n      \"message\": \"string\",\n      \"rci\": \"string\",\n      \"errorCode\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d19854d0-f3f3-4a5f-ab42-765d75675883",
+              "name": "The API request failed due to invalid JSON input, empty input or it exceeded the size limit of 1000 IDs.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "jobs",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c91182d-03f3-4197-9541-40969ee852ba",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "jobs",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4384821e-702f-4250-b673-ee4df445bd59",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "jobs",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92201188-97db-4dcd-b19d-6851ee6d089d",
+          "name": "Send feedback to help improve the quality of the job match results",
+          "request": {
+            "name": "Send feedback to help improve the quality of the job match results",
+            "description": {
+              "content": "This API allows you to submit feedback on the quality of the job match results returned by the Get jobs endpoint. \n\nYou must include the search term (job title you entered) in the request body. You can include the optional `naicsCode` if it was used as part of the search in the Get jobs endpoint.\n\nYou can also submit additional comments by providing values for `additionalComments`, along with `term` and `naicsCode`.\n\n**Note:**\n\nFor `term`, the minimum is 2 characters and the maximum is 100 characters.\n\nFor `additionalComments`, the maximum is 750 characters.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "compensation-benchmarks",
+                "jobs",
+                "feedback"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"term\": \"<string>\",\n  \"naicsCode\": \"<string>\",\n  \"additionalComments\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2a728a3f-dfe3-4d6b-946a-d63f0a9ebe1c",
+              "name": "Your feedback has been submitted successfully.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "jobs",
+                    "feedback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"term\": \"<string>\",\n  \"naicsCode\": \"<string>\",\n  \"additionalComments\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2a201031-e5d3-4adf-94a1-94083da3dd43",
+              "name": "Your feedback could not be submitted. Ensure the required fields `term` is not included in the request body.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "jobs",
+                    "feedback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"term\": \"<string>\",\n  \"naicsCode\": \"<string>\",\n  \"additionalComments\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01154bff-e7a3-451f-9e9e-fa4e0a8e3443",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "jobs",
+                    "feedback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"term\": \"<string>\",\n  \"naicsCode\": \"<string>\",\n  \"additionalComments\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fd521f0-742c-4779-baa3-46c49b159187",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "jobs",
+                    "feedback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"term\": \"<string>\",\n  \"naicsCode\": \"<string>\",\n  \"additionalComments\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "224234e7-ba36-4134-bbbd-fc0bae4b92c9",
+          "name": "Get industries",
+          "request": {
+            "name": "Get industries",
+            "description": {
+              "content": "Retrieve a list of all available industries.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "compensation-benchmarks",
+                "industries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "parent",
+                  "value": "<string>",
+                  "description": "The ID of the parent member.\n\nIf the ID is provided, the response returns the immediate children of the parent member.\n\nTo get the top-level members, use the value `root`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "naicsCode",
+                  "value": "<string>",
+                  "description": "The North American Industry Classification System (NAICS) code.\n\nIf provided, the response returns the best matching member associated with the code.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "showHierarchy",
+                  "value": "<boolean>",
+                  "description": "If `true`, returns members in a tree structure based on the industry hierarchy.\nDefault is `false`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "hasBenchmarkValue",
+                  "value": "<boolean>",
+                  "description": "Filter members based on the availability of benchmark values. \nIf `true`, members with benchmark values are returned. \nIf `false`, members without benchmark values are returned. \nIf no value is specified, all members are returned.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeArchived",
+                  "value": "<boolean>",
+                  "description": "If `true`, both `active` and `archived` members are returned. Default is `false`. Members are archived when taxonomy changes are made.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "74f675c3-967f-42cb-8e2f-83532997d6c8",
+              "name": "List of industry members.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "industries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "showHierarchy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"hasBenchmarkValue\": false,\n    \"hasChildren\": true,\n    \"status\": \"active\",\n    \"displayId\": \"string\",\n    \"shortDescriptionSections\": [\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      }\n    ],\n    \"jobDomain\": \"string\",\n    \"jobSubdomain\": \"string\",\n    \"typicalTitles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"relatedJobs\": [\n      \"string\",\n      \"string\"\n    ],\n    \"naicsId\": \"string\",\n    \"naicsName\": \"string\",\n    \"naicsDescription\": \"string\",\n    \"socCode\": \"string\",\n    \"socName\": \"string\",\n    \"socCodes\": {},\n    \"socNames\": {}\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"hasBenchmarkValue\": false,\n    \"hasChildren\": true,\n    \"status\": \"active\",\n    \"displayId\": \"string\",\n    \"shortDescriptionSections\": [\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      }\n    ],\n    \"jobDomain\": \"string\",\n    \"jobSubdomain\": \"string\",\n    \"typicalTitles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"relatedJobs\": [\n      \"string\",\n      \"string\"\n    ],\n    \"naicsId\": \"string\",\n    \"naicsName\": \"string\",\n    \"naicsDescription\": \"string\",\n    \"socCode\": \"string\",\n    \"socName\": \"string\",\n    \"socCodes\": {},\n    \"socNames\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60f6db27-8a06-4ffa-8e7f-021c81552349",
+              "name": "The API request failed given the parameters provided, such as missing or invalid parameters.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "industries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "showHierarchy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e7a153a-5b5d-40fa-9c33-d243dd5a7c30",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "industries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "showHierarchy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "090f67a4-1b7a-4861-a026-35327b0b527f",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "industries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "showHierarchy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4756089-af2f-4db2-a7ed-3adef32e5966",
+          "name": "Get locations",
+          "request": {
+            "name": "Get locations",
+            "description": {
+              "content": "Retrieve a list of all available locations.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "compensation-benchmarks",
+                "locations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "parent",
+                  "value": "<string>",
+                  "description": "The ID of the parent member.\n\nIf the ID is provided, the response returns the immediate children of the parent member.\n\nTo get the top-level member, use the value `root`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "countryCode",
+                  "value": "<string>",
+                  "description": "The **ISO 3166-1** country code to look up. Returns location members that match the country code.\n\nCurrently, the only supported country code is `US`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "postalCode",
+                  "value": "<string>",
+                  "description": "Postal code to look up. If `postalCode` is provided, `countryCode` is required. Returns location members that match both the country code and postal code.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "showHierarchy",
+                  "value": "<boolean>",
+                  "description": "If `true`, returns members in a tree structure based on the location hierarchy.\nDefault is `false`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "hasBenchmarkValue",
+                  "value": "<boolean>",
+                  "description": "Filter members based on the availability of benchmark values. \nIf `true`, members with benchmark values are returned. \nIf `false`, members without benchmark values are returned. \nIf no value is specified, all members are returned.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeArchived",
+                  "value": "<boolean>",
+                  "description": "If `true`, both `active` and `archived` members are returned. Default is `false`. Members are archived when taxonomy changes are made.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d14935c1-3288-45a0-a4e2-a54f63067d37",
+              "name": "List of location members.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countryCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "postalCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "showHierarchy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"hasBenchmarkValue\": false,\n    \"hasChildren\": true,\n    \"status\": \"active\",\n    \"displayId\": \"string\",\n    \"shortDescriptionSections\": [\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      }\n    ],\n    \"jobDomain\": \"string\",\n    \"jobSubdomain\": \"string\",\n    \"typicalTitles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"relatedJobs\": [\n      \"string\",\n      \"string\"\n    ],\n    \"naicsId\": \"string\",\n    \"naicsName\": \"string\",\n    \"naicsDescription\": \"string\",\n    \"socCode\": \"string\",\n    \"socName\": \"string\",\n    \"socCodes\": {},\n    \"socNames\": {}\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"hasBenchmarkValue\": false,\n    \"hasChildren\": true,\n    \"status\": \"active\",\n    \"displayId\": \"string\",\n    \"shortDescriptionSections\": [\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      }\n    ],\n    \"jobDomain\": \"string\",\n    \"jobSubdomain\": \"string\",\n    \"typicalTitles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"relatedJobs\": [\n      \"string\",\n      \"string\"\n    ],\n    \"naicsId\": \"string\",\n    \"naicsName\": \"string\",\n    \"naicsDescription\": \"string\",\n    \"socCode\": \"string\",\n    \"socName\": \"string\",\n    \"socCodes\": {},\n    \"socNames\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "533c358e-31fb-40c7-a54d-12292169d05b",
+              "name": "The API request failed given the parameters provided, such as missing or invalid parameters.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countryCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "postalCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "showHierarchy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad3bf322-424d-411b-83c4-d775e319b6a5",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countryCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "postalCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "showHierarchy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6af1554a-0090-43c7-ae6c-7e522daad9bd",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countryCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "postalCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "showHierarchy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8aa1f8a8-a554-4a80-a73f-a7aedbd8b3d7",
+          "name": "Get location members in bulk",
+          "request": {
+            "name": "Get location members in bulk",
+            "description": {
+              "content": "Retrieve location members in bulk by country code and postal code.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "compensation-benchmarks",
+                "locations",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"searchInputs\": [\n    {\n      \"uuid\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"postalCode\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"postalCode\": \"<string>\"\n    }\n  ],\n  \"hasBenchmarkValue\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0acc2ad8-799d-4433-aada-050f6116cfa8",
+              "name": "The request was completed. Review the responses individually to see which actions were successful. \nIf you receive a 400 status code for an individual input, it indicates an invalid look up code or no location was found.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "locations",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"searchInputs\": [\n    {\n      \"uuid\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"postalCode\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"postalCode\": \"<string>\"\n    }\n  ],\n  \"hasBenchmarkValue\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"successes\": [\n    {\n      \"uuid\": \"string\",\n      \"results\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"hasBenchmarkValue\": true,\n          \"hasChildren\": false,\n          \"status\": \"archived\",\n          \"displayId\": \"string\",\n          \"shortDescriptionSections\": [\n            {\n              \"label\": \"string\",\n              \"text\": \"string\"\n            },\n            {\n              \"label\": \"string\",\n              \"text\": \"string\"\n            }\n          ],\n          \"jobDomain\": \"string\",\n          \"jobSubdomain\": \"string\",\n          \"typicalTitles\": [\n            \"string\",\n            \"string\"\n          ],\n          \"relatedJobs\": [\n            \"string\",\n            \"string\"\n          ],\n          \"naicsId\": \"string\",\n          \"naicsName\": \"string\",\n          \"naicsDescription\": \"string\",\n          \"socCode\": \"string\",\n          \"socName\": \"string\",\n          \"socCodes\": {},\n          \"socNames\": {}\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"hasBenchmarkValue\": true,\n          \"hasChildren\": true,\n          \"status\": \"active\",\n          \"displayId\": \"string\",\n          \"shortDescriptionSections\": [\n            {\n              \"label\": \"string\",\n              \"text\": \"string\"\n            },\n            {\n              \"label\": \"string\",\n              \"text\": \"string\"\n            }\n          ],\n          \"jobDomain\": \"string\",\n          \"jobSubdomain\": \"string\",\n          \"typicalTitles\": [\n            \"string\",\n            \"string\"\n          ],\n          \"relatedJobs\": [\n            \"string\",\n            \"string\"\n          ],\n          \"naicsId\": \"string\",\n          \"naicsName\": \"string\",\n          \"naicsDescription\": \"string\",\n          \"socCode\": \"string\",\n          \"socName\": \"string\",\n          \"socCodes\": {},\n          \"socNames\": {}\n        }\n      ]\n    },\n    {\n      \"uuid\": \"string\",\n      \"results\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"hasBenchmarkValue\": true,\n          \"hasChildren\": false,\n          \"status\": \"active\",\n          \"displayId\": \"string\",\n          \"shortDescriptionSections\": [\n            {\n              \"label\": \"string\",\n              \"text\": \"string\"\n            },\n            {\n              \"label\": \"string\",\n              \"text\": \"string\"\n            }\n          ],\n          \"jobDomain\": \"string\",\n          \"jobSubdomain\": \"string\",\n          \"typicalTitles\": [\n            \"string\",\n            \"string\"\n          ],\n          \"relatedJobs\": [\n            \"string\",\n            \"string\"\n          ],\n          \"naicsId\": \"string\",\n          \"naicsName\": \"string\",\n          \"naicsDescription\": \"string\",\n          \"socCode\": \"string\",\n          \"socName\": \"string\",\n          \"socCodes\": {},\n          \"socNames\": {}\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"hasBenchmarkValue\": true,\n          \"hasChildren\": true,\n          \"status\": \"archived\",\n          \"displayId\": \"string\",\n          \"shortDescriptionSections\": [\n            {\n              \"label\": \"string\",\n              \"text\": \"string\"\n            },\n            {\n              \"label\": \"string\",\n              \"text\": \"string\"\n            }\n          ],\n          \"jobDomain\": \"string\",\n          \"jobSubdomain\": \"string\",\n          \"typicalTitles\": [\n            \"string\",\n            \"string\"\n          ],\n          \"relatedJobs\": [\n            \"string\",\n            \"string\"\n          ],\n          \"naicsId\": \"string\",\n          \"naicsName\": \"string\",\n          \"naicsDescription\": \"string\",\n          \"socCode\": \"string\",\n          \"socName\": \"string\",\n          \"socCodes\": {},\n          \"socNames\": {}\n        }\n      ]\n    }\n  ],\n  \"failures\": [\n    {\n      \"uuid\": \"string\",\n      \"httpStatus\": \"string\",\n      \"message\": \"string\",\n      \"rci\": \"string\",\n      \"errorCode\": \"string\"\n    },\n    {\n      \"uuid\": \"string\",\n      \"httpStatus\": \"string\",\n      \"message\": \"string\",\n      \"rci\": \"string\",\n      \"errorCode\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54c65b41-9d99-4267-8ee5-651a25c64e2c",
+              "name": "The API request failed due to invalid JSON input, empty input, missing mandatory fields, or it exceeded the bulk size limit of 1000 individual requests.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "locations",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"searchInputs\": [\n    {\n      \"uuid\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"postalCode\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"postalCode\": \"<string>\"\n    }\n  ],\n  \"hasBenchmarkValue\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c7219ce-cd23-4da5-881b-c1553adc2efe",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "locations",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"searchInputs\": [\n    {\n      \"uuid\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"postalCode\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"postalCode\": \"<string>\"\n    }\n  ],\n  \"hasBenchmarkValue\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a4a5467-9bc8-4b00-b1e3-1f875b375df2",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "locations",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"searchInputs\": [\n    {\n      \"uuid\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"postalCode\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"postalCode\": \"<string>\"\n    }\n  ],\n  \"hasBenchmarkValue\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e879391e-d1de-4b27-bf29-ff378275894e",
+          "name": "Get company sizes",
+          "request": {
+            "name": "Get company sizes",
+            "description": {
+              "content": "Retrieve a list of all available company sizes.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "compensation-benchmarks",
+                "company-sizes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "headcount",
+                  "value": "<integer>",
+                  "description": "The number of employees.\n\nIf provided, the response returns the members with the same headcount.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "hasBenchmarkValue",
+                  "value": "<boolean>",
+                  "description": "Filter members based on the availability of benchmark values. \nIf `true`, members with benchmark values are returned. \nIf `false`, members without benchmark values are returned. \nIf no value is specified, all members are returned.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeArchived",
+                  "value": "<boolean>",
+                  "description": "If `true`, both `active` and `archived` members are returned. Default is `false`. Members are archived when taxonomy changes are made.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d03f4d29-6322-41bb-bf9b-87a5abf06b9f",
+              "name": "List of company size members.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "company-sizes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "headcount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"hasBenchmarkValue\": false,\n    \"hasChildren\": true,\n    \"status\": \"active\",\n    \"displayId\": \"string\",\n    \"shortDescriptionSections\": [\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      }\n    ],\n    \"jobDomain\": \"string\",\n    \"jobSubdomain\": \"string\",\n    \"typicalTitles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"relatedJobs\": [\n      \"string\",\n      \"string\"\n    ],\n    \"naicsId\": \"string\",\n    \"naicsName\": \"string\",\n    \"naicsDescription\": \"string\",\n    \"socCode\": \"string\",\n    \"socName\": \"string\",\n    \"socCodes\": {},\n    \"socNames\": {}\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"hasBenchmarkValue\": false,\n    \"hasChildren\": true,\n    \"status\": \"active\",\n    \"displayId\": \"string\",\n    \"shortDescriptionSections\": [\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      }\n    ],\n    \"jobDomain\": \"string\",\n    \"jobSubdomain\": \"string\",\n    \"typicalTitles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"relatedJobs\": [\n      \"string\",\n      \"string\"\n    ],\n    \"naicsId\": \"string\",\n    \"naicsName\": \"string\",\n    \"naicsDescription\": \"string\",\n    \"socCode\": \"string\",\n    \"socName\": \"string\",\n    \"socCodes\": {},\n    \"socNames\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "515bd6ed-a727-4ad8-a2c9-2949180e0ff9",
+              "name": "The API request failed given the parameters provided, such as missing or invalid parameters.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "company-sizes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "headcount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "380e4fe3-852b-479d-a978-114ed7c8909f",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "company-sizes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "headcount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fcaa09b2-c659-4550-b3a4-9ac93ff44c37",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "company-sizes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "headcount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4751de08-bc52-410a-80a3-9b8d19fcc47b",
+          "name": "Get career levels",
+          "request": {
+            "name": "Get career levels",
+            "description": {
+              "content": "Retrieve a list of all available career levels.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "compensation-benchmarks",
+                "career-levels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "job",
+                  "value": "<string>",
+                  "description": "The job member ID.\n\nIf provided, the response returns the members for the job.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "hasBenchmarkValue",
+                  "value": "<boolean>",
+                  "description": "Filter members based on the availability of benchmark values. \nIf `true`, members with benchmark values are returned. \nIf `false`, members without benchmark values are returned. \nIf no value is specified, all members are returned.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeArchived",
+                  "value": "<boolean>",
+                  "description": "If `true`, both `active` and `archived` members are returned. Default is `false`. Members are archived when taxonomy changes are made.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "739e61ca-9edc-400b-8b33-254734e9cc55",
+              "name": "List of career level members.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "career-levels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "job",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"hasBenchmarkValue\": false,\n    \"hasChildren\": true,\n    \"status\": \"active\",\n    \"displayId\": \"string\",\n    \"shortDescriptionSections\": [\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      }\n    ],\n    \"jobDomain\": \"string\",\n    \"jobSubdomain\": \"string\",\n    \"typicalTitles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"relatedJobs\": [\n      \"string\",\n      \"string\"\n    ],\n    \"naicsId\": \"string\",\n    \"naicsName\": \"string\",\n    \"naicsDescription\": \"string\",\n    \"socCode\": \"string\",\n    \"socName\": \"string\",\n    \"socCodes\": {},\n    \"socNames\": {}\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"hasBenchmarkValue\": false,\n    \"hasChildren\": true,\n    \"status\": \"active\",\n    \"displayId\": \"string\",\n    \"shortDescriptionSections\": [\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"text\": \"string\"\n      }\n    ],\n    \"jobDomain\": \"string\",\n    \"jobSubdomain\": \"string\",\n    \"typicalTitles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"relatedJobs\": [\n      \"string\",\n      \"string\"\n    ],\n    \"naicsId\": \"string\",\n    \"naicsName\": \"string\",\n    \"naicsDescription\": \"string\",\n    \"socCode\": \"string\",\n    \"socName\": \"string\",\n    \"socCodes\": {},\n    \"socNames\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93115ea0-2c34-4786-96a1-ef08a68e324a",
+              "name": "The API request failed given the parameters provided, such as missing or invalid parameters.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "career-levels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "job",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8123b47c-abb1-4085-b8bf-8f199b80be6e",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "career-levels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "job",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37007ea7-fa39-47aa-9333-d9f7d02139df",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "career-levels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "job",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hasBenchmarkValue",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeArchived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "876f58d8-e3da-4f9f-ac0d-200b716b4464",
+          "name": "Get career level members in bulk",
+          "request": {
+            "name": "Get career level members in bulk",
+            "description": {
+              "content": "Retrieve career level members in bulk by job IDs.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "compensation-benchmarks",
+                "career-levels",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"hasBenchmarkValue\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6ea8c2ea-fbe6-4f8f-9574-940dc0a8c29f",
+              "name": "The request was completed. Review the responses individually to see which actions were successful.\nIf you receive a 400 status code for an individual input, it indicates an invalid job ID or no career level was found.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "career-levels",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"hasBenchmarkValue\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"successes\": [\n    {\n      \"jobID\": \"string\",\n      \"results\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"hasBenchmarkValue\": true,\n          \"hasChildren\": false,\n          \"status\": \"archived\",\n          \"displayId\": \"string\",\n          \"shortDescriptionSections\": [\n            {\n              \"label\": \"string\",\n              \"text\": \"string\"\n            },\n            {\n              \"label\": \"string\",\n              \"text\": \"string\"\n            }\n          ],\n          \"jobDomain\": \"string\",\n          \"jobSubdomain\": \"string\",\n          \"typicalTitles\": [\n            \"string\",\n            \"string\"\n          ],\n          \"relatedJobs\": [\n            \"string\",\n            \"string\"\n          ],\n          \"naicsId\": \"string\",\n          \"naicsName\": \"string\",\n          \"naicsDescription\": \"string\",\n          \"socCode\": \"string\",\n          \"socName\": \"string\",\n          \"socCodes\": {},\n          \"socNames\": {}\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"hasBenchmarkValue\": true,\n          \"hasChildren\": true,\n          \"status\": \"active\",\n          \"displayId\": \"string\",\n          \"shortDescriptionSections\": [\n            {\n              \"label\": \"string\",\n              \"text\": \"string\"\n            },\n            {\n              \"label\": \"string\",\n              \"text\": \"string\"\n            }\n          ],\n          \"jobDomain\": \"string\",\n          \"jobSubdomain\": \"string\",\n          \"typicalTitles\": [\n            \"string\",\n            \"string\"\n          ],\n          \"relatedJobs\": [\n            \"string\",\n            \"string\"\n          ],\n          \"naicsId\": \"string\",\n          \"naicsName\": \"string\",\n          \"naicsDescription\": \"string\",\n          \"socCode\": \"string\",\n          \"socName\": \"string\",\n          \"socCodes\": {},\n          \"socNames\": {}\n        }\n      ]\n    },\n    {\n      \"jobID\": \"string\",\n      \"results\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"hasBenchmarkValue\": false,\n          \"hasChildren\": true,\n          \"status\": \"archived\",\n          \"displayId\": \"string\",\n          \"shortDescriptionSections\": [\n            {\n              \"label\": \"string\",\n              \"text\": \"string\"\n            },\n            {\n              \"label\": \"string\",\n              \"text\": \"string\"\n            }\n          ],\n          \"jobDomain\": \"string\",\n          \"jobSubdomain\": \"string\",\n          \"typicalTitles\": [\n            \"string\",\n            \"string\"\n          ],\n          \"relatedJobs\": [\n            \"string\",\n            \"string\"\n          ],\n          \"naicsId\": \"string\",\n          \"naicsName\": \"string\",\n          \"naicsDescription\": \"string\",\n          \"socCode\": \"string\",\n          \"socName\": \"string\",\n          \"socCodes\": {},\n          \"socNames\": {}\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"hasBenchmarkValue\": false,\n          \"hasChildren\": true,\n          \"status\": \"archived\",\n          \"displayId\": \"string\",\n          \"shortDescriptionSections\": [\n            {\n              \"label\": \"string\",\n              \"text\": \"string\"\n            },\n            {\n              \"label\": \"string\",\n              \"text\": \"string\"\n            }\n          ],\n          \"jobDomain\": \"string\",\n          \"jobSubdomain\": \"string\",\n          \"typicalTitles\": [\n            \"string\",\n            \"string\"\n          ],\n          \"relatedJobs\": [\n            \"string\",\n            \"string\"\n          ],\n          \"naicsId\": \"string\",\n          \"naicsName\": \"string\",\n          \"naicsDescription\": \"string\",\n          \"socCode\": \"string\",\n          \"socName\": \"string\",\n          \"socCodes\": {},\n          \"socNames\": {}\n        }\n      ]\n    }\n  ],\n  \"failures\": [\n    {\n      \"jobID\": \"string\",\n      \"httpStatus\": \"string\",\n      \"message\": \"string\",\n      \"rci\": \"string\",\n      \"errorCode\": \"string\"\n    },\n    {\n      \"jobID\": \"string\",\n      \"httpStatus\": \"string\",\n      \"message\": \"string\",\n      \"rci\": \"string\",\n      \"errorCode\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad518bb0-2833-4a58-8df2-f03a56bc1a08",
+              "name": "The API request failed due to invalid JSON input, empty input or it exceeded the size limit of 500 IDs.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "career-levels",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"hasBenchmarkValue\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d81ad1fa-f749-4ead-8705-26651812dc1c",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "career-levels",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"hasBenchmarkValue\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "924d137d-a203-4669-9a16-b996ec45b27d",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "career-levels",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobIDs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"hasBenchmarkValue\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96b81f63-e5a4-4f3f-b034-a438e093233b",
+          "name": "Retrieve taxonomy changes",
+          "request": {
+            "name": "Retrieve taxonomy changes",
+            "description": {
+              "content": "Retrieve a list of taxonomy changes in CSV format, including updates to jobs, locations, industries, career levels, and company size up to the latest release.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "compensation-benchmarks",
+                "taxonomy-change-info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "734c86a0-1af6-4201-a298-cd9c90c02fd5",
+              "name": "A list of changes to the taxonomy in CSV format.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "taxonomy-change-info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "\"Date,Type,Category,Name,Id,Description\\n\\\"January 1, 2025\\\",Add,Job,New job,J.123456,Job added\"\n",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f733f9d6-4740-4328-bf3b-7e5428630185",
+              "name": "An unexpected exception occurred on the server.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "taxonomy-change-info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0988db6c-e044-4337-9cd6-a12e31ab10c3",
+              "name": "The server is taking too long to respond and the request timed out.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compensation-benchmarks",
+                    "taxonomy-change-info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f080e813-4162-4262-8156-f90c0c0b0218",
+    "name": "Compensation Benchmarks Dimensions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Discover dimensions and members.\n\nA dimension organizes unique values of an attribute into a list or a hierarchical structure of members. \nThe structure can be navigated to discover the members, and the members can be used to look up benchmark values.\n",
+      "type": "text/plain"
+    }
+  }
+}

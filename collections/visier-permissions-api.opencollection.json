@@ -1,0 +1,672 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Administration Permissions API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Permissions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of all permission capabilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/capabilities",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to retrieve the capabilities from."
+              }
+            ]
+          },
+          "docs": "Retrieve all the permission capabilities in your tenant.\n You can use the returned capabilities in other API calls when creating or updating permissions to assign the capability to the permission.\n\n To specify the project in which to retrieve the permission capabilities, provide a project UUID in the `ProjectID` request header."
+        },
+        {
+          "info": {
+            "name": "Retrieve a permission capability's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/capabilities/:capabilityId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capabilityId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the capability you want to retrieve."
+              },
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to retrieve a capability from."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a specific capability.\n\n To specify the project in which to retrieve the permission capability, provide a project UUID in the `ProjectID` request header."
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of all content packages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/content-packages",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to retrieve the content packages from."
+              },
+              {
+                "name": "searchString",
+                "value": "",
+                "type": "query",
+                "description": "Optional search string to return only content packages whose display name or description contains that search string.\n If searchString is empty or not provided, the response returns a list of all content packages."
+              }
+            ]
+          },
+          "docs": "Retrieve the list of available content packages.\n You can use the returned content packages in other API calls when creating or updating permissions to add the content package to the permission.\n\n To specify the project in which to retrieve the available content packages, provide a project UUID in the `ProjectID` request header."
+        },
+        {
+          "info": {
+            "name": "Retrieve a content package's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/content-packages/:contentPackageId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "contentPackageId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the content package you want to retrieve."
+              },
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to retrieve a content package from."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Controls the amount of detail to return in the response. Omit to return basic information.\n * `details`: Include the content package's artifacts, grouped by artifact type."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a specific content package.\n\n To specify the project in which to retrieve a content package, provide a project UUID in the `ProjectID` request header."
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of all data access sets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/data-access-sets",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "analyticObjectId",
+                "value": "",
+                "type": "query",
+                "description": "Specify the analytic object ID to retrieve the shareable data access sets for. Default is all analytic objects."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "The information about the data access set to include in the request response.\n * If empty, returns basic information for the data access set, including its unique ID, display name, description, and analytic object ID.\n * If `details`, returns basic information and property data access information (`propertyAccessConfigs`)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of data access sets to return. Default is 100. Maximum is 1000."
+              },
+              {
+                "name": "correlationIds",
+                "value": "",
+                "type": "query",
+                "description": "If defined, `correlationIds` limits the response to the data access sets associated with the specified correlation IDs.\n You can specify multiple correlation IDs in the `correlationIds` parameter separated by commas; for example, `correlationIds=123,abc,456`.\n\n **Note**:\n - Correlation IDs must be between 3 and 64 characters long and may only contain alphanumeric characters, underscores and hyphens.\n - Correlation IDs have a lifetime of up to 7 days after creation. After a correlation ID expires, you can only retrieve specific data access sets using the data access set ID.\n - Correlation IDs are optional during data access set creation and are only applicable to those objects created with a defined correlation ID."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all shareable data access sets. Data access sets define the level of access that users have to properties and property values for the analytic object in a permission. Data access sets also grant access to properties of subjects that are referenced by the analytic object in the permission.\n You can assign data access sets to a permission when creating or updating permissions.\n\n To specify the project in which to retrieve the shareable data access sets, provide a project UUID in"
+        },
+        {
+          "info": {
+            "name": "Create shareable data access sets",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/admin/data-access-sets",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create shareable data access sets. Shareable data access sets let you reuse common data access configurations in multiple permissions.\n\n To specify the project in which to create shareable data access sets, provide a project UUID in the `ProjectID` request header."
+        },
+        {
+          "info": {
+            "name": "Update shareable data access sets",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/admin/data-access-sets",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update shareable data access sets. Shareable data access sets let you reuse common data access configurations in multiple permissions.\n\n To specify the project in which to update shareable data access sets, provide a project UUID in the `ProjectID` request header."
+        },
+        {
+          "info": {
+            "name": "Delete shareable data access sets",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/admin/data-access-sets",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete shareable data access sets.\n\n To specify the project in which to delete shareable data access sets, provide a project UUID in the `ProjectID` request header."
+        },
+        {
+          "info": {
+            "name": "Revert data access sets",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/admin/data-access-sets/revert-to-parent",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Revert a shareable data access set to its parent version. For example, if you revert a:\n - Tenant override object: The object reverts to the Blueprint version or, for administrating tenants who revert an analytic tenant's object, the administrating tenant's object version.\n - Tenant object: The API request fails. The object is unique to your tenant and no parent version exists.\n - Blueprint object: Nothing happens. The object is inherited from the parent and there is nothing to revert on this te"
+        },
+        {
+          "info": {
+            "name": "Retrieve a data access set's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/data-access-sets/:dataAccessSetId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dataAccessSetId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the data access set you want to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a specific shareable data access set. You must know the ID of the data access set to retrieve its details. To retrieve data access set IDs, see `GET v1/admin/data-access-sets`.\n\n To specify the project in which to retrieve the shareable data access set, provide a project UUID in the `ProjectID` request header."
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of data security objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/data-security-objects",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifiers of the data security objects (analytic objects) to retrieve.\n Default is all data security objects."
+              },
+              {
+                "name": "includeDetails",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, the response includes the analytic objects (display name, ID, and object type), related objects,\n securable properties, and securable dimensions. If `false`, the response only includes analytic objects\n (display name, ID, and object type). Default is `false`."
+              },
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to retrieve data security objects from."
+              }
+            ]
+          },
+          "docs": "Retrieve the list of available data security objects.\n Data security objects are analytic objects and their related objects that are available to define\n permissions' data security profiles.\n\n To specify the project in which to retrieve the available data security objects, provide a project UUID in the `ProjectID` request header."
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of all permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/permissions",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to retrieve the permissions from."
+              },
+              {
+                "name": "includeDetails",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, returns the permission's details. If `false`, only returns the permissions' ID, display name,\n and description. Default is `false`."
+              },
+              {
+                "name": "includeDetailsWithStatus",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, returns the validity statuses for the permission's properties in data access sets and the\n permission's dimensions, dimension members, and hierarchy properties in member filters. If `false`,\n doesn't return validity status information. Default is `false`."
+              },
+              {
+                "name": "correlationIds",
+                "value": "",
+                "type": "query",
+                "description": "If defined, `correlationIds` limits the response to the permissions associated with the specified correlation IDs.\n You can specify multiple correlation IDs in the `correlationIds` parameter separated by commas; for example, `correlationIds=123,abc,456`.\n\n **Note**:\n - Correlation IDs must be between 3 and 64 characters long and may only contain alphanumeric characters, underscores and hyphens.\n - Correlation IDs have a lifetime of up to 7 days after creation. After a correlation ID expires, you can only retrieve specific permissions using the permission ID.\n - Correlation IDs are optional during permission creation and are only applicable to those objects created with a defined correlation ID."
+              }
+            ]
+          },
+          "docs": "Retrieve the full list of user permissions in your tenant.\n\n To specify the project in which to retrieve permissions, provide a project UUID in the `ProjectID` request header."
+        },
+        {
+          "info": {
+            "name": "Create permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/admin/permissions",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              },
+              {
+                "name": "FastMode",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to create permissions in."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create new permissions. Administrating tenant users can specify the tenant in which to add these permissions.\n\n To specify the project in which to create permissions, provide a project UUID in the `ProjectID` request header."
+        },
+        {
+          "info": {
+            "name": "Update permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/admin/permissions",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              },
+              {
+                "name": "FastMode",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to update permissions in."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update existing permissions.\n\n To specify the project in which to update permissions, provide a project UUID in the `ProjectID` request header."
+        },
+        {
+          "info": {
+            "name": "Delete permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/admin/permissions",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to delete permissions from."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete existing permissions.\n\n To specify the project in which to delete permissions, provide a project UUID in the `ProjectID` request header."
+        },
+        {
+          "info": {
+            "name": "Revert permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/admin/permissions/revert-to-parent",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Revert a permission to its parent version. For example, if you revert a:\n - Tenant override object: The object reverts to the Blueprint version or, for administrating tenants who revert an analytic tenant's object, the administrating tenant's object version.\n - Tenant object: The API request fails. The object is unique to your tenant and no parent version exists.\n - Blueprint object: Nothing happens. The object is inherited from the parent and there is nothing to revert on this tenant."
+        },
+        {
+          "info": {
+            "name": "Retrieve a permission's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/permissions/:permissionId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "permissionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the permission you want to retrieve."
+              },
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to retrieve a permission from."
+              },
+              {
+                "name": "includeDetailsWithStatus",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, returns the validity statuses for the permission's properties in data access sets and the\n permission's dimensions, dimension members, and hierarchy properties in member filters. If `false`,\n doesn't return validity status information. Default is `false`."
+              }
+            ]
+          },
+          "docs": "Retrieve the details for a specified permission.\n\n To specify the project in which to retrieve the permission, provide a project UUID in the `ProjectID` request header."
+        },
+        {
+          "info": {
+            "name": "Synchronize versioned security artifacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/admin/security-artifacts/sync-to-non-versioned",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Copies permissions, data access sets, user groups, and user direct assignments from the versioned environment to the non-versioned environment. This operation immediately applies the security configurations, independent of data versioning.\n\n The versioned environment utilizes projects and data versions while the non-versioned environment applies changes directly.\n\n This endpoint always synchronizes permissions and data access sets. You can optionally synchronize user group assignments and direct"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

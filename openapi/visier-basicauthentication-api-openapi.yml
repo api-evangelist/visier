@@ -1,0 +1,165 @@
+openapi: 3.2.0
+info:
+  title: Visier Authentication Basic Authentication API
+  description: Visier APIs for authenticating with Visier. To use Visier's public APIs, you must first authenticate yourself as a Visier user who is allowed to use Visier APIs.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: BasicAuthentication
+  x-displayName: Basic Authentication
+  description: Request an authentication token through basic authentication. With basic authentication, use your username and password to request a secure token. The response returns an ASID token that you can use in your API calls.
+paths:
+  /v1/admin/visierSecureToken:
+    post:
+      tags:
+      - BasicAuthentication
+      summary: Request a Visier authentication token
+      description: Generate a secure ASID token.
+      operationId: BasicAuthentication_ASIDTokenAuthentication
+      requestBody:
+        description: Your username and password credentials to request an authentication token.
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthenticationRequest'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: Authentication token response
+          content:
+            text/plain:
+              schema:
+                type: string
+      security:
+      - {}
+  /v1/admin/visierImpersonationToken:
+    post:
+      tags:
+      - BasicAuthentication
+      summary: Request an impersonation token
+      description: Generate an impersonation token for the given username. The requesting user must have the Impersonator profile. The impersonated user must have the Read Impersonated or Write Impersonated profile. Supports impersonating users within the same tenant or in an analytic tenant by specifying a`TargetTenantID`. After receiving the token, use the header `Cookie:VisierImpersonationToken` to make API requests as the impersonated user.
+      operationId: BasicAuthentication_GenerateImpersonationToken
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: The tenant ID to execute the call on.
+        schema:
+          type: string
+      - name: TargetUsername
+        in: header
+        description: The username of the user to impersonate. If provided in both the header and the request body, the header value takes precedence.
+        schema:
+          type: string
+      - name: write
+        in: query
+        description: If `true`, the token grants read and write impersonation. The impersonated user must have the WriteImpersonated profile capability. Default is `false` and grants read only impersonation.
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        description: Request to generate an impersonation token.
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GenerateImpersonationTokenRequest'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: Returns an impersonation request token in plain text and as the VisierImpersonationToken cookie. Use the token to execute API requests as the impersonated user.
+          content:
+            text/plain:
+              schema:
+                type: string
+      security:
+      - ApiKeyAuth: []
+        CookieAuth: []
+components:
+  schemas:
+    GenerateImpersonationTokenRequest:
+      description: The details of the user to impersonate.
+      type: object
+      properties:
+        TargetUsername:
+          type: string
+          description: The username of the user to impersonate.
+    AuthenticationRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The unique identifier of the API user requesting a security token.
+        password:
+          type: string
+          description: The password that corresponds to the user making the request.
+      description: Your username and password credentials to request an authentication token.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: authentication
+  tags:
+  - BasicAuthentication
+  - OAuth2

@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Compensation Benchmarks API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Benchmarks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get base salary benchmark value",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/compensation-benchmarks/base-salary",
+            "params": [
+              {
+                "name": "job",
+                "value": "",
+                "type": "query",
+                "description": "The job member ID.\n"
+              },
+              {
+                "name": "industry",
+                "value": "",
+                "type": "query",
+                "description": "The industry member ID. If the ID is not provided, the response returns the benchmark value across all industries.\n"
+              },
+              {
+                "name": "naicsCode",
+                "value": "",
+                "type": "query",
+                "description": "The North American Industry Classification System (NAICS) code. \n\nIf the NAICS code is not provided, the response returns the benchmark value across all industries.\nIf both `naicsCode` and `industry` are provided, the response returns the benchmark value for the `industry` parameter. The entered `naicsCode` will not be applied.\n"
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "The location member ID. If the ID is not provided, the response returns the benchmark value across all locations.\n"
+              },
+              {
+                "name": "companySize",
+                "value": "",
+                "type": "query",
+                "description": "The company size member ID. If the ID is not provided, the response returns the benchmark value across all company sizes.\n"
+              },
+              {
+                "name": "careerLevel",
+                "value": "",
+                "type": "query",
+                "description": "The career level member ID. If the ID is not provided, the response returns the benchmark value across all career levels.\n"
+              },
+              {
+                "name": "matchDate",
+                "value": "",
+                "type": "query",
+                "description": "The date on which the career level was matched in `yyyy-MM-dd` format. A `matchDate` allows precise migration of career levels according to job architecture changes released since the match was made. If `matchDate` is not available, the migration assumes the most recent possible match date for the provided career level.\n"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "apikey",
+              "value": "{{apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve the base salary benchmark value.\n"
+        },
+        {
+          "info": {
+            "name": "Submit feedback to improve salary benchmark values",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/compensation-benchmarks/base-salary/feedback",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "apikey",
+              "value": "{{apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Give feedback for a salary benchmark value returned by `GET /v1/compensation-benchmarks/base-salary` or `/base-salaries`. To submit feedback, include the benchmark value's:\n  * ID values you defined in `GET /v1/compensation-benchmarks/base-salary` or `/base-salaries`.\n  * `referenceDate` and `releaseDate` returned by `GET /v1/compensation-benchmarks/base-salary` or `/base-salaries`.\n  * Optional `additionalComments` up to 750 characters.\n"
+        },
+        {
+          "info": {
+            "name": "Get salary benchmark values in bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/compensation-benchmarks/base-salaries",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "apikey",
+              "value": "{{apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve multiple base salary benchmark values in a single request.\n"
+        },
+        {
+          "info": {
+            "name": "Get benchmark metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/compensation-benchmarks/info",
+            "auth": {
+              "type": "apikey",
+              "key": "apikey",
+              "value": "{{apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve metadata that summarizes the benchmark dataset and API such as the release date.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

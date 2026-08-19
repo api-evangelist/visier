@@ -1,0 +1,1541 @@
+{
+  "item": [
+    {
+      "id": "4c741864-67ab-4fb5-b825-39231b60475a",
+      "name": "Webhooks",
+      "description": {
+        "content": "Create, manage, and retrieve webhook definitions. Use webhooks to register your own HTTPS endpoints with Visier and listen for specific events. When these events occur, Visier sends an API request to your registered endpoint. For example, you can create a webhook to monitor job status events with Visier. Visier sends you a success or failure notification to your registered endpoint after the job completes.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2523e90a-7d56-43ff-a06d-6a4a7ed3a7fd",
+          "name": "Retrieve a list of webhooks",
+          "request": {
+            "name": "Retrieve a list of webhooks",
+            "description": {
+              "content": "Retrieve a list of all webhooks. The response returns each webhook's definition, such as its endpoint URL, active status, and event types.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "op",
+                "webhooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "event",
+                  "value": "<string>",
+                  "description": "Retrieve all webhooks listening for the specified event type. Default is to retrieve all webhooks.\n\n The possible event types to listen for. Valid values:\n - `jobResultSuccess`: A job completed successfully.\n - `jobResultFailure`: A job failed to complete.\n - `jobReschedule`: A job was rescheduled.\n - `dvPublish`: A data version published to production.\n - `alertNotification`: A personalized alert notification was triggered.\n - `smartCompNotification`: A Smart Compensation event notification was triggered. This is available for Embedded Partners.\n - `dataUploadNotification`: A data file was uploaded.\n - `systemAlertNotification`: A system event alert notification was triggered.\n - `planRowPromotionNotification`: A row in a plan was promoted.\n - `auditEvent`: An audit event was triggered."
+                },
+                {
+                  "disabled": false,
+                  "key": "isActive",
+                  "value": "<boolean>",
+                  "description": "If `true`, retrieve active webhooks only. If `false`, retrieve active and inactive webhooks. Default is `false`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d132a50f-f10a-4a15-8142-23b78c290b2f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "event",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isActive",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webhooks\": [\n    {\n      \"webhookId\": \"string\",\n      \"details\": {\n        \"targetUrl\": \"string\",\n        \"isActive\": true,\n        \"events\": [\n          {\n            \"eventType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"eventType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"keyName\": \"string\",\n        \"displayName\": \"string\"\n      },\n      \"credentialReference\": \"string\"\n    },\n    {\n      \"webhookId\": \"string\",\n      \"details\": {\n        \"targetUrl\": \"string\",\n        \"isActive\": false,\n        \"events\": [\n          {\n            \"eventType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"eventType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"keyName\": \"string\",\n        \"displayName\": \"string\"\n      },\n      \"credentialReference\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a70d5616-2832-4f3e-8648-b4a2004fc36a",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "event",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isActive",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "358777c0-299f-41e5-b2f4-133b6669958c",
+          "name": "Create a webhook",
+          "request": {
+            "name": "Create a webhook",
+            "description": {
+              "content": "Create a new webhook with Visier. You must specify the webhook's endpoint URL, its active status, the event types to listen for, and the credentials to authenticate calls to the webhook endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "op",
+                "webhooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"details\": {\n    \"targetUrl\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"events\": [\n      {\n        \"eventType\": \"<string>\"\n      },\n      {\n        \"eventType\": \"<string>\"\n      }\n    ],\n    \"keyName\": \"<string>\",\n    \"displayName\": \"<string>\"\n  },\n  \"credentials\": {\n    \"basicAuth\": {\n      \"username\": \"<string>\",\n      \"password\": \"<string>\"\n    },\n    \"accessToken\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "23e22589-0002-4559-9bdd-33590416b32e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"details\": {\n    \"targetUrl\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"events\": [\n      {\n        \"eventType\": \"<string>\"\n      },\n      {\n        \"eventType\": \"<string>\"\n      }\n    ],\n    \"keyName\": \"<string>\",\n    \"displayName\": \"<string>\"\n  },\n  \"credentials\": {\n    \"basicAuth\": {\n      \"username\": \"<string>\",\n      \"password\": \"<string>\"\n    },\n    \"accessToken\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webhookId\": \"string\",\n  \"details\": {\n    \"targetUrl\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"events\": [\n      {\n        \"eventType\": \"<string>\"\n      },\n      {\n        \"eventType\": \"<string>\"\n      }\n    ],\n    \"keyName\": \"<string>\",\n    \"displayName\": \"<string>\"\n  },\n  \"credentialReference\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd63d67f-b7be-4e0f-8fe8-7eae4c73212d",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"details\": {\n    \"targetUrl\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"events\": [\n      {\n        \"eventType\": \"<string>\"\n      },\n      {\n        \"eventType\": \"<string>\"\n      }\n    ],\n    \"keyName\": \"<string>\",\n    \"displayName\": \"<string>\"\n  },\n  \"credentials\": {\n    \"basicAuth\": {\n      \"username\": \"<string>\",\n      \"password\": \"<string>\"\n    },\n    \"accessToken\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "17997f82-f718-458e-8cd7-2f00e5963364",
+          "name": "Retrieve webhook statuses",
+          "request": {
+            "name": "Retrieve webhook statuses",
+            "description": {
+              "content": "Retrieve the statuses of all webhooks, such as their active status and the event types they're listening for. API users can call this endpoint without any special capabilities.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "op",
+                "webhooks-status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "event",
+                  "value": "<string>",
+                  "description": "Retrieve all webhooks listening for the specified event type. Default is to retrieve all webhooks.\n\n The possible event types to listen for. Valid values:\n - `jobResultSuccess`: A job completed successfully.\n - `jobResultFailure`: A job failed to complete.\n - `jobReschedule`: A job was rescheduled.\n - `dvPublish`: A data version published to production.\n - `alertNotification`: A personalized alert notification was triggered.\n - `smartCompNotification`: A Smart Compensation event notification was triggered. This is available for Embedded Partners.\n - `dataUploadNotification`: A data file was uploaded.\n - `systemAlertNotification`: A system event alert notification was triggered.\n - `planRowPromotionNotification`: A row in a plan was promoted.\n - `auditEvent`: An audit event was triggered."
+                },
+                {
+                  "disabled": false,
+                  "key": "isActive",
+                  "value": "<boolean>",
+                  "description": "If `true`, retrieve active webhooks only. If `false`, retrieve active and inactive webhooks. Default is `false`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6e9f8c0d-a77f-4da1-8656-04383ae5b129",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "webhooks-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "event",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isActive",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webhooks\": [\n    {\n      \"webhookId\": \"string\",\n      \"details\": {\n        \"isActive\": true,\n        \"events\": [\n          {\n            \"eventType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"eventType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"webhookId\": \"string\",\n      \"details\": {\n        \"isActive\": false,\n        \"events\": [\n          {\n            \"eventType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"eventType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6fb44cd-0fea-4356-afd7-2af9ef07a25e",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "webhooks-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "event",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isActive",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1c1a5261-b385-4561-9b12-16d61af29e49",
+          "name": "Retrieve a webhook's details",
+          "request": {
+            "name": "Retrieve a webhook's details",
+            "description": {
+              "content": "Retrieve the details of a specific webhook. You must know the ID of the webhook to retrieve its details. To retrieve webhook IDs, see `GET /v1/op/webhooks`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "op",
+                "webhooks",
+                ":webhookId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhookId",
+                  "description": "(Required) The unique identifier of the webhook."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e8069cb2-3254-4934-aa6c-6bd2dbbb8008",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "webhooks",
+                    ":webhookId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookId",
+                      "description": "(Required) The unique identifier of the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webhookId\": \"string\",\n  \"details\": {\n    \"targetUrl\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"events\": [\n      {\n        \"eventType\": \"<string>\"\n      },\n      {\n        \"eventType\": \"<string>\"\n      }\n    ],\n    \"keyName\": \"<string>\",\n    \"displayName\": \"<string>\"\n  },\n  \"credentialReference\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f79356f-6116-4154-818b-fcb5889c2147",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "webhooks",
+                    ":webhookId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookId",
+                      "description": "(Required) The unique identifier of the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f988730-e817-4db0-bf7a-553a00b371a2",
+          "name": "Update a webhook's details",
+          "request": {
+            "name": "Update a webhook's details",
+            "description": {
+              "content": "Update the details of an existing webhook, such as its URL and active status. You must know the ID of the webhook to update it. To retrieve webhook IDs, see `GET /v1/op/webhooks`. To update a webhook's credentials, see `PUT /v1/op/webhooks/{webhookId}/credentials`.\n\n When updating a webhook, the webhook definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed from the webhook. We recommend that you retrieve a webhook's details before you update the webhook with new values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "op",
+                "webhooks",
+                ":webhookId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhookId",
+                  "description": "(Required) The unique identifier of the webhook."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"webhookId\": \"<string>\",\n  \"details\": {\n    \"targetUrl\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"events\": [\n      {\n        \"eventType\": \"<string>\"\n      },\n      {\n        \"eventType\": \"<string>\"\n      }\n    ],\n    \"keyName\": \"<string>\",\n    \"displayName\": \"<string>\"\n  },\n  \"credentialReference\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "992192ee-7cbd-41e8-9072-40add9ad33df",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "webhooks",
+                    ":webhookId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookId",
+                      "description": "(Required) The unique identifier of the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookId\": \"<string>\",\n  \"details\": {\n    \"targetUrl\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"events\": [\n      {\n        \"eventType\": \"<string>\"\n      },\n      {\n        \"eventType\": \"<string>\"\n      }\n    ],\n    \"keyName\": \"<string>\",\n    \"displayName\": \"<string>\"\n  },\n  \"credentialReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webhookId\": \"<string>\",\n  \"details\": {\n    \"targetUrl\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"events\": [\n      {\n        \"eventType\": \"<string>\"\n      },\n      {\n        \"eventType\": \"<string>\"\n      }\n    ],\n    \"keyName\": \"<string>\",\n    \"displayName\": \"<string>\"\n  },\n  \"credentialReference\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7270bb3f-5c7d-43ae-9770-ec4eb472f545",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "webhooks",
+                    ":webhookId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookId",
+                      "description": "(Required) The unique identifier of the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookId\": \"<string>\",\n  \"details\": {\n    \"targetUrl\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"events\": [\n      {\n        \"eventType\": \"<string>\"\n      },\n      {\n        \"eventType\": \"<string>\"\n      }\n    ],\n    \"keyName\": \"<string>\",\n    \"displayName\": \"<string>\"\n  },\n  \"credentialReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00df9d95-a69b-4d92-b568-8daad5f3abe4",
+          "name": "Delete a webhook",
+          "request": {
+            "name": "Delete a webhook",
+            "description": {
+              "content": "Delete a specific webhook. You must know the ID of the webhook to delete it. To retrieve webhook IDs, see `GET /v1/op/webhooks`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "op",
+                "webhooks",
+                ":webhookId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhookId",
+                  "description": "(Required) The unique identifier of the webhook."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42584412-17f3-4206-974f-026cae1aaf68",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "webhooks",
+                    ":webhookId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookId",
+                      "description": "(Required) The unique identifier of the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webhookId\": \"<string>\",\n  \"details\": {\n    \"targetUrl\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"events\": [\n      {\n        \"eventType\": \"<string>\"\n      },\n      {\n        \"eventType\": \"<string>\"\n      }\n    ],\n    \"keyName\": \"<string>\",\n    \"displayName\": \"<string>\"\n  },\n  \"credentialReference\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74a60295-a9e4-46ea-b3f5-40f90acc3479",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "webhooks",
+                    ":webhookId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookId",
+                      "description": "(Required) The unique identifier of the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d84c9815-6cd4-4c0a-95ac-509f201fbe38",
+          "name": "Update a webhook's credentials",
+          "request": {
+            "name": "Update a webhook's credentials",
+            "description": {
+              "content": "Update the credentials to authenticate calls to the webhook endpoint. You must know the ID of the webhook to update it. To retrieve webhook IDs, see `GET /v1/op/webhooks`. To update a webhook's details, see `PUT /v1/op/webhooks/{webhookId}`.\n\n When updating a webhook, the webhook definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed from the webhook. We recommend that you retrieve a webhook's details before you update the webhook with new values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "op",
+                "webhooks",
+                ":webhookId",
+                "credentials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhookId",
+                  "description": "(Required) The unique identifier of the webhook."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"basicAuth\": {\n    \"username\": \"<string>\",\n    \"password\": \"<string>\"\n  },\n  \"accessToken\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1c9cab85-bd50-4cec-9d01-fdee05b03f7d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "webhooks",
+                    ":webhookId",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookId",
+                      "description": "(Required) The unique identifier of the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"basicAuth\": {\n    \"username\": \"<string>\",\n    \"password\": \"<string>\"\n  },\n  \"accessToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webhookId\": \"<string>\",\n  \"details\": {\n    \"targetUrl\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"events\": [\n      {\n        \"eventType\": \"<string>\"\n      },\n      {\n        \"eventType\": \"<string>\"\n      }\n    ],\n    \"keyName\": \"<string>\",\n    \"displayName\": \"<string>\"\n  },\n  \"credentialReference\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65861eb4-0954-4ffa-9b66-1e7939448a7c",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "webhooks",
+                    ":webhookId",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookId",
+                      "description": "(Required) The unique identifier of the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"basicAuth\": {\n    \"username\": \"<string>\",\n    \"password\": \"<string>\"\n  },\n  \"accessToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8737e8cf-7fab-416d-afa9-b41755a4eb3e",
+          "name": "Delete a webhook's credentials",
+          "request": {
+            "name": "Delete a webhook's credentials",
+            "description": {
+              "content": "Delete the credentials for a webhook. You must know the ID of the webhook to delete its credentials. To retrieve webhook IDs, see `GET /v1/op/webhooks`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "op",
+                "webhooks",
+                ":webhookId",
+                "credentials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhookId",
+                  "description": "(Required) The unique identifier of the webhook."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7a9d1ab5-d6e2-41ce-8d59-65f7848b65d9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "webhooks",
+                    ":webhookId",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookId",
+                      "description": "(Required) The unique identifier of the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webhookId\": \"<string>\",\n  \"details\": {\n    \"targetUrl\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"events\": [\n      {\n        \"eventType\": \"<string>\"\n      },\n      {\n        \"eventType\": \"<string>\"\n      }\n    ],\n    \"keyName\": \"<string>\",\n    \"displayName\": \"<string>\"\n  },\n  \"credentialReference\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdc053e5-60c9-43d0-b1cd-762318c377b7",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "webhooks",
+                    ":webhookId",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookId",
+                      "description": "(Required) The unique identifier of the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29934538-a2f3-45e2-b669-3d13fe384f90",
+          "name": "Test a webhook",
+          "request": {
+            "name": "Test a webhook",
+            "description": {
+              "content": "Send a test event to an existing webhook. This validates whether the webhook works. You must specify the webhook ID and an event type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "op",
+                "webhooks",
+                ":webhookId",
+                "testEvent"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhookId",
+                  "description": "(Required) The unique identifier of the webhook."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ef7c0d4-ff8b-4e4b-a553-f18538b97260",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "webhooks",
+                    ":webhookId",
+                    "testEvent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookId",
+                      "description": "(Required) The unique identifier of the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 5706,\n  \"message\": \"string\",\n  \"messageId\": \"string\",\n  \"eventId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a9659af-71ff-441a-9b16-3ebfa416dd1b",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "webhooks",
+                    ":webhookId",
+                    "testEvent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookId",
+                      "description": "(Required) The unique identifier of the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "34a8c09c-abd7-45b5-9bc9-26097bbeebf4",
+    "name": "Visier Webhooks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for managing your webhook integrations.",
+      "type": "text/plain"
+    }
+  }
+}

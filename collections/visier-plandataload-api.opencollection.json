@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Planning Public Plan Data Load API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PlanDataLoad",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload plan data",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/planning/data/plans/:planId/scenarios/:scenarioId/cells",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the plan."
+              },
+              {
+                "name": "scenarioId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the plan scenario to load data into."
+              },
+              {
+                "name": "calculation",
+                "value": "",
+                "type": "query",
+                "description": "Sets the plan values to rollup, distribute, or neither. Valid values:\n  - **ROLLUP**: Roll up loaded data values to parent and ancestor rows. If the data provides a parent value and its child value, this method prioritizes the loaded value for the child and overwrites the parent.\n  - **DISTRIBUTE**: Distribute loaded data values to their children and descendent rows. If the data provides a parent value and its child value, this method prioritizes the parent values and overrides the loaded child value.\n  - **NONE**: The loaded values are not rolled up or distributed. This is the default."
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The 3-digit ISO 4217 currency code of the data.\nIf undefined, default is the plan's consolidation currency. If the currency is different from the plan's consolidation currency, the values are converted to the consolidation currency using the conversion rates loaded for the plan's baseline period."
+              },
+              {
+                "name": "method",
+                "value": "",
+                "type": "query",
+                "description": "Sets how to validate the data being loaded into Visier. Valid values:\n  - **VALIDATE**: Runs a test load through all the validation steps without putting the data into the plan. Use `VALIDATE` to find any errors before using `STRICT_UPLOAD` to load the data.\n  - **SKIP_ERRORS**: Loads all data without errors into the plan. Any rows with errors are excluded from the update to the plan.\n  - **STRICT_UPLOAD**: Loads data into the plan if there are no errors in any row. If there are errors, the load fails. This is the default."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Send a file to Visier to modify a plan's data. The file must be in CSV format and match the plan's schema. To get the plan's schema, call `GET /v1/planning/model/plans/{id}?withSchema=true`.\nThe data file must contain the following columns:\n  - `periodId`: From the GET response, use the `date` values in the `timePeriods` array as values in this column.\n  - A column for each `id` value in the `planSegmentLevels` object, where the row value is the `id` of the `members` in the `planSegmentLevelMemb"
+        },
+        {
+          "info": {
+            "name": "Add or remove plan rows",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1alpha/planning/data/plans/:planId/rows",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the plan."
+              },
+              {
+                "name": "method",
+                "value": "",
+                "type": "query",
+                "description": "Sets how to validate the data being loaded into Visier. Valid values:\n  - **VALIDATE**: Runs a test load through all the validation steps without putting the data into the plan. Use `VALIDATE` to find any errors before using `STRICT_UPLOAD` to load the data.\n  - **SKIP_ERRORS**: Loads all data without errors into the plan. Any rows with errors are excluded from the update to the plan.\n  - **STRICT_UPLOAD**: Loads data into the plan if there are no errors in any row. If there are errors, the load fails. This is the default."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Send a file to Visier to modify a plan's rows. The file must be in CSV format and contain the following columns:\n- `Add/Remove`: In the column, use the value \"Add\" to add the specified row to the plan or \"Remove\" to remove the specified row from the plan.\n- A column for each plan segment level using the IDs from `planSegmentLevels`.\n  - To add a row, use the corresponding segment member ID from `planSegmentLevelMembers`. If the member doesn't exist in the schema, provide a display name. The resp"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

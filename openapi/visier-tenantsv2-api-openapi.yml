@@ -1,0 +1,665 @@
+openapi: 3.2.0
+info:
+  title: Visier Administration Tenants V2 API
+  description: Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: TenantsV2
+  x-displayName: Tenants V2
+  description: "Create analytic tenants, deprovision tenants, retrieve tenant information, and update tenant information. Tenants V2 improves upon Tenants V1 in the following ways:\n  * Programmatically assign a Home analysis to your analytic tenants.\n  * Specify whether to merge or replace values when updating the details of an analytic tenant.\n  * Specify the property fields to include in the response for GET requests."
+paths:
+  /v2/admin/tenants:
+    get:
+      tags:
+      - TenantsV2
+      summary: Retrieve a list of all analytic tenants
+      description: "Retrieve the full list of analytic tenants managed by you with their current states and the content\n modules assigned to them, and all other relevant details for the tenants if requested."
+      operationId: TenantsV2_ListTenants
+      parameters:
+      - name: limit
+        in: query
+        description: "The limit of analytic tenants to return. The limit is `1000` if the following fields are not included in the `mask`.\n  - `homeAnalysisId`\n  - `homeAnalysisByUserGroup`\n  - `clickThroughLink`\n  - `defaultCurrency`\n\n The limit is `400` if any of the above fields are included in the `mask` or if `mask` is not specified."
+        schema:
+          type: integer
+          format: int32
+      - name: start
+        in: query
+        description: The starting index of the first tenant to return. Default is 0.
+        schema:
+          type: integer
+          format: int32
+      - name: mask
+        in: query
+        description: "A list of fields to include in the response, separated by commas. If not specified, includes all fields in the response. Valid values:\n  - `tenantCode`\n  - `tenantDisplayName`\n  - `currentDataVersion`\n  - `traits`\n  - `dataVersionDate`\n  - `provisionDate`\n  - `vanityUrlName`\n  - `status`\n  - `canAdministerOtherTenants`\n  - `industryCode`\n  - `industryInfo`\n  - `purchasedModules`\n  - `manuallyAddedModules`\n  - `embeddableDomains`\n  - `allowedOAuthIdpUrlDomains`\n  - `customProperties`\n  - `ssoInstanceIssuers`\n  - `homeAnalysisId`\n  - `homeAnalysisByUserGroup`\n  - `clickThroughLink`\n  - `clickThroughLinkEnabled`\n  - `defaultCurrency`\n  - `primaryBusinessLocation`\n  - `effectiveIndustryCode`\n  - `companySize`\n\n If `mask` is specified in both request body and on the query string, the effective `mask` is the set union of both inputs."
+        schema:
+          type: string
+      - name: dataProfile
+        in: query
+        description: 'Returns tenants with the specified data profile. Valid values: `Regular`, `Integration`, `Demo`, `Cat`, `Test`, `ProductIntelligence`. If omitted, returns all tenants.'
+        schema:
+          type: string
+      - name: tenantCodes
+        in: query
+        description: "A comma-separated string of the tenants to retrieve details for. Specify tenant codes in one of the following formats:\n - Full tenant code. Example: `WFF_j1r~c1o`.\n - Short tenant code. Example: `c1o`.\n\n Use the same format for all tenants. Do not use both formats in one request.\n\n Examples:\n - Full: `tenantCodes=WFF_j1r~c1o,WFF_j1r~e1a,WFF_j1r~i1o`\n - Short: `tenantCodes=c1o,e1a,i1o`\n\n The limit of analytic tenants to return is `1000` if the following fields are not included in the `mask` argument.\n  - `homeAnalysisId`\n  - `homeAnalysisByUserGroup`\n  - `clickThroughLink`\n  - `defaultCurrency`\n\n The limit is `400` if any of the above fields are included in the `mask` or if `mask` is not specified.\n\n **Note:** It is recommended to use the request body for long lists of tenant codes. The specified tenant codes are combined (set union)\n with the `tenantCodes` query parameter if values for both are provided."
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/admin.TenantNamesFilterDTO'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin.TenantManagementAPIListResponseDTO'
+    post:
+      tags:
+      - TenantsV2
+      summary: Add an analytic tenant
+      description: "Prior to processing and loading an analytic tenant's data files, you must provision, or create, that tenant. A\n provisioned analytic tenant is automatically enabled. If the tenant's data is loaded after provisioning, that data\n is immediately accessible by their users.\n\n Create an analytic tenant and identify the\n applications assigned to the tenant. Visier organizes content under a set of modules.\n\n Contact Visier Support to determine the list of modules allocated to you.\n\n **Note:** API requests that contain `homeAnalysisId`, `homeAnalysisByUserGroup`, `clickThroughLink`, or\n `defaultCurrency` take longer to run because they require publishing a project to production."
+      operationId: TenantsV2_CreateTenant
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/admin.TenantManagementAPIUpdateRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin.TenantManagementAPIUpdateResponseDTO'
+  /v2/admin/tenants/{tenantId}:
+    get:
+      tags:
+      - TenantsV2
+      summary: Retrieve an analytic tenant's details
+      description: "Retrieve the details for a specified analytic tenant. Doing so allows you to see the current state\n of the tenant, the content modules assigned to it, and all other relevant details for the tenant."
+      operationId: TenantsV2_TenantInfo
+      parameters:
+      - name: tenantId
+        in: path
+        description: The ID of the tenant to retrieve.
+        required: true
+        schema:
+          type: string
+      - name: mask
+        in: query
+        description: "A list of fields to include in the response, separated by commas. If not specified, includes all fields in the response. Valid values:\n  - `tenantCode`\n  - `tenantDisplayName`\n  - `currentDataVersion`\n  - `traits`\n  - `dataVersionDate`\n  - `provisionDate`\n  - `vanityUrlName`\n  - `status`\n  - `canAdministerOtherTenants`\n  - `industryCode`\n  - `industryInfo`\n  - `purchasedModules`\n  - `manuallyAddedModules`\n  - `embeddableDomains`\n  - `allowedOAuthIdpUrlDomains`\n  - `customProperties`\n  - `ssoInstanceIssuers`\n  - `homeAnalysisId`\n  - `homeAnalysisByUserGroup`\n  - `clickThroughLink`\n  - `clickThroughLinkEnabled`\n  - `defaultCurrency`\n  - `primaryBusinessLocation`\n  - `effectiveIndustryCode`\n  - `companySize`\n\n If `mask` is specified in both request body and on the query string, the effective `mask` is the set union of both inputs."
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/admin.MaskMessage'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin.TenantManagementAPIGetResponseDTO'
+    put:
+      tags:
+      - TenantsV2
+      summary: Update an analytic tenant
+      description: "You may need to update analytic tenants as they grow and as your organization upgrades the content available to them.\n You may also encounter a scenario where an analytic tenant transitions across different industries. To make updates\n to your tenants, use this API.\n\n * To ensure that the analytic tenant receives accurate benchmarks and predictive functionality, update their industry code in the Visier system.\n * To programmatically assign the Home analysis that analytic tenants see at login, use this API to set the default Home analysis for a tenant and specific user groups of that tenant.\n\n You can use this API to update any field on an analytic tenant, except `tenantCode`.\n\n **Note:** API requests that contain `homeAnalysisId`, `homeAnalysisByUserGroup`, `clickThroughLink`, or\n `defaultCurrency` take longer to run because they require publishing a project to production."
+      operationId: TenantsV2_UpdateTenant
+      parameters:
+      - name: tenantId
+        in: path
+        description: The ID of the tenant to update.
+        required: true
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/admin.TenantManagementAPIUpdateRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin.TenantManagementAPIUpdateResponseDTO'
+    delete:
+      tags:
+      - TenantsV2
+      summary: Deprovision an analytic tenant
+      description: "<em>Warning! Deprovisioning an analytic tenant is not reversible.</em>\n Before deprovisioning, you must disable an analytic tenant. For more information, see **`/v1/admin/tenants/{tenantId}/disable`**.\n\n This API removes an analytic tenant permanently from the Visier system. If you are unsure whether an analytic tenant\n may be re-enabled on any of the Visier modules at any time, you may instead want to disable the analytic tenant.\n\n If successful, the response returns the status \"Deprovisioned\". This indicates that the tenant is scheduled for\n deprovisioning, which may take several days to complete."
+      operationId: TenantsV2_DeleteTenant
+      parameters:
+      - name: tenantId
+        in: path
+        description: "The ID of the tenant. For example, WFF_{XXX}~{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the analytic tenant code."
+        required: true
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin.TenantStatusAPIDTO'
+components:
+  schemas:
+    admin.MaskMessage:
+      type: object
+      properties:
+        mask:
+          type: string
+          description: "A list of fields to include in the response, separated by commas. If not specified, includes all fields in the response. Valid values:\n  - `tenantCode`\n  - `tenantDisplayName`\n  - `currentDataVersion`\n  - `traits`\n  - `dataVersionDate`\n  - `provisionDate`\n  - `vanityUrlName`\n  - `status`\n  - `canAdministerOtherTenants`\n  - `industryCode`\n  - `industryInfo`\n  - `purchasedModules`\n  - `manuallyAddedModules`\n  - `embeddableDomains`\n  - `allowedOAuthIdpUrlDomains`\n  - `customProperties`\n  - `ssoInstanceIssuers`\n  - `homeAnalysisId`\n  - `homeAnalysisByUserGroup`\n  - `clickThroughLink`\n  - `clickThroughLinkEnabled`\n  - `defaultCurrency`\n  - `primaryBusinessLocation`\n  - `effectiveIndustryCode`\n  - `companySize`\n\n If `mask` is specified in both request body and on the query string, the effective `mask` is the set union of both inputs."
+    admin.TenantDetailsTraitsDTO:
+      type: object
+      properties:
+        aggregationRights:
+          type: boolean
+          description: If `true`, the tenant is opted in to Visier's data aggregation program, such as Visier Benchmarks. Default is `false`. If `false`, `aggregationRights` isn't returned in the response.
+        tenantType:
+          enum:
+          - ROOT_ADMIN
+          - ROOT
+          - BLUEPRINT
+          - ENTERPRISE
+          - ENTERPRISE_ROOT
+          - BENCHMARK
+          - PARTNER
+          - PARTNER_CUSTOMER
+          - SMB_BP
+          - SMB_CUSTOMER
+          - UNKNOWN
+          type: string
+          description: "The tenant's type. Valid values:\n * `ENTERPRISE`: An analytic tenant managed by Visier that represents an enterprise customer's instance of Visier.\n * `PARTNER`: An administrating tenant that manages one or more analytic tenants. Partner tenants are managed by non-Visier administrators, such as an embedded partner or system integration partner.\n * `PARTNER_CUSTOMER`: An analytic tenant managed by a partner that represents the partner's customer's instance of Visier."
+          format: enum
+        dataProfileType:
+          enum:
+          - Regular
+          - Integration
+          - Demo
+          - Cat
+          - Test
+          - DataProfileUnknown
+          - ProductIntelligence
+          type: string
+          description: "The tenant's data profile, which designates how the tenant's data is used. Selecting the correct data profile is critical for accurately measuring adoption, assessing system performance, and accurate billing. Valid values:\n * `Regular`: An analytic tenant that hosts data for customer business decisions. `Regular` tenants receive monitoring for business data quality and the highest priority for system performance.\n * `Integration`: An analytic tenant that hosts data for development, staging, and testing. Customers do not use data in this tenant to make business decisions.\n * `Demo`: An analytic tenant that hosts data for demonstrations and training. `Demo` tenants receive the highest priority for system performance, but no monitoring for business data quality. Customers do not use data in this tenant to make business decisions.\n * `Cat`: A consolidated analytics tenant for aggregating data from multiple analytic tenants in a single tenant.\n * `Test`: An analytic tenant that hosts data for testing. Customers do not use data in this tenant to make business decisions.\n * `ProductIntelligence`: A Product Intelligence tenant for cross-tenant analysis."
+          format: enum
+      description: "The tenant's traits, including aggregation rights, tenant type, and data profile type.\n As workaround Due to sbt setup limitations this has been duplicated to components/data_services/modules/data_services-dto/src/main/protobuf/visier/dataservices/tenants/transfers/TenantDetailsTraits.proto\n Please make sure any change to this DTO (and enums) is also reflected in the above file."
+    admin.TenantNamesFilterDTO:
+      type: object
+      properties:
+        tenantCodes:
+          type: array
+          items:
+            type: string
+          description: "The tenants to retrieve details for. Specify tenant codes in one of the following formats:\n - Full tenant code. Example: `WFF_j1r~c7o`.\n - Short tenant code. Example: `c1o`.\n\n Use the same format for all tenants. Do not use both formats in one request.\n The limit of analytic tenants to return is `1000` if the following fields are not included in the `mask` argument.\n  - `homeAnalysisId`\n  - `homeAnalysisByUserGroup`\n  - `clickThroughLink`\n  - `defaultCurrency`\n\n The limit is `400` if any of the above fields are included in the `mask` or if `mask` is not specified."
+        mask:
+          type: string
+          description: "A list of fields to include in the response, separated by commas. If not specified, includes all fields in the response. Valid values:\n  - `tenantCode`\n  - `tenantDisplayName`\n  - `currentDataVersion`\n  - `traits`\n  - `dataVersionDate`\n  - `provisionDate`\n  - `vanityUrlName`\n  - `status`\n  - `canAdministerOtherTenants`\n  - `industryCode`\n  - `industryInfo`\n  - `purchasedModules`\n  - `manuallyAddedModules`\n  - `embeddableDomains`\n  - `allowedOAuthIdpUrlDomains`\n  - `customProperties`\n  - `ssoInstanceIssuers`\n  - `homeAnalysisId`\n  - `homeAnalysisByUserGroup`\n  - `clickThroughLink`\n  - `clickThroughLinkEnabled`\n  - `defaultCurrency`\n  - `primaryBusinessLocation`\n  - `effectiveIndustryCode`\n  - `companySize`\n\n If `mask` is specified in both request body and on the query string, the effective `mask` is the set union of both inputs."
+      description: Optionally, specify the tenants to retrieve. The specified tenant codes are combined (set union) with the `tenantCodes` query parameter.
+    admin.BusinessLocationDTO:
+      type: object
+      properties:
+        countryCode:
+          type: string
+          description: The country in which the business is located or business is performed. The country code must follow ISO 3166 standards in alpha-2 format (two-letter code).
+        postalCode:
+          type: string
+          description: The postal code associated with the business location. Cannot be blank.
+      description: The location of operations or where business is performed.
+    admin.TenantStatusAPIDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The unique identifier for the analytic tenant.
+        status:
+          type: string
+          description: Whether the tenant is enabled or disabled.
+        tenantDisplayName:
+          type: string
+          description: The identifiable tenant name that is displayed within Visier. For example, "Callisto".
+        canAdministerOtherTenants:
+          type: boolean
+          description: If true, the tenant is an administrating tenant.
+    admin.TenantManagementAPIListResponseDTO:
+      type: object
+      properties:
+        tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.TenantManagementAPIGetResponseDTO'
+          description: A list of objects representing all the analytic tenants.
+        limit:
+          type: integer
+          description: The limit of analytic tenants to return.
+          format: uint32
+        start:
+          type: integer
+          description: The starting index to retrieve values from, also known as offset.
+          format: uint32
+    admin.TenantManagementAPIUpdateRequestDTO:
+      type: object
+      properties:
+        tenantCode:
+          maxLength: 50
+          minLength: 1
+          pattern: ^[a-zA-Z][a-zA-Z0-9]+$
+          type: string
+          description: 'An alphanumeric string that represents a unique identifier for the analytic tenant. Required if creating new tenants. Example: If the full tenant code is `WFF_j1r~c7o`, specify `c7o` in this field. The maximum is 50 characters for the full tenant code, including the automatically prefixed administrating tenant code (`WFF_j1r~` in the example).'
+        tenantDisplayName:
+          minLength: 1
+          type: string
+          description: A new display name to assign to the analytic tenant. Required if creating new tenants.
+        tenantShortName:
+          deprecated: true
+          type: string
+          description: This will no longer be available as of Spring 2028. A new short name to assign to the tenant.
+        vanityUrlName:
+          type: string
+          description: A new vanity name to assign to the tenant. Omit for new Embedded analytic tenants.
+        industryCode:
+          minLength: 1
+          type: integer
+          description: "The North American Industry Classification System (NAICS) code for the industry in which the business operates.  Provide a value of 0 to use the business unit industry codes in the data or if the industry code is unknown. We highly recommend that you provide an industry code here or with the business units in the data to take advantage of all of Visier’s features.\n\n Required if creating new tenants."
+          format: uint32
+        primaryBusinessLocation:
+          allOf:
+          - $ref: '#/components/schemas/admin.BusinessLocationDTO'
+          description: The primary location of operations or where business is performed. This field is optional.
+        purchasedModules:
+          type: array
+          items:
+            type: string
+          description: "A comma-separated collection of strings that represent the Visier modules assigned to the new analytic tenant. Required if creating new tenants.\n\n To get module object names, contact your Partner Success Manager."
+        embeddableDomains:
+          type: array
+          items:
+            type: string
+          description: A comma-separated list of strings that represent the URLs, or domains, in which Visier can be embedded. If domains at the administrating tenant level match the domains at the analytic tenant level, you do not need to include a domain for each analytic tenant. This is optional.
+        customProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.CustomPropertyDTO'
+          description: A list of objects that represent different customizable properties for the analytic tenant. This is optional.
+        ssoInstanceIssuers:
+          type: array
+          items:
+            type: string
+          description: A comma-separated list of strings that represent the issuers for the SSO providers that can authenticate this tenant. This is optional.
+        homeAnalysisId:
+          type: string
+          description: "The unique ID of the analysis to display for this tenant when a user logs in. This is optional. Causes the API request to take longer because it must publish a project to production.\n\n Retrieve the ID by opening an analysis in the production version of a tenant and copying the string after the last forward slash (/) in the URL. For example: `https://jupiter.visier.com/hr/prod/appcontainer?previewId=-eZPm8xvo3SUMpD4Q5pdE-6mCj9CQ9K699XgqRGwtOxagH5x2IzDFawlWn3hYqFEfU7nP0YK9ASEzmrNfAihGg..&previewType=Production#/analytics/myanalyses/8a4c1d4f-eb61-4da0-9e5b-55bef757c30e`.\n\n The `homeAnalysisID` is `8a4c1d4f-eb61-4da0-9e5b-55bef757c30e`. Alternatively, retrieve the ID by copying the `Analysis ID` or `contentId` found by following the `Embed a Visualization` documentation."
+        homeAnalysisByUserGroup:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.HomeAnalysisByUserGroupDTO'
+          description: A list of objects representing the analysis to display to specific user groups when users log in. This is optional. Causes the API request to take longer because it must publish a project to production.
+        updateAction:
+          enum:
+          - MERGE
+          - REPLACE
+          type: string
+          description: "Specifies the way you want to update values. Default is MERGE.\n Valid values:\n - `MERGE`: Combine the existing values with the new values.\n - `REPLACE`: Remove existing values and let the new values take their place."
+          format: enum
+        enabled:
+          type: boolean
+          description: If true, the tenant is enabled. Enabled tenants have access to Visier visualizations.
+        clickThroughLink:
+          type: string
+          description: A custom URL to redirect users into your portal to see the relevant content. This URL is used for links that are shared by and with your users through the sharing capability, embedded visualizations, or email content. This is optional. Causes the API request to take longer because it must publish a project to production.
+        defaultCurrency:
+          type: string
+          description: The default currency to show in the application for the tenant.
+        allowedOAuthIdpUrlDomains:
+          type: array
+          items:
+            type: string
+          description: A comma-separated list of strings that represent the URLs, or domains, that are allowed in the idp_url OAuth parameter. This is optional.
+        traits:
+          allOf:
+          - $ref: '#/components/schemas/admin.TenantDetailsTraitsDTO'
+          description: The tenant's traits, including aggregation rights, tenant type, and data profile type. To set an analytic tenant's traits, contact Visier Technical Support.
+        forceLoginsWithSessionBasedPermissions:
+          type: boolean
+          description: If `true`, user sign in must also provide a `SessionRepoId`. Only valid if `SessionBasedPermissions` feature is enabled. Default is `false`.
+        industryInfo:
+          allOf:
+          - $ref: '#/components/schemas/admin.TenantIndustryInfoDTO'
+          description: The tenant's industry information, including the industry code and classification type. Valid classification systems are `NAICS` and `NACE`.
+    admin.CustomPropertyDTO:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    admin.TenantManagementAPIUpdateResponseDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The unique identifier of the newly created analytic tenant.
+        tenantDisplayName:
+          type: string
+          description: A comma-separated collection of strings that represent the Visier modules assigned to the new analytic tenant.
+        industryCode:
+          type: integer
+          description: The 6-digit NAICS code for the industry to which the analytic tenant belongs.
+          format: uint32
+        primaryBusinessLocation:
+          allOf:
+          - $ref: '#/components/schemas/admin.BusinessLocationDTO'
+          description: The primary location of operations or where business is performed. If undefined, it is omitted from the response.
+        purchasedModules:
+          type: array
+          items:
+            type: string
+          description: A comma-separated collection of strings that represent the Visier modules assigned to the new analytic tenant.
+        embeddableDomains:
+          type: array
+          items:
+            type: string
+          description: A comma-separated list of strings that represent the URLs, or domains, in which Visier can be embedded. If domains at the administrating tenant level match the domains at the analytic tenant level, you do not need to include a domain for each analytic tenant.
+        customProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.CustomPropertyDTO'
+          description: A list of objects that represent different customizable properties for the analytic tenant.
+        ssoInstanceIssuers:
+          type: array
+          items:
+            type: string
+          description: A comma-separated list of strings that represent the issuers for the SSO providers that can authenticate this tenant.
+        homeAnalysisId:
+          type: string
+          description: "The unique ID of the analysis to display for this tenant when a user logs in. This is optional.\n\n Retrieve the ID by opening an analysis in the production version of a tenant and copying the string after the last forward slash (/) in the URL. For example: https://jupiter.visier.com/hr/prod/appcontainer?previewId=-eZPm8xvo3SUMpD4Q5pdE-6mCj9CQ9K699XgqRGwtOxagH5x2IzDFawlWn3hYqFEfU7nP0YK9ASEzmrNfAihGg..&previewType=Production#/analytics/myanalyses/`8a4c1d4f-eb61-4da0-9e5b-55bef757c30e`.\n The `homeAnalysisID` is `8a4c1d4f-eb61-4da0-9e5b-55bef757c30e`.\n\n Alternatively, retrieve the ID by copying the `Analysis ID` or `contentId` found by following the `Embed a Visualization` documentation."
+        homeAnalysisByUserGroup:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.HomeAnalysisByUserGroupDTO'
+          description: A list of objects representing the analysis to display to specific user groups when users log in.
+        status:
+          type: string
+          description: Whether the tenant is enabled or disabled. Enabled tenants have access to Visier visualizations.
+        clickThroughLink:
+          type: string
+          description: A custom URL to redirect users into your portal to see the relevant content. This URL is used for links that are shared by and with your users through the sharing capability, embedded visualizations, or email content.
+        vanityUrlName:
+          type: string
+          description: The name of the administrating tenant used in Visier URLs.
+        defaultCurrency:
+          type: string
+          description: The default currency to show in the application for the tenant.
+        allowedOAuthIdpUrlDomains:
+          type: array
+          items:
+            type: string
+          description: A comma-separated list of strings that represent the URLs, or domains, that are allowed in the idp_url OAuth parameter. This is optional.
+        forceLoginsWithSessionBasedPermissions:
+          type: boolean
+          description: If `true`, user sign in must also provide a `SessionRepoId`. Only set if `SessionBasedPermissions` feature is enabled. Default is `false`.
+    admin.TenantManagementAPIGetResponseDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant code of the analytic tenant. For example, "WFF_j1r~i1o"
+        tenantDisplayName:
+          type: string
+          description: An identifiable tenant name that is displayed within Visier. For example, "Callisto".
+        status:
+          type: string
+          description: Whether the tenant is enabled or disabled.
+        provisionDate:
+          type: string
+          description: The date that the tenant was created.
+        currentDataVersion:
+          type: string
+          description: The data version ID that the tenant is using.
+        dataVersionDate:
+          type: string
+          description: The date that the data version was published to production.
+        purchasedModules:
+          type: array
+          items:
+            type: string
+          description: The modules assigned to the analytic tenant.
+        industryCode:
+          type: integer
+          description: The 6-digit NAICS code for the industry to which the analytic tenant belongs.
+          format: uint32
+        primaryBusinessLocation:
+          allOf:
+          - $ref: '#/components/schemas/admin.BusinessLocationDTO'
+          description: The primary location of operations or where business is performed. If undefined, it is omitted from the response.
+        canAdministerOtherTenants:
+          type: boolean
+          description: If true, the tenant is an administrating tenant.
+        embeddableDomains:
+          type: array
+          items:
+            type: string
+          description: A comma-separated list of strings that represent the URLs, or domains, in which Visier can be embedded.
+        customProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.CustomPropertyDTO'
+          description: A set of key-value pairs that represent different customizable properties for the analytic tenant.
+        ssoInstanceIssuers:
+          type: array
+          items:
+            type: string
+          description: A comma-separated list of strings that represent the issuers for the SSO providers that can authenticate this tenant.
+        vanityUrlName:
+          type: string
+          description: The name of the administrating tenant used in Visier URLs.
+        homeAnalysisId:
+          type: string
+          description: The unique ID of the analysis that's displayed for this tenant when a user logs in.
+        homeAnalysisByUserGroup:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.HomeAnalysisByUserGroupDTO'
+          description: A list of objects representing the analysis displayed to specific user groups when users log in.
+        clickThroughLink:
+          type: string
+          description: The custom URL to redirect users into your portal to see the relevant content. This URL is used for links that are shared by and with your users through the sharing capability, embedded visualizations, or email content.
+        clickThroughLinkEnabled:
+          type: string
+          description: Whether the click-through link is enabled or disabled.
+        defaultCurrency:
+          type: string
+          description: The default currency to show in the application for the tenant.
+        allowedOAuthIdpUrlDomains:
+          type: array
+          items:
+            type: string
+          description: A comma-separated list of strings that represent the URLs, or domains, that are allowed in the idp_url OAuth parameter.
+        effectiveIndustryCode:
+          type: integer
+          description: The 6-digit NAICS code for the industry to which the analytic tenant belongs. This is calculated from industry codes in the tenant's data if the tenant has business unit data. Not returned if the effective industry code cannot be calculated.
+          format: int32
+        companySize:
+          type: integer
+          description: The latest headcount value for the analytic tenant. Not returned if no headcount data is available.
+          format: int32
+        traits:
+          allOf:
+          - $ref: '#/components/schemas/admin.TenantDetailsTraitsDTO'
+          description: The tenant's traits, including aggregation rights, tenant type, and data profile type.
+        industryInfo:
+          allOf:
+          - $ref: '#/components/schemas/admin.TenantIndustryInfoDTO'
+          description: The tenant's industry information, including the industry code and classification type. Valid classification systems are `NAICS` and `NACE`.
+        manuallyAddedModules:
+          type: array
+          items:
+            type: string
+          description: The object names of the modules manually added to the analytic tenant. Manually added modules are not part of a purchased module bundle.
+    admin.HomeAnalysisByUserGroupDTO:
+      type: object
+      properties:
+        userGroupId:
+          type: string
+          description: The user group ID.
+        homeAnalysisId:
+          type: string
+          description: The unique ID of the analysis to show for this user group when a user logs in.
+    admin.TenantIndustryInfoDTO:
+      type: object
+      properties:
+        industryCode:
+          type: string
+          description: The standardized code that describes the tenant's industry within a particular industry classification system. We highly recommend that you provide an industry code here or with the business units in the data to take advantage of all of Visier's features.
+        industryClassificationType:
+          enum:
+          - UNKNOWN_CLASSIFICATION
+          - NAICS
+          - NACE
+          type: string
+          description: "The classification system the industry code belongs to. Valid values:\n * `NAICS`: The industry classification system of Canada, Mexico, and the United States.\n * `NACE`: The industry classification system of the European Union."
+          format: enum
+      description: A tenant's industry information, including the industry code and classification type.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: administration
+  tags:
+  - Projects
+  - ProductionVersions
+  - UsersV3
+  - UsersV2
+  - UserGroupsV2
+  - UsersV1
+  - Profiles
+  - Permissions
+  - TenantsV2
+  - TenantsV1
+  - ConsolidatedAnalytics
+  - Sources
+  - SystemStatus
+  - EmailDomains
+  - EncryptionKeys
+  - NetworkSubnets
+  - SidecarSolutions
+  - ReleaseVersionConfiguration
+  - VeeConfiguration

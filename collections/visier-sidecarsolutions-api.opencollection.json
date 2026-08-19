@@ -1,0 +1,109 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Administration Sidecar Solutions API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SidecarSolutions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a sidecar solution's settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/admin/sidecar-app-configs/:applicationId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the solution to configure."
+              }
+            ]
+          },
+          "docs": "Retrieve the settings for a specific sidecar solution. You must know the solution ID of your sidecar solution. To get the ID, contact Visier Technical Support.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Update a sidecar solution's settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1alpha/admin/sidecar-app-configs/:applicationId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the solution to configure."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a sidecar solution's settings. The response returns the settings after updating. When updating setting, we recommend that you first retrieve the existing settings using `GET`. You can use the `GET` response in your `PUT` request definition.\n\n In `PUT` requests, the definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed.\n\n <br>**Note:** <em>This API is in **alp"
+        },
+        {
+          "info": {
+            "name": "Delete a sidecar solution's settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1alpha/admin/sidecar-app-configs/:applicationId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the solution to configure."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete the settings for a sidecar solution. This deletes all the settings for the solution.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

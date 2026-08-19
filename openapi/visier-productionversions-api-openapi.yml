@@ -1,0 +1,302 @@
+openapi: 3.2.0
+info:
+  title: Visier Administration Production Versions API
+  description: Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: ProductionVersions
+  x-displayName: Production Versions
+  description: 'Use this API to retrieve information about data versions that were published to production.
+
+    In Visier, production is the version of Visier available to your end users.'
+paths:
+  /v1/admin/production-versions:
+    get:
+      tags:
+      - ProductionVersions
+      summary: Retrieve a list of all production versions
+      description: Retrieve a list of all projects that were published to production, ordered from latest published to earliest published.
+      operationId: ProductionVersions_GetProductionVersions
+      parameters:
+      - name: limit
+        in: query
+        description: The maximum number of production versions to return. Default is 400.
+        schema:
+          type: integer
+          format: int32
+      - name: start
+        in: query
+        description: The starting index of the first production version to return. Default is 0.
+        schema:
+          type: integer
+          format: int32
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.GetProductionVersionsAPIResponseDTO'
+    post:
+      tags:
+      - ProductionVersions
+      summary: Perform an operation on production versions
+      description: "Perform operations on production versions, such as exporting a production project's committed changes. \n \n If exporting, please specify `Accept: application/zip, application/json` in the header. The API returns exported changes in ZIP format and error messages in JSON format. If your request returns an error and it doesn't accept `application/json`, you will receive an HTTP 406 status code instead of the appropriate error response body."
+      operationId: ProductionVersions_PostProductionVersions
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.ProductionVersionsAPIOperationRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.ProductionVersionsAPIOperationResponseDTO'
+  /v1/admin/production-versions/{productionVersionId}:
+    post:
+      tags:
+      - ProductionVersions
+      summary: Perform an operation on a production version
+      description: "Perform operations on a specific production version. The following operations are supported:\n * `rollBackTo`: Create a project that rolls back the production version to the specified version. The project contains uncommitted changes that reverse the published versions after the target production version."
+      operationId: ProductionVersions_PostProductionVersion
+      parameters:
+      - name: productionVersionId
+        in: path
+        description: The production version to use as the target of the operation; for example, the production version to roll back to for the `rollBackTo` operation.
+        required: true
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.ProductionVersionAPIOperationRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.ProductionVersionAPIOperationResponseDTO'
+components:
+  schemas:
+    servicing.ExportProductionVersionsAPIOperationParametersDTO:
+      type: object
+      properties:
+        startVersion:
+          type: string
+          description: The unique identifier of the version to start exporting versions from. The range is inclusive.
+        endVersion:
+          type: string
+          description: The unique identifier of the version to stop exporting versions at. The range is inclusive.
+        excludedVersions:
+          type: array
+          items:
+            type: string
+          description: A list of versions between `startVersion` and `endVersion` to exclude.
+    servicing.ProductionVersionsAPIOperationRequestDTO:
+      type: object
+      properties:
+        operation:
+          enum:
+          - unknownProductionVersionsAPIOperation
+          - export
+          type: string
+          description: "The operation to perform. Valid values:\n * `export`: Export the project changes of the requested production versions and their related files, such as any Guidebook images. If successful, a ZIP file is returned containing any relevant image files and a JSON file with the production project changes."
+          format: enum
+        exportParameters:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExportProductionVersionsAPIOperationParametersDTO'
+          description: The parameters for the `export` option, such as the production version to start exporting versions from. Required for `export` operations.
+    servicing.ProductionVersionAPIOperationRequestDTO:
+      type: object
+      properties:
+        operation:
+          enum:
+          - unknownProductionVersionAPIOperation
+          - rollBackTo
+          type: string
+          description: "The operation to perform. Valid values:\n * `rollBackTo`: Create a project that rolls back the production version to the specified version. The project contains uncommitted changes that reverse the published versions after the target production version."
+          format: enum
+    servicing.ExportProductionVersionsAPIOperationResponseDTO:
+      type: object
+      properties: {}
+    servicing.GetProductionVersionsAPIResponseDTO:
+      type: object
+      properties:
+        publishedVersions:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ProjectDTO'
+          description: A list of projects that were published to production.
+    servicing.ProductionVersionsAPIOperationResponseDTO:
+      type: object
+      properties:
+        export:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExportProductionVersionsAPIOperationResponseDTO'
+          description: The result of the `export` operation.
+    servicing.ProjectDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the project. Omit when creating a new project.
+        name:
+          type: string
+          description: An identifiable project name to display in Visier.
+        description:
+          type: string
+          description: A description of the project.
+        releaseVersion:
+          type: string
+          description: The release version of the project.
+        ticketNumber:
+          type: string
+          description: The change management ticket number of the project.
+        versionNumber:
+          type: integer
+          description: The version number of the project.
+          format: int32
+        capabilities:
+          type: array
+          items:
+            enum:
+            - canRead
+            - canWrite
+            - canShare
+            - owner
+            type: string
+            format: enum
+          description: "The current user's capabilities for the project. Users with `canWrite`, `canShare`, or `owner` capabilities can add and commit changes to the project.\n **canRead**: The project has been shared to the user with `View` access.\n **canWrite**: The project has been shared to the user with `Edit` access.\n **canShare**: The project has been shared to the user with `Share` access.\n **owner**: The user is the owner of the project.\n Omit when creating a new project."
+        projectType:
+          enum:
+          - Standard
+          - Prototype
+          - UnknownType
+          type: string
+          description: The type of the project. Omit when creating a new project.
+          format: enum
+    servicing.ProductionVersionAPIOperationResponseDTO:
+      type: object
+      properties:
+        rollBackTo:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ProjectDTO'
+          description: The project created by the `rollBackTo` operation.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: administration
+  tags:
+  - Projects
+  - ProductionVersions
+  - UsersV3
+  - UsersV2
+  - UserGroupsV2
+  - UsersV1
+  - Profiles
+  - Permissions
+  - TenantsV2
+  - TenantsV1
+  - ConsolidatedAnalytics
+  - Sources
+  - SystemStatus
+  - EmailDomains
+  - EncryptionKeys
+  - NetworkSubnets
+  - SidecarSolutions
+  - ReleaseVersionConfiguration
+  - VeeConfiguration

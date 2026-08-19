@@ -1,0 +1,182 @@
+openapi: 3.2.0
+info:
+  title: Visier Administration Email Domains API
+  description: Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: EmailDomains
+  x-displayName: Email Domains
+  description: 'Manage the list of user email address domains that are allowed in your tenant.
+
+    <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
+paths:
+  /v1alpha/admin/email-domains:
+    get:
+      tags:
+      - EmailDomains
+      summary: Retrieve a list of allowed email domains
+      description: "Retrieve the full list of allowed email domains.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: EmailDomains_ListAllowedEmailDomains
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin.EmailDomainsDTO'
+    put:
+      tags:
+      - EmailDomains
+      summary: Add domains to the list of allowed domains
+      description: "Add email address domains to the allowed domains list. The response returns an updated list of allowed email domains.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: EmailDomains_AddAllowedEmailDomains
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/admin.EmailDomainsDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin.EmailDomainsDTO'
+    delete:
+      tags:
+      - EmailDomains
+      summary: Remove domains from the list of allowed domains
+      description: "Delete email address domains from the allowed domains list. The response returns an updated list of allowed email domains.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: EmailDomains_DeleteAllowedEmailDomains
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/admin.DeleteEmailDomainsDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin.DeleteEmailDomainsDTO'
+components:
+  schemas:
+    admin.EmailDomainsDTO:
+      type: object
+      properties:
+        domains:
+          type: array
+          items:
+            type: string
+          description: The list of allowed email address domains.
+    admin.DeleteEmailDomainsDTO:
+      type: object
+      properties:
+        domains:
+          type: array
+          items:
+            type: string
+          description: The list of allowed email address domains.
+        confirmNotAllowedDomain:
+          type: boolean
+          description: "If `true`, allows deletion of the requester's own domain when using credential-based sign in.\n If `false`, prevents deletion of the requester's own domain when using credential-based sign in.\n This setting only applies to credential-based sign in, not to single sign-on (SSO) unless used in API calls."
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: administration
+  tags:
+  - Projects
+  - ProductionVersions
+  - UsersV3
+  - UsersV2
+  - UserGroupsV2
+  - UsersV1
+  - Profiles
+  - Permissions
+  - TenantsV2
+  - TenantsV1
+  - ConsolidatedAnalytics
+  - Sources
+  - SystemStatus
+  - EmailDomains
+  - EncryptionKeys
+  - NetworkSubnets
+  - SidecarSolutions
+  - ReleaseVersionConfiguration
+  - VeeConfiguration

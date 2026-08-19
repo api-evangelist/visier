@@ -1,0 +1,128 @@
+openapi: 3.2.0
+info:
+  title: Visier Data Out Vee V2 API
+  description: Visier APIs for getting data out of Visier, such as aggregate data and data version information.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: VeeV2
+  x-displayName: Vee V2
+  description: Use Vee through Visier APIs, such as getting sample questions. Vee V2 improves upon Vee V1 by aligning response field names with the Vee UI.
+paths:
+  /v2/vee/sample-questions:
+    get:
+      tags:
+      - VeeV2
+      summary: Retrieve a list of sample questions to ask Vee
+      description: "Get a list of sample questions to help you start using Vee. The response returns a list of questions that you can ask Vee, such as \"What is the turnover rate?\".\n You may occasionally encounter a sample question that can't be answered due to data availability or your data access"
+      operationId: VeeV2_VeeSampleQuestions
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analysis.common.VeeSampleQuestionLibraryV2DTO'
+components:
+  schemas:
+    analysis.common.VeeSampleQuestionLibraryV2DTO:
+      type: object
+      properties:
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/analysis.common.VeeSampleQuestionV2DTO'
+          description: A list of sample questions to help your users start using Vee.
+      description: A list of sample questions to ask Vee.
+    analysis.common.VeeSampleQuestionV2DTO:
+      type: object
+      properties:
+        question:
+          type: string
+          description: A question in plain language.
+        questionId:
+          type: string
+          description: The unique identifier of the sample question.
+        categoryId:
+          type: string
+          description: The unique identifier of the question category.
+        isSpotlightedForUser:
+          type: boolean
+          description: If `true`, the sample question is spotlighted for at least one of the user's user groups.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: data out
+  tags:
+  - DataQuery
+  - DataVersionExport
+  - VeeV1
+  - VeeV2
+  - Search
+  - SourceFilesDownload
+  - Reporting
+  - DataExportConnectorsAPI

@@ -1,0 +1,252 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Administration Profiles API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of all profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/profiles",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get a list of all available profiles. For administrating tenants,\n this retrieves all administrating tenant profiles."
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of analytic tenant profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/profiles/accessible-tenants"
+          },
+          "docs": "Retrieve a list of profiles available for analytic tenants.\n\n **Note:** Administrating tenants only."
+        },
+        {
+          "info": {
+            "name": "Retrieve the details of an analytic tenant profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/profiles/accessible-tenants/:profileId",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the profile to retrieve details for."
+              }
+            ]
+          },
+          "docs": "Get the details of an analytic tenant profile.\n\n **Note:** Administrating tenants only."
+        },
+        {
+          "info": {
+            "name": "Assign an analytic tenant profile to administrating tenant users",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/admin/profiles/accessible-tenants/:profileId/assign",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the profile to assign."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assign an analytic tenant profile to a list of administrating tenant users\n for a list of analytic tenants.\n\n **Note:**\n  - Administrating tenants only.\n  - You can revoke a profile from a user with this request by updating the validityEndTime to be\n    \"less than\" the current time (that is, in the past)."
+        },
+        {
+          "info": {
+            "name": "Remove an analytic tenant profile from administrating tenant users",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/admin/profiles/accessible-tenants/:profileId/remove",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the profile to remove."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove an analytic tenant profile from a list of administrating tenant users for a list of analytic tenants.\n\n **Note:** Administrating tenants only."
+        },
+        {
+          "info": {
+            "name": "Retrieve the details of a profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/profiles/:profileId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the profile to retrieve details for."
+              }
+            ]
+          },
+          "docs": "Get the details of a specific profile. For administrating tenants, this retrieves\n the details of administrating tenant profiles."
+        },
+        {
+          "info": {
+            "name": "Assign a profile to a list of users",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/admin/profiles/:profileId/assign",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the profile to assign to a list of users."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assign a profile to a list of users. For administrating tenants,\n this assigns an administrating tenant profile to a list of users."
+        },
+        {
+          "info": {
+            "name": "Remove a profile from a list of users",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/admin/profiles/:profileId/remove",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the profile to remove to a list of users."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove a profile from a list of users. For administrating tenants, this\n removes an administrating tenant profile from a list of users."
+        },
+        {
+          "info": {
+            "name": "Retrieve an administrating tenant user's analytic tenant profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/users/:userId/accessible-tenant-profiles",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user you want to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve a specified user's assigned profiles for analytic tenants.\n\n **Note:** Administrating tenants only."
+        },
+        {
+          "info": {
+            "name": "Retrieve a user's profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/users/:userId/profiles",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user you want to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve a specified user's assigned profiles. For administrating tenants,\n this retrieves a user's administrating tenant profiles."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

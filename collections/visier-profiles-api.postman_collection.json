@@ -1,0 +1,1789 @@
+{
+  "item": [
+    {
+      "id": "be3b304c-f651-48ed-acae-0b1c56bf284e",
+      "name": "Profiles",
+      "description": {
+        "content": "Manage the profiles assigned to users, such as assigning or removing a profile from a list of users and retrieving profile details. Administrating tenant users can manage profiles at the administrating tenant level and analytic tenant level.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fe6d3280-bd6a-4ecc-b6ca-b0dae076f663",
+          "name": "Retrieve a list of all profiles",
+          "request": {
+            "name": "Retrieve a list of all profiles",
+            "description": {
+              "content": "Get a list of all available profiles. For administrating tenants,\n this retrieves all administrating tenant profiles.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4b6acc81-7289-4ceb-93b4-e92e4b93d31a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"profiles\": [\n    {\n      \"profileId\": \"string\",\n      \"displayName\": \"string\",\n      \"capabilities\": [\n        {\n          \"capability\": \"string\",\n          \"accessLevel\": \"string\",\n          \"viewLevel\": \"string\"\n        },\n        {\n          \"capability\": \"string\",\n          \"accessLevel\": \"string\",\n          \"viewLevel\": \"string\"\n        }\n      ],\n      \"additionalCapabilities\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"profileId\": \"string\",\n      \"displayName\": \"string\",\n      \"capabilities\": [\n        {\n          \"capability\": \"string\",\n          \"accessLevel\": \"string\",\n          \"viewLevel\": \"string\"\n        },\n        {\n          \"capability\": \"string\",\n          \"accessLevel\": \"string\",\n          \"viewLevel\": \"string\"\n        }\n      ],\n      \"additionalCapabilities\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0870578-e035-41cc-b91a-ebc03c69ca4c",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba5adabb-53ef-4257-86f4-90eccde9cf5d",
+          "name": "Retrieve a list of analytic tenant profiles",
+          "request": {
+            "name": "Retrieve a list of analytic tenant profiles",
+            "description": {
+              "content": "Retrieve a list of profiles available for analytic tenants.\n\n **Note:** Administrating tenants only.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "profiles",
+                "accessible-tenants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "256f6b1d-590b-41b8-bd6d-784e0de5329d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "profiles",
+                    "accessible-tenants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"profiles\": [\n    {\n      \"profileId\": \"string\",\n      \"displayName\": \"string\",\n      \"capabilities\": [\n        {\n          \"capability\": \"string\",\n          \"accessLevel\": \"string\",\n          \"viewLevel\": \"string\"\n        },\n        {\n          \"capability\": \"string\",\n          \"accessLevel\": \"string\",\n          \"viewLevel\": \"string\"\n        }\n      ],\n      \"additionalCapabilities\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"profileId\": \"string\",\n      \"displayName\": \"string\",\n      \"capabilities\": [\n        {\n          \"capability\": \"string\",\n          \"accessLevel\": \"string\",\n          \"viewLevel\": \"string\"\n        },\n        {\n          \"capability\": \"string\",\n          \"accessLevel\": \"string\",\n          \"viewLevel\": \"string\"\n        }\n      ],\n      \"additionalCapabilities\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17eeacba-64cf-46e8-87a6-aa503adba539",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "profiles",
+                    "accessible-tenants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6101e338-b976-445e-ba56-3442f19577ab",
+          "name": "Retrieve the details of an analytic tenant profile",
+          "request": {
+            "name": "Retrieve the details of an analytic tenant profile",
+            "description": {
+              "content": "Get the details of an analytic tenant profile.\n\n **Note:** Administrating tenants only.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "profiles",
+                "accessible-tenants",
+                ":profileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) The ID of the profile to retrieve details for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5e997e2c-93f9-45bf-84d2-be1facf49d79",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "profiles",
+                    "accessible-tenants",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) The ID of the profile to retrieve details for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"profileId\": \"string\",\n  \"displayName\": \"string\",\n  \"capabilities\": [\n    {\n      \"capability\": \"string\",\n      \"accessLevel\": \"string\",\n      \"viewLevel\": \"string\"\n    },\n    {\n      \"capability\": \"string\",\n      \"accessLevel\": \"string\",\n      \"viewLevel\": \"string\"\n    }\n  ],\n  \"additionalCapabilities\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "901b7e4f-78da-4542-80f1-d4df90e46c6a",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "profiles",
+                    "accessible-tenants",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) The ID of the profile to retrieve details for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1930cf0-ca99-4302-a237-d37f8df8b9cc",
+          "name": "Assign an analytic tenant profile to administrating tenant users",
+          "request": {
+            "name": "Assign an analytic tenant profile to administrating tenant users",
+            "description": {
+              "content": "Assign an analytic tenant profile to a list of administrating tenant users\n for a list of analytic tenants.\n\n **Note:**\n  - Administrating tenants only.\n  - You can revoke a profile from a user with this request by updating the validityEndTime to be\n    \"less than\" the current time (that is, in the past).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "profiles",
+                "accessible-tenants",
+                ":profileId",
+                "assign"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) The ID of the profile to assign."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"targetUserIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"targetTenantCodes\": [\n    {\n      \"tenantCode\": \"<string>\",\n      \"forAllChildren\": \"<boolean>\"\n    },\n    {\n      \"tenantCode\": \"<string>\",\n      \"forAllChildren\": \"<boolean>\"\n    }\n  ],\n  \"validityStartTime\": \"<string>\",\n  \"validityEndTime\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c1bbec15-ef65-422a-af5b-c766fa0525d9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "profiles",
+                    "accessible-tenants",
+                    ":profileId",
+                    "assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) The ID of the profile to assign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetUserIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"targetTenantCodes\": [\n    {\n      \"tenantCode\": \"<string>\",\n      \"forAllChildren\": \"<boolean>\"\n    },\n    {\n      \"tenantCode\": \"<string>\",\n      \"forAllChildren\": \"<boolean>\"\n    }\n  ],\n  \"validityStartTime\": \"<string>\",\n  \"validityEndTime\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": true,\n  \"badTenantCodes\": [\n    {\n      \"tenantCode\": \"string\",\n      \"forAllChildren\": true,\n      \"error\": {\n        \"rootCauseId\": \"string\",\n        \"errorCode\": \"string\",\n        \"errorMessage\": \"string\"\n      }\n    },\n    {\n      \"tenantCode\": \"string\",\n      \"forAllChildren\": true,\n      \"error\": {\n        \"rootCauseId\": \"string\",\n        \"errorCode\": \"string\",\n        \"errorMessage\": \"string\"\n      }\n    }\n  ],\n  \"badUserIds\": [\n    {\n      \"userId\": \"string\",\n      \"error\": {\n        \"rootCauseId\": \"string\",\n        \"errorCode\": \"string\",\n        \"errorMessage\": \"string\"\n      }\n    },\n    {\n      \"userId\": \"string\",\n      \"error\": {\n        \"rootCauseId\": \"string\",\n        \"errorCode\": \"string\",\n        \"errorMessage\": \"string\"\n      }\n    }\n  ],\n  \"failedAssignments\": [\n    {\n      \"userId\": \"string\",\n      \"tenantCode\": \"string\",\n      \"forAllChildren\": false,\n      \"error\": {\n        \"rootCauseId\": \"string\",\n        \"errorCode\": \"string\",\n        \"errorMessage\": \"string\"\n      }\n    },\n    {\n      \"userId\": \"string\",\n      \"tenantCode\": \"string\",\n      \"forAllChildren\": false,\n      \"error\": {\n        \"rootCauseId\": \"string\",\n        \"errorCode\": \"string\",\n        \"errorMessage\": \"string\"\n      }\n    }\n  ],\n  \"successfulAssignments\": [\n    {\n      \"userId\": \"string\",\n      \"tenantCode\": \"string\",\n      \"forAllChildren\": true\n    },\n    {\n      \"userId\": \"string\",\n      \"tenantCode\": \"string\",\n      \"forAllChildren\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "262a2d89-39d1-49b0-9029-4f7966c95d6a",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "profiles",
+                    "accessible-tenants",
+                    ":profileId",
+                    "assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) The ID of the profile to assign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetUserIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"targetTenantCodes\": [\n    {\n      \"tenantCode\": \"<string>\",\n      \"forAllChildren\": \"<boolean>\"\n    },\n    {\n      \"tenantCode\": \"<string>\",\n      \"forAllChildren\": \"<boolean>\"\n    }\n  ],\n  \"validityStartTime\": \"<string>\",\n  \"validityEndTime\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28de0cbe-1c9a-4604-833d-66b1e57b420b",
+          "name": "Remove an analytic tenant profile from administrating tenant users",
+          "request": {
+            "name": "Remove an analytic tenant profile from administrating tenant users",
+            "description": {
+              "content": "Remove an analytic tenant profile from a list of administrating tenant users for a list of analytic tenants.\n\n **Note:** Administrating tenants only.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "profiles",
+                "accessible-tenants",
+                ":profileId",
+                "remove"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) The ID of the profile to remove."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"targetUserIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"targetTenantCodes\": [\n    {\n      \"tenantCode\": \"<string>\",\n      \"forAllChildren\": \"<boolean>\"\n    },\n    {\n      \"tenantCode\": \"<string>\",\n      \"forAllChildren\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9165bd09-64d2-479e-8367-33f5a5e3fdf6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "profiles",
+                    "accessible-tenants",
+                    ":profileId",
+                    "remove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) The ID of the profile to remove."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetUserIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"targetTenantCodes\": [\n    {\n      \"tenantCode\": \"<string>\",\n      \"forAllChildren\": \"<boolean>\"\n    },\n    {\n      \"tenantCode\": \"<string>\",\n      \"forAllChildren\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"badTenantCodes\": [\n    {\n      \"tenantCode\": \"string\",\n      \"forAllChildren\": true,\n      \"error\": {\n        \"errorMessage\": \"string\"\n      }\n    },\n    {\n      \"tenantCode\": \"string\",\n      \"forAllChildren\": true,\n      \"error\": {\n        \"errorMessage\": \"string\"\n      }\n    }\n  ],\n  \"badUserIds\": [\n    {\n      \"userId\": \"string\",\n      \"error\": {\n        \"errorMessage\": \"string\"\n      }\n    },\n    {\n      \"userId\": \"string\",\n      \"error\": {\n        \"errorMessage\": \"string\"\n      }\n    }\n  ],\n  \"unaffectedUsers\": [\n    {\n      \"userId\": \"string\"\n    },\n    {\n      \"userId\": \"string\"\n    }\n  ],\n  \"succeeded\": [\n    {\n      \"userId\": \"string\"\n    },\n    {\n      \"userId\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de55ff9e-f607-4059-a36e-345653d44d59",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "profiles",
+                    "accessible-tenants",
+                    ":profileId",
+                    "remove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) The ID of the profile to remove."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetUserIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"targetTenantCodes\": [\n    {\n      \"tenantCode\": \"<string>\",\n      \"forAllChildren\": \"<boolean>\"\n    },\n    {\n      \"tenantCode\": \"<string>\",\n      \"forAllChildren\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "448433f0-771b-446e-b355-57c55fc5ecc3",
+          "name": "Retrieve the details of a profile",
+          "request": {
+            "name": "Retrieve the details of a profile",
+            "description": {
+              "content": "Get the details of a specific profile. For administrating tenants, this retrieves\n the details of administrating tenant profiles.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "profiles",
+                ":profileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) The ID of the profile to retrieve details for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cb0dea41-e72b-4952-88eb-02a5c2f0c129",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "profiles",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) The ID of the profile to retrieve details for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"profileId\": \"string\",\n  \"displayName\": \"string\",\n  \"capabilities\": [\n    {\n      \"capability\": \"string\",\n      \"accessLevel\": \"string\",\n      \"viewLevel\": \"string\"\n    },\n    {\n      \"capability\": \"string\",\n      \"accessLevel\": \"string\",\n      \"viewLevel\": \"string\"\n    }\n  ],\n  \"additionalCapabilities\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76150710-00ff-4ed1-8c65-78505cd2351f",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "profiles",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) The ID of the profile to retrieve details for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32f0f962-6afc-4247-b291-7478052c035b",
+          "name": "Assign a profile to a list of users",
+          "request": {
+            "name": "Assign a profile to a list of users",
+            "description": {
+              "content": "Assign a profile to a list of users. For administrating tenants,\n this assigns an administrating tenant profile to a list of users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "profiles",
+                ":profileId",
+                "assign"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) The ID of the profile to assign to a list of users."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"targetUserIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"validityStartTime\": \"<string>\",\n  \"validityEndTime\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "55da6a84-1630-4a09-9d04-cec244757b41",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "profiles",
+                    ":profileId",
+                    "assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) The ID of the profile to assign to a list of users."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetUserIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"validityStartTime\": \"<string>\",\n  \"validityEndTime\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": false,\n  \"badUserIds\": [\n    {\n      \"userId\": \"string\",\n      \"error\": {\n        \"rootCauseId\": \"string\",\n        \"errorCode\": \"string\",\n        \"errorMessage\": \"string\"\n      }\n    },\n    {\n      \"userId\": \"string\",\n      \"error\": {\n        \"rootCauseId\": \"string\",\n        \"errorCode\": \"string\",\n        \"errorMessage\": \"string\"\n      }\n    }\n  ],\n  \"failedAssignments\": [\n    {\n      \"userId\": \"string\",\n      \"error\": {\n        \"rootCauseId\": \"string\",\n        \"errorCode\": \"string\",\n        \"errorMessage\": \"string\"\n      }\n    },\n    {\n      \"userId\": \"string\",\n      \"error\": {\n        \"rootCauseId\": \"string\",\n        \"errorCode\": \"string\",\n        \"errorMessage\": \"string\"\n      }\n    }\n  ],\n  \"successfulAssignments\": [\n    {\n      \"userId\": \"string\"\n    },\n    {\n      \"userId\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40e6d977-6f08-4960-83b3-5ab4db2389f3",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "profiles",
+                    ":profileId",
+                    "assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) The ID of the profile to assign to a list of users."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetUserIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"validityStartTime\": \"<string>\",\n  \"validityEndTime\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f30134da-79d2-48d1-854a-84def9d10b8e",
+          "name": "Remove a profile from a list of users",
+          "request": {
+            "name": "Remove a profile from a list of users",
+            "description": {
+              "content": "Remove a profile from a list of users. For administrating tenants, this\n removes an administrating tenant profile from a list of users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "profiles",
+                ":profileId",
+                "remove"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) The ID of the profile to remove to a list of users."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"targetUserIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bb0b0a10-92a0-4a7c-9cfe-05af6b8282f3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "profiles",
+                    ":profileId",
+                    "remove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) The ID of the profile to remove to a list of users."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetUserIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"failed\": [\n    {\n      \"userId\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"userId\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"succeeded\": [\n    {\n      \"userId\": \"string\"\n    },\n    {\n      \"userId\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "039c7a40-a6da-4682-a23e-642138cec765",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "profiles",
+                    ":profileId",
+                    "remove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) The ID of the profile to remove to a list of users."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetUserIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e82f8156-c116-43ba-82ea-bc0e1f882c6b",
+          "name": "Retrieve an administrating tenant user's analytic tenant profiles",
+          "request": {
+            "name": "Retrieve an administrating tenant user's analytic tenant profiles",
+            "description": {
+              "content": "Retrieve a specified user's assigned profiles for analytic tenants.\n\n **Note:** Administrating tenants only.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "users",
+                ":userId",
+                "accessible-tenant-profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The ID of the user you want to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a8045984-bb95-480f-9bfa-f02fc1ba2608",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "users",
+                    ":userId",
+                    "accessible-tenant-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user you want to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assignedProfilesForAccessibleTenant\": [\n    {\n      \"profileId\": \"string\",\n      \"displayName\": \"string\",\n      \"tenantCode\": \"string\",\n      \"forAllChildren\": true,\n      \"validityStartTime\": \"string\",\n      \"validityEndTime\": \"string\"\n    },\n    {\n      \"profileId\": \"string\",\n      \"displayName\": \"string\",\n      \"tenantCode\": \"string\",\n      \"forAllChildren\": false,\n      \"validityStartTime\": \"string\",\n      \"validityEndTime\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35c0d2fb-3ab0-410a-9652-9de0db9a265e",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "users",
+                    ":userId",
+                    "accessible-tenant-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user you want to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "104dbdc1-238a-4ee1-b8e1-2ad74f6620cf",
+          "name": "Retrieve a user's profiles",
+          "request": {
+            "name": "Retrieve a user's profiles",
+            "description": {
+              "content": "Retrieve a specified user's assigned profiles. For administrating tenants,\n this retrieves a user's administrating tenant profiles.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "admin",
+                "users",
+                ":userId",
+                "profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The ID of the user you want to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9f7bc094-50a8-43b3-9040-b04a5f10b020",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "users",
+                    ":userId",
+                    "profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user you want to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assignedProfiles\": [\n    {\n      \"profileId\": \"string\",\n      \"displayName\": \"string\",\n      \"validityStartTime\": \"string\",\n      \"validityEndTime\": \"string\",\n      \"capabilities\": [\n        {\n          \"capability\": \"string\",\n          \"accessLevel\": \"string\",\n          \"viewLevel\": \"string\"\n        },\n        {\n          \"capability\": \"string\",\n          \"accessLevel\": \"string\",\n          \"viewLevel\": \"string\"\n        }\n      ],\n      \"additionalCapabilities\": {\n        \"additionalCapabilities\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    {\n      \"profileId\": \"string\",\n      \"displayName\": \"string\",\n      \"validityStartTime\": \"string\",\n      \"validityEndTime\": \"string\",\n      \"capabilities\": [\n        {\n          \"capability\": \"string\",\n          \"accessLevel\": \"string\",\n          \"viewLevel\": \"string\"\n        },\n        {\n          \"capability\": \"string\",\n          \"accessLevel\": \"string\",\n          \"viewLevel\": \"string\"\n        }\n      ],\n      \"additionalCapabilities\": {\n        \"additionalCapabilities\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0dee0a49-9c2f-424f-ab3b-864ead574f8d",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "admin",
+                    "users",
+                    ":userId",
+                    "profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user you want to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b51263c5-6d4b-460b-a177-3779531fda77",
+    "name": "Visier Administration Profiles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.",
+      "type": "text/plain"
+    }
+  }
+}

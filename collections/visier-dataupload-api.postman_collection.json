@@ -1,0 +1,231 @@
+{
+  "item": [
+    {
+      "id": "ae2d3d65-faa1-4acd-b73a-c703146ba3fa",
+      "name": "DataUpload",
+      "description": {
+        "content": "Send data files to Visier. After we receive the data, Visier starts a receiving job and a processing job to process the data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "36eb947b-7570-4dc7-9850-5e8d06ad3c26",
+          "name": "Upload a data file to Visier",
+          "request": {
+            "name": "Upload a data file to Visier",
+            "description": {
+              "content": "Use this API to upload data files to Visier. You can upload ZIP, CSV, XLS, and XLSX filetypes in plaintext or encrypted with Visier's PGP key.\n\n Use of this API requires client redirect. This API redirects requests directly to Visier's upload infrastructure to support long-running uploads. \n To ensure efficient uploading, we recommend that you use an HTTP client that supports the 100 Continue status code.\n\n The maximum file upload size is 500 MB. We recommend using SFTP for larger file sizes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "data",
+                "upload",
+                "files",
+                ":filename"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "filename",
+                  "description": "(Required) The filename of the data file to upload, including the file extension (such as .zip or .csv)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "file"
+            }
+          },
+          "response": [
+            {
+              "id": "4a7dc2c2-8d9f-40d8-a73c-70e04fa4688f",
+              "name": "Redirect to Visier's upload infrastructure.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "data",
+                    "upload",
+                    "files",
+                    ":filename"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filename",
+                      "description": "(Required) The filename of the data file to upload, including the file extension (such as .zip or .csv)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "file"
+                }
+              },
+              "status": "Temporary Redirect (since HTTP/1.1)",
+              "code": 307,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c76fad66-c82d-4820-87d3-84c2bd510e77",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "data",
+                    "upload",
+                    "files",
+                    ":filename"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filename",
+                      "description": "(Required) The filename of the data file to upload, including the file extension (such as .zip or .csv)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "file"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c0861136-c0a2-452f-a303-d26e6a6e58c5",
+    "name": "Visier Data In Data Upload API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for sending data to Visier and running data load jobs.",
+      "type": "text/plain"
+    }
+  }
+}

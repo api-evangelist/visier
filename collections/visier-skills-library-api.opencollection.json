@@ -1,0 +1,281 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skills Intelligence Engine Skills Library API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Skills Library",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get skill details by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/skills/:id",
+            "headers": [
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the skill to retrieve details for.\n"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "If you know the ID of a skill, use this endpoint to retrieve information such as display name, description, Automation Index, Remote Work Index, and alternative names.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of skills",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/skills",
+            "headers": [
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "skillGroupId",
+                "value": "",
+                "type": "query",
+                "description": "Filter only skills that belong to a certain skill group.\n"
+              },
+              {
+                "name": "skillCategoryId",
+                "value": "",
+                "type": "query",
+                "description": "Filter only skills that belong to a certain skill category.\n"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Use this endpoint to retrieve all skills in Visier's Skills Library.\n"
+        },
+        {
+          "info": {
+            "name": "Search skills",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/skills/search",
+            "headers": [
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "term",
+                "value": "",
+                "type": "query",
+                "description": "The term to search for. The search term must be URL encoded and the minimum length is 3 characters.\n"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a list of skills that match a specified search term.\n"
+        },
+        {
+          "info": {
+            "name": "Extract skills from text",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/skills/extract",
+            "headers": [
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Extract the relevant skills from text such as job descriptions and course outlines.\n"
+        },
+        {
+          "info": {
+            "name": "Match a skill set to a group of skill sets (targets)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/skills/match",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Find the best match between a skill set and a group of skill sets (targets). The response returns a ranking of the targets with the best match appearing at the top of the list.\n"
+        },
+        {
+          "info": {
+            "name": "Get skill group details by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/skill-groups/:id",
+            "headers": [
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the skill group to retrieve details for.\n"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "If you know the ID of a skill group, use this endpoint to retrieve information such as display name, description, Automation Index, Remote Work Index, and alternative names.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of skill groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/skill-groups",
+            "headers": [
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "skillCategoryId",
+                "value": "",
+                "type": "query",
+                "description": "Filter only skills that belong to a certain skill category.\n"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Use this endpoint to retrieve all skill groups in Visier's Skills Library.\n"
+        },
+        {
+          "info": {
+            "name": "Get skill category details by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/skill-categories/:id",
+            "headers": [
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the skill category to retrieve details for.\n"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "If you know the ID of a skill category, use this endpoint to retrieve information such as display name, description, Automation Index, Remote Work Index, and alternative names.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of skill categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/skill-categories",
+            "headers": [
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Use this endpoint to retrieve all skill categories in Visier's Skills Library.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

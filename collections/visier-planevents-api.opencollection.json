@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Planning Public Plan Events API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PlanEvents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve planning events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/planning/data/events",
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "query",
+                "description": "Optionally, specify the unique identifier of the plan to retrieve events for. Specify one of `planId` or `mainPlanId`. If both are provided, `planId` takes precedence and `mainPlanId` is ignored. If both are omitted, the response includes events for all plans you have access to."
+              },
+              {
+                "name": "mainPlanId",
+                "value": "",
+                "type": "query",
+                "description": "Optionally, specify the unique identifier of the main plan. When provided, the response includes events for the main plan and all its subplans. Specify one of `planId` or `mainPlanId`. If both are provided, `planId` takes precedence and `mainPlanId` is ignored. If both are omitted, the response includes events for all plans you have access to."
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Optionally, specify a start date to filter by and return only the events created after it. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string."
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "Optionally, specify an end date to filter by and return only the events created before it. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string."
+              },
+              {
+                "name": "eventTypes",
+                "value": "",
+                "type": "query",
+                "description": "Optionally, specify one or more event types to filter by. If omitted, the response includes all event types."
+              },
+              {
+                "name": "userFilter",
+                "value": "",
+                "type": "query",
+                "description": "Optionally, specify the username of the user who triggered the events. If omitted, the response includes events triggered by all users."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of events to return. Default and maximum is 50."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The index to start retrieving events from, also known as offset. The index begins at 0."
+              }
+            ]
+          },
+          "docs": "Retrieve planning events in bulk. Specify one of `planId` or `mainPlanId`. Use `planId` to retrieve events for a single plan, or `mainPlanId` to retrieve events for a main plan and all its subplans. If both are provided, `planId` takes precedence. If neither are provided, the response includes events for all plans you have access to. Results are sorted oldest first for stable forward pagination.\n\n To retrieve the full details of a single event, including promoted member paths, see `GET /v1/plann"
+        },
+        {
+          "info": {
+            "name": "Retrieve a planning event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/planning/data/events/:eventId",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the event."
+              }
+            ]
+          },
+          "docs": "Retrieve a single planning event by its unique identifier. The response includes event metadata and, for promotion events, the full member path for every promoted row. One entry per plan segment. To retrieve event IDs, create a webhook for the `planRowPromotionNotification` event. When the webhook triggers, its payload returns the `eventID`. For more information, see `POST /v1/op/webhooks`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

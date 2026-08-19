@@ -1,0 +1,348 @@
+openapi: 3.2.0
+info:
+  title: Visier Data Out Reporting API
+  description: Visier APIs for getting data out of Visier, such as aggregate data and data version information.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: Reporting
+  description: 'Create, retrieve, delete, copy, and download reports.
+
+    <br>**Note**: This API is available for Embedded Partners.
+
+    <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
+paths:
+  /v1alpha/reporting/reports:
+    get:
+      tags:
+      - Reporting
+      summary: Retrieve a list of reports
+      description: "Retrieve a list of reports. The response returns information such as the unique ID, title, description, owner, and the allowed actions you can take on the report.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: Reporting_GetReports
+      parameters:
+      - name: limit
+        in: query
+        description: Optionally, specify the number of reports to return. If omitted, the request uses the default value of 100.
+        schema:
+          type: integer
+          format: int32
+      - name: start
+        in: query
+        description: Optionally, specify the zero-based index of the report to start fetching from. If omitted, the request uses the default value of 0.
+        schema:
+          type: integer
+          format: int32
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analysis.common.ReportListResponseDTO'
+    post:
+      tags:
+      - Reporting
+      summary: Create a report
+      description: "Create a new report with a title and description. To edit other contents of the report, such as columns and group bys, navigate to the Reports room in Visier.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: Reporting_CreateReport
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/analysis.common.ReportCreateRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analysis.common.ReportDTO'
+  /v1alpha/reporting/reports/{reportId}:
+    get:
+      tags:
+      - Reporting
+      summary: Retrieve a report's details
+      description: "Retrieve the details of a specific report. The response returns information such as title, description, owner, and the allowed actions you can take on the report. You must know the ID of the report to retrieve its details. To retrieve report IDs, see `GET /v1alpha/reporting/reports`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: Reporting_GetReport
+      parameters:
+      - name: reportId
+        in: path
+        description: The unique identifier of the report you want to retrieve.
+        required: true
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analysis.common.ReportDTO'
+    post:
+      tags:
+      - Reporting
+      summary: Duplicate a report
+      description: "Make a copy of an existing report. You must know the ID of the report to copy it. To retrieve report IDs, see `GET /v1alpha/reporting/reports`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: Reporting_DuplicateReport
+      parameters:
+      - name: reportId
+        in: path
+        description: The unique identifier of the report you want to duplicate.
+        required: true
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analysis.common.ReportDTO'
+    delete:
+      tags:
+      - Reporting
+      summary: Delete a report
+      description: "Delete a report in the tenant. You must know the ID of the report to delete it. To retrieve report IDs, see `GET /v1alpha/reporting/reports`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: Reporting_DeleteReport
+      parameters:
+      - name: reportId
+        in: path
+        description: The unique identifier of the report you want to delete.
+        required: true
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analysis.common.ReportDeleteSuccessDTO'
+  /v1alpha/reporting/report-data/{reportId}:
+    get:
+      tags:
+      - Reporting
+      summary: Download a report
+      description: "Download a report as a CSV file. The returned CSV file contains the data in the report. You must know the ID of the report to download it. To retrieve report IDs, see `GET /v1alpha/reporting/reports`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: Reporting_DownloadReport
+      parameters:
+      - name: reportId
+        in: path
+        description: The unique identifier of the report you want to download.
+        required: true
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Report data response
+          content:
+            text/csv:
+              schema:
+                type: string
+            application/zip:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+components:
+  schemas:
+    analysis.common.ReportCreateRequestDTO:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The localized title of the report.
+        description:
+          type: string
+          description: The localized description of the report.
+      description: The request to create a new report.
+    analysis.common.ReportDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the report.
+        title:
+          type: string
+          description: The localized title of the report.
+        description:
+          type: string
+          description: The localized description of the report.
+        updatedTime:
+          type: string
+          description: The time in epoch milliseconds when the report was last updated.
+        isPublishedReport:
+          type: boolean
+          description: If `true`, the report is published through a project.
+        owner:
+          type: string
+          description: The owner of the report.
+        isOwnedByUser:
+          type: boolean
+          description: If `true`, you are the owner of the report.
+        allowedActions:
+          type: array
+          items:
+            enum:
+            - duplicate
+            - delete
+            - edit
+            - download
+            - share
+            type: string
+            format: enum
+          description: "The actions that you can perform on the report.\n\n Valid values are:\n - `duplicate`: The user can make their own copy of this report.\n - `delete`: The user can delete this report.\n - `edit`: The user can edit this report directly.\n - `download`: The user can download this report as a CSV.\n - `share`: The user can share this report with other users or user groups."
+        link:
+          type: string
+          description: The link to the report.
+      description: The information of a single report.
+    analysis.common.ReportDeleteSuccessDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the deleted report.
+      description: The report that was successfully deleted.
+    analysis.common.ReportListResponseDTO:
+      type: object
+      properties:
+        reports:
+          type: array
+          items:
+            $ref: '#/components/schemas/analysis.common.ReportDTO'
+          description: A list of reports.
+      description: The information of all the reports you have access to in your tenant.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: data out
+  tags:
+  - DataQuery
+  - DataVersionExport
+  - VeeV1
+  - VeeV2
+  - Search
+  - SourceFilesDownload
+  - Reporting
+  - DataExportConnectorsAPI

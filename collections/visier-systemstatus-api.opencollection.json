@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Administration System Status API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SystemStatus",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check the overall current status of Visier's systems",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/system-status",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Check the current overall status of Visier's systems.\n\n The overall status is one of:\n * ``UP`` : All systems are operational.\n * `DOWN`: At least one system is not fully operational."
+        },
+        {
+          "info": {
+            "name": "Check the overall current status of Visier's systems",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/admin/system-status",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Check the current overall status of Visier's systems.\n\n The overall status is one of:\n * ``UP`` : All systems are operational.\n * `DOWN`: At least one system is not fully operational."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

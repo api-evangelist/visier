@@ -1,0 +1,297 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Administration Consolidated Analytics API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ConsolidatedAnalytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of all consolidated analytics tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/admin/consolidated-analytics/tenants",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of tenants to return. The maximum value is 1000. Default is 400."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The starting index of the first tenant to return. Default is 0."
+              }
+            ]
+          },
+          "docs": "Retrieve the full list of consolidated analytics tenants in your administrating tenant.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Create a consolidated analytics tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1alpha/admin/consolidated-analytics/tenants",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a consolidated analytics tenant.\n\n A new CA tenant has no source tenants and no excluded sources.\n\n **Note:** CA tenant codes must have a prefix of CA. For example, WFF_{XXX}~CA{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the consolidated analytic tenant code.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in "
+        },
+        {
+          "info": {
+            "name": "Retrieve the details of all consolidated analytics tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/admin/consolidated-analytics/tenants-with-details",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of tenants to return. The maximum value is 1000. Default is 400."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The starting index of the first tenant to return. Default is 0."
+              }
+            ]
+          },
+          "docs": "Retrieve the full list of consolidated analytics tenants and their details in your administrating tenant.\n\n **Note:** If your consolidated analytics tenants have thousands of source tenants, we recommend that you use the `GET /admin/consolidated-analytics/tenants` endpoint to get all CA tenants and then use the `GET /admin/consolidated-analytics/tenants/{tenantId}/source-tenants` and `GET /admin/consolidated-analytics/tenants/{tenantId}/excluded-sources` endpoints to retrieve information about s"
+        },
+        {
+          "info": {
+            "name": "Retrieve a consolidated analytics tenant's excluded sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/admin/consolidated-analytics/tenants/:tenantId/excluded-sources",
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tenant. For example, WFF_{XXX}~CA{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the consolidated analytic tenant code."
+              }
+            ]
+          },
+          "docs": "Retrieve a CA tenant's excluded sources.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Set a consolidated analytics tenant's excluded sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1alpha/admin/consolidated-analytics/tenants/:tenantId/excluded-sources",
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tenant. For example, WFF_{XXX}~CA{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the consolidated analytic tenant code."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Define the excluded sources for a consolidated analytics tenant.\n\n After you create a CA tenant, you may optionally define a list of excluded sources. The excluded sources are the sources whose data is excluded from the CA tenant.\n You can also use this API to replace the list of excluded sources for an existing CA tenant.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will b"
+        },
+        {
+          "info": {
+            "name": "Add excluded sources to a consolidated analytics tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1alpha/admin/consolidated-analytics/tenants/:tenantId/excluded-sources",
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tenant. For example, WFF_{XXX}~CA{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the consolidated analytic tenant code."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add excluded sources to the list of excluded sources for a consolidated analytics tenant.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Remove excluded sources from a consolidated analytics tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1alpha/admin/consolidated-analytics/tenants/:tenantId/excluded-sources",
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tenant. For example, WFF_{XXX}~CA{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the consolidated analytic tenant code."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove excluded sources from the list of excluded sources for a consolidated analytics tenant.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Retrieve a consolidated analytics tenant's source tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/admin/consolidated-analytics/tenants/:tenantId/source-tenants",
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tenant. For example, WFF_{XXX}~CA{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the consolidated analytic tenant code."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of source tenants to return. The maximum value is 1000. Default is 400."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The starting index of the first source tenant to return. Default is 0."
+              }
+            ]
+          },
+          "docs": "Retrieve a CA tenant's source tenants.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Set a consolidated analytics tenant's source tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1alpha/admin/consolidated-analytics/tenants/:tenantId/source-tenants",
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tenant. For example, WFF_{XXX}~CA{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the consolidated analytic tenant code."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of source tenants to return. The maximum value is 1000. Default is 400."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Define the source tenants for a consolidated analytics tenant.\n\n After you create a CA tenant, you must define a list of its source tenants. The source tenants are the tenants whose data is aggregated in the CA tenant.\n You can also use this API to replace the list of source tenants for an existing CA tenant.\n\n If successful, the response returns an updated list of source tenants.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; func"
+        },
+        {
+          "info": {
+            "name": "Add source tenants to a consolidated analytics tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1alpha/admin/consolidated-analytics/tenants/:tenantId/source-tenants",
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tenant. For example, WFF_{XXX}~CA{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the consolidated analytic tenant code."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of source tenants to return. The maximum value is 1000. Default is 400."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add source tenants to the list of source tenants for a consolidated analytics tenant.\n\n If successful, the response returns an updated list of source tenants.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Remove source tenants from a consolidated analytics tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1alpha/admin/consolidated-analytics/tenants/:tenantId/source-tenants",
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the tenant. For example, WFF_{XXX}~CA{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the consolidated analytic tenant code."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of source tenants to return. The maximum value is 1000. Default is 400."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove source tenants from the list of source tenants for a consolidated analytics tenant.\n\n If successful, the response returns an updated list of source tenants.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

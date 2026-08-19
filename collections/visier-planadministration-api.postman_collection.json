@@ -1,0 +1,781 @@
+{
+  "item": [
+    {
+      "id": "97f12822-1a3b-4393-8619-accc78975acc",
+      "name": "PlanAdministration",
+      "description": {
+        "content": "Manage collaboration projects in your plans, including actions such as consolidating and reopening subplans.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1292dcfd-1b9a-492f-93af-6df11cc5f308",
+          "name": "Partially update a plan",
+          "request": {
+            "name": "Partially update a plan",
+            "description": {
+              "content": "Make partial changes to existing plans. The response returns whether each plan was successfully patched or not. When patching objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PATCH` request definition. To retrieve main plan or subplan IDs, see `GET /v1/planning/model/plans`. If the response includes a `parentPlanUuid`, then the plan is a subplan. Use `PATCH` to change specific fields in the plan without affecting omitted fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "planning",
+                "data",
+                "plans",
+                ":planId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) The unique identifier of the plan."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shareActionPayload\": {\n    \"shares\": [\n      {\n        \"username\": \"<string>\",\n        \"accessRight\": \"<enum>\"\n      },\n      {\n        \"username\": \"<string>\",\n        \"accessRight\": \"<enum>\"\n      }\n    ],\n    \"comment\": \"<string>\",\n    \"notifyRecipients\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a651ecf3-9fca-48d4-9647-2f06c2959eb5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "planning",
+                    "data",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) The unique identifier of the plan."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shareActionPayload\": {\n    \"shares\": [\n      {\n        \"username\": \"<string>\",\n        \"accessRight\": \"<enum>\"\n      },\n      {\n        \"username\": \"<string>\",\n        \"accessRight\": \"<enum>\"\n      }\n    ],\n    \"comment\": \"<string>\",\n    \"notifyRecipients\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"actionResults\": [\n    {\n      \"planId\": \"string\",\n      \"success\": true,\n      \"error\": {\n        \"rci\": \"string\",\n        \"message\": \"string\"\n      },\n      \"shareResult\": {\n        \"failedShares\": [\n          {\n            \"username\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"errorCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"username\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"errorCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"planId\": \"string\",\n      \"success\": true,\n      \"error\": {\n        \"rci\": \"string\",\n        \"message\": \"string\"\n      },\n      \"shareResult\": {\n        \"failedShares\": [\n          {\n            \"username\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"errorCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"username\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"errorCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef856293-10bc-4957-b7ee-fe226fb41625",
+              "name": "bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "planning",
+                    "data",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) The unique identifier of the plan."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shareActionPayload\": {\n    \"shares\": [\n      {\n        \"username\": \"<string>\",\n        \"accessRight\": \"<enum>\"\n      },\n      {\n        \"username\": \"<string>\",\n        \"accessRight\": \"<enum>\"\n      }\n    ],\n    \"comment\": \"<string>\",\n    \"notifyRecipients\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"rci\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1702519d-dd16-4c4e-bada-7aed41ca9897",
+              "name": "caller is not permitted to share this plan",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "planning",
+                    "data",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) The unique identifier of the plan."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shareActionPayload\": {\n    \"shares\": [\n      {\n        \"username\": \"<string>\",\n        \"accessRight\": \"<enum>\"\n      },\n      {\n        \"username\": \"<string>\",\n        \"accessRight\": \"<enum>\"\n      }\n    ],\n    \"comment\": \"<string>\",\n    \"notifyRecipients\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"rci\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85f3c683-8e63-485f-8742-c73287a869d4",
+              "name": "plan not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "planning",
+                    "data",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) The unique identifier of the plan."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shareActionPayload\": {\n    \"shares\": [\n      {\n        \"username\": \"<string>\",\n        \"accessRight\": \"<enum>\"\n      },\n      {\n        \"username\": \"<string>\",\n        \"accessRight\": \"<enum>\"\n      }\n    ],\n    \"comment\": \"<string>\",\n    \"notifyRecipients\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"rci\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52f5b751-8129-4dfa-a85d-2ead8bd36ec5",
+              "name": "default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "planning",
+                    "data",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) The unique identifier of the plan."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shareActionPayload\": {\n    \"shares\": [\n      {\n        \"username\": \"<string>\",\n        \"accessRight\": \"<enum>\"\n      },\n      {\n        \"username\": \"<string>\",\n        \"accessRight\": \"<enum>\"\n      }\n    ],\n    \"comment\": \"<string>\",\n    \"notifyRecipients\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08e4de67-f97c-4fb4-b6e4-600abd190fda",
+          "name": "Partially update a plan scenario",
+          "request": {
+            "name": "Partially update a plan scenario",
+            "description": {
+              "content": "Make partial changes to a scenario in an existing plan. The response returns whether the scenario was successfully patched or not. When patching objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PATCH` request definition. To retrieve plan IDs and scenario IDs, see `GET /v1/planning/model/plans`. If the response includes a `parentPlanUuid`, then the plan is a subplan.\n\n Use `PATCH` to change specific fields in the scenario without affecting omitted fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "planning",
+                "data",
+                "plans",
+                ":planId",
+                "scenarios",
+                ":scenarioId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) The unique identifier of the main plan or subplan. Use the main plan ID for consolidating, starting collaboration, or ending collaboration. Otherwise, use the subplan ID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scenarioId",
+                  "description": "(Required) The unique identifier of the plan scenario."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"actionType\": \"<string>\",\n  \"consolidateActionPayload\": {\n    \"autoRollup\": \"<boolean>\",\n    \"includedSubPlans\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "361513e6-f55c-4d11-a625-545ef89a9734",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "planning",
+                    "data",
+                    "plans",
+                    ":planId",
+                    "scenarios",
+                    ":scenarioId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) The unique identifier of the main plan or subplan. Use the main plan ID for consolidating, starting collaboration, or ending collaboration. Otherwise, use the subplan ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scenarioId",
+                      "description": "(Required) The unique identifier of the plan scenario."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"actionType\": \"<string>\",\n  \"consolidateActionPayload\": {\n    \"autoRollup\": \"<boolean>\",\n    \"includedSubPlans\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"actionResults\": [\n    {\n      \"planId\": \"string\",\n      \"success\": false,\n      \"error\": {\n        \"rci\": \"string\",\n        \"message\": \"string\"\n      }\n    },\n    {\n      \"planId\": \"string\",\n      \"success\": false,\n      \"error\": {\n        \"rci\": \"string\",\n        \"message\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "832509f3-3209-478a-9ec8-cfb201b29bd7",
+              "name": "bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "planning",
+                    "data",
+                    "plans",
+                    ":planId",
+                    "scenarios",
+                    ":scenarioId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) The unique identifier of the main plan or subplan. Use the main plan ID for consolidating, starting collaboration, or ending collaboration. Otherwise, use the subplan ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scenarioId",
+                      "description": "(Required) The unique identifier of the plan scenario."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"actionType\": \"<string>\",\n  \"consolidateActionPayload\": {\n    \"autoRollup\": \"<boolean>\",\n    \"includedSubPlans\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"rci\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c846e75-f7db-41bb-afdb-746b0a3787e8",
+              "name": "plan not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "planning",
+                    "data",
+                    "plans",
+                    ":planId",
+                    "scenarios",
+                    ":scenarioId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) The unique identifier of the main plan or subplan. Use the main plan ID for consolidating, starting collaboration, or ending collaboration. Otherwise, use the subplan ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scenarioId",
+                      "description": "(Required) The unique identifier of the plan scenario."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"actionType\": \"<string>\",\n  \"consolidateActionPayload\": {\n    \"autoRollup\": \"<boolean>\",\n    \"includedSubPlans\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"rci\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd0d4666-55ee-4123-927b-e33fd36c18e6",
+              "name": "default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "planning",
+                    "data",
+                    "plans",
+                    ":planId",
+                    "scenarios",
+                    ":scenarioId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) The unique identifier of the main plan or subplan. Use the main plan ID for consolidating, starting collaboration, or ending collaboration. Otherwise, use the subplan ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scenarioId",
+                      "description": "(Required) The unique identifier of the plan scenario."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"actionType\": \"<string>\",\n  \"consolidateActionPayload\": {\n    \"autoRollup\": \"<boolean>\",\n    \"includedSubPlans\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5b2b96d7-93d6-4c1c-9018-b5b33f7e7520",
+    "name": "Visier Planning Public Plan Administration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for managing your plans through API.",
+      "type": "text/plain"
+    }
+  }
+}

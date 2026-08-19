@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Data Out Source Files Download API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SourceFilesDownload",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download source files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/op/data/source-files",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Download a tenant's source files. You can download all included source files or specify a list of sources to download. Use object names or unique identifiers to specify the list of sources. Excluded source files will not be downloaded.\n\n If `minTimestamp` and `maxTimestamp` are defined, downloads the source files uploaded within the specified time range for all sources or the specified sources.\n\n Administrating tenants can specify the tenant from which to download sources using the `TargetTenant"
+        },
+        {
+          "info": {
+            "name": "Download a source file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/op/data/source-files/:identifier",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the source file you want to download."
+              }
+            ]
+          },
+          "docs": "Download a single source file in ZIP format. You must know the `identifier` of the file to download it. To retrieve file identifiers, see `GET /v1alpha/op/data/uploaded-files`.\n\n Administrating tenants can specify the tenant from which to download sources using the `TargetTenantID` header.\n\n **Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in us"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

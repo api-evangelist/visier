@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Data Out Search API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Perform a simple search for Visier document headers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/search/simple/document-headers",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "The search query string. The results include document headers that match the search string. Search string is case-insensitive and supports partial matches. Search string must be at least 2 characters up to a maximum of 200 characters."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return. Defaults to 100."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The index to start retrieving results from, also known as offset. Defaults to 0."
+              }
+            ]
+          },
+          "docs": "Perform a simple search for Visier document headers, such as analysis titles. Simple search doesn't support keywords, Boolean expressions, or any other advanced search features.\n Example: `GET /v1alpha/search/simple/document-headers?q=My+Query&limit=10` returns the first 10 document headers that best match the query string `My Query`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation no"
+        },
+        {
+          "info": {
+            "name": "Search for Visier objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1alpha/search/visier-objects",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform a search for Visier objects, such as metrics, dimensions, dimension members, concepts, analytic objects, and properties.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,929 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Data In Data And Job Handling API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DataAndJobHandling",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of all data connector credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/op/data-connector-credentials",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "The tenant code of a specific analytic tenant that you want to retrieve for."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The limit to retrieve."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The index to start retrieving results from, also known as offset. The index begins at 0."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of the connector credentials in a specified tenant. Connector credentials allow\n Visier to retrieve data from your source systems through an integration user in the source system."
+        },
+        {
+          "info": {
+            "name": "Create a connector credential",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/op/data-connector-credentials",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "The tenant code of a specific analytic tenant that you want to create the credential for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create credentials for a data connector. Connector credentials allow Visier to retrieve data from your source systems through an integration user in the source system. \n \n In the request body, specify one data provider in the `dataProviderAuthParams` parameter. For example, to create connector credentials for a UKG data connector, your request body might look like the following sample.\n ```json\n {\n   model={\n     \"dataProviderAuthParams\": {\n        \"provider\": \"UKG\",\n        \"ultimateAuthParams\""
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of all data connectors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/op/data-connectors",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "The tenant code of a specific analytic tenant that you want to retrieve for."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The limit to retrieve."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The index to start retrieving results from, also known as offset. The index begins at 0."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of the data connectors in a specified tenant. Data connectors are an alternative\n to generating flat files and transferring them to Visier via SFTP."
+        },
+        {
+          "info": {
+            "name": "Assign connector credentials to data connectors",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/op/data-connectors/assignCredentials",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assign a connector credential to a data connector."
+        },
+        {
+          "info": {
+            "name": "Retrieve data connector settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/op/data-connectors/connector-settings",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get a list of settings for all data connectors. This request retrieves data connectors from the production environment. The response returns a list of settings, if available, for each data connector in the tenant."
+        },
+        {
+          "info": {
+            "name": "Update data connector settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/op/data-connectors/connector-settings",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Define the settings for one or more data connectors. To find the available settings, see `Retrieve data connector settings`."
+        },
+        {
+          "info": {
+            "name": "Retrieve the latest enabled data versions for all analytic tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/op/data-versions",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "The tenant code of a specific analytic tenant that you want to retrieve data versions for.\n Use this if you are only interested in the results for one analytic tenant."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The limit of analytic tenants to retrieve data versions for.\n This parameter is not used if the tenantCode parameter is specified."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The index to start retrieving results from, also known as offset. The index begins at 0."
+              },
+              {
+                "name": "numberOfVersions",
+                "value": "",
+                "type": "query",
+                "description": "The number of latest enabled data versions to retrieve. The maximum value is 5."
+              },
+              {
+                "name": "dataCategory",
+                "value": "",
+                "type": "query",
+                "description": "The object name of the data category. Default is the primary data category.\n For administrating tenants, the data category must exist in the requesting tenant; that is, the administrating tenant or the tenant specified in `TargetTenantID`."
+              }
+            ]
+          },
+          "docs": "If you discover any inconsistencies after running metric value validation, you may want to find the data versions\n causing inconsistencies so you can later disable them.\n\n Retrieve up to five (5) of the latest enabled data versions for all your analytic tenants or a\n single specified analytic tenant."
+        },
+        {
+          "info": {
+            "name": "Disable data versions for a list of analytic tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/op/data-versions/disable",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "If you discover that a data version is not what is expected after running metric value validation on a data load,\n you may want to disable the data version for that processing job.\n\n Disable the latest enabled data versions for affected analytic tenants or to disable a particular\n data version for each analytic tenant.\n\n **Note:** Disabling an older data version may not have an effect on the state of the solution."
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of all data categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/op/data/categories",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all available data categories."
+        },
+        {
+          "info": {
+            "name": "Trigger data connector extraction jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/op/data/startExtractAndLoad",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run data connector extraction jobs for the administrating tenant or a list of analytic tenants.\n \n This API creates a dispatching job that generates one extraction job per tenant. The dispatching job is the \"parent\" of the extraction jobs and the dispatching job ID is returned in the response. Use that ID to monitor the extraction job statuses by calling `GET /v1/op/jobs/dispatching-jobs/{jobId}/extraction-jobs`.\n\n The extraction job generates receiving jobs to validate the data and processing j"
+        },
+        {
+          "info": {
+            "name": "Start the data load for analytic tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/op/data/startload",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API starts the data load process for all analytic tenants included in the specified data files uploaded\n to the Visier SFTP server. On success, you receive a job ID that can be filtered and searched for within the\n Jobs room in Visier. This job ID is associated with the receiving job, and related to all processing jobs that\n spawn for each analytic tenant.\n\n With the job ID, you can also call the next two APIs to retrieve the status of the receiving job and the status\n list of all related p"
+        },
+        {
+          "info": {
+            "name": "Retrieve data uploads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/op/data/uploads",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uploadJobId",
+                "value": "",
+                "type": "query",
+                "description": "The job ID of an upload job. Use this if you are interested in the data uploads for a specific upload job."
+              },
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "The tenant code of a specific analytic tenant that you want to retrieve the data uploads for."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The limit of analytic tenants to retrieve data uploads for. This parameter is not used if the tenantCode parameter is specified. Default is 1000."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The index to start retrieving results from, also known as offset. The index begins at 0."
+              },
+              {
+                "name": "numberOfDataUploads",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of latest enabled data uploads to retrieve for each analytic tenant. The maximum value is 5. Default is 1."
+              }
+            ]
+          },
+          "docs": "Retrieve the data uploads and whether they're included in one of:\n - A list of analytic tenants managed by you.\n - A single specified analytic tenant.\n - A receiving job."
+        },
+        {
+          "info": {
+            "name": "Exclude data uploads",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/op/data/uploads/exclude",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exclude either a specified list of data uploads or all data uploads for each analytic tenant."
+        },
+        {
+          "info": {
+            "name": "Include data uploads",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/op/data/uploads/include",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Include either the specified list of data uploads or all data uploads for each analytic tenant."
+        },
+        {
+          "info": {
+            "name": "Retrieve the statuses of all jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/op/job-status/jobs",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "The start time from which to retrieve job statuses."
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "The end time from which to retrieve job statuses."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The specific status to restrict the list of jobs to."
+              }
+            ]
+          },
+          "docs": "Retrieve the list of statuses for all jobs."
+        },
+        {
+          "info": {
+            "name": "Cancel a list of jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/op/jobs/cancel",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel a list of processing jobs, receiving jobs, and extraction jobs.\n\n **Note:** Receiving jobs with the Running status cannot be cancelled."
+        },
+        {
+          "info": {
+            "name": "Retrieve a dispatching job's status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/op/jobs/dispatching-jobs/:jobId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the job you want to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve the status of a dispatching job, including its job ID and the number of jobs it generated."
+        },
+        {
+          "info": {
+            "name": "Retrieve a dispatching job's extraction jobs with their statuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/op/jobs/dispatching-jobs/:jobId/extraction-jobs",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the dispatching job you want to retrieve."
+              },
+              {
+                "name": "dispatchingJobId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the dispatching job that generated the extraction jobs."
+              },
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "The tenant code of a specific analytic tenant that you want to retrieve the extraction job status for.\n Use this if you are only interested in the results for one analytic tenant."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The limit of extraction job statuses to retrieve."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The index to start retrieving results from, also known as offset. The index begins at 0."
+              }
+            ]
+          },
+          "docs": "Retrieve the statuses of extraction jobs associated with a dispatching job. The dispatching job\n is a \"parent\" to extraction jobs, which retrieve data from your source systems through data connectors."
+        },
+        {
+          "info": {
+            "name": "Retrieve a dispatching job's processing jobs with their statuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/op/jobs/dispatching-jobs/:jobId/processing-jobs",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the dispatching job you want to retrieve."
+              },
+              {
+                "name": "dispatchingJobId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the dispatching job that generated the extraction jobs."
+              },
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "The tenant code of a specific analytic tenant that you want to retrieve the extraction job status for.\n Use this if you are only interested in the results for one analytic tenant."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The limit of extraction job statuses to retrieve."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The index to start retrieving results from, also known as offset. The index begins at 0."
+              }
+            ]
+          },
+          "docs": "Retrieve the statuses of processing jobs associated with a dispatching job. The dispatching job\n is a \"parent\" to extraction jobs, which in turn generate processing jobs and receiving jobs."
+        },
+        {
+          "info": {
+            "name": "Retrieve a dispatching job's receiving jobs with their statuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/op/jobs/dispatching-jobs/:jobId/receiving-jobs",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the dispatching job you want to retrieve."
+              },
+              {
+                "name": "dispatchingJobId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the dispatching job that generated the extraction jobs."
+              },
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "The tenant code of a specific analytic tenant that you want to retrieve the extraction job status for.\n Use this if you are only interested in the results for one analytic tenant."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The limit of extraction job statuses to retrieve."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The index to start retrieving results from, also known as offset. The index begins at 0."
+              }
+            ]
+          },
+          "docs": "Retrieve the statuses of receiving jobs associated with a dispatching job. The dispatching job\n is a \"parent\" to extraction jobs, which in turn generate processing jobs and receiving jobs."
+        },
+        {
+          "info": {
+            "name": "Retrieve processing job statuses by receiving job ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/op/jobs/processing-jobs/:receivingJobId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "receivingJobId",
+                "value": "",
+                "type": "path",
+                "description": "The receiving job ID"
+              },
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "The tenant code of the tenant you want to retrieve the processing jobs for.\n Use this if you are only interested in the results for one analytic tenant."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The limit of processing jobs to retrieve per page."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The index to start retrieving results from, also known as offset. The index begins at 0."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of statuses for all processing jobs associated with the given receiving job ID.\n Processing jobs deal with an individual analytic tenant's data load. A processing job is either triggered through\n the UI or is one of many processing jobs spawned from a receiving job. When a processing job is triggered as part\n of a set from an receiving job, it is associated to the receiving job through a Parent ID."
+        },
+        {
+          "info": {
+            "name": "Retrieve a receiving job's status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/op/jobs/receiving-jobs/:receivingJobId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "receivingJobId",
+                "value": "",
+                "type": "path",
+                "description": "The jobId provided after sending data to Visier."
+              },
+              {
+                "name": "jobs",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, returns the status of receiving jobs spawned by the receiving job specified by `jobId`."
+              },
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "The tenant code of the tenant you want to retrieve the receiving jobs for. Use this if you are only interested\n in the results for one analytic tenant."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The index to start retrieving results from, also known as offset. The index begins at 0."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of job statuses to return per page."
+              }
+            ]
+          },
+          "docs": "After sending data to Visier, you may want to know the status of the receiving job and the associated tenant\n receiving jobs. A receiving job validates the transferred data and adds the transferred data to Visier's data\n store. \n\n A successful response indicates that the receiving job was successful. To get the status of the jobs spawned by the receiving job, set the `jobs` parameter to `true`."
+        },
+        {
+          "info": {
+            "name": "Retrieve a receiving job's files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/op/data/receiving-jobs/:jobId/files",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "The job ID of the receiving job."
+              },
+              {
+                "name": "fileNameRegex",
+                "value": "",
+                "type": "query",
+                "description": "The regular expression to match the file names of the files to retrieve. The regex must be URL-encoded; for example, the regular expression `Employee[0-9]+\\.csv` becomes `fileNameRegex=Employee%5B0-9%5D%2B%5C.csv`."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The limit of file to retrieve across tenants. Default is 500. Maximum is 1000."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The index to start retrieving files from, also known as offset. The index begins at 0."
+              }
+            ]
+          },
+          "docs": "Retrieve all the files transferred to Visier by a specific receiving job. To retrieve receiving job files, you must know the receiving job ID. To get receiving job IDs, see `GET /v1/op/job-status/jobs`. The response returns the details of uploaded files by tenant."
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of analytic tenant source files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/op/data/uploaded-files",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fileNameRegex",
+                "value": "",
+                "type": "query",
+                "description": "The regular expression to match the file names of the source files to retrieve. The regex must be URL-encoded; for example, the regular expression `Employee[0-9]+\\.csv` becomes `fileNameRegex=Employee%5B0-9%5D%2B%5C.csv`."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The limit of source files to retrieve. Default is 500. Maximum is 1000."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The index to start retrieving source files from, also known as offset. The index begins at 0."
+              }
+            ]
+          },
+          "docs": "Retrieve the list of all uploaded files for your analytic tenant's sources. Default is to return all analytic tenants' sources. To retrieve a specific analytic tenant’s uploaded files, use the `TargetTenantID` header. Optionally, specify a filename regex to a retrieve a particular set of uploaded files. The response returns details of each source's files, including upload time, filename, and whether the file is included during data version generation."
+        },
+        {
+          "info": {
+            "name": "Run a consolidated analytics job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1alpha/op/jobs/consolidated-analytics-jobs",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run a job for a consolidated analytics tenant. This request retrieves data for all source tenants in a consolidated analytics tenant. Optionally, set `runProcessingJob: true` in the request body to generate a data version for the consolidated analytics tenant."
+        },
+        {
+          "info": {
+            "name": "Run a data connector extraction job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1alpha/op/jobs/extraction-jobs",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run an extraction job to retrieve data through a Visier data connector and generate a new data version. Administrating tenants can run extraction jobs for all analytic tenants, a list of analytic tenants, or the administrating tenant.\n If running extraction jobs for an administrating tenant or their analytic tenants, this request starts a dispatching job that generates one extraction job per tenant. The response returns the job ID of the extraction job or dispatching job."
+        },
+        {
+          "info": {
+            "name": "Run a processing job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1alpha/op/jobs/processing-jobs",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run a processing job to generate a new data version. Administrating tenants can run processing jobs for all analytic tenants, a list of analytic tenants, or the administrating tenant.\n If running processing jobs for an administrating tenant or their analytic tenants, this request starts a dispatching job that generates one processing job per tenant. The response returns the job ID of the processing job or dispatching job."
+        },
+        {
+          "info": {
+            "name": "Delete a connector credential",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/op/data-connector-credentials/:id",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The credentialId of the credential you want to delete."
+              },
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "The tenant code of the analytic tenant in which the credential you're deleting."
+              }
+            ]
+          },
+          "docs": "Use this API to delete connector credentials from your tenants. Credentials that are no longer valid\n should be deleted."
+        },
+        {
+          "info": {
+            "name": "Retrieve a specific job's status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/op/job-status/jobs/:jobId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the job to retrieve the status for."
+              }
+            ]
+          },
+          "docs": "Use this API to retrieve the list of statuses for a specific job with id `jobId`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

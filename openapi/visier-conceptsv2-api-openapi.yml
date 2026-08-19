@@ -1,0 +1,975 @@
+openapi: 3.2.0
+info:
+  title: Visier Analytic Model Concepts V2 API
+  description: Visier APIs for retrieving and configuring your analytic model in Visier.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: ConceptsV2
+  x-displayName: Concepts V2
+  description: Create, retrieve, update, and delete concepts in your analytic model. You can create, update, and delete one or more concepts in an API call.
+paths:
+  /v2/data/model/analytic-objects/{analyticObjectName}/concepts:
+    get:
+      tags:
+      - ConceptsV2
+      summary: Retrieve a list of concepts by analytic object
+      description: Retrieve all the concepts for a specific analytic object. The response returns the details of all concepts for the analytic object, including object names, concept types, and descriptions.
+      operationId: ConceptsV2_GetAnalyticObjectConcepts
+      parameters:
+      - name: analyticObjectName
+        in: path
+        description: The object name of the analytic object from which to retrieve concepts.
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: "The type of the concept to retrieve. Omit to retrieve all supported concept types. Valid values:\n - `process`: Retrieves all process concepts.\n - `selection`: Retrieves all member selection concepts and calculated selection concepts."
+        schema:
+          type: array
+          items:
+            enum:
+            - process
+            - selection
+            type: string
+            format: enum
+      - name: with
+        in: query
+        description: "The level of information to retrieve for the concept. Valid values:\n - `basic`: Retrieves the concept's UUID, object name, and basic information. This is the default.\n - `details`: Retrieves the `basic` details and additional configurations, such as `visibleInAnalytics`.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+        schema:
+          type: array
+          items:
+            enum:
+            - basic
+            - details
+            - version
+            type: string
+            format: enum
+      - name: objectName
+        in: query
+        description: The concept object names to return in the response. When combined with `uuid`, the results return objects that match either the `objectName` or `uuid`.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: uuid
+        in: query
+        description: The concept UUIDs to return in the response. When combined with `objectName`, the results return objects that match either the `objectName` or `uuid`.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.v2.objectconfiguration.ConceptResponseDTO'
+  /v2/data/model/concepts:
+    get:
+      tags:
+      - ConceptsV2
+      summary: Retrieve a list of concepts
+      description: Retrieve a list of all concepts in your Visier tenant.
+      operationId: ConceptsV2_GetAllConcepts
+      parameters:
+      - name: type
+        in: query
+        description: "The type of the concept to retrieve. Omit to retrieve all supported concept types. Valid values:\n - `process`: Retrieves all process concepts.\n - `selection`: Retrieves all member selection concepts and calculated selection concepts."
+        schema:
+          type: array
+          items:
+            enum:
+            - process
+            - selection
+            type: string
+            format: enum
+      - name: with
+        in: query
+        description: "The level of information to retrieve for the concept. Valid values:\n - `basic`: Retrieves the concept's UUID, object name, and basic information. This is the default.\n - `details`: Retrieves the `basic` details and additional configurations, such as `visibleInAnalytics`.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+        schema:
+          type: array
+          items:
+            enum:
+            - basic
+            - details
+            - version
+            type: string
+            format: enum
+      - name: objectName
+        in: query
+        description: The concept object names to return in the response. When combined with `uuid`, the results return objects that match either the `objectName` or `uuid`.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: uuid
+        in: query
+        description: The concept UUIDs to return in the response. When combined with `objectName`, the results return objects that match either the `objectName` or `uuid`.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.v2.objectconfiguration.ConceptResponseDTO'
+    put:
+      tags:
+      - ConceptsV2
+      summary: Update concepts
+      description: "Update existing concepts. The response returns whether each concept was successfully updated or not. When updating objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PUT` request definition.\n\n In `PUT` calls, the definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed from the concept. To partially update a concept, see the `PATCH` method."
+      operationId: ConceptsV2_PutConcepts
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.v2.objectconfiguration.ConceptRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.BulkChangeResponseDTO'
+    post:
+      tags:
+      - ConceptsV2
+      summary: Create concepts
+      description: "Create new concepts. The response returns whether each concept was successfully created or not.\n When creating objects, assign a unique object name but don't set a UUID. Visier generates UUIDs for new objects."
+      operationId: ConceptsV2_CreateConcepts
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.v2.objectconfiguration.ConceptRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.BulkChangeResponseDTO'
+    delete:
+      tags:
+      - ConceptsV2
+      summary: Delete concepts
+      description: Delete existing concepts. The response returns whether each concept was successfully deleted or not.
+      operationId: ConceptsV2_DeleteConcepts
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.v2.objectconfiguration.ConceptDeleteRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.BulkChangeResponseDTO'
+    patch:
+      tags:
+      - ConceptsV2
+      summary: Partially update concepts
+      description: "Make partial changes to existing concepts. The response returns whether each concept was successfully patched or not. When patching objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PATCH` request definition.\n\n Unlike `PUT`, which completely replaces the concept definition, use `PATCH` to change specific fields in the concept without affecting omitted fields. To replace a concept's entire definition, see the `PUT` method."
+      operationId: ConceptsV2_PatchConcepts
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicing.v2.objectconfiguration.ConceptRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.BulkChangeResponseDTO'
+  /v2/data/model/concepts/{conceptId}:
+    get:
+      tags:
+      - ConceptsV2
+      summary: Retrieve a concept's details
+      description: Retrieve the details of a specific concept, such as its concept type and description.
+      operationId: ConceptsV2_GetOneConcept
+      parameters:
+      - name: conceptId
+        in: path
+        description: The object name or UUID of the concept to retrieve.
+        required: true
+        schema:
+          type: string
+      - name: with
+        in: query
+        description: "The level of information to retrieve for the concept. Valid values:\n - `basic`: Retrieves the concept's UUID, object name, and basic information.\n - `details`: Retrieves the `basic` details and additional configurations, such as `visibleInAnalytics`. This is the default.\n - `version`: Retrieves the object's version information, such as version type and last edited details."
+        schema:
+          type: array
+          items:
+            enum:
+            - basic
+            - details
+            - version
+            type: string
+            format: enum
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicing.v2.objectconfiguration.ConceptResponseDTO'
+components:
+  schemas:
+    servicing.v2.objectconfiguration.AnalyticObjectNamesDTO:
+      type: object
+      properties:
+        objectNames:
+          type: array
+          items:
+            type: string
+          description: The object names of the analytic objects associated with the object.
+      description: The analytic objects associated with the object.
+    servicing.v2.objectconfiguration.MemberSelectionConceptDTO:
+      type: object
+      properties:
+        analyticObjectFilterList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.AnalyticObjectFilterListDTO'
+          description: The list of analytic object associated with the concept.
+        tagList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.TagReferenceListDTO'
+          description: The tags assigned to the object.
+        visibleInAnalytics:
+          type: boolean
+          description: If `true`, the object is visible to end users in the solution.
+        includeWithVee:
+          type: boolean
+          description: If `true`, the object is available in Vee's responses.
+      description: Information about the concept.
+    servicing.v2.objectconfiguration.ProcessConceptMemberDTO:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The display name of the mapped member.
+        namePath:
+          type: array
+          items:
+            type: string
+          description: The name path of the mapped member.
+      description: Each member mapped to a stage or outcome in the process concept.
+    servicing.v2.objectconfiguration.ConceptTypeDetailsDTO:
+      type: object
+      properties:
+        process:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.ProcessConceptDefinitionDTO'
+          description: The process concept's associated objects, such as its analytic object and status dimension.
+        memberSelection:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.MemberSelectionConceptDTO'
+          description: The member selection concept's configuration, such as its dimension members.
+        calculatedSelection:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.CalculatedSelectionConceptDTO'
+          description: The calculated selection concept's configuration, such as its formula.
+    servicing.v2.objectconfiguration.AnalyticObjectFilterDTO:
+      type: object
+      properties:
+        analyticObjectName:
+          type: string
+          description: The analytic object name to which the dimension applies.
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.DimensionFilterDTO'
+          description: The dimension filters defined for this analytic object.
+      description: The analytic objects associated with the object.
+    servicing.v2.objectconfiguration.ProcessConceptPropertyDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: The UUID identifying the property.
+        objectName:
+          type: string
+          description: The object name of the property.
+        basicInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.BasicInformationDTO'
+          description: Fields that identify and describe the property, such as its display name, description, and explanation.
+        details:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.ProcessConceptPropertyDetailsDTO'
+          description: The property type and its details.
+    servicing.SynonymListDTO:
+      type: object
+      properties:
+        synonyms:
+          type: array
+          items:
+            type: string
+          description: Alternative words or phrases for the object.
+      description: The object's synonyms.
+    servicing.v2.objectconfiguration.ProcessConceptOutcomeListDTO:
+      type: object
+      properties:
+        outcomes:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.ProcessConceptOutcomeDTO'
+          description: Each outcome in the process concept.
+      description: The process concept's outcomes.
+    servicing.v2.objectconfiguration.ConceptWithContextDTO:
+      type: object
+      properties:
+        executionContext:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExecutionContextDTO'
+          description: The context of the API request, such as the tenant code and project ID.
+        concept:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.ConceptDefinitionDTO'
+          description: Information about the concept, such as its UUID and concept type.
+      description: Information about the concept and the context of the API request, such as the tenant code and project ID.
+    servicing.SuccessfulChangeDTO:
+      type: object
+      properties:
+        executionContext:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExecutionContextDTO'
+          description: The tenant and, optionally, project that change was made on.
+        objectName:
+          type: string
+          description: The object name of the object that was changed.
+        uuid:
+          type: string
+          description: The UUID of the object that was changed.
+        displayName:
+          type: string
+          description: The display name of the object that was changed.
+    servicing.v2.objectconfiguration.ProcessConceptMetricListDTO:
+      type: object
+      properties:
+        metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.ProcessConceptMetricDefinitionDTO'
+          description: Each metric in the process concept.
+      description: The process concept's associated metrics.
+    servicing.v2.objectconfiguration.ProcessConceptPropertyTypeDTO:
+      type: object
+      properties:
+        dataType:
+          type: string
+          description: "The property's data type. Valid values:\n\n `Number`, `Integer`, `Ordinal`, `Categorical`, `Currency`, `Boolean`, `Percent`,\n `IntegerPercent`, `PercentNoScaling`, `PercentagePoint`, `String`, `Text`, `LargeText`,\n `Date`, `HourDuration`, `DayDuration`, `MonthDuration`, `YearDuration`."
+        primitiveType:
+          type: string
+          description: The primitive data type, such as String, Integer, or Boolean.
+        formula:
+          type: string
+          description: The property's formula written in Visier Formula Language (VFL).
+      description: A process concept property that takes a value that comes directly from the data and creates a new value through a formula.
+    servicing.ExecutionContextDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant code.
+        projectId:
+          type: string
+          description: The project ID.
+      description: The context of the API request, such as the tenant code and project ID.
+    servicing.TagReferenceListDTO:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.TagReferenceDTO'
+          description: A list of tags assigned to the object.
+      description: The tags assigned to the object.
+    servicing.v2.objectconfiguration.ConceptDeleteRequestDTO:
+      type: object
+      properties:
+        concepts:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.ConceptDeleteWithContextDTO'
+          description: The concepts in the request.
+      description: The concepts to delete.
+    servicing.ObjectIdDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: The UUID identifying the object.
+        objectName:
+          type: string
+          description: The object name of the object.
+      description: The identifier for the object.
+    servicing.v2.objectconfiguration.ConceptResponseDTO:
+      type: object
+      properties:
+        concepts:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.ConceptWithContextDTO'
+          description: The concepts in the response.
+      description: The response for retrieving concepts.
+    servicing.v2.objectconfiguration.ConceptDefinitionDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: The UUID identifying the concept.
+        objectName:
+          type: string
+          description: The object name of the concept.
+        basicInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.BasicInformationDTO'
+          description: Fields that identify and describe the concept, such as its display name, description, and explanation.
+        details:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.ConceptTypeDetailsDTO'
+          description: The concept type and its details.
+        versionInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.VersionInformationDTO'
+          description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
+      description: Information about the concept, such as its UUID and concept type.
+    servicing.v2.objectconfiguration.ProcessConceptMetricDetailsDTO:
+      type: object
+      properties:
+        formula:
+          type: string
+          description: The metric's formula written in Visier Formula Language (VFL).
+        dataType:
+          type: string
+          description: "The metric's data type. Valid values:\n\n Custom data types, `Number`, `Integer`, `Ordinal`, `Categorical`, `Currency`, `Boolean`, `Percent`,\n `IntegerPercent`, `PercentNoScaling`, `PercentagePoint`, `String`, `Text`, `LargeText`,\n `Date`, `HourDuration`, `DayDuration`, `MonthDuration`, `YearDuration`."
+        visibleInAnalytics:
+          type: boolean
+          description: If `true`, the object is visible to end users in the solution. Default is `true`.
+      description: Information about the metric, such as its formula and data type.
+    servicing.v2.objectconfiguration.ConceptDeleteWithContextDTO:
+      type: object
+      properties:
+        executionContext:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExecutionContextDTO'
+          description: The context of the API request, such as the tenant code and project ID.
+        concept:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ObjectIdDTO'
+          description: Information identifying the concept to delete.
+      description: Information about the concept to delete and the context of the API request, such as the tenant code and project ID.
+    servicing.v2.objectconfiguration.CalculatedSelectionConceptDTO:
+      type: object
+      properties:
+        formula:
+          type: string
+          description: The calculation concept formula.
+        analyticObjectNames:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.AnalyticObjectNamesDTO'
+          description: The object name of the analytic object associated with the concept.
+        tagList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.TagReferenceListDTO'
+          description: The tags assigned to the object.
+        visibleInAnalytics:
+          type: boolean
+          description: If `true`, the object is visible to end users in the solution.
+        includeWithVee:
+          type: boolean
+          description: If `true`, the object is available in Vee's responses.
+      description: Information about the concept.
+    servicing.FailedChangeDTO:
+      type: object
+      properties:
+        executionContext:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExecutionContextDTO'
+          description: The tenant and, optionally, project that change was attempted on.
+        objectName:
+          type: string
+          description: The object name of the object that was attempted to be changed.
+        uuid:
+          type: string
+          description: The UUID of the object that was attempted to be changed.
+        displayName:
+          type: string
+          description: The display name of the object that was attempted to be changed.
+        messages:
+          type: array
+          items:
+            type: string
+          description: The error messages.
+    servicing.v2.objectconfiguration.MemberSelectionDTO:
+      type: object
+      properties:
+        namePath:
+          type: array
+          items:
+            type: string
+          description: The name path for a given dimension member. For example, `["North America", "United States", "California", "San Francisco"]`.
+        isExcluded:
+          type: boolean
+          description: If `true`, the member is excluded from the concept. Default is `false`.
+      description: A dimension member in a member selection concept.
+    servicing.v2.objectconfiguration.ConceptRequestDTO:
+      type: object
+      properties:
+        concepts:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.ConceptWithContextDTO'
+          description: The concepts in the request.
+      description: The concepts to create or update.
+    servicing.v2.objectconfiguration.ProcessConceptPropertyDetailsDTO:
+      type: object
+      properties:
+        processConcept:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.ProcessConceptPropertyTypeDTO'
+          description: The process concept's property type details.
+      description: Information about the process concept's property type details.
+    servicing.v2.objectconfiguration.ProcessConceptMemberListDTO:
+      type: object
+      properties:
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.ProcessConceptMemberDTO'
+          description: Each member mapped to a stage or outcome in the process concept.
+      description: The members mapped to a stage or outcome in the process concept.
+    servicing.TagReferenceDTO:
+      type: object
+      properties:
+        objectName:
+          type: string
+          description: The object name of the tag.
+      description: A reference to a tag.
+    servicing.v2.objectconfiguration.ProcessConceptStageDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: The UUID identifying the process concept stage.
+        objectName:
+          type: string
+          description: The object name of the process concept stage.
+        basicInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.BasicInformationDTO'
+          description: Fields that identify and describe the concept stage, such as its display name, description, and explanation.
+        mappedMemberList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.ProcessConceptMemberListDTO'
+          description: The members mapped to the process concept stage.
+      description: Information about a process concept stage.
+    servicing.v2.objectconfiguration.ProcessConceptMetricTypeDetailsDTO:
+      type: object
+      properties:
+        processConcept:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.ProcessConceptMetricDetailsDTO'
+          description: Information about the process concept metric, such as its formula and data type.
+    servicing.BulkChangeResponseDTO:
+      type: object
+      properties:
+        successes:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.SuccessfulChangeDTO'
+          description: The list of successful changes.
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.FailedChangeDTO'
+          description: The list of failed changes.
+    servicing.v2.objectconfiguration.ProcessConceptStageListDTO:
+      type: object
+      properties:
+        stages:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.ProcessConceptStageDTO'
+          description: Each stage in the process concept.
+      description: The process concept's stages.
+    servicing.v2.objectconfiguration.ProcessConceptMetricDefinitionDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: The UUID identifying the metric.
+        objectName:
+          type: string
+          description: The object name of the metric.
+        basicInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.BasicInformationDTO'
+          description: Fields that identify and describe the metric, such as its display name, description, and explanation.
+        details:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.ProcessConceptMetricTypeDetailsDTO'
+          description: The metric type and its details.
+        additiveType:
+          enum:
+          - fullyAdditive
+          - balance
+          - nonAdditive
+          - unknown
+          type: string
+          description: "How to sum the metric's values. Valid values:\n - `fullyAdditive`: Sums the metric over any dimension, concept, or time period.\n - `balance`: Sums the metric over any dimension or concept, but not time period.\n - `nonAdditive`: Metric values are not additive."
+          format: enum
+        versionInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.VersionInformationDTO'
+          description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
+      description: Information about the metric, such as its object name, basic information, and additive type.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    servicing.v2.objectconfiguration.AnalyticObjectFilterListDTO:
+      type: object
+      properties:
+        analyticObjectFilters:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.AnalyticObjectFilterDTO'
+          description: The list of analytic object associated with the dimension.
+      description: The analytic objects associated with the object.
+    servicing.VersionInformationDTO:
+      type: object
+      properties:
+        versionType:
+          enum:
+          - Unknown
+          - BP
+          - Tenant
+          - TenantOverride
+          - TenantShared
+          - Draft
+          type: string
+          description: "Indicates where the object originates from and whether the object has been modified. Valid values:\n - `Unknown`: The source is not known.\n - `BP`: The object originates from Visier's Blueprint and is not changed at the tenant level.\n - `Tenant`: The object only exists in the tenant and doesn't exist in Visier's Blueprint.\n - `TenantOverride`: The object originates from Visier's Blueprint and is changed at the tenant level.\n - `TenantShared`: The object is non-versioned, only exists in the tenant and doesn’t exist in Visier's Blueprint, and is shareable with other users in the tenant.\n - `Draft`: The object only exists in the specified draft project."
+          format: enum
+        edited:
+          type: string
+          description: The UTC time of the latest change in ISO 8601 format. For example, `2023-10-01T12:00:00Z`.
+        editor:
+          type: string
+          description: The user who made the latest change.
+      description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
+    servicing.v2.objectconfiguration.DimensionFilterDTO:
+      type: object
+      properties:
+        dimensionName:
+          type: string
+          description: The dimension object name.
+        qualifyingPath:
+          type: array
+          items:
+            type: string
+          description: "The objects that qualify the path to the dimension from its parent analytic object. For example, let's say the analytic object is `Applicant` and the dimension is `Location`.\n To get to `Location` from `Applicant` there are multiple paths, one of which is to follow references `Requisition` and then `Hiring Manager` to `Location`.\n `Location` is available on `Hiring_Manager` because a hiring manager is an `Employee`. In this example, the qualifying path is `[ \"Applicant.Requisition\" , \"Requisition.Hiring_Manager\" ]`."
+        memberSelections:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.MemberSelectionDTO'
+          description: The dimension members in a member selection concept.
+      description: A dimension associated with the selection concept.
+    servicing.BasicInformationDTO:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The user-friendly name for the object.
+        shortDisplayName:
+          type: string
+          description: A shortened version of the display name. If the object is visible in the solution experience, this name is displayed in visualization titles.
+        description:
+          type: string
+          description: A short description of the object. Descriptions provide in-context help for your users while working in Visier.
+        explanation:
+          type: string
+          description: A longer description of the object that typically includes a definition, calculation details, and other guidance about how to use the object.
+        designerNotes:
+          type: string
+          description: An admin-only description of the object that provides design-specific information or considerations.
+        synonymList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.SynonymListDTO'
+          description: Alternative words or phrases for the object.
+      description: Fields that identify and describe the object, such as its display name, description, and explanation.
+    servicing.v2.objectconfiguration.ProcessConceptDefinitionDTO:
+      type: object
+      properties:
+        analyticObjectName:
+          type: string
+          description: The object name of the analytic object for the process concept.
+        statusDimensionObjectName:
+          type: string
+          description: The object name of the status dimension for the process concept.
+        participationConceptUuid:
+          type: string
+          description: The UUID of the participation concept for the process concept.
+        onHoldConceptUuid:
+          type: string
+          description: The UUID of the on-hold concept for the process concept.
+        stageList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.ProcessConceptStageListDTO'
+          description: The process concept's stages.
+        outcomeList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.ProcessConceptOutcomeListDTO'
+          description: The process concept's outcomes.
+        metricList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.ProcessConceptMetricListDTO'
+          description: The process concept's associated metrics.
+        propertyList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.ProcessConceptPropertyListDTO'
+          description: The process concept's associated properties.
+        tagList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.TagReferenceListDTO'
+          description: The tags assigned to the object.
+        visibleInAnalytics:
+          type: boolean
+          description: If `true`, the object is visible to end users in the solution.
+        includeWithVee:
+          type: boolean
+          description: If `true`, the object is available in Vee's responses.
+      description: The process concept's associated objects, such as its analytic object and status dimension.
+    servicing.v2.objectconfiguration.ProcessConceptOutcomeDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: The UUID identifying the process concept outcome.
+        objectName:
+          type: string
+          description: The object name of the process concept outcome.
+        basicInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.BasicInformationDTO'
+          description: Fields that identify and describe the concept outcome, such as its display name, description, and explanation.
+        outcomeSemantic:
+          enum:
+          - Success
+          - Fail
+          type: string
+          description: "The end result of the process. Valid values:\n - `Success`: The outcome is considered successful; for example, Hired. This is the default.\n - `Fail`: The outcome is considered a failure; for example, Rejected."
+          format: enum
+        mappedMemberList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.ProcessConceptMemberListDTO'
+          description: Each member mapped to the process concept outcome.
+      description: Information about a process concept outcome.
+    servicing.v2.objectconfiguration.ProcessConceptPropertyListDTO:
+      type: object
+      properties:
+        properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.ProcessConceptPropertyDTO'
+          description: Each property in the process concept.
+      description: The process concept's associated properties.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: analytic model
+  tags:
+  - DataModel
+  - ObjectConfiguration
+  - ConceptsV2
+  - DimensionsV2
+  - AnalyticObjectsV2
+  - MetricsV2
+  - PersonalizedAlerts

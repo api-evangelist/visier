@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Administration Users V3 API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "UsersV3",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update or insert (upsert) a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v3/admin/users/:username",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "Prefer",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username of the user to update if the user exists, otherwise creates a new user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a user if the user exists, otherwise create a new user. Use the user's `username` to specify the user to update or create.\n\n In `PUT` requests, the definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the request, those values are removed from the user if the user exists."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

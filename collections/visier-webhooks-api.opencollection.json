@@ -1,0 +1,217 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Webhooks API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of webhooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/op/webhooks",
+            "params": [
+              {
+                "name": "event",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve all webhooks listening for the specified event type. Default is to retrieve all webhooks.\n\n The possible event types to listen for. Valid values:\n - `jobResultSuccess`: A job completed successfully.\n - `jobResultFailure`: A job failed to complete.\n - `jobReschedule`: A job was rescheduled.\n - `dvPublish`: A data version published to production.\n - `alertNotification`: A personalized alert notification was triggered.\n - `smartCompNotification`: A Smart Compensation event notification was triggered. This is available for Embedded Partners.\n - `dataUploadNotification`: A data file was uploaded.\n - `systemAlertNotification`: A system event alert notification was triggered.\n - `planRowPromotionNotification`: A row in a plan was promoted.\n - `auditEvent`: An audit event was triggered."
+              },
+              {
+                "name": "isActive",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, retrieve active webhooks only. If `false`, retrieve active and inactive webhooks. Default is `false`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all webhooks. The response returns each webhook's definition, such as its endpoint URL, active status, and event types."
+        },
+        {
+          "info": {
+            "name": "Create a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/op/webhooks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new webhook with Visier. You must specify the webhook's endpoint URL, its active status, the event types to listen for, and the credentials to authenticate calls to the webhook endpoint."
+        },
+        {
+          "info": {
+            "name": "Retrieve webhook statuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/op/webhooks-status",
+            "params": [
+              {
+                "name": "event",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve all webhooks listening for the specified event type. Default is to retrieve all webhooks.\n\n The possible event types to listen for. Valid values:\n - `jobResultSuccess`: A job completed successfully.\n - `jobResultFailure`: A job failed to complete.\n - `jobReschedule`: A job was rescheduled.\n - `dvPublish`: A data version published to production.\n - `alertNotification`: A personalized alert notification was triggered.\n - `smartCompNotification`: A Smart Compensation event notification was triggered. This is available for Embedded Partners.\n - `dataUploadNotification`: A data file was uploaded.\n - `systemAlertNotification`: A system event alert notification was triggered.\n - `planRowPromotionNotification`: A row in a plan was promoted.\n - `auditEvent`: An audit event was triggered."
+              },
+              {
+                "name": "isActive",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, retrieve active webhooks only. If `false`, retrieve active and inactive webhooks. Default is `false`."
+              }
+            ]
+          },
+          "docs": "Retrieve the statuses of all webhooks, such as their active status and the event types they're listening for. API users can call this endpoint without any special capabilities."
+        },
+        {
+          "info": {
+            "name": "Retrieve a webhook's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/op/webhooks/:webhookId",
+            "params": [
+              {
+                "name": "webhookId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the webhook."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a specific webhook. You must know the ID of the webhook to retrieve its details. To retrieve webhook IDs, see `GET /v1/op/webhooks`."
+        },
+        {
+          "info": {
+            "name": "Update a webhook's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/op/webhooks/:webhookId",
+            "params": [
+              {
+                "name": "webhookId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the webhook."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the details of an existing webhook, such as its URL and active status. You must know the ID of the webhook to update it. To retrieve webhook IDs, see `GET /v1/op/webhooks`. To update a webhook's credentials, see `PUT /v1/op/webhooks/{webhookId}/credentials`.\n\n When updating a webhook, the webhook definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed from the "
+        },
+        {
+          "info": {
+            "name": "Delete a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/op/webhooks/:webhookId",
+            "params": [
+              {
+                "name": "webhookId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the webhook."
+              }
+            ]
+          },
+          "docs": "Delete a specific webhook. You must know the ID of the webhook to delete it. To retrieve webhook IDs, see `GET /v1/op/webhooks`."
+        },
+        {
+          "info": {
+            "name": "Update a webhook's credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/op/webhooks/:webhookId/credentials",
+            "params": [
+              {
+                "name": "webhookId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the webhook."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the credentials to authenticate calls to the webhook endpoint. You must know the ID of the webhook to update it. To retrieve webhook IDs, see `GET /v1/op/webhooks`. To update a webhook's details, see `PUT /v1/op/webhooks/{webhookId}`.\n\n When updating a webhook, the webhook definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed from the webhook. We recommend th"
+        },
+        {
+          "info": {
+            "name": "Delete a webhook's credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/op/webhooks/:webhookId/credentials",
+            "params": [
+              {
+                "name": "webhookId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the webhook."
+              }
+            ]
+          },
+          "docs": "Delete the credentials for a webhook. You must know the ID of the webhook to delete its credentials. To retrieve webhook IDs, see `GET /v1/op/webhooks`."
+        },
+        {
+          "info": {
+            "name": "Test a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/op/webhooks/:webhookId/testEvent",
+            "params": [
+              {
+                "name": "webhookId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the webhook."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a test event to an existing webhook. This validates whether the webhook works. You must specify the webhook ID and an event type."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

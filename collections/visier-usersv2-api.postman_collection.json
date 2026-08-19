@@ -1,0 +1,622 @@
+{
+  "item": [
+    {
+      "id": "2de99b21-f4ee-422f-8762-f63d1793b9b5",
+      "name": "UsersV2",
+      "description": {
+        "content": "Manage users in bulk, such as creating, updating, and deleting many users.\n<br>**Tip:** Visier recommends that administrating tenant users focus primarily on managing users at the administrating tenant level. These users likely belong directly to your organization, such as customer support, customer value managers, account executives, and customer success. These users work with clients to manage their day-to-day solution needs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5708526f-efed-4601-a03c-b7a2da6e7aee",
+          "name": "Update users",
+          "request": {
+            "name": "Update users",
+            "description": {
+              "content": "Update an existing user's information, such as their display name or if the user is enabled in Visier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "admin",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "tenantCode",
+                  "value": "<string>",
+                  "description": "Specify the tenant to update a user in."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"users\": [\n    {\n      \"userId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"employeeId\": \"<string>\",\n      \"accountEnabled\": \"<string>\",\n      \"email\": \"<string>\",\n      \"username\": \"<string>\"\n    },\n    {\n      \"userId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"employeeId\": \"<string>\",\n      \"accountEnabled\": \"<string>\",\n      \"email\": \"<string>\",\n      \"username\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "09a1d8e6-a187-47e1-9cf4-fe3c86a7be11",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "admin",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tenantCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    {\n      \"userId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"employeeId\": \"<string>\",\n      \"accountEnabled\": \"<string>\",\n      \"email\": \"<string>\",\n      \"username\": \"<string>\"\n    },\n    {\n      \"userId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"employeeId\": \"<string>\",\n      \"accountEnabled\": \"<string>\",\n      \"email\": \"<string>\",\n      \"username\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"successes\": [\n    {\n      \"userId\": \"string\",\n      \"username\": \"string\",\n      \"displayName\": \"string\",\n      \"employeeId\": \"string\",\n      \"accountEnabled\": \"string\",\n      \"email\": \"string\"\n    },\n    {\n      \"userId\": \"string\",\n      \"username\": \"string\",\n      \"displayName\": \"string\",\n      \"employeeId\": \"string\",\n      \"accountEnabled\": \"string\",\n      \"email\": \"string\"\n    }\n  ],\n  \"failures\": [\n    {\n      \"userId\": \"string\",\n      \"userName\": \"string\",\n      \"displayName\": \"string\",\n      \"error\": {\n        \"message\": \"string\",\n        \"rci\": \"string\"\n      }\n    },\n    {\n      \"userId\": \"string\",\n      \"userName\": \"string\",\n      \"displayName\": \"string\",\n      \"error\": {\n        \"message\": \"string\",\n        \"rci\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df8a9a1b-f21e-47ee-83cf-530e7e7e4d94",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "admin",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tenantCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    {\n      \"userId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"employeeId\": \"<string>\",\n      \"accountEnabled\": \"<string>\",\n      \"email\": \"<string>\",\n      \"username\": \"<string>\"\n    },\n    {\n      \"userId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"employeeId\": \"<string>\",\n      \"accountEnabled\": \"<string>\",\n      \"email\": \"<string>\",\n      \"username\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "505e8658-5a56-4e8d-992c-89e319cccee0",
+          "name": "Add users",
+          "request": {
+            "name": "Add users",
+            "description": {
+              "content": "Create new users. Administrating tenant users can specify the tenant in which to add these users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "admin",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "tenantCode",
+                  "value": "<string>",
+                  "description": "Specify the tenant to create a user in."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"users\": [\n    {\n      \"username\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"employeeId\": \"<string>\",\n      \"accountEnabled\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    {\n      \"username\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"employeeId\": \"<string>\",\n      \"accountEnabled\": \"<string>\",\n      \"email\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4fbcc85d-f602-4fed-9a02-84884bb38c5a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "admin",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tenantCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    {\n      \"username\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"employeeId\": \"<string>\",\n      \"accountEnabled\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    {\n      \"username\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"employeeId\": \"<string>\",\n      \"accountEnabled\": \"<string>\",\n      \"email\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"successes\": [\n    {\n      \"userId\": \"string\",\n      \"username\": \"string\",\n      \"displayName\": \"string\",\n      \"employeeId\": \"string\",\n      \"accountEnabled\": \"string\",\n      \"email\": \"string\"\n    },\n    {\n      \"userId\": \"string\",\n      \"username\": \"string\",\n      \"displayName\": \"string\",\n      \"employeeId\": \"string\",\n      \"accountEnabled\": \"string\",\n      \"email\": \"string\"\n    }\n  ],\n  \"failures\": [\n    {\n      \"userId\": \"string\",\n      \"userName\": \"string\",\n      \"displayName\": \"string\",\n      \"error\": {\n        \"message\": \"string\",\n        \"rci\": \"string\"\n      }\n    },\n    {\n      \"userId\": \"string\",\n      \"userName\": \"string\",\n      \"displayName\": \"string\",\n      \"error\": {\n        \"message\": \"string\",\n        \"rci\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c814c8ce-9652-46a6-b037-851b4c2f94f4",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "admin",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tenantCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    {\n      \"username\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"employeeId\": \"<string>\",\n      \"accountEnabled\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    {\n      \"username\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"employeeId\": \"<string>\",\n      \"accountEnabled\": \"<string>\",\n      \"email\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62e2cfd8-41be-4914-8332-9022e6e6e832",
+          "name": "Delete users",
+          "request": {
+            "name": "Delete users",
+            "description": {
+              "content": "Delete an existing user. Administrating tenant users can specify the tenant from which to delete a user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "admin",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "tenantCode",
+                  "value": "<string>",
+                  "description": "Specify the tenant to delete a user in."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a7ab481c-d876-4a6c-8fd1-c26ef309ec59",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "admin",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tenantCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"successes\": [\n    {\n      \"userId\": \"string\",\n      \"username\": \"string\",\n      \"displayName\": \"string\",\n      \"employeeId\": \"string\",\n      \"accountEnabled\": \"string\",\n      \"email\": \"string\"\n    },\n    {\n      \"userId\": \"string\",\n      \"username\": \"string\",\n      \"displayName\": \"string\",\n      \"employeeId\": \"string\",\n      \"accountEnabled\": \"string\",\n      \"email\": \"string\"\n    }\n  ],\n  \"failures\": [\n    {\n      \"userId\": \"string\",\n      \"userName\": \"string\",\n      \"displayName\": \"string\",\n      \"error\": {\n        \"message\": \"string\",\n        \"rci\": \"string\"\n      }\n    },\n    {\n      \"userId\": \"string\",\n      \"userName\": \"string\",\n      \"displayName\": \"string\",\n      \"error\": {\n        \"message\": \"string\",\n        \"rci\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94beeba7-39f7-41ab-a239-13ee15a808c7",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "admin",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tenantCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "339f375c-d9bd-4168-bf44-943733d3bf3e",
+    "name": "Visier Administration Users V2 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.",
+      "type": "text/plain"
+    }
+  }
+}

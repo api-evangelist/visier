@@ -1,0 +1,143 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Data Out Vee V1 API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "VeeV1",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit Vee feedback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/vee/feedback",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Give Vee feedback for a previous answer. To submit feedback, include:\n * The conversation details from the `/question` response.\n * A rating of Vee's answer. If `isApproved` is `true`, Vee answered the question correctly. If `isApproved` is `false`, Vee's answer was incorrect or lacked details.\n * A description of how Vee should have answered the question or how Vee can improve the answer, such as \"Expected Headcount metric, but Vee returned Average Headcount\"."
+        },
+        {
+          "info": {
+            "name": "Ask Vee a question",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/vee/question",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use plain language to ask Vee a people question. Use body parameters to specify how Vee should respond, such as returning a visualization, data, or rewording the question.\n\n The response always returns a `conversationState` object containing a unique ID for the conversation. To ask a follow-up question or continue the conversation with Vee, include the `conversationState` from the response in your next `/question` call. To submit feedback about Vee's answer, copy the entire response into your `/"
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of Vee question categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/vee/sample-question-categories",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get a list of categories for the Vee sample questions displayed in the conversation interface."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Vee question category's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/vee/sample-question-categories/:questionCategoryId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "questionCategoryId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the details of a specific Vee sample question category where the ID is the `categoryID` returned by `GET /v1/vee/sample-question-categories`."
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of sample questions to ask Vee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/vee/sample-questions",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get a list of sample questions to help you start using Vee. The response returns a list of questions that you can ask Vee, such as \"What is the turnover rate?\".\n You may occasionally encounter a sample question that can't be answered due to data availability or your data access"
+        },
+        {
+          "info": {
+            "name": "Check the overall current status of Vee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/vee/status",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Check the current overall status of Vee.\n\n The overall status is one of:\n * `UP` :  Vee is operational.\n * `DOWN`: Vee is not operational."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

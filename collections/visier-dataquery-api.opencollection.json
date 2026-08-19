@@ -1,0 +1,161 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Data Out Data Query API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DataQuery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query aggregate data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/data/query/aggregate",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "DataVersionID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "To retrieve aggregated values from your data in Visier, you can perform an aggregation. Usually, an aggregation\n retrieves values over a period of time, such as multiple months. You can also group and filter your data in an\n aggregation query to retrieve detailed information."
+        },
+        {
+          "info": {
+            "name": "Retrieve a data out connector's latest version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/data/query/connector-version",
+            "params": [
+              {
+                "name": "connectorId",
+                "value": "",
+                "type": "query",
+                "description": "The name of the connector for which to retrieve the latest version. Valid values:\n - `powerbi`: Retrieve the latest version of Visier's Power BI connector.\n - `tableau`: Retrieve the latest version of Visier's Tableau connector."
+              }
+            ]
+          },
+          "docs": "Retrieve the latest released version of a data out connector. Use this endpoint to automate checking connector release versions."
+        },
+        {
+          "info": {
+            "name": "Query a list of details",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/data/query/list",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "DataVersionID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "To retrieve a list of values for specific objects, you can perform a list query. A list query provides information\n about values for selected data points, and is not an aggregated value. In Visier's interface, a list query is\n comparable to View Details for a specific data point in a visualization."
+        },
+        {
+          "info": {
+            "name": "Query a series of detailed snapshots",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/data/query/snapshot",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "DataVersionID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "To retrieve a collection of `list` query-style snapshots taken at the defined intervals, execute a `snapshot` query.\n Each snapshot in the result is associated with a timestamp, or the \"effective date\" at which date snapshot data was valid.\n This API allows you to request a detailed time series from Visier.\n\n Structurally, a `snapshot` query is similar to a `list` query, but has the following differences:\n * The `snapshot` query may contain a column, `effectiveDateProperty`, that specifies the t"
+        },
+        {
+          "info": {
+            "name": "Query aggregate or list data using SQL-like syntax",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/data/query/sql",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "DataVersionID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "To retrieve a list of values for specific objects or aggregate values from metrics, you can write queries using SQL-like syntax.\n The response format matches the query type whether aggregate or list. If requested, aggregate query results may be flattened into tabular format.\n\n A SQL-like query is an aggregate if it contains at least one metric. Aggregate queries must specify a time interval divided into periods; for example:\n ```sql\n SELECT\n   employeeCount() AS \"Employee Count\",\n   level(Gender"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

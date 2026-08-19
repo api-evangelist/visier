@@ -1,0 +1,304 @@
+{
+  "item": [
+    {
+      "id": "91888d34-dc49-4d63-8dbb-d89e9fdb45a3",
+      "name": "UsersV3",
+      "description": {
+        "content": "Manage users within an organization. Users V3 offers the ability to update or insert (upsert) a user. ",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f133234a-5382-4414-b7c6-18ed6897e34b",
+          "name": "Update or insert (upsert) a user",
+          "request": {
+            "name": "Update or insert (upsert) a user",
+            "description": {
+              "content": "Update a user if the user exists, otherwise create a new user. Use the user's `username` to specify the user to update or create.\n\n In `PUT` requests, the definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the request, those values are removed from the user if the user exists.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "admin",
+                "users",
+                ":username"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "username",
+                  "description": "(Required) The username of the user to update if the user exists, otherwise creates a new user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.",
+                "key": "NonVersioned",
+                "value": "<boolean>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally, specify a project in which to make the request.",
+                "key": "ProjectID",
+                "value": "<uuid>"
+              },
+              {
+                "disabled": false,
+                "description": "When `NonVersioned: true`, use `Prefer` to optionally specify if API calls should be subject to locking. Locking prevents incremental changes in multiple API calls from overwriting each other. The `Prefer` header works alongside a tenant feature flag. When enabled, the default is `nvLock=global`. When disabled, the default is not to lock API calls. Contact Visier Technical Support to enable the tenant feature flag.\nValid values for the `Prefer` header:\n* `nvLock=global`: Run API calls sequentially. Sequential API calls prevent calls from unintentionally overwriting each other.\n* `nvLock=artifact`: Allow API calls in parallel. Parallel API calls only work if the calls do not conflict with each other. If a change wasn't applied, the request fails and returns the HTTP 409 conflict error. Run the request again until successful.\n* `nvLock=none`: Disable the global lock if the tenant feature flag is enabled.",
+                "key": "Prefer",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"employeeId\": \"<string>\",\n  \"accountEnabled\": \"<string>\",\n  \"email\": \"<string>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"permissionIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"profileAssignments\": [\n    {\n      \"profileId\": \"<string>\",\n      \"validityStartTime\": \"<string>\",\n      \"validityEndTime\": \"<string>\"\n    },\n    {\n      \"profileId\": \"<string>\",\n      \"validityStartTime\": \"<string>\",\n      \"validityEndTime\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eb9c62de-2baa-4cfe-bd52-ac986382f8d0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "admin",
+                    "users",
+                    ":username"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "username",
+                      "description": "(Required) The username of the user to update if the user exists, otherwise creates a new user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.",
+                    "key": "NonVersioned",
+                    "value": "<boolean>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "When `NonVersioned: true`, use `Prefer` to optionally specify if API calls should be subject to locking. Locking prevents incremental changes in multiple API calls from overwriting each other. The `Prefer` header works alongside a tenant feature flag. When enabled, the default is `nvLock=global`. When disabled, the default is not to lock API calls. Contact Visier Technical Support to enable the tenant feature flag.\nValid values for the `Prefer` header:\n* `nvLock=global`: Run API calls sequentially. Sequential API calls prevent calls from unintentionally overwriting each other.\n* `nvLock=artifact`: Allow API calls in parallel. Parallel API calls only work if the calls do not conflict with each other. If a change wasn't applied, the request fails and returns the HTTP 409 conflict error. Run the request again until successful.\n* `nvLock=none`: Disable the global lock if the tenant feature flag is enabled.",
+                    "key": "Prefer",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"employeeId\": \"<string>\",\n  \"accountEnabled\": \"<string>\",\n  \"email\": \"<string>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"permissionIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"profileAssignments\": [\n    {\n      \"profileId\": \"<string>\",\n      \"validityStartTime\": \"<string>\",\n      \"validityEndTime\": \"<string>\"\n    },\n    {\n      \"profileId\": \"<string>\",\n      \"validityStartTime\": \"<string>\",\n      \"validityEndTime\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"userId\": \"string\",\n  \"username\": \"string\",\n  \"displayName\": \"string\",\n  \"employeeId\": \"string\",\n  \"accountEnabled\": \"string\",\n  \"email\": \"string\",\n  \"userGroupIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"profileIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"permissionIds\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0326dbf5-f117-4f27-8244-ff0f3dc1c874",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "admin",
+                    "users",
+                    ":username"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "username",
+                      "description": "(Required) The username of the user to update if the user exists, otherwise creates a new user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If `true`, the API call executes on non-versioned artifacts and create/update actions take effect without a new production version. If `false`, the API call executes on versioned artifacts and create/update actions release a new production version. Default is `false`.",
+                    "key": "NonVersioned",
+                    "value": "<boolean>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify a project in which to make the request.",
+                    "key": "ProjectID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "When `NonVersioned: true`, use `Prefer` to optionally specify if API calls should be subject to locking. Locking prevents incremental changes in multiple API calls from overwriting each other. The `Prefer` header works alongside a tenant feature flag. When enabled, the default is `nvLock=global`. When disabled, the default is not to lock API calls. Contact Visier Technical Support to enable the tenant feature flag.\nValid values for the `Prefer` header:\n* `nvLock=global`: Run API calls sequentially. Sequential API calls prevent calls from unintentionally overwriting each other.\n* `nvLock=artifact`: Allow API calls in parallel. Parallel API calls only work if the calls do not conflict with each other. If a change wasn't applied, the request fails and returns the HTTP 409 conflict error. Run the request again until successful.\n* `nvLock=none`: Disable the global lock if the tenant feature flag is enabled.",
+                    "key": "Prefer",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"employeeId\": \"<string>\",\n  \"accountEnabled\": \"<string>\",\n  \"email\": \"<string>\",\n  \"userGroupIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"permissionIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"profileAssignments\": [\n    {\n      \"profileId\": \"<string>\",\n      \"validityStartTime\": \"<string>\",\n      \"validityEndTime\": \"<string>\"\n    },\n    {\n      \"profileId\": \"<string>\",\n      \"validityStartTime\": \"<string>\",\n      \"validityEndTime\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7845b0c9-d062-47f0-a840-a2c034b2a3ec",
+    "name": "Visier Administration Users V3 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.",
+      "type": "text/plain"
+    }
+  }
+}

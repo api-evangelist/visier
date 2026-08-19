@@ -1,0 +1,1781 @@
+openapi: 3.2.0
+info:
+  title: Visier Data Out Data Query API
+  description: Visier APIs for getting data out of Visier, such as aggregate data and data version information.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: DataQuery
+  x-displayName: Data Query
+  description: Query against your data in Visier to get aggregate and list data.
+paths:
+  /v1/data/query/aggregate:
+    post:
+      tags:
+      - DataQuery
+      summary: Query aggregate data
+      description: "To retrieve aggregated values from your data in Visier, you can perform an aggregation. Usually, an aggregation\n retrieves values over a period of time, such as multiple months. You can also group and filter your data in an\n aggregation query to retrieve detailed information."
+      operationId: DataQuery_Aggregate
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request. If omitted, the request uses the production version.
+        schema:
+          type: string
+          format: uuid
+      - name: DataVersionID
+        in: header
+        description: Optionally, specify a data version against which to execute the query. If omitted, the request uses the current project's data version or the production version if no project is specified.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dataservices.query.AggregationQueryExecutionDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: Aggregate query response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dataservices.query.CellSetOrErrorDTO'
+            application/jsonlines:
+              schema:
+                type: string
+            text/csv:
+              schema:
+                type: string
+  /v1/data/query/connector-version:
+    get:
+      tags:
+      - DataQuery
+      summary: Retrieve a data out connector's latest version
+      description: Retrieve the latest released version of a data out connector. Use this endpoint to automate checking connector release versions.
+      operationId: DataQuery_ConnectorVersion
+      parameters:
+      - name: connectorId
+        in: query
+        description: "The name of the connector for which to retrieve the latest version. Valid values:\n - `powerbi`: Retrieve the latest version of Visier's Power BI connector.\n - `tableau`: Retrieve the latest version of Visier's Tableau connector."
+        schema:
+          enum:
+          - powerbi
+          - tableau
+          type: string
+          format: enum
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dataservices.query.ConnectorVersionDTO'
+      security:
+      - {}
+  /v1/data/query/list:
+    post:
+      tags:
+      - DataQuery
+      summary: Query a list of details
+      description: "To retrieve a list of values for specific objects, you can perform a list query. A list query provides information\n about values for selected data points, and is not an aggregated value. In Visier's interface, a list query is\n comparable to View Details for a specific data point in a visualization."
+      operationId: DataQuery_List
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request. If omitted, the request uses the production version.
+        schema:
+          type: string
+          format: uuid
+      - name: DataVersionID
+        in: header
+        description: Optionally, specify a data version against which to execute the query. If omitted, the request uses the data version released by the current project or production version, if no project is specified.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dataservices.query.ListQueryExecutionDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: List query response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/data_out.ListResponse'
+            application/jsonlines:
+              schema:
+                type: string
+            text/csv:
+              schema:
+                type: string
+  /v1/data/query/snapshot:
+    post:
+      tags:
+      - DataQuery
+      summary: Query a series of detailed snapshots
+      description: "To retrieve a collection of `list` query-style snapshots taken at the defined intervals, execute a `snapshot` query.\n Each snapshot in the result is associated with a timestamp, or the \"effective date\" at which date snapshot data was valid.\n This API allows you to request a detailed time series from Visier.\n\n Structurally, a `snapshot` query is similar to a `list` query, but has the following differences:\n * The `snapshot` query may contain a column, `effectiveDateProperty`, that specifies the time for each snapshot. To include the `effectiveDateProperty` column, add the following object to the columns array:\n    ```json\n    {\n        \"columnName\": \"Snapshot_Date\",\n        \"columnDefinition\": {\n            \"effectiveDateProperty\": {}\n        }\n    }\n    ```\n * The `snapshot` query uses `timeIntervals` (like an `aggregate` query) instead of `timeInterval` (like a `list` query) because the `snapshot` query\n    must specify the number of snapshots to generate. To specify the number of snapshots to generate, use the `intervalCount` property in the `timeIntervals` object, as shown next.\n    ```json\n    {\n        \"timeIntervals\": {\n        \"fromDateTime\": \"2022-01-01\",\n        \"intervalPeriodType\": \"MONTH\",\n        \"intervalPeriodCount\": 6,\n        \"intervalCount\": 4\n    }\n    ```"
+      operationId: Query_Snapshot
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request. If omitted, the request uses the production version.
+        schema:
+          type: string
+          format: uuid
+      - name: DataVersionID
+        in: header
+        description: Optionally, specify a data version against which to execute the query. If omitted, the request uses the data version released by the current project or production version, if no project is specified.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dataservices.query.SnapshotQueryExecutionDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: List query response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/data_out.ListResponse'
+            application/jsonlines:
+              schema:
+                type: string
+            text/csv:
+              schema:
+                type: string
+  /v1/data/query/sql:
+    post:
+      tags:
+      - DataQuery
+      summary: Query aggregate or list data using SQL-like syntax
+      description: "To retrieve a list of values for specific objects or aggregate values from metrics, you can write queries using SQL-like syntax.\n The response format matches the query type whether aggregate or list. If requested, aggregate query results may be flattened into tabular format.\n\n A SQL-like query is an aggregate if it contains at least one metric. Aggregate queries must specify a time interval divided into periods; for example:\n ```sql\n SELECT\n   employeeCount() AS \"Employee Count\",\n   level(Gender, \"Gender\") AS Gender\n FROM\n   Employee\n WHERE\n  Visier_Time IN periods(date(\"2023-01-01\"), 4, period(3, Month));\n ```\n\n A SQL-like query is a list if it does not contain any metrics. List queries define time intervals as simple intervals; for example:\n ```sql\n SELECT\n   EmployeeID AS \"Employee ID\",\n   level(Gender, \"Gender\") AS Gender\n FROM\n   Employee\n WHERE\n  Visier_Time BETWEEN date(\"2022-01-01\") AND date(\"2023-01-01\");\n ```"
+      operationId: DataQuery_SqlLike
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      - name: ProjectID
+        in: header
+        description: Optionally, specify a project in which to make the request. If omitted, the request uses the production version.
+        schema:
+          type: string
+          format: uuid
+      - name: DataVersionID
+        in: header
+        description: Optionally, specify a data version against which to execute the query. If omitted, the request uses the data version released by the current project or production version, if no project is specified.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dataservices.query.SqlLikeQueryExecutionDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '200':
+          description: List query response
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/TableResponseDTO'
+                - $ref: '#/components/schemas/dataservices.query.CellSetDTO'
+            application/jsonlines:
+              schema:
+                type: string
+            text/csv:
+              schema:
+                type: string
+components:
+  schemas:
+    dataservices.query.QueryExecutionErrorsDTO:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: A brief identifier of the type of error.
+        message:
+          type: string
+          description: The message of the error.
+        allErrorDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.QueryExecutionErrorDetailsDTO'
+          description: The list of the error details.
+      description: The errors that occurred during query execution.
+    dataservices.query.TimeShiftDTO:
+      type: object
+      properties:
+        periodType:
+          enum:
+          - MONTH
+          - DAY
+          - WEEK
+          - QUARTER
+          - YEAR
+          type: string
+          description: The time period type for the shift.
+          format: enum
+        periodCount:
+          type: integer
+          description: The number of intervals. Default is 1.
+          format: int32
+        direction:
+          enum:
+          - BACKWARD
+          - FORWARD
+          type: string
+          description: The direction to extend. Default is BACKWARD.
+          format: enum
+      description: The amount of time to shift the time interval by, such as backward by one year.
+    dataservices.query.CellDTO:
+      type: object
+      properties:
+        value:
+          type: string
+          description: The value of the cell.
+        support:
+          type: string
+          description: The number of data points contributing to this cell.
+        coordinates:
+          type: array
+          items:
+            type: integer
+            format: int32
+          description: A list of integers representing the coordinates of this cell, identifying its position along each axis.
+        distribution:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.CellDistributionBinDTO'
+          description: "The optional distribution of this cell.\n This will be populated if distribution calculation is requested, and supported by the query."
+      description: An individual value in a cell set.
+    dataservices.query.PlanParameterValueDTO:
+      type: object
+      properties:
+        parameterId:
+          type: string
+          description: The unique ID of the plan parameter qualified by the object.
+        planId:
+          type: string
+          description: The unique ID of the plan the parameter is based on.
+        scenarioId:
+          type: string
+          description: The unique ID of the scenario the parameter is based on.
+        snapshotId:
+          type: string
+          description: The unique ID of the snapshot the parameter is based on.
+      description: The value for a parameter on a planning metric, including the parameter ID and the plan the parameter is based on.
+    dataservices.query.SnapshotQueryExecutionOptionsDTO:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: "The maximum number of entries to return. Default is to return all entries. If `page` is defined but\n limit is not defined, limit will be set to a default value of 1000."
+          format: int32
+        queryMode:
+          enum:
+          - DEFAULT
+          - FILL
+          - FAIL
+          type: string
+          description: Determines how the query should handle column definitions that the query is unable to resolve. Default is DEFAULT.
+          format: enum
+        omitHeader:
+          type: boolean
+          description: "Option to omit the header from the result.\n If true, queryMode must be either FILL or FAIL.\n Default is false."
+        calendarType:
+          enum:
+          - TENANT_CALENDAR
+          - GREGORIAN_CALENDAR
+          type: string
+          description: "The calendar type to use. This will be used for all time calculations unless explicitly overridden in\n the calculation itself. Default is TENANT_CALENDAR."
+          format: enum
+        currencyConversionDate:
+          type: string
+          description: The currency conversion date to use. If defined, the currency conversion will use the exchange rates as of this date.
+        page:
+          type: integer
+          description: "A page defines a subset of the overall result set. The number of rows per page is equal to limit\n with the exception of the last page in the result set which may contain fewer rows. `Page` is an index\n that begins at 0. The index to start retrieving results is calculated by multiplying `page` by `limit`."
+          format: int32
+        multipleTables:
+          type: boolean
+          description: "Option to return multiple table files as zipped archive for derived metrics.\n Default is false. If false, one table is returned for the drill-through metric."
+        currencyConversionCode:
+          type: string
+          description: "The optional target currency for all currency conversions.\n If not specified, the tenant default currency will be used."
+        dateTimeDisplayMode:
+          enum:
+          - EPOCH
+          - DATETIME
+          type: string
+          description: "Control how date-time values are displayed in the result set.\n Supported values:\n * `EPOCH`: The number of elapsed milliseconds since January 1, 1970 in UTC timezone. This is the default.\n * `DATETIME`: The date-time value displayed in `yyyy-MM-dd HH:mm:ssZZ` format."
+          format: enum
+      description: A SnapshotQueryExecutionOptions provides additional instructions to perform a snapshot query.
+    dataservices.query.QueryNumericRangesDTO:
+      type: object
+      properties:
+        property:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryPropertyDTO'
+          description: The name and qualifying path of a numeric property. Non-numeric properties are not accepted.
+        ranges:
+          type: string
+          description: The ranges to group data into, expressed as a space-separated string of range-bound values.
+        includeNegative:
+          type: boolean
+          description: If `true`, negative ranges are included. Default is false.
+        includeIndependentZeroRange:
+          type: boolean
+          description: If `true`, 0 is an independent range. Default is false.
+        includeAllMember:
+          type: boolean
+          description: If `true`, a member is included that represents all members on the axis. Default is false.
+      description: A QueryNumericRanges groups data into specified ranges based on a property value.
+    dataservices.query.NumericParameterValueDTO:
+      type: object
+      properties:
+        parameterId:
+          type: string
+          description: The unique ID of the numeric parameter qualified by the object.
+        value:
+          type: number
+          description: The numeric value of the parameter.
+          format: double
+      description: The value of a numeric parameter, including the parameter ID and the numeric value passed into the parameter.
+    dataservices.query.QueryParameterValueDTO:
+      type: object
+      properties:
+        memberValue:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.MemberParameterValueDTO'
+          description: A value for a member parameter.
+        numericValue:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.NumericParameterValueDTO'
+          description: A value for a numeric parameter.
+        planValue:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.PlanParameterValueDTO'
+          description: A value for a plan parameter.
+        aggregationTypeValue:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.AggregationTypeParameterValueDTO'
+          description: A value for an aggregation parameter.
+        subjectMemberSetValue:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.SubjectMemberSetParameterValueDTO'
+          description: A value for a subject member set parameter.
+      description: An object that contains parameter values for either member or numeric parameters.
+    dataservices.query.ListQueryExecutionDTO:
+      type: object
+      properties:
+        source:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.ListQuerySourceDTO'
+          description: The source data that you want to query.
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.PropertyColumnDTO'
+          description: The columns to include in the result. This must contain at least one column.
+        sortOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.SortOptionDTO'
+          description: The index and direction to sort a column in the `columns` array.
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.QueryFilterDTO'
+          description: The filters of this query. Omit `filters` if no filtering is required.
+        timeInterval:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryTimeIntervalDTO'
+          description: The time that the data is valid, such as a specific day or period of months.
+        parameterValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.QueryParameterValueDTO'
+          description: The parameter values for either member or numeric parameters.
+        options:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.ListQueryExecutionOptionsDTO'
+          description: Additional instructions for your query, such as a calendar type or conversion information.
+      description: A ListQueryExecution provides instructions to perform a list query.
+    TableResponseDTO:
+      type: object
+      properties:
+        header:
+          type: object
+          additionalProperties:
+            type: string
+          description: Description of the columns in the result set.
+        rows:
+          type: array
+          description: Result rows in key-value format.
+          items:
+            type: object
+            additionalProperties:
+              type: string
+    dataservices.query.SubjectMemberSetParameterValueDTO_NamePathDTO:
+      type: object
+      properties:
+        namePath:
+          type: array
+          items:
+            type: string
+          description: The name path for dimension members.
+      description: The name path for dimension members.
+    dataservices.query.SqlLikeQueryExecutionDTO:
+      type: object
+      properties:
+        query:
+          type: string
+          description: The SQL-like query string
+        options:
+          deprecated: true
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.AggregateQueryExecutionOptionsDTO'
+          description: "This will be removed as of Spring 2026. Use `aggregateQueryOptions` instead.\n If both `options` and `aggregateQueryOptions` are specified, `aggregateQueryOptions` takes precedence.\n\n Optional aggregate query options.\n **Note**: `enableDescendingSpace` is not supported in SQL-like aggregate queries."
+        aggregateQueryOptions:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.AggregateQueryExecutionOptionsDTO'
+          description: "Options to apply to a SQL-like aggregate query. The query is aggregate if it contains at least one metric.\n **Note**: `enableDescendingSpace` is not supported in SQL-like aggregate queries."
+        listQueryOptions:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.ListQueryExecutionOptionsDTO'
+          description: "Options to apply to a SQL-like list query. The query is list if it contains no metrics and has only properties.\n **Note**: `multipleTables` is not supported in SQL-like list queries."
+      description: "*\n Request body for SQL-like query executions, which can be either an aggregate or list query.\n For examples that distinguish between aggregate and list queries, see the `POST /v1/data/query/sql` description."
+    dataservices.query.QueryFilterDTO:
+      type: object
+      properties:
+        formula:
+          type: string
+          description: A filter expressed as a formula.
+        selectionConcept:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.SelectionConceptReferenceDTO'
+          description: A filter that uses an existing selection concept in Visier.
+        memberSet:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.MemberFilterDTO'
+          description: A filter that includes or excludes dimension members.
+        cohort:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.CohortFilterDTO'
+          description: A filter that identifies a population at a specific time.
+      description: A QueryFilter selects specific data points within a population.
+    dataservices.query.AggregationQuerySourceMetricsDTO:
+      type: object
+      properties:
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.AggregationQuerySourceMetricDTO'
+          description: An array of metric columns.
+      description: "The IDs and column names of multiple metrics.\n\n **Note:**\n Only available when the `Accept` header is `text/csv`."
+    dataservices.query.QueryDimensionMemberSelectionDTO:
+      type: object
+      properties:
+        dimension:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.DimensionReferenceDTO'
+          description: A dimension and its qualifying path to query.
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.common.DimensionMemberReferenceDTO'
+          description: A collection of dimension members to select in the query. This must contain at least one member.
+      description: A QueryDimensionMemberSelection defines dimension members to select in the query.
+    dataservices.query.SubjectMemberSetParameterValueDTO_ListOfNamePathDTO:
+      type: object
+      properties:
+        namePaths:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.SubjectMemberSetParameterValueDTO_NamePathDTO'
+          description: The name paths for subject member parameter key values.
+      description: A list of name paths.
+    dataservices.query.QueryAxisDTO:
+      type: object
+      properties:
+        formula:
+          type: string
+          description: An axis expressed as a formula.
+        selectionConcept:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.SelectionConceptReferenceDTO'
+          description: "An axis that uses an existing selection concept in Visier.\n The resulting axis consists of 3 positions: True, False, and Unknown."
+        dimensionMemberSelection:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryDimensionMemberSelectionDTO'
+          description: An axis that uses existing dimension members in Visier.
+        memberMapSelection:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryMemberMapSelectionDTO'
+          description: An axis that uses an existing member map in Visier.
+        numericRanges:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryNumericRangesDTO'
+          description: An axis that uses an existing range dimension in Visier and defines the ranges to query.
+        dimensionLevelSelection:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryDimensionLevelSelectionDTO'
+          description: An axis that uses levels of existing dimensions in Visier.
+        dimensionLeafMemberSelection:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryDimensionLeafSelectionDTO'
+          description: An axis comprised of all non-data leaf members of an existing dimension in Visier.
+        dimensionDataMemberSelection:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryDimensionDataMemberSelectionDTO'
+          description: An axis comprised of all leaf, including data, members of an existing dimension in Visier.
+        dimensionLevelWithUncategorizedValueSelection:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryDimensionLevelSelectionDTO'
+          description: An axis that uses existing dimension levels in Visier, including uncategorized levels.
+        tableAxisOptions:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryAxisOptionsDTO'
+          description: Additional transformations to perform on this axis. Only available when the Accept header is a table format, such as text/csv or application/jsonlines.
+        sortAndLimitOptions:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryAxisSortAndLimitOptionsDTO'
+          description: Optional sorting and limits to apply to the axis.
+      description: An axis of a query used to group data points.
+    dataservices.query.QueryMemberMapPropertyDTO:
+      type: object
+      properties:
+        memberMap:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.DimensionReferenceDTO'
+          description: A member map and its qualifying path to query.
+        targetDimensionName:
+          type: string
+          description: The name of the member map's dimension that you want to query. The member selection is based on this dimension.
+      description: A QueryMemberMapProperty defines an existing member map and its dimension to query.
+    data_out.ListResponse:
+      type: object
+      properties:
+        header:
+          $ref: '#/components/schemas/google.protobuf.Any'
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/google.protobuf.Any'
+    dataservices.query.QueryMemberMapSelectionDTO:
+      type: object
+      properties:
+        memberMap:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.DimensionReferenceDTO'
+          description: A member map and its qualifying path to query.
+        targetDimensionName:
+          type: string
+          description: The name of the member map's dimension that you want to query. The member selection is based on this dimension.
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.common.DimensionMemberReferenceDTO'
+          description: A collection of the selected dimension members from the `targetDimension`. This must contain at least one member.
+      description: "A QueryMemberMapSelection groups data in a query by dimension members in a member map.\n This allows grouping by a dimension that isn't typically valid on the analytic object being\n queried by selecting a valid member map on the analytic object.\n Note: This is unique to the data query API and cannot be reproduced in Visier's interface."
+    dataservices.query.QueryDimensionLeafSelectionDTO:
+      type: object
+      properties:
+        dimension:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.DimensionReferenceDTO'
+          description: A dimension and its qualifying path to query.
+      description: "A QueryDimensionLeafSelection allows you to define a member set consisting exclusively\n of leaf-level members for the given dimension. Leaf members are those members that have\n no descendents. A member may be a leaf member regardless of the level it is positioned at.\n This member selection option, excludes data members."
+    dataservices.query.PropertyColumnDTO:
+      type: object
+      properties:
+        columnName:
+          type: string
+          description: "The name of the column. This is optional.\n If not specified, the name of the property is used, or a generic column name if the property is unnamed."
+        columnDefinition:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryPropertyDTO'
+          description: The definition of the property to query on.
+      description: A named, result column of a list query.
+    dataservices.query.QueryExecutionErrorDTO:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: A brief identifier of the type of error.
+        message:
+          type: string
+          description: The details of the error.
+        allErrors:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.QueryExecutionErrorsDTO'
+          description: All errors
+      description: "An error that occurred during query execution. A QueryExecutionError returns as part of a\n successful batch aggregation query for any queries that failed. This is different from errors,\n which return for failed requests."
+    dataservices.query.InternalQueryExecutionOptionsDTO:
+      type: object
+      properties:
+        sparseHandlingMode:
+          enum:
+          - ALLOW
+          - DISALLOW
+          - FORCE
+          type: string
+          format: enum
+        alignTimeAxisToPeriodEnd:
+          type: boolean
+          description: "If true, shifts the time axis members back by one millisecond.\n Shifting the time axis members back by one millisecond makes them valid at the end of the period instead of at the start of the next period.\n This aligns the returned data timestamps with the timestamps in the Visier application.\n\n Example: If the timestamps are originally [`2019-06-01T00:00:00.000Z`, `2019-05-01T00:00:00.000Z`],\n then `alignTimeAxisPeriodEnd` turns the timestamps into [`2019-05-31T23:59:59.999Z`, `2019-04-30T23:59:59.999Z`].\n\n Example: If the timestamps are originally [`2019-05-01T00:00:00.000Z/2019-06-01T00:00:00.000Z`, `2019-04-01T00:00:00.000Z/2019-05-01T00:00:00.000Z`],\n then `alignTimeAxisPeriodEnd` turns the timestamps into [`2019-05-01T00:00:00.000Z/2019-05-31T23:59:59.999Z`, `2019-04-01T00:00:00.000Z/2019-04-30T23:59:59.999Z`]."
+      description: Query options for Visier use. Not supported for customer or partner use.
+    dataservices.query.MemberParameterValueDTO:
+      type: object
+      properties:
+        parameterId:
+          type: string
+          description: The unique ID of the member parameter qualified by the object.
+        dimensionId:
+          type: string
+          description: The unique ID of the dimension on which the parameter is based.
+        referencePath:
+          type: array
+          items:
+            type: string
+          description: The analytic object reference path from the metric to the dimension.
+        values:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.common.MemberValuesDTO'
+          description: The included and excluded member references in a dimension filter.
+      description: "The member value of a parameter, including the parameter ID, dimension that the parameter is based on,\n and the included and excluded members for the parameter."
+    dataservices.query.AggregationQueryExecutionDTO:
+      type: object
+      properties:
+        query:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.AggregationQueryDTO'
+          description: "The data to perform an aggregation on, such as a metric or formula. The query must include a time interval,\n and may optionally include filters and axes."
+        options:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.AggregateQueryExecutionOptionsDTO'
+          description: Additional instructions for your query, such as a calendar type or conversion information.
+      description: An AggregationQueryExecution provides instructions to perform your aggregation query.
+    google.protobuf.Any:
+      type: object
+      properties:
+        '@type':
+          type: string
+          description: The type of the serialized message.
+      additionalProperties: true
+      description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+    dataservices.query.AggregationQuerySourceDTO:
+      type: object
+      properties:
+        formula:
+          type: string
+          description: "An ad-hoc metric formula. The response returns the results of the aggregate.\n See the formula dictionary in Visier to find functions and objects you can use in a formula."
+        metric:
+          type: string
+          description: The ID of an existing metric in your Visier solution.
+        metrics:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.AggregationQuerySourceMetricsDTO'
+          description: "The IDs of metrics to aggregate. All metrics in the query must reference the same analytic object.\n For example, you cannot query Headcount and Applicant Count because one uses the Employee subject and\n the other uses the Applicant subject. You can query Headcount and Employee Count for Women because both\n reference the Employee subject. Only available when the Accept header is `text/csv`."
+      description: An AggregationQuerySource defines the source data to query in an aggregation query.
+    dataservices.query.ConnectorVersionDTO:
+      type: object
+      properties:
+        version:
+          type: string
+          description: The version number; for example, 1.0.1.
+        id:
+          type: string
+          description: The unique identifier of the connector.
+      description: The version information of a connector.
+    dataservices.query.QueryDimensionLevelSelectionDTO:
+      type: object
+      properties:
+        dimension:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.DimensionReferenceDTO'
+          description: A dimension and its qualifying path to query.
+        levelIds:
+          type: array
+          items:
+            type: string
+          description: A list of level IDs for the dimension levels that you want to query. For example, ["Level_1", "Level_2"]. To get a dimension's level IDs, call the Data Model API.
+        levelDepths:
+          type: array
+          items:
+            type: integer
+            format: int32
+          description: A list of level depths for the dimension levels that you want to query. For a parent-child dimension, depth must be greater than 0. For example, [1, 2]. To get a dimension's level depths, call the Data Model API.
+      description: "A QueryDimensionLevelSelection allows you to select a dimension level and its members without\n explicitly listing each member."
+    dataservices.common.DimensionMemberReferenceDTO:
+      type: object
+      properties:
+        path:
+          type: array
+          items:
+            type: string
+          description: "A list of strings representing the members within a dimension path. For example, a dimension for Location\n may have the paths \"Canada, BC, Vancouver\" and \"US, California, San Francisco\"."
+        memberId:
+          deprecated: true
+          type: string
+          description: "This will be removed as of Spring 2027. Use `path` to identify dimension members instead.\n\n The unique identifier of the dimension member."
+      description: The members of a dimension.
+    dataservices.query.ListQueryExecutionOptionsDTO:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: "The maximum number of entries to return. Default is to return all entries. If `page` is defined but\n limit is not defined, limit will be set to a default value of 1000."
+          format: int32
+        queryMode:
+          enum:
+          - DEFAULT
+          - FILL
+          - FAIL
+          type: string
+          description: Determines how the query should handle column definitions that the query is unable to resolve. Default is DEFAULT.
+          format: enum
+        omitHeader:
+          type: boolean
+          description: "Option to omit the header from the result.\n If true, queryMode must be either FILL or FAIL.\n Default is false."
+        calendarType:
+          enum:
+          - TENANT_CALENDAR
+          - GREGORIAN_CALENDAR
+          type: string
+          description: "The calendar type to use. This will be used for all time calculations unless explicitly overridden in\n the calculation itself. Default is TENANT_CALENDAR."
+          format: enum
+        currencyConversionMode:
+          deprecated: true
+          enum:
+          - TENANT_CURRENCY_CONVERSION
+          - VISIER_CURRENCY_CONVERSION
+          type: string
+          description: "This will be removed as of Winter 2026. Use `currencyConversionCode` instead.\n\n The currency conversion mode to use. This will be used for all currency conversion calculations unless explicitly overridden in the calculation itself. Default is TENANT_CURRENCY_CONVERSION."
+          format: enum
+        currencyConversionDate:
+          type: string
+          description: The currency conversion date to use. If defined, the currency conversion will use the exchange rates as of this date.
+        page:
+          type: integer
+          description: "A page defines a subset of the overall result set. The number of rows per page is equal to limit\n with the exception of the last page in the result set which may contain fewer rows. `Page` is an index\n that begins at 0. The index to start retrieving results is calculated by multiplying `page` by `limit`."
+          format: int32
+        multipleTables:
+          type: boolean
+          description: "Option to return multiple table files as zipped archive for derived metrics.\n Default is false. If false, one table is returned for the drill-through metric."
+        currencyConversionCode:
+          type: string
+          description: Overrides the tenant's default currency for currency conversions.
+        recordMode:
+          enum:
+          - NORMAL
+          - CHANGES
+          type: string
+          description: "Influences the type of records used to build the result set, such as whether to return\n one record per entity that is valid in the provided time range or each change record\n falls in the time frame."
+          format: enum
+        dateTimeDisplayMode:
+          enum:
+          - EPOCH
+          - DATETIME
+          type: string
+          description: "Control how date-time values are displayed in the result set.\n Supported values:\n * `EPOCH`: The number of elapsed milliseconds since January 1, 1970 in UTC timezone. This is the default.\n * `DATETIME`: The date-time value displayed in `yyyy-MM-dd HH:mm:ssZZ` format."
+          format: enum
+      description: A ListQueryExecutionOptions provides additional instructions to perform a list query.
+    dataservices.query.LineageDTO:
+      type: object
+      properties:
+        cellSets:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.CellSetDTO'
+          description: The cell sets that constitute this lineage.
+        op:
+          type: string
+          description: The operation used to combine the cell sets of this lineage.
+      description: Lineage information for a given cell set. This describes how a cell set is created from other cell sets.
+    dataservices.query.QueryEffectiveDatePropertyDTO:
+      type: object
+      properties: {}
+      description: A special property that yields the effective date for the record
+    dataservices.query.QueryAxisSortAndLimitOptionsDTO:
+      type: object
+      properties:
+        sort:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryAxisSortDTO'
+          description: Sort the order that axis members returned in the response. For no sorting, omit `sort`.
+        limit:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryAxisLimitDTO'
+          description: Limit the number of axis members returned in the response. For no limit, omit `limit`.
+      description: Sort and limit the axis members returned in the response.
+    dataservices.query.QueryTimeIntervalsDTO:
+      type: object
+      properties:
+        intervalPeriodType:
+          enum:
+          - MONTH
+          - DAY
+          - WEEK
+          - QUARTER
+          - YEAR
+          type: string
+          description: The time period type for each interval. Default is MONTH.
+          format: enum
+        intervalPeriodCount:
+          type: integer
+          description: The number of time periods per interval. Default is 1.
+          format: int32
+        intervalCount:
+          type: integer
+          description: The number of intervals. Default is 1.
+          format: int32
+        direction:
+          enum:
+          - BACKWARD
+          - FORWARD
+          type: string
+          description: The direction to extend. Defaults is BACKWARD.
+          format: enum
+        shift:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.TimeShiftDTO'
+          description: The amount of time to shift the time interval by, such as backward by one year.
+        trailingPeriodType:
+          enum:
+          - MONTH
+          - DAY
+          - WEEK
+          - QUARTER
+          - YEAR
+          type: string
+          description: "The time period type for each trailing period. If `trailingPeriodCount` is defined and `trailingPeriodType` is undefined, the default trailing period type is `MONTH`.\n If both `trailingPeriodType` and `trailingPeriodCount` are undefined, `intervalPeriodCount` is used as the trailing period count.\n Note: This parameter is only applicable to metrics that can calculate trailing time. If defined on a metric that doesn't have trailing time, the platform ignores the parameter."
+          format: enum
+        trailingPeriodCount:
+          type: integer
+          description: "The number of time periods per trailing period. If `trailingPeriodType` is defined and `trailingPeriodCount` is undefined, the default trailing period count is 1.\n Note: This parameter is only applicable to metrics that can calculate trailing time. If defined on a metric that doesn't have trailing time, the platform ignores the parameter."
+          format: int32
+      description: "A QueryTimeIntervals defines a series of time intervals to query, including the \"from\" time, period type, period count,\n number of intervals, time direction, and shift to apply to each time interval."
+      oneOf:
+      - title: QueryTimeIntervalsDTO with fromInstant
+        required:
+        - fromInstant
+        properties:
+          fromInstant:
+            type: string
+            description: "The instant from which to extend, in milliseconds since 1970-01-01T00:00:00Z.\n Events that occur on this date are excluded. Subject-based data that ends on this date is included.\n Note: Epochs are expressed as 64-bit integers and represented as stringified longs in JSON due to JSON's\n inherent limitation in representing large numbers."
+          intervalPeriodType:
+            enum:
+            - MONTH
+            - DAY
+            - WEEK
+            - QUARTER
+            - YEAR
+            type: string
+            description: The time period type for each interval. Default is MONTH.
+            format: enum
+          intervalPeriodCount:
+            type: integer
+            description: The number of time periods per interval. Default is 1.
+            format: int32
+          intervalCount:
+            type: integer
+            description: The number of intervals. Default is 1.
+            format: int32
+          direction:
+            enum:
+            - BACKWARD
+            - FORWARD
+            type: string
+            description: The direction to extend. Defaults is BACKWARD.
+            format: enum
+          shift:
+            allOf:
+            - $ref: '#/components/schemas/dataservices.query.TimeShiftDTO'
+            description: The amount of time to shift the time interval by, such as backward by one year.
+          trailingPeriodType:
+            enum:
+            - MONTH
+            - DAY
+            - WEEK
+            - QUARTER
+            - YEAR
+            type: string
+            description: "The time period type for each trailing period. If `trailingPeriodCount` is defined and `trailingPeriodType` is undefined, the default trailing period type is `MONTH`.\n If both `trailingPeriodType` and `trailingPeriodCount` are undefined, `intervalPeriodCount` is used as the trailing period count.\n Note: This parameter is only applicable to metrics that can calculate trailing time. If defined on a metric that doesn't have trailing time, the platform ignores the parameter."
+            format: enum
+          trailingPeriodCount:
+            type: integer
+            description: "The number of time periods per trailing period. If `trailingPeriodType` is defined and `trailingPeriodCount` is undefined, the default trailing period count is 1.\n Note: This parameter is only applicable to metrics that can calculate trailing time. If defined on a metric that doesn't have trailing time, the platform ignores the parameter."
+            format: int32
+      - title: QueryTimeIntervalsDTO with fromDatetime
+        required:
+        - fromDateTime
+        properties:
+          fromDateTime:
+            type: string
+            description: "The instant from which to extend, as an ISO-8601 formatted date time string. This value is exclusive.\n Valid formats: yyyy-MM-dd, yyyy-MM-dd'T'HH:mm:ss, yyyy-MM-dd'T'HH:mm:ss.SSS.\n Events that occur on this date are excluded. Subject-based data that ends on this date is included."
+          intervalPeriodType:
+            enum:
+            - MONTH
+            - DAY
+            - WEEK
+            - QUARTER
+            - YEAR
+            type: string
+            description: The time period type for each interval. Default is MONTH.
+            format: enum
+          intervalPeriodCount:
+            type: integer
+            description: The number of time periods per interval. Default is 1.
+            format: int32
+          intervalCount:
+            type: integer
+            description: The number of intervals. Default is 1.
+            format: int32
+          direction:
+            enum:
+            - BACKWARD
+            - FORWARD
+            type: string
+            description: The direction to extend. Defaults is BACKWARD.
+            format: enum
+          shift:
+            allOf:
+            - $ref: '#/components/schemas/dataservices.query.TimeShiftDTO'
+            description: The amount of time to shift the time interval by, such as backward by one year.
+          trailingPeriodType:
+            enum:
+            - MONTH
+            - DAY
+            - WEEK
+            - QUARTER
+            - YEAR
+            type: string
+            description: "The time period type for each trailing period. If `trailingPeriodCount` is defined and `trailingPeriodType` is undefined, the default trailing period type is `MONTH`.\n If both `trailingPeriodType` and `trailingPeriodCount` are undefined, `intervalPeriodCount` is used as the trailing period count.\n Note: This parameter is only applicable to metrics that can calculate trailing time. If defined on a metric that doesn't have trailing time, the platform ignores the parameter."
+            format: enum
+          trailingPeriodCount:
+            type: integer
+            description: "The number of time periods per trailing period. If `trailingPeriodType` is defined and `trailingPeriodCount` is undefined, the default trailing period count is 1.\n Note: This parameter is only applicable to metrics that can calculate trailing time. If defined on a metric that doesn't have trailing time, the platform ignores the parameter."
+            format: int32
+      - title: QueryTimeIntervalsDTO with dynamicDateFrom
+        required:
+        - dynamicDateFrom
+        properties:
+          dynamicDateFrom:
+            enum:
+            - SOURCE
+            - COMPLETE_PERIOD
+            type: string
+            description: "Dynamically select the date from which to extend. Valid values are `SOURCE` or `COMPLETE_PERIOD`. Both options use the `source` query definition element to determine the date.\n\n If `dynamicDateFrom` is `SOURCE`, the query returns data from a date determined by the `source` query definition element. If `dynamicDateFrom` is `COMPLETE_PERIOD`, the query returns data starting from the latest or earliest date with a complete period of data. When `dynamicDateFrom` is specified:\n * If `source` is `metric`, then `dynamicDateFrom` considers the date range of available data for the metric.\n * If `source` is `formula`, then `dynamicDateFrom` considers the date range of available data for the metric in the formula.\n * If `source` is `metrics`, then `dynamicDateFrom` considers the date range of available data for the metric in the formula.\n Then, if `direction` is `BACKWARD`, query backward from the data **end** date and if `direction` is `FORWARD`, query forward from the data **start** date. \n This allows you to keep getting the latest or earliest data without changing your query every time there's new or updated data.\n\n Note: For multi-metric queries, if `direction` is `BACKWARD`, query backward from the earliest data end date of all metrics and if `direction` is `FORWARD`, query forward from the latest data start date of all metrics. \n This ensures that all metrics have data in the specified time range.\n\n Example: If a tenant has Headcount metric data available from 2023-01-01 to 2024-01-01 (End date exclusive), specifying `dynamicDateFrom`: `SOURCE` with `direction`: `BACKWARD` \n means the query will retrieve data backward from 2024-01-01. The effect is the same as if specifying a `fromDateTime` of 2024-01-01'T'00:00:00.000. \n\n Example: If a tenant has Employee subject data available from 2023-01-10 to 2023-04-01 (End date exclusive), specifying `dynamicDateFrom`: `COMPLETE_PERIOD` with `direction`: `FORWARD` \n means the query will retrieve data forward from 2023-02-01. The effect is the same as if specifying a `fromDateTime` of 2023-02-01'T'00:00:00.000. \n\n Example: If a tenant has Employee subject data available from 2023-01-01 to 2023-03-15 (End date exclusive), specifying `dynamicDateFrom`: `COMPLETE_PERIOD` with `direction`: `BACKWARD` \n means the query will retrieve data backward from 2023-03-01. The effect is the same as if specifying a `fromDateTime` of 2023-03-01'T'00:00:00.000. \n\n Example: If a tenant has Headcount data available from 2023-01-01 to 2024-09-01 and Exit Count data available from 2023-01-01 to 2024-01-01, specifying `dynamicDateFrom`: `SOURCE` with `direction`: `BACKWARD` means the query will retrieve data backward from 2024-01-01. \n Exit Count has an earlier data end date than Headcount, so `dynamicDateFrom` retrieves data backward from Exit Count's data end date to ensure both metrics have data in the specified time range.\n\n Example: Retrieve Headcount (employeeCount) extending 1 month backward from Headcount's dynamic source date\n\n ```\n {\n   \"query\": {\n     \"source\": {\n       \"metric\": \"employeeCount\"\n     },\n     \"timeIntervals\": {\n       \"dynamicDateFrom\": \"SOURCE\",\n       \"intervalPeriodType\": \"MONTH\",\n       \"intervalCount\": 1,\n       \"direction\": \"BACKWARD\"\n     }\n   }\n }\n ```"
+            format: enum
+          intervalPeriodType:
+            enum:
+            - MONTH
+            - DAY
+            - WEEK
+            - QUARTER
+            - YEAR
+            type: string
+            description: The time period type for each interval. Default is MONTH.
+            format: enum
+          intervalPeriodCount:
+            type: integer
+            description: The number of time periods per interval. Default is 1.
+            format: int32
+          intervalCount:
+            type: integer
+            description: The number of intervals. Default is 1.
+            format: int32
+          direction:
+            enum:
+            - BACKWARD
+            - FORWARD
+            type: string
+            description: The direction to extend. Defaults is BACKWARD.
+            format: enum
+          shift:
+            allOf:
+            - $ref: '#/components/schemas/dataservices.query.TimeShiftDTO'
+            description: The amount of time to shift the time interval by, such as backward by one year.
+          trailingPeriodType:
+            enum:
+            - MONTH
+            - DAY
+            - WEEK
+            - QUARTER
+            - YEAR
+            type: string
+            description: "The time period type for each trailing period. If `trailingPeriodCount` is defined and `trailingPeriodType` is undefined, the default trailing period type is `MONTH`.\n If both `trailingPeriodType` and `trailingPeriodCount` are undefined, `intervalPeriodCount` is used as the trailing period count.\n Note: This parameter is only applicable to metrics that can calculate trailing time. If defined on a metric that doesn't have trailing time, the platform ignores the parameter."
+            format: enum
+          trailingPeriodCount:
+            type: integer
+            description: "The number of time periods per trailing period. If `trailingPeriodType` is defined and `trailingPeriodCount` is undefined, the default trailing period count is 1.\n Note: This parameter is only applicable to metrics that can calculate trailing time. If defined on a metric that doesn't have trailing time, the platform ignores the parameter."
+            format: int32
+    dataservices.query.CellSetAxisPositionDTO:
+      type: object
+      properties:
+        path:
+          type: array
+          items:
+            type: string
+          description: "A list of strings representing the members within a dimension path. For example,\n a dimension for Location may have the paths \"Canada, BC, Vancouver\" and \"US, California, San Francisco\"."
+        displayName:
+          type: string
+          description: The display name of the position. This is optional and is omitted if unavailable or not requested.
+        displayNamePath:
+          type: array
+          items:
+            type: string
+          description: Optional display name path of the member.
+      description: The position along the axis of a cell set.
+    dataservices.query.QueryAxisSortDTO:
+      type: object
+      properties:
+        sortType:
+          enum:
+          - CONFIGURED
+          - METRIC_VALUE
+          type: string
+          description: "The order in which to return axis members in the response. Valid values:\n - `CONFIGURED`: Sorts axis members by their configuration:\n   - For parent-child dimensions, sorts axis members alphabetically by name.\n   - For all other dimensions, sorts axis members by their configured order in Studio.\n   - Unknown members are always placed at the end of the axis.\n - `METRIC_VALUE`: Sorts axis members by their metric values. Applicable if there is only one query axis and only one time axis member."
+          format: enum
+        sortDirection:
+          enum:
+          - SORT_ASCENDING
+          - SORT_DESCENDING
+          type: string
+          description: "The direction in which to return axis members in the response. Valid values:\n - `SORT_ASCENDING`: Sorts axis members in ascending order.\n - `SORT_DESCENDING`: Sorts axis members in descending order."
+          format: enum
+      description: Sort the axis members returned in the response by type and direction.
+    dataservices.query.MemberFilterDTO:
+      type: object
+      properties:
+        dimension:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.DimensionReferenceDTO'
+          description: The dimension in which the members belong.
+        values:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.common.MemberValuesDTO'
+          description: The dimension members to filter by.
+      description: "Member filters are dimension member values to filter by in your query. The member filters are\n defined within the filters section of a query definition. You can filter by dimension members in\n aggregate and list queries."
+    dataservices.datamodel.DimensionReferenceDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The ID of the dimension. To get a dimension's ID, call the Data Model API.
+        qualifyingPath:
+          type: string
+          description: "The qualifying path to the dimension in Visier, such as the analytic object or event the dimension is\n associated with. If the path has multiple objects, each object is separated by a period."
+      description: The name and qualifying path of a dimension to query.
+    dataservices.query.AggregationQuerySourceMetricDTO:
+      type: object
+      properties:
+        columnName:
+          type: string
+          description: The column name in the CSV file. Default is to use id as the column name.
+        id:
+          type: string
+          description: "The unique ID of the metric.\n If `columnName` is omitted, `id` is the column name in the CSV file."
+        formula:
+          type: string
+          description: "An ad-hoc metric formula. The response returns the results of the aggregate.\n See the formula dictionary in Visier to find functions and objects you can use in a formula."
+        qualifyingPath:
+          type: string
+          description: "The base qualifying path to prefix the axes and filters' qualifying paths with.\n You must specify the qualifying path on a metric if the convergent analytic object of the metric doesn't match the\n starting object in the qualifying paths of the axes and filters.\n\n For example, consider a multi-metric query that contains metrics that count the number of applicants and requisitions,\n grouped by the country of the recruiter's direct manager. The following sample shows how to use qualifyingPath to specify\n the object reference traversal path from each metric's convergent analytic object to the start of the path for the axes.\n In this example, there is only one convergent analytic object.\n ```\n \"source\": {\n     \"metrics\": {\n        \"columns\": [\n            {\n                \"id\": \"employeeCount\"\n            },\n            {\n                \"id\": \"applicantCount\",\n                \"qualifyingPath\": \"Applicant.Requisition.Recruiter\"\n            },\n            {\n                \"id\": \"requisitionCount\",\n                \"qualifyingPath\": \"Requisition.Recruiter\"\n            }\n        ]\n    }\n },\n \"axes\": [\n    {\n        \"dimensionLevelSelection\": {\n            \"dimension\": {\n                \"name\": \"Location\",\n                \"qualifyingPath\": \"Employee.Direct_Manager\"\n            },\n            \"levelIds\": [\n                \"Location_1\"\n            ]\n        }\n    }\n ]\n ```\n **Note:**\n * `employeeCount` doesn't need a `qualifyingPath` because it's already convergent with the start of the axis path.\n * The metrics' qualifying paths must provide the reference name that resolves to the first object of the axis' qualifying path as their last path segment. In this case, Recruiter is a named reference pointing to Employee. The final qualifying paths for the metrics are:\n     * `employeeCount`: Employee.Direct_Manager\n     * `applicantCount`: Applicant.Requisition.Recruiter.Direct_Manager\n     * `requisitionCount`: Requisition.Recruiter.Direct_Manager"
+      description: The column definition for a single metric within a `metrics` query.
+    dataservices.query.CellSetDTO:
+      type: object
+      properties:
+        cells:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.CellDTO'
+          description: The set of cells that represent the result of your query.
+        axes:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.CellSetAxisDTO'
+          description: The set of axes for the cell set that represent the objects the data is grouped by.
+        lineage:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.LineageDTO'
+          description: Lineage information for this cell set. This can be omitted if the cell has no lineage or the user did not request lineage information.
+      description: "The set of cells returned from executing an aggregation query.\n A CellSet represents a structured, multidimensional array of values."
+    dataservices.query.QueryExecutionErrorDetailsDTO:
+      type: object
+      properties:
+        objectType:
+          type: string
+          description: Query request object type.
+        queryIndex:
+          type: integer
+          description: The position of the query within the request query list.
+          format: int32
+        columnIndex:
+          type: integer
+          description: The position of the column within the request column list.
+          format: int32
+        error:
+          type: string
+          description: The details of the error.
+      description: The details of a error that occurred during query execution.
+    dataservices.query.QueryAxisOptionsDTO:
+      type: object
+      properties:
+        memberDisplayMode:
+          enum:
+          - UNCHANGED
+          - DEFAULT
+          - COMPACT
+          - DISPLAY
+          - MDX
+          type: string
+          description: "Options to override the display mode for the axis. This overrides the query-level `memberDisplayMode` options value in the query.\n Only available for non-time axes. Use the QueryAxisMemberDisplayMode `memberDisplayMode` to apply different display modes to different axes.\n For example, let's say your query has the `memberDisplayMode` as `DISPLAY` but you want to fetch the object name for a specific dimension.\n With QueryAxisMemberDisplayMode `memberDisplayMode`, you can override that dimension's `memberDisplayMode` to `DEFAULT` instead of `DISPLAY`.\n\n Valid values are `UNCHANGED`, `DEFAULT`, `COMPACT`, `DISPLAY`, or `MDX`. Default is `UNCHANGED`."
+          format: enum
+        columnName:
+          type: string
+          description: If specified, returns the column name of the axis in the response.
+      description: "QueryAxisOptions allows you to customize an axis in the query, such as changing the display mode for its cell set values or providing a custom column name.\n Only available when the Accept header is a table format, such as text/csv or application/jsonlines."
+    dataservices.query.CellSetOrErrorDTO:
+      type: object
+      properties:
+        cellSet:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.CellSetDTO'
+          description: The resulting cell set from a successful query execution.
+        error:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryExecutionErrorDTO'
+          description: An error for a failed query execution.
+      description: A result that is either a cell set for a successful query execution, or an error for a failed query execution.
+    dataservices.query.QueryDimensionDataMemberSelectionDTO:
+      type: object
+      properties:
+        dimension:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.DimensionReferenceDTO'
+          description: A dimension and its qualifying path to query.
+      description: "A QueryDimensionLeafSelection allows you to define a member set consisting exclusively\n of leaf-level, including data, members for the given dimension. Leaf members are those members that have\n no descendents. A member may be a leaf member regardless of the level it is positioned at."
+    dataservices.query.QueryDimensionLevelPropertyDTO:
+      type: object
+      properties:
+        dimension:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.DimensionReferenceDTO'
+          description: A dimension and its qualifying path to query.
+        memberValueMode:
+          enum:
+          - NAME
+          - PATH
+          type: string
+          description: "Controls how to display member values.\n\n Valid values are `NAME`, `PATH`.\n\n * `NAME`: Returns the member's display name. This is the default.\n * `PATH`: Returns the member's name path."
+          format: enum
+        levelId:
+          type: string
+          description: The level ID. For example, "Level_1" or "Level_2".
+        levelDepth:
+          type: integer
+          description: The level depth. For a parent-child dimension, depth must be greater than 0. For example, 1 or 2.
+          format: int32
+      description: A QueryDimensionLevelPropertyDTO defines an existing dimension level and its dimension to query.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    dataservices.query.QueryAxisLimitDTO:
+      type: object
+      properties:
+        limitType:
+          enum:
+          - FIRST_N
+          - LAST_N
+          type: string
+          description: "The type of limit to apply to the axis. Valid values:\n - `FIRST_N`: Limits the axis to the first N members.\n - `LAST_N`: Limits the axis to the last N members."
+          format: enum
+        n:
+          type: integer
+          description: If `limitType` is defined, the number of axis members to include. `n` must be at least `1`. If less than `1`, no limit is applied.
+          format: int32
+        showOthers:
+          type: boolean
+          description: If `true`, includes an `Others` member that aggregates all members not included in the limited set. Default is `false`.
+      description: Limit the number of axis members returned in the response.
+    dataservices.common.MemberValuesDTO:
+      type: object
+      properties:
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.common.DimensionMemberReferenceDTO'
+          description: The unique IDs of members to include when evaluating the metric.
+        excluded:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.common.DimensionMemberReferenceDTO'
+          description: The unique IDs of members to exclude when evaluating the metric.
+      description: "Member filter values are discrete member references in a dimension filter. You can define\n included and excluded members simultaneously. This is typically done with filtering applied on\n dimensions with multiple levels. For example, a Location parameter may include \"South\n America\" and exclude \"Brazil\" which results in the metric being evaluated for all South American\n countries except Brazil."
+    dataservices.query.QueryTimeIntervalDTO:
+      type: object
+      properties:
+        intervalPeriodType:
+          enum:
+          - MONTH
+          - DAY
+          - WEEK
+          - QUARTER
+          - YEAR
+          type: string
+          description: The time period type for each interval. Default is MONTH.
+          format: enum
+        intervalPeriodCount:
+          type: integer
+          description: The number of time periods per interval.
+          format: int32
+        direction:
+          enum:
+          - BACKWARD
+          - FORWARD
+          type: string
+          description: The direction to extend. Default is BACKWARD. BACKWARD is useful when the time instant is the current date or with `dynamicDateFrom` because the query continuously retrieves the newest data from current date backwards.
+          format: enum
+        shift:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.TimeShiftDTO'
+          description: The amount of time to shift the time interval by, such as backward by one year. Default is none.
+      description: "A QueryTimeInterval defines the time interval to query, including the \"from\" time, period type,\n period count, time direction, and shift to apply"
+      oneOf:
+      - title: QueryTimeIntervalDTO with fromInstant
+        required:
+        - fromInstant
+        properties:
+          fromInstant:
+            type: string
+            description: "The instant from which to extend in the specified `direction`, in milliseconds since 1970-01-01T00:00:00Z.\n Events that occur on this date are excluded. Subject-based data that ends on this date is included.\n Note: Epochs are expressed as 64-bit integers and represented as stringified longs in JSON due to\n JSON's inherent limitation in representing large numbers."
+          intervalPeriodType:
+            enum:
+            - MONTH
+            - DAY
+            - WEEK
+            - QUARTER
+            - YEAR
+            type: string
+            description: The time period type for each interval. Default is MONTH.
+            format: enum
+          intervalPeriodCount:
+            type: integer
+            description: The number of time periods per interval.
+            format: int32
+          direction:
+            enum:
+            - BACKWARD
+            - FORWARD
+            type: string
+            description: The direction to extend. Default is BACKWARD. BACKWARD is useful when the time instant is the current date or with `dynamicDateFrom` because the query continuously retrieves the newest data from current date backwards.
+            format: enum
+          shift:
+            allOf:
+            - $ref: '#/components/schemas/dataservices.query.TimeShiftDTO'
+            description: The amount of time to shift the time interval by, such as backward by one year. Default is none.
+      - title: QueryTimeIntervalDTO with fromDatetime
+        required:
+        - fromDateTime
+        properties:
+          fromDateTime:
+            type: string
+            description: "The instant from which to extend in the specified `direction`, as an ISO-8601 formatted date time string.\n Valid formats: yyyy-MM-dd, yyyy-MM-dd'T'HH:mm:ss, yyyy-MM-dd'T'HH:mm:ss.SSS.\n Events that occur on this date are excluded. Subject-based data that ends on this date is included."
+          intervalPeriodType:
+            enum:
+            - MONTH
+            - DAY
+            - WEEK
+            - QUARTER
+            - YEAR
+            type: string
+            description: The time period type for each interval. Default is MONTH.
+            format: enum
+          intervalPeriodCount:
+            type: integer
+            description: The number of time periods per interval.
+            format: int32
+          direction:
+            enum:
+            - BACKWARD
+            - FORWARD
+            type: string
+            description: The direction to extend. Default is BACKWARD. BACKWARD is useful when the time instant is the current date or with `dynamicDateFrom` because the query continuously retrieves the newest data from current date backwards.
+            format: enum
+          shift:
+            allOf:
+            - $ref: '#/components/schemas/dataservices.query.TimeShiftDTO'
+            description: The amount of time to shift the time interval by, such as backward by one year. Default is none.
+      - title: QueryTimeIntervalDTO with dynamicDateFrom
+        required:
+        - dynamicDateFrom
+        properties:
+          dynamicDateFrom:
+            enum:
+            - SOURCE
+            - COMPLETE_PERIOD
+            type: string
+            description: "Dynamically select the date from which to extend in the specified `direction`. Valid values are `SOURCE` or `COMPLETE_PERIOD`. Both options determine the date using the request's `source` field. Whether the source is a metric, formula, or metrics, each source has earliest and latest data available dates to use. The `direction` determines whether the earliest or latest date is used.\n\n * If `dynamicDateFrom` is `SOURCE`, the query returns data from a date determined by the `source` query definition element. If `dynamicDateFrom` is `COMPLETE_PERIOD`, the query returns data starting from the latest or earliest date with a complete period of data. `COMPLETE_PERIOD` returns periods defined by `intervalPeriodType`. If the period type is MONTH, it returns full months of data. If the period type is YEAR, it returns full years of data. When `dynamicDateFrom` is specified:\n * If `source` is `metric`, then `dynamicDateFrom` considers the date range of available data for the metric.\n * If `source` is `formula`, then `dynamicDateFrom` considers the date range of available data for the metric in the formula.\n * If `source` is `analyticObject`, then `dynamicDateFrom` considers the date range of available data for the analytic object.\n Then, if `direction` is `BACKWARD`, query backward from the data **end** date and if `direction` is `FORWARD`, query forward from the data **start** date.\n This allows you to keep getting the latest or earliest data without changing your query every time there's new or updated data. \n\n Example: If a tenant has Headcount metric data available from 2023-01-01 to 2024-01-01 (End date exclusive), specifying `dynamicDateFrom`: `SOURCE` with `direction`: `BACKWARD`\n means the query will retrieve data backward from 2024-01-01. The effect is the same as if specifying a `fromDateTime` of 2024-01-01'T'00:00:00.000. \n\n Example: If a tenant has Employee subject data available from 2023-01-01 to 2024-01-01 (End date exclusive), specifying `dynamicDateFrom`: `SOURCE` with `direction`: `FORWARD` \n means the query will retrieve data forward from 2023-01-01. The effect is the same as if specifying a `fromDateTime` of 2023-01-01'T'00:00:00.000.\n\n Example: If a tenant has Employee subject data available from 2023-01-10 to 2023-04-01 (End date exclusive), specifying `dynamicDateFrom`: `COMPLETE_PERIOD` with `direction`: `FORWARD` \n means the query will retrieve data forward from 2023-02-01. The effect is the same as if specifying a `fromDateTime` of 2023-02-01'T'00:00:00.000.\n\n Example: If a tenant has Employee subject data available from 2023-01-01 to 2023-03-15 (End date exclusive), specifying `dynamicDateFrom`: `COMPLETE_PERIOD` with `direction`: `BACKWARD` \n means the query will retrieve data backward from 2023-03-01. The effect is the same as if specifying a `fromDateTime` of 2023-03-01'T'00:00:00.000.\n\n Example: Retrieve a list of EmployeeIDs for the formula extending 1 month backward from the dynamic source date\n\n ```\n {\n   \"source\": {\n     \"formula\": \"on Employee validUntil instant filterBy(isActiveEmployee) aggregate count(Employee.EmployeeID)\"\n   },\n   \"columns\": [\n     {\n       \"columnDefinition\": {\n         \"property\": {\n           \"name\": \"Employee.EmployeeID\",\n           \"qualifyingPath\": \"Employee\"\n         }\n       }\n     },\n     {\n       \"columnDefinition\": {\n         \"effectiveDateProperty\": {}\n       }\n     }\n   ],\n   \"timeInterval\": {\n     \"dynamicDateFrom\": \"SOURCE\",\n     \"intervalPeriodType\": \"MONTH\",\n     \"intervalPeriodCount\": 1,\n     \"direction\": \"BACKWARD\"\n   }\n }\n ```"
+            format: enum
+          intervalPeriodType:
+            enum:
+            - MONTH
+            - DAY
+            - WEEK
+            - QUARTER
+            - YEAR
+            type: string
+            description: The time period type for each interval. Default is MONTH.
+            format: enum
+          intervalPeriodCount:
+            type: integer
+            description: The number of time periods per interval.
+            format: int32
+          direction:
+            enum:
+            - BACKWARD
+            - FORWARD
+            type: string
+            description: The direction to extend. Default is BACKWARD. BACKWARD is useful when the time instant is the current date or with `dynamicDateFrom` because the query continuously retrieves the newest data from current date backwards.
+            format: enum
+          shift:
+            allOf:
+            - $ref: '#/components/schemas/dataservices.query.TimeShiftDTO'
+            description: The amount of time to shift the time interval by, such as backward by one year. Default is none.
+    dataservices.datamodel.PropertyReferenceDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The ID of the property.
+        qualifyingPath:
+          type: string
+          description: "The qualifying path to the property in Visier, such as the analytic object or event the property is associated with.\n If the path has multiple objects, each object is separated by a period."
+      description: The name and qualifying path of a property to query.
+    dataservices.query.AggregationQueryDTO:
+      type: object
+      properties:
+        source:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.AggregationQuerySourceDTO'
+          description: The source data, such as a metric or formula, to query.
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.QueryFilterDTO'
+          description: "The objects by which to filter the query, such as dimensions or concepts.\n A filter defines the population to retrieve data from. Omit `filters` if no filtering is required."
+        axes:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.QueryAxisDTO'
+          description: "The objects by which to group the query. An axis defines the groups that the data belongs to.\n Omit `axes` if no grouping is required."
+        timeIntervals:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryTimeIntervalsDTO'
+          description: The time intervals to query.
+        parameterValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.QueryParameterValueDTO'
+          description: The values associated with parameters, if defined.
+      description: "An AggregationQuery defines the data to query in an aggregation query and returns a `cell set` calculated from\n the selected data points."
+    dataservices.query.SnapshotQueryExecutionDTO:
+      type: object
+      properties:
+        source:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.ListQuerySourceDTO'
+          description: The source data that you want to query.
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.PropertyColumnDTO'
+          description: The columns to include in the result. This must contain at least one column.
+        sortOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.SortOptionDTO'
+          description: The index and direction to sort a column in the `columns` array.
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.QueryFilterDTO'
+          description: The filters of this query. Omit `filters` if no filtering is required.
+        timeIntervals:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryTimeIntervalsDTO'
+          description: The time intervals to query.
+        parameterValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.QueryParameterValueDTO'
+          description: The parameter values for either member or numeric parameters.
+        options:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.SnapshotQueryExecutionOptionsDTO'
+          description: Additional instructions for your query, such as a calendar type or conversion information.
+    dataservices.query.SortOptionDTO:
+      type: object
+      properties:
+        columnIndex:
+          type: integer
+          description: The index of the column of the list query, staring from 0.
+          format: int32
+        sortDirection:
+          enum:
+          - SORT_ASCENDING
+          - SORT_DESCENDING
+          type: string
+          description: The sort direction.
+          format: enum
+      description: Sort option for a column of a list query.
+    dataservices.query.CellDistributionOptionsDTO:
+      type: object
+      properties:
+        binCount:
+          type: integer
+          description: The number of bins to return, minimum of 2, and a maximum of 100.
+          format: int32
+      description: "Cell distribution options for queries.\n Include with aggregation queries to enable distribution calculation per cell."
+    dataservices.query.ListQuerySourceDTO:
+      type: object
+      properties:
+        formula:
+          type: string
+          description: An ad-hoc metric formula. The response returns the individual data points that make up the aggregate.
+        metric:
+          type: string
+          description: The ID of an existing metric in your Visier solution.
+        analyticObject:
+          type: string
+          description: "The ID of an existing analytic object in your Visier solution.\n An analytic object source cannot have filters or time handling."
+        textConcept:
+          type: string
+          description: "The ID of an existing text concept in your Visier solution.\n A concept that defines how long text data can be analyzed. It links to a property with the Large Text data type and contains required filters and optional filters to enforce threshold requirements.\n <br>**Note:** <em>This field is in **limited availability**. If you are interested in using it, please contact your Customer Success Manager (CSM).</em>"
+      description: A ListQuerySource defines the source data to query in a list query.
+    dataservices.query.QueryPropertyDTO:
+      type: object
+      properties:
+        formula:
+          type: string
+          description: A formula-based property.
+        property:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.PropertyReferenceDTO'
+          description: A property reference.
+        selectionConcept:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.SelectionConceptReferenceDTO'
+          description: A selection concept-based property that returns true or false.
+        dimension:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.DimensionReferenceDTO'
+          description: A dimension-based property that returns the full name path of the dimension member that the data point is mapped to.
+        memberMapProperty:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryMemberMapPropertyDTO'
+          description: A member map-based property that uses an existing member map in Visier.
+        effectiveDateProperty:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryEffectiveDatePropertyDTO'
+          description: A property that yields the effective date for the record
+        dimensionLevelSelection:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryDimensionLevelPropertyDTO'
+          description: A dimension-based property that returns the member values of the dimension level.
+      description: "A QueryProperty defines a property of a data point returned from a query.\n This is not the same as a `property` in Visier's data mode."
+    dataservices.query.KeyGroupFilterDTO:
+      type: object
+      properties:
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.KeyGroupFilterItemDTO'
+      description: A collection of related filters that define a key group.
+    dataservices.query.CellDistributionBinDTO:
+      type: object
+      properties:
+        value:
+          type: string
+        support:
+          type: string
+      description: "A cell distribution bin.\n Each bin has a metric value (of the bin) and the number of observations contributing to the bin."
+    dataservices.query.KeyGroupFilterItemDTO:
+      type: object
+      properties:
+        formula:
+          type: string
+          description: A filter expressed as a formula.
+        selectionConcept:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.SelectionConceptReferenceDTO'
+          description: A filter that uses an existing selection concept in Visier.
+        memberSet:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.MemberFilterDTO'
+          description: A filter that includes or excludes dimension members.
+      description: An individual filter in a key group.
+    dataservices.query.AggregateQueryExecutionOptionsDTO:
+      type: object
+      properties:
+        calendarType:
+          enum:
+          - TENANT_CALENDAR
+          - GREGORIAN_CALENDAR
+          type: string
+          description: "The calendar type to use. This will be used for all time calculations unless explicitly overridden in\n the calculation itself. Default is TENANT_CALENDAR."
+          format: enum
+        currencyConversionMode:
+          deprecated: true
+          enum:
+          - TENANT_CURRENCY_CONVERSION
+          - VISIER_CURRENCY_CONVERSION
+          type: string
+          description: "This will be removed as of Winter 2026. Use `currencyConversionCode` instead. \n\n The currency conversion mode to use. This will be used for all currency conversion calculations unless explicitly overridden in the calculation itself. Default is TENANT_CURRENCY_CONVERSION."
+          format: enum
+        currencyConversionDate:
+          type: string
+          description: "The currency conversion date to use. If defined, the currency conversion will use the exchange rates as of this date.\n Default is the exchange rate at the end of the query time interval. Format is the number of milliseconds since\n midnight 01 January, 1970 UTC as a string. Note: Epochs are expressed as 64-bit integers and represented as\n stringified longs in JSON due to JSON's inherent limitation in representing large numbers."
+        lineageDepth:
+          type: integer
+          description: The max number of levels of nesting to unwind when determining the lineage for a derived metric value.
+          format: int32
+        zeroVisibility:
+          enum:
+          - SHOW
+          - HIDE
+          - ELIMINATE
+          type: string
+          description: Show or hide zeros in the result. Default is SHOW.
+          format: enum
+        nullVisibility:
+          enum:
+          - SHOW
+          - HIDE
+          - ELIMINATE
+          type: string
+          description: Show or hide null or N/A values in the result. Default is SHOW.
+          format: enum
+        cellDistributionOptions:
+          $ref: '#/components/schemas/dataservices.query.CellDistributionOptionsDTO'
+        axisVisibility:
+          enum:
+          - SIMPLE
+          - VERBOSE
+          type: string
+          description: The amount of information to return about each axis. Default is SIMPLE.
+          format: enum
+        enableSparseResults:
+          type: boolean
+          description: "Retrieve sparse cell sets. Sparse results only retrieve non-zero and non-null cells. Whether a result is truly sparse\n or not is determined by the Visier server."
+        internal:
+          $ref: '#/components/schemas/dataservices.query.InternalQueryExecutionOptionsDTO'
+        enableDescendingSpace:
+          type: boolean
+          description: If true, filter non-time axis member sets to only include members that are in aggregate positions or whose previous position is a leaf
+        currencyConversionCode:
+          type: string
+          description: Overrides the tenant's default currency for currency conversions.
+        memberDisplayMode:
+          enum:
+          - DEFAULT
+          - COMPACT
+          - DISPLAY
+          - MDX
+          - COMPACT_DISPLAY
+          type: string
+          description: "Control how member values are displayed. You can override the `memberDisplayMode` on a per-axis basis, if required.\n\n Valid values are `DEFAULT`, `COMPACT`, `DISPLAY`, or `MDX`. Default is `DEFAULT`.\n\n * `DEFAULT`: The default member name representation. For non-time members, this returns the technical member name path.\n   For time members, this includes a bracketed member index.\n   For example, Time instant member: `2019-06-01T00:00:00.000Z - [0]`\n   For example, Time interval member: `2022-06-01T00:00:00.000Z/2022-07-01T00:00:00.000Z - [12]`\n * `COMPACT`: Shortens the member name representation. For time intervals, the member name is the end time of the interval.\n    For example, Time instant member: `2019-06-01T00:00:00.000Z`\n    For example, Time interval member: `2022-07-01T00:00:00.000Z` where the interval member name was `2022-06-01T00:00:00.000Z/2022-07-01T00:00:00.000Z - [12]`\n * `DISPLAY`: Emits the members' display names whenever possible. When combined with `axisVisibility = VERBOSE`, the full display name path will be emitted.\n * `MDX`: Emits member name paths where each element is enclosed in square brackets, `[]`. Multidimensional expression (MDX) display mode automatically encloses time members in square brackets and puts them in `COMPACT` format.\n   For example, Location member `North America.United States.California` becomes `[North America].[United States].[California]` in MDX display mode.\n   For example, Time instant member `2019-06-01T00:00:00.000Z - [0]` becomes `[2019-06-01T00:00:00.000Z]` in MDX display mode.\n * `COMPACT_DISPLAY`: Emit the members' display names after compacting. This applies primarily to time members for event-based metrics. Compact display is required when\n   running multi-metric queries containing both event-based and subject-based metrics. Multi-metric queries with `DISPLAY` mode are changed\n   automatically to `COMPACT_DISPLAY`.\n   For example, Time interval member `2022-06-01T00:00:00.000Z/2022-07-01T00:00:00.000Z - [12]` becomes `Jun 30, 2022` in `COMPACT_DISPLAY` mode.\n   The exact format of the compacted time member display name depends on the the user's locale."
+          format: enum
+        axesOverallValueMode:
+          enum:
+          - NONE
+          - AGGREGATE
+          - OVERALL
+          type: string
+          description: "If `axes` is defined, use `axesOverallValueMode` to specify the type of overall values to return across the axes. Valid values:\n\n * `NONE`: Returns the metric's values for the selected axes and doesn't return overall values. This is the default.\n * `AGGREGATE`: Returns the metric's overall values for the selected axes members.\n * `OVERALL`: Returns the metric's overall values for all axes members.\n\n **Note**: `AGGREGATE` is not supported for lookup overlays because the overall values of selected members cannot be calculated directly from the data.\n\n Example: Let's say you want to know the Headcount of the locations Canada and US and the genders Male and Female. \n\n When `axesOverallValueMode` is `NONE`, the query returns these values:\n * 100 (Canada, Male)\n * 100 (US, Male)\n * 100 (Canada, Female)\n * 100 (US, Female)\n \n When `axesOverallValueMode` is `AGGREGATE`, the query returns these values:\n * 100 (Canada, Male)\n * 100 (US, Male)\n * 100 (Canada, Female)\n * 100 (US, Female)\n * 400 (Overall, Overall)\n * 200 (Overall, Male)\n * 200 (Overall, Female)\n * 200 (Canada, Overall)\n * 200 (US, Overall)\n\n When `axesOverallValueMode` is `OVERALL`, the query returns these values:\n * 100 (Canada, Male)\n * 100 (US, Male)\n * 100 (Canada, Female)\n * 100 (US, Female)\n * 800 (Overall, Overall)\n * 400 (Overall, Male)\n * 400 (Overall, Female)\n * 400 (Canada, Overall)\n * 400 (US, Overall)\n \n In this example, `OVERALL` returns higher overall values than `AGGREGATE` because `AGGREGATE` returns the overall values for the selected locations (Canada, US) and genders (Male, Female), whereas `OVERALL` returns the overall values across all locations and genders in the data."
+          format: enum
+      description: An AggregateQueryExecutionOptions provides additional instructions to perform an aggregate query.
+    dataservices.query.AggregationTypeParameterValueDTO:
+      type: object
+      properties:
+        parameterId:
+          type: string
+          description: The unique ID of the aggregation parameter.
+        aggregationOptionId:
+          type: string
+          description: The unique ID of the aggregation option.
+      description: The value for an aggregation parameter.
+    dataservices.query.CellSetAxisDTO:
+      type: object
+      properties:
+        dimension:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.DimensionReferenceDTO'
+          description: The dimension associated with the axis.
+        positions:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.CellSetAxisPositionDTO'
+          description: A list of paths that represent the data's positions along the axis.
+      description: The axis of a cell set associated with a dimension.
+    dataservices.query.SubjectMemberSetParameterValueDTO:
+      type: object
+      properties:
+        parameterId:
+          type: string
+          description: The unique ID of the subject member set parameter.
+        keyNamePaths:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.SubjectMemberSetParameterValueDTO_NamePathDTO'
+          description: The name path keys for the subject member set parameter; for example, `["Java"]`.
+        valueNamePaths:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.query.SubjectMemberSetParameterValueDTO_ListOfNamePathDTO'
+          description: The name path values for each subject member set parameter key; for example, `["5.0"]`.
+      description: The value for a subject member set parameter.
+    dataservices.query.CohortFilterDTO:
+      type: object
+      properties:
+        keyGroup:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.KeyGroupFilterDTO'
+          description: A key group is a collection of filters that define the shape of the analysis population.
+        exclude:
+          type: boolean
+          description: If true, the population is defined by those excluded by the filters. Default is false.
+        timeInterval:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.query.QueryTimeIntervalDTO'
+          description: The time at which to apply the key group, such as a specific day or period of months.
+      description: "Use a cohort filter to define a population as it existed during a specific time period.\n Cohort filters allow you to define a population in terms of a collection of filters, known as a key group.\n The cohort's defined time interval is independent of the query's time. The cohort's time interval is the\n time at which the key group should be applied.\n Cohorts are typically used to follow populations and understand changes to the population over time,\n such as promotion and resignation rates."
+    dataservices.datamodel.SelectionConceptReferenceDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The ID of the selection concept.
+        qualifyingPath:
+          type: string
+          description: "The qualifying path to the selection concept in Visier, such as the analytic object or event the selection\n concept is associated with. If the path has multiple objects, each object is separated by a period."
+      description: The name and qualifying path of a selection concept to query.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: data out
+  tags:
+  - DataQuery
+  - DataVersionExport
+  - VeeV1
+  - VeeV2
+  - Search
+  - SourceFilesDownload
+  - Reporting
+  - DataExportConnectorsAPI

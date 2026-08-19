@@ -1,0 +1,715 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Administration Users V1 API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "UsersV1",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Assign permissions to users",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/admin/permissions/users",
+            "headers": [
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              },
+              {
+                "name": "SessionBasedPermissions",
+                "value": ""
+              },
+              {
+                "name": "SessionRepoId",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API allows you to assign a permission to specific users. Administrating tenant users can assign permissions\n to users in the administrating tenant and in the analytic tenants those users belong to.\n\n To assign permissions to users in a project for the administrating tenant, provide a project UUID in the `ProjectID` request header.\n Administrating tenants can assign permissions to users in analytic tenants by providing a tenant code and project ID in the request body."
+        },
+        {
+          "info": {
+            "name": "Remove permissions from users",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/admin/permissions/users",
+            "headers": [
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API allows you to remove a permission from specific users. Administrating tenant users can remove permissions\n from users in the administrating tenant and in the analytic tenants those users belong to.\n\n To remove permission from users in a project for the administrating tenant, provide a project UUID in the `ProjectID` request header.\n Administrating tenants can remove permissions from users in analytic tenants by providing a tenant code and project ID in the request body."
+        },
+        {
+          "info": {
+            "name": "Retrieve users that are assigned a specific permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/permissions/:permissionId/users",
+            "headers": [
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "permissionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the permission you want to retrieve users for."
+              },
+              {
+                "name": "includeUserGroups",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, the response returns a list of all users that are assigned the permission, including users that are\n assigned the permission through a user group.\n If `false`, the response returns a list of the users that are directly assigned the permission."
+              },
+              {
+                "name": "tenantFilter",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to retrieve the list of users from."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return. The maximum number of tenants to retrieve is 100."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The index to start retrieving results from, also known as offset. The index begins at 0."
+              }
+            ]
+          },
+          "docs": "This API allows you to retrieve all the users that are assigned a specified permission. You must know the ID\n of the permission you want to retrieve users for.\n\n To specify the project in which to retrieve users assigned to a specific permission for the login tenant, provide\n a project UUID in the `ProjectID` request header. If omitted, the request retrieves users assigned to a specific permission from production."
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of all user groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/user-groups",
+            "headers": [
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to retrieve the list of user groups from."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return. The maximum number of users to retrieve is 1000."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The index to start retrieving results from, also known as offset."
+              }
+            ]
+          },
+          "docs": "This API allows you to retrieve the full list of user groups in a tenant.\n\n To specify the project in which to retrieve user groups for a tenant, provide a project UUID in the `ProjectID` request header. If omitted, the request retrieves user information from production."
+        },
+        {
+          "info": {
+            "name": "Assign permissions to user groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/admin/user-groups/permissions",
+            "headers": [
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API allows you to assign a permission to specific user groups. This assigns the permission to all users in the user group.\n\n To assign permissions to user groups in a project, provide a project UUID in the `ProjectID` request header."
+        },
+        {
+          "info": {
+            "name": "Remove permissions from user groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/admin/user-groups/permissions",
+            "headers": [
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API allows you to remove a permission from specific user groups.\n\n To remove permissions from user groups in a project, provide a project UUID in the `ProjectID` request header."
+        },
+        {
+          "info": {
+            "name": "Assign users to user groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/admin/user-groups/users",
+            "headers": [
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              },
+              {
+                "name": "Prefer",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API allows you to assign users to specific user groups.\n\n To assign users to user groups in a project for the administrating tenant, provide a project UUID in the `ProjectID` request header.\n Administrating tenants can assign users to user groups in multiple analytic tenants by providing a tenant code and project ID in the request body.\n\n We recommend that administrating tenants set the analytic tenant in which to execute the API call using the `TargetTenantID` request header."
+        },
+        {
+          "info": {
+            "name": "Remove users from user groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/admin/user-groups/users",
+            "headers": [
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              },
+              {
+                "name": "Prefer",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API allows you to remove users from specific user groups.\n\n To remove users from user groups in a project for the administrating tenant, provide a project UUID in the `ProjectID` request header.\n Administrating tenants can remove users to user groups in multiple analytic tenants by providing a tenant code and project ID in the request body.\n\n We recommend that administrating tenants set the analytic tenant in which to execute the API call using the `TargetTenantID` request header."
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of user group users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/user-groups/:userGroupId/users",
+            "headers": [
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "userGroupId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of user group."
+              },
+              {
+                "name": "tenantFilter",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the tenant to retrieve the list of users from."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return. The maximum number of tenants to retrieve is 100."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The index to start retrieving results from, also known as offset. The index begins at 0."
+              }
+            ]
+          },
+          "docs": "This API allows you to retrieve the list of users explicitly assigned to a user group. Users that are implicitly\n included in the user group through the user group's dynamic filters are not returned by this endpoint.\n\n To specify the project in which to retrieve user group users for the login tenant, provide\n a project UUID in the `ProjectID` request header. If omitted, the request retrieves user group users from production."
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of all users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/users",
+            "headers": [
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to retrieve a list of users from."
+              },
+              {
+                "name": "assignedProfiles",
+                "value": "",
+                "type": "query",
+                "description": "If true, the response returns a list of the user's assigned profiles."
+              },
+              {
+                "name": "assignedPermissions",
+                "value": "",
+                "type": "query",
+                "description": "If true, the response returns the user's assigned permissions."
+              },
+              {
+                "name": "assignedUserGroups",
+                "value": "",
+                "type": "query",
+                "description": "If true, the response returns the user's assigned user groups."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return. The maximum number of users to retrieve is 1000."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The index to start retrieving results from, also known as offset. The index begins at 0."
+              }
+            ]
+          },
+          "docs": "This API allows you to retrieve the full list of users and their current states.\n\n To specify the project in which to retrieve user information, provide a project UUID in the `ProjectID` request header. If omitted, the request retrieves user information from production."
+        },
+        {
+          "info": {
+            "name": "Add a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/admin/users",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to create a user in."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new user. Administrating tenant users can specify the tenant in which to add a user."
+        },
+        {
+          "info": {
+            "name": "Retrieve a user's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/users/:userId",
+            "headers": [
+              {
+                "name": "ProjectID",
+                "value": ""
+              },
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              },
+              {
+                "name": "NonVersioned",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user you want to retrieve."
+              },
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to retrieve a user from."
+              },
+              {
+                "name": "assignedProfiles",
+                "value": "",
+                "type": "query",
+                "description": "If true, the response returns a list of the user's assigned profiles."
+              },
+              {
+                "name": "assignedPermissions",
+                "value": "",
+                "type": "query",
+                "description": "If true, the response returns the user's assigned permissions."
+              },
+              {
+                "name": "assignedUserGroups",
+                "value": "",
+                "type": "query",
+                "description": "If true, the response returns the user's assigned user groups."
+              }
+            ]
+          },
+          "docs": "This API allows you to retrieve all details for a specified user.\n\n To specify the project in which to retrieve user information, provide a project UUID in the `ProjectID` request header. If omitted, the request retrieves user information from production."
+        },
+        {
+          "info": {
+            "name": "Update a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/admin/users/:userId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user you want to update."
+              },
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to update a user in."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing user's information, such as their display name or if the user is enabled in Visier."
+        },
+        {
+          "info": {
+            "name": "Delete a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/admin/users/:userId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user you want to delete."
+              },
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to delete a user in."
+              }
+            ]
+          },
+          "docs": "Delete an existing user. Administrating tenant users can specify the tenant from which to delete a user."
+        },
+        {
+          "info": {
+            "name": "Retrieve the Application Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/users/reports/application-logs",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "An inclusive date-time in milliseconds to start retrieving Application Logs from."
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "An exclusive date-time in milliseconds to stop retrieving Application Logs from."
+              },
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to retrieve Application Logs from."
+              }
+            ]
+          },
+          "docs": "This API allows you to export the Application Logs for a tenant. The Application Logs track information about your\n users and how they are using the application. Performing regular audits will help you identify potential security\n issues and keep your data safe. As part of user management, download the Application Logs to monitor user activity\n and logon events to ensure your users are performing authorized activities. \n\n Application logs are retained in the system for 180 days.\n\n Administrating"
+        },
+        {
+          "info": {
+            "name": "Retrieve the Data Security Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/users/:userId/reports/data-security",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user to retrieve the report for."
+              },
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to retrieve the Data Security Report from."
+              }
+            ]
+          },
+          "docs": "This API allows you to export the data security report of a user. The Data Security Report provides information\n about a specific user to see which populations and properties that user has access to as a result of the\n permissions assigned to them.\n\n Administrating tenant users can export the report for users in the administrating tenant and the analytic\n tenants those users belong to."
+        },
+        {
+          "info": {
+            "name": "Retrieve user profile assignments in XLSX format",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/users/reports/profile-assignments",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to retrieve profile assignments from."
+              }
+            ]
+          },
+          "docs": "This API allows you to export the profiles assigned to each user. This report details the profiles assigned to\n each user and the profile validity period.\n\n Administrating tenant users can export profile assignments for the administrating tenant and the analytic tenants\n those users belong to."
+        },
+        {
+          "info": {
+            "name": "Retrieve user permissions in XLSX format",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/users/reports/permission-assignments",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to retrieve the permission assignments report from."
+              }
+            ]
+          },
+          "docs": "This API allows you to export the user permission assignments for a tenant. The permission assignments report\n provides a summary of the permissions your users have been assigned and how each permission is being used across\n your user base, as well as the users that do not have any permissions assigned to them.\n\n Administrating tenant users can export permission assignments for the administrating tenant and the analytic\n tenants those users belong to."
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of all permissions in XLSX format",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/admin/users/reports/permissions-list",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant to retrieve permissions from."
+              }
+            ]
+          },
+          "docs": "This API allows you to export the list of permissions in a tenant. This report includes the permission name,\n permission description, and permission ID for all permissions in the tenant.\n\n Administrating tenant users can export permissions lists for the administrating tenant and the analytic tenants\n those users belong to."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

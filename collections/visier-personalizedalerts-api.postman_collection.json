@@ -1,0 +1,1115 @@
+{
+  "item": [
+    {
+      "id": "9880e697-7d32-4ad0-95db-52db1a3af2ff",
+      "name": "PersonalizedAlerts",
+      "description": {
+        "content": "Manage your personalized alerts in Visier. Alerts notify you if a metric exceeds your defined threshold.\n<br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\nIf you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1aef6070-f613-495e-86ed-62df0a3eb677",
+          "name": "Retrieve personalized alerts",
+          "request": {
+            "name": "Retrieve personalized alerts",
+            "description": {
+              "content": "Get all personalized alerts you have access to. The response returns each alert’s ID, creator, and whether the alert is enabled or disabled.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bcdd6019-69be-45b8-9e89-353ad353ade9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ownedAlerts\": [\n    {\n      \"alertId\": \"string\",\n      \"triggerCriteria\": {\n        \"groupedMetricValueThreshold\": {\n          \"metric\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"filters\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"relativeTimePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ruleSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"calendarId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"displayName\": \"string\",\n      \"isEnabledForUser\": true,\n      \"description\": \"string\",\n      \"content\": {\n        \"analysis\": {\n          \"analysisId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"businessQuestionId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"alertId\": \"string\",\n      \"triggerCriteria\": {\n        \"groupedMetricValueThreshold\": {\n          \"metric\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"filters\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"relativeTimePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ruleSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"calendarId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"displayName\": \"string\",\n      \"isEnabledForUser\": false,\n      \"description\": \"string\",\n      \"content\": {\n        \"analysis\": {\n          \"analysisId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"businessQuestionId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ],\n  \"sharedAlerts\": [\n    {\n      \"alertId\": \"string\",\n      \"triggerCriteria\": {\n        \"groupedMetricValueThreshold\": {\n          \"metric\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"filters\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"relativeTimePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ruleSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"calendarId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"displayName\": \"string\",\n      \"isEnabledForUser\": true,\n      \"description\": \"string\",\n      \"content\": {\n        \"analysis\": {\n          \"analysisId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"businessQuestionId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"alertId\": \"string\",\n      \"triggerCriteria\": {\n        \"groupedMetricValueThreshold\": {\n          \"metric\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"filters\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dimension\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"relativeTimePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ruleSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"calendarId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"displayName\": \"string\",\n      \"isEnabledForUser\": true,\n      \"description\": \"string\",\n      \"content\": {\n        \"analysis\": {\n          \"analysisId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"businessQuestionId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11afad2b-e57e-4d0f-9003-cd0499c74784",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d91bf1b1-f994-4377-bc67-3ce5f10c2a4b",
+          "name": "Create a personalized alert",
+          "request": {
+            "name": "Create a personalized alert",
+            "description": {
+              "content": "Create a new personalized alert. In the request body, define the alert’s display name and its trigger criteria, including the metric, filters, time periods, and threshold value.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"triggerCriteria\": {\n    \"groupedMetricValueThreshold\": {\n      \"metric\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"parameterValues\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"timeHandling\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"filters\": [\n        {\n          \"selectionConcept\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conceptReference\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"persistedCohort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"numericRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"selectionConcept\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conceptReference\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"persistedCohort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"numericRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"dimension\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"qualifyingPath\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"relativeTimePeriod\": {\n        \"allowPartialPeriod\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"periodType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"periodCount\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"direction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"ruleSet\": {\n        \"compareTo\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"rules\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"calendarId\": \"<string>\"\n    }\n  },\n  \"displayName\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9a8773f5-dc40-4f28-ac56-3860850f0f81",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"triggerCriteria\": {\n    \"groupedMetricValueThreshold\": {\n      \"metric\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"parameterValues\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"timeHandling\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"filters\": [\n        {\n          \"selectionConcept\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conceptReference\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"persistedCohort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"numericRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"selectionConcept\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conceptReference\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"persistedCohort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"numericRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"dimension\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"qualifyingPath\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"relativeTimePeriod\": {\n        \"allowPartialPeriod\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"periodType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"periodCount\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"direction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"ruleSet\": {\n        \"compareTo\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"rules\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"calendarId\": \"<string>\"\n    }\n  },\n  \"displayName\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alertId\": \"string\",\n  \"triggerCriteria\": {\n    \"groupedMetricValueThreshold\": {\n      \"metric\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"parameterValues\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"timeHandling\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"filters\": [\n        {\n          \"selectionConcept\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conceptReference\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"persistedCohort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"numericRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"selectionConcept\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conceptReference\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"persistedCohort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"numericRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"dimension\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"qualifyingPath\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"relativeTimePeriod\": {\n        \"allowPartialPeriod\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"periodType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"periodCount\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"direction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"ruleSet\": {\n        \"compareTo\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"rules\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"calendarId\": \"<string>\"\n    }\n  },\n  \"displayName\": \"string\",\n  \"isEnabledForUser\": true,\n  \"description\": \"string\",\n  \"content\": {\n    \"analysis\": {\n      \"analysisId\": \"string\",\n      \"businessQuestionId\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0e15cff-a1cb-4e48-8c18-bc08c25a4afb",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"triggerCriteria\": {\n    \"groupedMetricValueThreshold\": {\n      \"metric\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"parameterValues\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"timeHandling\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"filters\": [\n        {\n          \"selectionConcept\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conceptReference\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"persistedCohort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"numericRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"selectionConcept\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conceptReference\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"persistedCohort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"numericRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"dimension\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"qualifyingPath\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"relativeTimePeriod\": {\n        \"allowPartialPeriod\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"periodType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"periodCount\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"direction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"ruleSet\": {\n        \"compareTo\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"rules\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"calendarId\": \"<string>\"\n    }\n  },\n  \"displayName\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "311b9063-1be7-418e-8ba7-b9116e19cf57",
+          "name": "Retrieve a personalized alert",
+          "request": {
+            "name": "Retrieve a personalized alert",
+            "description": {
+              "content": "Get the details of a specific personalized alert. You must know the ID of the alert to retrieve its details. To retrieve all alert IDs, see `GET /v1alpha/alerts`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "alerts",
+                ":alertId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "alertId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f7ccc7e-46b0-40a1-8e93-b2a2bbff07dd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "alerts",
+                    ":alertId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alertId\": \"string\",\n  \"triggerCriteria\": {\n    \"groupedMetricValueThreshold\": {\n      \"metric\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"parameterValues\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"timeHandling\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"filters\": [\n        {\n          \"selectionConcept\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conceptReference\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"persistedCohort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"numericRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"selectionConcept\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conceptReference\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"persistedCohort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"numericRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"dimension\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"qualifyingPath\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"relativeTimePeriod\": {\n        \"allowPartialPeriod\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"periodType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"periodCount\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"direction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"ruleSet\": {\n        \"compareTo\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"rules\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"calendarId\": \"<string>\"\n    }\n  },\n  \"displayName\": \"string\",\n  \"isEnabledForUser\": true,\n  \"description\": \"string\",\n  \"content\": {\n    \"analysis\": {\n      \"analysisId\": \"string\",\n      \"businessQuestionId\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "784ff792-79da-4d6d-8580-aa6ec279f650",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "alerts",
+                    ":alertId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ede68620-3ae2-4110-90d4-9fadb3f99ccf",
+          "name": "Update a personalized alert",
+          "request": {
+            "name": "Update a personalized alert",
+            "description": {
+              "content": "Make changes to an existing personalized alert. You can only update alerts that you created. You must know the ID of the alert to update it. To retrieve all alert IDs, see `GET /v1alpha/alerts`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "alerts",
+                ":alertId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "alertId",
+                  "description": "(Required) The unique identifier of the alert."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"alertId\": \"<string>\",\n  \"triggerCriteria\": {\n    \"groupedMetricValueThreshold\": {\n      \"metric\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"parameterValues\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"timeHandling\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"filters\": [\n        {\n          \"selectionConcept\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conceptReference\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"persistedCohort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"numericRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"selectionConcept\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conceptReference\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"persistedCohort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"numericRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"dimension\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"qualifyingPath\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"relativeTimePeriod\": {\n        \"allowPartialPeriod\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"periodType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"periodCount\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"direction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"ruleSet\": {\n        \"compareTo\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"rules\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"calendarId\": \"<string>\"\n    }\n  },\n  \"displayName\": \"<string>\",\n  \"isEnabledForUser\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"content\": {\n    \"analysis\": {\n      \"analysisId\": \"<string>\",\n      \"businessQuestionId\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "509d589a-0636-488e-86d8-0265b4be97c0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "alerts",
+                    ":alertId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) The unique identifier of the alert."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertId\": \"<string>\",\n  \"triggerCriteria\": {\n    \"groupedMetricValueThreshold\": {\n      \"metric\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"parameterValues\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"timeHandling\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"filters\": [\n        {\n          \"selectionConcept\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conceptReference\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"persistedCohort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"numericRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"selectionConcept\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conceptReference\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"persistedCohort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"numericRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"dimension\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"qualifyingPath\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"relativeTimePeriod\": {\n        \"allowPartialPeriod\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"periodType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"periodCount\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"direction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"ruleSet\": {\n        \"compareTo\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"rules\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"calendarId\": \"<string>\"\n    }\n  },\n  \"displayName\": \"<string>\",\n  \"isEnabledForUser\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"content\": {\n    \"analysis\": {\n      \"analysisId\": \"<string>\",\n      \"businessQuestionId\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alertId\": \"<string>\",\n  \"triggerCriteria\": {\n    \"groupedMetricValueThreshold\": {\n      \"metric\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"parameterValues\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"timeHandling\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"filters\": [\n        {\n          \"selectionConcept\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conceptReference\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"persistedCohort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"numericRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"selectionConcept\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conceptReference\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"persistedCohort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"numericRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"dimension\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"qualifyingPath\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"relativeTimePeriod\": {\n        \"allowPartialPeriod\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"periodType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"periodCount\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"direction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"ruleSet\": {\n        \"compareTo\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"rules\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"calendarId\": \"<string>\"\n    }\n  },\n  \"displayName\": \"<string>\",\n  \"isEnabledForUser\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"content\": {\n    \"analysis\": {\n      \"analysisId\": \"<string>\",\n      \"businessQuestionId\": \"<string>\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c729bf05-9489-44af-9c41-0d76194516cc",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "alerts",
+                    ":alertId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) The unique identifier of the alert."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertId\": \"<string>\",\n  \"triggerCriteria\": {\n    \"groupedMetricValueThreshold\": {\n      \"metric\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"parameterValues\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"timeHandling\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"filters\": [\n        {\n          \"selectionConcept\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conceptReference\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"persistedCohort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"numericRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"selectionConcept\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberSet\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conceptReference\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"keyGroup\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"persistedCohort\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timePeriod\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"numericRange\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"dimension\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"qualifyingPath\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"relativeTimePeriod\": {\n        \"allowPartialPeriod\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"periodType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"periodCount\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"direction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"ruleSet\": {\n        \"compareTo\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"rules\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"calendarId\": \"<string>\"\n    }\n  },\n  \"displayName\": \"<string>\",\n  \"isEnabledForUser\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"content\": {\n    \"analysis\": {\n      \"analysisId\": \"<string>\",\n      \"businessQuestionId\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b61aaf40-0fc9-4e2c-a485-8d6fcd337d76",
+          "name": "Delete a personalized alert",
+          "request": {
+            "name": "Delete a personalized alert",
+            "description": {
+              "content": "Delete a personalized alert. You can only delete alerts that you created. Alternatively, to disable an alert, see `PUT /v1alpha/alerts/{alertId}/recipient-status`. You must know the ID of the alert to delete it. To retrieve all alert IDs, see `GET /v1alpha/alerts`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "alerts",
+                ":alertId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "alertId",
+                  "description": "(Required) The unique identifier of the alert."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ac4129c3-9013-4a4c-8103-a08013f73722",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "alerts",
+                    ":alertId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) The unique identifier of the alert."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alertId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4cfbb35-4a9a-495b-bef9-6420c285ed0e",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "alerts",
+                    ":alertId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) The unique identifier of the alert."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59c85693-13a7-44a2-bd6f-91a9c0c49cf9",
+          "name": "Enable or disable a personalized alert",
+          "request": {
+            "name": "Enable or disable a personalized alert",
+            "description": {
+              "content": "Enable or disable a personalized alert. Disabling an alert removes it from your Home room and future email digests. You can re-enable an alert at any time.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "alerts",
+                ":alertId",
+                "recipient-status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "alertId",
+                  "description": "(Required) The unique identifier of the alert."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<enum>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "413b17ac-4657-4932-9dc5-37ad3fe3b174",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "alerts",
+                    ":alertId",
+                    "recipient-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) The unique identifier of the alert."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<enum>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"<enum>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "133b1d9c-266a-45a8-a3d5-cba8d33bbd40",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "alerts",
+                    ":alertId",
+                    "recipient-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) The unique identifier of the alert."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<enum>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41103f09-366a-4a53-8e2d-06e2b5feb148",
+          "name": "Retrieve personalized alerts notifications",
+          "request": {
+            "name": "Retrieve personalized alerts notifications",
+            "description": {
+              "content": "Get all the notifications for your active personalized alerts from the last 30 days. For all active alerts, the response returns the date that the alert was triggered and the alert’s trigger criteria.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1alpha",
+                "notifications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b5aab75-723f-451d-9464-d7db2869abe7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"notifications\": [\n    {\n      \"alertNotificationId\": \"string\",\n      \"alertId\": \"string\",\n      \"createdDate\": \"string\",\n      \"alertDetails\": {\n        \"triggerType\": \"UNSPECIFIED\",\n        \"triggerCriteria\": {\n          \"groupedMetricValueThreshold\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"resultInfo\": [\n        {\n          \"overallResult\": {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"formattedValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"memberResult\": {\n            \"memberId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"displayName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"formattedValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"overallResult\": {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"formattedValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"memberResult\": {\n            \"memberId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"displayName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"formattedValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"resultType\": \"TRIGGERED\"\n    },\n    {\n      \"alertNotificationId\": \"string\",\n      \"alertId\": \"string\",\n      \"createdDate\": \"string\",\n      \"alertDetails\": {\n        \"triggerType\": \"UNSPECIFIED\",\n        \"triggerCriteria\": {\n          \"groupedMetricValueThreshold\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"resultInfo\": [\n        {\n          \"overallResult\": {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"formattedValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"memberResult\": {\n            \"memberId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"displayName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"formattedValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"overallResult\": {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"formattedValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"memberResult\": {\n            \"memberId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"displayName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"formattedValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"resultType\": \"TRIGGERED\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54211af7-cfeb-465c-90e7-cfd83276463e",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1alpha",
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ae518d33-a202-4edb-abb8-5132f5597124",
+    "name": "Visier Analytic Model Personalized Alerts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for retrieving and configuring your analytic model in Visier.",
+      "type": "text/plain"
+    }
+  }
+}

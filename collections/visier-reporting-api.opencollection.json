@@ -1,0 +1,178 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Data Out Reporting API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reporting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/reporting/reports",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Optionally, specify the number of reports to return. If omitted, the request uses the default value of 100."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Optionally, specify the zero-based index of the report to start fetching from. If omitted, the request uses the default value of 0."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of reports. The response returns information such as the unique ID, title, description, owner, and the allowed actions you can take on the report.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Create a report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1alpha/reporting/reports",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new report with a title and description. To edit other contents of the report, such as columns and group bys, navigate to the Reports room in Visier.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Retrieve a report's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/reporting/reports/:reportId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the report you want to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a specific report. The response returns information such as title, description, owner, and the allowed actions you can take on the report. You must know the ID of the report to retrieve its details. To retrieve report IDs, see `GET /v1alpha/reporting/reports`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in usin"
+        },
+        {
+          "info": {
+            "name": "Duplicate a report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1alpha/reporting/reports/:reportId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the report you want to duplicate."
+              }
+            ]
+          },
+          "docs": "Make a copy of an existing report. You must know the ID of the report to copy it. To retrieve report IDs, see `GET /v1alpha/reporting/reports`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Delete a report",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1alpha/reporting/reports/:reportId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the report you want to delete."
+              }
+            ]
+          },
+          "docs": "Delete a report in the tenant. You must know the ID of the report to delete it. To retrieve report IDs, see `GET /v1alpha/reporting/reports`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Download a report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/reporting/report-data/:reportId",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the report you want to download."
+              }
+            ]
+          },
+          "docs": "Download a report as a CSV file. The returned CSV file contains the data in the report. You must know the ID of the report to download it. To retrieve report IDs, see `GET /v1alpha/reporting/reports`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

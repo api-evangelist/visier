@@ -1,0 +1,416 @@
+openapi: 3.2.0
+info:
+  title: Visier Data Out Data Version Export API
+  description: Visier APIs for getting data out of Visier, such as aggregate data and data version information.
+  license:
+    name: Apache License, Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 22222222.99201.3040
+security:
+- ApiKeyAuth: []
+  BearerAuth: []
+- ApiKeyAuth: []
+  CookieAuth: []
+- ApiKeyAuth: []
+  OAuth2Auth: []
+tags:
+- name: DataVersionExport
+  x-displayName: Data Version Export
+  description: 'Export Visier data version information, such as tables, columns, and file information, in CSV format.
+
+    <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
+paths:
+  /v1alpha/data/data-version-exports/data-versions:
+    get:
+      tags:
+      - DataVersionExport
+      summary: Retrieve a list of all data versions
+      description: "Retrieve a list of all data versions in the tenant.\n\n **Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: DataVersionExport_GetAvailableDataVersions
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DvExportStatus'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/designer.DataVersionExportDataVersionsDTO'
+  /v1alpha/data/data-version-exports/exports:
+    get:
+      tags:
+      - DataVersionExport
+      summary: Retrieve the details of all data version exports
+      description: "Retrieve the information for all available data version exports.\n **Note:** Data version exports are available for 14 days after export job completes.\n\n **Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: DataVersionExport_GetAvailableExports
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DvExportStatus'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/designer.DataVersionExportsDTO'
+  /v1alpha/data/data-version-exports/exports/{exportUuid}:
+    get:
+      tags:
+      - DataVersionExport
+      summary: Retrieve the details of a data version export
+      description: "Retrieve information for a specific data version export.\n **Note:** Data version exports are available for 14 days after export job completes.\n\n **Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: DataVersionExport_GetExport
+      parameters:
+      - name: exportUuid
+        in: path
+        description: The unique identifier of the data version export.
+        required: true
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DvExportStatus'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/designer.DataVersionExportDTO'
+  /v1alpha/data/data-version-exports/jobs:
+    post:
+      tags:
+      - DataVersionExport
+      summary: Schedule a data version export job
+      description: "Schedule a data version export job. The job schedules immediately and will begin when resources are available. The response returns a `jobUuid` that you can use to check the export job status.\n\n **Note:** There is a limit of 10 export jobs per tenant per day.\n\n **Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: DataVersionExport_ScheduleExportJob
+      parameters:
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/designer.DataVersionExportScheduleJobRequestDTO'
+        required: true
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DvExportStatus'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/designer.DataVersionExportScheduleJobResponseDTO'
+  /v1alpha/data/data-version-exports/jobs/{jobUuid}:
+    get:
+      tags:
+      - DataVersionExport
+      summary: Retrieve a data version export job's status
+      description: "Retrieve the status of a data version export job. After the job completes successfully, this endpoint returns an `exportUuid` that you can use to retrieve the export information and download export files.\n\n **Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      operationId: DataVersionExport_GetExportJobStatus
+      parameters:
+      - name: jobUuid
+        in: path
+        description: The unique identifier of the data version export job.
+        required: true
+        schema:
+          type: string
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DvExportStatus'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/designer.DataVersionExportJobStatusDTO'
+  /v1alpha/data/data-version-exports/exports/{exportUuid}/files/{fileId}:
+    get:
+      tags:
+      - DataVersionExport
+      summary: Download a file from a data version export
+      description: 'This API allows you to download a file from a data version export.
+
+        Data version export files are in CSV format, compressed with gzip.'
+      operationId: DataVersionExportV1Alpha_DownloadFile
+      parameters:
+      - name: exportUuid
+        in: path
+        description: The unique identifier of the data version export.
+        required: true
+        schema:
+          type: string
+      - name: fileId
+        in: path
+        description: The unique integer identifier of the file within the data version export.
+        required: true
+        schema:
+          type: integer
+      - name: TargetTenantID
+        in: header
+        description: Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: File contents
+          content:
+            application/gzip:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DvExportStatus'
+components:
+  schemas:
+    designer.DataVersionExportsDTO:
+      type: object
+      properties:
+        dataVersionExports:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.DataVersionExportDTO'
+          description: Information about data version exports.
+    designer.DataVersionExportColumnDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The column's name.
+        dataType:
+          type: string
+          description: The column's data type. Possible data types are string, integer, number, date, Boolean.
+        allowsNull:
+          type: boolean
+          description: If `true`, the column allows null values.
+        isPrimaryKeyComponent:
+          type: boolean
+          description: If `true`, the column is part of the primary key.
+    designer.DataVersionExportDataVersionSummaryDTO:
+      type: object
+      properties:
+        dataVersion:
+          type: string
+          description: The data version number.
+        dataCategory:
+          type: string
+          description: The data category that the data version belongs to. If empty, the data version belongs to the default data category.
+        created:
+          type: string
+          description: The date that the data version was generated, in milliseconds since 1970-01-01T00:00:00Z.
+    designer.DataVersionExportJobStatusDTO:
+      type: object
+      properties:
+        jobUuid:
+          type: string
+          description: The unique identifier of the data version export job.
+        completed:
+          type: boolean
+          description: If `true`, the job completed successfully.
+        failed:
+          type: boolean
+          description: If `true`, the job failed.
+        exportUuid:
+          type: string
+          description: The unique identifier of the data version export generated by the job. If empty, the job hasn't completed successfully.
+    designer.DataVersionExportScheduleJobResponseDTO:
+      type: object
+      properties:
+        jobUuid:
+          type: string
+          description: The unique identifier of the scheduled data version export job.
+    designer.DataVersionExportPartFileDTO:
+      type: object
+      properties:
+        fileId:
+          type: integer
+          description: The unique integer identifier of the file in the data version export.
+          format: int32
+        filename:
+          type: string
+          description: The file's name.
+    designer.DataVersionExportFileDTO:
+      type: object
+      properties:
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.DataVersionExportColumnDTO'
+          description: Information about a table's columns.
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.DataVersionExportPartFileDTO'
+          description: Information about a table's files in the export.
+    designer.DataVersionExportScheduleJobRequestDTO:
+      type: object
+      properties:
+        dataVersionNumber:
+          type: string
+          description: The data version number to generate an export for.
+        baseDataVersionNumber:
+          type: string
+          description: "Optional. The baseline data version number to use to generate a delta export.\n Delta exports contain the differences between `baseDataVersionNumber` and\n `dataVersionNumber`, such as anything updated, added, or removed in `dataVersionNumber`.\n If `baseDataVersionNumber` is not provided, a full export generates for `dataVersionNumber`."
+    DvExportStatus:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        errorCode:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    designer.DataVersionExportDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: The unique identifier of the data version export. Must be a valid UUID.
+        timestamp:
+          type: string
+          description: The date that the data version export was generated, in milliseconds since 1970-01-01T00:00:00Z.
+        dataVersionNumber:
+          type: string
+          description: The data version number for which the export was generated.
+        baseDataVersionNumber:
+          type: string
+          description: The baseline data version number for which the export was generated. If specified, the export is a delta of the differences between `dateVersionNumber` and `baseDataVersionNumber`. If empty, a full export is generated for `dataVersionNumber`.
+        tables:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.DataVersionExportTableDTO'
+          description: Information about the tables in the export.
+        newTables:
+          type: array
+          items:
+            type: string
+          description: Tables that exist in `dataVersionNumber` but did not exist in `baseDataVersionNumber`.
+        deletedTables:
+          type: array
+          items:
+            type: string
+          description: Tables that do not exist in `dataVersionNumber` but did exist in `baseDataVersionNumber`.
+    designer.DataVersionExportTableDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of a table in the data version export; for example, Employee or Applicant.
+        commonColumns:
+          allOf:
+          - $ref: '#/components/schemas/designer.DataVersionExportFileDTO'
+          description: Information about the columns and files that are in both `dataVersionNumber` and `baseDataVersionNumber`. Always empty for full exports where `baseDataVersionNumber` is not specified.
+        newColumns:
+          allOf:
+          - $ref: '#/components/schemas/designer.DataVersionExportFileDTO'
+          description: "Information about new columns and files in the data version.\n If full export, lists all columns. If delta export, lists columns that exist in `dataVersionNumber` but not in `baseDataVersionNumber`."
+        deletedColumns:
+          type: array
+          items:
+            type: string
+          description: Information about columns that do not exist in `dataVersionNumber` but did exist in `baseDataVersionNumber`.
+    designer.DataVersionExportDataVersionsDTO:
+      type: object
+      properties:
+        dataVersions:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.DataVersionExportDataVersionSummaryDTO'
+          description: All the available data versions for the tenant's primary data category.
+  securitySchemes:
+    CookieAuth:
+      type: apiKey
+      name: VisierASIDToken
+      in: cookie
+    ApiKeyAuth:
+      type: apiKey
+      name: apikey
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+        password:
+          tokenUrl: /v1/auth/oauth2/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+x-tagGroups:
+- name: data out
+  tags:
+  - DataQuery
+  - DataVersionExport
+  - VeeV1
+  - VeeV2
+  - Search
+  - SourceFilesDownload
+  - Reporting
+  - DataExportConnectorsAPI

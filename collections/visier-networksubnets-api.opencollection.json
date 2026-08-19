@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Administration Network Subnets API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "NetworkSubnets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of API network subnets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1alpha/admin/api-network-subnets",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all IP addresses that can call Visier APIs.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Add API network subnets",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1alpha/admin/api-network-subnets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add IP addresses to the list of allowed network subnets that can call Visier APIs. IP addresses must use the Classless Inter-Domain Routing (CIDR) format: xxx.xxx.xxx.xxx/xx.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+        },
+        {
+          "info": {
+            "name": "Update API network subnets",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1alpha/admin/api-network-subnets",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Overwrite the existing list of IP addresses that can call Visier APIs with a new list. IP addresses must use the Classless Inter-Domain Routing (CIDR) format: xxx.xxx.xxx.xxx/xx.\n\n When updating allowed network subnets, the definition in your API call replaces the prior definition. You must provide the entire definition in the PUT call. If you omit IP addresses from the update request, those IP addresses are removed from the allowlist We recommend that you retrieve the current list of allowed ne"
+        },
+        {
+          "info": {
+            "name": "Delete API network subnets",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1alpha/admin/api-network-subnets",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove IP addresses from the list of allowed network subnets that can call Visier APIs. IP addresses must use the Classless Inter-Domain Routing (CIDR) format: xxx.xxx.xxx.xxx/xx.\n\n When updating allowed network subnets, the definition in your API call replaces the prior definition. You must provide the entire definition in the PUT call. If you omit IP addresses from the update request, those IP addresses are removed from the allowlist We recommend that you retrieve the current list of allowed n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

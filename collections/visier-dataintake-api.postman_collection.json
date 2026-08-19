@@ -1,0 +1,1200 @@
+{
+  "item": [
+    {
+      "id": "f7dce001-cb01-424d-969a-929575c6f279",
+      "name": "DataIntake",
+      "description": {
+        "content": "Send raw or untransformed data to Visier. After we receive the data, Visier runs business rules to transform your data into the expected format for the existing mappings.\n<br>**Note:** <em>This API is in **limited availability**. If you are interested in using it, please contact your Customer Success Manager (CSM).</em>",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d4c28852-1268-41a6-bac4-b1e1e684986d",
+          "name": "Retrieve a list of sources",
+          "request": {
+            "name": "Retrieve a list of sources",
+            "description": {
+              "content": "Prior to transferring data to Visier, you must identify the sources you want to target. Sources store data for\n the solution and are used to map data to Visier's data model.\n\n **Note:** To set up sources in your tenant, contact Visier Customer Success.\n This API allows you to query the list of available sources, and identify the source schema and required fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "op",
+                "data-sources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dd923c64-5459-446e-b4ca-3334a0ef01ea",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "data-sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sources\": [\n    {\n      \"sourceId\": \"string\",\n      \"name\": \"string\",\n      \"columns\": [\n        {\n          \"columnName\": \"string\",\n          \"dataType\": \"string\",\n          \"dataFormats\": [\n            \"string\",\n            \"string\"\n          ],\n          \"isMandatory\": false,\n          \"allowEmpty\": false,\n          \"defaultValue\": \"string\"\n        },\n        {\n          \"columnName\": \"string\",\n          \"dataType\": \"string\",\n          \"dataFormats\": [\n            \"string\",\n            \"string\"\n          ],\n          \"isMandatory\": false,\n          \"allowEmpty\": false,\n          \"defaultValue\": \"string\"\n        }\n      ],\n      \"isInherited\": false,\n      \"objectName\": \"string\",\n      \"fileNameRegex\": \"string\"\n    },\n    {\n      \"sourceId\": \"string\",\n      \"name\": \"string\",\n      \"columns\": [\n        {\n          \"columnName\": \"string\",\n          \"dataType\": \"string\",\n          \"dataFormats\": [\n            \"string\",\n            \"string\"\n          ],\n          \"isMandatory\": true,\n          \"allowEmpty\": false,\n          \"defaultValue\": \"string\"\n        },\n        {\n          \"columnName\": \"string\",\n          \"dataType\": \"string\",\n          \"dataFormats\": [\n            \"string\",\n            \"string\"\n          ],\n          \"isMandatory\": false,\n          \"allowEmpty\": false,\n          \"defaultValue\": \"string\"\n        }\n      ],\n      \"isInherited\": true,\n      \"objectName\": \"string\",\n      \"fileNameRegex\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a688b3a-c0bb-471a-a70c-34b4b305d87a",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "data-sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d5fdfe3-a0d2-4878-a0b0-f71f2210cca2",
+          "name": "Start a transfer session",
+          "request": {
+            "name": "Start a transfer session",
+            "description": {
+              "content": "Start a new transfer session. A transfer session can include one or more batches of records to be\n sent to Visier. Batches of records may be transferred as JSON or file payloads.\n\n Recommended: For optimal performance, please include all batches of records in a single transfer session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "op",
+                "data-transfer-sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "00ec72b3-0d79-4767-be34-ccc062ccd164",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "data-transfer-sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transferSessionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53853fc6-db81-42fb-aeeb-01f7fc58dd84",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "data-transfer-sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "483c74b7-96ec-451a-9c87-a206d976d8b1",
+          "name": "Transfer data to sources via JSON",
+          "request": {
+            "name": "Transfer data to sources via JSON",
+            "description": {
+              "content": "Transfer data to Visier in batches of records. Each request includes a batch of records\n formatted as a comma separated array with the first row containing the column headers in the request body. Each\n subsequent request should also include the first row as a header.\n\n Each request transfers a batch of records to a single source. Transfer sessions may include one or more batches before completion.\n\n Each batch is identified by a sequence number. Sequence numbers help identify any batches  that were delivered incorrectly.\n\n Each batch is limited to the following request size:\n - Batch size limit: 10 MB\n - Record count limit: 300,000 rows",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "op",
+                "data-transfer-sessions",
+                ":transferSessionId",
+                "add"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sourceId",
+                  "value": "<string>",
+                  "description": "The unique identifier associated with the source you want to transfer data to."
+                },
+                {
+                  "disabled": false,
+                  "key": "sequence",
+                  "value": "<uint32>",
+                  "description": "The unique sequence number associated with a batch of records."
+                },
+                {
+                  "disabled": false,
+                  "key": "tenantCode",
+                  "value": "<string>",
+                  "description": "The code of the tenant you want to transfer data to. For example, WFF_j1r or WFF_j1r~c7o."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transferSessionId",
+                  "description": "(Required) The transfer session ID returned after the data transfer session starts."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<string>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1adc42ac-e95c-4179-8b38-b50d3a298b6a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "data-transfer-sessions",
+                    ":transferSessionId",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sourceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sequence",
+                      "value": "<uint32>"
+                    },
+                    {
+                      "key": "tenantCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transferSessionId",
+                      "description": "(Required) The transfer session ID returned after the data transfer session starts."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transferSessionId\": \"string\",\n  \"sequence\": 3525,\n  \"status\": \"string\",\n  \"message\": \"string\",\n  \"tenants\": [\n    {\n      \"tenantCode\": \"string\",\n      \"status\": \"string\",\n      \"sources\": [\n        {\n          \"sourceId\": \"string\",\n          \"sourceName\": \"string\",\n          \"dataSize\": \"string\",\n          \"rows\": \"string\",\n          \"status\": \"string\",\n          \"message\": \"string\"\n        },\n        {\n          \"sourceId\": \"string\",\n          \"sourceName\": \"string\",\n          \"dataSize\": \"string\",\n          \"rows\": \"string\",\n          \"status\": \"string\",\n          \"message\": \"string\"\n        }\n      ]\n    },\n    {\n      \"tenantCode\": \"string\",\n      \"status\": \"string\",\n      \"sources\": [\n        {\n          \"sourceId\": \"string\",\n          \"sourceName\": \"string\",\n          \"dataSize\": \"string\",\n          \"rows\": \"string\",\n          \"status\": \"string\",\n          \"message\": \"string\"\n        },\n        {\n          \"sourceId\": \"string\",\n          \"sourceName\": \"string\",\n          \"dataSize\": \"string\",\n          \"rows\": \"string\",\n          \"status\": \"string\",\n          \"message\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ba47066-7b22-4aac-8969-7f196b361528",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "data-transfer-sessions",
+                    ":transferSessionId",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sourceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sequence",
+                      "value": "<uint32>"
+                    },
+                    {
+                      "key": "tenantCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transferSessionId",
+                      "description": "(Required) The transfer session ID returned after the data transfer session starts."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2df867d7-19e8-410e-a297-cea46668c79c",
+          "name": "Cancel a transfer session",
+          "request": {
+            "name": "Cancel a transfer session",
+            "description": {
+              "content": "Cancel a transfer session after starting it. If a transfer session is cancelled, all\n records within the transfer session do not persist in Visier's data store.\n\n If you cancel a transfer session, please start a new transfer session and resend the complete data set.\n\n You might cancel a transfer session if:\n - A request to send a batch of records failed.\n - The original set of records is incomplete.\n - An infrastructure error occurs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "op",
+                "data-transfer-sessions",
+                ":transferSessionId",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transferSessionId",
+                  "description": "(Required) The transfer session ID to cancel."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bd189ad1-a281-4358-a323-92269be61cac",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "data-transfer-sessions",
+                    ":transferSessionId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transferSessionId",
+                      "description": "(Required) The transfer session ID to cancel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"transferSessionId\": \"string\",\n  \"dataTransferResultDetails\": [\n    {\n      \"tenantCode\": \"string\",\n      \"sourceNames\": [\n        \"string\",\n        \"string\"\n      ],\n      \"dataSize\": \"string\",\n      \"rows\": \"string\"\n    },\n    {\n      \"tenantCode\": \"string\",\n      \"sourceNames\": [\n        \"string\",\n        \"string\"\n      ],\n      \"dataSize\": \"string\",\n      \"rows\": \"string\"\n    }\n  ],\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7fad145-8659-49c0-80f8-2f090a4b4e80",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "data-transfer-sessions",
+                    ":transferSessionId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transferSessionId",
+                      "description": "(Required) The transfer session ID to cancel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09de1c0a-f790-444f-a482-6af24eb98ddb",
+          "name": "Complete a transfer session",
+          "request": {
+            "name": "Complete a transfer session",
+            "description": {
+              "content": "Complete the specified transfer session by triggering a receiving job. A receiving job\n validates the transferred data and adds the transferred data to Visier's data store.\n\n You can set an optional parameter to generate a data version through a processing job immediately after the receiving job completes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "op",
+                "jobs",
+                "receiving-jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transferSessionId\": \"<string>\",\n  \"processingData\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "655e2c2d-a187-49eb-bb5e-df0e4dd41a39",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "jobs",
+                    "receiving-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transferSessionId\": \"<string>\",\n  \"processingData\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"dataReceivingJobId\": \"string\",\n  \"message\": \"string\",\n  \"transferSessionId\": \"string\",\n  \"dataTransferResultDetails\": [\n    {\n      \"tenantCode\": \"string\",\n      \"sourceNames\": [\n        \"string\",\n        \"string\"\n      ],\n      \"dataSize\": \"string\",\n      \"rows\": \"string\"\n    },\n    {\n      \"tenantCode\": \"string\",\n      \"sourceNames\": [\n        \"string\",\n        \"string\"\n      ],\n      \"dataSize\": \"string\",\n      \"rows\": \"string\"\n    }\n  ],\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fce440e-bafe-42d1-add2-0db79fe19d14",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "jobs",
+                    "receiving-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transferSessionId\": \"<string>\",\n  \"processingData\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "215d6c5c-5652-4d38-9325-6de89e43665b",
+          "name": "Transfer data to sources via file upload",
+          "request": {
+            "name": "Transfer data to sources via file upload",
+            "description": {
+              "content": "Upload data to Visier as CSV or ZIP files. Each request transfers a single file. If the\n data intended for Visier is stored in multiple files, you may compress them into a single ZIP file or make\n multiple requests within the same transfer session.\n\n File size limit: 3 GB\n\n Each file is identified by a sequence number. Sequence numbers help identify any batches that were delivered incorrectly.\n\n If you define a specific source in the request, all files within the request will target the declared source. If\n a source is not defined, the filenames are matched against the source regex to correctly assign each file to a\n source. To find out the source regex, please contact Visier Customer Success.\n\n **Note:** If you include files that should target multiple sources in one ZIP file, do not define a source in the request.\n\n Analytic tenants: For optimal transfer speed, provide one ZIP file per source.\n Administrating tenants: For optimal transfer speed, provide one ZIP file containing all the required data files for your analytic tenants.\n In the ZIP file, use one folder per analytic tenant. The ZIP file must adhere to the following file structure:\n\n File1.zip\n - Folder1: WFF_tenantCode1\n    - Filename1.csv\n    - Filename2.csv\n - Folder2: WFF_tenantCode2\n    - Filename3.csv\n    - Filename4.csv",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "op",
+                "data-transfer-sessions",
+                ":transferSessionId",
+                "upload"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sourceId",
+                  "value": "<string>",
+                  "description": "The unique identifier associated with the source you want to transfer data to."
+                },
+                {
+                  "disabled": false,
+                  "key": "sequence",
+                  "value": "<string>",
+                  "description": "The unique sequence number associated with a batch of records."
+                },
+                {
+                  "disabled": false,
+                  "key": "tenantCode",
+                  "value": "<string>",
+                  "description": "The code of the tenant you want to transfer data to. For example, WFF_j1r or WFF_j1r~c7o."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transferSessionId",
+                  "description": "(Required) The transfer session ID returned after the data transfer session starts."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "The file to upload in CSV or ZIP format."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ab2dfcb5-c8bd-453c-a2b1-8d5b4ad99811",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "data-transfer-sessions",
+                    ":transferSessionId",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sourceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sequence",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tenantCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transferSessionId",
+                      "description": "(Required) The transfer session ID returned after the data transfer session starts."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "The file to upload in CSV or ZIP format.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transferSessionId\": \"string\",\n  \"sequence\": 5709,\n  \"status\": \"string\",\n  \"message\": \"string\",\n  \"tenants\": [\n    {\n      \"tenantCode\": \"string\",\n      \"status\": \"string\",\n      \"sources\": [\n        {\n          \"sourceId\": \"string\",\n          \"sourceName\": \"string\",\n          \"dataSize\": \"string\",\n          \"rows\": \"string\",\n          \"status\": \"string\",\n          \"message\": \"string\"\n        },\n        {\n          \"sourceId\": \"string\",\n          \"sourceName\": \"string\",\n          \"dataSize\": \"string\",\n          \"rows\": \"string\",\n          \"status\": \"string\",\n          \"message\": \"string\"\n        }\n      ]\n    },\n    {\n      \"tenantCode\": \"string\",\n      \"status\": \"string\",\n      \"sources\": [\n        {\n          \"sourceId\": \"string\",\n          \"sourceName\": \"string\",\n          \"dataSize\": \"string\",\n          \"rows\": \"string\",\n          \"status\": \"string\",\n          \"message\": \"string\"\n        },\n        {\n          \"sourceId\": \"string\",\n          \"sourceName\": \"string\",\n          \"dataSize\": \"string\",\n          \"rows\": \"string\",\n          \"status\": \"string\",\n          \"message\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cea99065-5bc5-4946-a80c-0a5b3c6df04a",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "op",
+                    "data-transfer-sessions",
+                    ":transferSessionId",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sourceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sequence",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tenantCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transferSessionId",
+                      "description": "(Required) The transfer session ID returned after the data transfer session starts."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "The file to upload in CSV or ZIP format.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "182cc2c1-1bca-44c7-99f0-69b191444c1e",
+    "name": "Visier Data In Data Intake API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for sending data to Visier and running data load jobs.",
+      "type": "text/plain"
+    }
+  }
+}

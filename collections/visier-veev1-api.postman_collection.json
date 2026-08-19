@@ -1,0 +1,1004 @@
+{
+  "item": [
+    {
+      "id": "d5e7c64b-2207-4d60-bf28-9c903cdda6a4",
+      "name": "VeeV1",
+      "description": {
+        "content": "Use Vee through Visier APIs, such as asking questions, submitting feedback, and getting sample questions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8a43c3a3-e434-4cce-8030-263f3824d91a",
+          "name": "Submit Vee feedback",
+          "request": {
+            "name": "Submit Vee feedback",
+            "description": {
+              "content": "Give Vee feedback for a previous answer. To submit feedback, include:\n * The conversation details from the `/question` response.\n * A rating of Vee's answer. If `isApproved` is `true`, Vee answered the question correctly. If `isApproved` is `false`, Vee's answer was incorrect or lacked details.\n * A description of how Vee should have answered the question or how Vee can improve the answer, such as \"Expected Headcount metric, but Vee returned Average Headcount\".",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vee",
+                "feedback"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"conversation\": {\n    \"conversationState\": {\n      \"questionState\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"isApproved\": \"<boolean>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8c83aaf4-df19-40c5-b19b-98ae51449ca3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vee",
+                    "feedback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conversation\": {\n    \"conversationState\": {\n      \"questionState\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"isApproved\": \"<boolean>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": \"VEE_API_SUCCESS\",\n  \"statusMsg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01fcd980-7910-4f7f-8602-dea4dc34be21",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vee",
+                    "feedback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conversation\": {\n    \"conversationState\": {\n      \"questionState\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"isApproved\": \"<boolean>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a6b0099-658f-47c1-9492-642658fb606d",
+          "name": "Ask Vee a question",
+          "request": {
+            "name": "Ask Vee a question",
+            "description": {
+              "content": "Use plain language to ask Vee a people question. Use body parameters to specify how Vee should respond, such as returning a visualization, data, or rewording the question.\n\n The response always returns a `conversationState` object containing a unique ID for the conversation. To ask a follow-up question or continue the conversation with Vee, include the `conversationState` from the response in your next `/question` call. To submit feedback about Vee's answer, copy the entire response into your `/feedback` call.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vee",
+                "question"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"<string>\",\n  \"conversationState\": {\n    \"questionState\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"options\": {\n    \"includeVisual\": \"<boolean>\",\n    \"visualOptions\": {\n      \"width\": \"<uint32>\",\n      \"height\": \"<uint32>\"\n    },\n    \"includeData\": \"<boolean>\",\n    \"dataFormat\": \"<enum>\",\n    \"includeRewordedQuestion\": \"<boolean>\",\n    \"includeDetailData\": \"<boolean>\",\n    \"includeRelatedAnalyses\": \"<boolean>\",\n    \"includeRelatedReports\": \"<boolean>\",\n    \"includeSuggestions\": \"<boolean>\"\n  },\n  \"maxViewDetailsMembers\": \"<uint32>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c2d2eabd-e662-4ac6-8ab3-e5649bdc0668",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vee",
+                    "question"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"question\": \"<string>\",\n  \"conversationState\": {\n    \"questionState\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"options\": {\n    \"includeVisual\": \"<boolean>\",\n    \"visualOptions\": {\n      \"width\": \"<uint32>\",\n      \"height\": \"<uint32>\"\n    },\n    \"includeData\": \"<boolean>\",\n    \"dataFormat\": \"<enum>\",\n    \"includeRewordedQuestion\": \"<boolean>\",\n    \"includeDetailData\": \"<boolean>\",\n    \"includeRelatedAnalyses\": \"<boolean>\",\n    \"includeRelatedReports\": \"<boolean>\",\n    \"includeSuggestions\": \"<boolean>\"\n  },\n  \"maxViewDetailsMembers\": \"<uint32>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"conversationState\": {\n    \"questionState\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"statusCode\": {\n    \"statusCode\": \"UNDEFINED\",\n    \"statusMsg\": \"string\"\n  },\n  \"narrative\": \"string\",\n  \"chartUrl\": \"string\",\n  \"schema\": {\n    \"metrics\": [\n      \"string\",\n      \"string\"\n    ],\n    \"dimensions\": [\n      {\n        \"name\": \"string\",\n        \"paths\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"name\": \"string\",\n        \"paths\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"concepts\": [\n      {\n        \"name\": \"string\",\n        \"paths\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"name\": \"string\",\n        \"paths\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ]\n  },\n  \"corrections\": [\n    {\n      \"warning\": [\n        \"VEE_WARNING_ROUNDING_ADJUSTED\",\n        \"VEE_WARNING_RESPONSE_NOT_FOUND\"\n      ],\n      \"clarifications\": [\n        {\n          \"message\": \"string\",\n          \"questions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"metrics\": [\n            \"string\",\n            \"string\"\n          ],\n          \"dimensions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"filters\": [\n            \"string\",\n            \"string\"\n          ],\n          \"attributes\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"message\": \"string\",\n          \"questions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"metrics\": [\n            \"string\",\n            \"string\"\n          ],\n          \"dimensions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"filters\": [\n            \"string\",\n            \"string\"\n          ],\n          \"attributes\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"warning\": [\n        \"VEE_NO_WARNING\",\n        \"VEE_WARNING_TIME_SELECTION_ADJUSTED\"\n      ],\n      \"clarifications\": [\n        {\n          \"message\": \"string\",\n          \"questions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"metrics\": [\n            \"string\",\n            \"string\"\n          ],\n          \"dimensions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"filters\": [\n            \"string\",\n            \"string\"\n          ],\n          \"attributes\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"message\": \"string\",\n          \"questions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"metrics\": [\n            \"string\",\n            \"string\"\n          ],\n          \"dimensions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"filters\": [\n            \"string\",\n            \"string\"\n          ],\n          \"attributes\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"data\": {\n    \"dataJson\": \"string\",\n    \"context\": \"string\"\n  },\n  \"visual\": {\n    \"image\": \"string\",\n    \"title\": \"string\",\n    \"context\": \"string\"\n  },\n  \"rewordedQuestion\": \"string\",\n  \"relatedDocuments\": {\n    \"analyses\": [\n      {\n        \"id\": \"string\",\n        \"title\": \"string\",\n        \"description\": \"string\",\n        \"url\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"title\": \"string\",\n        \"description\": \"string\",\n        \"url\": \"string\"\n      }\n    ],\n    \"reports\": [\n      {\n        \"id\": \"string\",\n        \"title\": \"string\",\n        \"description\": \"string\",\n        \"url\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"title\": \"string\",\n        \"description\": \"string\",\n        \"url\": \"string\"\n      }\n    ]\n  },\n  \"suggestions\": [\n    {\n      \"suggestion\": \"string\"\n    },\n    {\n      \"suggestion\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af2dc606-14bb-4156-9319-fa47b345c9af",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vee",
+                    "question"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"question\": \"<string>\",\n  \"conversationState\": {\n    \"questionState\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"options\": {\n    \"includeVisual\": \"<boolean>\",\n    \"visualOptions\": {\n      \"width\": \"<uint32>\",\n      \"height\": \"<uint32>\"\n    },\n    \"includeData\": \"<boolean>\",\n    \"dataFormat\": \"<enum>\",\n    \"includeRewordedQuestion\": \"<boolean>\",\n    \"includeDetailData\": \"<boolean>\",\n    \"includeRelatedAnalyses\": \"<boolean>\",\n    \"includeRelatedReports\": \"<boolean>\",\n    \"includeSuggestions\": \"<boolean>\"\n  },\n  \"maxViewDetailsMembers\": \"<uint32>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cdb410e6-f19f-4907-be07-edd67b868d22",
+          "name": "Retrieve a list of Vee question categories",
+          "request": {
+            "name": "Retrieve a list of Vee question categories",
+            "description": {
+              "content": "Get a list of categories for the Vee sample questions displayed in the conversation interface.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vee",
+                "sample-question-categories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "71df5535-cfdc-4137-8f52-ed386711db3f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vee",
+                    "sample-question-categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"categories\": [\n    {\n      \"categoryId\": \"string\",\n      \"basicInformation\": {\n        \"displayName\": \"string\",\n        \"description\": \"string\"\n      },\n      \"categoryIcon\": {\n        \"base64Image\": \"string\",\n        \"backgroundColor\": \"string\"\n      }\n    },\n    {\n      \"categoryId\": \"string\",\n      \"basicInformation\": {\n        \"displayName\": \"string\",\n        \"description\": \"string\"\n      },\n      \"categoryIcon\": {\n        \"base64Image\": \"string\",\n        \"backgroundColor\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d10c07b1-ea20-4564-a133-2df02112f5d3",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vee",
+                    "sample-question-categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18aaef37-111e-48f9-81fc-be2d0eeffd45",
+          "name": "Retrieve a Vee question category's details",
+          "request": {
+            "name": "Retrieve a Vee question category's details",
+            "description": {
+              "content": "Get the details of a specific Vee sample question category where the ID is the `categoryID` returned by `GET /v1/vee/sample-question-categories`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vee",
+                "sample-question-categories",
+                ":questionCategoryId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "questionCategoryId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a261b1ce-f62b-45cf-841a-42dcc291d7e0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vee",
+                    "sample-question-categories",
+                    ":questionCategoryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "questionCategoryId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"categoryId\": \"string\",\n  \"basicInformation\": {\n    \"displayName\": \"string\",\n    \"description\": \"string\"\n  },\n  \"categoryIcon\": {\n    \"base64Image\": \"string\",\n    \"backgroundColor\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f140821a-2c8b-4f39-9ab7-ddeef383f62d",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vee",
+                    "sample-question-categories",
+                    ":questionCategoryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "questionCategoryId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c4bb4b0-42de-413f-b3cc-1eda7a4e3375",
+          "name": "Retrieve a list of sample questions to ask Vee",
+          "request": {
+            "name": "Retrieve a list of sample questions to ask Vee",
+            "description": {
+              "content": "Get a list of sample questions to help you start using Vee. The response returns a list of questions that you can ask Vee, such as \"What is the turnover rate?\".\n You may occasionally encounter a sample question that can't be answered due to data availability or your data access",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vee",
+                "sample-questions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c525b93a-3312-457f-b76a-dfff32b223aa",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vee",
+                    "sample-questions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"questions\": [\n    {\n      \"question\": \"string\",\n      \"questionId\": \"string\",\n      \"categoryId\": \"string\",\n      \"isAssignedToUser\": true\n    },\n    {\n      \"question\": \"string\",\n      \"questionId\": \"string\",\n      \"categoryId\": \"string\",\n      \"isAssignedToUser\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66d85e10-a2ca-4882-9dbe-cff8979fef00",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vee",
+                    "sample-questions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8cee492c-542c-4819-9f5a-49258483e13d",
+          "name": "Check the overall current status of Vee",
+          "request": {
+            "name": "Check the overall current status of Vee",
+            "description": {
+              "content": "Check the current overall status of Vee.\n\n The overall status is one of:\n * `UP` :  Vee is operational.\n * `DOWN`: Vee is not operational.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vee",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                "key": "TargetTenantID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ac6d8e5-1635-4740-a9de-761200e9c5b6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vee",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"overall\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66a3cfe1-2b6f-4404-88aa-ac50d04d54b3",
+              "name": "Default error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vee",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally, specify the tenant that you want to execute the API call on. This defines the tenant that you're logged into. If omitted, the request uses the administrating tenant as the login tenant.",
+                    "key": "TargetTenantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"localizedMessage\": \"string\",\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"rci\": \"string\",\n  \"userError\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9c965853-9e36-44b3-b5be-b8e7a1f81b6f",
+    "name": "Visier Data Out Vee V1 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Visier APIs for getting data out of Visier, such as aggregate data and data version information.",
+      "type": "text/plain"
+    }
+  }
+}

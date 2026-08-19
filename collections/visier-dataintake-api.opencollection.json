@@ -1,0 +1,206 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visier Data In Data Intake API",
+    "version": "22222222.99201.3040"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DataIntake",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/op/data-sources",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Prior to transferring data to Visier, you must identify the sources you want to target. Sources store data for\n the solution and are used to map data to Visier's data model.\n\n **Note:** To set up sources in your tenant, contact Visier Customer Success.\n This API allows you to query the list of available sources, and identify the source schema and required fields."
+        },
+        {
+          "info": {
+            "name": "Start a transfer session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/op/data-transfer-sessions",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Start a new transfer session. A transfer session can include one or more batches of records to be\n sent to Visier. Batches of records may be transferred as JSON or file payloads.\n\n Recommended: For optimal performance, please include all batches of records in a single transfer session."
+        },
+        {
+          "info": {
+            "name": "Transfer data to sources via JSON",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/op/data-transfer-sessions/:transferSessionId/add",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transferSessionId",
+                "value": "",
+                "type": "path",
+                "description": "The transfer session ID returned after the data transfer session starts."
+              },
+              {
+                "name": "sourceId",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier associated with the source you want to transfer data to."
+              },
+              {
+                "name": "sequence",
+                "value": "",
+                "type": "query",
+                "description": "The unique sequence number associated with a batch of records."
+              },
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "The code of the tenant you want to transfer data to. For example, WFF_j1r or WFF_j1r~c7o."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfer data to Visier in batches of records. Each request includes a batch of records\n formatted as a comma separated array with the first row containing the column headers in the request body. Each\n subsequent request should also include the first row as a header.\n\n Each request transfers a batch of records to a single source. Transfer sessions may include one or more batches before completion.\n\n Each batch is identified by a sequence number. Sequence numbers help identify any batches  that w"
+        },
+        {
+          "info": {
+            "name": "Cancel a transfer session",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/op/data-transfer-sessions/:transferSessionId/cancel",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transferSessionId",
+                "value": "",
+                "type": "path",
+                "description": "The transfer session ID to cancel."
+              }
+            ]
+          },
+          "docs": "Cancel a transfer session after starting it. If a transfer session is cancelled, all\n records within the transfer session do not persist in Visier's data store.\n\n If you cancel a transfer session, please start a new transfer session and resend the complete data set.\n\n You might cancel a transfer session if:\n - A request to send a batch of records failed.\n - The original set of records is incomplete.\n - An infrastructure error occurs."
+        },
+        {
+          "info": {
+            "name": "Complete a transfer session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/op/jobs/receiving-jobs",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Complete the specified transfer session by triggering a receiving job. A receiving job\n validates the transferred data and adds the transferred data to Visier's data store.\n\n You can set an optional parameter to generate a data version through a processing job immediately after the receiving job completes."
+        },
+        {
+          "info": {
+            "name": "Transfer data to sources via file upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/op/data-transfer-sessions/:transferSessionId/upload",
+            "headers": [
+              {
+                "name": "TargetTenantID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transferSessionId",
+                "value": "",
+                "type": "path",
+                "description": "The transfer session ID returned after the data transfer session starts."
+              },
+              {
+                "name": "sourceId",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier associated with the source you want to transfer data to."
+              },
+              {
+                "name": "sequence",
+                "value": "",
+                "type": "query",
+                "description": "The unique sequence number associated with a batch of records."
+              },
+              {
+                "name": "tenantCode",
+                "value": "",
+                "type": "query",
+                "description": "The code of the tenant you want to transfer data to. For example, WFF_j1r or WFF_j1r~c7o."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload data to Visier as CSV or ZIP files. Each request transfers a single file. If the\n data intended for Visier is stored in multiple files, you may compress them into a single ZIP file or make\n multiple requests within the same transfer session.\n\n File size limit: 3 GB\n\n Each file is identified by a sequence number. Sequence numbers help identify any batches that were delivered incorrectly.\n\n If you define a specific source in the request, all files within the request will target the declared"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
