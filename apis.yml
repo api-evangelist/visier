@@ -33,6 +33,19 @@ tags:
 - Compensation
 - Skills
 - Artificial Intelligence
+- MCP
+tags_raw:
+- Company
+- People Analytics
+- Workforce Analytics
+- Human Resources
+- HR Technology
+- Workforce Planning
+- Analytics
+- Business Intelligence
+- Compensation
+- Skills
+- Artificial Intelligence
 - Model Context Protocol
 apis:
 - aid: visier:query-mcp
@@ -44,6 +57,11 @@ apis:
   humanURL: https://docs.visier.com/developer/agents/mcp/mcp-server.htm
   baseURL: https://{vanity_name}.app.visier.com/visier-query-mcp
   tags:
+  - MCP
+  - Agents
+  - Vee
+  - Artificial Intelligence
+  tags_raw:
   - Model Context Protocol
   - MCP
   - Agents
@@ -108,6 +126,8 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
+  - Basic Authentication
+  tags_raw:
   - BasicAuthentication
   properties:
   - type: OpenAPI
@@ -332,6 +352,8 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
+  - Data Intake
+  tags_raw:
   - DataIntake
   properties:
   - type: OpenAPI
@@ -379,6 +401,8 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
+  - Data Model
+  tags_raw:
   - DataModel
   properties:
   - type: OpenAPI
@@ -412,6 +436,8 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
+  - Data Query
+  tags_raw:
   - DataQuery
   properties:
   - type: OpenAPI
@@ -447,6 +473,8 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
+  - Data Upload
+  tags_raw:
   - DataUpload
   properties:
   - type: OpenAPI
@@ -686,6 +714,8 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
+  - Encryption Keys
+  tags_raw:
   - EncryptionKeys
   properties:
   - type: OpenAPI
@@ -801,6 +831,8 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
+  - Network Subnets
+  tags_raw:
   - NetworkSubnets
   properties:
   - type: OpenAPI
@@ -836,6 +868,8 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
+  - Authentication
+  tags_raw:
   - OAuth2
   properties:
   - type: OpenAPI
@@ -1018,6 +1052,8 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
+  - Plan Administration
+  tags_raw:
   - PlanAdministration
   properties:
   - type: OpenAPI
@@ -1190,6 +1226,8 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -1499,6 +1537,8 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
+  - System Status
+  tags_raw:
   - SystemStatus
   properties:
   - type: OpenAPI
@@ -1687,6 +1727,8 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
+  - Users V1
+  tags_raw:
   - UsersV1
   properties:
   - type: OpenAPI
@@ -1907,6 +1949,8 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
