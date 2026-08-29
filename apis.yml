@@ -9,6 +9,18 @@ description: 'Visier is a workforce and people analytics platform that consolida
   Benchmarks and the Skills Intelligence Engine. OpenAPI v3 definitions for every collection are
   published on GitHub at visier/openapi-clients, generated Python SDKs ship to PyPI, and a hosted
   Visier Query MCP server exposes Vee and data-query tools to MCP clients over OAuth 2.0.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.visier.com/static/visier-og-image-289b36a6392a307b7342ffcf69bdee4c.jpg
 url: https://raw.githubusercontent.com/api-evangelist/visier/refs/heads/main/apis.yml
 x-type: company
@@ -1984,6 +1996,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/visier-capability-edges.yml
+  name: Visier Business Capability Map
 - type: Overlay
   url: overlays/visier-administration-apis-overlay.yaml
 - type: Website
