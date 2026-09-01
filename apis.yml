@@ -138,7 +138,7 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
-  - BasicAuthentication
+  - Basic Authentication
   tags_raw:
   - BasicAuthentication
   properties:
@@ -364,7 +364,7 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
-  - DataIntake
+  - Data Intake
   tags_raw:
   - DataIntake
   properties:
@@ -413,7 +413,7 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
-  - DataModel
+  - Data Model
   tags_raw:
   - DataModel
   properties:
@@ -448,7 +448,7 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
-  - DataQuery
+  - Data Query
   tags_raw:
   - DataQuery
   properties:
@@ -726,7 +726,7 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
-  - EncryptionKeys
+  - Encryption Keys
   tags_raw:
   - EncryptionKeys
   properties:
@@ -843,7 +843,7 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
-  - NetworkSubnets
+  - Network Subnets
   tags_raw:
   - NetworkSubnets
   properties:
@@ -1064,7 +1064,7 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
-  - PlanAdministration
+  - Plan Administration
   tags_raw:
   - PlanAdministration
   properties:
@@ -1549,7 +1549,7 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
-  - SystemStatus
+  - System Status
   tags_raw:
   - SystemStatus
   properties:
@@ -1741,7 +1741,7 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
-  - UsersV1
+  - Users V1
   tags_raw:
   - UsersV1
   properties:
