@@ -1,14 +1,14 @@
 aid: visier
 name: Visier
-description: 'Visier is a workforce and people analytics platform that consolidates HR, talent,
-  compensation, and operational data into a purpose-built people data model, then exposes that model
-  for analysis, planning, and AI-assisted question answering. Visier publishes a broad suite of public
-  REST APIs — Data In (Direct Data Intake, Data Upload, job handling), Data Out (Data Query, Vee,
-  exports), Administration (tenants, users, profiles, permissions, projects), Analytic Model (data
-  model, concepts, metrics, dimensions), Planning, Webhooks, and dataset APIs such as Compensation
-  Benchmarks and the Skills Intelligence Engine. OpenAPI v3 definitions for every collection are
-  published on GitHub at visier/openapi-clients, generated Python SDKs ship to PyPI, and a hosted
-  Visier Query MCP server exposes Vee and data-query tools to MCP clients over OAuth 2.0.'
+description: Visier is a workforce and people analytics platform that consolidates HR, talent, compensation,
+  and operational data into a purpose-built people data model, then exposes that model for analysis, planning,
+  and AI-assisted question answering. Visier publishes a broad suite of public REST APIs — Data In (Direct
+  Data Intake, Data Upload, job handling), Data Out (Data Query, Vee, exports), Administration (tenants,
+  users, profiles, permissions, projects), Analytic Model (data model, concepts, metrics, dimensions),
+  Planning, Webhooks, and dataset APIs such as Compensation Benchmarks and the Skills Intelligence Engine.
+  OpenAPI v3 definitions for every collection are published on GitHub at visier/openapi-clients, generated
+  Python SDKs ship to PyPI, and a hosted Visier Query MCP server exposes Vee and data-query tools to MCP
+  clients over OAuth 2.0.
 deliveryModel:
   model: saas
   open_source: false
@@ -42,7 +42,7 @@ x-type: company
 x-source: harvest:secondary-market
 specificationVersion: '0.23'
 created: '2026-08-02'
-modified: '2026-08-02'
+modified: '2026-09-16'
 x-enrichment:
   date: '2026-08-02'
   status: enriched
@@ -77,10 +77,9 @@ tags_raw:
 apis:
 - aid: visier:query-mcp
   name: Visier Query MCP Server
-  description: >-
-    Visier's hosted Model Context Protocol server, exposing Vee (natural-language workforce question answering)
-    and structured data-query tools to MCP clients such as Claude Desktop and Cursor over HTTPS/SSE, authenticated
-    with OAuth 2.0.
+  description: Visier's hosted Model Context Protocol server, exposing Vee (natural-language workforce
+    question answering) and structured data-query tools to MCP clients such as Claude Desktop and Cursor
+    over HTTPS/SSE, authenticated with OAuth 2.0.
   humanURL: https://docs.visier.com/developer/agents/mcp/mcp-server.htm
   baseURL: https://{vanity_name}.app.visier.com/visier-query-mcp
   tags:
@@ -103,9 +102,8 @@ apis:
     url: https://docs.visier.com/developer/agents/mcp/mcp-server-set-up.htm
 - aid: visier:visier-analyticobjectsv2-api
   name: Visier Analytic Objects V2 API
-  description: >-
-    Create, retrieve, update, and delete analytic objects in your analytic model. You can create, update,
-    and delete one or more analytic objects in an API call.
+  description: 'Create, retrieve, update, and delete analytic objects in your analytic model. You can
+    create, update, and delete one or more analytic objects in an API call.
 
     The supported analytic objects are <em>subjects</em> (entities that evolve over time) and <em>events</em>
     (things that happen to subjects at specific points in time).
@@ -113,7 +111,7 @@ apis:
     <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without
     notice; functionality may be removed, and no deprecation notices will be issued.
 
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -128,8 +126,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -137,19 +134,16 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-basicauthentication-api
   name: Visier Basic Authentication API
-  description: >-
-    Request an authentication token through basic authentication. With basic authentication, use your
-    username and password to request a secure token. The response returns an ASID token that you can use
-    in your API calls.
+  description: Request an authentication token through basic authentication. With basic authentication,
+    use your username and password to request a secure token. The response returns an ASID token that
+    you can use in your API calls.
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -166,8 +160,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -175,11 +168,9 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-benchmarks-api
@@ -199,8 +190,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -208,18 +198,15 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-conceptsv2-api
   name: Visier Concepts V2 API
-  description: >-
-    Create, retrieve, update, and delete concepts in your analytic model. You can create, update, and
-    delete one or more concepts in an API call.
+  description: Create, retrieve, update, and delete concepts in your analytic model. You can create, update,
+    and delete one or more concepts in an API call.
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -234,8 +221,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -243,24 +229,21 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-consolidatedanalytics-api
   name: Visier Consolidated Analytics API
-  description: >-
-    Manage your consolidated analytics (CA) tenants in Visier, such as retrieving the details of CA tenants,
-    creating CA tenants, adding or deleting source tenants from CA tenants, and excluding sources from
-    CA tenants.
+  description: 'Manage your consolidated analytics (CA) tenants in Visier, such as retrieving the details
+    of CA tenants, creating CA tenants, adding or deleting source tenants from CA tenants, and excluding
+    sources from CA tenants.
 
     <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without
     notice; functionality may be removed, and no deprecation notices will be issued.
 
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -275,8 +258,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -284,17 +266,14 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-dataandjobhandling-api
   name: Visier Data And Job Handling API
-  description: >-
-    Initiate and manage jobs, included or excluded data, and data connector credentials. Administrating
+  description: Initiate and manage jobs, included or excluded data, and data connector credentials. Administrating
     tenant users can manage jobs and data for their analytic tenants.
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
@@ -310,8 +289,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -319,25 +297,22 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-dataexportconnectorsapi-api
-  name: Visier Data Export Connectors API API
-  description: >-
-    Manage data export connectors and credentials, and run data export connector jobs. Data export connectors
-    send Visier data to external systems, such as Databricks or Snowflake. Use these APIs to manage the
-    credentials for authenticating with destinations, validate that credentials work, list available data
-    export connectors, and dispatch connector jobs.
+  name: Visier Data Export Connectors API
+  description: 'Manage data export connectors and credentials, and run data export connector jobs. Data
+    export connectors send Visier data to external systems, such as Databricks or Snowflake. Use these
+    APIs to manage the credentials for authenticating with destinations, validate that credentials work,
+    list available data export connectors, and dispatch connector jobs.
 
     <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without
     notice, functionality may be removed, and no deprecation notices will be issued.
 
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -352,8 +327,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -361,21 +335,18 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-dataintake-api
   name: Visier Data Intake API
-  description: >-
-    Send raw or untransformed data to Visier. After we receive the data, Visier runs business rules to
-    transform your data into the expected format for the existing mappings.
+  description: 'Send raw or untransformed data to Visier. After we receive the data, Visier runs business
+    rules to transform your data into the expected format for the existing mappings.
 
     <br>**Note:** <em>This API is in **limited availability**. If you are interested in using it, please
-    contact your Customer Success Manager (CSM).</em>
+    contact your Customer Success Manager (CSM).</em>'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -392,8 +363,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -401,30 +371,18 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-datamodel-api
   name: Visier Data Model API
-  description: >-
-    Discover the objects that make up your Visier solution and provide detailed information on the object's
-    schema.
-
-    You can retrieve detailed information about objects in Visier by retrieving a list of all objects
-    or retrieving information about an object by object ID.
-
-    The types of objects you can retrieve using the data model API are:
-      * Analytic objects
-      * Properties
-      * Dimensions
-      * Selection concepts
-      * Metrics
-      * Predictions
-      * Vee sample questions and categories
+  description: "Discover the objects that make up your Visier solution and provide detailed information\
+    \ on the object's schema.\nYou can retrieve detailed information about objects in Visier by retrieving\
+    \ a list of all objects or retrieving information about an object by object ID.\nThe types of objects\
+    \ you can retrieve using the data model API are:\n  * Analytic objects\n  * Properties\n  * Dimensions\n\
+    \  * Selection concepts\n  * Metrics\n  * Predictions\n  * Vee sample questions and categories"
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -441,8 +399,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -450,11 +407,9 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-dataquery-api
@@ -476,8 +431,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -485,18 +439,15 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-dataupload-api
   name: Visier Data Upload API
-  description: >-
-    Send data files to Visier. After we receive the data, Visier starts a receiving job and a processing
-    job to process the data.
+  description: Send data files to Visier. After we receive the data, Visier starts a receiving job and
+    a processing job to process the data.
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -513,8 +464,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -522,22 +472,20 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-dataversionexport-api
   name: Visier Data Version Export API
-  description: >-
-    Export Visier data version information, such as tables, columns, and file information, in CSV format.
+  description: 'Export Visier data version information, such as tables, columns, and file information,
+    in CSV format.
 
     <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without
     notice; functionality may be removed, and no deprecation notices will be issued.
 
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -552,8 +500,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -561,11 +508,9 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-dimensions-api
@@ -587,8 +532,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -596,23 +540,20 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-dimensionsv2-api
   name: Visier Dimensions V2 API
-  description: >-
-    Create, retrieve, update, and delete dimensions in your analytic model. You can create, update, and
-    delete one or more dimensions in an API call.
+  description: 'Create, retrieve, update, and delete dimensions in your analytic model. You can create,
+    update, and delete one or more dimensions in an API call.
 
     <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without
     notice; functionality may be removed, and no deprecation notices will be issued.
 
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -627,8 +568,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -636,19 +576,16 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-directdataintake-api
   name: Visier Direct Data Intake API
-  description: >-
-    Use the Direct Data Intake API to load data directly into Visier objects. These objects can be delivered
-    as part of Visier Blueprint, locally modified objects, or even completely custom objects. Objects
-    must be released to production to receive data through the DDI API.
+  description: 'Use the Direct Data Intake API to load data directly into Visier objects. These objects
+    can be delivered as part of Visier Blueprint, locally modified objects, or even completely custom
+    objects. Objects must be released to production to receive data through the DDI API.
 
     You can load data into:
 
@@ -658,7 +595,7 @@ apis:
 
     - Parent-child dimensions
 
-    - Multi-value properties
+    - Multi-value properties'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -673,8 +610,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -682,22 +618,19 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-emaildomains-api
   name: Visier Email Domains API
-  description: >-
-    Manage the list of user email address domains that are allowed in your tenant.
+  description: 'Manage the list of user email address domains that are allowed in your tenant.
 
     <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without
     notice; functionality may be removed, and no deprecation notices will be issued.
 
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -712,8 +645,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -721,23 +653,20 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-encryptionkeys-api
   name: Visier Encryption Keys API
-  description: >-
-    Manage the encryption keys in your Visier tenant. Administrating tenants can specify the tenant in
-    which to manage keys using the `TargetTenantID` header. For PGP keys, see `/v1/api/pgp-keys`.
+  description: 'Manage the encryption keys in your Visier tenant. Administrating tenants can specify the
+    tenant in which to manage keys using the `TargetTenantID` header. For PGP keys, see `/v1/api/pgp-keys`.
 
     <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without
     notice; functionality may be removed, and no deprecation notices will be issued.
 
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -754,8 +683,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -763,18 +691,15 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-jobs-library-api
   name: Visier Jobs Library API
-  description: >-
-    Access over 3,300 standard jobs and get complete details in 27 languages, such as alternative titles,
-    descriptions, and skills.
+  description: Access over 3,300 standard jobs and get complete details in 27 languages, such as alternative
+    titles, descriptions, and skills.
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -789,8 +714,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -798,24 +722,21 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-metricsv2-api
   name: Visier Metrics V2 API
-  description: >-
-    Create, retrieve, update, and delete simple and derived metrics in your analytic model. A simple metric
-    is a metric based on one or more analytic objects. A derived metric is a metric based on a simple
-    metric. You can create, update, and delete one or more metrics in an API call.
+  description: 'Create, retrieve, update, and delete simple and derived metrics in your analytic model.
+    A simple metric is a metric based on one or more analytic objects. A derived metric is a metric based
+    on a simple metric. You can create, update, and delete one or more metrics in an API call.
 
     <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without
     notice; functionality may be removed, and no deprecation notices will be issued.
 
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -830,8 +751,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -839,22 +759,19 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-networksubnets-api
   name: Visier Network Subnets API
-  description: >-
-    Manage the IP addresses that can call Visier APIs.
+  description: 'Manage the IP addresses that can call Visier APIs.
 
     <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without
     notice; functionality may be removed, and no deprecation notices will be issued.
 
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -871,8 +788,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -880,11 +796,9 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-oauth2-api
@@ -908,8 +822,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -917,11 +830,9 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-objectconfiguration-api
@@ -941,8 +852,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -950,18 +860,15 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-permissions-api
   name: Visier Permissions API
-  description: >-
-    Manage permissions in Visier, such as retrieving the details of a permission, content package, or
-    data access set, creating new permissions and data access sets, and updating or deleting permissions.
+  description: Manage permissions in Visier, such as retrieving the details of a permission, content package,
+    or data access set, creating new permissions and data access sets, and updating or deleting permissions.
     To assign permissions to users, see Users V1.
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
@@ -977,8 +884,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -986,22 +892,20 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-personalizedalerts-api
   name: Visier Personalized Alerts API
-  description: >-
-    Manage your personalized alerts in Visier. Alerts notify you if a metric exceeds your defined threshold.
+  description: 'Manage your personalized alerts in Visier. Alerts notify you if a metric exceeds your
+    defined threshold.
 
     <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without
     notice; functionality may be removed, and no deprecation notices will be issued.
 
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1016,8 +920,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1025,22 +928,20 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-pgpkeys-api
   name: Visier PGP Keys API
-  description: >-
-    The Pretty Good Privacy (PGP) Keys API generates key pairs and provides a public key to encrypt data
-    that you send to Visier. PGP encryption adds an additional layer of security against data disclosure.
+  description: 'The Pretty Good Privacy (PGP) Keys API generates key pairs and provides a public key to
+    encrypt data that you send to Visier. PGP encryption adds an additional layer of security against
+    data disclosure.
 
     <br><br>After you generate a key pair and retrieve the public encryption key, you can encrypt your
     data files before sending them to Visier. When Visier receives files encrypted with the public key,
-    we retrieve the associated private key to decrypt and process the file.
+    we retrieve the associated private key to decrypt and process the file.'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1055,8 +956,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1064,18 +964,15 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-planadministration-api
   name: Visier Plan Administration API
-  description: >-
-    Manage collaboration projects in your plans, including actions such as consolidating and reopening
-    subplans.
+  description: Manage collaboration projects in your plans, including actions such as consolidating and
+    reopening subplans.
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1092,8 +989,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1101,17 +997,15 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-plandataload-api
   name: Visier Plan Data Load API
-  description: >-
-    Send data directly to your plan's scenario and optionally add or remove rows from your plan.
+  description: Send data directly to your plan's scenario and optionally add or remove rows from your
+    plan.
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1126,8 +1020,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1135,11 +1028,9 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-planevents-api
@@ -1159,8 +1050,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1168,19 +1058,16 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-productionversions-api
   name: Visier Production Versions API
-  description: >-
-    Use this API to retrieve information about data versions that were published to production.
+  description: 'Use this API to retrieve information about data versions that were published to production.
 
-    In Visier, production is the version of Visier available to your end users.
+    In Visier, production is the version of Visier available to your end users.'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1195,8 +1082,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1204,18 +1090,15 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-profiles-api
   name: Visier Profiles API
-  description: >-
-    Manage the profiles assigned to users, such as assigning or removing a profile from a list of users
-    and retrieving profile details. Administrating tenant users can manage profiles at the administrating
+  description: Manage the profiles assigned to users, such as assigning or removing a profile from a list
+    of users and retrieving profile details. Administrating tenant users can manage profiles at the administrating
     tenant level and analytic tenant level.
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
@@ -1231,8 +1114,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1240,11 +1122,9 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-projects-api
@@ -1266,8 +1146,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1275,24 +1154,21 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-releaseversionconfiguration-api
   name: Visier Release Version Configuration API
-  description: >-
-    Manage the Visier product release versions for your tenants.
+  description: 'Manage the Visier product release versions for your tenants.
 
     <br>**Note:** <em>This API is available for Embedded Partners.</em>
 
     <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without
     notice; functionality may be removed, and no deprecation notices will be issued.
 
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1307,8 +1183,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1316,24 +1191,21 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-reporting-api
   name: Visier Reporting API
-  description: >-
-    Create, retrieve, delete, copy, and download reports.
+  description: 'Create, retrieve, delete, copy, and download reports.
 
     <br>**Note**: This API is available for Embedded Partners.
 
     <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without
     notice; functionality may be removed, and no deprecation notices will be issued.
 
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1348,8 +1220,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1357,22 +1228,19 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-search-api
   name: Visier Search API
-  description: >-
-    Search for documents, such as analyses, in Visier.
+  description: 'Search for documents, such as analyses, in Visier.
 
     <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without
     notice; functionality may be removed, and no deprecation notices will be issued.
 
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1387,8 +1255,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1396,24 +1263,21 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-sidecarsolutions-api
   name: Visier Sidecar Solutions API
-  description: >-
-    Manage your sidecar solution's configuration. A sidecar solution is a unique solution built using
-    the Visier platform, such as Smart Compensation. Use this API to retrieve the current settings, update
-    the settings to new values, or delete existing settings.
+  description: 'Manage your sidecar solution''s configuration. A sidecar solution is a unique solution
+    built using the Visier platform, such as Smart Compensation. Use this API to retrieve the current
+    settings, update the settings to new values, or delete existing settings.
 
     <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without
     notice; functionality may be removed, and no deprecation notices will be issued.
 
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1428,8 +1292,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1437,18 +1300,15 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-skills-library-api
   name: Visier Skills Library API
-  description: >-
-    Access over 14,000 skills and get complete skill details in 27 languages, such as alternative titles,
-    descriptions, and hierarchies.
+  description: Access over 14,000 skills and get complete skill details in 27 languages, such as alternative
+    titles, descriptions, and hierarchies.
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1463,8 +1323,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1472,22 +1331,19 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-sourcefilesdownload-api
   name: Visier Source Files Download API
-  description: >-
-    Download a tenants source files.
+  description: 'Download a tenants source files.
 
     <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without
     notice; functionality may be removed, and no deprecation notices will be issued.
 
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1502,8 +1358,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1511,23 +1366,20 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-sources-api
   name: Visier Sources API
-  description: >-
-    Export and import sources in Visier.
+  description: 'Export and import sources in Visier.
 
     <br>**Note:** <em>This API is in **beta**. While in beta, APIs are interface-stable and implementation
     may change without notice. Rarely, interface changes may occur that are not backwards-compatible and
     require advance communication.
 
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1542,8 +1394,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1551,11 +1402,9 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-systemstatus-api
@@ -1577,8 +1426,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1586,26 +1434,23 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-tablesource-api
   name: Visier Table Source API
-  description: >-
-    Use row-based management for your source data in Visier. The Table Source API supports direct SQL-based
-    data modifications, eliminating concerns about file management or override behavior. Use the API to
-    create, modify, and delete tables. Use SQL statements to query, insert, update, delete, and merge
-    data into tables with transactions. You can reference the tables by mappings, just like other sources,
-    to load data into an analytic object in a data version.
+  description: 'Use row-based management for your source data in Visier. The Table Source API supports
+    direct SQL-based data modifications, eliminating concerns about file management or override behavior.
+    Use the API to create, modify, and delete tables. Use SQL statements to query, insert, update, delete,
+    and merge data into tables with transactions. You can reference the tables by mappings, just like
+    other sources, to load data into an analytic object in a data version.
 
     <br><br>
 
     **Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without
-    notice; functionality may be removed, and no deprecation notices will be issued.</em>
+    notice; functionality may be removed, and no deprecation notices will be issued.</em>'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1620,8 +1465,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1629,11 +1473,9 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-tenantsv1-api
@@ -1653,8 +1495,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1662,21 +1503,18 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-tenantsv2-api
   name: Visier Tenants V2 API
-  description: >-
-    Create analytic tenants, deprovision tenants, retrieve tenant information, and update tenant information.
-    Tenants V2 improves upon Tenants V1 in the following ways:
-      * Programmatically assign a Home analysis to your analytic tenants.
-      * Specify whether to merge or replace values when updating the details of an analytic tenant.
-      * Specify the property fields to include in the response for GET requests.
+  description: "Create analytic tenants, deprovision tenants, retrieve tenant information, and update\
+    \ tenant information. Tenants V2 improves upon Tenants V1 in the following ways:\n  * Programmatically\
+    \ assign a Home analysis to your analytic tenants.\n  * Specify whether to merge or replace values\
+    \ when updating the details of an analytic tenant.\n  * Specify the property fields to include in\
+    \ the response for GET requests."
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1691,8 +1529,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1700,17 +1537,14 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-usergroupsv2-api
   name: Visier User Groups V2 API
-  description: >-
-    Manage user groups in Visier, such as creating, updating, and deleting user groups in bulk.
+  description: Manage user groups in Visier, such as creating, updating, and deleting user groups in bulk.
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1727,8 +1561,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1736,23 +1569,20 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-usersv1-api
   name: Visier Users V1 API
-  description: >-
-    Manage users within an organization, such as assigning permissions to users and retrieving user permission
-    assignments and application logs.
+  description: 'Manage users within an organization, such as assigning permissions to users and retrieving
+    user permission assignments and application logs.
 
     <br>**Tip:** Visier recommends that administrating tenant users focus primarily on managing users
     at the administrating tenant level. These users likely belong directly to your organization, such
     as customer support, customer value managers, account executives, and customer success. These users
-    work with clients to manage their day-to-day solution needs
+    work with clients to manage their day-to-day solution needs'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1769,8 +1599,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1778,22 +1607,19 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-usersv2-api
   name: Visier Users V2 API
-  description: >-
-    Manage users in bulk, such as creating, updating, and deleting many users.
+  description: 'Manage users in bulk, such as creating, updating, and deleting many users.
 
     <br>**Tip:** Visier recommends that administrating tenant users focus primarily on managing users
     at the administrating tenant level. These users likely belong directly to your organization, such
     as customer support, customer value managers, account executives, and customer success. These users
-    work with clients to manage their day-to-day solution needs.
+    work with clients to manage their day-to-day solution needs.'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1810,8 +1636,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1819,17 +1644,15 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-usersv3-api
   name: Visier Users V3 API
-  description: >-
-    Manage users within an organization. Users V3 offers the ability to update or insert (upsert) a user.
+  description: Manage users within an organization. Users V3 offers the ability to update or insert (upsert)
+    a user.
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1846,8 +1669,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1855,23 +1677,20 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-veeconfiguration-api
   name: Visier Vee Configuration API
-  description: >-
-    Manage Vee v2 instructions and safeguards for a tenant. Instructions guide Vee's behavior when responding
-    to queries. Safeguards prevent Vee from responding to certain types of queries.
+  description: 'Manage Vee v2 instructions and safeguards for a tenant. Instructions guide Vee''s behavior
+    when responding to queries. Safeguards prevent Vee from responding to certain types of queries.
 
     <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without
     notice; functionality may be removed, and no deprecation notices will be issued.
 
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1886,8 +1705,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1895,17 +1713,15 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-veev1-api
   name: Visier Vee V1 API
-  description: >-
-    Use Vee through Visier APIs, such as asking questions, submitting feedback, and getting sample questions.
+  description: Use Vee through Visier APIs, such as asking questions, submitting feedback, and getting
+    sample questions.
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1920,8 +1736,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1929,18 +1744,15 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-veev2-api
   name: Visier Vee V2 API
-  description: >-
-    Use Vee through Visier APIs, such as getting sample questions. Vee V2 improves upon Vee V1 by aligning
-    response field names with the Vee UI.
+  description: Use Vee through Visier APIs, such as getting sample questions. Vee V2 improves upon Vee
+    V1 by aligning response field names with the Vee UI.
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1955,8 +1767,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -1964,21 +1775,18 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-webhooks-api
   name: Visier Webhooks API
-  description: >-
-    Create, manage, and retrieve webhook definitions. Use webhooks to register your own HTTPS endpoints
-    with Visier and listen for specific events. When these events occur, Visier sends an API request to
-    your registered endpoint. For example, you can create a webhook to monitor job status events with
-    Visier. Visier sends you a success or failure notification to your registered endpoint after the job
-    completes.
+  description: Create, manage, and retrieve webhook definitions. Use webhooks to register your own HTTPS
+    endpoints with Visier and listen for specific events. When these events occur, Visier sends an API
+    request to your registered endpoint. For example, you can create a webhook to monitor job status events
+    with Visier. Visier sends you a success or failure notification to your registered endpoint after
+    the job completes.
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
@@ -1995,8 +1803,7 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/authentication/authentication.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+    url: https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
   - type: Webhooks
@@ -2004,11 +1811,9 @@ apis:
   - type: Documentation
     url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+    url: https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
   - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+    url: https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
 maintainers:
