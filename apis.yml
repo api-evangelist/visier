@@ -1542,6 +1542,41 @@ apis:
       https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
   - type: Documentation
     url: https://docs.visier.com/developer/apis/apis.htm
+- aid: visier:visier-oauth2-api
+  name: Visier O Auth2 API
+  description: "Request an authentication token through OAuth 2.0 with Open ID Connect (OIDC). With OAuth\
+    \ 2.0 with OIDC, use an OAuth 2.0 grant to request an authentication token. \nThe response returns\
+    \ a JSON Web Token (JWT) that you can use in your API calls."
+  humanURL: https://docs.visier.com/developer/agents/mcp/mcp-server.htm
+  baseURL: https://{vanity_name}.app.visier.com/visier-query-mcp
+  tags:
+  - OAuth2
+  properties:
+  - type: OpenAPI
+    url: openapi/visier-oauth2-api-openapi.yml
+  - type: Documentation
+    url: https://docs.visier.com/developer/apis/administration/user-management/users-api.htm
+  - type: Documentation
+    url: https://docs.visier.com/developer/apis/analytic-model/concepts/concepts-api.htm
+  - type: Documentation
+    url: https://docs.visier.com/developer/apis/authentication/authentication.htm
+  - type: Documentation
+    url: >-
+      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
+  - type: Documentation
+    url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
+  - type: Webhooks
+    url: asyncapi/visier-webhooks.yml
+  - type: Documentation
+    url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
+  - type: Documentation
+    url: >-
+      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
+  - type: Documentation
+    url: >-
+      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
+  - type: Documentation
+    url: https://docs.visier.com/developer/apis/apis.htm
 - aid: visier:visier-basic-authentication-api
   name: Visier Basic Authentication API
   description: >-
@@ -1758,43 +1793,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/visier-network-subnets-api-openapi.yml
-  - type: Documentation
-    url: https://docs.visier.com/developer/apis/administration/user-management/users-api.htm
-  - type: Documentation
-    url: https://docs.visier.com/developer/apis/analytic-model/concepts/concepts-api.htm
-  - type: Documentation
-    url: https://docs.visier.com/developer/apis/authentication/authentication.htm
-  - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/data-in/direct-data-intake/direct-data-intake-api.htm
-  - type: Documentation
-    url: https://docs.visier.com/developer/apis/data-out/vee/vee-api.htm
-  - type: Webhooks
-    url: asyncapi/visier-webhooks.yml
-  - type: Documentation
-    url: https://docs.visier.com/developer/apis/webhooks/webhooks-api.htm
-  - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/planning/plan-administration/plan-administration-api.htm
-  - type: Documentation
-    url: >-
-      https://docs.visier.com/developer/apis/compensation-benchmarks/compensation-benchmarks-api.htm
-  - type: Documentation
-    url: https://docs.visier.com/developer/apis/apis.htm
-- aid: visier:visier-o-auth2-api
-  name: Visier O Auth2 API
-  description: >-
-    Request an authentication token through OAuth 2.0 with Open ID Connect (OIDC). With OAuth 2.0 with
-    OIDC, use an OAuth 2.0 grant to request an authentication token.
-
-    The response returns a JSON Web Token (JWT) that you can use in your API calls.
-  humanURL: https://docs.visier.com/developer/agents/mcp/mcp-server.htm
-  baseURL: https://{vanity_name}.app.visier.com/visier-query-mcp
-  tags:
-  - O Auth2
-  properties:
-  - type: OpenAPI
-    url: openapi/visier-o-auth2-api-openapi.yml
   - type: Documentation
     url: https://docs.visier.com/developer/apis/administration/user-management/users-api.htm
   - type: Documentation
