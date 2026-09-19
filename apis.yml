@@ -1550,6 +1550,8 @@ apis:
   humanURL: https://docs.visier.com/developer/agents/mcp/mcp-server.htm
   baseURL: https://{vanity_name}.app.visier.com/visier-query-mcp
   tags:
+  - Authentication
+  tags_raw:
   - OAuth2
   properties:
   - type: OpenAPI
