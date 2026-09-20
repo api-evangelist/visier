@@ -55,7 +55,8 @@ edges:
   reason: Operations manage permissions, capabilities, data access sets and data security profiles assigned
     to users — squarely authorisation/entitlement administration, i.e. Identity & Access Management.
 - tag: UsersV1
-  spec_file: visier-usersv1-api-openapi.yml
+  spec_file: visier-users-v1-api-openapi.yml
+  reanchored_from: visier-usersv1-api-openapi.yml
   capability_id: BC-620.20
   capability_id_l1: BC-620
   capability_name: Identity & Access Management
@@ -76,7 +77,8 @@ edges:
     credentials, event types, delivery status and test events — which is exactly the Webhook & Event Subscription
     Management sub-capability of the developer platform/API ecosystem area rather than generic plumbing.
 - tag: UsersV2
-  spec_file: visier-usersv2-api-openapi.yml
+  spec_file: visier-users-v2-api-openapi.yml
+  reanchored_from: visier-usersv2-api-openapi.yml
   capability_id: BC-620.20
   capability_id_l1: BC-620
   capability_name: Identity & Access Management
@@ -84,7 +86,8 @@ edges:
   evidence: POST /v2/admin/users  UsersV2_AddUsers  "Add users"; DELETE /v2/admin/users "Delete users"
   reason: Bulk create/update/delete of user accounts — user provisioning within identity and access management.
 - tag: DataQuery
-  spec_file: visier-dataquery-api-openapi.yml
+  spec_file: visier-data-query-api-openapi.yml
+  reanchored_from: visier-dataquery-api-openapi.yml
   capability_id: BC-610.50
   capability_id_l1: BC-610
   capability_name: Analytics & BI Management
@@ -114,7 +117,8 @@ edges:
   reason: Report lifecycle and report data download from an analytics platform realises reporting/BI delivery.
     Some ambiguity with management reporting, but the surface is generic analytic report management.
 - tag: UserGroupsV2
-  spec_file: visier-usergroupsv2-api-openapi.yml
+  spec_file: visier-user-groups-v2-api-openapi.yml
+  reanchored_from: visier-usergroupsv2-api-openapi.yml
   capability_id: BC-620.20
   capability_id_l1: BC-620
   capability_name: Identity & Access Management
@@ -124,7 +128,8 @@ edges:
   reason: Lifecycle of user groups used to scope user access and data visibility within a tenant — access
     administration. Slight ambiguity vs tenant configuration, hence 0.75.
 - tag: UsersV3
-  spec_file: visier-usersv3-api-openapi.yml
+  spec_file: visier-users-v3-api-openapi.yml
+  reanchored_from: visier-usersv3-api-openapi.yml
   capability_id: BC-620.20
   capability_id_l1: BC-620
   capability_name: Identity & Access Management
