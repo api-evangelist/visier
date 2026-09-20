@@ -1,0 +1,179 @@
+slug: visier
+provider: Visier
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 16
+edges:
+- tag: TenantsV1
+  spec_file: visier-tenantsv1-api-openapi.yml
+  capability_id: BC-4230.10
+  capability_id_l1: BC-4230
+  capability_name: Tenant Provisioning & Lifecycle
+  confidence: 0.9
+  evidence: POST /v1/admin/tenants "Add an analytic tenant"; DELETE /v1/admin/tenants/{tenantId} "Deprovision
+    an analytic tenant"; PUT .../disable "Disable an analytic tenant"
+  reason: Create, update, enable/disable and deprovision analytic tenants in the multi-tenant service
+    — squarely tenant provisioning and lifecycle.
+- tag: TenantsV2
+  spec_file: visier-tenantsv2-api-openapi.yml
+  capability_id: BC-4230.10
+  capability_id_l1: BC-4230
+  capability_name: Tenant Provisioning & Lifecycle
+  confidence: 0.9
+  evidence: POST /v2/admin/tenants  TenantsV2_CreateTenant  "Add an analytic tenant"; DELETE /v2/admin/tenants/{tenantId}
+    "Deprovision an analytic tenant"
+  reason: V2 of tenant CRUD/provisioning for the multi-tenant analytics fleet — tenant provisioning and
+    lifecycle.
+- tag: Benchmarks
+  spec_file: visier-benchmarks-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.85
+  evidence: '"Get base salary benchmark value"; "Submit feedback to improve salary benchmark values";
+    schema "SalaryBenchmarkInputs"'
+  reason: The operations return compensation/base-salary benchmark values used to set and validate pay
+    levels, which is squarely Compensation & Benefits Management within Human Capital Management.
+- tag: Permissions
+  spec_file: visier-permissions-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: Permissions_GetPermissions "Retrieve a list of all permissions"; Permissions_CreateDataAccessSets
+    "Create shareable data access sets"; Permissions_GetDataSecurityObjects "Retrieve a list of data security
+    objects"; schema servicing.DataSecurityProfileDTO
+  reason: Operations manage permissions, capabilities, data access sets and data security profiles assigned
+    to users — squarely authorisation/entitlement administration, i.e. Identity & Access Management.
+- tag: UsersV1
+  spec_file: visier-usersv1-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: PUT /v1/admin/permissions/users  UsersV1_AssignPermissions  "Assign permissions to users";
+    "Remove permissions from users"; "Assign users to user groups"
+  reason: User accounts, group membership and permission assignment/revocation — identity and access management
+    for the platform.
+- tag: Webhooks
+  spec_file: visier-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.85
+  evidence: '''Visier APIs for managing your webhook integrations''; ''Webhooks_CreateWebhook'', ''Webhooks_GetWebhooksStatus  Retrieve
+    webhook statuses'', ''Webhooks_SendTestEvent  Test a webhook'''
+  reason: Operations cover the full lifecycle of outbound webhook subscriptions — create/update/delete,
+    credentials, event types, delivery status and test events — which is exactly the Webhook & Event Subscription
+    Management sub-capability of the developer platform/API ecosystem area rather than generic plumbing.
+- tag: UsersV2
+  spec_file: visier-usersv2-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: POST /v2/admin/users  UsersV2_AddUsers  "Add users"; DELETE /v2/admin/users "Delete users"
+  reason: Bulk create/update/delete of user accounts — user provisioning within identity and access management.
+- tag: DataQuery
+  spec_file: visier-dataquery-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.78
+  evidence: '"Query aggregate data"; "Query a list of details"; "Query aggregate or list data using SQL-like
+    syntax"'
+  reason: Analytical query execution against the people data model, returning aggregates and detail lists
+    — the delivery of reporting/analytics content, i.e. Analytics & BI Management.
+- tag: Profiles
+  spec_file: visier-profiles-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.78
+  evidence: '"Assign a profile to a list of users"; "Remove a profile from a list of users"; "the profiles
+    and permissions assigned to users"'
+  reason: Profiles are permission bundles assigned to and revoked from user accounts across tenants, which
+    is identity and access management. Confidence not higher because it is administrative access control
+    scoped to one vendor's product rather than an enterprise IAM service.
+- tag: Reporting
+  spec_file: visier-reporting-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.78
+  evidence: '"Retrieve a list of reports", "Create a report", "Download a report"; schema analysis.common.ReportDTO'
+  reason: Report lifecycle and report data download from an analytics platform realises reporting/BI delivery.
+    Some ambiguity with management reporting, but the surface is generic analytic report management.
+- tag: UserGroupsV2
+  spec_file: visier-usergroupsv2-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: GET /v2/admin/user-groups "Retrieve a list of user groups"; schema admin.UserGroupChangeUsersDTO,
+    admin.UserGroupFiltersDTO
+  reason: Lifecycle of user groups used to scope user access and data visibility within a tenant — access
+    administration. Slight ambiguity vs tenant configuration, hence 0.75.
+- tag: UsersV3
+  spec_file: visier-usersv3-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: PUT /v3/admin/users/{username}  "Update or insert (upsert) a user"; schema servicing.ProfileAssignmentDTO
+  reason: Single-endpoint user upsert with profile (permission) assignment — user account and access administration;
+    thin surface so moderate confidence.
+- tag: ConsolidatedAnalytics
+  spec_file: visier-consolidatedanalytics-api-openapi.yml
+  capability_id: BC-4230.10
+  capability_id_l1: BC-4230
+  capability_name: Tenant Provisioning & Lifecycle
+  confidence: 0.72
+  evidence: '"Create a consolidated analytics tenant"; "Retrieve a list of all consolidated analytics
+    tenants"; "Add source tenants to a consolidated analytics tenant"'
+  reason: Administrative operations that create and configure tenants within a multi-tenant SaaS service,
+    including which source tenants and sources are in scope. This is SaaS tenant provisioning and lifecycle
+    management. Some ambiguity with tenant configuration (BC-4230.20) since excluded-source settings are
+    also configuration.
+- tag: Jobs Library
+  spec_file: visier-jobs-library-api-openapi.yml
+  capability_id: BC-300
+  capability_id_l1: BC-300
+  capability_name: Human Capital Management
+  confidence: 0.72
+  evidence: '"Skills Intelligence Engine Jobs Library API" — GET /v1/jobs "Retrieve a list of jobs", POST
+    /v1/jobs/standardize "Standardize custom job titles"; schemas Skill, Job'
+  reason: A jobs-and-skills library with job-title standardisation is job-architecture/skills taxonomy
+    content for workforce and talent processes — Human Capital Management. Held at L1 because the evidence
+    does not distinguish talent management, workforce planning or L&D use.
+- tag: PlanAdministration
+  spec_file: visier-planadministration-api-openapi.yml
+  capability_id: BC-300.50
+  capability_id_l1: BC-300
+  capability_name: Workforce Planning Management
+  confidence: 0.72
+  evidence: '"Partially update a plan scenario"; schemas planning.PlanScenarioPatchRequest, PlanPatchSubmitActionRequest,
+    planning.AssignSubplanActionPayload, planning.StartCollaborationActionPayload'
+  reason: Visier Planning manages workforce plans and scenarios (submit, consolidate, assign subplan,
+    collaborate) on a people data model, which realises strategic workforce supply/demand planning. Confidence
+    moderated because the operations are generic plan-lifecycle patches and the plan subject matter is
+    inferred from the vendor's workforce-planning context.
+- tag: VeeConfiguration
+  spec_file: visier-veeconfiguration-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.7
+  evidence: POST /v1/admin/vee/instructions "Create a Vee instruction"; POST /v1/admin/vee/safeguards
+    "Create a Vee safeguard"
+  reason: Configures the instructions and safeguards (guardrails) governing the Vee AI assistant — AI
+    lifecycle/responsible-AI configuration. Some ambiguity as it could be read as tenant configuration.
