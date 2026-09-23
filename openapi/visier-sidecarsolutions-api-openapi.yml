@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Visier Administration Sidecar Solutions API
-  description: Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.
+  description: Visier APIs for managing your tenant or tenants in Visier.
   license:
     name: Apache License, Version 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
@@ -16,18 +16,19 @@ security:
 tags:
 - name: SidecarSolutions
   x-displayName: Sidecar Solutions
-  description: 'Manage your sidecar solution''s configuration. A sidecar solution is a unique solution built using the Visier platform, such as Smart Compensation. Use this API to retrieve the current settings, update the settings to new values, or delete existing settings.
-
-    <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
-
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
+  description: Manage your sidecar solution's configuration.
 paths:
   /v1alpha/admin/sidecar-app-configs/{applicationId}:
     get:
       tags:
       - SidecarSolutions
       summary: Retrieve a sidecar solution's settings
-      description: "Retrieve the settings for a specific sidecar solution. You must know the solution ID of your sidecar solution. To get the ID, contact Visier Technical Support.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Retrieve the settings for a specific sidecar solution. You must know the solution ID of your sidecar solution. To get the ID, contact Visier Technical Support.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: SidecarSolutions_GetSidecarSolutionSettings
       parameters:
       - name: applicationId
@@ -58,7 +59,15 @@ paths:
       tags:
       - SidecarSolutions
       summary: Update a sidecar solution's settings
-      description: "Update a sidecar solution's settings. The response returns the settings after updating. When updating setting, we recommend that you first retrieve the existing settings using `GET`. You can use the `GET` response in your `PUT` request definition.\n\n In `PUT` requests, the definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Update a sidecar solution''s settings. The response returns the settings after updating. When updating setting, we recommend that you first retrieve the existing settings using `GET`. You can use the `GET` response in your `PUT` request definition.
+
+
+        In `PUT` requests, the definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: SidecarSolutions_SetSidecarAppConfigs
       parameters:
       - name: applicationId
@@ -89,7 +98,12 @@ paths:
       tags:
       - SidecarSolutions
       summary: Delete a sidecar solution's settings
-      description: "Delete the settings for a sidecar solution. This deletes all the settings for the solution.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Delete the settings for a sidecar solution. This deletes all the settings for the solution.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: SidecarSolutions_DeleteSidecarAppConfigs
       parameters:
       - name: applicationId
@@ -115,43 +129,6 @@ paths:
           content: {}
 components:
   schemas:
-    servicing.SettingsDTO:
-      type: object
-      properties:
-        key:
-          type: string
-          description: The key of the configurable setting.
-        singleConfigItem:
-          allOf:
-          - $ref: '#/components/schemas/servicing.SingleValueSettingDTO'
-          description: A value containing a single string.
-        multiValueConfigItem:
-          allOf:
-          - $ref: '#/components/schemas/servicing.MultiValueSettingDTO'
-          description: A value containing multiple strings.
-      description: The settings to configure a sidecar solution.
-    servicing.MultiValueSettingDTO:
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
-          description: A value containing multiple strings.
-      description: A value containing multiple strings.
-    admin.SidecarSolutionRequestDTO:
-      type: object
-      properties:
-        applicationId:
-          type: string
-          description: The unique identifier of the solution to configure.
-    servicing.SingleValueSettingDTO:
-      type: object
-      properties:
-        value:
-          type: string
-          description: A value containing a single string.
-      description: A value containing a single string.
     Status:
       type: object
       properties:
@@ -171,6 +148,28 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
+    servicing.SingleValueSettingDTO:
+      type: object
+      properties:
+        value:
+          type: string
+          description: A value containing a single string.
+      description: A value containing a single string.
+    servicing.SettingsDTO:
+      type: object
+      properties:
+        key:
+          type: string
+          description: The key of the configurable setting.
+        singleConfigItem:
+          allOf:
+          - $ref: '#/components/schemas/servicing.SingleValueSettingDTO'
+          description: A value containing a single string.
+        multiValueConfigItem:
+          allOf:
+          - $ref: '#/components/schemas/servicing.MultiValueSettingDTO'
+          description: A value containing multiple strings.
+      description: The settings to configure a sidecar solution.
     servicing.SidecarSolutionSettingsDTO:
       type: object
       properties:
@@ -183,6 +182,21 @@ components:
           type: string
           description: The unique identifier of the solution to configure.
       description: The options to configure a sidecar solution.
+    admin.SidecarSolutionRequestDTO:
+      type: object
+      properties:
+        applicationId:
+          type: string
+          description: The unique identifier of the solution to configure.
+    servicing.MultiValueSettingDTO:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+          description: A value containing multiple strings.
+      description: A value containing multiple strings.
   securitySchemes:
     CookieAuth:
       type: apiKey

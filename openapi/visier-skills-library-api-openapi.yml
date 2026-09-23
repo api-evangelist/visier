@@ -1,18 +1,14 @@
 openapi: 3.2.0
 info:
   title: Skills Intelligence Engine Skills Library API
-  description: 'Everything you need to power skills and turn them into actions.
-
-    '
+  description: Everything you need to power skills and turn them into actions.
   license:
     name: Apache License, Version 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
   version: 1.0.0
 tags:
 - name: Skills Library
-  description: 'Access over 14,000 skills and get complete skill details in 27 languages, such as alternative titles, descriptions, and hierarchies.
-
-    '
+  description: Access over 14,000 skills and get complete skill details in 27 languages, such as alternative titles, descriptions, and hierarchies.
 paths:
   /v1/skills/{id}:
     get:
@@ -20,9 +16,7 @@ paths:
       tags:
       - Skills Library
       operationId: GetSkill
-      description: 'If you know the ID of a skill, use this endpoint to retrieve information such as display name, description, Automation Index, Remote Work Index, and alternative names.
-
-        '
+      description: If you know the ID of a skill, use this endpoint to retrieve information such as display name, description, Automation Index, Remote Work Index, and alternative names.
       parameters:
       - name: id
         in: path
@@ -91,9 +85,7 @@ paths:
       tags:
       - Skills Library
       operationId: ListSkills
-      description: 'Use this endpoint to retrieve all skills in Visier''s Skills Library.
-
-        '
+      description: Use this endpoint to retrieve all skills in Visier's Skills Library.
       parameters:
       - name: skillGroupId
         in: query
@@ -168,9 +160,7 @@ paths:
       tags:
       - Skills Library
       operationId: SearchSkill
-      description: 'Retrieve a list of skills that match a specified search term.
-
-        '
+      description: Retrieve a list of skills that match a specified search term.
       parameters:
       - name: term
         in: query
@@ -239,9 +229,7 @@ paths:
       tags:
       - Skills Library
       operationId: ExtractSkills
-      description: 'Extract the relevant skills from text such as job descriptions and course outlines.
-
-        '
+      description: Extract the relevant skills from text such as job descriptions and course outlines.
       parameters:
       - name: Accept-Language
         in: header
@@ -313,9 +301,7 @@ paths:
       tags:
       - Skills Library
       operationId: MatchSkills
-      description: 'Find the best match between a skill set and a group of skill sets (targets). The response returns a ranking of the targets with the best match appearing at the top of the list.
-
-        '
+      description: Find the best match between a skill set and a group of skill sets (targets). The response returns a ranking of the targets with the best match appearing at the top of the list.
       requestBody:
         description: 'The skill set and the group of skill sets (targets) to be matched. The skills included in each skill set are entered in the following format [skill_id, score]. The score represents how prevalent the skill was in the source and is used as a weighting factor when determining the best match.
 
@@ -370,9 +356,7 @@ paths:
       tags:
       - Skills Library
       operationId: GetSkillGroup
-      description: 'If you know the ID of a skill group, use this endpoint to retrieve information such as display name, description, Automation Index, Remote Work Index, and alternative names.
-
-        '
+      description: If you know the ID of a skill group, use this endpoint to retrieve information such as display name, description, Automation Index, Remote Work Index, and alternative names.
       parameters:
       - name: id
         in: path
@@ -441,9 +425,7 @@ paths:
       tags:
       - Skills Library
       operationId: ListSkillGroups
-      description: 'Use this endpoint to retrieve all skill groups in Visier''s Skills Library.
-
-        '
+      description: Use this endpoint to retrieve all skill groups in Visier's Skills Library.
       parameters:
       - name: skillCategoryId
         in: query
@@ -511,9 +493,7 @@ paths:
       tags:
       - Skills Library
       operationId: GetSkillCategory
-      description: 'If you know the ID of a skill category, use this endpoint to retrieve information such as display name, description, Automation Index, Remote Work Index, and alternative names.
-
-        '
+      description: If you know the ID of a skill category, use this endpoint to retrieve information such as display name, description, Automation Index, Remote Work Index, and alternative names.
       parameters:
       - name: id
         in: path
@@ -582,9 +562,7 @@ paths:
       tags:
       - Skills Library
       operationId: ListSkillCategories
-      description: 'Use this endpoint to retrieve all skill categories in Visier''s Skills Library.
-
-        '
+      description: Use this endpoint to retrieve all skill categories in Visier's Skills Library.
       parameters:
       - name: Accept-Language
         in: header
@@ -641,25 +619,211 @@ paths:
       - api_key: []
 components:
   schemas:
-    SkillList:
+    SkillGroup:
+      description: 'Details describing a skill group.
+
+        '
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'The unique ID of the skill group.
+
+            '
+        name:
+          type: string
+          description: 'The localized display name of the skill group.
+
+            '
+        description:
+          type: string
+          description: 'The localized description of the skill group.
+
+            '
+        skillCategoryId:
+          type: string
+          description: 'ID of the parent skill category.
+
+            '
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/Skill'
+          description: 'List of skills under this skill group.
+
+            '
+      required:
+      - id
+      - name
+      - description
+      - skillCategoryId
+      - skills
+    SkillCategoryList:
       type: array
       items:
         type: object
-        title: SkillEntry
+        title: SkillCategoryEntry
         properties:
           id:
             type: string
-            description: 'The unique ID of the skill.
+            description: 'The unique ID of the skill category.
 
               '
           name:
             type: string
-            description: 'The localized display name of the skill.
+            description: 'The localized display name of the skill category.
 
               '
           description:
             type: string
-            description: 'The localized description of the skill.
+            description: 'The localized description of the skill category.
+
+              '
+        required:
+        - id
+        - name
+        - description
+    SkillCategory:
+      description: 'Details describing a skill category.
+
+        '
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'The unique ID of the skill category.
+
+            '
+        name:
+          type: string
+          description: 'The localized display name of the skill category.
+
+            '
+        description:
+          type: string
+          description: 'The localized description of the skill category.
+
+            '
+        skillGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/SkillGroup'
+          description: 'List of skill groups under this skill category.
+
+            '
+      required:
+      - id
+      - name
+      - description
+      - skillGroups
+    SkillMatchOutput:
+      type: array
+      minItems: 1
+      description: 'Ranked list of the skill sets (targets) with the best match appearing at the top of the list. The integer value indicates the position of the target in the request body.
+
+        list. The groups are ranked by the best matched skill set to worst matched skill set to the input ''skills'' candidate.
+
+        '
+      example:
+      - 0
+      - 2
+      - 1
+      items:
+        type: integer
+        description: The position of the target skill set in the request body. The number sequence starts at 0.
+    SkillMatchInput:
+      description: 'The skill set and the group of skill sets (targets) to be matched.
+
+        '
+      type: object
+      properties:
+        skillSet:
+          type: array
+          minItems: 1
+          uniqueItems: true
+          items:
+            oneOf:
+            - type: string
+            - type: integer
+            minItems: 2
+            maxItems: 2
+            items:
+              description: 'The skills that make up the skill set to be matched. The skills included in each skill set are entered in the following format [skill_id, score]. The skill_id is the unique identifier of a skill in the Skills Library. The score represents how prevalent the skill was in the source and is used as a weighting factor when determining the best match.
+
+                '
+          description: 'The skills that make up the skill set that will be matched against a group of skill sets (targets).
+
+            '
+          example:
+          - - '21795'
+            - 85
+          - - '19391'
+            - 50
+          - - '21577'
+            - 40
+        targetSkillSets:
+          type: array
+          minItems: 1
+          items:
+            type: array
+            minItems: 1
+            description: 'The group of skill sets (targets) that is matched to the input skill set.
+
+              '
+            items:
+              type: array
+              oneOf:
+              - type: string
+              - type: integer
+              minItems: 2
+              maxItems: 2
+              items:
+                description: 'The skills that make up the skill set to be matched. The skills included in each skill set are entered in the following format [skill_id, score]. The skill_id is the unique identifier of a skill in the Skills Library. The score represents how prevalent the skill was in the source and is used as a weighting factor when determining the best match.
+
+                  '
+          description: 'A comma-separated list of strings that represent the group of skill sets (targets).
+
+            '
+          example:
+          - - - '21795'
+              - 75
+            - - '19391'
+              - 70
+            - - '21577'
+              - 40
+          - - - '15812'
+              - 90
+            - - '16835'
+              - 88
+            - - '30645'
+              - 76
+          - - - '21577'
+              - 90
+            - - '19391'
+              - 67
+            - - '19237'
+              - 66
+      required:
+      - content
+    SkillGroupList:
+      type: array
+      items:
+        type: object
+        title: SkillGroupEntry
+        properties:
+          id:
+            type: string
+            description: 'The unique ID of the skill group.
+
+              '
+          name:
+            type: string
+            description: 'The localized display name of the skill group.
+
+              '
+          description:
+            type: string
+            description: 'The localized description of the skill group.
 
               '
         required:
@@ -737,58 +901,51 @@ components:
       - isKnowledge
       - skillType
       - alternativeTitles
-    SkillCategory:
-      description: 'Details describing a skill category.
+    ApiError:
+      title: ApiError
+      description: 'Description of an API error.
 
         '
       type: object
       properties:
-        id:
+        errorCode:
           type: string
-          description: 'The unique ID of the skill category.
+          description: 'A brief identifier of the type of error.
 
             '
-        name:
+        message:
           type: string
-          description: 'The localized display name of the skill category.
+          description: 'The details of the error.
 
             '
-        description:
+        rci:
           type: string
-          description: 'The localized description of the skill category.
-
-            '
-        skillGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/SkillGroup'
-          description: 'List of skill groups under this skill category.
+          description: 'A root cause identifier that allows Visier to determine the source of the problem.
 
             '
       required:
-      - id
-      - name
-      - description
-      - skillGroups
-    SkillGroupList:
+      - errorCode
+      - message
+      - rci
+    SkillList:
       type: array
       items:
         type: object
-        title: SkillGroupEntry
+        title: SkillEntry
         properties:
           id:
             type: string
-            description: 'The unique ID of the skill group.
+            description: 'The unique ID of the skill.
 
               '
           name:
             type: string
-            description: 'The localized display name of the skill group.
+            description: 'The localized display name of the skill.
 
               '
           description:
             type: string
-            description: 'The localized description of the skill group.
+            description: 'The localized description of the skill.
 
               '
         required:
@@ -834,146 +991,6 @@ components:
             '
       required:
       - content
-    SkillCategoryList:
-      type: array
-      items:
-        type: object
-        title: SkillCategoryEntry
-        properties:
-          id:
-            type: string
-            description: 'The unique ID of the skill category.
-
-              '
-          name:
-            type: string
-            description: 'The localized display name of the skill category.
-
-              '
-          description:
-            type: string
-            description: 'The localized description of the skill category.
-
-              '
-        required:
-        - id
-        - name
-        - description
-    SkillMatchOutput:
-      type: array
-      minItems: 1
-      description: 'Ranked list of the skill sets (targets) with the best match appearing at the top of the list. The integer value indicates the position of the target in the request body.
-
-        list. The groups are ranked by the best matched skill set to worst matched skill set to the input ''skills'' candidate.
-
-        '
-      example:
-      - 0
-      - 2
-      - 1
-      items:
-        type: integer
-        description: The position of the target skill set in the request body. The number sequence starts at 0.
-    ApiError:
-      title: ApiError
-      description: 'Description of an API error.
-
-        '
-      type: object
-      properties:
-        errorCode:
-          type: string
-          description: 'A brief identifier of the type of error.
-
-            '
-        message:
-          type: string
-          description: 'The details of the error.
-
-            '
-        rci:
-          type: string
-          description: 'A root cause identifier that allows Visier to determine the source of the problem.
-
-            '
-      required:
-      - errorCode
-      - message
-      - rci
-    SkillMatchInput:
-      description: 'The skill set and the group of skill sets (targets) to be matched.
-
-        '
-      type: object
-      properties:
-        skillSet:
-          type: array
-          minItems: 1
-          uniqueItems: true
-          items:
-            oneOf:
-            - type: string
-            - type: integer
-            minItems: 2
-            maxItems: 2
-            items:
-              description: 'The skills that make up the skill set to be matched. The skills included in each skill set are entered in the following format [skill_id, score]. The skill_id is the unique identifier of a skill in the Skills Library. The score represents how prevalent the skill was in the source and is used as a weighting factor when determining the best match.
-
-                '
-          description: 'The skills that make up the skill set that will be matched against a group of skill sets (targets).
-
-            '
-          example:
-          - - '21795'
-            - 85
-          - - '19391'
-            - 50
-          - - '21577'
-            - 40
-        targetSkillSets:
-          type: array
-          minItems: 1
-          items:
-            type: array
-            minItems: 1
-            description: 'The group of skill sets (targets) that is matched to the input skill set.
-
-              '
-            items:
-              type: array
-              oneOf:
-              - type: string
-              - type: integer
-              minItems: 2
-              maxItems: 2
-              items:
-                description: 'The skills that make up the skill set to be matched. The skills included in each skill set are entered in the following format [skill_id, score]. The skill_id is the unique identifier of a skill in the Skills Library. The score represents how prevalent the skill was in the source and is used as a weighting factor when determining the best match.
-
-                  '
-          description: 'A comma-separated list of strings that represent the group of skill sets (targets).
-
-            '
-          example:
-          - - - '21795'
-              - 75
-            - - '19391'
-              - 70
-            - - '21577'
-              - 40
-          - - - '15812'
-              - 90
-            - - '16835'
-              - 88
-            - - '30645'
-              - 76
-          - - - '21577'
-              - 90
-            - - '19391'
-              - 67
-            - - '19237'
-              - 66
-      required:
-      - content
     SkillExtractionOutput:
       type: array
       items:
@@ -1005,45 +1022,6 @@ components:
         - name
         - description
         - score
-    SkillGroup:
-      description: 'Details describing a skill group.
-
-        '
-      type: object
-      properties:
-        id:
-          type: string
-          description: 'The unique ID of the skill group.
-
-            '
-        name:
-          type: string
-          description: 'The localized display name of the skill group.
-
-            '
-        description:
-          type: string
-          description: 'The localized description of the skill group.
-
-            '
-        skillCategoryId:
-          type: string
-          description: 'ID of the parent skill category.
-
-            '
-        skills:
-          type: array
-          items:
-            $ref: '#/components/schemas/Skill'
-          description: 'List of skills under this skill group.
-
-            '
-      required:
-      - id
-      - name
-      - description
-      - skillCategoryId
-      - skills
   securitySchemes:
     api_key:
       type: apiKey

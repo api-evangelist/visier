@@ -23,7 +23,15 @@ paths:
       tags:
       - PlanDataLoad
       summary: Upload plan data
-      description: "Send a file to Visier to modify a plan's data. The file must be in CSV format and match the plan's schema. To get the plan's schema, call `GET /v1/planning/model/plans/{id}?withSchema=true`.\nThe data file must contain the following columns:\n  - `periodId`: From the GET response, use the `date` values in the `timePeriods` array as values in this column.\n  - A column for each `id` value in the `planSegmentLevels` object, where the row value is the `id` of the `members` in the `planSegmentLevelMembers` object.\n  - A column for each  `id` value in the `planItems` object that you want to modify data for, where the row value is the data value."
+      description: 'Send a file to Visier to modify a plan''s data. The file must be in CSV format and match the plan''s schema. To get the plan''s schema, call `GET /v1/planning/model/plans/{id}?withSchema=true`.
+
+        The data file must contain the following columns:
+
+        - `periodId`: From the GET response, use the `date` values in the `timePeriods` array as values in this column.
+
+        - A column for each `id` value in the `planSegmentLevels` object, where the row value is the `id` of the `members` in the `planSegmentLevelMembers` object.
+
+        - A column for each `id` value in the `planItems` object that you want to modify data for, where the row value is the data value.'
       operationId: PlanDataLoad_PlanDataUpload
       parameters:
       - name: planId
@@ -85,7 +93,18 @@ paths:
       tags:
       - PlanDataLoad
       summary: Add or remove plan rows
-      description: "Send a file to Visier to modify a plan's rows. The file must be in CSV format and contain the following columns:\n- `Add/Remove`: In the column, use the value \"Add\" to add the specified row to the plan or \"Remove\" to remove the specified row from the plan.\n- A column for each plan segment level using the IDs from `planSegmentLevels`.\n  - To add a row, use the corresponding segment member ID from `planSegmentLevelMembers`. If the member doesn't exist in the schema, provide a display name. The response returns its assigned segment member ID.\n  - To remove a row, use the corresponding segmentId as the column name and the segment member ID from `planSegmentLevelMembers` as the row value.\n\n<br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued. If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Send a file to Visier to modify a plan''s rows. The file must be in CSV format and contain the following columns:
+
+        - `Add/Remove`: In the column, use the value "Add" to add the specified row to the plan or "Remove" to remove the specified row from the plan.
+
+        - A column for each plan segment level using the IDs from `planSegmentLevels`.
+
+        - To add a row, use the corresponding segment member ID from `planSegmentLevelMembers`. If the member doesn''t exist in the schema, provide a display name. The response returns its assigned segment member ID.
+
+        - To remove a row, use the corresponding segmentId as the column name and the segment member ID from `planSegmentLevelMembers` as the row value.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued. If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: PlanDataLoad_PlanRowDataLoad
       parameters:
       - name: planId
@@ -124,31 +143,25 @@ paths:
                 $ref: '#/components/schemas/PlanRowDataLoadResponseDTO'
 components:
   schemas:
-    PlanDataUploadResponseDTO:
+    PlanDataLoadChangeDTO:
       type: object
       properties:
-        updatedCellsCount:
-          type: integer
-          description: The number of cells that were updated from the data load process.
-        potentialUpdatedCellsCount:
-          type: integer
-          description: The number of cells that would have been updated if all changes were saved.
-        errors:
+        rowMembers:
           type: array
-          description: The collection of errors encountered during the data load process.
+          description: The collection of member ids that describe the row in the plan.
           items:
-            $ref: '#/components/schemas/planning.PlanDataLoadErrorDTO'
-        changelists:
-          type: array
-          description: 'The collection of changes grouped by plan item made during the data load process.
-
-            This list only contains the changes specified by the load.
-
-            If you indicated in the request that the changes are to be rolled up or distributed,
-
-            the values modified as a result of the calculations are not listed here.'
-          items:
-            $ref: '#/components/schemas/PlanDataLoadChangeListDTO'
+            type: string
+        period:
+          type: string
+          description: The display name of the time period.
+        oldValue:
+          type: number
+          format: double
+          description: The value that was replaced.
+        newValue:
+          type: number
+          format: double
+          description: The new value loaded into the plan from the data load.
     PlanRowDataLoadResponseDTO:
       type: object
       properties:
@@ -185,25 +198,31 @@ components:
           description: The collection of changes made for the plan item.
           items:
             $ref: '#/components/schemas/PlanDataLoadChangeDTO'
-    PlanDataLoadChangeDTO:
+    PlanDataUploadResponseDTO:
       type: object
       properties:
-        rowMembers:
+        updatedCellsCount:
+          type: integer
+          description: The number of cells that were updated from the data load process.
+        potentialUpdatedCellsCount:
+          type: integer
+          description: The number of cells that would have been updated if all changes were saved.
+        errors:
           type: array
-          description: The collection of member ids that describe the row in the plan.
+          description: The collection of errors encountered during the data load process.
           items:
-            type: string
-        period:
-          type: string
-          description: The display name of the time period.
-        oldValue:
-          type: number
-          format: double
-          description: The value that was replaced.
-        newValue:
-          type: number
-          format: double
-          description: The new value loaded into the plan from the data load.
+            $ref: '#/components/schemas/planning.PlanDataLoadErrorDTO'
+        changelists:
+          type: array
+          description: 'The collection of changes grouped by plan item made during the data load process.
+
+            This list only contains the changes specified by the load.
+
+            If you indicated in the request that the changes are to be rolled up or distributed,
+
+            the values modified as a result of the calculations are not listed here.'
+          items:
+            $ref: '#/components/schemas/PlanDataLoadChangeListDTO'
   securitySchemes:
     CookieAuth:
       type: apiKey

@@ -5,14 +5,10 @@ info:
     name: Apache License, Version 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
   version: '1.0'
-  description: 'Get benchmark values.
-
-    '
+  description: Get benchmark values.
 tags:
 - name: Benchmarks
-  description: 'Get benchmark values.
-
-    '
+  description: Get benchmark values.
 paths:
   /v1/compensation-benchmarks/base-salary:
     get:
@@ -20,9 +16,7 @@ paths:
       tags:
       - Benchmarks
       operationId: GetSalaryBenchmark
-      description: 'Retrieve the base salary benchmark value.
-
-        '
+      description: Retrieve the base salary benchmark value.
       parameters:
       - name: job
         in: query
@@ -124,7 +118,13 @@ paths:
       tags:
       - Benchmarks
       operationId: SubmitSalaryBenchmarkFeedback
-      description: "Give feedback for a salary benchmark value returned by `GET /v1/compensation-benchmarks/base-salary` or `/base-salaries`. To submit feedback, include the benchmark value's:\n  * ID values you defined in `GET /v1/compensation-benchmarks/base-salary` or `/base-salaries`.\n  * `referenceDate` and `releaseDate` returned by `GET /v1/compensation-benchmarks/base-salary` or `/base-salaries`.\n  * Optional `additionalComments` up to 750 characters.\n"
+      description: 'Give feedback for a salary benchmark value returned by `GET /v1/compensation-benchmarks/base-salary` or `/base-salaries`. To submit feedback, include the benchmark value''s:
+
+        * ID values you defined in `GET /v1/compensation-benchmarks/base-salary` or `/base-salaries`.
+
+        * `referenceDate` and `releaseDate` returned by `GET /v1/compensation-benchmarks/base-salary` or `/base-salaries`.
+
+        * Optional `additionalComments` up to 750 characters.'
       requestBody:
         description: 'The feedback to submit.
 
@@ -176,9 +176,7 @@ paths:
       tags:
       - Benchmarks
       operationId: GetSalaryBenchmarksInBulk
-      description: 'Retrieve multiple base salary benchmark values in a single request.
-
-        '
+      description: Retrieve multiple base salary benchmark values in a single request.
       requestBody:
         description: 'A batch request takes a JSON object consisting of an array of your requests. You can batch up to 1000 individual requests in one API call.
 
@@ -232,9 +230,7 @@ paths:
       tags:
       - Benchmarks
       operationId: GetInfo
-      description: 'Retrieve metadata that summarizes the benchmark dataset and API such as the release date.
-
-        '
+      description: Retrieve metadata that summarizes the benchmark dataset and API such as the release date.
       responses:
         '200':
           description: 'Metadata that summarizes the benchmark dataset and API such as the release date.
@@ -271,44 +267,6 @@ paths:
       - api_key: []
 components:
   schemas:
-    SalaryBenchmarksBatchProcessingFailureOutput:
-      title: SalaryBenchmarksBatchProcessingFailureOutput
-      description: 'Error description for individual requests within a bulk request.
-
-        '
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: 'A unique identifier of the individual requests.
-
-            '
-        httpStatus:
-          type: string
-          description: 'A three-digit code that indicates the outcome of a request.
-
-            '
-        message:
-          type: string
-          description: 'The details of the error.
-
-            '
-        rci:
-          type: string
-          description: 'A root cause identifier that allows Visier to determine the source of the problem.
-
-            '
-        errorCode:
-          type: string
-          description: 'A brief identifier of the type of error.
-
-            '
-      required:
-      - uuid
-      - httpStatus
-      - message
-      - rci
-      - errorCode
     SalaryBenchmarksBatchProcessingSuccessfulOutput:
       description: 'The compensation benchmark values for individual requests within a bulk request.
 
@@ -388,16 +346,21 @@ components:
       - releaseDate
       - industryId
       - careerLevelId
-    ApiError:
-      title: ApiError
-      description: 'Description of an API error.
+    SalaryBenchmarksBatchProcessingFailureOutput:
+      title: SalaryBenchmarksBatchProcessingFailureOutput
+      description: 'Error description for individual requests within a bulk request.
 
         '
       type: object
       properties:
-        errorCode:
+        uuid:
           type: string
-          description: 'A brief identifier of the type of error.
+          description: 'A unique identifier of the individual requests.
+
+            '
+        httpStatus:
+          type: string
+          description: 'A three-digit code that indicates the outcome of a request.
 
             '
         message:
@@ -410,10 +373,43 @@ components:
           description: 'A root cause identifier that allows Visier to determine the source of the problem.
 
             '
+        errorCode:
+          type: string
+          description: 'A brief identifier of the type of error.
+
+            '
       required:
-      - errorCode
+      - uuid
+      - httpStatus
       - message
       - rci
+      - errorCode
+    BenchmarkInfo:
+      title: BenchmarkInfo
+      description: 'Metadata that summarizes the benchmark dataset and API such as the release date.
+
+        '
+      type: object
+      properties:
+        referenceDate:
+          type: string
+          description: 'The date that benchmark values are calculated for.
+
+            '
+        releaseDate:
+          type: string
+          description: 'The date that benchmark values are released.
+
+            '
+        apiReleaseDate:
+          type: string
+          description: 'The date that API changes are released.
+
+            '
+      required:
+      - referenceDate
+      - releaseDate
+      - apiReleaseDate
     SalaryBenchmarkInputs:
       description: 'A list of salary query parameters for bulk operation. The maximum batch size is 1000.
 
@@ -471,46 +467,32 @@ components:
         required:
         - uuid
         - job
-    SalaryBenchmarksBatchProcessingOutputs:
-      description: 'All operations in the bulk request were completed.
+    ApiError:
+      title: ApiError
+      description: 'Description of an API error.
 
         '
       type: object
       properties:
-        successes:
-          type: array
-          items:
-            $ref: '#/components/schemas/SalaryBenchmarksBatchProcessingSuccessfulOutput'
-        failures:
-          type: array
-          items:
-            $ref: '#/components/schemas/SalaryBenchmarksBatchProcessingFailureOutput'
-    BenchmarkInfo:
-      title: BenchmarkInfo
-      description: 'Metadata that summarizes the benchmark dataset and API such as the release date.
-
-        '
-      type: object
-      properties:
-        referenceDate:
+        errorCode:
           type: string
-          description: 'The date that benchmark values are calculated for.
+          description: 'A brief identifier of the type of error.
 
             '
-        releaseDate:
+        message:
           type: string
-          description: 'The date that benchmark values are released.
+          description: 'The details of the error.
 
             '
-        apiReleaseDate:
+        rci:
           type: string
-          description: 'The date that API changes are released.
+          description: 'A root cause identifier that allows Visier to determine the source of the problem.
 
             '
       required:
-      - referenceDate
-      - releaseDate
-      - apiReleaseDate
+      - errorCode
+      - message
+      - rci
     BenchmarkValue:
       title: BenchmarkValue
       description: 'The compensation benchmark value.
@@ -585,6 +567,20 @@ components:
       - releaseDate
       - industryId
       - careerLevelId
+    SalaryBenchmarksBatchProcessingOutputs:
+      description: 'All operations in the bulk request were completed.
+
+        '
+      type: object
+      properties:
+        successes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SalaryBenchmarksBatchProcessingSuccessfulOutput'
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/SalaryBenchmarksBatchProcessingFailureOutput'
     SalaryBenchmarkFeedbackInput:
       title: SalaryBenchmarkFeedbackInput
       description: 'The salary benchmark value for which to submit feedback.

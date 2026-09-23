@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Visier Administration Users V2 API
-  description: Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.
+  description: Visier APIs for managing your tenant or tenants in Visier.
   license:
     name: Apache License, Version 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
@@ -14,16 +14,17 @@ security:
 - ApiKeyAuth: []
   OAuth2Auth: []
 tags:
-- name: UsersV2
+- name: Users V2
   x-displayName: Users V2
   description: 'Manage users in bulk, such as creating, updating, and deleting many users.
 
-    <br>**Tip:** Visier recommends that administrating tenant users focus primarily on managing users at the administrating tenant level. These users likely belong directly to your organization, such as customer support, customer value managers, account executives, and customer success. These users work with clients to manage their day-to-day solution needs.'
+
+    **Tip:** Visier recommends that administrating tenant users focus primarily on managing users at the administrating tenant level. These users likely belong directly to your organization, such as customer support, customer value managers, account executives, and customer success. These users work with clients to manage their day-to-day solution needs.'
 paths:
   /v2/admin/users:
     put:
       tags:
-      - UsersV2
+      - Users V2
       summary: Update users
       description: Update an existing user's information, such as their display name or if the user is enabled in Visier.
       operationId: UsersV2_UpdateUsers
@@ -59,7 +60,7 @@ paths:
                 $ref: '#/components/schemas/servicing.UsersAPIResponseDTO'
     post:
       tags:
-      - UsersV2
+      - Users V2
       summary: Add users
       description: Create new users. Administrating tenant users can specify the tenant in which to add these users.
       operationId: UsersV2_AddUsers
@@ -95,7 +96,7 @@ paths:
                 $ref: '#/components/schemas/servicing.UsersAPIResponseDTO'
     delete:
       tags:
-      - UsersV2
+      - Users V2
       summary: Delete users
       description: Delete an existing user. Administrating tenant users can specify the tenant from which to delete a user.
       operationId: UsersV2_DeleteUsers
@@ -131,86 +132,6 @@ paths:
                 $ref: '#/components/schemas/servicing.UsersAPIResponseDTO'
 components:
   schemas:
-    servicing.UsersUpdateAPIRequestDTO:
-      type: object
-      properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.UsersUpdateAPIUserDTO'
-          description: A list of objects representing users to update. Maximum 100 users can be updated in a single request.
-    servicing.UsersDeleteAPIRequestDTO:
-      type: object
-      properties:
-        userIds:
-          type: array
-          items:
-            type: string
-          description: A list of objects representing users to delete. Maximum 100 users can be deleted in a single request.
-    servicing.UsersAPIErrorMessageDTO:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error message
-        rci:
-          type: string
-          description: The unique identifier associated to this error
-    servicing.UsersCreationAPIRequestDTO:
-      type: object
-      properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.UserCreationAPIRequestDTO'
-          description: A list of objects representing users to create. Maximum 100 users can be created in a single request.
-    servicing.UsersAPIFailureDTO:
-      type: object
-      properties:
-        userId:
-          type: string
-          description: The unique identifier associated with the user.
-        userName:
-          type: string
-          description: The user's username. This is typically the user's email, such as john@jupiter.com.
-        displayName:
-          type: string
-          description: An identifiable name to display within Visier. For example, "John Smith".
-        error:
-          allOf:
-          - $ref: '#/components/schemas/servicing.UsersAPIErrorMessageDTO'
-          description: The error thrown during creation.
-    servicing.UserCreationAPIRequestDTO:
-      type: object
-      properties:
-        username:
-          type: string
-          description: The user's username. This is typically the user's email, such as john@visier.com.
-        displayName:
-          type: string
-          description: An identifiable name to display within Visier. For example, "John Smith".
-        employeeId:
-          type: string
-          description: If applicable, and if available, the user employee ID in the data.
-        accountEnabled:
-          type: string
-          description: If false, the user account is disabled.
-        email:
-          type: string
-          description: The user's email. This is used if the user's email is different from their username. For example, "john.doe@visier.com".
-    servicing.UsersAPIResponseDTO:
-      type: object
-      properties:
-        successes:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.UsersAPISuccessDTO'
-          description: The users for which the request succeeded.
-        failures:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.UsersAPIFailureDTO'
-          description: The users for which the request failed.
     servicing.UsersAPISuccessDTO:
       type: object
       properties:
@@ -232,6 +153,34 @@ components:
         email:
           type: string
           description: The user's email address.
+    servicing.UsersAPIErrorMessageDTO:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+        rci:
+          type: string
+          description: The unique identifier associated to this error
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
     servicing.UsersUpdateAPIUserDTO:
       type: object
       properties:
@@ -253,25 +202,77 @@ components:
         username:
           type: string
           description: The user's username. This is typically the user's email, such as john@jupiter.com. If a user's username changes, they must authenticate using the new username.
-    Status:
+    servicing.UsersCreationAPIRequestDTO:
       type: object
       properties:
-        localizedMessage:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.UserCreationAPIRequestDTO'
+          description: A list of objects representing users to create. Maximum 100 users can be created in a single request.
+    servicing.UserCreationAPIRequestDTO:
+      type: object
+      properties:
+        username:
           type: string
-          description: Localized error message describing the root cause of the error.
-        code:
+          description: The user's username. This is typically the user's email, such as john@visier.com.
+        displayName:
           type: string
-          description: Error classification.
-        message:
+          description: An identifiable name to display within Visier. For example, "John Smith".
+        employeeId:
           type: string
-          description: Not used.
-        rci:
+          description: If applicable, and if available, the user employee ID in the data.
+        accountEnabled:
           type: string
-          description: Optional root cause identifier.
-        userError:
-          type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
+          description: If false, the user account is disabled.
+        email:
+          type: string
+          description: The user's email. This is used if the user's email is different from their username. For example, "john.doe@visier.com".
+    servicing.UsersUpdateAPIRequestDTO:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.UsersUpdateAPIUserDTO'
+          description: A list of objects representing users to update. Maximum 100 users can be updated in a single request.
+    servicing.UsersAPIResponseDTO:
+      type: object
+      properties:
+        successes:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.UsersAPISuccessDTO'
+          description: The users for which the request succeeded.
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.UsersAPIFailureDTO'
+          description: The users for which the request failed.
+    servicing.UsersDeleteAPIRequestDTO:
+      type: object
+      properties:
+        userIds:
+          type: array
+          items:
+            type: string
+          description: A list of objects representing users to delete. Maximum 100 users can be deleted in a single request.
+    servicing.UsersAPIFailureDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The unique identifier associated with the user.
+        userName:
+          type: string
+          description: The user's username. This is typically the user's email, such as john@jupiter.com.
+        displayName:
+          type: string
+          description: An identifiable name to display within Visier. For example, "John Smith".
+        error:
+          allOf:
+          - $ref: '#/components/schemas/servicing.UsersAPIErrorMessageDTO'
+          description: The error thrown during creation.
   securitySchemes:
     CookieAuth:
       type: apiKey

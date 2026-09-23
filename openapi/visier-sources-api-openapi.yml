@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Visier Administration Sources API
-  description: Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.
+  description: Visier APIs for managing your tenant or tenants in Visier.
   license:
     name: Apache License, Version 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
@@ -17,16 +17,26 @@ tags:
 - name: Sources
   description: 'Export and import sources in Visier.
 
-    <br>**Note:** <em>This API is in **beta**. While in beta, APIs are interface-stable and implementation may change without notice. Rarely, interface changes may occur that are not backwards-compatible and require advance communication.
 
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
+    **Note:** This API is in **beta**. While in beta, APIs are interface-stable and implementation may change without notice. Rarely, interface changes may occur that are not backwards-compatible and require advance communication.
+
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).'
 paths:
   /v1beta/admin/sources:
     post:
       tags:
       - Sources
       summary: Perform an operation on all sources
-      description: "Perform operations on all sources. The following operations are supported:\n * `exportSources`: Export a ZIP file that contains a list of all sources in the application.\n * `cloneFilesIntoSource`: Clone a source's files into a different source.\n\n <br>**Note:** <em>This API is in **beta**. While in beta, APIs are interface-stable and implementation may change without notice. Rarely, interface changes may occur that are not backwards-compatible and require advance communication.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Perform operations on all sources. The following operations are supported:
+
+        * `exportSources`: Export a ZIP file that contains a list of all sources in the application.
+
+        * `cloneFilesIntoSource`: Clone a source''s files into a different source.
+
+
+        **Note:** This API is in **beta**. While in beta, APIs are interface-stable and implementation may change without notice. Rarely, interface changes may occur that are not backwards-compatible and require advance communication.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: Sources_RunSourcesOperation
       parameters:
       - name: TargetTenantID
@@ -60,9 +70,9 @@ paths:
       description: 'Import a list of sources in ZIP format. The file must be an export from `POST /v1beta/admin/sources`. Use this API after making changes in a development environment to copy the changes to your production environment.
 
 
-        <br>**Note:** <em>This API is in **beta**. While in beta, APIs are interface-stable and implementation may change without notice. Rarely, interface changes may occur that are not backwards-compatible and require advance communication.
+        **Note:** This API is in **beta**. While in beta, APIs are interface-stable and implementation may change without notice. Rarely, interface changes may occur that are not backwards-compatible and require advance communication.
 
-        If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: Sources_PutSources
       parameters:
       - name: replaceAllExistingSources
@@ -97,23 +107,32 @@ paths:
                 $ref: '#/components/schemas/Status'
 components:
   schemas:
-    servicing.CloneFilesIntoSourceParametersDTO:
+    SourcesAPIPutResponseDTO:
       type: object
       properties:
-        originSource:
-          type: string
-          description: The unique identifier of the source to clone files from.
-        targetSource:
-          type: string
-          description: The unique identifier of the source to clone files into.
-        dateRange:
+        summary:
           allOf:
-          - $ref: '#/components/schemas/servicing.DateRangeDTO'
-          description: The date range of the files to clone. If undefined, clones all files.
-      description: The parameters for the `cloneFilesIntoSource` option, such as the source to clone files from, the source to clone files into, and the date range of the files to clone.
-    servicing.ExportSourcesAPIOperationResponseDTO:
+          - $ref: '#/components/schemas/SourceImportResultSummaryDTO'
+          description: The changes made to the sources during the operation.
+    servicing.SourcesAPIOperationRequestDTO:
       type: object
-      properties: {}
+      properties:
+        operation:
+          enum:
+          - unknownSourcesAPIOperation
+          - exportSources
+          - cloneFilesIntoSource
+          type: string
+          description: "The operation to perform. Valid values:\n * `exportSources`: Export sources from the tenant. If successful, returns a ZIP file containing a compressed JSON file with the sources.\n * `cloneFilesIntoSource`: Clone a source's files into a different source. If successful, returns a receiving job ID. Use the job ID to monitor the cloning results."
+          format: enum
+        exportSourcesParameters:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExportSourcesParametersDTO'
+          description: The parameters for the `exportSources` option. If neither parameter is specified, exports all sources. If both parameters are specified, exports the sources that match values from both parameters.
+        cloneFilesIntoSourceParameters:
+          allOf:
+          - $ref: '#/components/schemas/servicing.CloneFilesIntoSourceParametersDTO'
+          description: The parameters for the `cloneFilesIntoSource` option, such as the source to clone files from, the source to clone files into, and the date range of the files to clone.
     SourceImportResultSummaryDTO:
       type: object
       properties:
@@ -152,6 +171,20 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
+    servicing.CloneFilesIntoSourceParametersDTO:
+      type: object
+      properties:
+        originSource:
+          type: string
+          description: The unique identifier of the source to clone files from.
+        targetSource:
+          type: string
+          description: The unique identifier of the source to clone files into.
+        dateRange:
+          allOf:
+          - $ref: '#/components/schemas/servicing.DateRangeDTO'
+          description: The date range of the files to clone. If undefined, clones all files.
+      description: The parameters for the `cloneFilesIntoSource` option, such as the source to clone files from, the source to clone files into, and the date range of the files to clone.
     servicing.DateRangeDTO:
       type: object
       properties:
@@ -162,32 +195,6 @@ components:
           type: string
           description: The end date in ISO 8601 format. If undefined, the end date is the current date.
       description: The range of dates for the request.
-    servicing.SourcesAPIOperationRequestDTO:
-      type: object
-      properties:
-        operation:
-          enum:
-          - unknownSourcesAPIOperation
-          - exportSources
-          - cloneFilesIntoSource
-          type: string
-          description: "The operation to perform. Valid values:\n * `exportSources`: Export sources from the tenant. If successful, returns a ZIP file containing a compressed JSON file with the sources.\n * `cloneFilesIntoSource`: Clone a source's files into a different source. If successful, returns a receiving job ID. Use the job ID to monitor the cloning results."
-          format: enum
-        exportSourcesParameters:
-          allOf:
-          - $ref: '#/components/schemas/servicing.ExportSourcesParametersDTO'
-          description: The parameters for the `exportSources` option. If neither parameter is specified, exports all sources. If both parameters are specified, exports the sources that match values from both parameters.
-        cloneFilesIntoSourceParameters:
-          allOf:
-          - $ref: '#/components/schemas/servicing.CloneFilesIntoSourceParametersDTO'
-          description: The parameters for the `cloneFilesIntoSource` option, such as the source to clone files from, the source to clone files into, and the date range of the files to clone.
-    SourcesAPIPutResponseDTO:
-      type: object
-      properties:
-        summary:
-          allOf:
-          - $ref: '#/components/schemas/SourceImportResultSummaryDTO'
-          description: The changes made to the sources during the operation.
     servicing.ExportSourcesParametersDTO:
       type: object
       properties:
@@ -202,6 +209,9 @@ components:
             type: string
           description: The object names of the sources to export. If specified, exports only the listed sources.
       description: The parameters for the `exportSources` option. If neither parameter is specified, exports all sources. If both parameters are specified, exports the sources that match values from both parameters.
+    servicing.ExportSourcesAPIOperationResponseDTO:
+      type: object
+      properties: {}
   securitySchemes:
     CookieAuth:
       type: apiKey

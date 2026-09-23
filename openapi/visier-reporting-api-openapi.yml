@@ -17,18 +17,25 @@ tags:
 - name: Reporting
   description: 'Create, retrieve, delete, copy, and download reports.
 
-    <br>**Note**: This API is available for Embedded Partners.
 
-    <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+    **Note**: This API is available for Embedded Partners.
 
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
+
+    **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).'
 paths:
   /v1alpha/reporting/reports:
     get:
       tags:
       - Reporting
       summary: Retrieve a list of reports
-      description: "Retrieve a list of reports. The response returns information such as the unique ID, title, description, owner, and the allowed actions you can take on the report.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Retrieve a list of reports. The response returns information such as the unique ID, title, description, owner, and the allowed actions you can take on the report.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: Reporting_GetReports
       parameters:
       - name: limit
@@ -65,7 +72,12 @@ paths:
       tags:
       - Reporting
       summary: Create a report
-      description: "Create a new report with a title and description. To edit other contents of the report, such as columns and group bys, navigate to the Reports room in Visier.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Create a new report with a title and description. To edit other contents of the report, such as columns and group bys, navigate to the Reports room in Visier.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: Reporting_CreateReport
       parameters:
       - name: TargetTenantID
@@ -97,7 +109,12 @@ paths:
       tags:
       - Reporting
       summary: Retrieve a report's details
-      description: "Retrieve the details of a specific report. The response returns information such as title, description, owner, and the allowed actions you can take on the report. You must know the ID of the report to retrieve its details. To retrieve report IDs, see `GET /v1alpha/reporting/reports`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Retrieve the details of a specific report. The response returns information such as title, description, owner, and the allowed actions you can take on the report. You must know the ID of the report to retrieve its details. To retrieve report IDs, see `GET /v1alpha/reporting/reports`.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: Reporting_GetReport
       parameters:
       - name: reportId
@@ -128,7 +145,12 @@ paths:
       tags:
       - Reporting
       summary: Duplicate a report
-      description: "Make a copy of an existing report. You must know the ID of the report to copy it. To retrieve report IDs, see `GET /v1alpha/reporting/reports`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Make a copy of an existing report. You must know the ID of the report to copy it. To retrieve report IDs, see `GET /v1alpha/reporting/reports`.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: Reporting_DuplicateReport
       parameters:
       - name: reportId
@@ -159,7 +181,12 @@ paths:
       tags:
       - Reporting
       summary: Delete a report
-      description: "Delete a report in the tenant. You must know the ID of the report to delete it. To retrieve report IDs, see `GET /v1alpha/reporting/reports`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Delete a report in the tenant. You must know the ID of the report to delete it. To retrieve report IDs, see `GET /v1alpha/reporting/reports`.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: Reporting_DeleteReport
       parameters:
       - name: reportId
@@ -191,7 +218,12 @@ paths:
       tags:
       - Reporting
       summary: Download a report
-      description: "Download a report as a CSV file. The returned CSV file contains the data in the report. You must know the ID of the report to download it. To retrieve report IDs, see `GET /v1alpha/reporting/reports`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Download a report as a CSV file. The returned CSV file contains the data in the report. You must know the ID of the report to download it. To retrieve report IDs, see `GET /v1alpha/reporting/reports`.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: Reporting_DownloadReport
       parameters:
       - name: reportId
@@ -224,6 +256,34 @@ paths:
                 $ref: '#/components/schemas/Status'
 components:
   schemas:
+    analysis.common.ReportListResponseDTO:
+      type: object
+      properties:
+        reports:
+          type: array
+          items:
+            $ref: '#/components/schemas/analysis.common.ReportDTO'
+          description: A list of reports.
+      description: The information of all the reports you have access to in your tenant.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
     analysis.common.ReportCreateRequestDTO:
       type: object
       properties:
@@ -281,34 +341,6 @@ components:
           type: string
           description: The unique ID of the deleted report.
       description: The report that was successfully deleted.
-    analysis.common.ReportListResponseDTO:
-      type: object
-      properties:
-        reports:
-          type: array
-          items:
-            $ref: '#/components/schemas/analysis.common.ReportDTO'
-          description: A list of reports.
-      description: The information of all the reports you have access to in your tenant.
-    Status:
-      type: object
-      properties:
-        localizedMessage:
-          type: string
-          description: Localized error message describing the root cause of the error.
-        code:
-          type: string
-          description: Error classification.
-        message:
-          type: string
-          description: Not used.
-        rci:
-          type: string
-          description: Optional root cause identifier.
-        userError:
-          type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
   securitySchemes:
     CookieAuth:
       type: apiKey

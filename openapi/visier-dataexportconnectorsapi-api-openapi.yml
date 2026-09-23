@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Visier Data Out Data Export Connectors API API
+  title: Visier Data Out Data Export Connectors API
   description: Visier APIs for getting data out of Visier, such as aggregate data and data version information.
   license:
     name: Apache License, Version 2.0
@@ -16,18 +16,19 @@ security:
 tags:
 - name: DataExportConnectorsAPI
   x-displayName: Data Export Connectors
-  description: 'Manage data export connectors and credentials, and run data export connector jobs. Data export connectors send Visier data to external systems, such as Databricks or Snowflake. Use these APIs to manage the credentials for authenticating with destinations, validate that credentials work, list available data export connectors, and dispatch connector jobs.
-
-    <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.
-
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
+  description: Manage data export connectors and credentials, and run data export connector jobs.
 paths:
   /v1alpha/data/export-connectors/connectors:
     get:
       tags:
       - DataExportConnectorsAPI
       summary: Retrieve data export connectors
-      description: "Retrieve a list of data export connectors. Each data export connector defines the Data Exports it runs and the credentials it uses.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Retrieve a list of data export connectors. Each data export connector defines the Data Exports it runs and the credentials it uses.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: DataExportConnectorsAPI_ListConnectors
       responses:
         default:
@@ -47,7 +48,12 @@ paths:
       tags:
       - DataExportConnectorsAPI
       summary: Run a data export connector job
-      description: "Dispatch a job for the specified data export connector. The job runs the connector's exports using the production version. The response returns an `id` that you can use to monitor the job's progress with `GET /v1alpha/data/export-connectors/jobs/{jobId}`.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Dispatch a job for the specified data export connector. The job runs the connector''s exports using the production version. The response returns an `id` that you can use to monitor the job''s progress with `GET /v1alpha/data/export-connectors/jobs/{jobId}`.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: DataExportConnectorsAPI_DispatchJob
       parameters:
       - name: connectorId
@@ -74,7 +80,12 @@ paths:
       tags:
       - DataExportConnectorsAPI
       summary: Retrieve data export connector credentials
-      description: "Retrieve a list of data export connector credentials. The response returns each credential's identifying fields and authentication parameters. Sensitive fields, such as secrets and private keys, are masked.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Retrieve a list of data export connector credentials. The response returns each credential''s identifying fields and authentication parameters. Sensitive fields, such as secrets and private keys, are masked.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: DataExportConnectorsAPI_ListCredentials
       responses:
         default:
@@ -93,7 +104,12 @@ paths:
       tags:
       - DataExportConnectorsAPI
       summary: Create a data export connector credential
-      description: "Create a data export connector credential. Credentials authenticate with external systems, such as Databricks or Snowflake. When creating a credential, do not provide an `id`. Visier generates the credential ID automatically.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Create a data export connector credential. Credentials authenticate with external systems, such as Databricks or Snowflake. When creating a credential, do not provide an `id`. Visier generates the credential ID automatically.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: DataExportConnectorsAPI_CreateCredential
       requestBody:
         content:
@@ -119,7 +135,15 @@ paths:
       tags:
       - DataExportConnectorsAPI
       summary: Validate a data export connector credential
-      description: "Validate that a data export connector credential can connect to its destination. Validation runs asynchronously. The response returns an `id` that you can use to poll for the validation result with `GET /v1alpha/data/export-connectors/credentials/validations/{id}`.\n\n Specify an `id` to validate an existing credential or `parameters` to validate a new set of credential values without persisting the credentials.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Validate that a data export connector credential can connect to its destination. Validation runs asynchronously. The response returns an `id` that you can use to poll for the validation result with `GET /v1alpha/data/export-connectors/credentials/validations/{id}`.
+
+
+        Specify an `id` to validate an existing credential or `parameters` to validate a new set of credential values without persisting the credentials.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: DataExportConnectorsAPI_CreateCredentialValidation
       requestBody:
         content:
@@ -145,7 +169,19 @@ paths:
       tags:
       - DataExportConnectorsAPI
       summary: Retrieve a data export connector credential's validation result
-      description: "Retrieve the validation results for a credential. Use the `id` returned by `POST /v1alpha/data/export-connectors/credentials/validations`.\n\n Validation runs asynchronously. Poll this endpoint until the result is available.\n * While validation is still in progress, the response is `200 OK` with a `null` body. Continue polling.\n * After validation completes, the response is `200 OK` with a body indicating whether the validation succeeded and listing any errors.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Retrieve the validation results for a credential. Use the `id` returned by `POST /v1alpha/data/export-connectors/credentials/validations`.
+
+
+        Validation runs asynchronously. Poll this endpoint until the result is available.
+
+        * While validation is still in progress, the response is `200 OK` with a `null` body. Continue polling.
+
+        * After validation completes, the response is `200 OK` with a body indicating whether the validation succeeded and listing any errors.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: DataExportConnectorsAPI_GetCredentialValidation
       parameters:
       - name: id
@@ -172,7 +208,12 @@ paths:
       tags:
       - DataExportConnectorsAPI
       summary: Retrieve a data export connector credential
-      description: "Retrieve a specific data export connector credential by its unique identifier. Sensitive fields, such as secrets and private keys, are masked.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Retrieve a specific data export connector credential by its unique identifier. Sensitive fields, such as secrets and private keys, are masked.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: DataExportConnectorsAPI_GetCredential
       parameters:
       - name: id
@@ -198,7 +239,12 @@ paths:
       tags:
       - DataExportConnectorsAPI
       summary: Update a data export connector credential
-      description: "Update an existing data export connector credential. The definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. Provide sensitive fields, such as secrets and private keys, in plain text.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Update an existing data export connector credential. The definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. Provide sensitive fields, such as secrets and private keys, in plain text.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: DataExportConnectorsAPI_UpdateCredential
       parameters:
       - name: id
@@ -230,7 +276,12 @@ paths:
       tags:
       - DataExportConnectorsAPI
       summary: Delete a data export connector credential
-      description: "Delete a data export connector credential.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Delete a data export connector credential.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: DataExportConnectorsAPI_DeleteCredential
       parameters:
       - name: id
@@ -254,7 +305,12 @@ paths:
       tags:
       - DataExportConnectorsAPI
       summary: Retrieve a data export connector job's status
-      description: "Retrieve the status of a data export connector job. Use the `id` returned by `POST /v1alpha/data/export-connectors/connectors/{connectorId}/jobs`. The response returns the job's status, any error message, and the statuses of its spawned sync jobs. A sync job sends the data from Visier to the target system, such as Databricks or Snowflake.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Retrieve the status of a data export connector job. Use the `id` returned by `POST /v1alpha/data/export-connectors/connectors/{connectorId}/jobs`. The response returns the job''s status, any error message, and the statuses of its spawned sync jobs. A sync job sends the data from Visier to the target system, such as Databricks or Snowflake.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice, functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: DataExportConnectorsAPI_GetJobStatus
       parameters:
       - name: id
@@ -278,46 +334,6 @@ paths:
                 $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnectorJobStatus'
 components:
   schemas:
-    servicing.dataexportconnector.BigQueryServiceAccountCredentialParameters:
-      type: object
-      properties:
-        datasetId:
-          type: string
-          description: The BigQuery dataset that holds the destination tables.
-        projectId:
-          type: string
-          description: The Google Cloud Project that owns the data and is billed for the export.
-        privateKeyId:
-          type: string
-          description: The unique identifier of the private key.
-        privateKey:
-          type: string
-          description: The private key to authenticate with Google BigQuery. Returned as the string `********`. The actual value is never returned. To update the value, provide the value in plain text.
-        clientEmail:
-          type: string
-          description: The Google BigQuery service account email address.
-        clientId:
-          type: string
-          description: The OAuth client ID to authenticate with Google BigQuery.
-    servicing.dataexportconnector.DataExportConnectorCredentialValidationRequest:
-      type: object
-      properties: {}
-      oneOf:
-      - title: DataExportConnectorCredentialValidationRequest with id
-        required:
-        - id
-        properties:
-          id:
-            type: string
-            description: The unique identifier of an existing credential to validate.
-      - title: DataExportConnectorCredentialValidationRequest with parameters
-        required:
-        - parameters
-        properties:
-          parameters:
-            allOf:
-            - $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnectorCredentialParameters'
-            description: A new set of credential values to validate without persisting the credentials.
     servicing.dataexportconnector.SnowflakeCredentialParameters:
       type: object
       properties:
@@ -345,15 +361,21 @@ components:
         role:
           type: string
           description: The Snowflake role to use for the connection.
-    servicing.SynonymListDTO:
+    servicing.dataexportconnector.DataExportConnectorJobDispatched:
       type: object
       properties:
-        synonyms:
+        id:
+          type: string
+          description: The unique identifier of the job.
+      description: Identifies a dispatched data export connector job.
+    servicing.dataexportconnector.DataExportConnectorCredentialListResponse:
+      type: object
+      properties:
+        credentials:
           type: array
           items:
-            type: string
-          description: Alternative words or phrases for the object.
-      description: The object's synonyms.
+            $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnectorCredential'
+          description: The list of data export connector credentials.
     servicing.dataexportconnector.DataExportConnectorCredentialParameters:
       type: object
       properties: {}
@@ -382,38 +404,19 @@ components:
             allOf:
             - $ref: '#/components/schemas/servicing.dataexportconnector.BigQueryServiceAccountCredentialParameters'
             description: Credentials for Google BigQuery using a service account key.
-    servicing.dataexportconnector.DataExportConnectorCredentialValidationError:
-      type: object
-      properties:
-        rci:
-          type: string
-          description: An optional Visier internal error identifier. Reference this when contacting Visier support to help diagnose the issue.
-        message:
-          type: string
-          description: A description of the validation error.
-    servicing.dataexportconnector.LinkedDataExport:
-      type: object
-      properties:
-        dataExportId:
-          type: string
-          description: The unique identifier of the linked Data Export.
-        tableName:
-          type: string
-          description: The name of the destination table that the Data Export writes to.
-    servicing.dataexportconnector.DataExportConnectorCredential:
+    servicing.dataexportconnector.DataExportConnectorSyncJobStatus:
       type: object
       properties:
         id:
           type: string
-          description: "The unique identifier for the credential. This identifier is a UUID generated automatically when the credential is created and cannot be changed.\n Do not provide a value when creating a new credential. When updating a credential, this field is required and must match the `id` path parameter."
-        basicInformation:
-          allOf:
-          - $ref: '#/components/schemas/servicing.BasicInformationDTO'
-          description: Fields that identify and describe the credential, such as its display name, description, and explanation.
-        parameters:
-          allOf:
-          - $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnectorCredentialParameters'
-          description: The parameters for the credential. Sensitive fields are masked when retrieved.
+          description: The unique identifier of the sync job.
+        status:
+          type: string
+          description: The current status of the sync job (e.g., Pending, Succeeded, Failed).
+        errorMessage:
+          type: string
+          description: The error message if the sync job failed. Empty for other job statuses.
+      description: The status of a sync job.
     servicing.dataexportconnector.DataExportConnectorCredentialValidationResponse:
       type: object
       properties:
@@ -425,67 +428,6 @@ components:
           items:
             $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnectorCredentialValidationError'
           description: The list of errors encountered during validation. Empty if the validation succeeded.
-    servicing.dataexportconnector.DataExportConnectorCredentialValidationCreated:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the credential validation request. Use this ID to retrieve the validation result.
-    servicing.dataexportconnector.DataExportConnectorLink:
-      type: object
-      properties:
-        linkedDataExport:
-          allOf:
-          - $ref: '#/components/schemas/servicing.dataexportconnector.LinkedDataExport'
-          description: A Data Export linked to the connector.
-    servicing.dataexportconnector.DataExportConnector:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the data export connector. This identifier is a UUID generated automatically when the connector is created and cannot be changed.
-        objectName:
-          type: string
-          description: The unique name of the data export connector to identify the connector programmatically. The `objectName` is distinct from the human-readable `displayName`.
-        basicInformation:
-          allOf:
-          - $ref: '#/components/schemas/servicing.BasicInformationDTO'
-          description: Fields that identify and describe the data export connector, such as its display name, description, and explanation.
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnectorLink'
-          description: The list of data exports linked to the connector.
-        credentialIds:
-          type: array
-          items:
-            type: string
-          description: The unique identifiers of the credentials that this data export connector uses to authenticate.
-    servicing.dataexportconnector.DataExportConnectorJobDispatched:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the job.
-      description: Identifies a dispatched data export connector job.
-    servicing.dataexportconnector.DatabricksCredentialParameters:
-      type: object
-      properties:
-        workspaceUrl:
-          type: string
-          description: The Databricks workspace URL.
-        catalog:
-          type: string
-          description: The Databricks catalog name.
-        schema:
-          type: string
-          description: The Databricks schema name.
-        clientId:
-          type: string
-          description: The OAuth client ID to authenticate with Databricks.
-        clientSecret:
-          type: string
-          description: The OAuth client secret to authenticate with Databricks. Returned as the string `********`. The actual value is never returned. To update the value, provide the value in plain text.
     servicing.dataexportconnector.DataExportConnectorJobStatus:
       type: object
       properties:
@@ -504,46 +446,6 @@ components:
             $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnectorSyncJobStatus'
           description: The status of each sync job spawned by this data export connector job.
       description: The status of a data export connector job and its spawned sync jobs.
-    servicing.dataexportconnector.DataExportConnectorSyncJobStatus:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the sync job.
-        status:
-          type: string
-          description: The current status of the sync job (e.g., Pending, Succeeded, Failed).
-        errorMessage:
-          type: string
-          description: The error message if the sync job failed. Empty for other job statuses.
-      description: The status of a sync job.
-    Status:
-      type: object
-      properties:
-        localizedMessage:
-          type: string
-          description: Localized error message describing the root cause of the error.
-        code:
-          type: string
-          description: Error classification.
-        message:
-          type: string
-          description: Not used.
-        rci:
-          type: string
-          description: Optional root cause identifier.
-        userError:
-          type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
-    servicing.dataexportconnector.DataExportConnectorListResponse:
-      type: object
-      properties:
-        connectors:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnector'
-          description: The list of data export connectors.
     servicing.BasicInformationDTO:
       type: object
       properties:
@@ -567,14 +469,168 @@ components:
           - $ref: '#/components/schemas/servicing.SynonymListDTO'
           description: Alternative words or phrases for the object.
       description: Fields that identify and describe the object, such as its display name, description, and explanation.
-    servicing.dataexportconnector.DataExportConnectorCredentialListResponse:
+    servicing.dataexportconnector.DataExportConnectorCredentialValidationRequest:
+      type: object
+      properties: {}
+      oneOf:
+      - title: DataExportConnectorCredentialValidationRequest with id
+        required:
+        - id
+        properties:
+          id:
+            type: string
+            description: The unique identifier of an existing credential to validate.
+      - title: DataExportConnectorCredentialValidationRequest with parameters
+        required:
+        - parameters
+        properties:
+          parameters:
+            allOf:
+            - $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnectorCredentialParameters'
+            description: A new set of credential values to validate without persisting the credentials.
+    servicing.dataexportconnector.DatabricksCredentialParameters:
       type: object
       properties:
-        credentials:
+        workspaceUrl:
+          type: string
+          description: The Databricks workspace URL.
+        catalog:
+          type: string
+          description: The Databricks catalog name.
+        schema:
+          type: string
+          description: The Databricks schema name.
+        clientId:
+          type: string
+          description: The OAuth client ID to authenticate with Databricks.
+        clientSecret:
+          type: string
+          description: The OAuth client secret to authenticate with Databricks. Returned as the string `********`. The actual value is never returned. To update the value, provide the value in plain text.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    servicing.dataexportconnector.DataExportConnectorCredential:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "The unique identifier for the credential. This identifier is a UUID generated automatically when the credential is created and cannot be changed.\n Do not provide a value when creating a new credential. When updating a credential, this field is required and must match the `id` path parameter."
+        basicInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.BasicInformationDTO'
+          description: Fields that identify and describe the credential, such as its display name, description, and explanation.
+        parameters:
+          allOf:
+          - $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnectorCredentialParameters'
+          description: The parameters for the credential. Sensitive fields are masked when retrieved.
+    servicing.dataexportconnector.BigQueryServiceAccountCredentialParameters:
+      type: object
+      properties:
+        datasetId:
+          type: string
+          description: The BigQuery dataset that holds the destination tables.
+        projectId:
+          type: string
+          description: The Google Cloud Project that owns the data and is billed for the export.
+        privateKeyId:
+          type: string
+          description: The unique identifier of the private key.
+        privateKey:
+          type: string
+          description: The private key to authenticate with Google BigQuery. Returned as the string `********`. The actual value is never returned. To update the value, provide the value in plain text.
+        clientEmail:
+          type: string
+          description: The Google BigQuery service account email address.
+        clientId:
+          type: string
+          description: The OAuth client ID to authenticate with Google BigQuery.
+    servicing.SynonymListDTO:
+      type: object
+      properties:
+        synonyms:
           type: array
           items:
-            $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnectorCredential'
-          description: The list of data export connector credentials.
+            type: string
+          description: Alternative words or phrases for the object.
+      description: The object's synonyms.
+    servicing.dataexportconnector.DataExportConnectorLink:
+      type: object
+      properties:
+        linkedDataExport:
+          allOf:
+          - $ref: '#/components/schemas/servicing.dataexportconnector.LinkedDataExport'
+          description: A Data Export linked to the connector.
+    servicing.dataexportconnector.DataExportConnectorCredentialValidationError:
+      type: object
+      properties:
+        rci:
+          type: string
+          description: An optional Visier internal error identifier. Reference this when contacting Visier support to help diagnose the issue.
+        message:
+          type: string
+          description: A description of the validation error.
+    servicing.dataexportconnector.LinkedDataExport:
+      type: object
+      properties:
+        dataExportId:
+          type: string
+          description: The unique identifier of the linked Data Export.
+        tableName:
+          type: string
+          description: The name of the destination table that the Data Export writes to.
+    servicing.dataexportconnector.DataExportConnector:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the data export connector. This identifier is a UUID generated automatically when the connector is created and cannot be changed.
+        objectName:
+          type: string
+          description: The unique name of the data export connector to identify the connector programmatically. The `objectName` is distinct from the human-readable `displayName`.
+        basicInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.BasicInformationDTO'
+          description: Fields that identify and describe the data export connector, such as its display name, description, and explanation.
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnectorLink'
+          description: The list of data exports linked to the connector.
+        credentialIds:
+          type: array
+          items:
+            type: string
+          description: The unique identifiers of the credentials that this data export connector uses to authenticate.
+    servicing.dataexportconnector.DataExportConnectorCredentialValidationCreated:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the credential validation request. Use this ID to retrieve the validation result.
+    servicing.dataexportconnector.DataExportConnectorListResponse:
+      type: object
+      properties:
+        connectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnector'
+          description: The list of data export connectors.
   securitySchemes:
     CookieAuth:
       type: apiKey

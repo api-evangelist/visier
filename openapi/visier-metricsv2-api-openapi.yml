@@ -16,18 +16,19 @@ security:
 tags:
 - name: MetricsV2
   x-displayName: Metrics V2
-  description: 'Create, retrieve, update, and delete simple and derived metrics in your analytic model. A simple metric is a metric based on one or more analytic objects. A derived metric is a metric based on a simple metric. You can create, update, and delete one or more metrics in an API call.
-
-    <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
-
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
+  description: Create, retrieve, update, and delete simple and derived metrics in your analytic model.
 paths:
   /v2alpha/data/model/analytic-objects/{analyticObjectName}/metrics:
     get:
       tags:
       - MetricsV2
       summary: Retrieve a list of metrics by analytic object
-      description: "Retrieve all the simple or derived metrics for a specific analytic object. By default, the response will return the `basic` representation of the metric definitions.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Retrieve all the simple or derived metrics for a specific analytic object. By default, the response will return the `basic` representation of the metric definitions.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: MetricsV2_GetAnalyticObjectMetrics
       parameters:
       - name: analyticObjectName
@@ -102,7 +103,12 @@ paths:
       tags:
       - MetricsV2
       summary: Retrieve a list of metrics
-      description: "Retrieve a list of all simple or derived metrics in your Visier tenant. By default, the response will return the `basic` representation of the metric definitions.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Retrieve a list of all simple or derived metrics in your Visier tenant. By default, the response will return the `basic` representation of the metric definitions.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: MetricsV2_GetAllMetrics
       parameters:
       - name: type
@@ -170,7 +176,15 @@ paths:
       tags:
       - MetricsV2
       summary: Update metrics
-      description: "Update existing simple or derived metrics. The response returns whether each metric was successfully updated or not. When updating objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PUT` request definition.\n\n In `PUT` calls, the definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed from the metric. To partially update a metric, see the `PATCH` method.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Update existing simple or derived metrics. The response returns whether each metric was successfully updated or not. When updating objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PUT` request definition.
+
+
+        In `PUT` calls, the definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed from the metric. To partially update a metric, see the `PATCH` method.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: MetricsV2_PutMetrics
       parameters:
       - name: TargetTenantID
@@ -207,7 +221,14 @@ paths:
       tags:
       - MetricsV2
       summary: Create metrics
-      description: "Create new simple or derived metrics. The response returns whether each metric was successfully created or not.\n When creating objects, assign a unique object name but don't set a UUID. Visier generates UUIDs for new objects.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Create new simple or derived metrics. The response returns whether each metric was successfully created or not.
+
+        When creating objects, assign a unique object name but don''t set a UUID. Visier generates UUIDs for new objects.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: MetricsV2_CreateMetrics
       parameters:
       - name: TargetTenantID
@@ -244,7 +265,15 @@ paths:
       tags:
       - MetricsV2
       summary: Delete metrics
-      description: "Delete existing simple or derived metrics. The response returns whether each metric was successfully deleted or not.\n\n **Note**: Deleting a simple metric will also delete any derived metrics that depend on it. Derived metrics cannot exist without their base metric.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Delete existing simple or derived metrics. The response returns whether each metric was successfully deleted or not.
+
+
+        **Note**: Deleting a simple metric will also delete any derived metrics that depend on it. Derived metrics cannot exist without their base metric.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: MetricsV2_DeleteMetrics
       parameters:
       - name: TargetTenantID
@@ -281,7 +310,15 @@ paths:
       tags:
       - MetricsV2
       summary: Partially update metrics
-      description: "Make partial changes to existing simple or derived metrics. The response returns whether each metric was successfully patched or not. When patching objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PATCH` request definition.\n\n Unlike `PUT`, which completely replaces the metric definition, use `PATCH` to change specific fields in the metric without affecting omitted fields. To replace a metric's entire definition, see the `PUT` method.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Make partial changes to existing simple or derived metrics. The response returns whether each metric was successfully patched or not. When patching objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PATCH` request definition.
+
+
+        Unlike `PUT`, which completely replaces the metric definition, use `PATCH` to change specific fields in the metric without affecting omitted fields. To replace a metric''s entire definition, see the `PUT` method.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: MetricsV2_PatchMetrics
       parameters:
       - name: TargetTenantID
@@ -319,7 +356,12 @@ paths:
       tags:
       - MetricsV2
       summary: Retrieve a metric's details
-      description: "Retrieve the details of a specific simple or derived metric, such as its metric type and description. By default, the response will return the detailed representation of the metric definition.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Retrieve the details of a specific simple or derived metric, such as its metric type and description. By default, the response will return the detailed representation of the metric definition.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: MetricsV2_GetOneMetric
       parameters:
       - name: metricId
@@ -366,6 +408,37 @@ paths:
                 $ref: '#/components/schemas/servicing.v2.objectconfiguration.MetricResponseDTO'
 components:
   schemas:
+    servicing.ExecutionContextDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant code.
+        projectId:
+          type: string
+          description: The project ID.
+      description: The context of the API request, such as the tenant code and project ID.
+    servicing.VersionInformationDTO:
+      type: object
+      properties:
+        versionType:
+          enum:
+          - Unknown
+          - BP
+          - Tenant
+          - TenantOverride
+          - TenantShared
+          - Draft
+          type: string
+          description: "Indicates where the object originates from and whether the object has been modified. Valid values:\n - `Unknown`: The source is not known.\n - `BP`: The object originates from Visier's Blueprint and is not changed at the tenant level.\n - `Tenant`: The object only exists in the tenant and doesn't exist in Visier's Blueprint.\n - `TenantOverride`: The object originates from Visier's Blueprint and is changed at the tenant level.\n - `TenantShared`: The object is non-versioned, only exists in the tenant and doesn’t exist in Visier's Blueprint, and is shareable with other users in the tenant.\n - `Draft`: The object only exists in the specified draft project."
+          format: enum
+        edited:
+          type: string
+          description: The UTC time of the latest change in ISO 8601 format. For example, `2023-10-01T12:00:00Z`.
+        editor:
+          type: string
+          description: The user who made the latest change.
+      description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
     servicing.v2.objectconfiguration.MetricWithContextDTO:
       type: object
       properties:
@@ -378,90 +451,6 @@ components:
           - $ref: '#/components/schemas/servicing.v2.objectconfiguration.MetricDefinitionDTO'
           description: Information about the metric, such as its UUID and metric type.
       description: Information about the metric and the context of the API request, such as the tenant code and project ID.
-    servicing.SynonymListDTO:
-      type: object
-      properties:
-        synonyms:
-          type: array
-          items:
-            type: string
-          description: Alternative words or phrases for the object.
-      description: The object's synonyms.
-    servicing.v2.objectconfiguration.DerivedMetricDetailsDTO:
-      type: object
-      properties:
-        formula:
-          type: string
-          description: The metric's formula written in Visier Formula Language (VFL).
-        dataType:
-          type: string
-          description: "The metric's data type. Valid values:\n\n Custom data types, `Number`, `Integer`, `Ordinal`, `Categorical`, `Currency`, `Boolean`, `Percent`,\n `IntegerPercent`, `PercentNoScaling`, `PercentagePoint`, `String`, `Text`, `LargeText`,\n `Date`, `HourDuration`, `DayDuration`, `MonthDuration`, `YearDuration`."
-        baseMetricId:
-          type: string
-          description: The UUID of the metric from which this metric is derived.
-        derivedMetricType:
-          enum:
-          - Rate
-          - Annualized
-          - AverageCount
-          - AnnualizedRate
-          - AverageFTE
-          - Proportion
-          - Arbitrary
-          type: string
-          description: "The method through which to derive an existing metric. Valid values:\n - `Annualized`: Calculate the metric as a yearly value.\n - `AnnualizedRate`: Calculate the metric as a rate for the year. This type requires you to set another metric as the denominator for the calculation.\n - `Arbitrary`: Calculate the metric in a custom way. This is the only derived metric in which you can modify the formula.\n - `AverageCount`: Calculate the metric as an average over all members, like employees. This type requires you to set another metric as the denominator for the calculation.\n - `AverageFTE`: Calculate the metric as a weighted average over all members, with full-time equivalent (FTE) values as weights. This type requires you to set another metric as the denominator for the calculation.\n - `Proportion`: Calculate the metric as a percentage of the total.\n - `Rate`: Calculate the metric as a rate. This type requires you to set another metric as the denominator for the calculation."
-          format: enum
-        denominatorMetricName:
-          type: string
-          description: An optional metric to use as the denominator for the calculation. If defined, the derived metric is calculated as a fraction.
-      description: Information about the metric, such as its formula and data type.
-    servicing.SuccessfulChangeDTO:
-      type: object
-      properties:
-        executionContext:
-          allOf:
-          - $ref: '#/components/schemas/servicing.ExecutionContextDTO'
-          description: The tenant and, optionally, project that change was made on.
-        objectName:
-          type: string
-          description: The object name of the object that was changed.
-        uuid:
-          type: string
-          description: The UUID of the object that was changed.
-        displayName:
-          type: string
-          description: The display name of the object that was changed.
-    servicing.ExecutionContextDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The tenant code.
-        projectId:
-          type: string
-          description: The project ID.
-      description: The context of the API request, such as the tenant code and project ID.
-    servicing.v2.objectconfiguration.MetricDeleteWithContextDTO:
-      type: object
-      properties:
-        executionContext:
-          allOf:
-          - $ref: '#/components/schemas/servicing.ExecutionContextDTO'
-          description: The context of the API request, such as the tenant code and project ID.
-        metric:
-          allOf:
-          - $ref: '#/components/schemas/servicing.ObjectIdDTO'
-          description: Information identifying the metric to delete.
-      description: Information about the metric to delete and the context of the API request, such as the tenant code and project ID.
-    servicing.TagReferenceListDTO:
-      type: object
-      properties:
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.TagReferenceDTO'
-          description: A list of tags assigned to the object.
-      description: The tags assigned to the object.
     servicing.ObjectIdDTO:
       type: object
       properties:
@@ -472,47 +461,6 @@ components:
           type: string
           description: The object name of the object.
       description: The identifier for the object.
-    servicing.FailedChangeDTO:
-      type: object
-      properties:
-        executionContext:
-          allOf:
-          - $ref: '#/components/schemas/servicing.ExecutionContextDTO'
-          description: The tenant and, optionally, project that change was attempted on.
-        objectName:
-          type: string
-          description: The object name of the object that was attempted to be changed.
-        uuid:
-          type: string
-          description: The UUID of the object that was attempted to be changed.
-        displayName:
-          type: string
-          description: The display name of the object that was attempted to be changed.
-        messages:
-          type: array
-          items:
-            type: string
-          description: The error messages.
-    servicing.v2.objectconfiguration.MetricResponseDTO:
-      type: object
-      properties:
-        metrics:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.v2.objectconfiguration.MetricWithContextDTO'
-          description: The metrics in the response.
-      description: The response for retrieving metrics.
-    servicing.v2.objectconfiguration.MetricTypeDetailsDTO:
-      type: object
-      properties:
-        simple:
-          allOf:
-          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.SimpleMetricDetailsDTO'
-          description: Information about the metric, such as its formula and data type.
-        derived:
-          allOf:
-          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.DerivedMetricDetailsDTO'
-          description: Information about the derived metric, such as its formula and data type.
     servicing.TagReferenceDTO:
       type: object
       properties:
@@ -520,15 +468,38 @@ components:
           type: string
           description: The object name of the tag.
       description: A reference to a tag.
-    servicing.v2.objectconfiguration.MetricRequestDTO:
+    servicing.BasicInformationDTO:
       type: object
       properties:
-        metrics:
+        displayName:
+          type: string
+          description: The user-friendly name for the object.
+        shortDisplayName:
+          type: string
+          description: A shortened version of the display name. If the object is visible in the solution experience, this name is displayed in visualization titles.
+        description:
+          type: string
+          description: A short description of the object. Descriptions provide in-context help for your users while working in Visier.
+        explanation:
+          type: string
+          description: A longer description of the object that typically includes a definition, calculation details, and other guidance about how to use the object.
+        designerNotes:
+          type: string
+          description: An admin-only description of the object that provides design-specific information or considerations.
+        synonymList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.SynonymListDTO'
+          description: Alternative words or phrases for the object.
+      description: Fields that identify and describe the object, such as its display name, description, and explanation.
+    servicing.TagReferenceListDTO:
+      type: object
+      properties:
+        tags:
           type: array
           items:
-            $ref: '#/components/schemas/servicing.v2.objectconfiguration.MetricWithContextDTO'
-          description: The metrics in the request.
-      description: The metrics to create or update.
+            $ref: '#/components/schemas/servicing.TagReferenceDTO'
+          description: A list of tags assigned to the object.
+      description: The tags assigned to the object.
     servicing.BulkChangeResponseDTO:
       type: object
       properties:
@@ -561,27 +532,43 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
-    servicing.VersionInformationDTO:
+    servicing.v2.objectconfiguration.MetricDeleteRequestDTO:
       type: object
       properties:
-        versionType:
+        metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.MetricDeleteWithContextDTO'
+          description: The metrics in the request.
+      description: The metrics to delete.
+    servicing.v2.objectconfiguration.DerivedMetricDetailsDTO:
+      type: object
+      properties:
+        formula:
+          type: string
+          description: The metric's formula written in Visier Formula Language (VFL).
+        dataType:
+          type: string
+          description: "The metric's data type. Valid values:\n\n Custom data types, `Number`, `Integer`, `Ordinal`, `Categorical`, `Currency`, `Boolean`, `Percent`,\n `IntegerPercent`, `PercentNoScaling`, `PercentagePoint`, `String`, `Text`, `LargeText`,\n `Date`, `HourDuration`, `DayDuration`, `MonthDuration`, `YearDuration`."
+        baseMetricId:
+          type: string
+          description: The UUID of the metric from which this metric is derived.
+        derivedMetricType:
           enum:
-          - Unknown
-          - BP
-          - Tenant
-          - TenantOverride
-          - TenantShared
-          - Draft
+          - Rate
+          - Annualized
+          - AverageCount
+          - AnnualizedRate
+          - AverageFTE
+          - Proportion
+          - Arbitrary
           type: string
-          description: "Indicates where the object originates from and whether the object has been modified. Valid values:\n - `Unknown`: The source is not known.\n - `BP`: The object originates from Visier's Blueprint and is not changed at the tenant level.\n - `Tenant`: The object only exists in the tenant and doesn't exist in Visier's Blueprint.\n - `TenantOverride`: The object originates from Visier's Blueprint and is changed at the tenant level.\n - `TenantShared`: The object is non-versioned, only exists in the tenant and doesn’t exist in Visier's Blueprint, and is shareable with other users in the tenant.\n - `Draft`: The object only exists in the specified draft project."
+          description: "The method through which to derive an existing metric. Valid values:\n - `Annualized`: Calculate the metric as a yearly value.\n - `AnnualizedRate`: Calculate the metric as a rate for the year. This type requires you to set another metric as the denominator for the calculation.\n - `Arbitrary`: Calculate the metric in a custom way. This is the only derived metric in which you can modify the formula.\n - `AverageCount`: Calculate the metric as an average over all members, like employees. This type requires you to set another metric as the denominator for the calculation.\n - `AverageFTE`: Calculate the metric as a weighted average over all members, with full-time equivalent (FTE) values as weights. This type requires you to set another metric as the denominator for the calculation.\n - `Proportion`: Calculate the metric as a percentage of the total.\n - `Rate`: Calculate the metric as a rate. This type requires you to set another metric as the denominator for the calculation."
           format: enum
-        edited:
+        denominatorMetricName:
           type: string
-          description: The UTC time of the latest change in ISO 8601 format. For example, `2023-10-01T12:00:00Z`.
-        editor:
-          type: string
-          description: The user who made the latest change.
-      description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
+          description: An optional metric to use as the denominator for the calculation. If defined, the derived metric is calculated as a fraction.
+      description: Information about the metric, such as its formula and data type.
     servicing.v2.objectconfiguration.SimpleMetricDetailsDTO:
       type: object
       properties:
@@ -592,38 +579,15 @@ components:
           type: string
           description: "The metric's data type. Valid values:\n\n Custom data types, `Number`, `Integer`, `Ordinal`, `Categorical`, `Currency`, `Boolean`, `Percent`,\n `IntegerPercent`, `PercentNoScaling`, `PercentagePoint`, `String`, `Text`, `LargeText`,\n `Date`, `HourDuration`, `DayDuration`, `MonthDuration`, `YearDuration`."
       description: Information about the metric, such as its formula and data type.
-    servicing.v2.objectconfiguration.MetricDeleteRequestDTO:
+    servicing.SynonymListDTO:
       type: object
       properties:
-        metrics:
+        synonyms:
           type: array
           items:
-            $ref: '#/components/schemas/servicing.v2.objectconfiguration.MetricDeleteWithContextDTO'
-          description: The metrics in the request.
-      description: The metrics to delete.
-    servicing.BasicInformationDTO:
-      type: object
-      properties:
-        displayName:
-          type: string
-          description: The user-friendly name for the object.
-        shortDisplayName:
-          type: string
-          description: A shortened version of the display name. If the object is visible in the solution experience, this name is displayed in visualization titles.
-        description:
-          type: string
-          description: A short description of the object. Descriptions provide in-context help for your users while working in Visier.
-        explanation:
-          type: string
-          description: A longer description of the object that typically includes a definition, calculation details, and other guidance about how to use the object.
-        designerNotes:
-          type: string
-          description: An admin-only description of the object that provides design-specific information or considerations.
-        synonymList:
-          allOf:
-          - $ref: '#/components/schemas/servicing.SynonymListDTO'
+            type: string
           description: Alternative words or phrases for the object.
-      description: Fields that identify and describe the object, such as its display name, description, and explanation.
+      description: The object's synonyms.
     servicing.v2.objectconfiguration.MetricDefinitionDTO:
       type: object
       properties:
@@ -668,6 +632,84 @@ components:
           - $ref: '#/components/schemas/servicing.VersionInformationDTO'
           description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
       description: Information about the metric, such as its object name, basic information, and additive type.
+    servicing.v2.objectconfiguration.MetricTypeDetailsDTO:
+      type: object
+      properties:
+        simple:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.SimpleMetricDetailsDTO'
+          description: Information about the metric, such as its formula and data type.
+        derived:
+          allOf:
+          - $ref: '#/components/schemas/servicing.v2.objectconfiguration.DerivedMetricDetailsDTO'
+          description: Information about the derived metric, such as its formula and data type.
+    servicing.v2.objectconfiguration.MetricDeleteWithContextDTO:
+      type: object
+      properties:
+        executionContext:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExecutionContextDTO'
+          description: The context of the API request, such as the tenant code and project ID.
+        metric:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ObjectIdDTO'
+          description: Information identifying the metric to delete.
+      description: Information about the metric to delete and the context of the API request, such as the tenant code and project ID.
+    servicing.FailedChangeDTO:
+      type: object
+      properties:
+        executionContext:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExecutionContextDTO'
+          description: The tenant and, optionally, project that change was attempted on.
+        objectName:
+          type: string
+          description: The object name of the object that was attempted to be changed.
+        uuid:
+          type: string
+          description: The UUID of the object that was attempted to be changed.
+        displayName:
+          type: string
+          description: The display name of the object that was attempted to be changed.
+        messages:
+          type: array
+          items:
+            type: string
+          description: The error messages.
+    servicing.v2.objectconfiguration.MetricRequestDTO:
+      type: object
+      properties:
+        metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.MetricWithContextDTO'
+          description: The metrics in the request.
+      description: The metrics to create or update.
+    servicing.SuccessfulChangeDTO:
+      type: object
+      properties:
+        executionContext:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExecutionContextDTO'
+          description: The tenant and, optionally, project that change was made on.
+        objectName:
+          type: string
+          description: The object name of the object that was changed.
+        uuid:
+          type: string
+          description: The UUID of the object that was changed.
+        displayName:
+          type: string
+          description: The display name of the object that was changed.
+    servicing.v2.objectconfiguration.MetricResponseDTO:
+      type: object
+      properties:
+        metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.v2.objectconfiguration.MetricWithContextDTO'
+          description: The metrics in the response.
+      description: The response for retrieving metrics.
   securitySchemes:
     CookieAuth:
       type: apiKey

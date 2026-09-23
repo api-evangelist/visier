@@ -23,7 +23,9 @@ paths:
       tags:
       - VeeV2
       summary: Retrieve a list of sample questions to ask Vee
-      description: "Get a list of sample questions to help you start using Vee. The response returns a list of questions that you can ask Vee, such as \"What is the turnover rate?\".\n You may occasionally encounter a sample question that can't be answered due to data availability or your data access"
+      description: 'Get a list of sample questions to help you start using Vee. The response returns a list of questions that you can ask Vee, such as "What is the turnover rate?".
+
+        You may occasionally encounter a sample question that can''t be answered due to data availability or your data access'
       operationId: VeeV2_VeeSampleQuestions
       parameters:
       - name: TargetTenantID
@@ -55,21 +57,6 @@ components:
             $ref: '#/components/schemas/analysis.common.VeeSampleQuestionV2DTO'
           description: A list of sample questions to help your users start using Vee.
       description: A list of sample questions to ask Vee.
-    analysis.common.VeeSampleQuestionV2DTO:
-      type: object
-      properties:
-        question:
-          type: string
-          description: A question in plain language.
-        questionId:
-          type: string
-          description: The unique identifier of the sample question.
-        categoryId:
-          type: string
-          description: The unique identifier of the question category.
-        isSpotlightedForUser:
-          type: boolean
-          description: If `true`, the sample question is spotlighted for at least one of the user's user groups.
     Status:
       type: object
       properties:
@@ -89,6 +76,21 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
+    analysis.common.VeeSampleQuestionV2DTO:
+      type: object
+      properties:
+        question:
+          type: string
+          description: A question in plain language.
+        questionId:
+          type: string
+          description: The unique identifier of the sample question.
+        categoryId:
+          type: string
+          description: The unique identifier of the question category.
+        isSpotlightedForUser:
+          type: boolean
+          description: If `true`, the sample question is spotlighted for at least one of the user's user groups.
   securitySchemes:
     CookieAuth:
       type: apiKey

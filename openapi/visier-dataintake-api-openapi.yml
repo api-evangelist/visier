@@ -18,14 +18,22 @@ tags:
   x-displayName: Data Intake
   description: 'Send raw or untransformed data to Visier. After we receive the data, Visier runs business rules to transform your data into the expected format for the existing mappings.
 
-    <br>**Note:** <em>This API is in **limited availability**. If you are interested in using it, please contact your Customer Success Manager (CSM).</em>'
+
+    **Note:** This API is in **limited availability**. If you are interested in using it, please contact your Customer Success Manager (CSM).'
 paths:
   /v1/op/data-sources:
     get:
       tags:
       - DataIntake
       summary: Retrieve a list of sources
-      description: "Prior to transferring data to Visier, you must identify the sources you want to target. Sources store data for\n the solution and are used to map data to Visier's data model.\n\n **Note:** To set up sources in your tenant, contact Visier Customer Success.\n This API allows you to query the list of available sources, and identify the source schema and required fields."
+      description: 'Prior to transferring data to Visier, you must identify the sources you want to target. Sources store data for
+
+        the solution and are used to map data to Visier''s data model.
+
+
+        **Note:** To set up sources in your tenant, contact Visier Customer Success.
+
+        This API allows you to query the list of available sources, and identify the source schema and required fields.'
       operationId: DataIntake_GetSources
       parameters:
       - name: TargetTenantID
@@ -51,7 +59,12 @@ paths:
       tags:
       - DataIntake
       summary: Start a transfer session
-      description: "Start a new transfer session. A transfer session can include one or more batches of records to be\n sent to Visier. Batches of records may be transferred as JSON or file payloads.\n\n Recommended: For optimal performance, please include all batches of records in a single transfer session."
+      description: 'Start a new transfer session. A transfer session can include one or more batches of records to be
+
+        sent to Visier. Batches of records may be transferred as JSON or file payloads.
+
+
+        Recommended: For optimal performance, please include all batches of records in a single transfer session.'
       operationId: DataIntake_StartTransfer
       parameters:
       - name: TargetTenantID
@@ -77,7 +90,24 @@ paths:
       tags:
       - DataIntake
       summary: Transfer data to sources via JSON
-      description: "Transfer data to Visier in batches of records. Each request includes a batch of records\n formatted as a comma separated array with the first row containing the column headers in the request body. Each\n subsequent request should also include the first row as a header.\n\n Each request transfers a batch of records to a single source. Transfer sessions may include one or more batches before completion.\n\n Each batch is identified by a sequence number. Sequence numbers help identify any batches  that were delivered incorrectly.\n\n Each batch is limited to the following request size:\n - Batch size limit: 10 MB\n - Record count limit: 300,000 rows"
+      description: 'Transfer data to Visier in batches of records. Each request includes a batch of records
+
+        formatted as a comma separated array with the first row containing the column headers in the request body. Each
+
+        subsequent request should also include the first row as a header.
+
+
+        Each request transfers a batch of records to a single source. Transfer sessions may include one or more batches before completion.
+
+
+        Each batch is identified by a sequence number. Sequence numbers help identify any batches that were delivered incorrectly.
+
+
+        Each batch is limited to the following request size:
+
+        - Batch size limit: 10 MB
+
+        - Record count limit: 300,000 rows'
       operationId: DataIntake_PushData
       parameters:
       - name: transferSessionId
@@ -131,7 +161,21 @@ paths:
       tags:
       - DataIntake
       summary: Cancel a transfer session
-      description: "Cancel a transfer session after starting it. If a transfer session is cancelled, all\n records within the transfer session do not persist in Visier's data store.\n\n If you cancel a transfer session, please start a new transfer session and resend the complete data set.\n\n You might cancel a transfer session if:\n - A request to send a batch of records failed.\n - The original set of records is incomplete.\n - An infrastructure error occurs."
+      description: 'Cancel a transfer session after starting it. If a transfer session is cancelled, all
+
+        records within the transfer session do not persist in Visier''s data store.
+
+
+        If you cancel a transfer session, please start a new transfer session and resend the complete data set.
+
+
+        You might cancel a transfer session if:
+
+        - A request to send a batch of records failed.
+
+        - The original set of records is incomplete.
+
+        - An infrastructure error occurs.'
       operationId: DataIntake_PushDataCancel
       parameters:
       - name: transferSessionId
@@ -163,7 +207,12 @@ paths:
       tags:
       - DataIntake
       summary: Complete a transfer session
-      description: "Complete the specified transfer session by triggering a receiving job. A receiving job\n validates the transferred data and adds the transferred data to Visier's data store.\n\n You can set an optional parameter to generate a data version through a processing job immediately after the receiving job completes."
+      description: 'Complete the specified transfer session by triggering a receiving job. A receiving job
+
+        validates the transferred data and adds the transferred data to Visier''s data store.
+
+
+        You can set an optional parameter to generate a data version through a processing job immediately after the receiving job completes.'
       operationId: DataIntake_PushDataComplete
       parameters:
       - name: TargetTenantID
@@ -195,7 +244,49 @@ paths:
       tags:
       - DataIntake
       summary: Transfer data to sources via file upload
-      description: "Upload data to Visier as CSV or ZIP files. Each request transfers a single file. If the\n data intended for Visier is stored in multiple files, you may compress them into a single ZIP file or make\n multiple requests within the same transfer session.\n\n File size limit: 3 GB\n\n Each file is identified by a sequence number. Sequence numbers help identify any batches that were delivered incorrectly.\n\n If you define a specific source in the request, all files within the request will target the declared source. If\n a source is not defined, the filenames are matched against the source regex to correctly assign each file to a\n source. To find out the source regex, please contact Visier Customer Success.\n\n **Note:** If you include files that should target multiple sources in one ZIP file, do not define a source in the request.\n\n Analytic tenants: For optimal transfer speed, provide one ZIP file per source.\n Administrating tenants: For optimal transfer speed, provide one ZIP file containing all the required data files for your analytic tenants.\n In the ZIP file, use one folder per analytic tenant. The ZIP file must adhere to the following file structure:\n\n File1.zip\n - Folder1: WFF_tenantCode1\n    - Filename1.csv\n    - Filename2.csv\n - Folder2: WFF_tenantCode2\n    - Filename3.csv\n    - Filename4.csv"
+      description: 'Upload data to Visier as CSV or ZIP files. Each request transfers a single file. If the
+
+        data intended for Visier is stored in multiple files, you may compress them into a single ZIP file or make
+
+        multiple requests within the same transfer session.
+
+
+        File size limit: 3 GB
+
+
+        Each file is identified by a sequence number. Sequence numbers help identify any batches that were delivered incorrectly.
+
+
+        If you define a specific source in the request, all files within the request will target the declared source. If
+
+        a source is not defined, the filenames are matched against the source regex to correctly assign each file to a
+
+        source. To find out the source regex, please contact Visier Customer Success.
+
+
+        **Note:** If you include files that should target multiple sources in one ZIP file, do not define a source in the request.
+
+
+        Analytic tenants: For optimal transfer speed, provide one ZIP file per source.
+
+        Administrating tenants: For optimal transfer speed, provide one ZIP file containing all the required data files for your analytic tenants.
+
+        In the ZIP file, use one folder per analytic tenant. The ZIP file must adhere to the following file structure:
+
+
+        File1.zip
+
+        - Folder1: WFF_tenantCode1
+
+        - Filename1.csv
+
+        - Filename2.csv
+
+        - Folder2: WFF_tenantCode2
+
+        - Filename3.csv
+
+        - Filename4.csv'
       operationId: DataIntake_UploadData
       parameters:
       - name: transferSessionId
@@ -250,30 +341,6 @@ paths:
                 $ref: '#/components/schemas/Status'
 components:
   schemas:
-    designer.PushDataColumnDefinitionDTO:
-      type: object
-      properties:
-        columnName:
-          type: string
-          description: The name of the column.
-        dataType:
-          type: string
-          description: The data type associated with the column.
-        dataFormats:
-          type: array
-          items:
-            type: string
-          description: The expected format for datetime data types.
-        isMandatory:
-          type: boolean
-          description: If true, the column value is required. If a column is mandatory, and the file is missing this column, the request will fail.
-        allowEmpty:
-          type: boolean
-          description: If true, the column allows an empty value for the record.
-        defaultValue:
-          type: string
-          description: The default value of the column.
-      description: Definition of the source column.
     data_in.StartTransferResponse:
       type: object
       properties:
@@ -304,74 +371,34 @@ components:
           type: string
           description: A regular expression to match the file names for the source.
       description: Details of each existing source.
-    data_in.DataTransferResultDetail:
+    designer.PushDataSourceDefinitionsDTO:
       type: object
       properties:
-        tenantCode:
-          type: string
-          description: The code of the tenant that data was transferred to. For example, WFF_j1r or WFF_j1r~c7o.
-        sourceNames:
-          type: array
-          items:
-            type: string
-          description: A list of strings representing the sources that received a data transfer.
-        dataSize:
-          type: string
-          description: The total size of the transfer session in bytes.
-        rows:
-          type: string
-          description: The total number of rows transferred during the transfer session.
-    data_in.PushDataCompleteResponse:
-      type: object
-      properties:
-        dataReceivingJobId:
-          type: string
-          description: The unique identifier associated with the receiving job.
-        message:
-          type: string
-          description: A meaningful message about the transfer session.
-        transferSessionId:
-          type: string
-          description: The unique identifier associated with the transfer session.
-        dataTransferResultDetails:
-          type: array
-          items:
-            $ref: '#/components/schemas/data_in.DataTransferResultDetail'
-          description: A list of objects representing the results of the transfer session.
-        status:
-          type: string
-          description: The status of the transfer session. A completed session returns the status SUCCEED.
-    data_in.Tenant:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The code of the tenant that data was transferred to. For example, WFF_j1r or WFF_j1r~c7o.
-        status:
-          type: string
-          description: The status of the data transfer for this tenant.
         sources:
           type: array
           items:
-            $ref: '#/components/schemas/data_in.Source'
-          description: A list of objects representing the sources that data was pushed to and their data transfer results.
-    data_in.PushDataCancelResponse:
+            $ref: '#/components/schemas/designer.PushDataSourceDefinitionDTO'
+          description: A list of objects representing the target sources for the request.
+      description: The existing sources.
+    Status:
       type: object
       properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
         message:
           type: string
-          description: A meaningful message about the transfer session.
-        transferSessionId:
+          description: Not used.
+        rci:
           type: string
-          description: The unique identifier associated with the transfer session.
-        dataTransferResultDetails:
-          type: array
-          items:
-            $ref: '#/components/schemas/data_in.DataTransferResultDetail'
-          description: A list of objects representing the results of the transfer session.
-        status:
-          type: string
-          description: The status of the transfer session. A cancelled session returns the status CANCELLED.
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
     data_in.PushDataResponse:
       type: object
       properties:
@@ -393,15 +420,6 @@ components:
           items:
             $ref: '#/components/schemas/data_in.Tenant'
           description: A list of strings representing the tenants that data was pushed to and their data transfer results.
-    data_in.PushDataCompleteRequest:
-      type: object
-      properties:
-        transferSessionId:
-          type: string
-          description: The unique identifier associated with the transfer session.
-        processingData:
-          type: boolean
-          description: If `true`, a processing job will be triggered after the receiving job successfully completes. This generates a new data version.
     data_in.Source:
       type: object
       properties:
@@ -423,34 +441,107 @@ components:
         message:
           type: string
           description: A meaningful message about the data transfer.
-    Status:
+    designer.PushDataColumnDefinitionDTO:
       type: object
       properties:
-        localizedMessage:
+        columnName:
           type: string
-          description: Localized error message describing the root cause of the error.
-        code:
+          description: The name of the column.
+        dataType:
           type: string
-          description: Error classification.
-        message:
-          type: string
-          description: Not used.
-        rci:
-          type: string
-          description: Optional root cause identifier.
-        userError:
+          description: The data type associated with the column.
+        dataFormats:
+          type: array
+          items:
+            type: string
+          description: The expected format for datetime data types.
+        isMandatory:
           type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
-    designer.PushDataSourceDefinitionsDTO:
+          description: If true, the column value is required. If a column is mandatory, and the file is missing this column, the request will fail.
+        allowEmpty:
+          type: boolean
+          description: If true, the column allows an empty value for the record.
+        defaultValue:
+          type: string
+          description: The default value of the column.
+      description: Definition of the source column.
+    data_in.Tenant:
       type: object
       properties:
+        tenantCode:
+          type: string
+          description: The code of the tenant that data was transferred to. For example, WFF_j1r or WFF_j1r~c7o.
+        status:
+          type: string
+          description: The status of the data transfer for this tenant.
         sources:
           type: array
           items:
-            $ref: '#/components/schemas/designer.PushDataSourceDefinitionDTO'
-          description: A list of objects representing the target sources for the request.
-      description: The existing sources.
+            $ref: '#/components/schemas/data_in.Source'
+          description: A list of objects representing the sources that data was pushed to and their data transfer results.
+    data_in.PushDataCompleteResponse:
+      type: object
+      properties:
+        dataReceivingJobId:
+          type: string
+          description: The unique identifier associated with the receiving job.
+        message:
+          type: string
+          description: A meaningful message about the transfer session.
+        transferSessionId:
+          type: string
+          description: The unique identifier associated with the transfer session.
+        dataTransferResultDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/data_in.DataTransferResultDetail'
+          description: A list of objects representing the results of the transfer session.
+        status:
+          type: string
+          description: The status of the transfer session. A completed session returns the status SUCCEED.
+    data_in.DataTransferResultDetail:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The code of the tenant that data was transferred to. For example, WFF_j1r or WFF_j1r~c7o.
+        sourceNames:
+          type: array
+          items:
+            type: string
+          description: A list of strings representing the sources that received a data transfer.
+        dataSize:
+          type: string
+          description: The total size of the transfer session in bytes.
+        rows:
+          type: string
+          description: The total number of rows transferred during the transfer session.
+    data_in.PushDataCompleteRequest:
+      type: object
+      properties:
+        transferSessionId:
+          type: string
+          description: The unique identifier associated with the transfer session.
+        processingData:
+          type: boolean
+          description: If `true`, a processing job will be triggered after the receiving job successfully completes. This generates a new data version.
+    data_in.PushDataCancelResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A meaningful message about the transfer session.
+        transferSessionId:
+          type: string
+          description: The unique identifier associated with the transfer session.
+        dataTransferResultDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/data_in.DataTransferResultDetail'
+          description: A list of objects representing the results of the transfer session.
+        status:
+          type: string
+          description: The status of the transfer session. A cancelled session returns the status CANCELLED.
   securitySchemes:
     CookieAuth:
       type: apiKey

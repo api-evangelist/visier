@@ -14,14 +14,14 @@ security:
 - ApiKeyAuth: []
   OAuth2Auth: []
 tags:
-- name: BasicAuthentication
+- name: Basic Authentication
   x-displayName: Basic Authentication
   description: Request an authentication token through basic authentication. With basic authentication, use your username and password to request a secure token. The response returns an ASID token that you can use in your API calls.
 paths:
   /v1/admin/visierSecureToken:
     post:
       tags:
-      - BasicAuthentication
+      - Basic Authentication
       summary: Request a Visier authentication token
       description: Generate a secure ASID token.
       operationId: BasicAuthentication_ASIDTokenAuthentication
@@ -50,7 +50,7 @@ paths:
   /v1/admin/visierImpersonationToken:
     post:
       tags:
-      - BasicAuthentication
+      - Basic Authentication
       summary: Request an impersonation token
       description: Generate an impersonation token for the given username. The requesting user must have the Impersonator profile. The impersonated user must have the Read Impersonated or Write Impersonated profile. Supports impersonating users within the same tenant or in an analytic tenant by specifying a`TargetTenantID`. After receiving the token, use the header `Cookie:VisierImpersonationToken` to make API requests as the impersonated user.
       operationId: BasicAuthentication_GenerateImpersonationToken
@@ -96,23 +96,6 @@ paths:
         CookieAuth: []
 components:
   schemas:
-    GenerateImpersonationTokenRequest:
-      description: The details of the user to impersonate.
-      type: object
-      properties:
-        TargetUsername:
-          type: string
-          description: The username of the user to impersonate.
-    AuthenticationRequest:
-      type: object
-      properties:
-        username:
-          type: string
-          description: The unique identifier of the API user requesting a security token.
-        password:
-          type: string
-          description: The password that corresponds to the user making the request.
-      description: Your username and password credentials to request an authentication token.
     Status:
       type: object
       properties:
@@ -132,6 +115,23 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
+    GenerateImpersonationTokenRequest:
+      description: The details of the user to impersonate.
+      type: object
+      properties:
+        TargetUsername:
+          type: string
+          description: The username of the user to impersonate.
+    AuthenticationRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The unique identifier of the API user requesting a security token.
+        password:
+          type: string
+          description: The password that corresponds to the user making the request.
+      description: Your username and password credentials to request an authentication token.
   securitySchemes:
     CookieAuth:
       type: apiKey

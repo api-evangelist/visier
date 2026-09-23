@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Visier Administration Release Version Configuration API
-  description: Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.
+  description: Visier APIs for managing your tenant or tenants in Visier.
   license:
     name: Apache License, Version 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
@@ -18,18 +18,25 @@ tags:
   x-displayName: Release Versions
   description: 'Manage the Visier product release versions for your tenants.
 
-    <br>**Note:** <em>This API is available for Embedded Partners.</em>
 
-    <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+    **Note:** This API is available for Embedded Partners.
 
-    If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>'
+
+    **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+    If you are interested in using this API, please contact your Customer Success Manager (CSM).'
 paths:
   /v1alpha/admin/product/releases:
     get:
       tags:
       - ReleaseVersionConfiguration
       summary: Retrieve available product releases
-      description: "Retrieve a list of release versions available for each product. The response returns information such as the unique ID of the product, the latest release version, and when the latest release version of the product will automatically be activated. Sometimes, the previous and latest versions are the same.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Retrieve a list of release versions available for each product. The response returns information such as the unique ID of the product, the latest release version, and when the latest release version of the product will automatically be activated. Sometimes, the previous and latest versions are the same.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: ReleaseVersionConfiguration_GetAvailableReleases
       responses:
         default:
@@ -49,7 +56,12 @@ paths:
       tags:
       - ReleaseVersionConfiguration
       summary: Retrieve active product release versions
-      description: "Retrieve the currently active product release versions for a tenant.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Retrieve the currently active product release versions for a tenant.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: ReleaseVersionConfiguration_GetReleaseVersions
       parameters:
       - name: TargetTenantID
@@ -74,7 +86,12 @@ paths:
       tags:
       - ReleaseVersionConfiguration
       summary: Activate product release versions
-      description: "Set the product release version to activate it on the selected tenants. Analytic tenants will automatically inherit the release version from the administrating tenant. You cannot rollback to a previous version.\n\n <br>**Note:** <em>This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.\n If you are interested in using this API, please contact your Customer Success Manager (CSM).</em>"
+      description: 'Set the product release version to activate it on the selected tenants. Analytic tenants will automatically inherit the release version from the administrating tenant. You cannot rollback to a previous version.
+
+
+        **Note:** This API is in **alpha**. While in alpha, APIs may change in a breaking way without notice; functionality may be removed, and no deprecation notices will be issued.
+
+        If you are interested in using this API, please contact your Customer Success Manager (CSM).'
       operationId: ReleaseVersionConfiguration_SetReleaseVersions
       requestBody:
         content:
@@ -97,33 +114,21 @@ paths:
                 $ref: '#/components/schemas/admin.ProductVersionsUpdateResponseDTO'
 components:
   schemas:
-    admin.ProductVersionsDTO:
-      type: object
-      properties:
-        versions:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.ProductVersionDTO'
-          description: A list of products and their current release versions for a tenant.
-      description: A collection of products and their current release version for a tenant.
-    admin.ProductVersionsUpdateFailureTenantResponseDTO:
+    admin.ProductVersionDTO:
       type: object
       properties:
         productId:
           type: string
-          description: The unique ID of the product that failed to activate.
+          description: The unique ID of the product.
         version:
           type: string
-          description: The release version of the product that was being activated.
+          description: The release version of the product.
         tenantCodes:
           type: array
           items:
             type: string
-          description: The tenants where the specified release version failed to activate.
-        message:
-          type: string
-          description: More information about why the activation failed.
-      description: Provides details about the failed activation of a product release version.
+          description: The tenants you want to execute the API call on. Retrieve or activate the product release versions on these tenants.
+      description: Provides information about the product release version of a tenant. It is used when retrieving the active product release version and activating the product release version.
     admin.ProductReleaseDTO:
       type: object
       properties:
@@ -140,44 +145,6 @@ components:
           type: string
           description: The release version that replaces previous versions.
       description: Details about the available release versions for a specific product.
-    admin.ProductVersionDTO:
-      type: object
-      properties:
-        productId:
-          type: string
-          description: The unique ID of the product.
-        version:
-          type: string
-          description: The release version of the product.
-        tenantCodes:
-          type: array
-          items:
-            type: string
-          description: The tenants you want to execute the API call on. Retrieve or activate the product release versions on these tenants.
-      description: Provides information about the product release version of a tenant. It is used when retrieving the active product release version and activating the product release version.
-    admin.ProductVersionsUpdateResponseDTO:
-      type: object
-      properties:
-        successes:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.ProductVersionsUpdateSuccessfulTenantResponseDTO'
-          description: The products that were successfully activated.
-        failures:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.ProductVersionsUpdateFailureTenantResponseDTO'
-          description: The products that failed to activate.
-      description: A collection of responses indicating the success or failure of a product release version activation request, including lists of tenants with successful or failed activations.
-    admin.ProductReleasesDTO:
-      type: object
-      properties:
-        releases:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.ProductReleaseDTO'
-          description: A list of products and details about their available release versions.
-      description: A collection of products and details about their available release versions.
     admin.ProductVersionsUpdateSuccessfulTenantResponseDTO:
       type: object
       properties:
@@ -212,6 +179,56 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
+    admin.ProductVersionsUpdateResponseDTO:
+      type: object
+      properties:
+        successes:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.ProductVersionsUpdateSuccessfulTenantResponseDTO'
+          description: The products that were successfully activated.
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.ProductVersionsUpdateFailureTenantResponseDTO'
+          description: The products that failed to activate.
+      description: A collection of responses indicating the success or failure of a product release version activation request, including lists of tenants with successful or failed activations.
+    admin.ProductVersionsDTO:
+      type: object
+      properties:
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.ProductVersionDTO'
+          description: A list of products and their current release versions for a tenant.
+      description: A collection of products and their current release version for a tenant.
+    admin.ProductReleasesDTO:
+      type: object
+      properties:
+        releases:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.ProductReleaseDTO'
+          description: A list of products and details about their available release versions.
+      description: A collection of products and details about their available release versions.
+    admin.ProductVersionsUpdateFailureTenantResponseDTO:
+      type: object
+      properties:
+        productId:
+          type: string
+          description: The unique ID of the product that failed to activate.
+        version:
+          type: string
+          description: The release version of the product that was being activated.
+        tenantCodes:
+          type: array
+          items:
+            type: string
+          description: The tenants where the specified release version failed to activate.
+        message:
+          type: string
+          description: More information about why the activation failed.
+      description: Provides details about the failed activation of a product release version.
   securitySchemes:
     CookieAuth:
       type: apiKey

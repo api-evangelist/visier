@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Visier Administration User Groups V2 API
-  description: Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.
+  description: Visier APIs for managing your tenant or tenants in Visier.
   license:
     name: Apache License, Version 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
@@ -14,16 +14,33 @@ security:
 - ApiKeyAuth: []
   OAuth2Auth: []
 tags:
-- name: UserGroupsV2
+- name: User Groups V2
   x-displayName: User Groups V2
   description: Manage user groups in Visier, such as creating, updating, and deleting user groups in bulk.
 paths:
   /v2/admin/user-groups:
     get:
       tags:
-      - UserGroupsV2
+      - User Groups V2
       summary: Retrieve a list of user groups
-      description: "Retrieve a collection of user groups. Use `with` to control the amount of detail returned in the response.\n `with` supports these values:\n * **permissions**: Include the user group's permissions.\n * **users**: Include the users in the user group.\n * **details**: Include all available information.\n\n This API can return a maximum of 1000 user groups. The default number of user groups to return is 100.\n\n To specify the project in which to return user groups, provide a project UUID in the `ProjectID` request header.\n\n <br>To specify the tenant in which to retrieve user groups, administrating tenants can provide an analytic tenant code in the `TargetTenantID` request header."
+      description: 'Retrieve a collection of user groups. Use `with` to control the amount of detail returned in the response.
+
+        `with` supports these values:
+
+        * **permissions**: Include the user group''s permissions.
+
+        * **users**: Include the users in the user group.
+
+        * **details**: Include all available information.
+
+
+        This API can return a maximum of 1000 user groups. The default number of user groups to return is 100.
+
+
+        To specify the project in which to return user groups, provide a project UUID in the `ProjectID` request header.
+
+
+        To specify the tenant in which to retrieve user groups, administrating tenants can provide an analytic tenant code in the `TargetTenantID` request header.'
       operationId: UserGroupsV2_GetUserGroups
       parameters:
       - name: with
@@ -89,9 +106,15 @@ paths:
                 $ref: '#/components/schemas/admin.UserGroupsChangeDTO'
     put:
       tags:
-      - UserGroupsV2
+      - User Groups V2
       summary: Update multiple user groups
-      description: "Update existing user groups. To specify the tenant in which to update a user group, administrating tenants can provide an analytic tenant code in the `TargetTenantID` request header or `tenantCode` for each user group in the request body.\n\n When updating user groups, the user group definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed from the user group. We recommend that you retrieve a user group's details before you update the user group with new values. \n\n To specify the project in which to update user groups, provide a project UUID in the `ProjectID` request header or `projectId` for each user group in the request body."
+      description: 'Update existing user groups. To specify the tenant in which to update a user group, administrating tenants can provide an analytic tenant code in the `TargetTenantID` request header or `tenantCode` for each user group in the request body.
+
+
+        When updating user groups, the user group definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values from the update request, those values are removed from the user group. We recommend that you retrieve a user group''s details before you update the user group with new values.
+
+
+        To specify the project in which to update user groups, provide a project UUID in the `ProjectID` request header or `projectId` for each user group in the request body.'
       operationId: UserGroupsV2_PutUserGroups
       parameters:
       - name: TargetTenantID
@@ -131,9 +154,12 @@ paths:
                 $ref: '#/components/schemas/admin.UserGroupChangeResponseDTO'
     post:
       tags:
-      - UserGroupsV2
+      - User Groups V2
       summary: Create multiple user groups
-      description: "Create new user groups. To specify the tenant in which to add new user groups, administrating tenants can provide an analytic tenant code in the `TargetTenantID` request header.\n\n To specify the project in which to create new user groups, provide a project UUID in the `ProjectID` request header or `projectId` for each user group in the request body."
+      description: 'Create new user groups. To specify the tenant in which to add new user groups, administrating tenants can provide an analytic tenant code in the `TargetTenantID` request header.
+
+
+        To specify the project in which to create new user groups, provide a project UUID in the `ProjectID` request header or `projectId` for each user group in the request body.'
       operationId: UserGroupsV2_CreateUserGroups
       parameters:
       - name: TargetTenantID
@@ -173,9 +199,12 @@ paths:
                 $ref: '#/components/schemas/admin.UserGroupChangeResponseDTO'
     delete:
       tags:
-      - UserGroupsV2
+      - User Groups V2
       summary: Delete multiple user groups
-      description: "Delete user groups in bulk. To specify the tenant in which to delete user groups, administrating tenants can provide an analytic tenant code in the `TargetTenantID` request header.\n\n To specify the project in which to delete user groups, provide a project UUID in the `ProjectID` request header or `projectId` for each user group in the request body."
+      description: 'Delete user groups in bulk. To specify the tenant in which to delete user groups, administrating tenants can provide an analytic tenant code in the `TargetTenantID` request header.
+
+
+        To specify the project in which to delete user groups, provide a project UUID in the `ProjectID` request header or `projectId` for each user group in the request body.'
       operationId: UserGroupsV2_DeleteUserGroups
       parameters:
       - name: TargetTenantID
@@ -215,9 +244,15 @@ paths:
                 $ref: '#/components/schemas/admin.UserGroupDeleteResponseDTO'
     patch:
       tags:
-      - UserGroupsV2
+      - User Groups V2
       summary: Patch multiple user groups
-      description: "Make partial changes to user groups. To specify the tenant in which to patch a user group, administrating tenants can provide an analytic tenant code in the `TargetTenantID` request header or `tenantCode` for each user group in the request body.\n\n Unlike `PUT`, which completely replaces the user group definition, use `PATCH` to change specific fields in the user group without affecting omitted fields.\n\n To specify the project in which to patch user groups, provide a project UUID in the `ProjectID` request header or `projectId` for each user group in the request body."
+      description: 'Make partial changes to user groups. To specify the tenant in which to patch a user group, administrating tenants can provide an analytic tenant code in the `TargetTenantID` request header or `tenantCode` for each user group in the request body.
+
+
+        Unlike `PUT`, which completely replaces the user group definition, use `PATCH` to change specific fields in the user group without affecting omitted fields.
+
+
+        To specify the project in which to patch user groups, provide a project UUID in the `ProjectID` request header or `projectId` for each user group in the request body.'
       operationId: UserGroupsV2_PatchUserGroups
       parameters:
       - name: TargetTenantID
@@ -271,9 +306,15 @@ paths:
   /v2/admin/user-groups/revert-to-parent:
     post:
       tags:
-      - UserGroupsV2
+      - User Groups V2
       summary: Revert user groups
-      description: "Revert a user group to its parent version. For example, if you revert a:\n - Tenant override object: The object reverts to the Blueprint version or, for administrating tenants who revert an analytic tenant's object, the administrating tenant's object version.\n - Tenant object: The API request fails. The object is unique to your tenant and no parent version exists.\n - Blueprint object: Nothing happens. The object is inherited from the parent and there is nothing to revert on this tenant."
+      description: 'Revert a user group to its parent version. For example, if you revert a:
+
+        - Tenant override object: The object reverts to the Blueprint version or, for administrating tenants who revert an analytic tenant''s object, the administrating tenant''s object version.
+
+        - Tenant object: The API request fails. The object is unique to your tenant and no parent version exists.
+
+        - Blueprint object: Nothing happens. The object is inherited from the parent and there is nothing to revert on this tenant.'
       operationId: UserGroupsV2_RevertUserGroupsToParent
       parameters:
       - name: TargetTenantID
@@ -314,9 +355,15 @@ paths:
   /v2/admin/user-groups/{userGroupId}:
     get:
       tags:
-      - UserGroupsV2
+      - User Groups V2
       summary: Retrieve the details of a user group
-      description: "Retrieve all available information about a specific user group.\n \n <br>To specify the tenant in which to retrieve a user group, administrating tenants can provide an analytic tenant code in the `TargetTenantID` request header.\n\n To specify the project in which to return a user group, provide a project UUID in the `ProjectID` request header."
+      description: 'Retrieve all available information about a specific user group.
+
+
+        To specify the tenant in which to retrieve a user group, administrating tenants can provide an analytic tenant code in the `TargetTenantID` request header.
+
+
+        To specify the project in which to return a user group, provide a project UUID in the `ProjectID` request header.'
       operationId: UserGroupsV2_GetUserGroup
       parameters:
       - name: userGroupId
@@ -366,9 +413,12 @@ paths:
                 $ref: '#/components/schemas/admin.UserGroupChangeDefinitionDTO'
     delete:
       tags:
-      - UserGroupsV2
+      - User Groups V2
       summary: Delete a user group
-      description: "Delete a specific user group. To specify the tenant in which to delete a user group, administrating tenants can provide an analytic tenant code in the `TargetTenantID` request header.\n\n To specify the project in which to delete a user group, provide a project UUID in the `ProjectID` request header."
+      description: 'Delete a specific user group. To specify the tenant in which to delete a user group, administrating tenants can provide an analytic tenant code in the `TargetTenantID` request header.
+
+
+        To specify the project in which to delete a user group, provide a project UUID in the `ProjectID` request header.'
       operationId: UserGroupsV2_DeleteUserGroup
       parameters:
       - name: userGroupId
@@ -408,251 +458,6 @@ paths:
                 $ref: '#/components/schemas/admin.UserGroupSingleDeleteResponseDTO'
 components:
   schemas:
-    admin.UserGroupDeleteResponseDTO:
-      type: object
-      properties:
-        successes:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.UserGroupDeleteSuccessDTO'
-          description: The user groups that were successfully deleted.
-        failures:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.UserGroupDeleteFailureDTO'
-          description: The user groups that were not deleted successfully.
-    admin.UserGroupsDeleteRequestDTO:
-      type: object
-      properties:
-        userGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.UserGroupDeleteDTO'
-          description: The user groups to delete.
-    admin.UserGroupDeleteFailureDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The code of the tenant from which the user group could not be deleted.
-        userGroupId:
-          type: string
-          description: The unique identifier of the user group that could not be deleted.
-        message:
-          type: string
-          description: The error message containing the cause of the failure.
-        rci:
-          type: string
-          description: The root cause identifier to provide to Visier Technical Support if you require further troubleshooting.
-        projectId:
-          type: string
-          description: The ID of the project in which the user group could not be deleted.
-    admin.ElementIDsDTO:
-      type: object
-      properties:
-        ids:
-          type: array
-          items:
-            type: string
-          description: The unique identifiers.
-    admin.UserGroupChangeUsersDTO:
-      type: object
-      properties:
-        includeAllUsers:
-          type: boolean
-          description: "If `true`, all users are included in the user group. If `true`:\n * You can manually exclude users with `manuallyExcludedIds`.\n * Cannot be combined with `manuallyIncludedIds` or `dynamicFilterDefinition`."
-        manuallyIncludedIds:
-          allOf:
-          - $ref: '#/components/schemas/admin.ElementIDsDTO'
-          description: "Includes specified user IDs in the user group.\n * May be combined with `dynamicFilterDefinition`.\n * Omit if `includeAllUsers` is `true`."
-        manuallyExcludedIds:
-          allOf:
-          - $ref: '#/components/schemas/admin.ElementIDsDTO'
-          description: "Excludes specified user IDs from the user group.\n * You can manually exclude users if `includeAllUsers` is `true` or if `dynamicFilterDefinition` is defined.\n * Excluded IDs must not overlap with user IDs in `manuallyIncludedIds`."
-        dynamicFilterDefinition:
-          allOf:
-          - $ref: '#/components/schemas/admin.UserGroupFiltersDTO'
-          description: "The filters that dynamically define a population through dimensions or dimensions accessible through references from the analytic object.\n * Omit if `includeAllUsers` is `true`.\n * You can combine dynamic filters with manually-assigned users."
-    admin.UserGroupRevertDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: "The code of the tenant in which to revert the user group.\n Omit if reverting user groups in the current tenant."
-        userGroupId:
-          type: string
-          description: The unique identifier for the user group.
-        projectId:
-          type: string
-          description: "The unique identifier of the project in which to revert the user group.\n If omitted and the `ProjectID` request header is not defined, the change is published to production immediately."
-    admin.UserGroupsRevertRequestDTO:
-      type: object
-      properties:
-        userGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.UserGroupRevertDTO'
-          description: The user groups to revert.
-    admin.VisibleForSelectionDTO:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          description: "If `true`, the user group is visible in features such as sharing an analysis with user groups or assigning user groups a Vee sample question. Cannot update to `true` if `features` is empty.\n If `false`, the user group is not visible to select in any features.\n Default is `true`."
-        features:
-          type: array
-          items:
-            enum:
-            - AnalyticsFeatures
-            - StudioFeatures
-            type: string
-            format: enum
-          description: "The features in which the user group is visible. Default is empty.\n If `enabled` is `true`, the user group is visible in features listed.\n If `enabled` is `false`, this field is ignored."
-    admin.UserGroupChangeMemberSelectionDTO:
-      type: object
-      properties:
-        isExcluded:
-          type: boolean
-          description: If `true`, the specified member must not be defined for members of the user group.
-        namePath:
-          type: array
-          items:
-            type: string
-          description: The name path for dimension members; for example, `[ "North America", "US", "CA" ]`.
-    admin.UserGroupChangeFilterDTO:
-      type: object
-      properties:
-        filterId:
-          type: string
-          description: The unique identifier of the filter. Omit if creating a new filter.
-        analyticObjectId:
-          type: string
-          description: The analytic object the filter applies to. Currently, the only supported analytic object is `Employee`. Default is `Employee`.
-        dimensionFilters:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.UserGroupChangeDimensionFilterDTO'
-          description: The dimensions in the dynamic filter.
-    admin.UserGroupChangeSuccessDTO:
-      type: object
-      properties:
-        displayName:
-          type: string
-          description: The display name of the user group that was successfully changed.
-        userGroupId:
-          type: string
-          description: The unique identifier of the user group.
-        tenantCode:
-          type: string
-          description: The code of the tenant in which the user group was changed.
-        projectId:
-          type: string
-          description: The unique identifier of the project in which the user group was changed.
-        correlationId:
-          type: string
-          description: An identifier to associate the matching request field. Only returned if a `correlationId` was defined for the corresponding request field.
-    admin.UserGroupChangeDimensionFilterDTO:
-      type: object
-      properties:
-        dimensionId:
-          type: string
-          description: The object name of the dimension.
-        subjectReferencePath:
-          allOf:
-          - $ref: '#/components/schemas/admin.ElementIDsDTO'
-          description: "A qualifying path if the dimension is from an analytic object that references Employee.\n For example, use `subjectReferencePath` to create a filter on the `Employment_Start_Type` dimension from the `Employment_Start` object, which references `Employee`: `{ \"ids\": [ \"Employee\", \"Employment_Start\" ] }`."
-        memberSelections:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.UserGroupChangeMemberSelectionDTO'
-          description: The dimension members to select in the dynamic filter.
-    admin.UserGroupDeleteDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: "The code of the tenant from which to delete the user group.\n Omit if deleting user groups in the current tenant."
-        userGroupId:
-          type: string
-          description: Unique identifier for the user group.
-        projectId:
-          type: string
-          description: "The project ID in which to delete the user group.\n If omitted and the `ProjectID` request header is not defined, the change is published to production immediately."
-    Status:
-      type: object
-      properties:
-        localizedMessage:
-          type: string
-          description: Localized error message describing the root cause of the error.
-        code:
-          type: string
-          description: Error classification.
-        message:
-          type: string
-          description: Not used.
-        rci:
-          type: string
-          description: Optional root cause identifier.
-        userError:
-          type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
-    admin.UserGroupChangeFailureDTO:
-      type: object
-      properties:
-        displayName:
-          type: string
-          description: The display name of the user group that couldn't be changed.
-        message:
-          type: string
-          description: The error message containing the cause of the failure.
-        rci:
-          type: string
-          description: The root cause identifier to provide to Visier Technical Support if you require further troubleshooting.
-        tenantCode:
-          type: string
-          description: The code of the tenant in which the user group couldn't be changed.
-        projectId:
-          type: string
-          description: The unique identifier of the project in which the user group couldn't be changed.
-        userGroupId:
-          type: string
-          description: The unique identifier of the user group that couldn't be changed.
-        correlationId:
-          type: string
-          description: An identifier to associate the matching request field. Only returned if a `correlationId` was defined for the corresponding request field.
-    admin.UserGroupChangeResponseDTO:
-      type: object
-      properties:
-        successes:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.UserGroupChangeSuccessDTO'
-          description: The user groups that were successfully changed (created, updated, patched, or reverted).
-        failures:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.UserGroupChangeFailureDTO'
-          description: The user groups that were not successfully changed (created, updated, patched, or reverted).
-    admin.UserGroupFiltersDTO:
-      type: object
-      properties:
-        filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.UserGroupChangeFilterDTO'
-          description: The filters that define user group membership.
-    admin.UserGroupSingleDeleteResponseDTO:
-      type: object
-      properties:
-        success:
-          allOf:
-          - $ref: '#/components/schemas/admin.UserGroupDeleteSuccessDTO'
-          description: The user group was successfully deleted.
-        failure:
-          allOf:
-          - $ref: '#/components/schemas/admin.UserGroupDeleteFailureDTO'
-          description: The user group was not successfully deleted.
     admin.UserGroupChangeDefinitionDTO:
       type: object
       properties:
@@ -686,6 +491,91 @@ components:
         correlationId:
           type: string
           description: "An optional identifier to associate bulk request fields with their corresponding response fields. Correlation IDs may be between 3 and 64 characters long and\n consist of alphanumeric characters, `-`, and `_`.\n\n **Note**:\n - Each request field must have a unique `correlationId`.\n - Cannot reuse a `correlationId` in subsequent POST requests while the ID is still active. A `correlationId` is active for 7 days after creation."
+    admin.ElementIDsDTO:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: string
+          description: The unique identifiers.
+    admin.UserGroupChangeSuccessDTO:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The display name of the user group that was successfully changed.
+        userGroupId:
+          type: string
+          description: The unique identifier of the user group.
+        tenantCode:
+          type: string
+          description: The code of the tenant in which the user group was changed.
+        projectId:
+          type: string
+          description: The unique identifier of the project in which the user group was changed.
+        correlationId:
+          type: string
+          description: An identifier to associate the matching request field. Only returned if a `correlationId` was defined for the corresponding request field.
+    admin.UserGroupChangeUsersDTO:
+      type: object
+      properties:
+        includeAllUsers:
+          type: boolean
+          description: "If `true`, all users are included in the user group. If `true`:\n * You can manually exclude users with `manuallyExcludedIds`.\n * Cannot be combined with `manuallyIncludedIds` or `dynamicFilterDefinition`."
+        manuallyIncludedIds:
+          allOf:
+          - $ref: '#/components/schemas/admin.ElementIDsDTO'
+          description: "Includes specified user IDs in the user group.\n * May be combined with `dynamicFilterDefinition`.\n * Omit if `includeAllUsers` is `true`."
+        manuallyExcludedIds:
+          allOf:
+          - $ref: '#/components/schemas/admin.ElementIDsDTO'
+          description: "Excludes specified user IDs from the user group.\n * You can manually exclude users if `includeAllUsers` is `true` or if `dynamicFilterDefinition` is defined.\n * Excluded IDs must not overlap with user IDs in `manuallyIncludedIds`."
+        dynamicFilterDefinition:
+          allOf:
+          - $ref: '#/components/schemas/admin.UserGroupFiltersDTO'
+          description: "The filters that dynamically define a population through dimensions or dimensions accessible through references from the analytic object.\n * Omit if `includeAllUsers` is `true`.\n * You can combine dynamic filters with manually-assigned users."
+    admin.UserGroupDeleteFailureDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The code of the tenant from which the user group could not be deleted.
+        userGroupId:
+          type: string
+          description: The unique identifier of the user group that could not be deleted.
+        message:
+          type: string
+          description: The error message containing the cause of the failure.
+        rci:
+          type: string
+          description: The root cause identifier to provide to Visier Technical Support if you require further troubleshooting.
+        projectId:
+          type: string
+          description: The ID of the project in which the user group could not be deleted.
+    admin.UserGroupsDeleteRequestDTO:
+      type: object
+      properties:
+        userGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserGroupDeleteDTO'
+          description: The user groups to delete.
+    admin.VisibleForSelectionDTO:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: "If `true`, the user group is visible in features such as sharing an analysis with user groups or assigning user groups a Vee sample question. Cannot update to `true` if `features` is empty.\n If `false`, the user group is not visible to select in any features.\n Default is `true`."
+        features:
+          type: array
+          items:
+            enum:
+            - AnalyticsFeatures
+            - StudioFeatures
+            type: string
+            format: enum
+          description: "The features in which the user group is visible. Default is empty.\n If `enabled` is `true`, the user group is visible in features listed.\n If `enabled` is `false`, this field is ignored."
     admin.UserGroupsChangeDTO:
       type: object
       properties:
@@ -694,6 +584,31 @@ components:
           items:
             $ref: '#/components/schemas/admin.UserGroupChangeDefinitionDTO'
           description: The user groups and their definitions.
+    admin.UserGroupRevertDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: "The code of the tenant in which to revert the user group.\n Omit if reverting user groups in the current tenant."
+        userGroupId:
+          type: string
+          description: The unique identifier for the user group.
+        projectId:
+          type: string
+          description: "The unique identifier of the project in which to revert the user group.\n If omitted and the `ProjectID` request header is not defined, the change is published to production immediately."
+    admin.UserGroupDeleteResponseDTO:
+      type: object
+      properties:
+        successes:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserGroupDeleteSuccessDTO'
+          description: The user groups that were successfully deleted.
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserGroupDeleteFailureDTO'
+          description: The user groups that were not deleted successfully.
     admin.UserGroupDeleteSuccessDTO:
       type: object
       properties:
@@ -706,6 +621,141 @@ components:
         projectId:
           type: string
           description: The ID of the project in which user group was deleted.
+    admin.UserGroupChangeFilterDTO:
+      type: object
+      properties:
+        filterId:
+          type: string
+          description: The unique identifier of the filter. Omit if creating a new filter.
+        analyticObjectId:
+          type: string
+          description: The analytic object the filter applies to. Currently, the only supported analytic object is `Employee`. Default is `Employee`.
+        dimensionFilters:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserGroupChangeDimensionFilterDTO'
+          description: The dimensions in the dynamic filter.
+    admin.UserGroupChangeResponseDTO:
+      type: object
+      properties:
+        successes:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserGroupChangeSuccessDTO'
+          description: The user groups that were successfully changed (created, updated, patched, or reverted).
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserGroupChangeFailureDTO'
+          description: The user groups that were not successfully changed (created, updated, patched, or reverted).
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    admin.UserGroupChangeMemberSelectionDTO:
+      type: object
+      properties:
+        isExcluded:
+          type: boolean
+          description: If `true`, the specified member must not be defined for members of the user group.
+        namePath:
+          type: array
+          items:
+            type: string
+          description: The name path for dimension members; for example, `[ "North America", "US", "CA" ]`.
+    admin.UserGroupFiltersDTO:
+      type: object
+      properties:
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserGroupChangeFilterDTO'
+          description: The filters that define user group membership.
+    admin.UserGroupsRevertRequestDTO:
+      type: object
+      properties:
+        userGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserGroupRevertDTO'
+          description: The user groups to revert.
+    admin.UserGroupDeleteDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: "The code of the tenant from which to delete the user group.\n Omit if deleting user groups in the current tenant."
+        userGroupId:
+          type: string
+          description: Unique identifier for the user group.
+        projectId:
+          type: string
+          description: "The project ID in which to delete the user group.\n If omitted and the `ProjectID` request header is not defined, the change is published to production immediately."
+    admin.UserGroupChangeDimensionFilterDTO:
+      type: object
+      properties:
+        dimensionId:
+          type: string
+          description: The object name of the dimension.
+        subjectReferencePath:
+          allOf:
+          - $ref: '#/components/schemas/admin.ElementIDsDTO'
+          description: "A qualifying path if the dimension is from an analytic object that references Employee.\n For example, use `subjectReferencePath` to create a filter on the `Employment_Start_Type` dimension from the `Employment_Start` object, which references `Employee`: `{ \"ids\": [ \"Employee\", \"Employment_Start\" ] }`."
+        memberSelections:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserGroupChangeMemberSelectionDTO'
+          description: The dimension members to select in the dynamic filter.
+    admin.UserGroupChangeFailureDTO:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The display name of the user group that couldn't be changed.
+        message:
+          type: string
+          description: The error message containing the cause of the failure.
+        rci:
+          type: string
+          description: The root cause identifier to provide to Visier Technical Support if you require further troubleshooting.
+        tenantCode:
+          type: string
+          description: The code of the tenant in which the user group couldn't be changed.
+        projectId:
+          type: string
+          description: The unique identifier of the project in which the user group couldn't be changed.
+        userGroupId:
+          type: string
+          description: The unique identifier of the user group that couldn't be changed.
+        correlationId:
+          type: string
+          description: An identifier to associate the matching request field. Only returned if a `correlationId` was defined for the corresponding request field.
+    admin.UserGroupSingleDeleteResponseDTO:
+      type: object
+      properties:
+        success:
+          allOf:
+          - $ref: '#/components/schemas/admin.UserGroupDeleteSuccessDTO'
+          description: The user group was successfully deleted.
+        failure:
+          allOf:
+          - $ref: '#/components/schemas/admin.UserGroupDeleteFailureDTO'
+          description: The user group was not successfully deleted.
   securitySchemes:
     CookieAuth:
       type: apiKey

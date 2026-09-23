@@ -18,7 +18,8 @@ tags:
   x-displayName: PGP Keys
   description: 'The Pretty Good Privacy (PGP) Keys API generates key pairs and provides a public key to encrypt data that you send to Visier. PGP encryption adds an additional layer of security against data disclosure.
 
-    <br><br>After you generate a key pair and retrieve the public encryption key, you can encrypt your data files before sending them to Visier. When Visier receives files encrypted with the public key, we retrieve the associated private key to decrypt and process the file.'
+
+    After you generate a key pair and retrieve the public encryption key, you can encrypt your data files before sending them to Visier. When Visier receives files encrypted with the public key, we retrieve the associated private key to decrypt and process the file.'
 paths:
   /v1/api/pgp-keys:
     get:
@@ -50,7 +51,10 @@ paths:
       tags:
       - PGPKeys
       summary: Download a public encryption key
-      description: "Generate a key pair and retrieve the public key that you can use to encrypt your data to send to Visier. \n \n In the request body, optionally set the UTC expiration date for the key pair in ISO-8601 format. Must be between 2 and 10 years. Default is 2 years."
+      description: 'Generate a key pair and retrieve the public key that you can use to encrypt your data to send to Visier.
+
+
+        In the request body, optionally set the UTC expiration date for the key pair in ISO-8601 format. Must be between 2 and 10 years. Default is 2 years.'
       operationId: PGPKeys_GeneratePGPKeyPair
       parameters:
       - name: TargetTenantID
@@ -142,18 +146,37 @@ paths:
                 $ref: '#/components/schemas/designer.crypto.KeyPairDeleteResponseDTO'
 components:
   schemas:
-    designer.crypto.KeyPairGenerateRequestDTO:
-      type: object
-      properties:
-        expirationDate:
-          type: string
-          description: The UTC expiration date of the key in ISO-8601 format. Must be between 2 and 10 years. Default is 2 years.
     designer.crypto.KeyPairDeleteResponseDTO:
       type: object
       properties:
         keyID:
           type: string
           description: The key ID in 16-letter hexadecimal format, including leading zeros.
+    designer.crypto.KeyPairGenerateRequestDTO:
+      type: object
+      properties:
+        expirationDate:
+          type: string
+          description: The UTC expiration date of the key in ISO-8601 format. Must be between 2 and 10 years. Default is 2 years.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
     designer.crypto.PublicKeysDTO:
       type: object
       properties:
@@ -180,25 +203,6 @@ components:
         publicKey:
           type: string
           description: The public key of the generated key pair.
-    Status:
-      type: object
-      properties:
-        localizedMessage:
-          type: string
-          description: Localized error message describing the root cause of the error.
-        code:
-          type: string
-          description: Error classification.
-        message:
-          type: string
-          description: Not used.
-        rci:
-          type: string
-          description: Optional root cause identifier.
-        userError:
-          type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
   securitySchemes:
     CookieAuth:
       type: apiKey

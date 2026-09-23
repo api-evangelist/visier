@@ -74,7 +74,10 @@ paths:
       tags:
       - PlanAdministration
       summary: Partially update a plan scenario
-      description: "Make partial changes to a scenario in an existing plan. The response returns whether the scenario was successfully patched or not. When patching objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PATCH` request definition. To retrieve plan IDs and scenario IDs, see `GET /v1/planning/model/plans`. If the response includes a `parentPlanUuid`, then the plan is a subplan.\n\n Use `PATCH` to change specific fields in the scenario without affecting omitted fields."
+      description: 'Make partial changes to a scenario in an existing plan. The response returns whether the scenario was successfully patched or not. When patching objects, we recommend that you first retrieve the object definition using `GET`. You can use the `GET` response in your `PATCH` request definition. To retrieve plan IDs and scenario IDs, see `GET /v1/planning/model/plans`. If the response includes a `parentPlanUuid`, then the plan is a subplan.
+
+
+        Use `PATCH` to change specific fields in the scenario without affecting omitted fields.'
       operationId: PlanAdministration_PatchPlan
       parameters:
       - name: planId
@@ -122,123 +125,16 @@ paths:
                 $ref: '#/components/schemas/planning.ErrorSummary'
 components:
   schemas:
-    planning.PlanUserShareEntry:
+    planning.ReopenActionPayload:
       type: object
       properties:
-        username:
+        assignee:
           type: string
-          description: The username of the user to share the plan with.
-        accessRight:
-          enum:
-          - Viewer
-          - Editor
-          - CoOwner
-          type: string
-          description: "The access level to grant to the user. Valid values:\n - `Viewer`: The user can view the plan but cannot make changes.\n - `Editor`: The user can view and edit the plan.\n - `CoOwner`: The user has the same rights as the plan owner, including sharing the plan."
-          format: enum
-    planning.ErrorSummary:
-      type: object
-      properties:
-        rci:
-          type: string
-          description: A root cause identifier that allows Visier to determine the source of the problem.
-        message:
-          type: string
-          description: The details of the error and actions you can take to load the data correctly.
-      description: The error details of the unsuccessful action.
-    planning.SubmitActionPayload:
-      type: object
-      properties:
-        comment:
-          type: string
-          description: A note or instructions to include when submitting a subplan.
-      description: The details of submitting a subplan.
-    PlanPatchReopenActionRequest:
-      type: object
-      title: Reopen a plan
-      required:
-      - actionType
-      - reopenActionPayload
-      properties:
-        actionType:
-          description: 'The action to perform on the main plan or the subplan, in a specific scenario. Valid values:
-
-            - `Consolidate`: Combine the submitted subplan values into the main plan.
-
-            - `Submit`: Send your completed subplan to the plan coordinator for review.
-
-            - `Reopen`: Reopen consolidated subplans so subplanners can change the values.
-
-            - `StartCollaboration`: Enter collaboration mode, so you can assign subplans to subplanners.
-
-            - `EndCollaboration`:  Regain control of the plan, so you can finalize it and put it into operation.
-
-            - `AssignSubplan`: Create a new subplan anchored at a specific row in the parent plan.
-
-            '
-          type: string
-          enum:
-          - Reopen
-        reopenActionPayload:
-          $ref: '#/components/schemas/planning.ReopenActionPayload'
-    planning.StartCollaborationActionPayload:
-      type: object
-      properties:
-        startDate:
-          type: string
-          description: The start date of the collaboration. The default is today. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
+          description: The user that the subplan will be assigned to once reopened. If not defined, it will keep the user that was previously assigned.
         dueDate:
           type: string
-          description: The due date of the collaboration. The default is 14 days since the start date. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
-      description: The details of starting a collaboration project.
-    PlanPatchAssignSubplanActionRequest:
-      type: object
-      title: Assign a subplan
-      required:
-      - actionType
-      - assignSubplanActionPayload
-      properties:
-        actionType:
-          description: 'The action to perform on the main plan or the subplan, in a specific scenario. Valid values:
-
-            - `Consolidate`: Combine the submitted subplan values into the main plan.
-
-            - `Submit`: Send your completed subplan to the plan coordinator for review.
-
-            - `Reopen`: Reopen consolidated subplans so subplanners can change the values.
-
-            - `StartCollaboration`: Enter collaboration mode, so you can assign subplans to subplanners.
-
-            - `EndCollaboration`:  Regain control of the plan, so you can finalize it and put it into operation.
-
-            - `AssignSubplan`: Create a new subplan anchored at a specific row in the parent plan.
-
-            '
-          type: string
-          enum:
-          - AssignSubplan
-        assignSubplanActionPayload:
-          $ref: '#/components/schemas/planning.AssignSubplansActionPayload'
-    planning.EndCollaborationActionPayload:
-      type: object
-      properties:
-        actionWhenUnconsolidatedPlansExists:
-          enum:
-          - Ignore
-          - Revert
-          type: string
-          description: "The action to take when there are unconsolidated subplans for the main plan. Valid values:\n - `Ignore`: Ignore unconsolidated subplans.\n - `Revert`: Ignore all subplans and revert plan values to the state prior to the start of collaboration."
-          format: enum
-      description: The details of ending a collaboration project.
-    planning.ShareActionResult:
-      type: object
-      properties:
-        failedShares:
-          type: array
-          items:
-            $ref: '#/components/schemas/planning.FailedShareEntry'
-          description: The users from the Share request that were unsuccessful.
-      description: Per-user outcome detail for a Share action.
+          description: "The due date of the subplan in UTC format. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.\n The due date cannot be earlier than today.\n If not defined, the default is based on the length of the collaboration window:\n - Collaboration window between 2 and 14 days: The due date is set to one day before the collaboration window ends.\n - Collaboration window longer than 14 days: The due date is automatically set to 14 days from the start of the collaboration.\n - Collaboration window shorter than 2 days: The due date is automatically set to today."
+      description: The details of reopening a subplan.
     planning.ConsolidateActionPayload:
       type: object
       properties:
@@ -251,23 +147,15 @@ components:
             type: string
           description: The UUIDs of the subplans to include. If not defined, all submitted subplans will be consolidated.
       description: The details of consolidating a subplan.
-    planning.PlanPatchRequest:
+    planning.ShareActionResult:
       type: object
       properties:
-        shareActionPayload:
-          allOf:
-          - $ref: '#/components/schemas/planning.ShareActionPayload'
-          description: The details of sharing a plan.
-      description: "A plan-level action request. Parallel to PlanScenarioPatchRequest but operates on a plan\n (no scenario). Designed to host further plan-level actions over time. The action is\n discriminated by which member of `actionPayload` is set; an unset oneof is a bad request."
-    planning.PlanPatchResponse:
-      type: object
-      properties:
-        actionResults:
+        failedShares:
           type: array
           items:
-            $ref: '#/components/schemas/planning.PlanPatchActionResult'
-          description: The result of the action taken on the plan.
-      description: Response envelope for the plan-level action route.
+            $ref: '#/components/schemas/planning.FailedShareEntry'
+          description: The users from the Share request that were unsuccessful.
+      description: Per-user outcome detail for a Share action.
     planning.PlanScenarioPatchActionResult:
       type: object
       properties:
@@ -282,114 +170,27 @@ components:
           - $ref: '#/components/schemas/planning.ErrorSummary'
           description: The error details of the unsuccessful action.
       description: The result of the action taken on the main plan or subplan.
-    planning.FailedShareEntry:
+    planning.ErrorSummary:
       type: object
       properties:
-        username:
-          type: string
-          description: The username of the unsuccessful user.
-        errorCode:
-          enum:
-          - PLAN_SHARE_ERROR_UNKNOWN
-          - PLAN_SHARE_ERROR_USER_NOT_FOUND
-          - PLAN_SHARE_ERROR_PERSISTENCE_FAILURE
-          type: string
-          description: The reason that the Share action was unsuccessful.
-          format: enum
-    planning.ShareActionPayload:
-      type: object
-      properties:
-        shares:
-          type: array
-          items:
-            $ref: '#/components/schemas/planning.PlanUserShareEntry'
-          description: The list of users the plan is shared with and their access level.
-        comment:
-          type: string
-          description: Optional message included in the notification email.
-        notifyRecipients:
-          type: boolean
-          description: If true, notification emails will be sent to newly shared users. Default is false.
-      description: "The desired sharing state for a plan. `shares` is the complete set of individual user shares\n (full-replace): users not listed lose their individual access."
-    planning.PlanScenarioPatchResponse:
-      type: object
-      properties:
-        actionResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/planning.PlanScenarioPatchActionResult'
-          description: The result of the action taken on the main plan or subplan.
-      description: The result of the action taken on the subplan if reopening, or the main plan if consolidating.
-    PlanPatchStartCollaborationActionRequest:
-      type: object
-      title: Start Collaboration on a plan
-      required:
-      - actionType
-      - startCollaborationActionPayload
-      properties:
-        actionType:
-          description: 'The action to perform on the main plan or the subplan, in a specific scenario. Valid values:
-
-            - `Consolidate`: Combine the submitted subplan values into the main plan.
-
-            - `Submit`: Send your completed subplan to the plan coordinator for review.
-
-            - `Reopen`: Reopen consolidated subplans so subplanners can change the values.
-
-            - `StartCollaboration`: Enter collaboration mode, so you can assign subplans to subplanners.
-
-            - `EndCollaboration`:  Regain control of the plan, so you can finalize it and put it into operation.
-
-            - `AssignSubplan`: Create a new subplan anchored at a specific row in the parent plan.
-
-            '
-          type: string
-          enum:
-          - StartCollaboration
-        startCollaborationActionPayload:
-          $ref: '#/components/schemas/planning.StartCollaborationActionPayload'
-    planning.DimensionMember:
-      type: object
-      properties:
-        segmentId:
-          type: string
-          description: The unique identifier of the dimension (for example, `Organization`).
-        memberId:
-          type: string
-          description: The unique identifier of the member within the dimension (for example, `[Organization].[Finance Americas]`).
-      description: A dimension member that identifies a position along one dimension in a plan's segmentation.
-      required:
-      - segmentId
-      - memberId
-    Status:
-      type: object
-      properties:
-        localizedMessage:
-          type: string
-          description: Localized error message describing the root cause of the error.
-        code:
-          type: string
-          description: Error classification.
-        message:
-          type: string
-          description: Not used.
         rci:
           type: string
-          description: Optional root cause identifier.
-        userError:
-          type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
-    planning.ReopenActionPayload:
+          description: A root cause identifier that allows Visier to determine the source of the problem.
+        message:
+          type: string
+          description: The details of the error and actions you can take to load the data correctly.
+      description: The error details of the unsuccessful action.
+    planning.AssignSubplansActionPayload:
       type: object
       properties:
-        assignee:
-          type: string
-          description: The user that the subplan will be assigned to once reopened. If not defined, it will keep the user that was previously assigned.
-        dueDate:
-          type: string
-          description: "The due date of the subplan in UTC format. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.\n The due date cannot be earlier than today.\n If not defined, the default is based on the length of the collaboration window:\n - Collaboration window between 2 and 14 days: The due date is set to one day before the collaboration window ends.\n - Collaboration window longer than 14 days: The due date is automatically set to 14 days from the start of the collaboration.\n - Collaboration window shorter than 2 days: The due date is automatically set to today."
-      description: The details of reopening a subplan.
+        subplans:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.AssignSubplanActionPayload'
+          description: Assign subplans;
+      description: The details of creating a list subplans.
+      required:
+      - subplans
     planning.PlanPatchActionResult:
       type: object
       properties:
@@ -407,34 +208,30 @@ components:
           allOf:
           - $ref: '#/components/schemas/planning.ShareActionResult'
           description: The result of the Share action.
-    PlanPatchConsolidateActionRequest:
+    planning.SubmitActionPayload:
       type: object
-      title: Consolidate subplans
-      required:
-      - actionType
-      - consolidateActionPayload
       properties:
-        actionType:
-          description: 'The action to perform on the main plan or the subplan, in a specific scenario. Valid values:
-
-            - `Consolidate`: Combine the submitted subplan values into the main plan.
-
-            - `Submit`: Send your completed subplan to the plan coordinator for review.
-
-            - `Reopen`: Reopen consolidated subplans so subplanners can change the values.
-
-            - `StartCollaboration`: Enter collaboration mode, so you can assign subplans to subplanners.
-
-            - `EndCollaboration`:  Regain control of the plan, so you can finalize it and put it into operation.
-
-            - `AssignSubplan`: Create a new subplan anchored at a specific row in the parent plan.
-
-            '
+        comment:
           type: string
-          enum:
-          - Consolidate
-        consolidateActionPayload:
-          $ref: '#/components/schemas/planning.ConsolidateActionPayload'
+          description: A note or instructions to include when submitting a subplan.
+      description: The details of submitting a subplan.
+    planning.PlanPatchResponse:
+      type: object
+      properties:
+        actionResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.PlanPatchActionResult'
+          description: The result of the action taken on the plan.
+      description: Response envelope for the plan-level action route.
+    planning.PlanPatchRequest:
+      type: object
+      properties:
+        shareActionPayload:
+          allOf:
+          - $ref: '#/components/schemas/planning.ShareActionPayload'
+          description: The details of sharing a plan.
+      description: "A plan-level action request. Parallel to PlanScenarioPatchRequest but operates on a plan\n (no scenario). Designed to host further plan-level actions over time. The action is\n discriminated by which member of `actionPayload` is set; an unset oneof is a bad request."
     planning.AssignSubplanActionPayload:
       type: object
       properties:
@@ -458,12 +255,12 @@ components:
       - assignee
       - dueDate
       - rowMembers
-    PlanPatchEndCollaborationActionRequest:
+    PlanPatchSubmitActionRequest:
       type: object
-      title: End Collaboration on a plan
+      title: Submit a plan
       required:
       - actionType
-      - endCollaborationActionPayload
+      - submitActionPayload
       properties:
         actionType:
           description: 'The action to perform on the main plan or the subplan, in a specific scenario. Valid values:
@@ -483,9 +280,28 @@ components:
             '
           type: string
           enum:
-          - EndCollaboration
-        endCollaborationActionPayload:
-          $ref: '#/components/schemas/planning.EndCollaborationActionPayload'
+          - Submit
+        submitActionPayload:
+          $ref: '#/components/schemas/planning.SubmitActionPayload'
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
     planning.PlanScenarioPatchRequest:
       type: object
       properties:
@@ -542,12 +358,12 @@ components:
           StartCollaboration: '#/components/schemas/PlanPatchStartCollaborationActionRequest'
           EndCollaboration: '#/components/schemas/PlanPatchEndCollaborationActionRequest'
           AssignSubplan: '#/components/schemas/PlanPatchAssignSubplanActionRequest'
-    PlanPatchSubmitActionRequest:
+    PlanPatchConsolidateActionRequest:
       type: object
-      title: Submit a plan
+      title: Consolidate subplans
       required:
       - actionType
-      - submitActionPayload
+      - consolidateActionPayload
       properties:
         actionType:
           description: 'The action to perform on the main plan or the subplan, in a specific scenario. Valid values:
@@ -567,20 +383,207 @@ components:
             '
           type: string
           enum:
-          - Submit
-        submitActionPayload:
-          $ref: '#/components/schemas/planning.SubmitActionPayload'
-    planning.AssignSubplansActionPayload:
+          - Consolidate
+        consolidateActionPayload:
+          $ref: '#/components/schemas/planning.ConsolidateActionPayload'
+    planning.PlanScenarioPatchResponse:
       type: object
       properties:
-        subplans:
+        actionResults:
           type: array
           items:
-            $ref: '#/components/schemas/planning.AssignSubplanActionPayload'
-          description: Assign subplans;
-      description: The details of creating a list subplans.
+            $ref: '#/components/schemas/planning.PlanScenarioPatchActionResult'
+          description: The result of the action taken on the main plan or subplan.
+      description: The result of the action taken on the subplan if reopening, or the main plan if consolidating.
+    PlanPatchReopenActionRequest:
+      type: object
+      title: Reopen a plan
       required:
-      - subplans
+      - actionType
+      - reopenActionPayload
+      properties:
+        actionType:
+          description: 'The action to perform on the main plan or the subplan, in a specific scenario. Valid values:
+
+            - `Consolidate`: Combine the submitted subplan values into the main plan.
+
+            - `Submit`: Send your completed subplan to the plan coordinator for review.
+
+            - `Reopen`: Reopen consolidated subplans so subplanners can change the values.
+
+            - `StartCollaboration`: Enter collaboration mode, so you can assign subplans to subplanners.
+
+            - `EndCollaboration`:  Regain control of the plan, so you can finalize it and put it into operation.
+
+            - `AssignSubplan`: Create a new subplan anchored at a specific row in the parent plan.
+
+            '
+          type: string
+          enum:
+          - Reopen
+        reopenActionPayload:
+          $ref: '#/components/schemas/planning.ReopenActionPayload'
+    PlanPatchEndCollaborationActionRequest:
+      type: object
+      title: End Collaboration on a plan
+      required:
+      - actionType
+      - endCollaborationActionPayload
+      properties:
+        actionType:
+          description: 'The action to perform on the main plan or the subplan, in a specific scenario. Valid values:
+
+            - `Consolidate`: Combine the submitted subplan values into the main plan.
+
+            - `Submit`: Send your completed subplan to the plan coordinator for review.
+
+            - `Reopen`: Reopen consolidated subplans so subplanners can change the values.
+
+            - `StartCollaboration`: Enter collaboration mode, so you can assign subplans to subplanners.
+
+            - `EndCollaboration`:  Regain control of the plan, so you can finalize it and put it into operation.
+
+            - `AssignSubplan`: Create a new subplan anchored at a specific row in the parent plan.
+
+            '
+          type: string
+          enum:
+          - EndCollaboration
+        endCollaborationActionPayload:
+          $ref: '#/components/schemas/planning.EndCollaborationActionPayload'
+    planning.ShareActionPayload:
+      type: object
+      properties:
+        shares:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.PlanUserShareEntry'
+          description: The list of users the plan is shared with and their access level.
+        comment:
+          type: string
+          description: Optional message included in the notification email.
+        notifyRecipients:
+          type: boolean
+          description: If true, notification emails will be sent to newly shared users. Default is false.
+      description: "The desired sharing state for a plan. `shares` is the complete set of individual user shares\n (full-replace): users not listed lose their individual access."
+    PlanPatchAssignSubplanActionRequest:
+      type: object
+      title: Assign a subplan
+      required:
+      - actionType
+      - assignSubplanActionPayload
+      properties:
+        actionType:
+          description: 'The action to perform on the main plan or the subplan, in a specific scenario. Valid values:
+
+            - `Consolidate`: Combine the submitted subplan values into the main plan.
+
+            - `Submit`: Send your completed subplan to the plan coordinator for review.
+
+            - `Reopen`: Reopen consolidated subplans so subplanners can change the values.
+
+            - `StartCollaboration`: Enter collaboration mode, so you can assign subplans to subplanners.
+
+            - `EndCollaboration`:  Regain control of the plan, so you can finalize it and put it into operation.
+
+            - `AssignSubplan`: Create a new subplan anchored at a specific row in the parent plan.
+
+            '
+          type: string
+          enum:
+          - AssignSubplan
+        assignSubplanActionPayload:
+          $ref: '#/components/schemas/planning.AssignSubplansActionPayload'
+    planning.FailedShareEntry:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The username of the unsuccessful user.
+        errorCode:
+          enum:
+          - PLAN_SHARE_ERROR_UNKNOWN
+          - PLAN_SHARE_ERROR_USER_NOT_FOUND
+          - PLAN_SHARE_ERROR_PERSISTENCE_FAILURE
+          type: string
+          description: The reason that the Share action was unsuccessful.
+          format: enum
+    planning.PlanUserShareEntry:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The username of the user to share the plan with.
+        accessRight:
+          enum:
+          - Viewer
+          - Editor
+          - CoOwner
+          type: string
+          description: "The access level to grant to the user. Valid values:\n - `Viewer`: The user can view the plan but cannot make changes.\n - `Editor`: The user can view and edit the plan.\n - `CoOwner`: The user has the same rights as the plan owner, including sharing the plan."
+          format: enum
+    planning.DimensionMember:
+      type: object
+      properties:
+        segmentId:
+          type: string
+          description: The unique identifier of the dimension (for example, `Organization`).
+        memberId:
+          type: string
+          description: The unique identifier of the member within the dimension (for example, `[Organization].[Finance Americas]`).
+      description: A dimension member that identifies a position along one dimension in a plan's segmentation.
+      required:
+      - segmentId
+      - memberId
+    planning.EndCollaborationActionPayload:
+      type: object
+      properties:
+        actionWhenUnconsolidatedPlansExists:
+          enum:
+          - Ignore
+          - Revert
+          type: string
+          description: "The action to take when there are unconsolidated subplans for the main plan. Valid values:\n - `Ignore`: Ignore unconsolidated subplans.\n - `Revert`: Ignore all subplans and revert plan values to the state prior to the start of collaboration."
+          format: enum
+      description: The details of ending a collaboration project.
+    PlanPatchStartCollaborationActionRequest:
+      type: object
+      title: Start Collaboration on a plan
+      required:
+      - actionType
+      - startCollaborationActionPayload
+      properties:
+        actionType:
+          description: 'The action to perform on the main plan or the subplan, in a specific scenario. Valid values:
+
+            - `Consolidate`: Combine the submitted subplan values into the main plan.
+
+            - `Submit`: Send your completed subplan to the plan coordinator for review.
+
+            - `Reopen`: Reopen consolidated subplans so subplanners can change the values.
+
+            - `StartCollaboration`: Enter collaboration mode, so you can assign subplans to subplanners.
+
+            - `EndCollaboration`:  Regain control of the plan, so you can finalize it and put it into operation.
+
+            - `AssignSubplan`: Create a new subplan anchored at a specific row in the parent plan.
+
+            '
+          type: string
+          enum:
+          - StartCollaboration
+        startCollaborationActionPayload:
+          $ref: '#/components/schemas/planning.StartCollaborationActionPayload'
+    planning.StartCollaborationActionPayload:
+      type: object
+      properties:
+        startDate:
+          type: string
+          description: The start date of the collaboration. The default is today. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
+        dueDate:
+          type: string
+          description: The due date of the collaboration. The default is 14 days since the start date. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
+      description: The details of starting a collaboration project.
   securitySchemes:
     CookieAuth:
       type: apiKey

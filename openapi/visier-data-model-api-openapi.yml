@@ -14,14 +14,32 @@ security:
 - ApiKeyAuth: []
   OAuth2Auth: []
 tags:
-- name: DataModel
+- name: Data Model
   x-displayName: Data Model
-  description: "Discover the objects that make up your Visier solution and provide detailed information on the object's schema.\nYou can retrieve detailed information about objects in Visier by retrieving a list of all objects or retrieving information about an object by object ID.\nThe types of objects you can retrieve using the data model API are:\n  * Analytic objects\n  * Properties\n  * Dimensions\n  * Selection concepts\n  * Metrics\n  * Predictions\n  * Vee sample questions and categories"
+  description: 'Discover the objects that make up your Visier solution and provide detailed information on the object''s schema.
+
+    You can retrieve detailed information about objects in Visier by retrieving a list of all objects or retrieving information about an object by object ID.
+
+    The types of objects you can retrieve using the data model API are:
+
+    * Analytic objects
+
+    * Properties
+
+    * Dimensions
+
+    * Selection concepts
+
+    * Metrics
+
+    * Predictions
+
+    * Vee sample questions and categories'
 paths:
   /v1/data/model/analytic-objects:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a list of analytic objects
       description: Retrieve all the analytic objects in your Visier solution.
       operationId: DataModel_AnalyticObjects
@@ -65,7 +83,7 @@ paths:
   /v1/data/model/analytic-objects/{id}:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve an analytic object by ID
       description: If you know the ID of an analytic object, use this API to retrieve that object specifically.
       operationId: DataModel_AnalyticObject
@@ -103,7 +121,7 @@ paths:
   /v1/data/model/analytic-objects/{id}/metrics:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a list of metrics for an analytic object by ID
       description: If you know the ID of an analytic object, use this API to retrieve metrics for that object specifically.
       operationId: DataModel_AnalyticMetrics
@@ -141,7 +159,7 @@ paths:
   /v1/data/model/analytic-objects/{objectId}/dimensions:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a list of dimensions
       description: Retrieve a list of dimensions for a specific analytic object.
       operationId: DataModel_Dimensions
@@ -186,9 +204,13 @@ paths:
   /v1/data/model/analytic-objects/{objectId}/dimensions/{dimensionId}/mappings/validate:
     post:
       tags:
-      - DataModel
+      - Data Model
       summary: Validate a member map's unmapped dimension members by ID
-      description: "If you know the ID of a member map, use this API to validate one of the member map's dimensions. \n You must also know the dimension's ID and the analytic object's ID. \n The response returns the member map ID, the requested dimension ID, a list of the dimension's unmapped members, and a list of errors found."
+      description: 'If you know the ID of a member map, use this API to validate one of the member map''s dimensions.
+
+        You must also know the dimension''s ID and the analytic object''s ID.
+
+        The response returns the member map ID, the requested dimension ID, a list of the dimension''s unmapped members, and a list of errors found.'
       operationId: DataModel_DimensionMemberMapValidation
       parameters:
       - name: objectId
@@ -236,9 +258,27 @@ paths:
   /v1/data/model/analytic-objects/{objectId}/dimensions/{dimensionId}/members:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a list of dimension members
-      description: "If you know the ID of a dimension, use this API to retrieve the members of that dimension specifically. You must\n also know the analytic object's ID. Dimension members exist in a hierarchy. The levels in the hierarchy may be\n fixed or non-uniform. Leveled dimensions have fixed hierarchies, while parent-child dimensions have non-uniform\n levels. When you retrieve dimension members with this API, the response returns the level of the dimension and the\n path to get to that level. For example, in a Location dimension, Vancouver is 3 levels deep:\n\n - All > Canada > British Columbia > Vancouver\n\n Parent-child hierarchies are non-uniform and exhibit distinct characteristics such as time dependence and data\n attributes. These traits reflect the dynamic nature of hierarchies, for example, organizational hierarchies. The API\n response includes elements that express the validity ranges for retrieved members."
+      description: 'If you know the ID of a dimension, use this API to retrieve the members of that dimension specifically. You must
+
+        also know the analytic object''s ID. Dimension members exist in a hierarchy. The levels in the hierarchy may be
+
+        fixed or non-uniform. Leveled dimensions have fixed hierarchies, while parent-child dimensions have non-uniform
+
+        levels. When you retrieve dimension members with this API, the response returns the level of the dimension and the
+
+        path to get to that level. For example, in a Location dimension, Vancouver is 3 levels deep:
+
+
+        - All > Canada > British Columbia > Vancouver
+
+
+        Parent-child hierarchies are non-uniform and exhibit distinct characteristics such as time dependence and data
+
+        attributes. These traits reflect the dynamic nature of hierarchies, for example, organizational hierarchies. The API
+
+        response includes elements that express the validity ranges for retrieved members.'
       operationId: DataModel_Members
       parameters:
       - name: objectId
@@ -325,7 +365,7 @@ paths:
   /v1/data/model/analytic-objects/{objectId}/dimensions/{dimensionId}/members/{id}:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a dimension member
       description: If you know the ID of a dimension member, use this API to retrieve that dimension member specifically. You must also know the dimension's ID and the analytic object's ID.
       operationId: DataModel_Member
@@ -379,7 +419,7 @@ paths:
   /v1/data/model/analytic-objects/{objectId}/dimensions/{id}:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a dimension by ID
       description: If you know the ID of a dimension, use this API to retrieve that dimension specifically. You must also know the analytic object's ID.
       operationId: DataModel_Dimension
@@ -423,7 +463,7 @@ paths:
   /v1/data/model/analytic-objects/{objectId}/properties:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a list of properties
       description: Retrieve a list of properties for a specific analytic object.
       operationId: DataModel_Properties
@@ -468,7 +508,7 @@ paths:
   /v1/data/model/analytic-objects/{objectId}/properties/{id}:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a property by ID
       description: If you know the ID of a property, use this API to retrieve that property specifically. You must also know the analytic object's ID..
       operationId: DataModel_Property
@@ -514,7 +554,7 @@ paths:
   /v1/data/model/analytic-objects/{objectId}/selection-concepts:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve an analytic object's selection concepts
       description: Retrieve a list of selection concepts for a specific analytic object.
       operationId: DataModel_SelectionConcepts
@@ -559,7 +599,7 @@ paths:
   /v1/data/model/analytic-objects/{objectId}/selection-concepts/{id}:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve an analytic object's selection concept by ID
       description: If you know the ID of a selection concept, use this API to retrieve that selection concept specifically. You must also know the analytic object's ID.
       operationId: DataModel_SelectionConcept
@@ -603,7 +643,7 @@ paths:
   /v1/data/model/currencies:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve all currencies
       description: Retrieve all the available currencies in your Visier solution.
       operationId: DataModel_Currencies
@@ -635,7 +675,7 @@ paths:
   /v1/data/model/currencies/{id}:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a currency
       description: Retrieve a specific currency if you know the currency code.
       operationId: DataModel_Currency
@@ -673,9 +713,11 @@ paths:
   /v1/data/model/currencies/{id}/rates:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve all exchange rates for a currency
-      description: "Retrieve exchange rates for a specific currency from Visier.\n You can optionally specify query parameter options for the returned rates, such as the number of decimals to round the exchange rate to."
+      description: 'Retrieve exchange rates for a specific currency from Visier.
+
+        You can optionally specify query parameter options for the returned rates, such as the number of decimals to round the exchange rate to.'
       operationId: DataModel_CurrencyRates
       parameters:
       - name: id
@@ -726,9 +768,11 @@ paths:
   /v1/data/model/currencies/{id}/rates/{toId}:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve exchange rates from one currency to another currency
-      description: "Retrieve exchange rates from a specific currency to another specific currency.\n You can optionally specify query parameter options for the returned rates, such as the number of decimals to round the exchange rate to."
+      description: 'Retrieve exchange rates from a specific currency to another specific currency.
+
+        You can optionally specify query parameter options for the returned rates, such as the number of decimals to round the exchange rate to.'
       operationId: DataModel_CurrencyRatesWithToCurrency
       parameters:
       - name: id
@@ -785,9 +829,11 @@ paths:
   /v1/data/model/dimensions:
     patch:
       tags:
-      - DataModel
+      - Data Model
       summary: Update dimensions
-      description: "Change the display name, short display name, and description of one or more dimensions. This API supports updating leveled dimensions.\n In each API request, update up to 10 dimensions per tenant with a maximum of 500 tenants."
+      description: 'Change the display name, short display name, and description of one or more dimensions. This API supports updating leveled dimensions.
+
+        In each API request, update up to 10 dimensions per tenant with a maximum of 500 tenants.'
       operationId: DataModel_UpdateDimensions
       parameters:
       - name: TargetTenantID
@@ -823,7 +869,7 @@ paths:
   /v1/data/model/metrics:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a list of metrics
       description: Retrieve all the metrics in your Visier solution.
       operationId: DataModel_Metrics
@@ -867,7 +913,7 @@ paths:
   /v1/data/model/metrics/{id}:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a metric by ID
       description: If you know the ID of a metric, use this API to retrieve that metric specifically.
       operationId: DataModel_Metric
@@ -905,7 +951,7 @@ paths:
   /v1/data/model/metrics/{metricId}/dimensions:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a metric's dimensions
       description: Retrieve a list of dimensions for a specific metric.
       operationId: DataModel_MetricDimensions
@@ -950,7 +996,7 @@ paths:
   /v1/data/model/metrics/{metricId}/selection-concepts:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a metric's selection concepts
       description: Retrieve a list of selection concepts for a specific metric.
       operationId: DataModel_MetricSelectionConcepts
@@ -995,7 +1041,7 @@ paths:
   /v1/data/model/plan-models:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a list of planning models
       description: Retrieve all the planning models you have access to.
       operationId: DataModel_PlanningModels
@@ -1034,7 +1080,7 @@ paths:
   /v1/data/model/plan-models/{id}:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a planning model by ID
       description: Retrieve a specific planning model you have access to.
       operationId: DataModel_PlanningModel
@@ -1072,7 +1118,7 @@ paths:
   /v1/data/model/plan-models/{id}/metrics:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve metrics by planning model ID
       description: Retrieve all the metrics you have access to for a planning model.
       operationId: DataModel_PlanningMetrics
@@ -1110,7 +1156,7 @@ paths:
   /v1/data/model/plan-models/{modelId}/plans:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a list of plans by planning model ID
       description: Retrieve all the plans you have access to for a planning model.
       operationId: DataModel_PlanningPlans
@@ -1155,7 +1201,7 @@ paths:
   /v1/data/model/plan-models/{modelId}/plans/{id}:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a plan by planning model ID and plan ID
       description: Retrieve a specific plan that you have access to in a planning model.
       operationId: DataModel_PlanningPlan
@@ -1199,7 +1245,7 @@ paths:
   /v1/data/model/predictions:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a list of predictions
       description: Retrieve all the predictions in your Visier solution.
       operationId: DataModel_Predictions
@@ -1238,7 +1284,7 @@ paths:
   /v1/data/model/predictions/{id}:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a prediction by ID
       description: If you know the ID of a prediction, use this API to retrieve that prediction specifically.
       operationId: DataModel_Prediction
@@ -1276,9 +1322,15 @@ paths:
   /v1/data/model/properties:
     put:
       tags:
-      - DataModel
+      - Data Model
       summary: Replace properties
-      description: "Update existing properties by replacing their entire definition. The definition in your API call replaces the property's prior definition. You must provide the entire definition in the PUT call. If you omit values from the update request, those values are removed from the property. We recommend that you retrieve a property's details before you update the property with new values. This operation does not create new properties if they do not exist.\n In each API request, update up to 10 properties per tenant with a maximum of 500 tenants.\n To specify the tenant in which to update a property, administrating tenants can provide an analytic tenant code in the `TargetTenantID` request header or `tenantCode` for each property in the request body.\n To specify the project in which to update properties, provide a project UUID in the `ProjectID` request header or `projectId` for each property in the request body."
+      description: 'Update existing properties by replacing their entire definition. The definition in your API call replaces the property''s prior definition. You must provide the entire definition in the PUT call. If you omit values from the update request, those values are removed from the property. We recommend that you retrieve a property''s details before you update the property with new values. This operation does not create new properties if they do not exist.
+
+        In each API request, update up to 10 properties per tenant with a maximum of 500 tenants.
+
+        To specify the tenant in which to update a property, administrating tenants can provide an analytic tenant code in the `TargetTenantID` request header or `tenantCode` for each property in the request body.
+
+        To specify the project in which to update properties, provide a project UUID in the `ProjectID` request header or `projectId` for each property in the request body.'
       operationId: DataModel_PutProperties
       parameters:
       - name: TargetTenantID
@@ -1313,7 +1365,7 @@ paths:
                 $ref: '#/components/schemas/servicing.objectconfiguration.ObjectsBulkChangeResponseDTO'
     post:
       tags:
-      - DataModel
+      - Data Model
       summary: Create properties
       description: Create new properties. Administrating tenant users can specify the tenant in which to add these properties.
       operationId: DataModel_CreateProperties
@@ -1350,9 +1402,11 @@ paths:
                 $ref: '#/components/schemas/servicing.objectconfiguration.ObjectsBulkChangeResponseDTO'
     delete:
       tags:
-      - DataModel
+      - Data Model
       summary: Delete properties
-      description: "Delete existing properties. Administrating tenant users can specify the tenant in which to delete the properties.\n In each API request, delete up to 10 properties per tenant with a maximum of 500 tenants."
+      description: 'Delete existing properties. Administrating tenant users can specify the tenant in which to delete the properties.
+
+        In each API request, delete up to 10 properties per tenant with a maximum of 500 tenants.'
       operationId: DataModel_DeleteProperties
       parameters:
       - name: TargetTenantID
@@ -1387,7 +1441,7 @@ paths:
                 $ref: '#/components/schemas/servicing.objectconfiguration.PropertyBulkDeleteResponseDTO'
     patch:
       tags:
-      - DataModel
+      - Data Model
       summary: Update properties
       description: Change the display name, short display name, and description of one or more properties. In each API request, update up to 10 properties per tenant with a maximum of 500 tenants.
       operationId: DataModel_UpdateProperties
@@ -1425,7 +1479,7 @@ paths:
   /v1/data/model/vee/sample-question-categories:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a list of all Vee question categories
       description: Get a list of all categories for Vee sample questions. Administrating tenants can specify the tenant from which to retrieve categories using the `TargetTenantID` header.
       operationId: DataModel_GetVeeSampleQuestionCategories
@@ -1450,9 +1504,12 @@ paths:
                 $ref: '#/components/schemas/servicing.QuestionCategoriesAPIResponseDTO'
     put:
       tags:
-      - DataModel
+      - Data Model
       summary: Update Vee question categories
-      description: "Update existing Vee sample question categories, such as its display name or icon. Administrating tenants can specify the tenant in which to update categories using the `TargetTenantID` header.\n\n When updating categories, the category definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values for optional fields from the update request, the values reset to their respective default value. We recommend that you retrieve a category's details before you update the category with new values."
+      description: 'Update existing Vee sample question categories, such as its display name or icon. Administrating tenants can specify the tenant in which to update categories using the `TargetTenantID` header.
+
+
+        When updating categories, the category definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values for optional fields from the update request, the values reset to their respective default value. We recommend that you retrieve a category''s details before you update the category with new values.'
       operationId: DataModel_PutVeeSampleQuestionCategories
       parameters:
       - name: TargetTenantID
@@ -1487,7 +1544,7 @@ paths:
                 $ref: '#/components/schemas/servicing.VeeQuestionCategoriesBulkChangeResponseDTO'
     post:
       tags:
-      - DataModel
+      - Data Model
       summary: Create Vee question categories
       description: Create new sample question categories for Vee sample questions. Administrating tenants can specify the tenant in which to add sample question categories using the `TargetTenantID` header.
       operationId: DataModel_CreateVeeSampleQuestionCategories
@@ -1524,7 +1581,7 @@ paths:
                 $ref: '#/components/schemas/servicing.VeeQuestionCategoriesBulkChangeResponseDTO'
     delete:
       tags:
-      - DataModel
+      - Data Model
       summary: Delete Vee question categories
       description: Delete existing Vee sample question categories. Administrating tenants can specify the tenant in which to delete categories using the `TargetTenantID` header.
       operationId: DataModel_DeleteVeeSampleQuestionCategories
@@ -1561,9 +1618,12 @@ paths:
                 $ref: '#/components/schemas/servicing.VeeQuestionCategoriesBulkChangeResponseDTO'
     patch:
       tags:
-      - DataModel
+      - Data Model
       summary: Partially update Vee question categories
-      description: "Make partial changes to Vee sample question categories. Administrating tenants can specify the tenant in which to patch categories using the `TargetTenantID` header.\n\n Unlike a `PUT` call, which completely replaces the sample question category definition, use `PATCH` to change specific fields in the category without affecting omitted fields."
+      description: 'Make partial changes to Vee sample question categories. Administrating tenants can specify the tenant in which to patch categories using the `TargetTenantID` header.
+
+
+        Unlike a `PUT` call, which completely replaces the sample question category definition, use `PATCH` to change specific fields in the category without affecting omitted fields.'
       operationId: DataModel_UpdateVeeSampleQuestionCategories
       parameters:
       - name: TargetTenantID
@@ -1599,7 +1659,7 @@ paths:
   /v1/data/model/vee/sample-question-categories/{questionCategoryId}:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a Vee question category's details
       description: Get the details of a specific Vee sample question category where the ID is the `categoryID` returned by `GET /v1/data/model/vee/sample-question-categories`.
       operationId: DataModel_GetVeeSampleQuestionCategory
@@ -1631,7 +1691,7 @@ paths:
   /v1/data/model/vee/sample-questions:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a list of all Vee sample questions
       description: Get a list of all Vee sample questions for a tenant, including sample questions that are not available to end users. Administrating tenants can specify the tenant from which to retrieve sample questions using the `TargetTenantID` header.
       operationId: DataModel_GetVeeSampleQuestions
@@ -1662,9 +1722,11 @@ paths:
                 $ref: '#/components/schemas/servicing.SampleQuestionsAPIResponseDTO'
     put:
       tags:
-      - DataModel
+      - Data Model
       summary: Update Vee sample questions
-      description: "Update existing sample questions, such as its question category or whether the question is visible in Vee. Administrating tenants can specify the tenant in which to update sample questions using the `TargetTenantID` header.\n When updating sample questions, the question definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values for optional fields from the update request, the values reset to their respective default value. We recommend that you retrieve a question's details before you update the question with new values."
+      description: 'Update existing sample questions, such as its question category or whether the question is visible in Vee. Administrating tenants can specify the tenant in which to update sample questions using the `TargetTenantID` header.
+
+        When updating sample questions, the question definition in your API call replaces the prior definition. You must provide the entire definition in the `PUT` call. If you omit values for optional fields from the update request, the values reset to their respective default value. We recommend that you retrieve a question''s details before you update the question with new values.'
       operationId: DataModel_PutVeeSampleQuestions
       parameters:
       - name: TargetTenantID
@@ -1699,7 +1761,7 @@ paths:
                 $ref: '#/components/schemas/servicing.VeeQuestionsBulkChangeResponseDTO'
     post:
       tags:
-      - DataModel
+      - Data Model
       summary: Add Vee sample questions
       description: Create new sample questions that your users can ask Vee. Administrating tenants can specify the tenant in which to add sample questions using the `TargetTenantID` header.
       operationId: DataModel_CreateVeeSampleQuestions
@@ -1736,7 +1798,7 @@ paths:
                 $ref: '#/components/schemas/servicing.VeeQuestionsBulkChangeResponseDTO'
     delete:
       tags:
-      - DataModel
+      - Data Model
       summary: Delete Vee sample questions
       description: Delete existing sample questions. Administrating tenants can specify the tenant in which to delete questions using the `TargetTenantID` header.
       operationId: DataModel_DeleteVeeSampleQuestions
@@ -1773,9 +1835,11 @@ paths:
                 $ref: '#/components/schemas/servicing.VeeQuestionsBulkChangeResponseDTO'
     patch:
       tags:
-      - DataModel
+      - Data Model
       summary: Patch Vee sample questions
-      description: "Make partial changes to Vee sample questions. Administrating tenants can specify the tenant in which to patch questions using the `TargetTenantID` header.\n Unlike a `PUT` call, which completely replaces the sample question definition, use `PATCH` to change specific fields in the question without affecting omitted fields."
+      description: 'Make partial changes to Vee sample questions. Administrating tenants can specify the tenant in which to patch questions using the `TargetTenantID` header.
+
+        Unlike a `PUT` call, which completely replaces the sample question definition, use `PATCH` to change specific fields in the question without affecting omitted fields.'
       operationId: DataModel_UpdateVeeSampleQuestions
       parameters:
       - name: TargetTenantID
@@ -1811,7 +1875,7 @@ paths:
   /v1/data/model/vee/sample-questions/{questionId}:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a Vee sample question's details
       description: Get the details of a specific Vee sample question where the ID is the `questionID` returned by `GET /v1/data/model/vee/sample-questions`.
       operationId: DataModel_GetVeeSampleQuestion
@@ -1849,7 +1913,7 @@ paths:
   /v1/planning/model/plans:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a list of plans
       description: Retrieve all the plans you have access to. The response returns plan information you can use to call the Plan Data Load API and Plan Administration API.
       operationId: DataModel_PlanDataLoadlList
@@ -1935,7 +1999,7 @@ paths:
   /v1/planning/model/plans/{id}:
     get:
       tags:
-      - DataModel
+      - Data Model
       summary: Retrieve a plan's details
       description: Retrieve the details of a specific plan. The response returns plan information you can use to call the Plan Data Load API.
       operationId: DataModel_PlanInfoWithSchema
@@ -1976,162 +2040,40 @@ paths:
                 $ref: '#/components/schemas/planning.PlanWithSchemaDTO'
 components:
   schemas:
-    servicing.VeeQuestionDeleteDefinitionsByTenantDTO:
+    servicing.objectconfiguration.DimensionChangeDefinitionsByTenantDTO:
       type: object
       properties:
         tenantCode:
           type: string
-          description: The code of the tenant to delete sample questions from. Default is the current tenant.
+          description: The tenant code of the tenant in which to update dimensions.
         projectId:
           type: string
-          description: The project in which to delete sample questions. If omitted and the `ProjectID` request header is not defined, the change is published to production immediately.
-        questionIds:
-          type: array
-          items:
-            type: string
-          description: The IDs of the sample questions to delete for a specific tenant.
-      description: Information about the sample question and the context of the API request, such as the tenant code and project ID.
-    servicing.VeeQuestionChangeFailureDTO:
-      type: object
-      properties:
-        question:
-          type: string
-          description: The question in plain language that was not successfully changed.
-        questionId:
-          type: string
-          description: The unique identifier of the sample question that was not successfully changed.
-        categoryId:
-          type: string
-          description: The unique identifier of the category of the sample question that was not successfully changed.
-        userGroupAssignment:
-          allOf:
-          - $ref: '#/components/schemas/servicing.UserGroupAssignmentDTO'
-          description: The user group IDs that were not successfully assigned to the sample question for spotlight.
-        message:
-          type: string
-          description: An error message describing the cause of the failure.
-        rci:
-          type: string
-          description: The root cause identifier to provide to Visier Technical Support if you require further troubleshooting.
-        tenantCode:
-          type: string
-          description: The tenant that the object was not successfully changed in.
-        projectId:
-          type: string
-          description: The project that the object was not successfully changed in.
-      description: The list of failed changes.
-    dataservices.datamodel.PropertyDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID of the property.
-        displayName:
-          type: string
-          description: The localized display name of the property.
-        description:
-          type: string
-          description: The localized description of the property.
-        dataType:
-          type: string
-          description: The data type of the property, such as Categorical, HourDuration, or Ratio.
-        primitiveDataType:
-          type: string
-          description: The primitive data type of the property, such as Number, String, or Boolean.
-        parameters:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.ParameterDefinitionDTO'
-          description: The collection of parameters defined for the property.
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.TagMapElementDTO'
-          description: The optional collection of tags defined for this element.
-        explanation:
-          type: string
-          description: The localized explanation of the property.
-      description: Properties are qualities of an analytic object.
-    servicing.objectconfiguration.ObjectsBulkChangeResponseDTO:
-      type: object
-      properties:
-        successes:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.objectconfiguration.ObjectChangeSuccessDTO'
-          description: The objects that were successfully changed.
-        failures:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.objectconfiguration.ObjectChangeFailureDTO'
-          description: The objects that were not successfully changed.
-    dataservices.datamodel.DimensionsDTO:
-      type: object
-      properties:
+          description: To make changes in a project, specify a project ID.
         dimensions:
           type: array
           items:
-            $ref: '#/components/schemas/dataservices.datamodel.DimensionDTO'
-      description: A collection of dimensions.
-    planning.GetPlanListResponseDTO:
-      type: object
-      properties:
-        plans:
-          type: array
-          items:
-            $ref: '#/components/schemas/planning.PlanInfoDTO'
-          description: A list of plans accessible to the user.
-        page:
-          type: integer
-          description: The current page number of results that the user is viewing.
-          format: int32
-      description: A collection of plans.
-    dataservices.datamodel.DimensionMappingValidationExecutionDTO:
-      type: object
-      properties:
-        memberMapId:
-          type: string
-          description: memberMapId == dimensionMapId
-        analyticObject:
-          type: string
-          description: The analytic object associated with the dimension map.
-      description: Instruction to execute a mapping validation query
-    dataservices.datamodel.PlanningModelDTO:
+            $ref: '#/components/schemas/servicing.objectconfiguration.DimensionChangeDefinitionDTO'
+          description: The list of dimensions to update.
+    dataservices.datamodel.ScenarioOrSnapshotDTO:
       type: object
       properties:
         id:
           type: string
-          description: The unique identifier of the planning model.
+          description: The identifier of the scenario or snapshot.
         displayName:
           type: string
-          description: The localized display name of the planning model.
-        description:
-          type: string
-          description: The localized description of the planning model.
-      description: The basic information about the planning model. A planning model captures the planning intent, plan items, and the relationship between them.
-    dataservices.datamodel.PlanningPlansDTO:
+          description: The scenario or snapshot display name.
+      description: The unique identifier and display name for plan scenarios and snapshots.
+    dataservices.datamodel.SelectionConceptReferenceDTO:
       type: object
       properties:
-        plans:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.PlanningPlanDTO'
-      description: A collection of plan definitions.
-    planning.PlanSegmentLevelMemberListDTO:
-      type: object
-      properties:
-        segmentLevelId:
+        name:
           type: string
-          description: The unique identifier of the dimension and dimension level.
-        members:
-          type: array
-          items:
-            $ref: '#/components/schemas/planning.PlanSegmentLevelMemberDTO'
-          description: The dimension members.
-        segmentId:
+          description: The ID of the selection concept.
+        qualifyingPath:
           type: string
-          description: The unique identifier of the dimension.
-      description: A collection of dimension members.
+          description: "The qualifying path to the selection concept in Visier, such as the analytic object or event the selection\n concept is associated with. If the path has multiple objects, each object is separated by a period."
+      description: The name and qualifying path of a selection concept to query.
     servicing.SampleQuestionAPIResponseDTO:
       type: object
       properties:
@@ -2156,6 +2098,685 @@ components:
           - $ref: '#/components/schemas/servicing.VersionInformationDTO'
           description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
       description: Information about the sample question.
+    servicing.VeeQuestionsDeleteDefinitionsDTO:
+      type: object
+      properties:
+        questionsByTenant:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.VeeQuestionDeleteDefinitionsByTenantDTO'
+          description: The sample questions to delete for each tenant.
+      description: The Vee sample question to delete.
+    servicing.VeeQuestionsChangeDefinitionsDTO:
+      type: object
+      properties:
+        questionsByTenant:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.VeeQuestionChangeDefinitionsByTenantDTO'
+          description: The Vee sample question updates to make in each tenant.
+      description: The changes to Vee sample questions.
+    dataservices.datamodel.PlanningPlanDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the plan.
+        name:
+          type: string
+          description: The name of the plan.
+        subjectId:
+          type: string
+          description: The ID of subject for the plan.
+        defaultContexts:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.PlanningPlanContextDTO'
+          description: The contexts defined for the plan.
+        planDimensionIds:
+          type: array
+          items:
+            type: string
+          description: The IDs of the dimensions defined for the plan.
+        scenarios:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.ScenarioOrSnapshotDTO'
+          description: The available scenarios for the plan.
+        snapshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.ScenarioOrSnapshotDTO'
+          description: The available snapshots for the plan.
+      description: The definition of a plan. Plans are defined on planning models, and each plan may define multiple scenarios or snapshots.
+    dataservices.datamodel.PlanParameterDefinitionDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the parameter.
+        displayName:
+          type: string
+          description: The localized display name of the parameter.
+        description:
+          type: string
+          description: The localized description of the parameter.
+        modelName:
+          type: string
+          description: The name of the planning model to which the parameter applies.
+      description: "The definition of a plan parameter. These parameters resolve planning model metrics to a specific plan and scenario\n or snapshot values at query runtime."
+    dataservices.datamodel.PlanningModelsDTO:
+      type: object
+      properties:
+        models:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.PlanningModelDTO'
+      description: A collection of planning modules.
+    dataservices.datamodel.PropertyReferenceDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The ID of the property.
+        qualifyingPath:
+          type: string
+          description: "The qualifying path to the property in Visier, such as the analytic object or event the property is associated with.\n If the path has multiple objects, each object is separated by a period."
+      description: The name and qualifying path of a property to query.
+    dataservices.datamodel.PlanningPlanContextDTO:
+      type: object
+      properties:
+        hierarchyFilterContext:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.PlanningHierarchyFilterContextDTO'
+          description: A plan context defined using hierarchy members.
+        conceptFilterContext:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.PlanningConceptFilterContextDTO'
+          description: A plan context defined using a selection concept.
+      description: The filter context for a plan. Plan contexts are defined using a set of hierarchy members or a concept.
+    dataservices.datamodel.PlanningPlansDTO:
+      type: object
+      properties:
+        plans:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.PlanningPlanDTO'
+      description: A collection of plan definitions.
+    servicing.objectconfiguration.ObjectChangeFailureDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The symbol name of the object that was not successfully changed.
+        displayName:
+          type: string
+          description: The display name of the object.
+        message:
+          type: string
+          description: An error message describing the cause of the failure.
+        rci:
+          type: string
+          description: The root cause identifier to provide to Visier Technical Support if you require further troubleshooting.
+        tenantCode:
+          type: string
+          description: The tenant that the object was not successfully changed in.
+        projectId:
+          type: string
+          description: The project that the object was not successfully changed in.
+    dataservices.datamodel.PropertiesDTO:
+      type: object
+      properties:
+        properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.PropertyDTO'
+      description: A collection of properties.
+    servicing.VeeQuestionCategoryChangeDefinitionDTO:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: A name in plain language to display in Vee.
+        categoryId:
+          type: string
+          description: The unique identifier of the question category. Omit if creating a new question category.
+        categoryIcon:
+          allOf:
+          - $ref: '#/components/schemas/servicing.CategoryIconDTO'
+          description: The icon for the question category.
+      description: The Vee question category details.
+    dataservices.datamodel.CurrencyRateDTO:
+      type: object
+      properties:
+        fromCurrencyCode:
+          type: string
+          description: "The currency to convert **from**.\n **Note:** If USD is the `fromCurrencyCode`, you are retrieving the exchange rates from USD to a different currency."
+        toCurrencyCode:
+          type: string
+          description: "The currency to convert **to**.\n **Note:** If USD is the `toCurrencyCode`, you are retrieving the exchange rates from a different currency to USD."
+        rate:
+          type: number
+          description: "The numeric value of the exchange rate.\n **Note:** If **decimals** is specified, rate rounds to that value. If **decimals** is undefined, **rate** rounds to 2 significant figures after the decimal point."
+          format: double
+        startTime:
+          type: string
+          description: "The earliest time instant to retrieve exchange rates from.\n **Note:** Format is the number of milliseconds since Jan 1, 1970 12:00 AM UTC."
+        endTime:
+          type: string
+          description: "The latest time instant to retrieve exchange rates from.\n **Note:** Format is the number of milliseconds since Jan 1, 1970 12:00 AM UTC."
+      description: Information about a currency exchange rate.
+    servicing.VeeQuestionCategoriesDeleteDefinitionsDTO:
+      type: object
+      properties:
+        categoriesByTenant:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.VeeQuestionCategoryDeleteDefinitionsByTenantDTO'
+          description: The question categories to delete for each tenant.
+      description: The Vee question categories to delete.
+    dataservices.datamodel.PlanningHierarchyFilterContextDTO:
+      type: object
+      properties:
+        hierarchyName:
+          type: string
+          description: The object name of the hierarchy.
+        includedMembers:
+          type: array
+          items:
+            type: string
+          description: The unique IDs of the included dimension members.
+        excludedMembers:
+          type: array
+          items:
+            type: string
+          description: The unique IDs of excluded dimension members.
+      description: A plan context defined using hierarchy members
+    planning.PlanDataLoadErrorDTO:
+      type: object
+      properties:
+        row:
+          type: integer
+          description: The row in the file that caused the error.
+          format: int32
+        rci:
+          type: string
+          description: An error code that can be provided to Visier Support to help investigate your issue.
+        errorMessage:
+          type: string
+          description: Information regarding the error and any actions that you could take to load the data correctly.
+      description: An error encountered while loading plan data.
+    servicing.objectconfiguration.PropertyDeleteFailureDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the property.
+        displayName:
+          type: string
+          description: The display name of the property.
+        message:
+          type: string
+          description: An error message describing the cause of the failure.
+        rci:
+          type: string
+          description: The root cause identifier to provide to Visier Technical Support if you require further troubleshooting.
+        tenantCode:
+          type: string
+          description: The tenant in which the property wasn't deleted.
+        projectId:
+          type: string
+          description: The project in which the property wasn't deleted.
+        derivedDependentsToDelete:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.objectconfiguration.DependentDTO'
+          description: The derived dependents that would have been deleted if the deletion was successful.
+        referenceDependentsToIgnore:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.objectconfiguration.DependentDTO'
+          description: Dependents that reference this property and could be affected.
+      description: Details about a failed property deletion.
+    servicing.VeeQuestionChangeDefinitionsByTenantDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant code of the tenant in which to update sample questions.
+        projectId:
+          type: string
+          description: To make changes in a project, specify a project ID.
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.VeeQuestionChangeDefinitionDTO'
+          description: The list of sample questions to update.
+      description: Information about the sample question and the context of the API request, such as the tenant code and project ID.
+    dataservices.datamodel.CurrenciesDTO:
+      type: object
+      properties:
+        currencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.CurrencyDTO'
+          description: The list of available currencies.
+        tenantReportingCurrencyCode:
+          type: string
+          description: The tenant's default reporting currency in ISO 4217 3-letter format, if set.
+        userPreferredCurrencyCode:
+          type: string
+          description: The user's preferred currency in ISO 4217 3-letter format, if set.
+      description: A collection of currencies.
+    servicing.objectconfiguration.ObjectsBulkChangeResponseDTO:
+      type: object
+      properties:
+        successes:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.objectconfiguration.ObjectChangeSuccessDTO'
+          description: The objects that were successfully changed.
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.objectconfiguration.ObjectChangeFailureDTO'
+          description: The objects that were not successfully changed.
+    dataservices.datamodel.SelectionConceptsDTO:
+      type: object
+      properties:
+        selectionConcepts:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.SelectionConceptDTO'
+      description: A collection of selection concepts
+    planning.PlanSchemaDTO:
+      type: object
+      properties:
+        planItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.PlanItemDTO'
+          description: A collection of editable plan items in a plan.
+        timePeriods:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.PlanTimePeriodDTO'
+          description: The editable time periods in a plan. These time periods are the columns in the planning grid.
+        planSegmentLevels:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.PlanSegmentLevelDTO'
+          description: The dimensions that the plan is segmented by.
+        planSegmentLevelMembers:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.PlanSegmentLevelMemberListDTO'
+          description: "A collection of members grouped by their dimension and level.\n The combination of these member IDs points to a specific row in the plan."
+        planContext:
+          allOf:
+          - $ref: '#/components/schemas/planning.PlanContextDTO'
+          description: "The context the plan is scoped to, with each context member's full ancestor path expanded top-down. For example, a plan might be scoped to women, with a location segmentation down to the state and city levels, and organization levels one to three.\n Omitted for top-level plans that have no context."
+      description: Information about a plan's schema.
+    planning.CollaborationInfo:
+      type: object
+      properties:
+        scenarioId:
+          type: string
+          description: The unique identifier of the scenario used in the collaboration.
+        startDate:
+          type: string
+          description: The start date of the collaboration. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
+        dueDate:
+          type: string
+          description: The due date of the collaboration. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
+        updatedDate:
+          type: string
+          description: The date the collaboration was last updated.
+        status:
+          enum:
+          - Closed
+          - Open
+          type: string
+          description: "The status of the collaboration. Valid values:\n - `Closed`: The collaboration is closed.\n - `Open`: The collaboration is open."
+          format: enum
+      description: Information about the plan's collaborations.
+    dataservices.datamodel.PlanningModelDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the planning model.
+        displayName:
+          type: string
+          description: The localized display name of the planning model.
+        description:
+          type: string
+          description: The localized description of the planning model.
+      description: The basic information about the planning model. A planning model captures the planning intent, plan items, and the relationship between them.
+    servicing.VeeQuestionCategoryChangeDefinitionsByTenantDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant code of the tenant in which to update question categories.
+        projectId:
+          type: string
+          description: To make changes in a project, specify a project ID.
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.VeeQuestionCategoryChangeDefinitionDTO'
+          description: The Vee question categories to update.
+      description: Information about the question category and the context of the API request, such as the tenant code and project ID.
+    dataservices.datamodel.AnalyticObjectDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the analytic object.
+        displayName:
+          type: string
+          description: The localized display name of the analytic object.
+        description:
+          type: string
+          description: The localized description of the analytic object.
+        type:
+          enum:
+          - SUBJECT
+          - EVENT
+          - OVERLAY
+          type: string
+          description: 'The analytic object type: `SUBJECT`, `EVENT`, or `OVERLAY`.'
+          format: enum
+        dataStartDate:
+          type: string
+          description: "The date from which data becomes available for this analytic object.\n Note: Format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.\n Epochs are expressed as 64-bit integers and represented as stringified longs in JSON due to JSON's inherent\n limitation in representing large numbers."
+        dataEndDate:
+          type: string
+          description: "The date from which data is no longer available for this analytic object.\n Note: Format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.\n Epochs are expressed as 64-bit integers and represented as stringified longs in JSON due to JSON's inherent\n limitation in representing large numbers."
+        propertyIds:
+          type: array
+          items:
+            type: string
+          description: A list of strings representing IDs of the properties that belong to this analytic object.
+        dimensionIds:
+          type: array
+          items:
+            type: string
+          description: A list of strings representing IDs of the dimensions that belong to this analytic object.
+        selectionConceptIds:
+          type: array
+          items:
+            type: string
+          description: "A list of strings representing IDs of the selection concepts that belong to this analytic object.\n Note: If there are no selection concepts, this field is omitted."
+        objectReferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.ObjectReferenceDTO'
+          description: "A list of references from this analytic object to other analytic objects.\n Note: If there are no references, this field is omitted."
+        populationConfiguration:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.PopulationConfigurationDTO'
+          description: "A set of property and dimension references configured by Visier or an administrator to tell the platform what\n properties and dimensions to use when doing population insight calculations. These are the distinguishing\n properties, change history properties, and grouping dimensions to use in AI insights. This field is optional and\n is only available for subjects."
+        defaultSelectionConcept:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.SelectionConceptReferenceDTO'
+          description: "The selection concept to use as the default filter in visualizations using this analytic object. Useful for \n filtering visuals to a context that users understand. Returns the object name and the qualifying path to the \n related analytic object. Not returned if no default filter is configured."
+      description: Analytic objects are the various items that users can analyze in Visier. Analytic objects include subjects, events, and overlays.
+    dataservices.datamodel.DimensionMappingValidationExecutionDTO:
+      type: object
+      properties:
+        memberMapId:
+          type: string
+          description: memberMapId == dimensionMapId
+        analyticObject:
+          type: string
+          description: The analytic object associated with the dimension map.
+      description: Instruction to execute a mapping validation query
+    servicing.VeeQuestionChangeSuccessDTO:
+      type: object
+      properties:
+        question:
+          type: string
+          description: The sample question in plain language that was successfully changed.
+        questionId:
+          type: string
+          description: The unique identifier of the sample question that was successfully changed.
+        visibleInVee:
+          type: boolean
+          description: If `true`, the question is visible in Vee.
+        categoryId:
+          type: string
+          description: The unique identifier of the category of the question that was successfully changed.
+        userGroupAssignment:
+          allOf:
+          - $ref: '#/components/schemas/servicing.UserGroupAssignmentDTO'
+          description: The user group IDs that were successfully assigned to the sample question for spotlight.
+        tenantCode:
+          type: string
+          description: The tenant that the sample question was changed in.
+        projectId:
+          type: string
+          description: The project that the sample question was changed in.
+      description: The list of successful changes.
+    servicing.VeeQuestionDeleteDefinitionsByTenantDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The code of the tenant to delete sample questions from. Default is the current tenant.
+        projectId:
+          type: string
+          description: The project in which to delete sample questions. If omitted and the `ProjectID` request header is not defined, the change is published to production immediately.
+        questionIds:
+          type: array
+          items:
+            type: string
+          description: The IDs of the sample questions to delete for a specific tenant.
+      description: Information about the sample question and the context of the API request, such as the tenant code and project ID.
+    planning.PlanSegmentLevelMemberListDTO:
+      type: object
+      properties:
+        segmentLevelId:
+          type: string
+          description: The unique identifier of the dimension and dimension level.
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.PlanSegmentLevelMemberDTO'
+          description: The dimension members.
+        segmentId:
+          type: string
+          description: The unique identifier of the dimension.
+      description: A collection of dimension members.
+    servicing.objectconfiguration.PropertyChangeDefinitionsByTenantDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant code of the tenant in which to update properties.
+        projectId:
+          type: string
+          description: To make changes in a project, specify a project ID.
+        properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.objectconfiguration.PropertyChangeDefinitionDTO'
+          description: The list of properties to update.
+    dataservices.datamodel.MetricDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the metric.
+        displayName:
+          type: string
+          description: The localized display name of the metric.
+        description:
+          type: string
+          description: The localized description of the metric.
+        dataStartDate:
+          type: string
+          description: "The date from which data becomes available for this metric.\n Note: Format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.\n Epochs are expressed as 64-bit integers and represented as stringified longs in JSON due to JSON's inherent\n limitation in representing large numbers."
+        dataEndDate:
+          type: string
+          description: "The date from which data is no longer available for this metric.\n Note: Format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.\n Epochs are expressed as 64-bit integers and represented as stringified longs in JSON due to JSON's inherent\n limitation in representing large numbers."
+        analyticObjectId:
+          type: string
+          description: The unique ID of the analytic object.
+        parameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.ParameterDefinitionDTO'
+          description: The collection of parameters defined for the metric.
+        category:
+          enum:
+          - REGULAR
+          - DERIVED
+          - PLANNING
+          type: string
+          description: 'The category of the metric. Will be one of: `REGULAR`, `DERIVED` or `PLANNING`.'
+          format: enum
+        visibleInApp:
+          type: boolean
+          description: // If `true`, the metric is visible to end users in the solution.
+        dataType:
+          type: string
+          description: "The metric's data type. Valid values:\n\n Custom data types, `Number`, `Integer`, `Ordinal`, `Categorical`, `Currency`, `Boolean`, `Percent`,\n `IntegerPercent`, `PercentNoScaling`, `PercentagePoint`, `String`, `Text`, `LargeText`,\n `Date`, `HourDuration`, `DayDuration`, `MonthDuration`, `YearDuration`."
+      description: A metric is a calculation based on one or more attribute values of analytic objects.
+    servicing.objectconfiguration.PropertyDeleteDefinitionsByTenantDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The code of the tenant to delete properties from. Default is the current tenant.
+        projectId:
+          type: string
+          description: The project in which to delete properties. If omitted and the ProjectID request header is not defined, the change is published to production immediately.
+        propertyIds:
+          type: array
+          items:
+            type: string
+          description: The IDs of the properties to delete.
+      description: The properties to delete for a specific tenant.
+    planning.PlanInfoDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: The UUID of the plan.
+        displayName:
+          type: string
+          description: The display name of the plan.
+        modelId:
+          type: string
+          description: The unique identifier of the planning model that the plan is using.
+        scenarios:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.ScenarioInfoDTO'
+          description: Information about the plan's scenarios.
+        collaborations:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.CollaborationInfo'
+          description: Information about the plan's collaborations.
+        parentPlanUuid:
+          type: string
+          description: If the plan is a subplan, the response returns its parent plan's UUID. Not returned for main plans.
+        currencyCode:
+          type: string
+          description: The 3-digit ISO 4217 currency code of the plan's data.
+      description: Information about a plan and its scenarios.
+    servicing.objectconfiguration.PropertyDeleteSuccessDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the property.
+        displayName:
+          type: string
+          description: The display name of the property.
+        tenantCode:
+          type: string
+          description: The tenant in which the property was deleted.
+        projectId:
+          type: string
+          description: The project in which the property was deleted.
+        derivedDependentsDeleted:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.objectconfiguration.DependentDTO'
+          description: The derived dependents that were deleted along with the property.
+        referenceDependentsIgnored:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.objectconfiguration.DependentDTO'
+          description: Dependents that reference the property and were ignored during deletion.
+      description: Details about a successful property deletion.
+    servicing.objectconfiguration.DimensionChangeDefinitionDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The symbol name of the dimension; for example, `Career_Level` or `Employee.Vaccination_Status`
+        displayName:
+          type: string
+          description: The user-friendly name for the dimension.
+        shortDisplayName:
+          type: string
+          description: A shortened version of the display name. If the dimension is visible in the solution experience, this name is displayed in visualization titles.
+        description:
+          type: string
+          description: A short description of the dimension. Descriptions provide in-context help for your users while working in Visier.
+    dataservices.datamodel.PopulationConfigurationDTO:
+      type: object
+      properties:
+        distinguishingProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.PropertyReferenceDTO'
+          description: Properties that are used by default to compare subject members.
+        changeHistoryProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.PropertyReferenceDTO'
+          description: Properties that are used by default to compare subject members over time.
+        groupingDimensions:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.DimensionReferenceDTO'
+          description: Dimensions to use for grouping and clustering the population.
+      description: "A set of property and dimension references configured by Visier or an administrator to tell the platform what\n properties and dimensions to use when doing population insight calculations. These are the distinguishing properties,\n change history properties, and grouping dimensions to use in AI insights."
+    dataservices.datamodel.AnalyticObjectsDTO:
+      type: object
+      properties:
+        analyticObjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.AnalyticObjectDTO'
+      description: A collection of analytic objects
+    planning.MemberDTO:
+      type: object
+      properties:
+        dimensionId:
+          type: string
+          description: The unique identifier of the dimension. For example, `Location`.
+        levelId:
+          type: string
+          description: The dimension level this member belongs to. For example, `Location_2`.
+        memberId:
+          type: string
+          description: The unique identifier of the member. For example, `[Location].[Canada].[BC]`.
+        displayName:
+          type: string
+          description: The display name of the member. For example, `BC`.
+        namePath:
+          type: array
+          items:
+            type: string
+          description: The path of member names from the root member down to the current member. For example, `[Canada, BC]`.
+      description: A single member at a specific dimension level within the plan's context path.
     servicing.objectconfiguration.CalculatedPropertyTypeDTO:
       type: object
       properties:
@@ -2165,6 +2786,66 @@ components:
         formula:
           type: string
           description: The formula used to calculate the property's value, written in Visier Formula Language.
+    dataservices.datamodel.CurrencyRatesDTO:
+      type: object
+      properties:
+        currencyRates:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.CurrencyRateDTO'
+      description: "A collection of currency exchange rates.\n Note: Currencies may have different exchange rates in different time intervals, depending what rate data is stored in Visier.\n For example, USD:CAD can be 1.2 between January 1 - March 1, while USD:EUR can be 0.92 between January 1 - February 1, but 0.88 between February  1 - March 1."
+    servicing.objectconfiguration.PropertiesDeleteDefinitionsDTO:
+      type: object
+      properties:
+        deleteDerivedProperties:
+          type: boolean
+          description: If `true`, deletes derived properties along with the properties to delete. Default is `false`.
+        ignorePropertyReferences:
+          type: boolean
+          description: If `true`, ignores properties that reference the properties to delete. Default is `false`.
+        propertiesByTenant:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.objectconfiguration.PropertyDeleteDefinitionsByTenantDTO'
+          description: The properties to delete for each tenant.
+      description: Property deletion options.
+    dataservices.datamodel.TagMapElementDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the tag.
+        displayName:
+          type: string
+          description: The localized display name of the tag.
+      description: Tag identifier and display name pair.
+    servicing.SampleQuestionsAPIResponseDTO:
+      type: object
+      properties:
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.SampleQuestionAPIResponseDTO'
+          description: A list of sample questions to help your users start using Vee.
+      description: The list of Vee sample questions.
+    dataservices.datamodel.AggregationTypeParameterDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the parameter.
+        displayName:
+          type: string
+          description: The localized display name of the parameter.
+        description:
+          type: string
+          description: The localized description of the parameter.
+        parameterOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.AggregationTypeOptionDTO'
+          description: The options defined for the parameter.
+      description: "The definition of an aggregation parameter. These parameters resolve metrics that use aggregation parameters.\n For example, Visier Benchmarks metrics often use aggregation parameters to enable callers to aggregate metric values according to their average or different percentiles."
     dataservices.datamodel.PredictionDTO:
       type: object
       properties:
@@ -2232,7 +2913,61 @@ components:
           type: boolean
           description: If `true`, this prediction applies to more than one tenant. If "false", the prediction only applies to the current tenant.
       description: A prediction is a forecast of future events with advanced machine learning models.
-    servicing.VeeQuestionCategoryChangeFailureDTO:
+    servicing.QuestionCategoriesAPIResponseDTO:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.QuestionCategoryAPIResponseDTO'
+          description: A list of available categories for Vee sample questions.
+      description: The Vee question categories.
+    servicing.objectconfiguration.PropertiesChangeDefinitionsDTO:
+      type: object
+      properties:
+        propertiesByTenant:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.objectconfiguration.PropertyChangeDefinitionsByTenantDTO'
+          description: The property updates to make in each tenant.
+    planning.PlanSegmentLevelMemberDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the dimension member.
+        displayName:
+          type: string
+          description: The display name of the dimension member.
+        isCustom:
+          type: boolean
+          description: If `true`, this is a custom member created for use in the plan and all its subplans.
+        parentId:
+          type: string
+          description: The unique identifier of the dimension member's parent.
+      description: A member in the dimension.
+    servicing.VersionInformationDTO:
+      type: object
+      properties:
+        versionType:
+          enum:
+          - Unknown
+          - BP
+          - Tenant
+          - TenantOverride
+          - TenantShared
+          - Draft
+          type: string
+          description: "Indicates where the object originates from and whether the object has been modified. Valid values:\n - `Unknown`: The source is not known.\n - `BP`: The object originates from Visier's Blueprint and is not changed at the tenant level.\n - `Tenant`: The object only exists in the tenant and doesn't exist in Visier's Blueprint.\n - `TenantOverride`: The object originates from Visier's Blueprint and is changed at the tenant level.\n - `TenantShared`: The object is non-versioned, only exists in the tenant and doesn’t exist in Visier's Blueprint, and is shareable with other users in the tenant.\n - `Draft`: The object only exists in the specified draft project."
+          format: enum
+        edited:
+          type: string
+          description: The UTC time of the latest change in ISO 8601 format. For example, `2023-10-01T12:00:00Z`.
+        editor:
+          type: string
+          description: The user who made the latest change.
+      description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
+    servicing.VeeQuestionCategoryChangeSuccessDTO:
       type: object
       properties:
         displayName:
@@ -2245,6 +2980,39 @@ components:
           allOf:
           - $ref: '#/components/schemas/servicing.CategoryIconDTO'
           description: The question category icons that were successfully changed.
+        tenantCode:
+          type: string
+          description: The tenant that the question category was changed in.
+        projectId:
+          type: string
+          description: The project that the question category was changed in.
+      description: The list of successful changes.
+    planning.PlanTimePeriodDTO:
+      type: object
+      properties:
+        date:
+          type: string
+          description: The date of the time period. The format is YYYY-MM-DD.
+        displayName:
+          type: string
+          description: The display name of the time period; for example, March 2024.
+      description: A time period in the plan.
+    servicing.VeeQuestionChangeFailureDTO:
+      type: object
+      properties:
+        question:
+          type: string
+          description: The question in plain language that was not successfully changed.
+        questionId:
+          type: string
+          description: The unique identifier of the sample question that was not successfully changed.
+        categoryId:
+          type: string
+          description: The unique identifier of the category of the sample question that was not successfully changed.
+        userGroupAssignment:
+          allOf:
+          - $ref: '#/components/schemas/servicing.UserGroupAssignmentDTO'
+          description: The user group IDs that were not successfully assigned to the sample question for spotlight.
         message:
           type: string
           description: An error message describing the cause of the failure.
@@ -2258,133 +3026,15 @@ components:
           type: string
           description: The project that the object was not successfully changed in.
       description: The list of failed changes.
-    dataservices.datamodel.MembersDTO:
+    servicing.objectconfiguration.TagsDTO:
       type: object
       properties:
-        members:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.MemberDTO'
-      description: A collection of members.
-    dataservices.datamodel.SelectionConceptDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID of the selection concept.
-        displayName:
-          type: string
-          description: The localized display name of the selection concept.
-        description:
-          type: string
-          description: The localized description of the selection concept.
-        visibleInApp:
-          type: boolean
-          description: If `true`, the selection concept is visible to end users in the solution.
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.TagMapElementDTO'
-          description: The optional collection of tags defined for this element.
-        explanation:
-          type: string
-          description: The localized explanation of the selection concept.
-      description: Selection concepts select a population of subject members of a given subject or event.
-    servicing.VeeQuestionCategoryDeleteDefinitionsByTenantDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The code of the tenant to delete question categories from. Default is the current tenant.
-        projectId:
-          type: string
-          description: The project in which to delete question categories. If omitted and the `ProjectID` request header is not defined, the change is published to production immediately.
-        categoryIds:
+        ids:
           type: array
           items:
             type: string
-          description: The IDs of the question categories to delete for a specific tenant.
-      description: Information about the question category and the context of the API request, such as the tenant code and project ID.
-    dataservices.common.MemberValuesDTO:
-      type: object
-      properties:
-        included:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.common.DimensionMemberReferenceDTO'
-          description: The unique IDs of members to include when evaluating the metric.
-        excluded:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.common.DimensionMemberReferenceDTO'
-          description: The unique IDs of members to exclude when evaluating the metric.
-      description: "Member filter values are discrete member references in a dimension filter. You can define\n included and excluded members simultaneously. This is typically done with filtering applied on\n dimensions with multiple levels. For example, a Location parameter may include \"South\n America\" and exclude \"Brazil\" which results in the metric being evaluated for all South American\n countries except Brazil."
-    dataservices.datamodel.PropertyReferenceDTO:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The ID of the property.
-        qualifyingPath:
-          type: string
-          description: "The qualifying path to the property in Visier, such as the analytic object or event the property is associated with.\n If the path has multiple objects, each object is separated by a period."
-      description: The name and qualifying path of a property to query.
-    dataservices.datamodel.CurrencyRatesDTO:
-      type: object
-      properties:
-        currencyRates:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.CurrencyRateDTO'
-      description: "A collection of currency exchange rates.\n Note: Currencies may have different exchange rates in different time intervals, depending what rate data is stored in Visier.\n For example, USD:CAD can be 1.2 between January 1 - March 1, while USD:EUR can be 0.92 between January 1 - February 1, but 0.88 between February  1 - March 1."
-    dataservices.datamodel.ScenarioOrSnapshotDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The identifier of the scenario or snapshot.
-        displayName:
-          type: string
-          description: The scenario or snapshot display name.
-      description: The unique identifier and display name for plan scenarios and snapshots.
-    dataservices.datamodel.PlanningModelsDTO:
-      type: object
-      properties:
-        models:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.PlanningModelDTO'
-      description: A collection of planning modules.
-    planning.PlanItemDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the plan item.
-        displayName:
-          type: string
-          description: The display name of the plan item.
-        dataType:
-          enum:
-          - unknown
-          - number
-          - currency
-          - decimal
-          - rate
-          type: string
-          description: "The data type of the plan item. The data types are:\n - **rate**: Converts values into a percentage in the planning grid. The provided value is multiplied by 100 to get the display value. For example, a provided value of 0.5 is displayed as 50% in the grid.\n - **number**: Displays values as whole numbers. Decimal values are rounded to a whole number when displayed in the planning grid.\n - **currency**: Displays values as a currency. Values must not contain thousand separators, currency codes, or currency symbols.\n - **decimal**: Displays values with decimals."
-          format: enum
-      description: A plan item is a metric in your plan. The available plan items depend on the planning model.
-    dataservices.datamodel.TagMapElementDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID of the tag.
-        displayName:
-          type: string
-          description: The localized display name of the tag.
-      description: Tag identifier and display name pair.
+          description: The tag ids.
+      description: Wrapper to distinguish between an empty list and a null/unset list.
     servicing.objectconfiguration.PropertyBulkDeleteResponseDTO:
       type: object
       properties:
@@ -2399,39 +3049,68 @@ components:
             $ref: '#/components/schemas/servicing.objectconfiguration.PropertyDeleteFailureDTO'
           description: Properties that were not successfully deleted.
       description: Results of a bulk delete operation.
-    planning.PlanWithSchemaDTO:
+    servicing.objectconfiguration.DimensionsChangeDefinitionsDTO:
       type: object
       properties:
-        plan:
-          $ref: '#/components/schemas/planning.PlanInfoDTO'
-        schema:
-          $ref: '#/components/schemas/planning.PlanSchemaDTO'
-        errors:
+        dimensionsByTenant:
           type: array
           items:
-            $ref: '#/components/schemas/planning.PlanDataLoadErrorDTO'
-          description: The errors that occurred while loading the data.
-      description: Details about the plan, including its schema.
-    dataservices.datamodel.ParameterDefinitionDTO:
+            $ref: '#/components/schemas/servicing.objectconfiguration.DimensionChangeDefinitionsByTenantDTO'
+          description: The dimension updates to make in each tenant.
+    planning.PlanContextDTO:
       type: object
       properties:
-        memberParameter:
+        memberPath:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.MemberDTO'
+          description: The members representing the populations of the plan.
+      description: The populations included in this plan.
+    planning.GetPlanListResponseDTO:
+      type: object
+      properties:
+        plans:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.PlanInfoDTO'
+          description: A list of plans accessible to the user.
+        page:
+          type: integer
+          description: The current page number of results that the user is viewing.
+          format: int32
+      description: A collection of plans.
+    dataservices.datamodel.PlanningConceptFilterContextDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The object name of the selection concept.
+      description: A plan context defined using a selection concept.
+    dataservices.datamodel.MemberParameterDefinitionDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the member parameter.
+        displayName:
+          type: string
+          description: The localized display name of the member parameter.
+        description:
+          type: string
+          description: The localized description of the member parameter.
+        dimensionId:
+          type: string
+          description: The unique ID of the dimension on which the member parameter is based.
+        referencePath:
+          type: array
+          items:
+            type: string
+          description: The analytic object reference path from the metric to the dimension.
+        default:
           allOf:
-          - $ref: '#/components/schemas/dataservices.datamodel.MemberParameterDefinitionDTO'
-          description: A filter parameter that can be set with dimension members for the end user to select.
-        numericParameter:
-          allOf:
-          - $ref: '#/components/schemas/dataservices.datamodel.NumericParameterDefinitionDTO'
-          description: A parameter with a numeric data type. A numeric parameter can be set with an optional default value and value range.
-        planParameter:
-          allOf:
-          - $ref: '#/components/schemas/dataservices.datamodel.PlanParameterDefinitionDTO'
-          description: A parameter on a planning metric. Plan parameters resolve planning model metrics to a specific plan and scenario or snapshot.
-        aggregationTypeParameter:
-          allOf:
-          - $ref: '#/components/schemas/dataservices.datamodel.AggregationTypeParameterDTO'
-          description: An aggregation parameter. Such parameters enable control over how applicable metrics aggregate their results.
-      description: Parameters generalize object definitions so that end users can provide values at query run time.
+          - $ref: '#/components/schemas/dataservices.common.MemberValuesDTO'
+          description: The default value if the end user does not select a member at run time.
+      description: The definition of a filter parameter. These elements are returned as part of the definition for metrics that include parameters in their definition.
     dataservices.datamodel.DimensionDTO:
       type: object
       properties:
@@ -2470,30 +3149,430 @@ components:
           type: string
           description: The localized explanation of the dimension.
       description: A dimension organizes unique values of an attribute into a list or a hierarchical structure for use as a filter or group-by in your solution.
-    servicing.VeeQuestionsDeleteDefinitionsDTO:
+    dataservices.common.DimensionMemberReferenceDTO:
       type: object
       properties:
-        questionsByTenant:
+        path:
           type: array
           items:
-            $ref: '#/components/schemas/servicing.VeeQuestionDeleteDefinitionsByTenantDTO'
-          description: The sample questions to delete for each tenant.
-      description: The Vee sample question to delete.
-    dataservices.datamodel.CurrenciesDTO:
+            type: string
+          description: "A list of strings representing the members within a dimension path. For example, a dimension for Location\n may have the paths \"Canada, BC, Vancouver\" and \"US, California, San Francisco\"."
+        memberId:
+          deprecated: true
+          type: string
+          description: "This will be removed as of Spring 2027. Use `path` to identify dimension members instead.\n\n The unique identifier of the dimension member."
+      description: The members of a dimension.
+    dataservices.datamodel.MetricsDTO:
       type: object
       properties:
-        currencies:
+        metrics:
           type: array
           items:
-            $ref: '#/components/schemas/dataservices.datamodel.CurrencyDTO'
-          description: The list of available currencies.
-        tenantReportingCurrencyCode:
+            $ref: '#/components/schemas/dataservices.datamodel.MetricDTO'
+      description: A collection of metrics.
+    servicing.VeeQuestionCategoriesChangeDefinitionsDTO:
+      type: object
+      properties:
+        categoriesByTenant:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.VeeQuestionCategoryChangeDefinitionsByTenantDTO'
+          description: The Vee question category updates to make in each tenant.
+      description: The changes to Vee question categories.
+    dataservices.datamodel.CurrencyDTO:
+      type: object
+      properties:
+        currencyCode:
           type: string
-          description: The tenant's default reporting currency in ISO 4217 3-letter format, if set.
-        userPreferredCurrencyCode:
+          description: The ISO 4217 3-letter code for the currency.
+        displayName:
           type: string
-          description: The user's preferred currency in ISO 4217 3-letter format, if set.
-      description: A collection of currencies.
+          description: The display name for the currency.
+        symbol:
+          type: string
+          description: The symbol name for the currency.
+        shortSymbol:
+          type: string
+          description: "The shortened symbol name for the currency.\n Removes all alphabetic characters. If **symbol** only has alphabetic characters, **shortSymbol** is empty.\n If **symbol** contains only non-alphabetic characters, **shortSymbol** is the same as **symbol**.\n For example, if **symbol** is CA$, **shortSymbol** is $. If **symbol** is $, then **shortSymbol** is $."
+      description: Information about a currency type.
+    dataservices.datamodel.PredictionsDTO:
+      type: object
+      properties:
+        predictions:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.PredictionDTO'
+      description: A collection of predictions.
+    planning.PlanWithSchemaDTO:
+      type: object
+      properties:
+        plan:
+          $ref: '#/components/schemas/planning.PlanInfoDTO'
+        schema:
+          $ref: '#/components/schemas/planning.PlanSchemaDTO'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.PlanDataLoadErrorDTO'
+          description: The errors that occurred while loading the data.
+      description: Details about the plan, including its schema.
+    dataservices.datamodel.NumericParameterDefinitionDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the numeric parameter.
+        displayName:
+          type: string
+          description: The localized display name of the numeric parameter.
+        description:
+          type: string
+          description: The localized description of the numeric parameter.
+        lowerBound:
+          type: number
+          description: The lowest value for the numeric parameter.
+          format: double
+        upperBound:
+          type: number
+          description: The highest value for the numeric parameter.
+          format: double
+        default:
+          type: number
+          description: The default value if the end user does not select a member at run time.
+          format: double
+      description: The definition of a numeric parameter. These elements are returned as part of the query definition for metric parameter values.
+    dataservices.common.MemberValuesDTO:
+      type: object
+      properties:
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.common.DimensionMemberReferenceDTO'
+          description: The unique IDs of members to include when evaluating the metric.
+        excluded:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.common.DimensionMemberReferenceDTO'
+          description: The unique IDs of members to exclude when evaluating the metric.
+      description: "Member filter values are discrete member references in a dimension filter. You can define\n included and excluded members simultaneously. This is typically done with filtering applied on\n dimensions with multiple levels. For example, a Location parameter may include \"South\n America\" and exclude \"Brazil\" which results in the metric being evaluated for all South American\n countries except Brazil."
+    dataservices.datamodel.ParameterDefinitionDTO:
+      type: object
+      properties:
+        memberParameter:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.MemberParameterDefinitionDTO'
+          description: A filter parameter that can be set with dimension members for the end user to select.
+        numericParameter:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.NumericParameterDefinitionDTO'
+          description: A parameter with a numeric data type. A numeric parameter can be set with an optional default value and value range.
+        planParameter:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.PlanParameterDefinitionDTO'
+          description: A parameter on a planning metric. Plan parameters resolve planning model metrics to a specific plan and scenario or snapshot.
+        aggregationTypeParameter:
+          allOf:
+          - $ref: '#/components/schemas/dataservices.datamodel.AggregationTypeParameterDTO'
+          description: An aggregation parameter. Such parameters enable control over how applicable metrics aggregate their results.
+      description: Parameters generalize object definitions so that end users can provide values at query run time.
+    dataservices.datamodel.PropertyDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the property.
+        displayName:
+          type: string
+          description: The localized display name of the property.
+        description:
+          type: string
+          description: The localized description of the property.
+        dataType:
+          type: string
+          description: The data type of the property, such as Categorical, HourDuration, or Ratio.
+        primitiveDataType:
+          type: string
+          description: The primitive data type of the property, such as Number, String, or Boolean.
+        parameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.ParameterDefinitionDTO'
+          description: The collection of parameters defined for the property.
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.TagMapElementDTO'
+          description: The optional collection of tags defined for this element.
+        explanation:
+          type: string
+          description: The localized explanation of the property.
+      description: Properties are qualities of an analytic object.
+    dataservices.datamodel.DimensionsDTO:
+      type: object
+      properties:
+        dimensions:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.DimensionDTO'
+      description: A collection of dimensions.
+    dataservices.datamodel.ValidityRangeDTO:
+      type: object
+      properties:
+        start:
+          type: string
+          description: "The date from which data becomes available.\n Note: Format is the number of milliseconds since midnight 01 January, 1970 UTC as a string."
+        end:
+          type: string
+          description: "The date from which data is no longer available.\n Note: Format is the number of milliseconds since midnight 01 January, 1970 UTC as a string."
+      description: "A pair of values that represent the time interval to which the data is valid.\n The validity range is defined in Unix epoch format and UTC timezone.\n Note: Epochs are expressed as 64-bit integers and represented as stringified longs in JSON due to JSON's inherent\n limitation in representing large numbers."
+    servicing.VeeQuestionCategoriesBulkChangeResponseDTO:
+      type: object
+      properties:
+        successes:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.VeeQuestionCategoryChangeSuccessDTO'
+          description: The question categories that were successfully changed.
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.VeeQuestionCategoryChangeFailureDTO'
+          description: The question categories that were not successfully changed.
+      description: The results of the bulk change operation.
+    dataservices.datamodel.LevelDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of a level within a dimension.
+        displayName:
+          type: string
+          description: The localized display name of the dimension.
+        depth:
+          type: integer
+          description: The level depth of the dimension.
+          format: int32
+      description: Levels are the hierarchical structure of members within a dimension.
+    servicing.VeeQuestionChangeDefinitionDTO:
+      type: object
+      properties:
+        question:
+          type: string
+          description: A question in plain language to display in Vee.
+        questionId:
+          type: string
+          description: The unique identifier of the sample question. Omit if creating a new sample question.
+        visibleInVee:
+          type: boolean
+          description: If `true`, the question is visible in Vee. Default is `true`.
+        categoryId:
+          type: string
+          description: The unique identifier of the question category.
+        userGroupAssignment:
+          allOf:
+          - $ref: '#/components/schemas/servicing.UserGroupAssignmentDTO'
+          description: The user group IDs that the sample question is spotlighted for.
+      description: The Vee sample question details.
+    servicing.VeeQuestionCategoryChangeFailureDTO:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The name in plain language that was successfully changed.
+        categoryId:
+          type: string
+          description: The unique identifier of the question category that was successfully changed.
+        categoryIcon:
+          allOf:
+          - $ref: '#/components/schemas/servicing.CategoryIconDTO'
+          description: The question category icons that were successfully changed.
+        message:
+          type: string
+          description: An error message describing the cause of the failure.
+        rci:
+          type: string
+          description: The root cause identifier to provide to Visier Technical Support if you require further troubleshooting.
+        tenantCode:
+          type: string
+          description: The tenant that the object was not successfully changed in.
+        projectId:
+          type: string
+          description: The project that the object was not successfully changed in.
+      description: The list of failed changes.
+    planning.PlanSegmentLevelDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The symbol name of the dimension appended with its level ID.
+        displayName:
+          type: string
+          description: The display name of the dimension level.
+        order:
+          type: integer
+          description: The number that describes the segment's position in the plan's overall structure.
+          format: int32
+        segmentId:
+          type: string
+          description: The symbol name of the dimension.
+        segmentDisplayName:
+          type: string
+          description: The display name of the dimension.
+      description: A dimension and dimension level that segments the plan.
+    dataservices.datamodel.DimensionMappingValidationDTO:
+      type: object
+      properties:
+        dimensionMapId:
+          type: string
+        dimensionId:
+          type: string
+        unmappedMembers:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.common.DimensionMemberReferenceDTO'
+        failures:
+          type: array
+          items:
+            type: string
+    servicing.objectconfiguration.SimplePropertyTypeDTO:
+      type: object
+      properties:
+        dataType:
+          type: string
+          description: The data type of the property, such as Categorical, HourDuration, or Ratio.
+    dataservices.datamodel.MembersDTO:
+      type: object
+      properties:
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.MemberDTO'
+      description: A collection of members.
+    dataservices.datamodel.ObjectReferenceDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the object reference.
+        displayName:
+          type: string
+          description: The localized display name of the object reference.
+        description:
+          type: string
+          description: The localized description of the object reference.
+        fromObject:
+          type: string
+          description: The ID of the referencing analytic object.
+        toObject:
+          type: string
+          description: The ID of the referenced analytic object.
+        type:
+          enum:
+          - SUBJECT_REFERENCE
+          - MULTI_VALUE_REFERENCE
+          type: string
+          description: The type of object reference.
+          format: enum
+        isStrongReference:
+          type: boolean
+          description: True if this is a strong reference.
+      description: "A link between one analytic object and another. An ObjectReference allows you to discover the relationships between\n analytic objects. In some queries, you may need to provide a qualifyingPath, which is built from ObjectReference information."
+    dataservices.datamodel.SelectionConceptDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the selection concept.
+        displayName:
+          type: string
+          description: The localized display name of the selection concept.
+        description:
+          type: string
+          description: The localized description of the selection concept.
+        visibleInApp:
+          type: boolean
+          description: If `true`, the selection concept is visible to end users in the solution.
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.TagMapElementDTO'
+          description: The optional collection of tags defined for this element.
+        explanation:
+          type: string
+          description: The localized explanation of the selection concept.
+      description: Selection concepts select a population of subject members of a given subject or event.
+    dataservices.datamodel.AggregationTypeOptionDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the parameter option.
+        displayName:
+          type: string
+          description: The localized display name of the parameter option.
+        propertyName:
+          type: string
+          description: The property name of the parameter option.
+        aggregationFunction:
+          type: string
+          description: The aggregation function of the parameter option.
+        isDefault:
+          type: boolean
+          description: '`true` if the parameter option is the default one and `false` otherwise.'
+      description: The definition of an aggregation option.
+    servicing.objectconfiguration.ObjectChangeSuccessDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The symbol name of the object that was successfully changed.
+        displayName:
+          type: string
+          description: The display name of the object.
+        tenantCode:
+          type: string
+          description: The tenant that the object was changed in.
+        projectId:
+          type: string
+          description: The project that the object was changed in.
+    servicing.UserGroupAssignmentDTO:
+      type: object
+      properties:
+        userGroupIds:
+          type: array
+          items:
+            type: string
+          description: A list of user group IDs assigned to the sample question.
+      description: The Vee sample question's assigned user groups.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    servicing.QuestionCategoryBasicInformationDTO:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The user-friendly name for the category. For example, "About individuals".
+        description:
+          type: string
+          description: A short description of the category.
+      description: Information that identifies and describes the question category, such as its display name and description.
     servicing.objectconfiguration.DependentDTO:
       type: object
       properties:
@@ -2507,14 +3586,30 @@ components:
           type: string
           description: The type of dependent object, such as a property or parameter.
       description: Details about a dependent object related to the property to delete.
-    dataservices.datamodel.MetricsDTO:
+    planning.ScenarioInfoDTO:
       type: object
       properties:
-        metrics:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.MetricDTO'
-      description: A collection of metrics.
+        uuid:
+          type: string
+          description: The UUID of the scenario.
+        displayName:
+          type: string
+          description: The full display name of the scenario.
+        versionedScenarioId:
+          type: string
+          description: If the scenario belongs to a managed plan, the response returns the scenario's user-readable symbol name.
+      description: Information about a plan's scenario.
+    servicing.objectconfiguration.PropertyTypeDTO:
+      type: object
+      properties:
+        simple:
+          allOf:
+          - $ref: '#/components/schemas/servicing.objectconfiguration.SimplePropertyTypeDTO'
+          description: The simple property type, which provides a single value directly from the data.
+        calculated:
+          allOf:
+          - $ref: '#/components/schemas/servicing.objectconfiguration.CalculatedPropertyTypeDTO'
+          description: The calculated property type, which derives its value using a formula.
     servicing.QuestionCategoryAPIResponseDTO:
       type: object
       properties:
@@ -2534,6 +3629,55 @@ components:
           - $ref: '#/components/schemas/servicing.VersionInformationDTO'
           description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
       description: Information about the Vee question category.
+    dataservices.datamodel.MemberDTO:
+      type: object
+      properties:
+        fullName:
+          type: string
+          description: The fully qualified name of the member. This is the dimension's object name and the member's display name, separated by a period.
+        displayName:
+          type: string
+          description: The localized display name of the member.
+        level:
+          type: integer
+          description: The numeric level of the hierarchy the member belongs to.
+          format: sint32
+        path:
+          type: array
+          items:
+            type: string
+          description: A comma-separated list of identifiers that reference members on the query axis as part of dimensionMemberSelection.
+        validityRanges:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataservices.datamodel.ValidityRangeDTO'
+          description: The validity ranges that exist for this member.
+        displayNamePath:
+          type: array
+          items:
+            type: string
+          description: The display names for each level in the member's ancestral path.
+      description: "A member is an element of a dimension. Dimension members are organized hierarchically. For example, Argentina is\n a member of the Location dimension at the Country level of the hierarchy Region > Country > Province > City."
+    planning.PlanItemDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the plan item.
+        displayName:
+          type: string
+          description: The display name of the plan item.
+        dataType:
+          enum:
+          - unknown
+          - number
+          - currency
+          - decimal
+          - rate
+          type: string
+          description: "The data type of the plan item. The data types are:\n - **rate**: Converts values into a percentage in the planning grid. The provided value is multiplied by 100 to get the display value. For example, a provided value of 0.5 is displayed as 50% in the grid.\n - **number**: Displays values as whole numbers. Decimal values are rounded to a whole number when displayed in the planning grid.\n - **currency**: Displays values as a currency. Values must not contain thousand separators, currency codes, or currency symbols.\n - **decimal**: Displays values with decimals."
+          format: enum
+      description: A plan item is a metric in your plan. The available plan items depend on the planning model.
     servicing.objectconfiguration.PropertyChangeDefinitionDTO:
       type: object
       properties:
@@ -2566,788 +3710,6 @@ components:
         includeWithVee:
           type: boolean
           description: If 'true', the property is included with Vee.
-    dataservices.datamodel.PlanningConceptFilterContextDTO:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The object name of the selection concept.
-      description: A plan context defined using a selection concept.
-    servicing.objectconfiguration.PropertiesDeleteDefinitionsDTO:
-      type: object
-      properties:
-        deleteDerivedProperties:
-          type: boolean
-          description: If `true`, deletes derived properties along with the properties to delete. Default is `false`.
-        ignorePropertyReferences:
-          type: boolean
-          description: If `true`, ignores properties that reference the properties to delete. Default is `false`.
-        propertiesByTenant:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.objectconfiguration.PropertyDeleteDefinitionsByTenantDTO'
-          description: The properties to delete for each tenant.
-      description: Property deletion options.
-    servicing.objectconfiguration.PropertiesChangeDefinitionsDTO:
-      type: object
-      properties:
-        propertiesByTenant:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.objectconfiguration.PropertyChangeDefinitionsByTenantDTO'
-          description: The property updates to make in each tenant.
-    servicing.SampleQuestionsAPIResponseDTO:
-      type: object
-      properties:
-        questions:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.SampleQuestionAPIResponseDTO'
-          description: A list of sample questions to help your users start using Vee.
-      description: The list of Vee sample questions.
-    servicing.VeeQuestionCategoryChangeSuccessDTO:
-      type: object
-      properties:
-        displayName:
-          type: string
-          description: The name in plain language that was successfully changed.
-        categoryId:
-          type: string
-          description: The unique identifier of the question category that was successfully changed.
-        categoryIcon:
-          allOf:
-          - $ref: '#/components/schemas/servicing.CategoryIconDTO'
-          description: The question category icons that were successfully changed.
-        tenantCode:
-          type: string
-          description: The tenant that the question category was changed in.
-        projectId:
-          type: string
-          description: The project that the question category was changed in.
-      description: The list of successful changes.
-    dataservices.datamodel.AnalyticObjectsDTO:
-      type: object
-      properties:
-        analyticObjects:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.AnalyticObjectDTO'
-      description: A collection of analytic objects
-    servicing.VeeQuestionCategoriesChangeDefinitionsDTO:
-      type: object
-      properties:
-        categoriesByTenant:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.VeeQuestionCategoryChangeDefinitionsByTenantDTO'
-          description: The Vee question category updates to make in each tenant.
-      description: The changes to Vee question categories.
-    dataservices.datamodel.PlanningPlanContextDTO:
-      type: object
-      properties:
-        hierarchyFilterContext:
-          allOf:
-          - $ref: '#/components/schemas/dataservices.datamodel.PlanningHierarchyFilterContextDTO'
-          description: A plan context defined using hierarchy members.
-        conceptFilterContext:
-          allOf:
-          - $ref: '#/components/schemas/dataservices.datamodel.PlanningConceptFilterContextDTO'
-          description: A plan context defined using a selection concept.
-      description: The filter context for a plan. Plan contexts are defined using a set of hierarchy members or a concept.
-    dataservices.datamodel.PopulationConfigurationDTO:
-      type: object
-      properties:
-        distinguishingProperties:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.PropertyReferenceDTO'
-          description: Properties that are used by default to compare subject members.
-        changeHistoryProperties:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.PropertyReferenceDTO'
-          description: Properties that are used by default to compare subject members over time.
-        groupingDimensions:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.DimensionReferenceDTO'
-          description: Dimensions to use for grouping and clustering the population.
-      description: "A set of property and dimension references configured by Visier or an administrator to tell the platform what\n properties and dimensions to use when doing population insight calculations. These are the distinguishing properties,\n change history properties, and grouping dimensions to use in AI insights."
-    dataservices.datamodel.AggregationTypeOptionDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID of the parameter option.
-        displayName:
-          type: string
-          description: The localized display name of the parameter option.
-        propertyName:
-          type: string
-          description: The property name of the parameter option.
-        aggregationFunction:
-          type: string
-          description: The aggregation function of the parameter option.
-        isDefault:
-          type: boolean
-          description: '`true` if the parameter option is the default one and `false` otherwise.'
-      description: The definition of an aggregation option.
-    dataservices.datamodel.SelectionConceptReferenceDTO:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The ID of the selection concept.
-        qualifyingPath:
-          type: string
-          description: "The qualifying path to the selection concept in Visier, such as the analytic object or event the selection\n concept is associated with. If the path has multiple objects, each object is separated by a period."
-      description: The name and qualifying path of a selection concept to query.
-    planning.PlanTimePeriodDTO:
-      type: object
-      properties:
-        date:
-          type: string
-          description: The date of the time period. The format is YYYY-MM-DD.
-        displayName:
-          type: string
-          description: The display name of the time period; for example, March 2024.
-      description: A time period in the plan.
-    servicing.UserGroupAssignmentDTO:
-      type: object
-      properties:
-        userGroupIds:
-          type: array
-          items:
-            type: string
-          description: A list of user group IDs assigned to the sample question.
-      description: The Vee sample question's assigned user groups.
-    servicing.QuestionCategoriesAPIResponseDTO:
-      type: object
-      properties:
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.QuestionCategoryAPIResponseDTO'
-          description: A list of available categories for Vee sample questions.
-      description: The Vee question categories.
-    dataservices.datamodel.PlanParameterDefinitionDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID of the parameter.
-        displayName:
-          type: string
-          description: The localized display name of the parameter.
-        description:
-          type: string
-          description: The localized description of the parameter.
-        modelName:
-          type: string
-          description: The name of the planning model to which the parameter applies.
-      description: "The definition of a plan parameter. These parameters resolve planning model metrics to a specific plan and scenario\n or snapshot values at query runtime."
-    servicing.objectconfiguration.PropertyDeleteSuccessDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the property.
-        displayName:
-          type: string
-          description: The display name of the property.
-        tenantCode:
-          type: string
-          description: The tenant in which the property was deleted.
-        projectId:
-          type: string
-          description: The project in which the property was deleted.
-        derivedDependentsDeleted:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.objectconfiguration.DependentDTO'
-          description: The derived dependents that were deleted along with the property.
-        referenceDependentsIgnored:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.objectconfiguration.DependentDTO'
-          description: Dependents that reference the property and were ignored during deletion.
-      description: Details about a successful property deletion.
-    servicing.objectconfiguration.ObjectChangeSuccessDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The symbol name of the object that was successfully changed.
-        displayName:
-          type: string
-          description: The display name of the object.
-        tenantCode:
-          type: string
-          description: The tenant that the object was changed in.
-        projectId:
-          type: string
-          description: The project that the object was changed in.
-    servicing.VeeQuestionCategoriesBulkChangeResponseDTO:
-      type: object
-      properties:
-        successes:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.VeeQuestionCategoryChangeSuccessDTO'
-          description: The question categories that were successfully changed.
-        failures:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.VeeQuestionCategoryChangeFailureDTO'
-          description: The question categories that were not successfully changed.
-      description: The results of the bulk change operation.
-    servicing.objectconfiguration.DimensionChangeDefinitionDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The symbol name of the dimension; for example, `Career_Level` or `Employee.Vaccination_Status`
-        displayName:
-          type: string
-          description: The user-friendly name for the dimension.
-        shortDisplayName:
-          type: string
-          description: A shortened version of the display name. If the dimension is visible in the solution experience, this name is displayed in visualization titles.
-        description:
-          type: string
-          description: A short description of the dimension. Descriptions provide in-context help for your users while working in Visier.
-    servicing.objectconfiguration.ObjectChangeFailureDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The symbol name of the object that was not successfully changed.
-        displayName:
-          type: string
-          description: The display name of the object.
-        message:
-          type: string
-          description: An error message describing the cause of the failure.
-        rci:
-          type: string
-          description: The root cause identifier to provide to Visier Technical Support if you require further troubleshooting.
-        tenantCode:
-          type: string
-          description: The tenant that the object was not successfully changed in.
-        projectId:
-          type: string
-          description: The project that the object was not successfully changed in.
-    dataservices.datamodel.PlanningHierarchyFilterContextDTO:
-      type: object
-      properties:
-        hierarchyName:
-          type: string
-          description: The object name of the hierarchy.
-        includedMembers:
-          type: array
-          items:
-            type: string
-          description: The unique IDs of the included dimension members.
-        excludedMembers:
-          type: array
-          items:
-            type: string
-          description: The unique IDs of excluded dimension members.
-      description: A plan context defined using hierarchy members
-    servicing.objectconfiguration.PropertyDeleteFailureDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the property.
-        displayName:
-          type: string
-          description: The display name of the property.
-        message:
-          type: string
-          description: An error message describing the cause of the failure.
-        rci:
-          type: string
-          description: The root cause identifier to provide to Visier Technical Support if you require further troubleshooting.
-        tenantCode:
-          type: string
-          description: The tenant in which the property wasn't deleted.
-        projectId:
-          type: string
-          description: The project in which the property wasn't deleted.
-        derivedDependentsToDelete:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.objectconfiguration.DependentDTO'
-          description: The derived dependents that would have been deleted if the deletion was successful.
-        referenceDependentsToIgnore:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.objectconfiguration.DependentDTO'
-          description: Dependents that reference this property and could be affected.
-      description: Details about a failed property deletion.
-    servicing.objectconfiguration.TagsDTO:
-      type: object
-      properties:
-        ids:
-          type: array
-          items:
-            type: string
-          description: The tag ids.
-      description: Wrapper to distinguish between an empty list and a null/unset list.
-    dataservices.common.DimensionMemberReferenceDTO:
-      type: object
-      properties:
-        path:
-          type: array
-          items:
-            type: string
-          description: "A list of strings representing the members within a dimension path. For example, a dimension for Location\n may have the paths \"Canada, BC, Vancouver\" and \"US, California, San Francisco\"."
-        memberId:
-          deprecated: true
-          type: string
-          description: "This will be removed as of Spring 2027. Use `path` to identify dimension members instead.\n\n The unique identifier of the dimension member."
-      description: The members of a dimension.
-    dataservices.datamodel.MemberDTO:
-      type: object
-      properties:
-        fullName:
-          type: string
-          description: The fully qualified name of the member. This is the dimension's object name and the member's display name, separated by a period.
-        displayName:
-          type: string
-          description: The localized display name of the member.
-        level:
-          type: integer
-          description: The numeric level of the hierarchy the member belongs to.
-          format: sint32
-        path:
-          type: array
-          items:
-            type: string
-          description: A comma-separated list of identifiers that reference members on the query axis as part of dimensionMemberSelection.
-        validityRanges:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.ValidityRangeDTO'
-          description: The validity ranges that exist for this member.
-        displayNamePath:
-          type: array
-          items:
-            type: string
-          description: The display names for each level in the member's ancestral path.
-      description: "A member is an element of a dimension. Dimension members are organized hierarchically. For example, Argentina is\n a member of the Location dimension at the Country level of the hierarchy Region > Country > Province > City."
-    planning.ScenarioInfoDTO:
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: The UUID of the scenario.
-        displayName:
-          type: string
-          description: The full display name of the scenario.
-        versionedScenarioId:
-          type: string
-          description: If the scenario belongs to a managed plan, the response returns the scenario's user-readable symbol name.
-      description: Information about a plan's scenario.
-    servicing.VeeQuestionChangeDefinitionDTO:
-      type: object
-      properties:
-        question:
-          type: string
-          description: A question in plain language to display in Vee.
-        questionId:
-          type: string
-          description: The unique identifier of the sample question. Omit if creating a new sample question.
-        visibleInVee:
-          type: boolean
-          description: If `true`, the question is visible in Vee. Default is `true`.
-        categoryId:
-          type: string
-          description: The unique identifier of the question category.
-        userGroupAssignment:
-          allOf:
-          - $ref: '#/components/schemas/servicing.UserGroupAssignmentDTO'
-          description: The user group IDs that the sample question is spotlighted for.
-      description: The Vee sample question details.
-    servicing.VeeQuestionChangeDefinitionsByTenantDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The tenant code of the tenant in which to update sample questions.
-        projectId:
-          type: string
-          description: To make changes in a project, specify a project ID.
-        questions:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.VeeQuestionChangeDefinitionDTO'
-          description: The list of sample questions to update.
-      description: Information about the sample question and the context of the API request, such as the tenant code and project ID.
-    servicing.VeeQuestionChangeSuccessDTO:
-      type: object
-      properties:
-        question:
-          type: string
-          description: The sample question in plain language that was successfully changed.
-        questionId:
-          type: string
-          description: The unique identifier of the sample question that was successfully changed.
-        visibleInVee:
-          type: boolean
-          description: If `true`, the question is visible in Vee.
-        categoryId:
-          type: string
-          description: The unique identifier of the category of the question that was successfully changed.
-        userGroupAssignment:
-          allOf:
-          - $ref: '#/components/schemas/servicing.UserGroupAssignmentDTO'
-          description: The user group IDs that were successfully assigned to the sample question for spotlight.
-        tenantCode:
-          type: string
-          description: The tenant that the sample question was changed in.
-        projectId:
-          type: string
-          description: The project that the sample question was changed in.
-      description: The list of successful changes.
-    servicing.objectconfiguration.PropertyTypeDTO:
-      type: object
-      properties:
-        simple:
-          allOf:
-          - $ref: '#/components/schemas/servicing.objectconfiguration.SimplePropertyTypeDTO'
-          description: The simple property type, which provides a single value directly from the data.
-        calculated:
-          allOf:
-          - $ref: '#/components/schemas/servicing.objectconfiguration.CalculatedPropertyTypeDTO'
-          description: The calculated property type, which derives its value using a formula.
-    dataservices.datamodel.PredictionsDTO:
-      type: object
-      properties:
-        predictions:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.PredictionDTO'
-      description: A collection of predictions.
-    dataservices.datamodel.MemberParameterDefinitionDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID of the member parameter.
-        displayName:
-          type: string
-          description: The localized display name of the member parameter.
-        description:
-          type: string
-          description: The localized description of the member parameter.
-        dimensionId:
-          type: string
-          description: The unique ID of the dimension on which the member parameter is based.
-        referencePath:
-          type: array
-          items:
-            type: string
-          description: The analytic object reference path from the metric to the dimension.
-        default:
-          allOf:
-          - $ref: '#/components/schemas/dataservices.common.MemberValuesDTO'
-          description: The default value if the end user does not select a member at run time.
-      description: The definition of a filter parameter. These elements are returned as part of the definition for metrics that include parameters in their definition.
-    servicing.VeeQuestionCategoryChangeDefinitionsByTenantDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The tenant code of the tenant in which to update question categories.
-        projectId:
-          type: string
-          description: To make changes in a project, specify a project ID.
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.VeeQuestionCategoryChangeDefinitionDTO'
-          description: The Vee question categories to update.
-      description: Information about the question category and the context of the API request, such as the tenant code and project ID.
-    planning.CollaborationInfo:
-      type: object
-      properties:
-        scenarioId:
-          type: string
-          description: The unique identifier of the scenario used in the collaboration.
-        startDate:
-          type: string
-          description: The start date of the collaboration. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
-        dueDate:
-          type: string
-          description: The due date of the collaboration. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
-        updatedDate:
-          type: string
-          description: The date the collaboration was last updated.
-        status:
-          enum:
-          - Closed
-          - Open
-          type: string
-          description: "The status of the collaboration. Valid values:\n - `Closed`: The collaboration is closed.\n - `Open`: The collaboration is open."
-          format: enum
-      description: Information about the plan's collaborations.
-    planning.PlanDataLoadErrorDTO:
-      type: object
-      properties:
-        row:
-          type: integer
-          description: The row in the file that caused the error.
-          format: int32
-        rci:
-          type: string
-          description: An error code that can be provided to Visier Support to help investigate your issue.
-        errorMessage:
-          type: string
-          description: Information regarding the error and any actions that you could take to load the data correctly.
-      description: An error encountered while loading plan data.
-    servicing.objectconfiguration.SimplePropertyTypeDTO:
-      type: object
-      properties:
-        dataType:
-          type: string
-          description: The data type of the property, such as Categorical, HourDuration, or Ratio.
-    dataservices.datamodel.PropertiesDTO:
-      type: object
-      properties:
-        properties:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.PropertyDTO'
-      description: A collection of properties.
-    dataservices.datamodel.CurrencyDTO:
-      type: object
-      properties:
-        currencyCode:
-          type: string
-          description: The ISO 4217 3-letter code for the currency.
-        displayName:
-          type: string
-          description: The display name for the currency.
-        symbol:
-          type: string
-          description: The symbol name for the currency.
-        shortSymbol:
-          type: string
-          description: "The shortened symbol name for the currency.\n Removes all alphabetic characters. If **symbol** only has alphabetic characters, **shortSymbol** is empty.\n If **symbol** contains only non-alphabetic characters, **shortSymbol** is the same as **symbol**.\n For example, if **symbol** is CA$, **shortSymbol** is $. If **symbol** is $, then **shortSymbol** is $."
-      description: Information about a currency type.
-    servicing.CategoryIconDTO:
-      type: object
-      properties:
-        base64Image:
-          type: string
-          description: The Base64 value for the category icon image.
-        backgroundColor:
-          type: string
-          description: The HEX color code of the background color for the category icon. This is useful if the icon is transparent.
-      description: An icon associated with the question category.
-    dataservices.datamodel.NumericParameterDefinitionDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID of the numeric parameter.
-        displayName:
-          type: string
-          description: The localized display name of the numeric parameter.
-        description:
-          type: string
-          description: The localized description of the numeric parameter.
-        lowerBound:
-          type: number
-          description: The lowest value for the numeric parameter.
-          format: double
-        upperBound:
-          type: number
-          description: The highest value for the numeric parameter.
-          format: double
-        default:
-          type: number
-          description: The default value if the end user does not select a member at run time.
-          format: double
-      description: The definition of a numeric parameter. These elements are returned as part of the query definition for metric parameter values.
-    planning.MemberDTO:
-      type: object
-      properties:
-        dimensionId:
-          type: string
-          description: The unique identifier of the dimension. For example, `Location`.
-        levelId:
-          type: string
-          description: The dimension level this member belongs to. For example, `Location_2`.
-        memberId:
-          type: string
-          description: The unique identifier of the member. For example, `[Location].[Canada].[BC]`.
-        displayName:
-          type: string
-          description: The display name of the member. For example, `BC`.
-        namePath:
-          type: array
-          items:
-            type: string
-          description: The path of member names from the root member down to the current member. For example, `[Canada, BC]`.
-      description: A single member at a specific dimension level within the plan's context path.
-    dataservices.datamodel.ValidityRangeDTO:
-      type: object
-      properties:
-        start:
-          type: string
-          description: "The date from which data becomes available.\n Note: Format is the number of milliseconds since midnight 01 January, 1970 UTC as a string."
-        end:
-          type: string
-          description: "The date from which data is no longer available.\n Note: Format is the number of milliseconds since midnight 01 January, 1970 UTC as a string."
-      description: "A pair of values that represent the time interval to which the data is valid.\n The validity range is defined in Unix epoch format and UTC timezone.\n Note: Epochs are expressed as 64-bit integers and represented as stringified longs in JSON due to JSON's inherent\n limitation in representing large numbers."
-    servicing.objectconfiguration.PropertyChangeDefinitionsByTenantDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The tenant code of the tenant in which to update properties.
-        projectId:
-          type: string
-          description: To make changes in a project, specify a project ID.
-        properties:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.objectconfiguration.PropertyChangeDefinitionDTO'
-          description: The list of properties to update.
-    servicing.objectconfiguration.DimensionsChangeDefinitionsDTO:
-      type: object
-      properties:
-        dimensionsByTenant:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.objectconfiguration.DimensionChangeDefinitionsByTenantDTO'
-          description: The dimension updates to make in each tenant.
-    servicing.VeeQuestionCategoryChangeDefinitionDTO:
-      type: object
-      properties:
-        displayName:
-          type: string
-          description: A name in plain language to display in Vee.
-        categoryId:
-          type: string
-          description: The unique identifier of the question category. Omit if creating a new question category.
-        categoryIcon:
-          allOf:
-          - $ref: '#/components/schemas/servicing.CategoryIconDTO'
-          description: The icon for the question category.
-      description: The Vee question category details.
-    dataservices.datamodel.CurrencyRateDTO:
-      type: object
-      properties:
-        fromCurrencyCode:
-          type: string
-          description: "The currency to convert **from**.\n **Note:** If USD is the `fromCurrencyCode`, you are retrieving the exchange rates from USD to a different currency."
-        toCurrencyCode:
-          type: string
-          description: "The currency to convert **to**.\n **Note:** If USD is the `toCurrencyCode`, you are retrieving the exchange rates from a different currency to USD."
-        rate:
-          type: number
-          description: "The numeric value of the exchange rate.\n **Note:** If **decimals** is specified, rate rounds to that value. If **decimals** is undefined, **rate** rounds to 2 significant figures after the decimal point."
-          format: double
-        startTime:
-          type: string
-          description: "The earliest time instant to retrieve exchange rates from.\n **Note:** Format is the number of milliseconds since Jan 1, 1970 12:00 AM UTC."
-        endTime:
-          type: string
-          description: "The latest time instant to retrieve exchange rates from.\n **Note:** Format is the number of milliseconds since Jan 1, 1970 12:00 AM UTC."
-      description: Information about a currency exchange rate.
-    dataservices.datamodel.SelectionConceptsDTO:
-      type: object
-      properties:
-        selectionConcepts:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.SelectionConceptDTO'
-      description: A collection of selection concepts
-    planning.PlanInfoDTO:
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: The UUID of the plan.
-        displayName:
-          type: string
-          description: The display name of the plan.
-        modelId:
-          type: string
-          description: The unique identifier of the planning model that the plan is using.
-        scenarios:
-          type: array
-          items:
-            $ref: '#/components/schemas/planning.ScenarioInfoDTO'
-          description: Information about the plan's scenarios.
-        collaborations:
-          type: array
-          items:
-            $ref: '#/components/schemas/planning.CollaborationInfo'
-          description: Information about the plan's collaborations.
-        parentPlanUuid:
-          type: string
-          description: If the plan is a subplan, the response returns its parent plan's UUID. Not returned for main plans.
-        currencyCode:
-          type: string
-          description: The 3-digit ISO 4217 currency code of the plan's data.
-      description: Information about a plan and its scenarios.
-    dataservices.datamodel.AggregationTypeParameterDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID of the parameter.
-        displayName:
-          type: string
-          description: The localized display name of the parameter.
-        description:
-          type: string
-          description: The localized description of the parameter.
-        parameterOptions:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.AggregationTypeOptionDTO'
-          description: The options defined for the parameter.
-      description: "The definition of an aggregation parameter. These parameters resolve metrics that use aggregation parameters.\n For example, Visier Benchmarks metrics often use aggregation parameters to enable callers to aggregate metric values according to their average or different percentiles."
-    planning.PlanSegmentLevelDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The symbol name of the dimension appended with its level ID.
-        displayName:
-          type: string
-          description: The display name of the dimension level.
-        order:
-          type: integer
-          description: The number that describes the segment's position in the plan's overall structure.
-          format: int32
-        segmentId:
-          type: string
-          description: The symbol name of the dimension.
-        segmentDisplayName:
-          type: string
-          description: The display name of the dimension.
-      description: A dimension and dimension level that segments the plan.
-    servicing.objectconfiguration.DimensionChangeDefinitionsByTenantDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The tenant code of the tenant in which to update dimensions.
-        projectId:
-          type: string
-          description: To make changes in a project, specify a project ID.
-        dimensions:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.objectconfiguration.DimensionChangeDefinitionDTO'
-          description: The list of dimensions to update.
     dataservices.datamodel.DimensionReferenceDTO:
       type: object
       properties:
@@ -3358,6 +3720,31 @@ components:
           type: string
           description: "The qualifying path to the dimension in Visier, such as the analytic object or event the dimension is\n associated with. If the path has multiple objects, each object is separated by a period."
       description: The name and qualifying path of a dimension to query.
+    servicing.CategoryIconDTO:
+      type: object
+      properties:
+        base64Image:
+          type: string
+          description: The Base64 value for the category icon image.
+        backgroundColor:
+          type: string
+          description: The HEX color code of the background color for the category icon. This is useful if the icon is transparent.
+      description: An icon associated with the question category.
+    servicing.VeeQuestionCategoryDeleteDefinitionsByTenantDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The code of the tenant to delete question categories from. Default is the current tenant.
+        projectId:
+          type: string
+          description: The project in which to delete question categories. If omitted and the `ProjectID` request header is not defined, the change is published to production immediately.
+        categoryIds:
+          type: array
+          items:
+            type: string
+          description: The IDs of the question categories to delete for a specific tenant.
+      description: Information about the question category and the context of the API request, such as the tenant code and project ID.
     servicing.VeeQuestionsBulkChangeResponseDTO:
       type: object
       properties:
@@ -3372,329 +3759,6 @@ components:
             $ref: '#/components/schemas/servicing.VeeQuestionChangeFailureDTO'
           description: The sample questions that were not successfully changed.
       description: The results of the bulk change operation.
-    planning.PlanSegmentLevelMemberDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the dimension member.
-        displayName:
-          type: string
-          description: The display name of the dimension member.
-        isCustom:
-          type: boolean
-          description: If `true`, this is a custom member created for use in the plan and all its subplans.
-        parentId:
-          type: string
-          description: The unique identifier of the dimension member's parent.
-      description: A member in the dimension.
-    servicing.VeeQuestionCategoriesDeleteDefinitionsDTO:
-      type: object
-      properties:
-        categoriesByTenant:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.VeeQuestionCategoryDeleteDefinitionsByTenantDTO'
-          description: The question categories to delete for each tenant.
-      description: The Vee question categories to delete.
-    dataservices.datamodel.LevelDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID of a level within a dimension.
-        displayName:
-          type: string
-          description: The localized display name of the dimension.
-        depth:
-          type: integer
-          description: The level depth of the dimension.
-          format: int32
-      description: Levels are the hierarchical structure of members within a dimension.
-    servicing.QuestionCategoryBasicInformationDTO:
-      type: object
-      properties:
-        displayName:
-          type: string
-          description: The user-friendly name for the category. For example, "About individuals".
-        description:
-          type: string
-          description: A short description of the category.
-      description: Information that identifies and describes the question category, such as its display name and description.
-    Status:
-      type: object
-      properties:
-        localizedMessage:
-          type: string
-          description: Localized error message describing the root cause of the error.
-        code:
-          type: string
-          description: Error classification.
-        message:
-          type: string
-          description: Not used.
-        rci:
-          type: string
-          description: Optional root cause identifier.
-        userError:
-          type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
-    dataservices.datamodel.DimensionMappingValidationDTO:
-      type: object
-      properties:
-        dimensionMapId:
-          type: string
-        dimensionId:
-          type: string
-        unmappedMembers:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.common.DimensionMemberReferenceDTO'
-        failures:
-          type: array
-          items:
-            type: string
-    dataservices.datamodel.ObjectReferenceDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID of the object reference.
-        displayName:
-          type: string
-          description: The localized display name of the object reference.
-        description:
-          type: string
-          description: The localized description of the object reference.
-        fromObject:
-          type: string
-          description: The ID of the referencing analytic object.
-        toObject:
-          type: string
-          description: The ID of the referenced analytic object.
-        type:
-          enum:
-          - SUBJECT_REFERENCE
-          - MULTI_VALUE_REFERENCE
-          type: string
-          description: The type of object reference.
-          format: enum
-        isStrongReference:
-          type: boolean
-          description: True if this is a strong reference.
-      description: "A link between one analytic object and another. An ObjectReference allows you to discover the relationships between\n analytic objects. In some queries, you may need to provide a qualifyingPath, which is built from ObjectReference information."
-    servicing.VeeQuestionsChangeDefinitionsDTO:
-      type: object
-      properties:
-        questionsByTenant:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.VeeQuestionChangeDefinitionsByTenantDTO'
-          description: The Vee sample question updates to make in each tenant.
-      description: The changes to Vee sample questions.
-    servicing.VersionInformationDTO:
-      type: object
-      properties:
-        versionType:
-          enum:
-          - Unknown
-          - BP
-          - Tenant
-          - TenantOverride
-          - TenantShared
-          - Draft
-          type: string
-          description: "Indicates where the object originates from and whether the object has been modified. Valid values:\n - `Unknown`: The source is not known.\n - `BP`: The object originates from Visier's Blueprint and is not changed at the tenant level.\n - `Tenant`: The object only exists in the tenant and doesn't exist in Visier's Blueprint.\n - `TenantOverride`: The object originates from Visier's Blueprint and is changed at the tenant level.\n - `TenantShared`: The object is non-versioned, only exists in the tenant and doesn’t exist in Visier's Blueprint, and is shareable with other users in the tenant.\n - `Draft`: The object only exists in the specified draft project."
-          format: enum
-        edited:
-          type: string
-          description: The UTC time of the latest change in ISO 8601 format. For example, `2023-10-01T12:00:00Z`.
-        editor:
-          type: string
-          description: The user who made the latest change.
-      description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
-    dataservices.datamodel.AnalyticObjectDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID of the analytic object.
-        displayName:
-          type: string
-          description: The localized display name of the analytic object.
-        description:
-          type: string
-          description: The localized description of the analytic object.
-        type:
-          enum:
-          - SUBJECT
-          - EVENT
-          - OVERLAY
-          type: string
-          description: 'The analytic object type: `SUBJECT`, `EVENT`, or `OVERLAY`.'
-          format: enum
-        dataStartDate:
-          type: string
-          description: "The date from which data becomes available for this analytic object.\n Note: Format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.\n Epochs are expressed as 64-bit integers and represented as stringified longs in JSON due to JSON's inherent\n limitation in representing large numbers."
-        dataEndDate:
-          type: string
-          description: "The date from which data is no longer available for this analytic object.\n Note: Format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.\n Epochs are expressed as 64-bit integers and represented as stringified longs in JSON due to JSON's inherent\n limitation in representing large numbers."
-        propertyIds:
-          type: array
-          items:
-            type: string
-          description: A list of strings representing IDs of the properties that belong to this analytic object.
-        dimensionIds:
-          type: array
-          items:
-            type: string
-          description: A list of strings representing IDs of the dimensions that belong to this analytic object.
-        selectionConceptIds:
-          type: array
-          items:
-            type: string
-          description: "A list of strings representing IDs of the selection concepts that belong to this analytic object.\n Note: If there are no selection concepts, this field is omitted."
-        objectReferences:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.ObjectReferenceDTO'
-          description: "A list of references from this analytic object to other analytic objects.\n Note: If there are no references, this field is omitted."
-        populationConfiguration:
-          allOf:
-          - $ref: '#/components/schemas/dataservices.datamodel.PopulationConfigurationDTO'
-          description: "A set of property and dimension references configured by Visier or an administrator to tell the platform what\n properties and dimensions to use when doing population insight calculations. These are the distinguishing\n properties, change history properties, and grouping dimensions to use in AI insights. This field is optional and\n is only available for subjects."
-        defaultSelectionConcept:
-          allOf:
-          - $ref: '#/components/schemas/dataservices.datamodel.SelectionConceptReferenceDTO'
-          description: "The selection concept to use as the default filter in visualizations using this analytic object. Useful for \n filtering visuals to a context that users understand. Returns the object name and the qualifying path to the \n related analytic object. Not returned if no default filter is configured."
-      description: Analytic objects are the various items that users can analyze in Visier. Analytic objects include subjects, events, and overlays.
-    planning.PlanContextDTO:
-      type: object
-      properties:
-        memberPath:
-          type: array
-          items:
-            $ref: '#/components/schemas/planning.MemberDTO'
-          description: The members representing the populations of the plan.
-      description: The populations included in this plan.
-    planning.PlanSchemaDTO:
-      type: object
-      properties:
-        planItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/planning.PlanItemDTO'
-          description: A collection of editable plan items in a plan.
-        timePeriods:
-          type: array
-          items:
-            $ref: '#/components/schemas/planning.PlanTimePeriodDTO'
-          description: The editable time periods in a plan. These time periods are the columns in the planning grid.
-        planSegmentLevels:
-          type: array
-          items:
-            $ref: '#/components/schemas/planning.PlanSegmentLevelDTO'
-          description: The dimensions that the plan is segmented by.
-        planSegmentLevelMembers:
-          type: array
-          items:
-            $ref: '#/components/schemas/planning.PlanSegmentLevelMemberListDTO'
-          description: "A collection of members grouped by their dimension and level.\n The combination of these member IDs points to a specific row in the plan."
-        planContext:
-          allOf:
-          - $ref: '#/components/schemas/planning.PlanContextDTO'
-          description: "The context the plan is scoped to, with each context member's full ancestor path expanded top-down. For example, a plan might be scoped to women, with a location segmentation down to the state and city levels, and organization levels one to three.\n Omitted for top-level plans that have no context."
-      description: Information about a plan's schema.
-    servicing.objectconfiguration.PropertyDeleteDefinitionsByTenantDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The code of the tenant to delete properties from. Default is the current tenant.
-        projectId:
-          type: string
-          description: The project in which to delete properties. If omitted and the ProjectID request header is not defined, the change is published to production immediately.
-        propertyIds:
-          type: array
-          items:
-            type: string
-          description: The IDs of the properties to delete.
-      description: The properties to delete for a specific tenant.
-    dataservices.datamodel.PlanningPlanDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the plan.
-        name:
-          type: string
-          description: The name of the plan.
-        subjectId:
-          type: string
-          description: The ID of subject for the plan.
-        defaultContexts:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.PlanningPlanContextDTO'
-          description: The contexts defined for the plan.
-        planDimensionIds:
-          type: array
-          items:
-            type: string
-          description: The IDs of the dimensions defined for the plan.
-        scenarios:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.ScenarioOrSnapshotDTO'
-          description: The available scenarios for the plan.
-        snapshots:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.ScenarioOrSnapshotDTO'
-          description: The available snapshots for the plan.
-      description: The definition of a plan. Plans are defined on planning models, and each plan may define multiple scenarios or snapshots.
-    dataservices.datamodel.MetricDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID of the metric.
-        displayName:
-          type: string
-          description: The localized display name of the metric.
-        description:
-          type: string
-          description: The localized description of the metric.
-        dataStartDate:
-          type: string
-          description: "The date from which data becomes available for this metric.\n Note: Format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.\n Epochs are expressed as 64-bit integers and represented as stringified longs in JSON due to JSON's inherent\n limitation in representing large numbers."
-        dataEndDate:
-          type: string
-          description: "The date from which data is no longer available for this metric.\n Note: Format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.\n Epochs are expressed as 64-bit integers and represented as stringified longs in JSON due to JSON's inherent\n limitation in representing large numbers."
-        analyticObjectId:
-          type: string
-          description: The unique ID of the analytic object.
-        parameters:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataservices.datamodel.ParameterDefinitionDTO'
-          description: The collection of parameters defined for the metric.
-        category:
-          enum:
-          - REGULAR
-          - DERIVED
-          - PLANNING
-          type: string
-          description: 'The category of the metric. Will be one of: `REGULAR`, `DERIVED` or `PLANNING`.'
-          format: enum
-        visibleInApp:
-          type: boolean
-          description: // If `true`, the metric is visible to end users in the solution.
-        dataType:
-          type: string
-          description: "The metric's data type. Valid values:\n\n Custom data types, `Number`, `Integer`, `Ordinal`, `Categorical`, `Currency`, `Boolean`, `Percent`,\n `IntegerPercent`, `PercentNoScaling`, `PercentagePoint`, `String`, `Text`, `LargeText`,\n `Date`, `HourDuration`, `DayDuration`, `MonthDuration`, `YearDuration`."
-      description: A metric is a calculation based on one or more attribute values of analytic objects.
   securitySchemes:
     CookieAuth:
       type: apiKey

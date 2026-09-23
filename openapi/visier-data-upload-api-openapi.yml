@@ -14,16 +14,24 @@ security:
 - ApiKeyAuth: []
   OAuth2Auth: []
 tags:
-- name: DataUpload
+- name: Data Upload
   x-displayName: Data Upload
   description: Send data files to Visier. After we receive the data, Visier starts a receiving job and a processing job to process the data.
 paths:
   /v1/data/upload/files/{filename}:
     put:
       tags:
-      - DataUpload
+      - Data Upload
       summary: Upload a data file to Visier
-      description: "Use this API to upload data files to Visier. You can upload ZIP, CSV, XLS, and XLSX filetypes in plaintext or encrypted with Visier's PGP key.\n\n Use of this API requires client redirect. This API redirects requests directly to Visier's upload infrastructure to support long-running uploads. \n To ensure efficient uploading, we recommend that you use an HTTP client that supports the 100 Continue status code.\n\n The maximum file upload size is 500 MB. We recommend using SFTP for larger file sizes."
+      description: 'Use this API to upload data files to Visier. You can upload ZIP, CSV, XLS, and XLSX filetypes in plaintext or encrypted with Visier''s PGP key.
+
+
+        Use of this API requires client redirect. This API redirects requests directly to Visier''s upload infrastructure to support long-running uploads.
+
+        To ensure efficient uploading, we recommend that you use an HTTP client that supports the 100 Continue status code.
+
+
+        The maximum file upload size is 500 MB. We recommend using SFTP for larger file sizes.'
       operationId: DataUpload_FileUpload
       parameters:
       - name: filename

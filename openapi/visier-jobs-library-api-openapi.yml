@@ -1,18 +1,14 @@
 openapi: 3.2.0
 info:
   title: Skills Intelligence Engine Jobs Library API
-  description: 'Everything you need to power skills and turn them into actions.
-
-    '
+  description: Everything you need to power skills and turn them into actions.
   license:
     name: Apache License, Version 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
   version: 1.0.0
 tags:
 - name: Jobs Library
-  description: 'Access over 3,300 standard jobs and get complete details in 27 languages, such as alternative titles, descriptions, and skills.
-
-    '
+  description: Access over 3,300 standard jobs and get complete details in 27 languages, such as alternative titles, descriptions, and skills.
 paths:
   /v1/jobs/{id}:
     get:
@@ -20,9 +16,7 @@ paths:
       tags:
       - Jobs Library
       operationId: GetJob
-      description: 'If you know the ID of a job, use this endpoint to retrieve information such as display name, description, Automation Index, Remote Work Index, alternative names, and skills.
-
-        '
+      description: If you know the ID of a job, use this endpoint to retrieve information such as display name, description, Automation Index, Remote Work Index, alternative names, and skills.
       parameters:
       - name: id
         in: path
@@ -91,9 +85,7 @@ paths:
       tags:
       - Jobs Library
       operationId: ListJobs
-      description: 'Use this endpoint to retrieve all the jobs in Visier''s Jobs Library.
-
-        '
+      description: Use this endpoint to retrieve all the jobs in Visier's Jobs Library.
       parameters:
       - name: Accept-Language
         in: header
@@ -154,9 +146,7 @@ paths:
       tags:
       - Jobs Library
       operationId: SearchJob
-      description: 'Retrieve a list of jobs that match a specified search term.
-
-        '
+      description: Retrieve a list of jobs that match a specified search term.
       parameters:
       - name: term
         in: query
@@ -225,9 +215,7 @@ paths:
       tags:
       - Jobs Library
       operationId: StandardizeJobs
-      description: 'Find the top standardized job matches for any custom job title and optional NAICS code.
-
-        '
+      description: Find the top standardized job matches for any custom job title and optional NAICS code.
       requestBody:
         description: 'The custom job titles that you want to retrieve standardized jobs for and the optional NAICS code to retrieve industry specific jobs.
 
@@ -282,6 +270,98 @@ paths:
       - api_key: []
 components:
   schemas:
+    JobList:
+      type: array
+      items:
+        type: object
+        title: JobEntry
+        properties:
+          id:
+            type: string
+            description: 'The unique ID of the job.
+
+              '
+          name:
+            type: string
+            description: 'The localized display name of the job.
+
+              '
+          description:
+            type: string
+            description: 'The localized description of the job.
+
+              '
+        required:
+        - id
+        - name
+        - description
+    JobStandardizationInputSkills:
+      description: 'The custom job titles to standardize.
+
+        '
+      type: object
+      properties:
+        jobs:
+          type: array
+          items:
+            type: string
+        naicsCode:
+          type: string
+          description: 'The North American Industry Classification System (NAICS) code.
+
+
+            If `naicsCode` is provided, the most relevant job titles associated with the naicsCode are returned first.
+
+            '
+      required:
+      - jobs
+    JobStandardizationOutputSkills:
+      type: array
+      items:
+        title: OutputEntry
+        type: object
+        properties:
+          job:
+            type: string
+            description: 'The custom job title input.
+
+              '
+          matches:
+            type: array
+            description: 'The top standardized job matches.
+
+              '
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: 'The unique ID of the job.
+
+                    '
+                name:
+                  type: string
+                  description: 'The localized display name of the job.
+
+                    '
+                description:
+                  type: string
+                  description: 'The localized description of the job.
+
+                    '
+                score:
+                  type: integer
+                  description: 'The score representing the confidence level of the match between the standardized job and the custom job title input. The score ranges from 0 to 100.
+
+                    '
+              required:
+              - id
+              - name
+              - description
+              - score
+        required:
+        - job
+        - matches
     Skill:
       description: 'The details describing a skill.
 
@@ -353,78 +433,6 @@ components:
       - isKnowledge
       - skillType
       - alternativeTitles
-    JobList:
-      type: array
-      items:
-        type: object
-        title: JobEntry
-        properties:
-          id:
-            type: string
-            description: 'The unique ID of the job.
-
-              '
-          name:
-            type: string
-            description: 'The localized display name of the job.
-
-              '
-          description:
-            type: string
-            description: 'The localized description of the job.
-
-              '
-        required:
-        - id
-        - name
-        - description
-    JobStandardizationOutputSkills:
-      type: array
-      items:
-        title: OutputEntry
-        type: object
-        properties:
-          job:
-            type: string
-            description: 'The custom job title input.
-
-              '
-          matches:
-            type: array
-            description: 'The top standardized job matches.
-
-              '
-            items:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: 'The unique ID of the job.
-
-                    '
-                name:
-                  type: string
-                  description: 'The localized display name of the job.
-
-                    '
-                description:
-                  type: string
-                  description: 'The localized description of the job.
-
-                    '
-                score:
-                  type: integer
-                  description: 'The score representing the confidence level of the match between the standardized job and the custom job title input. The score ranges from 0 to 100.
-
-                    '
-              required:
-              - id
-              - name
-              - description
-              - score
-        required:
-        - job
-        - matches
     ApiError:
       title: ApiError
       description: 'Description of an API error.
@@ -532,26 +540,6 @@ components:
       - alternativeTitles
       - essentialSkills
       - optionalSkills
-    JobStandardizationInputSkills:
-      description: 'The custom job titles to standardize.
-
-        '
-      type: object
-      properties:
-        jobs:
-          type: array
-          items:
-            type: string
-        naicsCode:
-          type: string
-          description: 'The North American Industry Classification System (NAICS) code.
-
-
-            If `naicsCode` is provided, the most relevant job titles associated with the naicsCode are returned first.
-
-            '
-      required:
-      - jobs
   securitySchemes:
     api_key:
       type: apiKey

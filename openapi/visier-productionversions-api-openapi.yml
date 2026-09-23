@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Visier Administration Production Versions API
-  description: Visier APIs for managing your tenant or tenants in Visier. You can programmatically manage user accounts in Visier, the profiles and permissions assigned to users, and to make changes in projects and publish projects to production. Administrating tenant users can use administration APIs to manage their analytic tenants and consolidated analytics tenants.<br>**Note:** If you submit API requests for changes that cause a project to publish to production (such as assigning permissions to users or updating permissions), each request is individually published to production, resulting in hundreds or thousands of production versions. We recommend that you use the `ProjectID` request header to make changes in a project, if `ProjectID` is available for the API endpoint.
+  description: Visier APIs for managing your tenant or tenants in Visier.
   license:
     name: Apache License, Version 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
@@ -62,7 +62,10 @@ paths:
       tags:
       - ProductionVersions
       summary: Perform an operation on production versions
-      description: "Perform operations on production versions, such as exporting a production project's committed changes. \n \n If exporting, please specify `Accept: application/zip, application/json` in the header. The API returns exported changes in ZIP format and error messages in JSON format. If your request returns an error and it doesn't accept `application/json`, you will receive an HTTP 406 status code instead of the appropriate error response body."
+      description: 'Perform operations on production versions, such as exporting a production project''s committed changes.
+
+
+        If exporting, please specify `Accept: application/zip, application/json` in the header. The API returns exported changes in ZIP format and error messages in JSON format. If your request returns an error and it doesn''t accept `application/json`, you will receive an HTTP 406 status code instead of the appropriate error response body.'
       operationId: ProductionVersions_PostProductionVersions
       parameters:
       - name: TargetTenantID
@@ -94,7 +97,9 @@ paths:
       tags:
       - ProductionVersions
       summary: Perform an operation on a production version
-      description: "Perform operations on a specific production version. The following operations are supported:\n * `rollBackTo`: Create a project that rolls back the production version to the specified version. The project contains uncommitted changes that reverse the published versions after the target production version."
+      description: 'Perform operations on a specific production version. The following operations are supported:
+
+        * `rollBackTo`: Create a project that rolls back the production version to the specified version. The project contains uncommitted changes that reverse the published versions after the target production version.'
       operationId: ProductionVersions_PostProductionVersion
       parameters:
       - name: productionVersionId
@@ -143,20 +148,28 @@ components:
           items:
             type: string
           description: A list of versions between `startVersion` and `endVersion` to exclude.
-    servicing.ProductionVersionsAPIOperationRequestDTO:
+    Status:
       type: object
       properties:
-        operation:
-          enum:
-          - unknownProductionVersionsAPIOperation
-          - export
+        localizedMessage:
           type: string
-          description: "The operation to perform. Valid values:\n * `export`: Export the project changes of the requested production versions and their related files, such as any Guidebook images. If successful, a ZIP file is returned containing any relevant image files and a JSON file with the production project changes."
-          format: enum
-        exportParameters:
-          allOf:
-          - $ref: '#/components/schemas/servicing.ExportProductionVersionsAPIOperationParametersDTO'
-          description: The parameters for the `export` option, such as the production version to start exporting versions from. Required for `export` operations.
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    servicing.ExportProductionVersionsAPIOperationResponseDTO:
+      type: object
+      properties: {}
     servicing.ProductionVersionAPIOperationRequestDTO:
       type: object
       properties:
@@ -167,17 +180,6 @@ components:
           type: string
           description: "The operation to perform. Valid values:\n * `rollBackTo`: Create a project that rolls back the production version to the specified version. The project contains uncommitted changes that reverse the published versions after the target production version."
           format: enum
-    servicing.ExportProductionVersionsAPIOperationResponseDTO:
-      type: object
-      properties: {}
-    servicing.GetProductionVersionsAPIResponseDTO:
-      type: object
-      properties:
-        publishedVersions:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.ProjectDTO'
-          description: A list of projects that were published to production.
     servicing.ProductionVersionsAPIOperationResponseDTO:
       type: object
       properties:
@@ -233,25 +235,28 @@ components:
           allOf:
           - $ref: '#/components/schemas/servicing.ProjectDTO'
           description: The project created by the `rollBackTo` operation.
-    Status:
+    servicing.GetProductionVersionsAPIResponseDTO:
       type: object
       properties:
-        localizedMessage:
+        publishedVersions:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ProjectDTO'
+          description: A list of projects that were published to production.
+    servicing.ProductionVersionsAPIOperationRequestDTO:
+      type: object
+      properties:
+        operation:
+          enum:
+          - unknownProductionVersionsAPIOperation
+          - export
           type: string
-          description: Localized error message describing the root cause of the error.
-        code:
-          type: string
-          description: Error classification.
-        message:
-          type: string
-          description: Not used.
-        rci:
-          type: string
-          description: Optional root cause identifier.
-        userError:
-          type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
+          description: "The operation to perform. Valid values:\n * `export`: Export the project changes of the requested production versions and their related files, such as any Guidebook images. If successful, a ZIP file is returned containing any relevant image files and a JSON file with the production project changes."
+          format: enum
+        exportParameters:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExportProductionVersionsAPIOperationParametersDTO'
+          description: The parameters for the `export` option, such as the production version to start exporting versions from. Required for `export` operations.
   securitySchemes:
     CookieAuth:
       type: apiKey

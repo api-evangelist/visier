@@ -81,7 +81,14 @@ paths:
       tags:
       - ObjectConfiguration
       summary: Map dimension members to nodes in a calculation concept
-      description: "Map dimension members to nodes in a calculation concept.\n The changes are applied in a new project and published to production.\n\n The body of this API is the source of truth for dimension members mapped to the concept. For example, if a node in\n the body does not have any dimension members, all existing dimension members mapped to that node will be removed."
+      description: 'Map dimension members to nodes in a calculation concept.
+
+        The changes are applied in a new project and published to production.
+
+
+        The body of this API is the source of truth for dimension members mapped to the concept. For example, if a node in
+
+        the body does not have any dimension members, all existing dimension members mapped to that node will be removed.'
       operationId: ObjectConfiguration_MapCalculationConcept
       parameters:
       - name: conceptId
@@ -177,7 +184,14 @@ paths:
       tags:
       - ObjectConfiguration
       summary: Map dimension members to a selection concept
-      description: "Map dimension members to a selection concept.\n The changes are applied to a new project and published to production.\n\n The body of this API is the source of truth for dimension members mapped to the concept. For example, if a node in\n the body does not have any dimension members, all existing dimension members mapped to that node will be removed."
+      description: 'Map dimension members to a selection concept.
+
+        The changes are applied to a new project and published to production.
+
+
+        The body of this API is the source of truth for dimension members mapped to the concept. For example, if a node in
+
+        the body does not have any dimension members, all existing dimension members mapped to that node will be removed.'
       operationId: ObjectConfiguration_MapSelectionConcept
       parameters:
       - name: conceptId
@@ -212,6 +226,54 @@ paths:
                 $ref: '#/components/schemas/designer.api.ConceptConfigurationResultDTO'
 components:
   schemas:
+    designer.api.DimensionMemberDTO:
+      type: object
+      properties:
+        dimensionMember:
+          type: array
+          items:
+            type: string
+          description: "A list of strings representing the dimension members. Dimension members in a hierarchical dimension\n will have an array with multiple strings."
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    designer.api.CalculationConceptDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: The unique identifier associated with the calculation concept.
+        name:
+          type: string
+          description: The display name of the calculation concept.
+        configuration:
+          allOf:
+          - $ref: '#/components/schemas/designer.api.CalculationConceptConfigurationDTO'
+          description: A list of objects representing the configuration for the calculation concept.
+    designer.api.SelectionConceptConfigurationDTO:
+      type: object
+      properties:
+        analyticObjectFilters:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.api.AnalyticObjectFilterDTO'
+          description: A list of analytic object filters indicating the analytic object and dimension used for this selection concept.
     designer.api.CalculationConceptConfigurationDTO:
       type: object
       properties:
@@ -234,75 +296,6 @@ components:
           items:
             $ref: '#/components/schemas/designer.api.DimensionFilterDTO'
           description: A list of dimensions included in the concept.
-    designer.api.PerspectiveConfigurationDTO:
-      type: object
-      properties:
-        perspectiveId:
-          type: string
-          description: The UUID of the perspective.
-        perspectiveName:
-          type: string
-          description: The display name of the perspective.
-        perspectiveNodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/designer.api.PerspectiveNodeDTO'
-          description: A list of nodes in the perspective.
-    designer.api.ConceptConfigurationResultDTO:
-      type: object
-      properties:
-        conceptId:
-          type: string
-          description: The unique identifier of the configured concept.
-        projectId:
-          type: string
-          description: The unique identifier of the system-generated project.
-        message:
-          type: string
-          description: A meaningful message about the API result.
-    designer.api.SelectionConceptConfigurationDTO:
-      type: object
-      properties:
-        analyticObjectFilters:
-          type: array
-          items:
-            $ref: '#/components/schemas/designer.api.AnalyticObjectFilterDTO'
-          description: A list of analytic object filters indicating the analytic object and dimension used for this selection concept.
-    designer.api.CalculationConceptConfigurationMapDTO:
-      type: object
-      properties:
-        perspectivesToMap:
-          type: array
-          items:
-            $ref: '#/components/schemas/designer.api.PerspectiveConfigurationDTO'
-          description: A list of objects representing the list of perspectives in the calculation concept.
-      description: The configuration to apply to the concept.
-    designer.api.SelectionConceptDTO:
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: The unique identifier associated with the selection concept.
-        name:
-          type: string
-          description: The display name of the selection concept.
-        configuration:
-          allOf:
-          - $ref: '#/components/schemas/designer.api.SelectionConceptConfigurationDTO'
-          description: A list of objects representing the configuration for the selection concept.
-    designer.api.CalculationConceptDTO:
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: The unique identifier associated with the calculation concept.
-        name:
-          type: string
-          description: The display name of the calculation concept.
-        configuration:
-          allOf:
-          - $ref: '#/components/schemas/designer.api.CalculationConceptConfigurationDTO'
-          description: A list of objects representing the configuration for the calculation concept.
     designer.api.PerspectiveNodeDTO:
       type: object
       properties:
@@ -317,6 +310,37 @@ components:
           items:
             $ref: '#/components/schemas/designer.api.AnalyticObjectFilterDTO'
           description: A list of analytic object filters indicating the analytic object and dimensions used for the selection concept.
+    designer.api.CalculationConceptConfigurationMapDTO:
+      type: object
+      properties:
+        perspectivesToMap:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.api.PerspectiveConfigurationDTO'
+          description: A list of objects representing the list of perspectives in the calculation concept.
+      description: The configuration to apply to the concept.
+    designer.api.CalculationConceptListDTO:
+      type: object
+      properties:
+        concepts:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.api.CalculationConceptDTO'
+          description: A list of objects representing calculation concepts.
+    designer.api.PerspectiveConfigurationDTO:
+      type: object
+      properties:
+        perspectiveId:
+          type: string
+          description: The UUID of the perspective.
+        perspectiveName:
+          type: string
+          description: The display name of the perspective.
+        perspectiveNodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.api.PerspectiveNodeDTO'
+          description: A list of nodes in the perspective.
     designer.api.DimensionFilterDTO:
       type: object
       properties:
@@ -331,14 +355,18 @@ components:
           items:
             $ref: '#/components/schemas/designer.api.DimensionMemberDTO'
           description: "A list of dimension members to map to the perspective node.\n\n Note: If this array is empty, all dimension members will be removed for the node."
-    designer.api.SelectionConceptListDTO:
+    designer.api.ConceptConfigurationResultDTO:
       type: object
       properties:
-        concepts:
-          type: array
-          items:
-            $ref: '#/components/schemas/designer.api.SelectionConceptDTO'
-          description: A list of objects representing selection concepts.
+        conceptId:
+          type: string
+          description: The unique identifier of the configured concept.
+        projectId:
+          type: string
+          description: The unique identifier of the system-generated project.
+        message:
+          type: string
+          description: A meaningful message about the API result.
     designer.api.SelectionConceptConfigurationMapDTO:
       type: object
       properties:
@@ -347,41 +375,27 @@ components:
           items:
             $ref: '#/components/schemas/designer.api.AnalyticObjectFilterDTO'
           description: "A list of analytic object filters indicating the analytic object and dimension members used\n for the selection concept.\n\n Note: If this array is empty, all filters will be removed for the concept."
-    designer.api.DimensionMemberDTO:
-      type: object
-      properties:
-        dimensionMember:
-          type: array
-          items:
-            type: string
-          description: "A list of strings representing the dimension members. Dimension members in a hierarchical dimension\n will have an array with multiple strings."
-    designer.api.CalculationConceptListDTO:
+    designer.api.SelectionConceptListDTO:
       type: object
       properties:
         concepts:
           type: array
           items:
-            $ref: '#/components/schemas/designer.api.CalculationConceptDTO'
-          description: A list of objects representing calculation concepts.
-    Status:
+            $ref: '#/components/schemas/designer.api.SelectionConceptDTO'
+          description: A list of objects representing selection concepts.
+    designer.api.SelectionConceptDTO:
       type: object
       properties:
-        localizedMessage:
+        uuid:
           type: string
-          description: Localized error message describing the root cause of the error.
-        code:
+          description: The unique identifier associated with the selection concept.
+        name:
           type: string
-          description: Error classification.
-        message:
-          type: string
-          description: Not used.
-        rci:
-          type: string
-          description: Optional root cause identifier.
-        userError:
-          type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
+          description: The display name of the selection concept.
+        configuration:
+          allOf:
+          - $ref: '#/components/schemas/designer.api.SelectionConceptConfigurationDTO'
+          description: A list of objects representing the configuration for the selection concept.
   securitySchemes:
     CookieAuth:
       type: apiKey
