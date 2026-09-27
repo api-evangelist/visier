@@ -386,70 +386,6 @@ paths:
                 $ref: '#/components/schemas/servicing.SafeguardAPIResponseDTO'
 components:
   schemas:
-    servicing.InstructionAPIResponseDTO:
-      type: object
-      properties:
-        instructionId:
-          type: string
-          description: The unique identifier of the instruction.
-        displayName:
-          type: string
-          description: The user-friendly display name for the instruction.
-        content:
-          type: string
-          description: The instruction content.
-        category:
-          enum:
-          - INSTRUCTION_CATEGORY_UNSPECIFIED
-          - INSTRUCTION_DATA_GATHERING
-          - INSTRUCTION_RESPONSE_STYLE
-          type: string
-          description: The category of the instruction.
-          format: enum
-        userGroupIds:
-          type: array
-          items:
-            type: string
-          description: The user group IDs that the instruction applies to.
-        versionInformation:
-          allOf:
-          - $ref: '#/components/schemas/servicing.VersionInformationDTO'
-          description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
-      description: Information about a Vee instruction.
-    servicing.SafeguardsAPIResponseDTO:
-      type: object
-      properties:
-        safeguards:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.SafeguardAPIResponseDTO'
-          description: A list of safeguards.
-      description: The Vee safeguards.
-    servicing.SafeguardAPIResponseDTO:
-      type: object
-      properties:
-        safeguardId:
-          type: string
-          description: The unique identifier of the safeguard.
-        displayName:
-          type: string
-          description: The user-friendly display name for the safeguard.
-        content:
-          type: string
-          description: The safeguard text that constrains Vee's behavior.
-        customResponse:
-          type: string
-          description: The custom response text when a safeguard is triggered.
-        userGroupIds:
-          type: array
-          items:
-            type: string
-          description: The user group IDs that the safeguard applies to.
-        versionInformation:
-          allOf:
-          - $ref: '#/components/schemas/servicing.VersionInformationDTO'
-          description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
-      description: Information about a Vee safeguard.
     Status:
       type: object
       properties:
@@ -490,6 +426,70 @@ components:
           type: string
           description: The user who made the latest change.
       description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
+    servicing.SafeguardAPIResponseDTO:
+      type: object
+      properties:
+        safeguardId:
+          type: string
+          description: The unique identifier of the safeguard.
+        displayName:
+          type: string
+          description: The user-friendly display name for the safeguard.
+        content:
+          type: string
+          description: The safeguard text that constrains Vee's behavior.
+        customResponse:
+          type: string
+          description: The custom response text when a safeguard is triggered.
+        userGroupIds:
+          type: array
+          items:
+            type: string
+          description: The user group IDs that the safeguard applies to.
+        versionInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.VersionInformationDTO'
+          description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
+      description: Information about a Vee safeguard.
+    servicing.InstructionAPIResponseDTO:
+      type: object
+      properties:
+        instructionId:
+          type: string
+          description: The unique identifier of the instruction.
+        displayName:
+          type: string
+          description: The user-friendly display name for the instruction.
+        content:
+          type: string
+          description: The instruction content.
+        category:
+          enum:
+          - INSTRUCTION_CATEGORY_UNSPECIFIED
+          - INSTRUCTION_DATA_GATHERING
+          - INSTRUCTION_RESPONSE_STYLE
+          type: string
+          description: The category of the instruction.
+          format: enum
+        userGroupIds:
+          type: array
+          items:
+            type: string
+          description: The user group IDs that the instruction applies to.
+        versionInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.VersionInformationDTO'
+          description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
+      description: Information about a Vee instruction.
+    servicing.SafeguardsAPIResponseDTO:
+      type: object
+      properties:
+        safeguards:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.SafeguardAPIResponseDTO'
+          description: A list of safeguards.
+      description: The Vee safeguards.
     servicing.InstructionsAPIResponseDTO:
       type: object
       properties:

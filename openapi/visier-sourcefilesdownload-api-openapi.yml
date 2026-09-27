@@ -112,6 +112,15 @@ paths:
                 $ref: '#/components/schemas/designer.DownloadSourceFilesResponseDTO'
 components:
   schemas:
+    designer.DownloadSourceFilesResponseDTO:
+      type: object
+      properties:
+        status:
+          type: string
+          description: The download request status, such as `Error`.
+        messages:
+          type: string
+          description: A description of the request status.
     Status:
       type: object
       properties:
@@ -131,15 +140,6 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
-    designer.DownloadSourceFilesResponseDTO:
-      type: object
-      properties:
-        status:
-          type: string
-          description: The download request status, such as `Error`.
-        messages:
-          type: string
-          description: A description of the request status.
     designer.DownloadSourceFilesDTO:
       type: object
       properties:

@@ -64,7 +64,7 @@
     "visier-webhooks-api-openapi.yml"
   ],
   "archived": [
-    "deleted 12 superseded output(s) from the previous generation"
+    "deleted 11 superseded output(s) from the previous generation"
   ],
   "errors": [
     "visier-planning-openapi.yaml: dangling $ref: #/components/schemas/planning.PlanDataLoadErrorDTO",
@@ -83,7 +83,7 @@
     "visier-skills-intelligence-engine-openapi.yaml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
     "visier-webhooks-openapi.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "superseded outputs removed: visier-basic-authentication-api-openapi.yml, visier-data-model-api-openapi.yml, visier-data-query-api-openapi.yml, visier-data-upload-api-openapi.yml, visier-encryption-keys-api-openapi.yml \u2026",
-    "apis.yml register: written (+12 apis, 51 total)"
+    "apis.yml register: written (+11 apis, 51 total)"
   ],
   "skipped": [
     "visier-analyticobjectsv2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -106,7 +106,7 @@
     "visier-jobs-library-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "visier-metricsv2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "visier-network-subnets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "visier-o-auth2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "visier-oauth2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "visier-objectconfiguration-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "visier-permissions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "visier-personalizedalerts-api-openapi.yml: previously refined output, superseded by openapi/_original/",

@@ -114,6 +114,39 @@ paths:
                 $ref: '#/components/schemas/admin.ProductVersionsUpdateResponseDTO'
 components:
   schemas:
+    admin.ProductVersionsUpdateResponseDTO:
+      type: object
+      properties:
+        successes:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.ProductVersionsUpdateSuccessfulTenantResponseDTO'
+          description: The products that were successfully activated.
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.ProductVersionsUpdateFailureTenantResponseDTO'
+          description: The products that failed to activate.
+      description: A collection of responses indicating the success or failure of a product release version activation request, including lists of tenants with successful or failed activations.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
     admin.ProductVersionDTO:
       type: object
       properties:
@@ -160,48 +193,6 @@ components:
             type: string
           description: The tenants where the specified release version was succesfully activated.
       description: Provides confirmation details about the successful activation of a product release version.
-    Status:
-      type: object
-      properties:
-        localizedMessage:
-          type: string
-          description: Localized error message describing the root cause of the error.
-        code:
-          type: string
-          description: Error classification.
-        message:
-          type: string
-          description: Not used.
-        rci:
-          type: string
-          description: Optional root cause identifier.
-        userError:
-          type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
-    admin.ProductVersionsUpdateResponseDTO:
-      type: object
-      properties:
-        successes:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.ProductVersionsUpdateSuccessfulTenantResponseDTO'
-          description: The products that were successfully activated.
-        failures:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.ProductVersionsUpdateFailureTenantResponseDTO'
-          description: The products that failed to activate.
-      description: A collection of responses indicating the success or failure of a product release version activation request, including lists of tenants with successful or failed activations.
-    admin.ProductVersionsDTO:
-      type: object
-      properties:
-        versions:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.ProductVersionDTO'
-          description: A list of products and their current release versions for a tenant.
-      description: A collection of products and their current release version for a tenant.
     admin.ProductReleasesDTO:
       type: object
       properties:
@@ -229,6 +220,15 @@ components:
           type: string
           description: More information about why the activation failed.
       description: Provides details about the failed activation of a product release version.
+    admin.ProductVersionsDTO:
+      type: object
+      properties:
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.ProductVersionDTO'
+          description: A list of products and their current release versions for a tenant.
+      description: A collection of products and their current release version for a tenant.
   securitySchemes:
     CookieAuth:
       type: apiKey

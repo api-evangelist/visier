@@ -619,118 +619,6 @@ paths:
       - api_key: []
 components:
   schemas:
-    SkillGroup:
-      description: 'Details describing a skill group.
-
-        '
-      type: object
-      properties:
-        id:
-          type: string
-          description: 'The unique ID of the skill group.
-
-            '
-        name:
-          type: string
-          description: 'The localized display name of the skill group.
-
-            '
-        description:
-          type: string
-          description: 'The localized description of the skill group.
-
-            '
-        skillCategoryId:
-          type: string
-          description: 'ID of the parent skill category.
-
-            '
-        skills:
-          type: array
-          items:
-            $ref: '#/components/schemas/Skill'
-          description: 'List of skills under this skill group.
-
-            '
-      required:
-      - id
-      - name
-      - description
-      - skillCategoryId
-      - skills
-    SkillCategoryList:
-      type: array
-      items:
-        type: object
-        title: SkillCategoryEntry
-        properties:
-          id:
-            type: string
-            description: 'The unique ID of the skill category.
-
-              '
-          name:
-            type: string
-            description: 'The localized display name of the skill category.
-
-              '
-          description:
-            type: string
-            description: 'The localized description of the skill category.
-
-              '
-        required:
-        - id
-        - name
-        - description
-    SkillCategory:
-      description: 'Details describing a skill category.
-
-        '
-      type: object
-      properties:
-        id:
-          type: string
-          description: 'The unique ID of the skill category.
-
-            '
-        name:
-          type: string
-          description: 'The localized display name of the skill category.
-
-            '
-        description:
-          type: string
-          description: 'The localized description of the skill category.
-
-            '
-        skillGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/SkillGroup'
-          description: 'List of skill groups under this skill category.
-
-            '
-      required:
-      - id
-      - name
-      - description
-      - skillGroups
-    SkillMatchOutput:
-      type: array
-      minItems: 1
-      description: 'Ranked list of the skill sets (targets) with the best match appearing at the top of the list. The integer value indicates the position of the target in the request body.
-
-        list. The groups are ranked by the best matched skill set to worst matched skill set to the input ''skills'' candidate.
-
-        '
-      example:
-      - 0
-      - 2
-      - 1
-      items:
-        type: integer
-        description: The position of the target skill set in the request body. The number sequence starts at 0.
     SkillMatchInput:
       description: 'The skill set and the group of skill sets (targets) to be matched.
 
@@ -805,31 +693,70 @@ components:
               - 66
       required:
       - content
-    SkillGroupList:
+    SkillExtractionOutput:
       type: array
       items:
+        title: ExtractedSkill
         type: object
-        title: SkillGroupEntry
         properties:
           id:
             type: string
-            description: 'The unique ID of the skill group.
+            description: 'The unique ID of the skill.
 
               '
           name:
             type: string
-            description: 'The localized display name of the skill group.
+            description: 'The localized display name of the skill.
 
               '
           description:
             type: string
-            description: 'The localized description of the skill group.
+            description: 'The localized description of the skill.
+
+              '
+          score:
+            type: integer
+            description: 'The score representing the confidence level of the match between the extracted skill and the standardized skill in Visier’s Skills Library. The score ranges from 0 to 100.
 
               '
         required:
         - id
         - name
         - description
+        - score
+    SkillCategory:
+      description: 'Details describing a skill category.
+
+        '
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'The unique ID of the skill category.
+
+            '
+        name:
+          type: string
+          description: 'The localized display name of the skill category.
+
+            '
+        description:
+          type: string
+          description: 'The localized description of the skill category.
+
+            '
+        skillGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/SkillGroup'
+          description: 'List of skill groups under this skill category.
+
+            '
+      required:
+      - id
+      - name
+      - description
+      - skillGroups
     Skill:
       description: 'The details describing a skill.
 
@@ -901,6 +828,110 @@ components:
       - isKnowledge
       - skillType
       - alternativeTitles
+    SkillCategoryList:
+      type: array
+      items:
+        type: object
+        title: SkillCategoryEntry
+        properties:
+          id:
+            type: string
+            description: 'The unique ID of the skill category.
+
+              '
+          name:
+            type: string
+            description: 'The localized display name of the skill category.
+
+              '
+          description:
+            type: string
+            description: 'The localized description of the skill category.
+
+              '
+        required:
+        - id
+        - name
+        - description
+    SkillExtractionInput:
+      description: 'The text to extract skills from, such as a job description or course outline.
+
+        '
+      type: object
+      properties:
+        content:
+          type: string
+          maxLength: 7500
+          minLength: 4
+          description: 'The body of text to extract skills from.
+
+
+            The maximum length is 7500 characters. The minimum length is 4 characters.
+
+            '
+        languageCode:
+          type: string
+          description: 'Identifies the language of the input text.
+
+
+            Format: **ISO 639-1** language code. For a list of supported languages, see "Supported Languages" in the Skills Intelligence Engine API documentation.
+
+
+            If no value is specified, the response language is used.
+
+            '
+        limit:
+          type: integer
+          minimum: 1
+          maximum: 50
+          description: 'The limit on the number of skills extracted from the text. The minimum is 1 and the maximum is 50 skills.
+
+
+            If no value is specified, the default limit of 10 skills is used.
+
+            '
+      required:
+      - content
+    SkillGroupList:
+      type: array
+      items:
+        type: object
+        title: SkillGroupEntry
+        properties:
+          id:
+            type: string
+            description: 'The unique ID of the skill group.
+
+              '
+          name:
+            type: string
+            description: 'The localized display name of the skill group.
+
+              '
+          description:
+            type: string
+            description: 'The localized description of the skill group.
+
+              '
+        required:
+        - id
+        - name
+        - description
+    SkillMatchOutput:
+      type: array
+      minItems: 1
+      description: 'Ranked list of the skill sets (targets) with the best match appearing at the top of the list. The integer value indicates the position of the target in the request body.
+
+        list. The groups are ranked by the best matched skill set to worst matched skill set to the input ''skills'' candidate.
+
+        '
+      example:
+      - 0
+      - 2
+      - 1
+      items:
+        type: integer
+        description: The position of the target skill set in the request body. The number sequence starts at 0.
     ApiError:
       title: ApiError
       description: 'Description of an API error.
@@ -952,76 +983,45 @@ components:
         - id
         - name
         - description
-    SkillExtractionInput:
-      description: 'The text to extract skills from, such as a job description or course outline.
+    SkillGroup:
+      description: 'Details describing a skill group.
 
         '
       type: object
       properties:
-        content:
+        id:
           type: string
-          maxLength: 7500
-          minLength: 4
-          description: 'The body of text to extract skills from.
-
-
-            The maximum length is 7500 characters. The minimum length is 4 characters.
+          description: 'The unique ID of the skill group.
 
             '
-        languageCode:
+        name:
           type: string
-          description: 'Identifies the language of the input text.
-
-
-            Format: **ISO 639-1** language code. For a list of supported languages, see "Supported Languages" in the Skills Intelligence Engine API documentation.
-
-
-            If no value is specified, the response language is used.
+          description: 'The localized display name of the skill group.
 
             '
-        limit:
-          type: integer
-          minimum: 1
-          maximum: 50
-          description: 'The limit on the number of skills extracted from the text. The minimum is 1 and the maximum is 50 skills.
+        description:
+          type: string
+          description: 'The localized description of the skill group.
 
+            '
+        skillCategoryId:
+          type: string
+          description: 'ID of the parent skill category.
 
-            If no value is specified, the default limit of 10 skills is used.
+            '
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/Skill'
+          description: 'List of skills under this skill group.
 
             '
       required:
-      - content
-    SkillExtractionOutput:
-      type: array
-      items:
-        title: ExtractedSkill
-        type: object
-        properties:
-          id:
-            type: string
-            description: 'The unique ID of the skill.
-
-              '
-          name:
-            type: string
-            description: 'The localized display name of the skill.
-
-              '
-          description:
-            type: string
-            description: 'The localized description of the skill.
-
-              '
-          score:
-            type: integer
-            description: 'The score representing the confidence level of the match between the extracted skill and the standardized skill in Visier’s Skills Library. The score ranges from 0 to 100.
-
-              '
-        required:
-        - id
-        - name
-        - description
-        - score
+      - id
+      - name
+      - description
+      - skillCategoryId
+      - skills
   securitySchemes:
     api_key:
       type: apiKey

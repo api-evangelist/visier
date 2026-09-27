@@ -96,6 +96,16 @@ paths:
         CookieAuth: []
 components:
   schemas:
+    AuthenticationRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The unique identifier of the API user requesting a security token.
+        password:
+          type: string
+          description: The password that corresponds to the user making the request.
+      description: Your username and password credentials to request an authentication token.
     Status:
       type: object
       properties:
@@ -122,16 +132,6 @@ components:
         TargetUsername:
           type: string
           description: The username of the user to impersonate.
-    AuthenticationRequest:
-      type: object
-      properties:
-        username:
-          type: string
-          description: The unique identifier of the API user requesting a security token.
-        password:
-          type: string
-          description: The password that corresponds to the user making the request.
-      description: Your username and password credentials to request an authentication token.
   securitySchemes:
     CookieAuth:
       type: apiKey

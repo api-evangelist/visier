@@ -148,6 +148,12 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
+    admin.SidecarSolutionRequestDTO:
+      type: object
+      properties:
+        applicationId:
+          type: string
+          description: The unique identifier of the solution to configure.
     servicing.SingleValueSettingDTO:
       type: object
       properties:
@@ -155,6 +161,27 @@ components:
           type: string
           description: A value containing a single string.
       description: A value containing a single string.
+    servicing.MultiValueSettingDTO:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+          description: A value containing multiple strings.
+      description: A value containing multiple strings.
+    servicing.SidecarSolutionSettingsDTO:
+      type: object
+      properties:
+        configs:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.SettingsDTO'
+          description: The available configuration settings.
+        applicationId:
+          type: string
+          description: The unique identifier of the solution to configure.
+      description: The options to configure a sidecar solution.
     servicing.SettingsDTO:
       type: object
       properties:
@@ -170,33 +197,6 @@ components:
           - $ref: '#/components/schemas/servicing.MultiValueSettingDTO'
           description: A value containing multiple strings.
       description: The settings to configure a sidecar solution.
-    servicing.SidecarSolutionSettingsDTO:
-      type: object
-      properties:
-        configs:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.SettingsDTO'
-          description: The available configuration settings.
-        applicationId:
-          type: string
-          description: The unique identifier of the solution to configure.
-      description: The options to configure a sidecar solution.
-    admin.SidecarSolutionRequestDTO:
-      type: object
-      properties:
-        applicationId:
-          type: string
-          description: The unique identifier of the solution to configure.
-    servicing.MultiValueSettingDTO:
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
-          description: A value containing multiple strings.
-      description: A value containing multiple strings.
   securitySchemes:
     CookieAuth:
       type: apiKey

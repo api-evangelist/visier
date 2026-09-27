@@ -137,6 +137,19 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
+    designer.crypto.GenerateKeyRequestDTO:
+      type: object
+      properties:
+        keyName:
+          type: string
+          description: The encryption key's display name. The name may only contain alphanumeric or dash (-) characters and must be between 6 and 36 characters long.
+        expiryDate:
+          type: string
+          description: The UTC expiration date of the key in ISO-8601 format. Must be between 2 and 10 years. Default is 2 years.
+        algorithm:
+          type: string
+          description: The hash-based message authentication code and cryptographic hash function associated with the encryption key. Must be one of `HmacSHA224`, `HmacSHA256`, `HmacSHA384`, or `HmacSHA512`.
+      description: The settings to define for an encryption key.
     designer.crypto.TenantEncryptionKeyDetailsDTO:
       type: object
       properties:
@@ -156,21 +169,6 @@ components:
           type: string
           description: The UTC expiration date of the key in milliseconds since the Unix epoch.
       description: Information about who generated an encryption key, its key name, algorithm, generation date, and expiration date.
-    admin.KeyName:
-      type: object
-      properties:
-        keyName:
-          type: string
-          description: The encryption key's display name. The name may only contain alphanumeric or dash (-) characters and must be between 3 and 36 characters long.
-    designer.crypto.TenantEncryptionKeyDetailListDTO:
-      type: object
-      properties:
-        keyDetails:
-          type: array
-          items:
-            $ref: '#/components/schemas/designer.crypto.TenantEncryptionKeyDetailsDTO'
-          description: Information about a list of encryption keys.
-      description: A list of encryption keys.
     designer.crypto.TenantEncryptionKeyDTO:
       type: object
       properties:
@@ -182,19 +180,21 @@ components:
           type: string
           description: The encryption key value.
       description: The details of an encryption key.
-    designer.crypto.GenerateKeyRequestDTO:
+    designer.crypto.TenantEncryptionKeyDetailListDTO:
+      type: object
+      properties:
+        keyDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.crypto.TenantEncryptionKeyDetailsDTO'
+          description: Information about a list of encryption keys.
+      description: A list of encryption keys.
+    admin.KeyName:
       type: object
       properties:
         keyName:
           type: string
-          description: The encryption key's display name. The name may only contain alphanumeric or dash (-) characters and must be between 6 and 36 characters long.
-        expiryDate:
-          type: string
-          description: The UTC expiration date of the key in ISO-8601 format. Must be between 2 and 10 years. Default is 2 years.
-        algorithm:
-          type: string
-          description: The hash-based message authentication code and cryptographic hash function associated with the encryption key. Must be one of `HmacSHA224`, `HmacSHA256`, `HmacSHA384`, or `HmacSHA512`.
-      description: The settings to define for an encryption key.
+          description: The encryption key's display name. The name may only contain alphanumeric or dash (-) characters and must be between 3 and 36 characters long.
   securitySchemes:
     CookieAuth:
       type: apiKey

@@ -127,6 +127,172 @@ paths:
                 $ref: '#/components/schemas/Status'
 components:
   schemas:
+    planning.ErrorSummary:
+      type: object
+      properties:
+        rci:
+          type: string
+          description: A root cause identifier that allows Visier to determine the source of the problem.
+        message:
+          type: string
+          description: The details of the error and actions you can take to load the data correctly.
+      description: The error details of the unsuccessful action.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    planning.EventSummaryDTO:
+      type: object
+      properties:
+        eventId:
+          type: string
+          description: The unique identifier of the event.
+        planId:
+          type: string
+          description: The unique identifier of the plan the event belongs to.
+        scenarioId:
+          type: string
+          description: The unique identifier of the scenario in which the event occurred. Only present for scenario-scoped events.
+        mainPlanId:
+          type: string
+          description: The unique identifier of the main plan this plan belongs to. Only present when the plan is a subplan.
+        eventType:
+          enum:
+          - unknownPlanEventType
+          - memberPromoted
+          - autoPromotion
+          - bulkPromotionDemotionEvent
+          - planCreationEvent
+          - planDeletionEvent
+          - planTreeAutoDeletionEvent
+          - orphanedSubplanDeletionEvent
+          - planRenameEvent
+          - planContextAndParameterRenameEvent
+          - planClonedEvent
+          - planPublishedEvent
+          - planOpeningEvent
+          - planSubmissionEvent
+          - planAcceptedEvent
+          - planForceAcceptedEvent
+          - dataLoadEvent
+          - subPlanCreationEvent
+          - subPlanDeletionEvent
+          - subPlanReassignEvent
+          - subPlanPushedEvent
+          - subPlanReopenedEvent
+          - subPlanMergedEvent
+          - planSharingEvent
+          - planUnsharingEvent
+          - sharedUserEditAccessGrantedEvent
+          - sharedUserEditAccessRevokedEvent
+          - collaborationStarted
+          - collaborationEnded
+          - metaDataModifiedEvent
+          - metaDataDimensionsModifiedEvent
+          - metaDataDimensionsAddedEvent
+          - MetaDataDimensionsRemovedEvent
+          - metaDataTimelineModifiedEvent
+          - metaDataVisibleHistoricalPeriodsModifiedEvent
+          - metaDataSeedDateModifiedEvent
+          - metaDataCostsAddedModifiedEvent
+          - metaDataCostsRemovedModifiedEvent
+          - metaDataCostsModifiedEvent
+          - metaDataPlanUsingActualsEvent
+          - metaDataPlanUsingBudgetedEvent
+          - metaDataListPlanInAnalysisEvent
+          - metaDataDontListPlanInAnalysisEvent
+          - addMeasureToMetricBindingEvent
+          - removeMeasureToMetricBindingEvent
+          - modifyMeasureToMetricBindingEvent
+          - scenarioCreationEvent
+          - scenarioResetEvent
+          - scenarioCloneEvent
+          - scenarioRevertEvent
+          - scenarioRevertToSnapshotEvent
+          - scenarioUpdateEvent
+          - scenarioDeletionEvent
+          - scenarioDataChangeEvent
+          - scenarioCostChangeEvent
+          - scenarioSubmissionEvent
+          - scenarioRejectionEvent
+          - scenarioAddedToSubPlan
+          - scenarioDataFixedByPreviousVersionEvent
+          - scenarioDataFitToHeadcountEvent
+          - scenarioDataFitToCostEvent
+          - scenarioDataFitToFTEEvent
+          - scenarioDataFitToCostAndHeadcountEvent
+          - scenarioDataRevenueOptimizationEvent
+          - scenarioDataCostOptimizationEvent
+          - scenarioDataFreezeHiresEvent
+          - attachAssumptionEvent
+          - detachAssumptionEvent
+          - automaticDetachAssumptionEvent
+          - reloadAssumptionEvent
+          - memberAdded
+          - memberRenamed
+          - memberResolvedAsMapped
+          - memberResolvedAsPreserved
+          - memberResolvedAsRemoved
+          - memberResolvedAsAdded
+          - memberRemoved
+          - planCostBudgetChangeEvent
+          - planHeadcountBudgetChangeEvent
+          - scenarioDrillThroughExportEvent
+          - planExportHeadcountEvent
+          - planExportHirecountEvent
+          - planExportTCOWEvent
+          - planExportEvent
+          - planActivityExportEvent
+          - planConsolidationCurrencyUpdateEvent
+          - planDisplayCurrencyUpdateEvent
+          - snapshotCreationEvent
+          - snapshotDeletionEvent
+          - snapshotRenameEvent
+          - explorationSnapshotRenameEvent
+          - updateBaselineEvent
+          - planOfRecordAddEvent
+          - planOfRecordRemoveEvent
+          - copyScenarioDataToCollaborationEvent
+          - backupScenarioCreationEvent
+          - lostSyncedLimitsEvent
+          - planComment
+          - cellComment
+          - cellDeleteComment
+          - cellEditComment
+          type: string
+          description: The type of event.
+          format: enum
+        createdDate:
+          type: string
+          description: The date that the event was created. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
+        user:
+          type: string
+          description: The username of the user who triggered the event.
+      description: Summary of a single planning event without type-specific payload.
+    planning.PromotionEventData:
+      type: object
+      properties:
+        promotedRows:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.PromotedRowDTO'
+          description: The rows that were promoted. Each entry represents one promoted row with its dimension members.
+      description: Event data for memberPromoted and autoPromotion events.
     planning.PlanningEventResponse:
       type: object
       properties:
@@ -276,34 +442,15 @@ components:
           description: The index to start retrieving events from, also known as offset. The index begins at 0.
           format: int32
       description: Response for the bulk events listing endpoint.
-    planning.PromotionEventData:
+    planning.PromotedRowDTO:
       type: object
       properties:
-        promotedRows:
+        memberPath:
           type: array
           items:
-            $ref: '#/components/schemas/planning.PromotedRowDTO'
-          description: The rows that were promoted. Each entry represents one promoted row with its dimension members.
-      description: Event data for memberPromoted and autoPromotion events.
-    Status:
-      type: object
-      properties:
-        localizedMessage:
-          type: string
-          description: Localized error message describing the root cause of the error.
-        code:
-          type: string
-          description: Error classification.
-        message:
-          type: string
-          description: Not used.
-        rci:
-          type: string
-          description: Optional root cause identifier.
-        userError:
-          type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
+            $ref: '#/components/schemas/planning.MemberDTO'
+          description: One entry per hierarchy level and dimension included in the plan's analysis context.
+      description: The member path for a single promoted row.
     planning.BulkPromotionDemotionEventData:
       type: object
       properties:
@@ -318,143 +465,6 @@ components:
             $ref: '#/components/schemas/planning.PromotedRowDTO'
           description: The rows that were demoted. Each entry represents one demoted row with its dimension members.
       description: Event data for bulkPromotionDemotionEvent events.
-    planning.PromotedRowDTO:
-      type: object
-      properties:
-        memberPath:
-          type: array
-          items:
-            $ref: '#/components/schemas/planning.MemberDTO'
-          description: One entry per hierarchy level and dimension included in the plan's analysis context.
-      description: The member path for a single promoted row.
-    planning.EventSummaryDTO:
-      type: object
-      properties:
-        eventId:
-          type: string
-          description: The unique identifier of the event.
-        planId:
-          type: string
-          description: The unique identifier of the plan the event belongs to.
-        scenarioId:
-          type: string
-          description: The unique identifier of the scenario in which the event occurred. Only present for scenario-scoped events.
-        mainPlanId:
-          type: string
-          description: The unique identifier of the main plan this plan belongs to. Only present when the plan is a subplan.
-        eventType:
-          enum:
-          - unknownPlanEventType
-          - memberPromoted
-          - autoPromotion
-          - bulkPromotionDemotionEvent
-          - planCreationEvent
-          - planDeletionEvent
-          - planTreeAutoDeletionEvent
-          - orphanedSubplanDeletionEvent
-          - planRenameEvent
-          - planContextAndParameterRenameEvent
-          - planClonedEvent
-          - planPublishedEvent
-          - planOpeningEvent
-          - planSubmissionEvent
-          - planAcceptedEvent
-          - planForceAcceptedEvent
-          - dataLoadEvent
-          - subPlanCreationEvent
-          - subPlanDeletionEvent
-          - subPlanReassignEvent
-          - subPlanPushedEvent
-          - subPlanReopenedEvent
-          - subPlanMergedEvent
-          - planSharingEvent
-          - planUnsharingEvent
-          - sharedUserEditAccessGrantedEvent
-          - sharedUserEditAccessRevokedEvent
-          - collaborationStarted
-          - collaborationEnded
-          - metaDataModifiedEvent
-          - metaDataDimensionsModifiedEvent
-          - metaDataDimensionsAddedEvent
-          - MetaDataDimensionsRemovedEvent
-          - metaDataTimelineModifiedEvent
-          - metaDataVisibleHistoricalPeriodsModifiedEvent
-          - metaDataSeedDateModifiedEvent
-          - metaDataCostsAddedModifiedEvent
-          - metaDataCostsRemovedModifiedEvent
-          - metaDataCostsModifiedEvent
-          - metaDataPlanUsingActualsEvent
-          - metaDataPlanUsingBudgetedEvent
-          - metaDataListPlanInAnalysisEvent
-          - metaDataDontListPlanInAnalysisEvent
-          - addMeasureToMetricBindingEvent
-          - removeMeasureToMetricBindingEvent
-          - modifyMeasureToMetricBindingEvent
-          - scenarioCreationEvent
-          - scenarioResetEvent
-          - scenarioCloneEvent
-          - scenarioRevertEvent
-          - scenarioRevertToSnapshotEvent
-          - scenarioUpdateEvent
-          - scenarioDeletionEvent
-          - scenarioDataChangeEvent
-          - scenarioCostChangeEvent
-          - scenarioSubmissionEvent
-          - scenarioRejectionEvent
-          - scenarioAddedToSubPlan
-          - scenarioDataFixedByPreviousVersionEvent
-          - scenarioDataFitToHeadcountEvent
-          - scenarioDataFitToCostEvent
-          - scenarioDataFitToFTEEvent
-          - scenarioDataFitToCostAndHeadcountEvent
-          - scenarioDataRevenueOptimizationEvent
-          - scenarioDataCostOptimizationEvent
-          - scenarioDataFreezeHiresEvent
-          - attachAssumptionEvent
-          - detachAssumptionEvent
-          - automaticDetachAssumptionEvent
-          - reloadAssumptionEvent
-          - memberAdded
-          - memberRenamed
-          - memberResolvedAsMapped
-          - memberResolvedAsPreserved
-          - memberResolvedAsRemoved
-          - memberResolvedAsAdded
-          - memberRemoved
-          - planCostBudgetChangeEvent
-          - planHeadcountBudgetChangeEvent
-          - scenarioDrillThroughExportEvent
-          - planExportHeadcountEvent
-          - planExportHirecountEvent
-          - planExportTCOWEvent
-          - planExportEvent
-          - planActivityExportEvent
-          - planConsolidationCurrencyUpdateEvent
-          - planDisplayCurrencyUpdateEvent
-          - snapshotCreationEvent
-          - snapshotDeletionEvent
-          - snapshotRenameEvent
-          - explorationSnapshotRenameEvent
-          - updateBaselineEvent
-          - planOfRecordAddEvent
-          - planOfRecordRemoveEvent
-          - copyScenarioDataToCollaborationEvent
-          - backupScenarioCreationEvent
-          - lostSyncedLimitsEvent
-          - planComment
-          - cellComment
-          - cellDeleteComment
-          - cellEditComment
-          type: string
-          description: The type of event.
-          format: enum
-        createdDate:
-          type: string
-          description: The date that the event was created. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
-        user:
-          type: string
-          description: The username of the user who triggered the event.
-      description: Summary of a single planning event without type-specific payload.
     planning.MemberDTO:
       type: object
       properties:
@@ -476,16 +486,6 @@ components:
             type: string
           description: The path of member names from the root member down to the current member. For example, `[Canada, BC]`.
       description: A single member at a specific dimension level within the plan's context path.
-    planning.ErrorSummary:
-      type: object
-      properties:
-        rci:
-          type: string
-          description: A root cause identifier that allows Visier to determine the source of the problem.
-        message:
-          type: string
-          description: The details of the error and actions you can take to load the data correctly.
-      description: The error details of the unsuccessful action.
   securitySchemes:
     CookieAuth:
       type: apiKey

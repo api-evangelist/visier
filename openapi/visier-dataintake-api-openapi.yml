@@ -341,45 +341,37 @@ paths:
                 $ref: '#/components/schemas/Status'
 components:
   schemas:
-    data_in.StartTransferResponse:
+    data_in.Tenant:
       type: object
       properties:
-        transferSessionId:
+        tenantCode:
           type: string
-          description: The unique identifier associated with the transfer session.
-    designer.PushDataSourceDefinitionDTO:
-      type: object
-      properties:
-        sourceId:
+          description: The code of the tenant that data was transferred to. For example, WFF_j1r or WFF_j1r~c7o.
+        status:
           type: string
-          description: The unique identifier associated with the source.
-        name:
-          type: string
-          description: The object name of the source.
-        columns:
-          type: array
-          items:
-            $ref: '#/components/schemas/designer.PushDataColumnDefinitionDTO'
-          description: A list of objects representing the source columns.
-        isInherited:
-          type: boolean
-          description: If true, the source is inherited by all analytic tenants.
-        objectName:
-          type: string
-          description: The unique object name associated with the source.
-        fileNameRegex:
-          type: string
-          description: A regular expression to match the file names for the source.
-      description: Details of each existing source.
-    designer.PushDataSourceDefinitionsDTO:
-      type: object
-      properties:
+          description: The status of the data transfer for this tenant.
         sources:
           type: array
           items:
-            $ref: '#/components/schemas/designer.PushDataSourceDefinitionDTO'
-          description: A list of objects representing the target sources for the request.
-      description: The existing sources.
+            $ref: '#/components/schemas/data_in.Source'
+          description: A list of objects representing the sources that data was pushed to and their data transfer results.
+    data_in.DataTransferResultDetail:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The code of the tenant that data was transferred to. For example, WFF_j1r or WFF_j1r~c7o.
+        sourceNames:
+          type: array
+          items:
+            type: string
+          description: A list of strings representing the sources that received a data transfer.
+        dataSize:
+          type: string
+          description: The total size of the transfer session in bytes.
+        rows:
+          type: string
+          description: The total number of rows transferred during the transfer session.
     Status:
       type: object
       properties:
@@ -399,86 +391,15 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
-    data_in.PushDataResponse:
+    designer.PushDataSourceDefinitionsDTO:
       type: object
       properties:
-        transferSessionId:
-          type: string
-          description: The unique identifier associated with the transfer session.
-        sequence:
-          type: integer
-          description: The unique sequence number associated with a batch of records.
-          format: uint32
-        status:
-          type: string
-          description: The status of the data transfer.
-        message:
-          type: string
-          description: Any additional information about the data transfer.
-        tenants:
-          type: array
-          items:
-            $ref: '#/components/schemas/data_in.Tenant'
-          description: A list of strings representing the tenants that data was pushed to and their data transfer results.
-    data_in.Source:
-      type: object
-      properties:
-        sourceId:
-          type: string
-          description: The unique identifier associated with the source that data was transferred to.
-        sourceName:
-          type: string
-          description: The object name of the source.
-        dataSize:
-          type: string
-          description: The size of the data transfer in bytes.
-        rows:
-          type: string
-          description: The number of rows in the data transfer.
-        status:
-          type: string
-          description: The status of the data transfer for this source.
-        message:
-          type: string
-          description: A meaningful message about the data transfer.
-    designer.PushDataColumnDefinitionDTO:
-      type: object
-      properties:
-        columnName:
-          type: string
-          description: The name of the column.
-        dataType:
-          type: string
-          description: The data type associated with the column.
-        dataFormats:
-          type: array
-          items:
-            type: string
-          description: The expected format for datetime data types.
-        isMandatory:
-          type: boolean
-          description: If true, the column value is required. If a column is mandatory, and the file is missing this column, the request will fail.
-        allowEmpty:
-          type: boolean
-          description: If true, the column allows an empty value for the record.
-        defaultValue:
-          type: string
-          description: The default value of the column.
-      description: Definition of the source column.
-    data_in.Tenant:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The code of the tenant that data was transferred to. For example, WFF_j1r or WFF_j1r~c7o.
-        status:
-          type: string
-          description: The status of the data transfer for this tenant.
         sources:
           type: array
           items:
-            $ref: '#/components/schemas/data_in.Source'
-          description: A list of objects representing the sources that data was pushed to and their data transfer results.
+            $ref: '#/components/schemas/designer.PushDataSourceDefinitionDTO'
+          description: A list of objects representing the target sources for the request.
+      description: The existing sources.
     data_in.PushDataCompleteResponse:
       type: object
       properties:
@@ -499,23 +420,6 @@ components:
         status:
           type: string
           description: The status of the transfer session. A completed session returns the status SUCCEED.
-    data_in.DataTransferResultDetail:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The code of the tenant that data was transferred to. For example, WFF_j1r or WFF_j1r~c7o.
-        sourceNames:
-          type: array
-          items:
-            type: string
-          description: A list of strings representing the sources that received a data transfer.
-        dataSize:
-          type: string
-          description: The total size of the transfer session in bytes.
-        rows:
-          type: string
-          description: The total number of rows transferred during the transfer session.
     data_in.PushDataCompleteRequest:
       type: object
       properties:
@@ -542,6 +446,102 @@ components:
         status:
           type: string
           description: The status of the transfer session. A cancelled session returns the status CANCELLED.
+    designer.PushDataColumnDefinitionDTO:
+      type: object
+      properties:
+        columnName:
+          type: string
+          description: The name of the column.
+        dataType:
+          type: string
+          description: The data type associated with the column.
+        dataFormats:
+          type: array
+          items:
+            type: string
+          description: The expected format for datetime data types.
+        isMandatory:
+          type: boolean
+          description: If true, the column value is required. If a column is mandatory, and the file is missing this column, the request will fail.
+        allowEmpty:
+          type: boolean
+          description: If true, the column allows an empty value for the record.
+        defaultValue:
+          type: string
+          description: The default value of the column.
+      description: Definition of the source column.
+    data_in.PushDataResponse:
+      type: object
+      properties:
+        transferSessionId:
+          type: string
+          description: The unique identifier associated with the transfer session.
+        sequence:
+          type: integer
+          description: The unique sequence number associated with a batch of records.
+          format: uint32
+        status:
+          type: string
+          description: The status of the data transfer.
+        message:
+          type: string
+          description: Any additional information about the data transfer.
+        tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/data_in.Tenant'
+          description: A list of strings representing the tenants that data was pushed to and their data transfer results.
+    data_in.StartTransferResponse:
+      type: object
+      properties:
+        transferSessionId:
+          type: string
+          description: The unique identifier associated with the transfer session.
+    data_in.Source:
+      type: object
+      properties:
+        sourceId:
+          type: string
+          description: The unique identifier associated with the source that data was transferred to.
+        sourceName:
+          type: string
+          description: The object name of the source.
+        dataSize:
+          type: string
+          description: The size of the data transfer in bytes.
+        rows:
+          type: string
+          description: The number of rows in the data transfer.
+        status:
+          type: string
+          description: The status of the data transfer for this source.
+        message:
+          type: string
+          description: A meaningful message about the data transfer.
+    designer.PushDataSourceDefinitionDTO:
+      type: object
+      properties:
+        sourceId:
+          type: string
+          description: The unique identifier associated with the source.
+        name:
+          type: string
+          description: The object name of the source.
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.PushDataColumnDefinitionDTO'
+          description: A list of objects representing the source columns.
+        isInherited:
+          type: boolean
+          description: If true, the source is inherited by all analytic tenants.
+        objectName:
+          type: string
+          description: The unique object name associated with the source.
+        fileNameRegex:
+          type: string
+          description: A regular expression to match the file names for the source.
+      description: Details of each existing source.
   securitySchemes:
     CookieAuth:
       type: apiKey

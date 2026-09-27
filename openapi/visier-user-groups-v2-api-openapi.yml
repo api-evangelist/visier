@@ -458,6 +458,39 @@ paths:
                 $ref: '#/components/schemas/admin.UserGroupSingleDeleteResponseDTO'
 components:
   schemas:
+    admin.UserGroupsRevertRequestDTO:
+      type: object
+      properties:
+        userGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserGroupRevertDTO'
+          description: The user groups to revert.
+    admin.UserGroupChangeResponseDTO:
+      type: object
+      properties:
+        successes:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserGroupChangeSuccessDTO'
+          description: The user groups that were successfully changed (created, updated, patched, or reverted).
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserGroupChangeFailureDTO'
+          description: The user groups that were not successfully changed (created, updated, patched, or reverted).
+    admin.UserGroupDeleteDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: "The code of the tenant from which to delete the user group.\n Omit if deleting user groups in the current tenant."
+        userGroupId:
+          type: string
+          description: Unique identifier for the user group.
+        projectId:
+          type: string
+          description: "The project ID in which to delete the user group.\n If omitted and the `ProjectID` request header is not defined, the change is published to production immediately."
     admin.UserGroupChangeDefinitionDTO:
       type: object
       properties:
@@ -491,50 +524,45 @@ components:
         correlationId:
           type: string
           description: "An optional identifier to associate bulk request fields with their corresponding response fields. Correlation IDs may be between 3 and 64 characters long and\n consist of alphanumeric characters, `-`, and `_`.\n\n **Note**:\n - Each request field must have a unique `correlationId`.\n - Cannot reuse a `correlationId` in subsequent POST requests while the ID is still active. A `correlationId` is active for 7 days after creation."
-    admin.ElementIDsDTO:
+    admin.UserGroupSingleDeleteResponseDTO:
       type: object
       properties:
-        ids:
+        success:
+          allOf:
+          - $ref: '#/components/schemas/admin.UserGroupDeleteSuccessDTO'
+          description: The user group was successfully deleted.
+        failure:
+          allOf:
+          - $ref: '#/components/schemas/admin.UserGroupDeleteFailureDTO'
+          description: The user group was not successfully deleted.
+    admin.UserGroupDeleteResponseDTO:
+      type: object
+      properties:
+        successes:
           type: array
           items:
-            type: string
-          description: The unique identifiers.
-    admin.UserGroupChangeSuccessDTO:
+            $ref: '#/components/schemas/admin.UserGroupDeleteSuccessDTO'
+          description: The user groups that were successfully deleted.
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserGroupDeleteFailureDTO'
+          description: The user groups that were not deleted successfully.
+    admin.UserGroupChangeDimensionFilterDTO:
       type: object
       properties:
-        displayName:
+        dimensionId:
           type: string
-          description: The display name of the user group that was successfully changed.
-        userGroupId:
-          type: string
-          description: The unique identifier of the user group.
-        tenantCode:
-          type: string
-          description: The code of the tenant in which the user group was changed.
-        projectId:
-          type: string
-          description: The unique identifier of the project in which the user group was changed.
-        correlationId:
-          type: string
-          description: An identifier to associate the matching request field. Only returned if a `correlationId` was defined for the corresponding request field.
-    admin.UserGroupChangeUsersDTO:
-      type: object
-      properties:
-        includeAllUsers:
-          type: boolean
-          description: "If `true`, all users are included in the user group. If `true`:\n * You can manually exclude users with `manuallyExcludedIds`.\n * Cannot be combined with `manuallyIncludedIds` or `dynamicFilterDefinition`."
-        manuallyIncludedIds:
+          description: The object name of the dimension.
+        subjectReferencePath:
           allOf:
           - $ref: '#/components/schemas/admin.ElementIDsDTO'
-          description: "Includes specified user IDs in the user group.\n * May be combined with `dynamicFilterDefinition`.\n * Omit if `includeAllUsers` is `true`."
-        manuallyExcludedIds:
-          allOf:
-          - $ref: '#/components/schemas/admin.ElementIDsDTO'
-          description: "Excludes specified user IDs from the user group.\n * You can manually exclude users if `includeAllUsers` is `true` or if `dynamicFilterDefinition` is defined.\n * Excluded IDs must not overlap with user IDs in `manuallyIncludedIds`."
-        dynamicFilterDefinition:
-          allOf:
-          - $ref: '#/components/schemas/admin.UserGroupFiltersDTO'
-          description: "The filters that dynamically define a population through dimensions or dimensions accessible through references from the analytic object.\n * Omit if `includeAllUsers` is `true`.\n * You can combine dynamic filters with manually-assigned users."
+          description: "A qualifying path if the dimension is from an analytic object that references Employee.\n For example, use `subjectReferencePath` to create a filter on the `Employment_Start_Type` dimension from the `Employment_Start` object, which references `Employee`: `{ \"ids\": [ \"Employee\", \"Employment_Start\" ] }`."
+        memberSelections:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserGroupChangeMemberSelectionDTO'
+          description: The dimension members to select in the dynamic filter.
     admin.UserGroupDeleteFailureDTO:
       type: object
       properties:
@@ -553,62 +581,6 @@ components:
         projectId:
           type: string
           description: The ID of the project in which the user group could not be deleted.
-    admin.UserGroupsDeleteRequestDTO:
-      type: object
-      properties:
-        userGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.UserGroupDeleteDTO'
-          description: The user groups to delete.
-    admin.VisibleForSelectionDTO:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          description: "If `true`, the user group is visible in features such as sharing an analysis with user groups or assigning user groups a Vee sample question. Cannot update to `true` if `features` is empty.\n If `false`, the user group is not visible to select in any features.\n Default is `true`."
-        features:
-          type: array
-          items:
-            enum:
-            - AnalyticsFeatures
-            - StudioFeatures
-            type: string
-            format: enum
-          description: "The features in which the user group is visible. Default is empty.\n If `enabled` is `true`, the user group is visible in features listed.\n If `enabled` is `false`, this field is ignored."
-    admin.UserGroupsChangeDTO:
-      type: object
-      properties:
-        userGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.UserGroupChangeDefinitionDTO'
-          description: The user groups and their definitions.
-    admin.UserGroupRevertDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: "The code of the tenant in which to revert the user group.\n Omit if reverting user groups in the current tenant."
-        userGroupId:
-          type: string
-          description: The unique identifier for the user group.
-        projectId:
-          type: string
-          description: "The unique identifier of the project in which to revert the user group.\n If omitted and the `ProjectID` request header is not defined, the change is published to production immediately."
-    admin.UserGroupDeleteResponseDTO:
-      type: object
-      properties:
-        successes:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.UserGroupDeleteSuccessDTO'
-          description: The user groups that were successfully deleted.
-        failures:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.UserGroupDeleteFailureDTO'
-          description: The user groups that were not deleted successfully.
     admin.UserGroupDeleteSuccessDTO:
       type: object
       properties:
@@ -621,33 +593,6 @@ components:
         projectId:
           type: string
           description: The ID of the project in which user group was deleted.
-    admin.UserGroupChangeFilterDTO:
-      type: object
-      properties:
-        filterId:
-          type: string
-          description: The unique identifier of the filter. Omit if creating a new filter.
-        analyticObjectId:
-          type: string
-          description: The analytic object the filter applies to. Currently, the only supported analytic object is `Employee`. Default is `Employee`.
-        dimensionFilters:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.UserGroupChangeDimensionFilterDTO'
-          description: The dimensions in the dynamic filter.
-    admin.UserGroupChangeResponseDTO:
-      type: object
-      properties:
-        successes:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.UserGroupChangeSuccessDTO'
-          description: The user groups that were successfully changed (created, updated, patched, or reverted).
-        failures:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.UserGroupChangeFailureDTO'
-          description: The user groups that were not successfully changed (created, updated, patched, or reverted).
     Status:
       type: object
       properties:
@@ -678,6 +623,28 @@ components:
           items:
             type: string
           description: The name path for dimension members; for example, `[ "North America", "US", "CA" ]`.
+    admin.UserGroupChangeFilterDTO:
+      type: object
+      properties:
+        filterId:
+          type: string
+          description: The unique identifier of the filter. Omit if creating a new filter.
+        analyticObjectId:
+          type: string
+          description: The analytic object the filter applies to. Currently, the only supported analytic object is `Employee`. Default is `Employee`.
+        dimensionFilters:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserGroupChangeDimensionFilterDTO'
+          description: The dimensions in the dynamic filter.
+    admin.UserGroupsChangeDTO:
+      type: object
+      properties:
+        userGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserGroupChangeDefinitionDTO'
+          description: The user groups and their definitions.
     admin.UserGroupFiltersDTO:
       type: object
       properties:
@@ -686,41 +653,18 @@ components:
           items:
             $ref: '#/components/schemas/admin.UserGroupChangeFilterDTO'
           description: The filters that define user group membership.
-    admin.UserGroupsRevertRequestDTO:
-      type: object
-      properties:
-        userGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.UserGroupRevertDTO'
-          description: The user groups to revert.
-    admin.UserGroupDeleteDTO:
+    admin.UserGroupRevertDTO:
       type: object
       properties:
         tenantCode:
           type: string
-          description: "The code of the tenant from which to delete the user group.\n Omit if deleting user groups in the current tenant."
+          description: "The code of the tenant in which to revert the user group.\n Omit if reverting user groups in the current tenant."
         userGroupId:
           type: string
-          description: Unique identifier for the user group.
+          description: The unique identifier for the user group.
         projectId:
           type: string
-          description: "The project ID in which to delete the user group.\n If omitted and the `ProjectID` request header is not defined, the change is published to production immediately."
-    admin.UserGroupChangeDimensionFilterDTO:
-      type: object
-      properties:
-        dimensionId:
-          type: string
-          description: The object name of the dimension.
-        subjectReferencePath:
-          allOf:
-          - $ref: '#/components/schemas/admin.ElementIDsDTO'
-          description: "A qualifying path if the dimension is from an analytic object that references Employee.\n For example, use `subjectReferencePath` to create a filter on the `Employment_Start_Type` dimension from the `Employment_Start` object, which references `Employee`: `{ \"ids\": [ \"Employee\", \"Employment_Start\" ] }`."
-        memberSelections:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.UserGroupChangeMemberSelectionDTO'
-          description: The dimension members to select in the dynamic filter.
+          description: "The unique identifier of the project in which to revert the user group.\n If omitted and the `ProjectID` request header is not defined, the change is published to production immediately."
     admin.UserGroupChangeFailureDTO:
       type: object
       properties:
@@ -745,17 +689,73 @@ components:
         correlationId:
           type: string
           description: An identifier to associate the matching request field. Only returned if a `correlationId` was defined for the corresponding request field.
-    admin.UserGroupSingleDeleteResponseDTO:
+    admin.VisibleForSelectionDTO:
       type: object
       properties:
-        success:
+        enabled:
+          type: boolean
+          description: "If `true`, the user group is visible in features such as sharing an analysis with user groups or assigning user groups a Vee sample question. Cannot update to `true` if `features` is empty.\n If `false`, the user group is not visible to select in any features.\n Default is `true`."
+        features:
+          type: array
+          items:
+            enum:
+            - AnalyticsFeatures
+            - StudioFeatures
+            type: string
+            format: enum
+          description: "The features in which the user group is visible. Default is empty.\n If `enabled` is `true`, the user group is visible in features listed.\n If `enabled` is `false`, this field is ignored."
+    admin.UserGroupsDeleteRequestDTO:
+      type: object
+      properties:
+        userGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserGroupDeleteDTO'
+          description: The user groups to delete.
+    admin.UserGroupChangeUsersDTO:
+      type: object
+      properties:
+        includeAllUsers:
+          type: boolean
+          description: "If `true`, all users are included in the user group. If `true`:\n * You can manually exclude users with `manuallyExcludedIds`.\n * Cannot be combined with `manuallyIncludedIds` or `dynamicFilterDefinition`."
+        manuallyIncludedIds:
           allOf:
-          - $ref: '#/components/schemas/admin.UserGroupDeleteSuccessDTO'
-          description: The user group was successfully deleted.
-        failure:
+          - $ref: '#/components/schemas/admin.ElementIDsDTO'
+          description: "Includes specified user IDs in the user group.\n * May be combined with `dynamicFilterDefinition`.\n * Omit if `includeAllUsers` is `true`."
+        manuallyExcludedIds:
           allOf:
-          - $ref: '#/components/schemas/admin.UserGroupDeleteFailureDTO'
-          description: The user group was not successfully deleted.
+          - $ref: '#/components/schemas/admin.ElementIDsDTO'
+          description: "Excludes specified user IDs from the user group.\n * You can manually exclude users if `includeAllUsers` is `true` or if `dynamicFilterDefinition` is defined.\n * Excluded IDs must not overlap with user IDs in `manuallyIncludedIds`."
+        dynamicFilterDefinition:
+          allOf:
+          - $ref: '#/components/schemas/admin.UserGroupFiltersDTO'
+          description: "The filters that dynamically define a population through dimensions or dimensions accessible through references from the analytic object.\n * Omit if `includeAllUsers` is `true`.\n * You can combine dynamic filters with manually-assigned users."
+    admin.UserGroupChangeSuccessDTO:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The display name of the user group that was successfully changed.
+        userGroupId:
+          type: string
+          description: The unique identifier of the user group.
+        tenantCode:
+          type: string
+          description: The code of the tenant in which the user group was changed.
+        projectId:
+          type: string
+          description: The unique identifier of the project in which the user group was changed.
+        correlationId:
+          type: string
+          description: An identifier to associate the matching request field. Only returned if a `correlationId` was defined for the corresponding request field.
+    admin.ElementIDsDTO:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: string
+          description: The unique identifiers.
   securitySchemes:
     CookieAuth:
       type: apiKey

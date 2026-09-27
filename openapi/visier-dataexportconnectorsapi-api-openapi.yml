@@ -334,33 +334,20 @@ paths:
                 $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnectorJobStatus'
 components:
   schemas:
-    servicing.dataexportconnector.SnowflakeCredentialParameters:
+    servicing.dataexportconnector.DataExportConnectorCredentialValidationCreated:
       type: object
       properties:
-        accountUrl:
+        id:
           type: string
-          description: The Snowflake account URL.
-        database:
-          type: string
-          description: The Snowflake database name.
-        schema:
-          type: string
-          description: The Snowflake schema name.
-        user:
-          type: string
-          description: The Snowflake user name.
-        warehouse:
-          type: string
-          description: The Snowflake warehouse name.
-        privateKey:
-          type: string
-          description: The private key to authenticate with Snowflake. Returned as the string `********`. The actual value is never returned. To update the value, provide the value in plain text.
-        privateKeyPassphrase:
-          type: string
-          description: The passphrase that protects the private key if the private key is encrypted. Returned as the string `********`. The actual value is never returned. To update the value, provide the value in plain text.
-        role:
-          type: string
-          description: The Snowflake role to use for the connection.
+          description: The unique identifier of the credential validation request. Use this ID to retrieve the validation result.
+    servicing.dataexportconnector.DataExportConnectorListResponse:
+      type: object
+      properties:
+        connectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnector'
+          description: The list of data export connectors.
     servicing.dataexportconnector.DataExportConnectorJobDispatched:
       type: object
       properties:
@@ -368,14 +355,6 @@ components:
           type: string
           description: The unique identifier of the job.
       description: Identifies a dispatched data export connector job.
-    servicing.dataexportconnector.DataExportConnectorCredentialListResponse:
-      type: object
-      properties:
-        credentials:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnectorCredential'
-          description: The list of data export connector credentials.
     servicing.dataexportconnector.DataExportConnectorCredentialParameters:
       type: object
       properties: {}
@@ -404,19 +383,6 @@ components:
             allOf:
             - $ref: '#/components/schemas/servicing.dataexportconnector.BigQueryServiceAccountCredentialParameters'
             description: Credentials for Google BigQuery using a service account key.
-    servicing.dataexportconnector.DataExportConnectorSyncJobStatus:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the sync job.
-        status:
-          type: string
-          description: The current status of the sync job (e.g., Pending, Succeeded, Failed).
-        errorMessage:
-          type: string
-          description: The error message if the sync job failed. Empty for other job statuses.
-      description: The status of a sync job.
     servicing.dataexportconnector.DataExportConnectorCredentialValidationResponse:
       type: object
       properties:
@@ -446,66 +412,24 @@ components:
             $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnectorSyncJobStatus'
           description: The status of each sync job spawned by this data export connector job.
       description: The status of a data export connector job and its spawned sync jobs.
-    servicing.BasicInformationDTO:
+    servicing.dataexportconnector.LinkedDataExport:
       type: object
       properties:
-        displayName:
+        dataExportId:
           type: string
-          description: The user-friendly name for the object.
-        shortDisplayName:
+          description: The unique identifier of the linked Data Export.
+        tableName:
           type: string
-          description: A shortened version of the display name. If the object is visible in the solution experience, this name is displayed in visualization titles.
-        description:
-          type: string
-          description: A short description of the object. Descriptions provide in-context help for your users while working in Visier.
-        explanation:
-          type: string
-          description: A longer description of the object that typically includes a definition, calculation details, and other guidance about how to use the object.
-        designerNotes:
-          type: string
-          description: An admin-only description of the object that provides design-specific information or considerations.
-        synonymList:
-          allOf:
-          - $ref: '#/components/schemas/servicing.SynonymListDTO'
-          description: Alternative words or phrases for the object.
-      description: Fields that identify and describe the object, such as its display name, description, and explanation.
-    servicing.dataexportconnector.DataExportConnectorCredentialValidationRequest:
+          description: The name of the destination table that the Data Export writes to.
+    servicing.SynonymListDTO:
       type: object
-      properties: {}
-      oneOf:
-      - title: DataExportConnectorCredentialValidationRequest with id
-        required:
-        - id
-        properties:
-          id:
+      properties:
+        synonyms:
+          type: array
+          items:
             type: string
-            description: The unique identifier of an existing credential to validate.
-      - title: DataExportConnectorCredentialValidationRequest with parameters
-        required:
-        - parameters
-        properties:
-          parameters:
-            allOf:
-            - $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnectorCredentialParameters'
-            description: A new set of credential values to validate without persisting the credentials.
-    servicing.dataexportconnector.DatabricksCredentialParameters:
-      type: object
-      properties:
-        workspaceUrl:
-          type: string
-          description: The Databricks workspace URL.
-        catalog:
-          type: string
-          description: The Databricks catalog name.
-        schema:
-          type: string
-          description: The Databricks schema name.
-        clientId:
-          type: string
-          description: The OAuth client ID to authenticate with Databricks.
-        clientSecret:
-          type: string
-          description: The OAuth client secret to authenticate with Databricks. Returned as the string `********`. The actual value is never returned. To update the value, provide the value in plain text.
+          description: Alternative words or phrases for the object.
+      description: The object's synonyms.
     Status:
       type: object
       properties:
@@ -539,6 +463,25 @@ components:
           allOf:
           - $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnectorCredentialParameters'
           description: The parameters for the credential. Sensitive fields are masked when retrieved.
+    servicing.dataexportconnector.DataExportConnectorCredentialValidationRequest:
+      type: object
+      properties: {}
+      oneOf:
+      - title: DataExportConnectorCredentialValidationRequest with id
+        required:
+        - id
+        properties:
+          id:
+            type: string
+            description: The unique identifier of an existing credential to validate.
+      - title: DataExportConnectorCredentialValidationRequest with parameters
+        required:
+        - parameters
+        properties:
+          parameters:
+            allOf:
+            - $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnectorCredentialParameters'
+            description: A new set of credential values to validate without persisting the credentials.
     servicing.dataexportconnector.BigQueryServiceAccountCredentialParameters:
       type: object
       properties:
@@ -560,15 +503,64 @@ components:
         clientId:
           type: string
           description: The OAuth client ID to authenticate with Google BigQuery.
-    servicing.SynonymListDTO:
+    servicing.dataexportconnector.DatabricksCredentialParameters:
       type: object
       properties:
-        synonyms:
-          type: array
-          items:
-            type: string
-          description: Alternative words or phrases for the object.
-      description: The object's synonyms.
+        workspaceUrl:
+          type: string
+          description: The Databricks workspace URL.
+        catalog:
+          type: string
+          description: The Databricks catalog name.
+        schema:
+          type: string
+          description: The Databricks schema name.
+        clientId:
+          type: string
+          description: The OAuth client ID to authenticate with Databricks.
+        clientSecret:
+          type: string
+          description: The OAuth client secret to authenticate with Databricks. Returned as the string `********`. The actual value is never returned. To update the value, provide the value in plain text.
+    servicing.dataexportconnector.DataExportConnectorSyncJobStatus:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the sync job.
+        status:
+          type: string
+          description: The current status of the sync job (e.g., Pending, Succeeded, Failed).
+        errorMessage:
+          type: string
+          description: The error message if the sync job failed. Empty for other job statuses.
+      description: The status of a sync job.
+    servicing.dataexportconnector.SnowflakeCredentialParameters:
+      type: object
+      properties:
+        accountUrl:
+          type: string
+          description: The Snowflake account URL.
+        database:
+          type: string
+          description: The Snowflake database name.
+        schema:
+          type: string
+          description: The Snowflake schema name.
+        user:
+          type: string
+          description: The Snowflake user name.
+        warehouse:
+          type: string
+          description: The Snowflake warehouse name.
+        privateKey:
+          type: string
+          description: The private key to authenticate with Snowflake. Returned as the string `********`. The actual value is never returned. To update the value, provide the value in plain text.
+        privateKeyPassphrase:
+          type: string
+          description: The passphrase that protects the private key if the private key is encrypted. Returned as the string `********`. The actual value is never returned. To update the value, provide the value in plain text.
+        role:
+          type: string
+          description: The Snowflake role to use for the connection.
     servicing.dataexportconnector.DataExportConnectorLink:
       type: object
       properties:
@@ -576,6 +568,29 @@ components:
           allOf:
           - $ref: '#/components/schemas/servicing.dataexportconnector.LinkedDataExport'
           description: A Data Export linked to the connector.
+    servicing.BasicInformationDTO:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The user-friendly name for the object.
+        shortDisplayName:
+          type: string
+          description: A shortened version of the display name. If the object is visible in the solution experience, this name is displayed in visualization titles.
+        description:
+          type: string
+          description: A short description of the object. Descriptions provide in-context help for your users while working in Visier.
+        explanation:
+          type: string
+          description: A longer description of the object that typically includes a definition, calculation details, and other guidance about how to use the object.
+        designerNotes:
+          type: string
+          description: An admin-only description of the object that provides design-specific information or considerations.
+        synonymList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.SynonymListDTO'
+          description: Alternative words or phrases for the object.
+      description: Fields that identify and describe the object, such as its display name, description, and explanation.
     servicing.dataexportconnector.DataExportConnectorCredentialValidationError:
       type: object
       properties:
@@ -585,15 +600,14 @@ components:
         message:
           type: string
           description: A description of the validation error.
-    servicing.dataexportconnector.LinkedDataExport:
+    servicing.dataexportconnector.DataExportConnectorCredentialListResponse:
       type: object
       properties:
-        dataExportId:
-          type: string
-          description: The unique identifier of the linked Data Export.
-        tableName:
-          type: string
-          description: The name of the destination table that the Data Export writes to.
+        credentials:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnectorCredential'
+          description: The list of data export connector credentials.
     servicing.dataexportconnector.DataExportConnector:
       type: object
       properties:
@@ -617,20 +631,6 @@ components:
           items:
             type: string
           description: The unique identifiers of the credentials that this data export connector uses to authenticate.
-    servicing.dataexportconnector.DataExportConnectorCredentialValidationCreated:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the credential validation request. Use this ID to retrieve the validation result.
-    servicing.dataexportconnector.DataExportConnectorListResponse:
-      type: object
-      properties:
-        connectors:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.dataexportconnector.DataExportConnector'
-          description: The list of data export connectors.
   securitySchemes:
     CookieAuth:
       type: apiKey

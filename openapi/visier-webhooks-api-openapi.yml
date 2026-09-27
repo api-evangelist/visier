@@ -290,29 +290,16 @@ paths:
                 $ref: '#/components/schemas/designer.webhook.WebhookMessageResponseDTO'
 components:
   schemas:
-    designer.webhook.WebhookDTO:
+    designer.webhook.WebhookBasicAuthCredentialDTO:
       type: object
       properties:
-        webhookId:
+        username:
           type: string
-          description: The unique identifier of the webhook.
-        details:
-          allOf:
-          - $ref: '#/components/schemas/designer.webhook.WebhookDetailsDTO'
-          description: The webhook's details, such as its URL, active status, and event types to listen for.
-        credentialReference:
+          description: The username for the webhook credential.
+        password:
           type: string
-          description: The unique identifier of the configured webhook credentials.
-      description: The webhook's details, such as its URL, active status, and event types to listen for.
-    designer.webhook.WebhooksDTO:
-      type: object
-      properties:
-        webhooks:
-          type: array
-          items:
-            $ref: '#/components/schemas/designer.webhook.WebhookDTO'
-          description: A list of webhooks.
-      description: The returned list of webhooks.
+          description: The password for the webhook credential.
+      description: The basic authentication credentials for the webhook.
     designer.webhook.WebhookMessageResponseDTO:
       type: object
       properties:
@@ -330,17 +317,6 @@ components:
           type: string
           description: The unique identifier of the event that triggered the webhook notification.
       description: The results of the webhook notification attempt.
-    designer.webhook.WebhookStatusDTO:
-      type: object
-      properties:
-        webhookId:
-          type: string
-          description: The unique identifier of the webhook.
-        details:
-          allOf:
-          - $ref: '#/components/schemas/designer.webhook.WebhookStatusDetailsDTO'
-          description: The webhook's details, such as its active status and the event types it's listening for.
-      description: The webhook's status.
     Status:
       type: object
       properties:
@@ -360,60 +336,6 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
-    designer.webhook.WebhookStatusesDTO:
-      type: object
-      properties:
-        webhooks:
-          type: array
-          items:
-            $ref: '#/components/schemas/designer.webhook.WebhookStatusDTO'
-          description: The webhook statuses.
-      description: The returned list of webhook statuses.
-    designer.webhook.WebhookStatusDetailsDTO:
-      type: object
-      properties:
-        isActive:
-          type: boolean
-          description: If `true`, the webhook is active.
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/designer.webhook.WebhookEventTypeDTO'
-          description: The events that the webhook is listening for.
-      description: The webhook's details, such as its active status and the event types it's listening for.
-    designer.webhook.WebhookRequestDTO:
-      type: object
-      properties:
-        details:
-          allOf:
-          - $ref: '#/components/schemas/designer.webhook.WebhookDetailsDTO'
-          description: The webhook's details, such as its URL, active status, and event types to listen for.
-        credentials:
-          allOf:
-          - $ref: '#/components/schemas/designer.webhook.WebhookCredentialsDTO'
-          description: The webhook's credentials, such as a username and password or access token.
-      description: The details and credentials for a webhook. Not required if your endpoint doesn't have authentication.
-    designer.webhook.WebhookBasicAuthCredentialDTO:
-      type: object
-      properties:
-        username:
-          type: string
-          description: The username for the webhook credential.
-        password:
-          type: string
-          description: The password for the webhook credential.
-      description: The basic authentication credentials for the webhook.
-    designer.webhook.WebhookCredentialsDTO:
-      type: object
-      properties:
-        basicAuth:
-          allOf:
-          - $ref: '#/components/schemas/designer.webhook.WebhookBasicAuthCredentialDTO'
-          description: Authentication using a username and password.
-        accessToken:
-          type: string
-          description: Authentication using an access token.
-      description: The credentials to authenticate calls to the webhook endpoint. Must be one of `basicAuth` or `accessToken`. Not required if your endpoint doesn't have authentication.
     designer.webhook.WebhookEventTypeDTO:
       type: object
       properties:
@@ -442,6 +364,84 @@ components:
           type: string
           description: The display name of the webhook.
       description: Information about the webhook, such as its URL, active status, and event types to listen for.
+    designer.webhook.WebhookStatusDetailsDTO:
+      type: object
+      properties:
+        isActive:
+          type: boolean
+          description: If `true`, the webhook is active.
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.webhook.WebhookEventTypeDTO'
+          description: The events that the webhook is listening for.
+      description: The webhook's details, such as its active status and the event types it's listening for.
+    designer.webhook.WebhookCredentialsDTO:
+      type: object
+      properties:
+        basicAuth:
+          allOf:
+          - $ref: '#/components/schemas/designer.webhook.WebhookBasicAuthCredentialDTO'
+          description: Authentication using a username and password.
+        accessToken:
+          type: string
+          description: Authentication using an access token.
+      description: The credentials to authenticate calls to the webhook endpoint. Must be one of `basicAuth` or `accessToken`. Not required if your endpoint doesn't have authentication.
+    designer.webhook.WebhookDTO:
+      type: object
+      properties:
+        webhookId:
+          type: string
+          description: The unique identifier of the webhook.
+        details:
+          allOf:
+          - $ref: '#/components/schemas/designer.webhook.WebhookDetailsDTO'
+          description: The webhook's details, such as its URL, active status, and event types to listen for.
+        credentialReference:
+          type: string
+          description: The unique identifier of the configured webhook credentials.
+      description: The webhook's details, such as its URL, active status, and event types to listen for.
+    designer.webhook.WebhooksDTO:
+      type: object
+      properties:
+        webhooks:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.webhook.WebhookDTO'
+          description: A list of webhooks.
+      description: The returned list of webhooks.
+    designer.webhook.WebhookRequestDTO:
+      type: object
+      properties:
+        details:
+          allOf:
+          - $ref: '#/components/schemas/designer.webhook.WebhookDetailsDTO'
+          description: The webhook's details, such as its URL, active status, and event types to listen for.
+        credentials:
+          allOf:
+          - $ref: '#/components/schemas/designer.webhook.WebhookCredentialsDTO'
+          description: The webhook's credentials, such as a username and password or access token.
+      description: The details and credentials for a webhook. Not required if your endpoint doesn't have authentication.
+    designer.webhook.WebhookStatusesDTO:
+      type: object
+      properties:
+        webhooks:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.webhook.WebhookStatusDTO'
+          description: The webhook statuses.
+      description: The returned list of webhook statuses.
+    designer.webhook.WebhookStatusDTO:
+      type: object
+      properties:
+        webhookId:
+          type: string
+          description: The unique identifier of the webhook.
+        details:
+          allOf:
+          - $ref: '#/components/schemas/designer.webhook.WebhookStatusDetailsDTO'
+          description: The webhook's details, such as its active status and the event types it's listening for.
+      description: The webhook's status.
   securitySchemes:
     CookieAuth:
       type: apiKey

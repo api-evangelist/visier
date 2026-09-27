@@ -122,6 +122,25 @@ components:
             type: string
           description: The unique identifiers associated with each permission.
       description: The result of the update or insert (upsert) request.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
     servicing.ProfileAssignmentDTO:
       type: object
       properties:
@@ -169,25 +188,6 @@ components:
             $ref: '#/components/schemas/servicing.ProfileAssignmentDTO'
           description: The profiles to assign to the user.
       description: The updates to make to a user, or the user to create.
-    Status:
-      type: object
-      properties:
-        localizedMessage:
-          type: string
-          description: Localized error message describing the root cause of the error.
-        code:
-          type: string
-          description: Error classification.
-        message:
-          type: string
-          description: Not used.
-        rci:
-          type: string
-          description: Optional root cause identifier.
-        userError:
-          type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
   securitySchemes:
     CookieAuth:
       type: apiKey

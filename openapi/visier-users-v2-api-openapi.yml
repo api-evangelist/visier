@@ -132,36 +132,6 @@ paths:
                 $ref: '#/components/schemas/servicing.UsersAPIResponseDTO'
 components:
   schemas:
-    servicing.UsersAPISuccessDTO:
-      type: object
-      properties:
-        userId:
-          type: string
-          description: The unique identifier associated with the user.
-        username:
-          type: string
-          description: The user's username. This is typically the user's email, such as john@jupiter.com.
-        displayName:
-          type: string
-          description: An identifiable name to display within Visier. For example, "John Smith".
-        employeeId:
-          type: string
-          description: If applicable, and if available, the user employee ID in the data.
-        accountEnabled:
-          type: string
-          description: If true, the user account is enabled.
-        email:
-          type: string
-          description: The user's email address.
-    servicing.UsersAPIErrorMessageDTO:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error message
-        rci:
-          type: string
-          description: The unique identifier associated to this error
     Status:
       type: object
       properties:
@@ -181,35 +151,14 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
-    servicing.UsersUpdateAPIUserDTO:
+    servicing.UsersDeleteAPIRequestDTO:
       type: object
       properties:
-        userId:
-          type: string
-          description: The unique identifier associated with the user.
-        displayName:
-          type: string
-          description: An identifiable name to display within Visier. For example, "John Smith".
-        employeeId:
-          type: string
-          description: If applicable, and if available, the user employee ID in the data.
-        accountEnabled:
-          type: string
-          description: If true, the user account is enabled.
-        email:
-          type: string
-          description: The user's email address.
-        username:
-          type: string
-          description: The user's username. This is typically the user's email, such as john@jupiter.com. If a user's username changes, they must authenticate using the new username.
-    servicing.UsersCreationAPIRequestDTO:
-      type: object
-      properties:
-        users:
+        userIds:
           type: array
           items:
-            $ref: '#/components/schemas/servicing.UserCreationAPIRequestDTO'
-          description: A list of objects representing users to create. Maximum 100 users can be created in a single request.
+            type: string
+          description: A list of objects representing users to delete. Maximum 100 users can be deleted in a single request.
     servicing.UserCreationAPIRequestDTO:
       type: object
       properties:
@@ -236,6 +185,65 @@ components:
           items:
             $ref: '#/components/schemas/servicing.UsersUpdateAPIUserDTO'
           description: A list of objects representing users to update. Maximum 100 users can be updated in a single request.
+    servicing.UsersAPIErrorMessageDTO:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+        rci:
+          type: string
+          description: The unique identifier associated to this error
+    servicing.UsersCreationAPIRequestDTO:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.UserCreationAPIRequestDTO'
+          description: A list of objects representing users to create. Maximum 100 users can be created in a single request.
+    servicing.UsersUpdateAPIUserDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The unique identifier associated with the user.
+        displayName:
+          type: string
+          description: An identifiable name to display within Visier. For example, "John Smith".
+        employeeId:
+          type: string
+          description: If applicable, and if available, the user employee ID in the data.
+        accountEnabled:
+          type: string
+          description: If true, the user account is enabled.
+        email:
+          type: string
+          description: The user's email address.
+        username:
+          type: string
+          description: The user's username. This is typically the user's email, such as john@jupiter.com. If a user's username changes, they must authenticate using the new username.
+    servicing.UsersAPISuccessDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The unique identifier associated with the user.
+        username:
+          type: string
+          description: The user's username. This is typically the user's email, such as john@jupiter.com.
+        displayName:
+          type: string
+          description: An identifiable name to display within Visier. For example, "John Smith".
+        employeeId:
+          type: string
+          description: If applicable, and if available, the user employee ID in the data.
+        accountEnabled:
+          type: string
+          description: If true, the user account is enabled.
+        email:
+          type: string
+          description: The user's email address.
     servicing.UsersAPIResponseDTO:
       type: object
       properties:
@@ -249,14 +257,6 @@ components:
           items:
             $ref: '#/components/schemas/servicing.UsersAPIFailureDTO'
           description: The users for which the request failed.
-    servicing.UsersDeleteAPIRequestDTO:
-      type: object
-      properties:
-        userIds:
-          type: array
-          items:
-            type: string
-          description: A list of objects representing users to delete. Maximum 100 users can be deleted in a single request.
     servicing.UsersAPIFailureDTO:
       type: object
       properties:

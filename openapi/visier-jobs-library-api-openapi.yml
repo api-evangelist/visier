@@ -270,98 +270,6 @@ paths:
       - api_key: []
 components:
   schemas:
-    JobList:
-      type: array
-      items:
-        type: object
-        title: JobEntry
-        properties:
-          id:
-            type: string
-            description: 'The unique ID of the job.
-
-              '
-          name:
-            type: string
-            description: 'The localized display name of the job.
-
-              '
-          description:
-            type: string
-            description: 'The localized description of the job.
-
-              '
-        required:
-        - id
-        - name
-        - description
-    JobStandardizationInputSkills:
-      description: 'The custom job titles to standardize.
-
-        '
-      type: object
-      properties:
-        jobs:
-          type: array
-          items:
-            type: string
-        naicsCode:
-          type: string
-          description: 'The North American Industry Classification System (NAICS) code.
-
-
-            If `naicsCode` is provided, the most relevant job titles associated with the naicsCode are returned first.
-
-            '
-      required:
-      - jobs
-    JobStandardizationOutputSkills:
-      type: array
-      items:
-        title: OutputEntry
-        type: object
-        properties:
-          job:
-            type: string
-            description: 'The custom job title input.
-
-              '
-          matches:
-            type: array
-            description: 'The top standardized job matches.
-
-              '
-            items:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: 'The unique ID of the job.
-
-                    '
-                name:
-                  type: string
-                  description: 'The localized display name of the job.
-
-                    '
-                description:
-                  type: string
-                  description: 'The localized description of the job.
-
-                    '
-                score:
-                  type: integer
-                  description: 'The score representing the confidence level of the match between the standardized job and the custom job title input. The score ranges from 0 to 100.
-
-                    '
-              required:
-              - id
-              - name
-              - description
-              - score
-        required:
-        - job
-        - matches
     Skill:
       description: 'The details describing a skill.
 
@@ -433,6 +341,26 @@ components:
       - isKnowledge
       - skillType
       - alternativeTitles
+    JobStandardizationInputSkills:
+      description: 'The custom job titles to standardize.
+
+        '
+      type: object
+      properties:
+        jobs:
+          type: array
+          items:
+            type: string
+        naicsCode:
+          type: string
+          description: 'The North American Industry Classification System (NAICS) code.
+
+
+            If `naicsCode` is provided, the most relevant job titles associated with the naicsCode are returned first.
+
+            '
+      required:
+      - jobs
     ApiError:
       title: ApiError
       description: 'Description of an API error.
@@ -459,6 +387,31 @@ components:
       - errorCode
       - message
       - rci
+    JobList:
+      type: array
+      items:
+        type: object
+        title: JobEntry
+        properties:
+          id:
+            type: string
+            description: 'The unique ID of the job.
+
+              '
+          name:
+            type: string
+            description: 'The localized display name of the job.
+
+              '
+          description:
+            type: string
+            description: 'The localized description of the job.
+
+              '
+        required:
+        - id
+        - name
+        - description
     Job:
       description: 'Details describing a job.
 
@@ -540,6 +493,53 @@ components:
       - alternativeTitles
       - essentialSkills
       - optionalSkills
+    JobStandardizationOutputSkills:
+      type: array
+      items:
+        title: OutputEntry
+        type: object
+        properties:
+          job:
+            type: string
+            description: 'The custom job title input.
+
+              '
+          matches:
+            type: array
+            description: 'The top standardized job matches.
+
+              '
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: 'The unique ID of the job.
+
+                    '
+                name:
+                  type: string
+                  description: 'The localized display name of the job.
+
+                    '
+                description:
+                  type: string
+                  description: 'The localized description of the job.
+
+                    '
+                score:
+                  type: integer
+                  description: 'The score representing the confidence level of the match between the standardized job and the custom job title input. The score ranges from 0 to 100.
+
+                    '
+              required:
+              - id
+              - name
+              - description
+              - score
+        required:
+        - job
+        - matches
   securitySchemes:
     api_key:
       type: apiKey

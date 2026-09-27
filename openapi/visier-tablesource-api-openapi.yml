@@ -701,16 +701,307 @@ paths:
                 format: binary
 components:
   schemas:
-    servicing.sqlsource.SqlSourceReplaceActionDTO:
+    servicing.sqlsource.SqlSourceIoFormatDTO_ParquetFormatDTO:
+      type: object
+      properties: {}
+      description: Options for the Parquet format.
+    servicing.sqlsource.SqlSourceRollbackActionDTO:
+      type: object
+      properties: {}
+      description: A rollback action.
+    data_in.TableSourceRequest:
       type: object
       properties:
-        source:
+        tableId:
           type: string
-          description: The SQL table (identifier) containing rows to replace.
-        target:
+          description: The unique identifier of the table source.
+    servicing.sqlsource.SqlSourceExecuteJobResponseDTO:
+      type: object
+      properties:
+        jobId:
           type: string
-          description: The SQL table (identifier) to replace the rows in.
-      description: "A replace action. Replaces all rows in the target table with the rows in the source table.\n Preserves rows that exist in both the source and the target."
+          description: The job ID that was scheduled. If the job dispatches to multiple tenants, the jobs for each tenant are scheduled as child jobs of this parent job.
+        tableAccess:
+          allOf:
+          - $ref: '#/components/schemas/servicing.sqlsource.SqlJobTableAccessDTO'
+          description: The read and write tables per job.
+        transactionId:
+          type: string
+          description: The transaction ID in which the job was scheduled.
+    servicing.sqlsource.SqlSourceTenantJobStatusDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant code for the status.
+        status:
+          enum:
+          - UNKNOWN
+          - PENDING
+          - RUNNING
+          - SUCCEEDED
+          - FAILED
+          - PROCESSING_FAILED
+          type: string
+          description: The status of the job.
+          format: enum
+        message:
+          type: string
+          description: Any applicable additional message for the status.
+        processingJobIds:
+          type: array
+          items:
+            type: string
+          description: Processing job IDs created by `process` actions within the job, if any.
+        jobId:
+          type: string
+          description: The ID of the job.
+    servicing.sqlsource.SqlSourceChildTransactionStateDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant code of the analytic tenant.
+        status:
+          enum:
+          - UNSPECIFIED
+          - OPEN
+          - CLOSED
+          - COMMITTED
+          - ROLLED_BACK
+          type: string
+          description: The current status of the transaction in the analytic tenant.
+          format: enum
+        startedAt:
+          type: string
+          description: The timestamp when work began on the child transaction in ISO 8601 format.
+        closedAt:
+          type: string
+          description: The timestamp when the child transaction was closed in ISO 8601 format.
+    servicing.sqlsource.SqlSourceInputDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The name to give the input view in SQL.
+        filename:
+          type: string
+          description: The name of the input file. If specified, do not specify `filenames`.
+        format:
+          allOf:
+          - $ref: '#/components/schemas/servicing.sqlsource.SqlSourceIoFormatDTO'
+          description: The format and parameters to use to read the input file.
+        tenantCodeColumn:
+          type: string
+          description: The tenant code column to use when multiple tenants are specified.
+        prependAdminTenantCode:
+          type: boolean
+          description: If `true`, the tenant codes in the column/filename do not include the parent tenant prefix.
+        inputDistributionMode:
+          enum:
+          - NO_DISTRIBUTION
+          - DISTRIBUTE_FILES
+          - DISTRIBUTE_ROWS
+          type: string
+          description: "Describes how to distribute input data among tenants. Required when multiple tenants are specified. When set and `tenants` is not specified, tenants are automatically detected from the input data. Valid values:\n - `NO_DISTRIBUTION`: Don't distribute to multiple tenants. Files must be uploaded directly to their target tenant.\n - `DISTRIBUTE_FILES`: Distribute to multiple tenants based on the file path. The input filename must exist under subdirectories.\n - `DISTRIBUTE_ROWS`: Distribute to multiple tenants by splitting rows to each tenant based on the tenant code column."
+          format: enum
+        fileContainerName:
+          type: string
+          description: Indicates if the file exists in a container and the container name.
+        filenames:
+          type: array
+          items:
+            type: string
+          description: The names of multiple input files. Specifying multiple files concatenates the file records into a single input view in SQL. Useful for large inputs that are split across several files. If specified, do not specify `filename`.
+    servicing.sqlsource.SqlSourceCommitActionDTO:
+      type: object
+      properties: {}
+      description: A commit action.
+    servicing.sqlsource.SqlJobTableAccessDTO:
+      type: object
+      properties:
+        read:
+          type: array
+          items:
+            type: string
+          description: The read tables for a given job.
+        write:
+          type: array
+          items:
+            type: string
+          description: The write tables for a given job.
+    servicing.sqlsource.SqlSourceTableDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: "The unique identifier for the table. This UUID is generated automatically when the table is created and cannot be changed.\n Do not provide a value when creating a new table."
+        objectName:
+          type: string
+          description: The object name for the table. This determines the name of the table accessible from SQL.
+        basicInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.BasicInformationDTO'
+          description: Fields that identify and describe the table, such as its display name, description, and explanation.
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.sqlsource.SqlSourceColumnDTO'
+          description: The columns contained within the table.
+        canChildrenInherit:
+          type: boolean
+          description: If `true`, analytic tenants inherit the table definition. To also inherit the table data, set `canChildrenInheritData` to `true`. Default is `false`.
+        canChildrenInheritData:
+          type: boolean
+          description: If `true`, analytic tenants inherit the table data. Analytic tenants can read the data but cannot write to it. Default is `false`.
+        excludeFromAutoProcessing:
+          type: boolean
+          description: If `true`, Visier ignores this source when checking which data categories require a processing job during a `process` action with no specified `dataCategoryIds`. Default is `false`.
+        snapshotRetentionDays:
+          type: integer
+          description: "The number of days to keep snapshots for this table before permanently deleting them. Must be between 1 and 180 days.\n If undefined, the default is 7 days. You cannot reset the table to a timestamp older than the retention period because older snapshots are permanently deleted."
+          format: int32
+        materializedView:
+          allOf:
+          - $ref: '#/components/schemas/servicing.sqlsource.SqlSourceMaterializedViewConfigDTO'
+          description: The configuration options for a materialized view. Omit or set `enabled=false` for non-materialized view tables.
+        filterInheritedDataByTenant:
+          type: boolean
+          description: If `true`, analytic tenants only see data from inherited table data for rows where `TENANT_ID` or `CUSTOMER_ID` matches their own tenant code. Requires `canChildrenInheritData=true`.
+    servicing.sqlsource.SqlSourceTableListResponseDTO:
+      type: object
+      properties:
+        tables:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.sqlsource.SqlSourceTableDTO'
+          description: The list of tables.
+    servicing.sqlsource.SqlSourceIoFormatDTO_CsvFormatDTO:
+      type: object
+      properties:
+        header:
+          type: boolean
+          description: If `true`, the output includes a header row.
+      description: Options for the CSV format.
+    servicing.sqlsource.SqlSourceQueryOutputDTO:
+      type: object
+      properties:
+        format:
+          allOf:
+          - $ref: '#/components/schemas/servicing.sqlsource.SqlSourceIoFormatDTO'
+          description: The format to write the output in.
+        filename:
+          type: string
+          description: The filename to write the output to.
+      description: Output configuration for a query. If specified, query output will be written to a file that can be retrieved later.
+    servicing.sqlsource.SqlSourceListOutputFilePartsResponseDTO:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: The transaction ID the output file belongs to.
+        filename:
+          type: string
+          description: The name of the output file.
+        numberOfParts:
+          type: integer
+          description: The number of parts that are available for the output file. The parts are numbered from 0 up to (but not including) this number.
+          format: int32
+    servicing.sqlsource.SqlSourceExtendTransactionRequestDTO:
+      type: object
+      properties:
+        expireAfterSeconds:
+          type: integer
+          description: The number of seconds that the transaction is open before rolling back and the number of seconds that query results are available.
+          format: int32
+    servicing.sqlsource.SqlSourceMaterializedViewConfigDTO:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: If `true`, this table is a materialized view that updates based on upstream changes.
+        query:
+          type: string
+          description: The SQL query that defines the materialized view's content.
+        dependencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.sqlsource.SqlSourceMaterializedViewDependencyDTO'
+          description: The list of upstream data tables whose changes trigger incremental updates to the materialized view.
+    servicing.sqlsource.SqlSourceQueryActionDTO:
+      type: object
+      properties:
+        query:
+          type: string
+          description: The SQL query to execute.
+        timeoutSeconds:
+          type: integer
+          description: The maximum amount of time in seconds to run the query for before cancelling it.
+          format: int32
+        output:
+          allOf:
+          - $ref: '#/components/schemas/servicing.sqlsource.SqlSourceQueryOutputDTO'
+          description: The output configuration for the query, if desired.
+        rollbackOnEmpty:
+          type: boolean
+          description: If `true`, the transaction rolls back if the query returns no rows. Use this to implement a validation step.
+      description: A query action. Executes the specified SQL query within the tenant's context.
+    servicing.sqlsource.SqlSourceMaterializedViewDependencyDTO:
+      type: object
+      properties:
+        upstreamTable:
+          type: string
+          description: The UUID of the table that this materialized view table depends on.
+        joinFilter:
+          type: string
+          description: 'A SQL condition that correlates the upstream table''s changed rows (''input'') to rows in the materialized view (''output''). Example: "input.EmployeeID = output.EmployeeID AND input.EventDate = output.EventDate".'
+    servicing.sqlsource.SqlSourceProcessActionDTO:
+      type: object
+      properties:
+        projectId:
+          type: string
+          description: The project ID to execute the processing job for. If not specified, the current production project is used.
+        versionId:
+          type: string
+          description: The version ID to execute the processing job for. If not specified, the latest version is used.
+        dataCategoryIds:
+          type: array
+          items:
+            type: string
+          description: "The data category IDs to spawn processing jobs for. If not specified, all data categories\n used by tables that were locked by the transaction are processed."
+        deferTimeNotAfter:
+          type: string
+          description: "The latest time to schedule the processing job in ISO 8601 format, such as `2025-04-01T12:00:00Z`.\n If not specified, the processing job schedules immediately. If a deferred job already exists for\n the same parameters, the earlier time takes precedence."
+      description: A process action. Spawns a processing job for the specified data categories.
+    servicing.sqlsource.SqlSourceGetJobStatusResponseDTO:
+      type: object
+      properties:
+        status:
+          enum:
+          - UNKNOWN
+          - PENDING
+          - RUNNING
+          - SUCCEEDED
+          - FAILED
+          type: string
+          description: The overall status of the jobs, including children of the requested job.
+          format: enum
+        summary:
+          allOf:
+          - $ref: '#/components/schemas/servicing.sqlsource.SqlSourceJobStatusSummaryDTO'
+          description: Summary of job statuses for SQL jobs.
+        processingSummary:
+          allOf:
+          - $ref: '#/components/schemas/servicing.sqlsource.SqlSourceJobStatusSummaryDTO'
+          description: Summary of job status for processing jobs (if any were created).
+        tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.sqlsource.SqlSourceTenantJobStatusDTO'
+          description: Status information for each tenant.
+        jobId:
+          type: string
+          description: The ID of the requested job.
     servicing.sqlsource.SqlSourceTransactionStateDTO:
       type: object
       properties:
@@ -756,48 +1047,15 @@ components:
           allOf:
           - $ref: '#/components/schemas/servicing.sqlsource.SqlSourceTransactionStatusSummaryDTO'
           description: Summary counts of transaction statuses across the parent and all analytic tenants.
-    servicing.sqlsource.SqlSourceResetActionDTO:
+    servicing.SynonymListDTO:
       type: object
       properties:
-        table:
-          type: string
-          description: The SQL table (identifier) to roll back.
-        asOfTimestamp:
-          type: string
-          description: The time from which to retrieve the latest snapshot in ISO 8601 format, such as `"2001-10-25T13:45:35.999"`.
-      description: A reset action. Rolls the table back to the latest snapshot given the timestamp.
-    servicing.sqlsource.SqlSourceMaterializedViewConfigDTO:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          description: If `true`, this table is a materialized view that updates based on upstream changes.
-        query:
-          type: string
-          description: The SQL query that defines the materialized view's content.
-        dependencies:
+        synonyms:
           type: array
           items:
-            $ref: '#/components/schemas/servicing.sqlsource.SqlSourceMaterializedViewDependencyDTO'
-          description: The list of upstream data tables whose changes trigger incremental updates to the materialized view.
-    data_in.TableSourceRequest:
-      type: object
-      properties:
-        tableId:
-          type: string
-          description: The unique identifier of the table source.
-    servicing.sqlsource.SqlSourceJobPreconditionDTO:
-      type: object
-      properties:
-        table:
-          type: string
-          description: The unique identifier of the SQL table for which to check the precondition.
-        metadata:
-          type: object
-          additionalProperties:
             type: string
-          description: The required key-value pairs. If any key doesn't exist or has a different value than specified here, the precondition isn't met and the job fails with an error.
-      description: A precondition that must be met for a job to execute.
+          description: Alternative words or phrases for the object.
+      description: The object's synonyms.
     servicing.sqlsource.SqlSourceActionDTO:
       type: object
       properties:
@@ -818,272 +1076,6 @@ components:
         reset:
           $ref: '#/components/schemas/servicing.sqlsource.SqlSourceResetActionDTO'
       description: An individual action to execute within a SQL job.
-    servicing.sqlsource.SqlSourceTenantJobStatusDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The tenant code for the status.
-        status:
-          enum:
-          - UNKNOWN
-          - PENDING
-          - RUNNING
-          - SUCCEEDED
-          - FAILED
-          - PROCESSING_FAILED
-          type: string
-          description: The status of the job.
-          format: enum
-        message:
-          type: string
-          description: Any applicable additional message for the status.
-        processingJobIds:
-          type: array
-          items:
-            type: string
-          description: Processing job IDs created by `process` actions within the job, if any.
-        jobId:
-          type: string
-          description: The ID of the job.
-    servicing.sqlsource.SqlSourceExecuteJobResponseDTO:
-      type: object
-      properties:
-        jobId:
-          type: string
-          description: The job ID that was scheduled. If the job dispatches to multiple tenants, the jobs for each tenant are scheduled as child jobs of this parent job.
-        tableAccess:
-          allOf:
-          - $ref: '#/components/schemas/servicing.sqlsource.SqlJobTableAccessDTO'
-          description: The read and write tables per job.
-        transactionId:
-          type: string
-          description: The transaction ID in which the job was scheduled.
-    servicing.sqlsource.SqlSourceQueryActionDTO:
-      type: object
-      properties:
-        query:
-          type: string
-          description: The SQL query to execute.
-        timeoutSeconds:
-          type: integer
-          description: The maximum amount of time in seconds to run the query for before cancelling it.
-          format: int32
-        output:
-          allOf:
-          - $ref: '#/components/schemas/servicing.sqlsource.SqlSourceQueryOutputDTO'
-          description: The output configuration for the query, if desired.
-        rollbackOnEmpty:
-          type: boolean
-          description: If `true`, the transaction rolls back if the query returns no rows. Use this to implement a validation step.
-      description: A query action. Executes the specified SQL query within the tenant's context.
-    servicing.sqlsource.SqlSourceInputDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The name to give the input view in SQL.
-        filename:
-          type: string
-          description: The name of the input file. If specified, do not specify `filenames`.
-        format:
-          allOf:
-          - $ref: '#/components/schemas/servicing.sqlsource.SqlSourceIoFormatDTO'
-          description: The format and parameters to use to read the input file.
-        tenantCodeColumn:
-          type: string
-          description: The tenant code column to use when multiple tenants are specified.
-        prependAdminTenantCode:
-          type: boolean
-          description: If `true`, the tenant codes in the column/filename do not include the parent tenant prefix.
-        inputDistributionMode:
-          enum:
-          - NO_DISTRIBUTION
-          - DISTRIBUTE_FILES
-          - DISTRIBUTE_ROWS
-          type: string
-          description: "Describes how to distribute input data among tenants. Required when multiple tenants are specified. When set and `tenants` is not specified, tenants are automatically detected from the input data. Valid values:\n - `NO_DISTRIBUTION`: Don't distribute to multiple tenants. Files must be uploaded directly to their target tenant.\n - `DISTRIBUTE_FILES`: Distribute to multiple tenants based on the file path. The input filename must exist under subdirectories.\n - `DISTRIBUTE_ROWS`: Distribute to multiple tenants by splitting rows to each tenant based on the tenant code column."
-          format: enum
-        fileContainerName:
-          type: string
-          description: Indicates if the file exists in a container and the container name.
-        filenames:
-          type: array
-          items:
-            type: string
-          description: The names of multiple input files. Specifying multiple files concatenates the file records into a single input view in SQL. Useful for large inputs that are split across several files. If specified, do not specify `filename`.
-    servicing.sqlsource.SqlSourceJobStatusSummaryDTO:
-      type: object
-      properties:
-        pending:
-          type: integer
-          description: The number of jobs that are waiting to run.
-          format: int32
-        running:
-          type: integer
-          description: The number of jobs that are running.
-          format: int32
-        succeeded:
-          type: integer
-          description: The number of jobs that have succeeded.
-          format: int32
-        failed:
-          type: integer
-          description: The number of jobs that have failed.
-          format: int32
-    servicing.sqlsource.SqlSourceIoFormatDTO_ParquetFormatDTO:
-      type: object
-      properties: {}
-      description: Options for the Parquet format.
-    servicing.sqlsource.SqlSourceQueryOutputDTO:
-      type: object
-      properties:
-        format:
-          allOf:
-          - $ref: '#/components/schemas/servicing.sqlsource.SqlSourceIoFormatDTO'
-          description: The format to write the output in.
-        filename:
-          type: string
-          description: The filename to write the output to.
-      description: Output configuration for a query. If specified, query output will be written to a file that can be retrieved later.
-    servicing.sqlsource.SqlSourceIoFormatDTO:
-      type: object
-      properties:
-        csv:
-          $ref: '#/components/schemas/servicing.sqlsource.SqlSourceIoFormatDTO_CsvFormatDTO'
-        parquet:
-          $ref: '#/components/schemas/servicing.sqlsource.SqlSourceIoFormatDTO_ParquetFormatDTO'
-      description: Input/output format configuration for a query.
-    servicing.sqlsource.SqlSourceChildTransactionStateDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The tenant code of the analytic tenant.
-        status:
-          enum:
-          - UNSPECIFIED
-          - OPEN
-          - CLOSED
-          - COMMITTED
-          - ROLLED_BACK
-          type: string
-          description: The current status of the transaction in the analytic tenant.
-          format: enum
-        startedAt:
-          type: string
-          description: The timestamp when work began on the child transaction in ISO 8601 format.
-        closedAt:
-          type: string
-          description: The timestamp when the child transaction was closed in ISO 8601 format.
-    servicing.sqlsource.SqlSourceRollbackActionDTO:
-      type: object
-      properties: {}
-      description: A rollback action.
-    servicing.sqlsource.SqlSourceTransactionStatusSummaryDTO:
-      type: object
-      properties:
-        open:
-          type: integer
-          description: The number of open transactions, including the parent transaction.
-          format: int32
-        resolving:
-          type: integer
-          description: The number of transactions that are committing or rolling back, including the parent transaction.
-          format: int32
-        committed:
-          type: integer
-          description: The number of committed transactions, including the parent transaction.
-          format: int32
-        rolledBack:
-          type: integer
-          description: The number of rolled back transactions, including the parent transaction.
-          format: int32
-    servicing.sqlsource.SqlJobTableAccessDTO:
-      type: object
-      properties:
-        read:
-          type: array
-          items:
-            type: string
-          description: The read tables for a given job.
-        write:
-          type: array
-          items:
-            type: string
-          description: The write tables for a given job.
-    servicing.BasicInformationDTO:
-      type: object
-      properties:
-        displayName:
-          type: string
-          description: The user-friendly name for the object.
-        shortDisplayName:
-          type: string
-          description: A shortened version of the display name. If the object is visible in the solution experience, this name is displayed in visualization titles.
-        description:
-          type: string
-          description: A short description of the object. Descriptions provide in-context help for your users while working in Visier.
-        explanation:
-          type: string
-          description: A longer description of the object that typically includes a definition, calculation details, and other guidance about how to use the object.
-        designerNotes:
-          type: string
-          description: An admin-only description of the object that provides design-specific information or considerations.
-        synonymList:
-          allOf:
-          - $ref: '#/components/schemas/servicing.SynonymListDTO'
-          description: Alternative words or phrases for the object.
-      description: Fields that identify and describe the object, such as its display name, description, and explanation.
-    servicing.sqlsource.SqlSourceMaterializedViewDependencyDTO:
-      type: object
-      properties:
-        upstreamTable:
-          type: string
-          description: The UUID of the table that this materialized view table depends on.
-        joinFilter:
-          type: string
-          description: 'A SQL condition that correlates the upstream table''s changed rows (''input'') to rows in the materialized view (''output''). Example: "input.EmployeeID = output.EmployeeID AND input.EventDate = output.EventDate".'
-    servicing.sqlsource.SqlSourceIoFormatDTO_CsvFormatDTO:
-      type: object
-      properties:
-        header:
-          type: boolean
-          description: If `true`, the output includes a header row.
-      description: Options for the CSV format.
-    servicing.sqlsource.SqlSourceUpsertActionDTO:
-      type: object
-      properties:
-        source:
-          type: string
-          description: The SQL table (identifier) containing rows to upsert.
-        target:
-          type: string
-          description: The SQL table (identifier) to upsert the rows into.
-        keys:
-          type: array
-          items:
-            type: string
-          description: The key columns to match on to find rows that should be replaced.
-      description: An upsert action. Replaces any rows that match on `keys` with the rows in the source table, and inserts them if there are no matches.
-    servicing.sqlsource.SqlSourceProcessActionDTO:
-      type: object
-      properties:
-        projectId:
-          type: string
-          description: The project ID to execute the processing job for. If not specified, the current production project is used.
-        versionId:
-          type: string
-          description: The version ID to execute the processing job for. If not specified, the latest version is used.
-        dataCategoryIds:
-          type: array
-          items:
-            type: string
-          description: "The data category IDs to spawn processing jobs for. If not specified, all data categories\n used by tables that were locked by the transaction are processed."
-        deferTimeNotAfter:
-          type: string
-          description: "The latest time to schedule the processing job in ISO 8601 format, such as `2025-04-01T12:00:00Z`.\n If not specified, the processing job schedules immediately. If a deferred job already exists for\n the same parameters, the earlier time takes precedence."
-      description: A process action. Spawns a processing job for the specified data categories.
     Status:
       type: object
       properties:
@@ -1118,59 +1110,114 @@ components:
           type: boolean
           description: If `true` and the job dispatches to multiple tenants by automatic detection, this action applies to tenants that had no data in any distributed input. This field does not impact tenants that receive a child job. Job preconditions are evaluated before applying this action. Default is `false`.
       description: A set metadata action. Sets the key-value pairs to apply to the table source when you commit the transaction. You can use key-value pairs as preconditions for jobs. If any key doesn't exist or has a different value than specified here, the precondition isn't met and the job fails with an error.
-    servicing.sqlsource.SqlSourceBeginTransactionRequestDTO:
+    servicing.sqlsource.SqlSourceTransactionStatusSummaryDTO:
       type: object
       properties:
-        expireAfterSeconds:
+        open:
           type: integer
-          description: The number of seconds that the transaction is open before rolling back and the number of seconds that query results are available.
+          description: The number of open transactions, including the parent transaction.
           format: int32
-        tablesToModify:
-          type: array
-          items:
-            type: string
-          description: "The tables to modify in the transaction. If undefined, the transaction is read-only. You cannot add tables to modify after creating the transaction.\n\n After a job starts running, the tables are locked for the duration of the transaction to prevent concurrent writes. Each tenant has independent locks; there is no cross-tenant locking."
-    servicing.sqlsource.SqlSourceListOutputFilePartsResponseDTO:
+        resolving:
+          type: integer
+          description: The number of transactions that are committing or rolling back, including the parent transaction.
+          format: int32
+        committed:
+          type: integer
+          description: The number of committed transactions, including the parent transaction.
+          format: int32
+        rolledBack:
+          type: integer
+          description: The number of rolled back transactions, including the parent transaction.
+          format: int32
+    servicing.sqlsource.SqlSourceResetActionDTO:
       type: object
       properties:
+        table:
+          type: string
+          description: The SQL table (identifier) to roll back.
+        asOfTimestamp:
+          type: string
+          description: The time from which to retrieve the latest snapshot in ISO 8601 format, such as `"2001-10-25T13:45:35.999"`.
+      description: A reset action. Rolls the table back to the latest snapshot given the timestamp.
+    servicing.sqlsource.SqlSourceGetTableMetadataResponseDTO:
+      type: object
+      properties:
+        tableId:
+          type: string
+          description: The unique identifier of the table.
         transactionId:
           type: string
-          description: The transaction ID the output file belongs to.
-        filename:
+          description: The unique identifier of the transaction for which the metadata was retrieved, if applicable.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: The table's key-value pairs that were set by previously-executed jobs or previously-committed transactions.
+        recordCount:
           type: string
-          description: The name of the output file.
-        numberOfParts:
-          type: integer
-          description: The number of parts that are available for the output file. The parts are numbered from 0 up to (but not including) this number.
-          format: int32
-    servicing.SynonymListDTO:
+          description: The number of records in the table. Not included for inherited tables if `filterInheritedDataByTenant` is `true`.
+        recordsUpdatedAt:
+          type: string
+          description: The timestamp when the table records were last updated in ISO 8601 format. Not included in the response if no data is loaded.
+        dataFilesSizeBytes:
+          type: string
+          description: The table's data files size in bytes. Not included in the response if `filterInheritedDataByTenant` is `true`.
+    servicing.sqlsource.SqlSourceUpsertActionDTO:
       type: object
       properties:
-        synonyms:
+        source:
+          type: string
+          description: The SQL table (identifier) containing rows to upsert.
+        target:
+          type: string
+          description: The SQL table (identifier) to upsert the rows into.
+        keys:
           type: array
           items:
             type: string
+          description: The key columns to match on to find rows that should be replaced.
+      description: An upsert action. Replaces any rows that match on `keys` with the rows in the source table, and inserts them if there are no matches.
+    servicing.sqlsource.SqlSourceReplaceActionDTO:
+      type: object
+      properties:
+        source:
+          type: string
+          description: The SQL table (identifier) containing rows to replace.
+        target:
+          type: string
+          description: The SQL table (identifier) to replace the rows in.
+      description: "A replace action. Replaces all rows in the target table with the rows in the source table.\n Preserves rows that exist in both the source and the target."
+    servicing.sqlsource.SqlSourceIoFormatDTO:
+      type: object
+      properties:
+        csv:
+          $ref: '#/components/schemas/servicing.sqlsource.SqlSourceIoFormatDTO_CsvFormatDTO'
+        parquet:
+          $ref: '#/components/schemas/servicing.sqlsource.SqlSourceIoFormatDTO_ParquetFormatDTO'
+      description: Input/output format configuration for a query.
+    servicing.BasicInformationDTO:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The user-friendly name for the object.
+        shortDisplayName:
+          type: string
+          description: A shortened version of the display name. If the object is visible in the solution experience, this name is displayed in visualization titles.
+        description:
+          type: string
+          description: A short description of the object. Descriptions provide in-context help for your users while working in Visier.
+        explanation:
+          type: string
+          description: A longer description of the object that typically includes a definition, calculation details, and other guidance about how to use the object.
+        designerNotes:
+          type: string
+          description: An admin-only description of the object that provides design-specific information or considerations.
+        synonymList:
+          allOf:
+          - $ref: '#/components/schemas/servicing.SynonymListDTO'
           description: Alternative words or phrases for the object.
-      description: The object's synonyms.
-    servicing.sqlsource.SqlSourceExtendTransactionRequestDTO:
-      type: object
-      properties:
-        expireAfterSeconds:
-          type: integer
-          description: The number of seconds that the transaction is open before rolling back and the number of seconds that query results are available.
-          format: int32
-    servicing.sqlsource.SqlSourceTableListResponseDTO:
-      type: object
-      properties:
-        tables:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.sqlsource.SqlSourceTableDTO'
-          description: The list of tables.
-    servicing.sqlsource.SqlSourceCommitActionDTO:
-      type: object
-      properties: {}
-      description: A commit action.
+      description: Fields that identify and describe the object, such as its display name, description, and explanation.
     servicing.sqlsource.SqlSourceColumnDTO:
       type: object
       properties:
@@ -1198,6 +1245,49 @@ components:
         isPrimaryTimestamp:
           type: boolean
           description: If `true`, this column determines the overall timestamp of the data contained within the row. This is used for time-based partitioning.
+    servicing.sqlsource.SqlSourceJobStatusSummaryDTO:
+      type: object
+      properties:
+        pending:
+          type: integer
+          description: The number of jobs that are waiting to run.
+          format: int32
+        running:
+          type: integer
+          description: The number of jobs that are running.
+          format: int32
+        succeeded:
+          type: integer
+          description: The number of jobs that have succeeded.
+          format: int32
+        failed:
+          type: integer
+          description: The number of jobs that have failed.
+          format: int32
+    servicing.sqlsource.SqlSourceBeginTransactionRequestDTO:
+      type: object
+      properties:
+        expireAfterSeconds:
+          type: integer
+          description: The number of seconds that the transaction is open before rolling back and the number of seconds that query results are available.
+          format: int32
+        tablesToModify:
+          type: array
+          items:
+            type: string
+          description: "The tables to modify in the transaction. If undefined, the transaction is read-only. You cannot add tables to modify after creating the transaction.\n\n After a job starts running, the tables are locked for the duration of the transaction to prevent concurrent writes. Each tenant has independent locks; there is no cross-tenant locking."
+    servicing.sqlsource.SqlSourceJobPreconditionDTO:
+      type: object
+      properties:
+        table:
+          type: string
+          description: The unique identifier of the SQL table for which to check the precondition.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: The required key-value pairs. If any key doesn't exist or has a different value than specified here, the precondition isn't met and the job fails with an error.
+      description: A precondition that must be met for a job to execute.
     servicing.sqlsource.SqlSourceExecuteJobRequestDTO:
       type: object
       properties:
@@ -1224,96 +1314,6 @@ components:
           items:
             $ref: '#/components/schemas/servicing.sqlsource.SqlSourceJobPreconditionDTO'
           description: The precondition requirements to execute the job. If any precondition isn't met, the job fails with an error. To set metadata to use for preconditions, use the `setMetadata` action in `POST /v1alpha/data/table-sources/transactions/{transactionId}/jobs`.
-    servicing.sqlsource.SqlSourceGetTableMetadataResponseDTO:
-      type: object
-      properties:
-        tableId:
-          type: string
-          description: The unique identifier of the table.
-        transactionId:
-          type: string
-          description: The unique identifier of the transaction for which the metadata was retrieved, if applicable.
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          description: The table's key-value pairs that were set by previously-executed jobs or previously-committed transactions.
-        recordCount:
-          type: string
-          description: The number of records in the table. Not included for inherited tables if `filterInheritedDataByTenant` is `true`.
-        recordsUpdatedAt:
-          type: string
-          description: The timestamp when the table records were last updated in ISO 8601 format. Not included in the response if no data is loaded.
-        dataFilesSizeBytes:
-          type: string
-          description: The table's data files size in bytes. Not included in the response if `filterInheritedDataByTenant` is `true`.
-    servicing.sqlsource.SqlSourceGetJobStatusResponseDTO:
-      type: object
-      properties:
-        status:
-          enum:
-          - UNKNOWN
-          - PENDING
-          - RUNNING
-          - SUCCEEDED
-          - FAILED
-          type: string
-          description: The overall status of the jobs, including children of the requested job.
-          format: enum
-        summary:
-          allOf:
-          - $ref: '#/components/schemas/servicing.sqlsource.SqlSourceJobStatusSummaryDTO'
-          description: Summary of job statuses for SQL jobs.
-        processingSummary:
-          allOf:
-          - $ref: '#/components/schemas/servicing.sqlsource.SqlSourceJobStatusSummaryDTO'
-          description: Summary of job status for processing jobs (if any were created).
-        tenants:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.sqlsource.SqlSourceTenantJobStatusDTO'
-          description: Status information for each tenant.
-        jobId:
-          type: string
-          description: The ID of the requested job.
-    servicing.sqlsource.SqlSourceTableDTO:
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: "The unique identifier for the table. This UUID is generated automatically when the table is created and cannot be changed.\n Do not provide a value when creating a new table."
-        objectName:
-          type: string
-          description: The object name for the table. This determines the name of the table accessible from SQL.
-        basicInformation:
-          allOf:
-          - $ref: '#/components/schemas/servicing.BasicInformationDTO'
-          description: Fields that identify and describe the table, such as its display name, description, and explanation.
-        columns:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.sqlsource.SqlSourceColumnDTO'
-          description: The columns contained within the table.
-        canChildrenInherit:
-          type: boolean
-          description: If `true`, analytic tenants inherit the table definition. To also inherit the table data, set `canChildrenInheritData` to `true`. Default is `false`.
-        canChildrenInheritData:
-          type: boolean
-          description: If `true`, analytic tenants inherit the table data. Analytic tenants can read the data but cannot write to it. Default is `false`.
-        excludeFromAutoProcessing:
-          type: boolean
-          description: If `true`, Visier ignores this source when checking which data categories require a processing job during a `process` action with no specified `dataCategoryIds`. Default is `false`.
-        snapshotRetentionDays:
-          type: integer
-          description: "The number of days to keep snapshots for this table before permanently deleting them. Must be between 1 and 180 days.\n If undefined, the default is 7 days. You cannot reset the table to a timestamp older than the retention period because older snapshots are permanently deleted."
-          format: int32
-        materializedView:
-          allOf:
-          - $ref: '#/components/schemas/servicing.sqlsource.SqlSourceMaterializedViewConfigDTO'
-          description: The configuration options for a materialized view. Omit or set `enabled=false` for non-materialized view tables.
-        filterInheritedDataByTenant:
-          type: boolean
-          description: If `true`, analytic tenants only see data from inherited table data for rows where `TENANT_ID` or `CUSTOMER_ID` matches their own tenant code. Requires `canChildrenInheritData=true`.
   securitySchemes:
     CookieAuth:
       type: apiKey
