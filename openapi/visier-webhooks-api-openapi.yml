@@ -290,16 +290,17 @@ paths:
                 $ref: '#/components/schemas/designer.webhook.WebhookMessageResponseDTO'
 components:
   schemas:
-    designer.webhook.WebhookBasicAuthCredentialDTO:
+    designer.webhook.WebhookCredentialsDTO:
       type: object
       properties:
-        username:
+        basicAuth:
+          allOf:
+          - $ref: '#/components/schemas/designer.webhook.WebhookBasicAuthCredentialDTO'
+          description: Authentication using a username and password.
+        accessToken:
           type: string
-          description: The username for the webhook credential.
-        password:
-          type: string
-          description: The password for the webhook credential.
-      description: The basic authentication credentials for the webhook.
+          description: Authentication using an access token.
+      description: The credentials to authenticate calls to the webhook endpoint. Must be one of `basicAuth` or `accessToken`. Not required if your endpoint doesn't have authentication.
     designer.webhook.WebhookMessageResponseDTO:
       type: object
       properties:
@@ -317,32 +318,15 @@ components:
           type: string
           description: The unique identifier of the event that triggered the webhook notification.
       description: The results of the webhook notification attempt.
-    Status:
+    designer.webhook.WebhookStatusesDTO:
       type: object
       properties:
-        localizedMessage:
-          type: string
-          description: Localized error message describing the root cause of the error.
-        code:
-          type: string
-          description: Error classification.
-        message:
-          type: string
-          description: Not used.
-        rci:
-          type: string
-          description: Optional root cause identifier.
-        userError:
-          type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
-    designer.webhook.WebhookEventTypeDTO:
-      type: object
-      properties:
-        eventType:
-          type: string
-          description: "The possible event types to listen for. Valid values:\n - `jobResultSuccess`: A job completed successfully.\n - `jobResultFailure`: A job failed to complete.\n - `jobReschedule`: A job was rescheduled.\n - `dvPublish`: A data version published to production.\n - `alertNotification`: A personalized alert notification was triggered.\n - `smartCompNotification`: A Smart Compensation event notification was triggered. This is available for Embedded Partners.\n - `dataUploadNotification`: A data file was uploaded.\n - `systemAlertNotification`: A system event alert notification was triggered.\n - `planRowPromotionNotification`: A row in a plan was promoted.\n - `auditEvent`: An audit event was triggered."
-      description: The possible event types for Visier webhooks.
+        webhooks:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.webhook.WebhookStatusDTO'
+          description: The webhook statuses.
+      description: The returned list of webhook statuses.
     designer.webhook.WebhookDetailsDTO:
       type: object
       properties:
@@ -376,17 +360,25 @@ components:
             $ref: '#/components/schemas/designer.webhook.WebhookEventTypeDTO'
           description: The events that the webhook is listening for.
       description: The webhook's details, such as its active status and the event types it's listening for.
-    designer.webhook.WebhookCredentialsDTO:
+    Status:
       type: object
       properties:
-        basicAuth:
-          allOf:
-          - $ref: '#/components/schemas/designer.webhook.WebhookBasicAuthCredentialDTO'
-          description: Authentication using a username and password.
-        accessToken:
+        localizedMessage:
           type: string
-          description: Authentication using an access token.
-      description: The credentials to authenticate calls to the webhook endpoint. Must be one of `basicAuth` or `accessToken`. Not required if your endpoint doesn't have authentication.
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
     designer.webhook.WebhookDTO:
       type: object
       properties:
@@ -410,6 +402,34 @@ components:
             $ref: '#/components/schemas/designer.webhook.WebhookDTO'
           description: A list of webhooks.
       description: The returned list of webhooks.
+    designer.webhook.WebhookStatusDTO:
+      type: object
+      properties:
+        webhookId:
+          type: string
+          description: The unique identifier of the webhook.
+        details:
+          allOf:
+          - $ref: '#/components/schemas/designer.webhook.WebhookStatusDetailsDTO'
+          description: The webhook's details, such as its active status and the event types it's listening for.
+      description: The webhook's status.
+    designer.webhook.WebhookBasicAuthCredentialDTO:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The username for the webhook credential.
+        password:
+          type: string
+          description: The password for the webhook credential.
+      description: The basic authentication credentials for the webhook.
+    designer.webhook.WebhookEventTypeDTO:
+      type: object
+      properties:
+        eventType:
+          type: string
+          description: "The possible event types to listen for. Valid values:\n - `jobResultSuccess`: A job completed successfully.\n - `jobResultFailure`: A job failed to complete.\n - `jobReschedule`: A job was rescheduled.\n - `dvPublish`: A data version published to production.\n - `alertNotification`: A personalized alert notification was triggered.\n - `smartCompNotification`: A Smart Compensation event notification was triggered. This is available for Embedded Partners.\n - `dataUploadNotification`: A data file was uploaded.\n - `systemAlertNotification`: A system event alert notification was triggered.\n - `planRowPromotionNotification`: A row in a plan was promoted.\n - `auditEvent`: An audit event was triggered."
+      description: The possible event types for Visier webhooks.
     designer.webhook.WebhookRequestDTO:
       type: object
       properties:
@@ -422,26 +442,6 @@ components:
           - $ref: '#/components/schemas/designer.webhook.WebhookCredentialsDTO'
           description: The webhook's credentials, such as a username and password or access token.
       description: The details and credentials for a webhook. Not required if your endpoint doesn't have authentication.
-    designer.webhook.WebhookStatusesDTO:
-      type: object
-      properties:
-        webhooks:
-          type: array
-          items:
-            $ref: '#/components/schemas/designer.webhook.WebhookStatusDTO'
-          description: The webhook statuses.
-      description: The returned list of webhook statuses.
-    designer.webhook.WebhookStatusDTO:
-      type: object
-      properties:
-        webhookId:
-          type: string
-          description: The unique identifier of the webhook.
-        details:
-          allOf:
-          - $ref: '#/components/schemas/designer.webhook.WebhookStatusDetailsDTO'
-          description: The webhook's details, such as its active status and the event types it's listening for.
-      description: The webhook's status.
   securitySchemes:
     CookieAuth:
       type: apiKey

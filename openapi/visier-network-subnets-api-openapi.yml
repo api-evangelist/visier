@@ -146,6 +146,15 @@ paths:
                 $ref: '#/components/schemas/admin.NetworkSubnetsMessageResponse'
 components:
   schemas:
+    admin.NetworkSubnetsMessageResponse:
+      type: object
+      properties:
+        networkSubnetsForApi:
+          type: array
+          items:
+            type: string
+          description: The IP addresses that are allowed to call Visier APIs.
+      description: The list of IP addresses that are allowed to call Visier APIs.
     admin.NetworkSubnetsMessageRequest:
       type: object
       properties:
@@ -158,15 +167,6 @@ components:
           type: boolean
           description: If `true`, you acknowledge that the API call removes your IP address from the list of allowed network subnets and you will not be able to call Visier APIs from your current IP address. Default is `false`. To avoid this, add your current IP address to the allowed network subnets list.
       description: The IP addresses to modify in the API network subnet allowlist.
-    admin.NetworkSubnetsMessageResponse:
-      type: object
-      properties:
-        networkSubnetsForApi:
-          type: array
-          items:
-            type: string
-          description: The IP addresses that are allowed to call Visier APIs.
-      description: The list of IP addresses that are allowed to call Visier APIs.
   securitySchemes:
     CookieAuth:
       type: apiKey

@@ -246,76 +246,6 @@ paths:
                 $ref: '#/components/schemas/DvExportStatus'
 components:
   schemas:
-    designer.DataVersionExportScheduleJobRequestDTO:
-      type: object
-      properties:
-        dataVersionNumber:
-          type: string
-          description: The data version number to generate an export for.
-        baseDataVersionNumber:
-          type: string
-          description: "Optional. The baseline data version number to use to generate a delta export.\n Delta exports contain the differences between `baseDataVersionNumber` and\n `dataVersionNumber`, such as anything updated, added, or removed in `dataVersionNumber`.\n If `baseDataVersionNumber` is not provided, a full export generates for `dataVersionNumber`."
-    DvExportStatus:
-      type: object
-      properties:
-        localizedMessage:
-          type: string
-          description: Localized error message describing the root cause of the error.
-        errorCode:
-          type: string
-          description: Error classification.
-        message:
-          type: string
-          description: Not used.
-        rci:
-          type: string
-          description: Optional root cause identifier.
-        userError:
-          type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
-    designer.DataVersionExportTableDTO:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of a table in the data version export; for example, Employee or Applicant.
-        commonColumns:
-          allOf:
-          - $ref: '#/components/schemas/designer.DataVersionExportFileDTO'
-          description: Information about the columns and files that are in both `dataVersionNumber` and `baseDataVersionNumber`. Always empty for full exports where `baseDataVersionNumber` is not specified.
-        newColumns:
-          allOf:
-          - $ref: '#/components/schemas/designer.DataVersionExportFileDTO'
-          description: "Information about new columns and files in the data version.\n If full export, lists all columns. If delta export, lists columns that exist in `dataVersionNumber` but not in `baseDataVersionNumber`."
-        deletedColumns:
-          type: array
-          items:
-            type: string
-          description: Information about columns that do not exist in `dataVersionNumber` but did exist in `baseDataVersionNumber`.
-    designer.DataVersionExportColumnDTO:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The column's name.
-        dataType:
-          type: string
-          description: The column's data type. Possible data types are string, integer, number, date, Boolean.
-        allowsNull:
-          type: boolean
-          description: If `true`, the column allows null values.
-        isPrimaryKeyComponent:
-          type: boolean
-          description: If `true`, the column is part of the primary key.
-    designer.DataVersionExportsDTO:
-      type: object
-      properties:
-        dataVersionExports:
-          type: array
-          items:
-            $ref: '#/components/schemas/designer.DataVersionExportDTO'
-          description: Information about data version exports.
     designer.DataVersionExportDTO:
       type: object
       properties:
@@ -346,6 +276,64 @@ components:
           items:
             type: string
           description: Tables that do not exist in `dataVersionNumber` but did exist in `baseDataVersionNumber`.
+    designer.DataVersionExportDataVersionSummaryDTO:
+      type: object
+      properties:
+        dataVersion:
+          type: string
+          description: The data version number.
+        dataCategory:
+          type: string
+          description: The data category that the data version belongs to. If empty, the data version belongs to the default data category.
+        created:
+          type: string
+          description: The date that the data version was generated, in milliseconds since 1970-01-01T00:00:00Z.
+    designer.DataVersionExportPartFileDTO:
+      type: object
+      properties:
+        fileId:
+          type: integer
+          description: The unique integer identifier of the file in the data version export.
+          format: int32
+        filename:
+          type: string
+          description: The file's name.
+    DvExportStatus:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        errorCode:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    designer.DataVersionExportScheduleJobRequestDTO:
+      type: object
+      properties:
+        dataVersionNumber:
+          type: string
+          description: The data version number to generate an export for.
+        baseDataVersionNumber:
+          type: string
+          description: "Optional. The baseline data version number to use to generate a delta export.\n Delta exports contain the differences between `baseDataVersionNumber` and\n `dataVersionNumber`, such as anything updated, added, or removed in `dataVersionNumber`.\n If `baseDataVersionNumber` is not provided, a full export generates for `dataVersionNumber`."
+    designer.DataVersionExportsDTO:
+      type: object
+      properties:
+        dataVersionExports:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.DataVersionExportDTO'
+          description: Information about data version exports.
     designer.DataVersionExportDataVersionsDTO:
       type: object
       properties:
@@ -354,6 +342,19 @@ components:
           items:
             $ref: '#/components/schemas/designer.DataVersionExportDataVersionSummaryDTO'
           description: All the available data versions for the tenant's primary data category.
+    designer.DataVersionExportFileDTO:
+      type: object
+      properties:
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.DataVersionExportColumnDTO'
+          description: Information about a table's columns.
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.DataVersionExportPartFileDTO'
+          description: Information about a table's files in the export.
     designer.DataVersionExportJobStatusDTO:
       type: object
       properties:
@@ -369,47 +370,46 @@ components:
         exportUuid:
           type: string
           description: The unique identifier of the data version export generated by the job. If empty, the job hasn't completed successfully.
-    designer.DataVersionExportFileDTO:
+    designer.DataVersionExportColumnDTO:
       type: object
       properties:
-        columns:
-          type: array
-          items:
-            $ref: '#/components/schemas/designer.DataVersionExportColumnDTO'
-          description: Information about a table's columns.
-        files:
-          type: array
-          items:
-            $ref: '#/components/schemas/designer.DataVersionExportPartFileDTO'
-          description: Information about a table's files in the export.
-    designer.DataVersionExportPartFileDTO:
-      type: object
-      properties:
-        fileId:
-          type: integer
-          description: The unique integer identifier of the file in the data version export.
-          format: int32
-        filename:
+        name:
           type: string
-          description: The file's name.
+          description: The column's name.
+        dataType:
+          type: string
+          description: The column's data type. Possible data types are string, integer, number, date, Boolean.
+        allowsNull:
+          type: boolean
+          description: If `true`, the column allows null values.
+        isPrimaryKeyComponent:
+          type: boolean
+          description: If `true`, the column is part of the primary key.
     designer.DataVersionExportScheduleJobResponseDTO:
       type: object
       properties:
         jobUuid:
           type: string
           description: The unique identifier of the scheduled data version export job.
-    designer.DataVersionExportDataVersionSummaryDTO:
+    designer.DataVersionExportTableDTO:
       type: object
       properties:
-        dataVersion:
+        name:
           type: string
-          description: The data version number.
-        dataCategory:
-          type: string
-          description: The data category that the data version belongs to. If empty, the data version belongs to the default data category.
-        created:
-          type: string
-          description: The date that the data version was generated, in milliseconds since 1970-01-01T00:00:00Z.
+          description: The name of a table in the data version export; for example, Employee or Applicant.
+        commonColumns:
+          allOf:
+          - $ref: '#/components/schemas/designer.DataVersionExportFileDTO'
+          description: Information about the columns and files that are in both `dataVersionNumber` and `baseDataVersionNumber`. Always empty for full exports where `baseDataVersionNumber` is not specified.
+        newColumns:
+          allOf:
+          - $ref: '#/components/schemas/designer.DataVersionExportFileDTO'
+          description: "Information about new columns and files in the data version.\n If full export, lists all columns. If delta export, lists columns that exist in `dataVersionNumber` but not in `baseDataVersionNumber`."
+        deletedColumns:
+          type: array
+          items:
+            type: string
+          description: Information about columns that do not exist in `dataVersionNumber` but did exist in `baseDataVersionNumber`.
   securitySchemes:
     CookieAuth:
       type: apiKey

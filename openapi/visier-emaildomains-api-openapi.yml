@@ -110,17 +110,6 @@ paths:
                 $ref: '#/components/schemas/admin.DeleteEmailDomainsDTO'
 components:
   schemas:
-    admin.DeleteEmailDomainsDTO:
-      type: object
-      properties:
-        domains:
-          type: array
-          items:
-            type: string
-          description: The list of allowed email address domains.
-        confirmNotAllowedDomain:
-          type: boolean
-          description: "If `true`, allows deletion of the requester's own domain when using credential-based sign in.\n If `false`, prevents deletion of the requester's own domain when using credential-based sign in.\n This setting only applies to credential-based sign in, not to single sign-on (SSO) unless used in API calls."
     Status:
       type: object
       properties:
@@ -148,6 +137,17 @@ components:
           items:
             type: string
           description: The list of allowed email address domains.
+    admin.DeleteEmailDomainsDTO:
+      type: object
+      properties:
+        domains:
+          type: array
+          items:
+            type: string
+          description: The list of allowed email address domains.
+        confirmNotAllowedDomain:
+          type: boolean
+          description: "If `true`, allows deletion of the requester's own domain when using credential-based sign in.\n If `false`, prevents deletion of the requester's own domain when using credential-based sign in.\n This setting only applies to credential-based sign in, not to single sign-on (SSO) unless used in API calls."
   securitySchemes:
     CookieAuth:
       type: apiKey

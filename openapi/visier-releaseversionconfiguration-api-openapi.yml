@@ -114,20 +114,39 @@ paths:
                 $ref: '#/components/schemas/admin.ProductVersionsUpdateResponseDTO'
 components:
   schemas:
-    admin.ProductVersionsUpdateResponseDTO:
+    admin.ProductVersionsUpdateFailureTenantResponseDTO:
       type: object
       properties:
-        successes:
+        productId:
+          type: string
+          description: The unique ID of the product that failed to activate.
+        version:
+          type: string
+          description: The release version of the product that was being activated.
+        tenantCodes:
           type: array
           items:
-            $ref: '#/components/schemas/admin.ProductVersionsUpdateSuccessfulTenantResponseDTO'
-          description: The products that were successfully activated.
-        failures:
+            type: string
+          description: The tenants where the specified release version failed to activate.
+        message:
+          type: string
+          description: More information about why the activation failed.
+      description: Provides details about the failed activation of a product release version.
+    admin.ProductVersionDTO:
+      type: object
+      properties:
+        productId:
+          type: string
+          description: The unique ID of the product.
+        version:
+          type: string
+          description: The release version of the product.
+        tenantCodes:
           type: array
           items:
-            $ref: '#/components/schemas/admin.ProductVersionsUpdateFailureTenantResponseDTO'
-          description: The products that failed to activate.
-      description: A collection of responses indicating the success or failure of a product release version activation request, including lists of tenants with successful or failed activations.
+            type: string
+          description: The tenants you want to execute the API call on. Retrieve or activate the product release versions on these tenants.
+      description: Provides information about the product release version of a tenant. It is used when retrieving the active product release version and activating the product release version.
     Status:
       type: object
       properties:
@@ -147,21 +166,44 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
-    admin.ProductVersionDTO:
+    admin.ProductVersionsUpdateSuccessfulTenantResponseDTO:
       type: object
       properties:
         productId:
           type: string
-          description: The unique ID of the product.
+          description: The unique ID of the product that was successfully activated.
         version:
           type: string
-          description: The release version of the product.
+          description: The release version of the product that was activated.
         tenantCodes:
           type: array
           items:
             type: string
-          description: The tenants you want to execute the API call on. Retrieve or activate the product release versions on these tenants.
-      description: Provides information about the product release version of a tenant. It is used when retrieving the active product release version and activating the product release version.
+          description: The tenants where the specified release version was succesfully activated.
+      description: Provides confirmation details about the successful activation of a product release version.
+    admin.ProductVersionsUpdateResponseDTO:
+      type: object
+      properties:
+        successes:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.ProductVersionsUpdateSuccessfulTenantResponseDTO'
+          description: The products that were successfully activated.
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.ProductVersionsUpdateFailureTenantResponseDTO'
+          description: The products that failed to activate.
+      description: A collection of responses indicating the success or failure of a product release version activation request, including lists of tenants with successful or failed activations.
+    admin.ProductReleasesDTO:
+      type: object
+      properties:
+        releases:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.ProductReleaseDTO'
+          description: A list of products and details about their available release versions.
+      description: A collection of products and details about their available release versions.
     admin.ProductReleaseDTO:
       type: object
       properties:
@@ -178,48 +220,6 @@ components:
           type: string
           description: The release version that replaces previous versions.
       description: Details about the available release versions for a specific product.
-    admin.ProductVersionsUpdateSuccessfulTenantResponseDTO:
-      type: object
-      properties:
-        productId:
-          type: string
-          description: The unique ID of the product that was successfully activated.
-        version:
-          type: string
-          description: The release version of the product that was activated.
-        tenantCodes:
-          type: array
-          items:
-            type: string
-          description: The tenants where the specified release version was succesfully activated.
-      description: Provides confirmation details about the successful activation of a product release version.
-    admin.ProductReleasesDTO:
-      type: object
-      properties:
-        releases:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.ProductReleaseDTO'
-          description: A list of products and details about their available release versions.
-      description: A collection of products and details about their available release versions.
-    admin.ProductVersionsUpdateFailureTenantResponseDTO:
-      type: object
-      properties:
-        productId:
-          type: string
-          description: The unique ID of the product that failed to activate.
-        version:
-          type: string
-          description: The release version of the product that was being activated.
-        tenantCodes:
-          type: array
-          items:
-            type: string
-          description: The tenants where the specified release version failed to activate.
-        message:
-          type: string
-          description: More information about why the activation failed.
-      description: Provides details about the failed activation of a product release version.
     admin.ProductVersionsDTO:
       type: object
       properties:

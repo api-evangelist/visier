@@ -267,6 +267,294 @@ paths:
       - api_key: []
 components:
   schemas:
+    SalaryBenchmarksBatchProcessingSuccessfulOutput:
+      description: 'The compensation benchmark values for individual requests within a bulk request.
+
+        '
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: 'A unique identifier of the individual requests.
+
+            '
+        percentile10:
+          type: integer
+          description: 'The 10th percentile base pay.
+
+            '
+        percentile25:
+          type: integer
+          description: 'The 25th percentile base pay.
+
+            '
+        percentile50:
+          type: integer
+          description: 'The 50th percentile base pay.
+
+            '
+        percentile75:
+          type: integer
+          description: 'The 75th percentile base pay.
+
+            '
+        percentile90:
+          type: integer
+          description: 'The 90th percentile base pay.
+
+            '
+        alignedRangeMin:
+          type: integer
+          description: 'The lower bound of salaries that are aligned with the market.
+
+            '
+        alignedRangeMax:
+          type: integer
+          description: 'The upper bound of salaries that are aligned with the market.
+
+            '
+        referenceDate:
+          type: string
+          description: 'The date that benchmark values are calculated for.
+
+            '
+        releaseDate:
+          type: string
+          description: 'The date that benchmark values are released.
+
+            '
+        industryId:
+          type: string
+          description: 'The industry member ID for the returned benchmarks.
+
+            '
+        careerLevelId:
+          type: string
+          description: 'The career level member ID for the returned benchmarks.
+
+            '
+      required:
+      - uuid
+      - percentile10
+      - percentile25
+      - percentile50
+      - percentile75
+      - percentile90
+      - alignedRangeMin
+      - alignedRangeMax
+      - referenceDate
+      - releaseDate
+      - industryId
+      - careerLevelId
+    BenchmarkValue:
+      title: BenchmarkValue
+      description: 'The compensation benchmark value.
+
+        '
+      type: object
+      properties:
+        percentile10:
+          type: integer
+          description: 'The 10th percentile base pay.
+
+            '
+        percentile25:
+          type: integer
+          description: 'The 25th percentile base pay.
+
+            '
+        percentile50:
+          type: integer
+          description: 'The 50th percentile base pay.
+
+            '
+        percentile75:
+          type: integer
+          description: 'The 75th percentile base pay.
+
+            '
+        percentile90:
+          type: integer
+          description: 'The 90th percentile base pay.
+
+            '
+        alignedRangeMin:
+          type: integer
+          description: 'The lower bound of salaries that are aligned with the market.
+
+            '
+        alignedRangeMax:
+          type: integer
+          description: 'The upper bound of salaries that are aligned with the market.
+
+            '
+        referenceDate:
+          type: string
+          description: 'The date that benchmark values are calculated for.
+
+            '
+        releaseDate:
+          type: string
+          description: 'The date that benchmark values are released.
+
+            '
+        industryId:
+          type: string
+          description: 'The industry member ID for the returned benchmarks.
+
+            '
+        careerLevelId:
+          type: string
+          description: 'The career level member ID for the returned benchmarks.
+
+            '
+      required:
+      - percentile10
+      - percentile25
+      - percentile50
+      - percentile75
+      - percentile90
+      - alignedRangeMin
+      - alignedRangeMax
+      - referenceDate
+      - releaseDate
+      - industryId
+      - careerLevelId
+    SalaryBenchmarkInputs:
+      description: 'A list of salary query parameters for bulk operation. The maximum batch size is 1000.
+
+        '
+      type: array
+      items:
+        title: SalaryBenchmarkInput
+        type: object
+        properties:
+          uuid:
+            type: string
+            description: 'A unique identifier of the individual requests.
+
+              '
+          job:
+            type: string
+            description: 'The job member ID.
+
+              '
+          industry:
+            type: string
+            description: 'The industry member ID. If the ID is not provided, the response returns the benchmark value across all industries.
+
+              '
+          naicsCode:
+            type: string
+            description: 'The North American Industry Classification System (NAICS) code.
+
+
+              If the NAICS code is not provided, the response returns the benchmark value across all industries.
+
+              If both `naicsCode` and `industry` are provided, the response returns the benchmark value for the `industry` parameter. The entered `naicsCode` will not be applied.
+
+              '
+          location:
+            type: string
+            description: 'The location member ID. If the ID is not provided, the response returns the benchmark value across all locations.
+
+              '
+          companySize:
+            type: string
+            description: 'The company size member ID. If the ID is not provided, the response returns the benchmark value across all company sizes.
+
+              '
+          careerLevel:
+            type: string
+            description: 'The career level member ID. If the ID is not provided, the response returns the benchmark value across all career levels.
+
+              '
+          matchDate:
+            type: string
+            description: 'The date on which the career level was matched in `yyyy-MM-dd` format. A `matchDate` allows precise migration of career levels according to job architecture changes released since the match was made. If `matchDate` is not available, the migration assumes the most recent possible match date for the provided career level.
+
+              '
+        required:
+        - uuid
+        - job
+    ApiError:
+      title: ApiError
+      description: 'Description of an API error.
+
+        '
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: 'A brief identifier of the type of error.
+
+            '
+        message:
+          type: string
+          description: 'The details of the error.
+
+            '
+        rci:
+          type: string
+          description: 'A root cause identifier that allows Visier to determine the source of the problem.
+
+            '
+      required:
+      - errorCode
+      - message
+      - rci
+    SalaryBenchmarksBatchProcessingOutputs:
+      description: 'All operations in the bulk request were completed.
+
+        '
+      type: object
+      properties:
+        successes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SalaryBenchmarksBatchProcessingSuccessfulOutput'
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/SalaryBenchmarksBatchProcessingFailureOutput'
+    SalaryBenchmarksBatchProcessingFailureOutput:
+      title: SalaryBenchmarksBatchProcessingFailureOutput
+      description: 'Error description for individual requests within a bulk request.
+
+        '
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: 'A unique identifier of the individual requests.
+
+            '
+        httpStatus:
+          type: string
+          description: 'A three-digit code that indicates the outcome of a request.
+
+            '
+        message:
+          type: string
+          description: 'The details of the error.
+
+            '
+        rci:
+          type: string
+          description: 'A root cause identifier that allows Visier to determine the source of the problem.
+
+            '
+        errorCode:
+          type: string
+          description: 'A brief identifier of the type of error.
+
+            '
+      required:
+      - uuid
+      - httpStatus
+      - message
+      - rci
+      - errorCode
     BenchmarkInfo:
       title: BenchmarkInfo
       description: 'Metadata that summarizes the benchmark dataset and API such as the release date.
@@ -355,294 +643,6 @@ components:
       - companySize
       - referenceDate
       - releaseDate
-    BenchmarkValue:
-      title: BenchmarkValue
-      description: 'The compensation benchmark value.
-
-        '
-      type: object
-      properties:
-        percentile10:
-          type: integer
-          description: 'The 10th percentile base pay.
-
-            '
-        percentile25:
-          type: integer
-          description: 'The 25th percentile base pay.
-
-            '
-        percentile50:
-          type: integer
-          description: 'The 50th percentile base pay.
-
-            '
-        percentile75:
-          type: integer
-          description: 'The 75th percentile base pay.
-
-            '
-        percentile90:
-          type: integer
-          description: 'The 90th percentile base pay.
-
-            '
-        alignedRangeMin:
-          type: integer
-          description: 'The lower bound of salaries that are aligned with the market.
-
-            '
-        alignedRangeMax:
-          type: integer
-          description: 'The upper bound of salaries that are aligned with the market.
-
-            '
-        referenceDate:
-          type: string
-          description: 'The date that benchmark values are calculated for.
-
-            '
-        releaseDate:
-          type: string
-          description: 'The date that benchmark values are released.
-
-            '
-        industryId:
-          type: string
-          description: 'The industry member ID for the returned benchmarks.
-
-            '
-        careerLevelId:
-          type: string
-          description: 'The career level member ID for the returned benchmarks.
-
-            '
-      required:
-      - percentile10
-      - percentile25
-      - percentile50
-      - percentile75
-      - percentile90
-      - alignedRangeMin
-      - alignedRangeMax
-      - referenceDate
-      - releaseDate
-      - industryId
-      - careerLevelId
-    SalaryBenchmarksBatchProcessingFailureOutput:
-      title: SalaryBenchmarksBatchProcessingFailureOutput
-      description: 'Error description for individual requests within a bulk request.
-
-        '
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: 'A unique identifier of the individual requests.
-
-            '
-        httpStatus:
-          type: string
-          description: 'A three-digit code that indicates the outcome of a request.
-
-            '
-        message:
-          type: string
-          description: 'The details of the error.
-
-            '
-        rci:
-          type: string
-          description: 'A root cause identifier that allows Visier to determine the source of the problem.
-
-            '
-        errorCode:
-          type: string
-          description: 'A brief identifier of the type of error.
-
-            '
-      required:
-      - uuid
-      - httpStatus
-      - message
-      - rci
-      - errorCode
-    ApiError:
-      title: ApiError
-      description: 'Description of an API error.
-
-        '
-      type: object
-      properties:
-        errorCode:
-          type: string
-          description: 'A brief identifier of the type of error.
-
-            '
-        message:
-          type: string
-          description: 'The details of the error.
-
-            '
-        rci:
-          type: string
-          description: 'A root cause identifier that allows Visier to determine the source of the problem.
-
-            '
-      required:
-      - errorCode
-      - message
-      - rci
-    SalaryBenchmarkInputs:
-      description: 'A list of salary query parameters for bulk operation. The maximum batch size is 1000.
-
-        '
-      type: array
-      items:
-        title: SalaryBenchmarkInput
-        type: object
-        properties:
-          uuid:
-            type: string
-            description: 'A unique identifier of the individual requests.
-
-              '
-          job:
-            type: string
-            description: 'The job member ID.
-
-              '
-          industry:
-            type: string
-            description: 'The industry member ID. If the ID is not provided, the response returns the benchmark value across all industries.
-
-              '
-          naicsCode:
-            type: string
-            description: 'The North American Industry Classification System (NAICS) code.
-
-
-              If the NAICS code is not provided, the response returns the benchmark value across all industries.
-
-              If both `naicsCode` and `industry` are provided, the response returns the benchmark value for the `industry` parameter. The entered `naicsCode` will not be applied.
-
-              '
-          location:
-            type: string
-            description: 'The location member ID. If the ID is not provided, the response returns the benchmark value across all locations.
-
-              '
-          companySize:
-            type: string
-            description: 'The company size member ID. If the ID is not provided, the response returns the benchmark value across all company sizes.
-
-              '
-          careerLevel:
-            type: string
-            description: 'The career level member ID. If the ID is not provided, the response returns the benchmark value across all career levels.
-
-              '
-          matchDate:
-            type: string
-            description: 'The date on which the career level was matched in `yyyy-MM-dd` format. A `matchDate` allows precise migration of career levels according to job architecture changes released since the match was made. If `matchDate` is not available, the migration assumes the most recent possible match date for the provided career level.
-
-              '
-        required:
-        - uuid
-        - job
-    SalaryBenchmarksBatchProcessingSuccessfulOutput:
-      description: 'The compensation benchmark values for individual requests within a bulk request.
-
-        '
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: 'A unique identifier of the individual requests.
-
-            '
-        percentile10:
-          type: integer
-          description: 'The 10th percentile base pay.
-
-            '
-        percentile25:
-          type: integer
-          description: 'The 25th percentile base pay.
-
-            '
-        percentile50:
-          type: integer
-          description: 'The 50th percentile base pay.
-
-            '
-        percentile75:
-          type: integer
-          description: 'The 75th percentile base pay.
-
-            '
-        percentile90:
-          type: integer
-          description: 'The 90th percentile base pay.
-
-            '
-        alignedRangeMin:
-          type: integer
-          description: 'The lower bound of salaries that are aligned with the market.
-
-            '
-        alignedRangeMax:
-          type: integer
-          description: 'The upper bound of salaries that are aligned with the market.
-
-            '
-        referenceDate:
-          type: string
-          description: 'The date that benchmark values are calculated for.
-
-            '
-        releaseDate:
-          type: string
-          description: 'The date that benchmark values are released.
-
-            '
-        industryId:
-          type: string
-          description: 'The industry member ID for the returned benchmarks.
-
-            '
-        careerLevelId:
-          type: string
-          description: 'The career level member ID for the returned benchmarks.
-
-            '
-      required:
-      - uuid
-      - percentile10
-      - percentile25
-      - percentile50
-      - percentile75
-      - percentile90
-      - alignedRangeMin
-      - alignedRangeMax
-      - referenceDate
-      - releaseDate
-      - industryId
-      - careerLevelId
-    SalaryBenchmarksBatchProcessingOutputs:
-      description: 'All operations in the bulk request were completed.
-
-        '
-      type: object
-      properties:
-        successes:
-          type: array
-          items:
-            $ref: '#/components/schemas/SalaryBenchmarksBatchProcessingSuccessfulOutput'
-        failures:
-          type: array
-          items:
-            $ref: '#/components/schemas/SalaryBenchmarksBatchProcessingFailureOutput'
   securitySchemes:
     api_key:
       type: apiKey

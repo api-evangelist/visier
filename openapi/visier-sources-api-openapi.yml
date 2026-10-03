@@ -107,28 +107,39 @@ paths:
                 $ref: '#/components/schemas/Status'
 components:
   schemas:
-    SourceImportResultSummaryDTO:
+    servicing.ExportSourcesParametersDTO:
       type: object
       properties:
-        created:
-          type: integer
-          description: The number of imported sources that were newly created in the target tenant.
-          format: int32
-        updated:
-          type: integer
-          description: The number of imported sources that already existed and were updated in the target tenant.
-          format: int32
-        ignored:
-          type: integer
-          description: The number of imported sources that already existed and were unchanged in the target tenant.
-          format: int32
-        deleted:
-          type: integer
-          description: The number of imported sources that existed in the target tenant prior to the import and were deleted during the import.
-          format: int32
-    servicing.ExportSourcesAPIOperationResponseDTO:
+        sourceUuids:
+          type: array
+          items:
+            type: string
+          description: The UUIDs of the sources to export. If specified, exports only the listed sources.
+        sourceObjectNames:
+          type: array
+          items:
+            type: string
+          description: The object names of the sources to export. If specified, exports only the listed sources.
+      description: The parameters for the `exportSources` option. If neither parameter is specified, exports all sources. If both parameters are specified, exports the sources that match values from both parameters.
+    servicing.SourcesAPIOperationRequestDTO:
       type: object
-      properties: {}
+      properties:
+        operation:
+          enum:
+          - unknownSourcesAPIOperation
+          - exportSources
+          - cloneFilesIntoSource
+          type: string
+          description: "The operation to perform. Valid values:\n * `exportSources`: Export sources from the tenant. If successful, returns a ZIP file containing a compressed JSON file with the sources.\n * `cloneFilesIntoSource`: Clone a source's files into a different source. If successful, returns a receiving job ID. Use the job ID to monitor the cloning results."
+          format: enum
+        exportSourcesParameters:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExportSourcesParametersDTO'
+          description: The parameters for the `exportSources` option. If neither parameter is specified, exports all sources. If both parameters are specified, exports the sources that match values from both parameters.
+        cloneFilesIntoSourceParameters:
+          allOf:
+          - $ref: '#/components/schemas/servicing.CloneFilesIntoSourceParametersDTO'
+          description: The parameters for the `cloneFilesIntoSource` option, such as the source to clone files from, the source to clone files into, and the date range of the files to clone.
     Status:
       type: object
       properties:
@@ -169,25 +180,28 @@ components:
           - $ref: '#/components/schemas/servicing.DateRangeDTO'
           description: The date range of the files to clone. If undefined, clones all files.
       description: The parameters for the `cloneFilesIntoSource` option, such as the source to clone files from, the source to clone files into, and the date range of the files to clone.
-    servicing.SourcesAPIOperationRequestDTO:
+    servicing.ExportSourcesAPIOperationResponseDTO:
+      type: object
+      properties: {}
+    SourceImportResultSummaryDTO:
       type: object
       properties:
-        operation:
-          enum:
-          - unknownSourcesAPIOperation
-          - exportSources
-          - cloneFilesIntoSource
-          type: string
-          description: "The operation to perform. Valid values:\n * `exportSources`: Export sources from the tenant. If successful, returns a ZIP file containing a compressed JSON file with the sources.\n * `cloneFilesIntoSource`: Clone a source's files into a different source. If successful, returns a receiving job ID. Use the job ID to monitor the cloning results."
-          format: enum
-        exportSourcesParameters:
-          allOf:
-          - $ref: '#/components/schemas/servicing.ExportSourcesParametersDTO'
-          description: The parameters for the `exportSources` option. If neither parameter is specified, exports all sources. If both parameters are specified, exports the sources that match values from both parameters.
-        cloneFilesIntoSourceParameters:
-          allOf:
-          - $ref: '#/components/schemas/servicing.CloneFilesIntoSourceParametersDTO'
-          description: The parameters for the `cloneFilesIntoSource` option, such as the source to clone files from, the source to clone files into, and the date range of the files to clone.
+        created:
+          type: integer
+          description: The number of imported sources that were newly created in the target tenant.
+          format: int32
+        updated:
+          type: integer
+          description: The number of imported sources that already existed and were updated in the target tenant.
+          format: int32
+        ignored:
+          type: integer
+          description: The number of imported sources that already existed and were unchanged in the target tenant.
+          format: int32
+        deleted:
+          type: integer
+          description: The number of imported sources that existed in the target tenant prior to the import and were deleted during the import.
+          format: int32
     servicing.DateRangeDTO:
       type: object
       properties:
@@ -198,20 +212,6 @@ components:
           type: string
           description: The end date in ISO 8601 format. If undefined, the end date is the current date.
       description: The range of dates for the request.
-    servicing.ExportSourcesParametersDTO:
-      type: object
-      properties:
-        sourceUuids:
-          type: array
-          items:
-            type: string
-          description: The UUIDs of the sources to export. If specified, exports only the listed sources.
-        sourceObjectNames:
-          type: array
-          items:
-            type: string
-          description: The object names of the sources to export. If specified, exports only the listed sources.
-      description: The parameters for the `exportSources` option. If neither parameter is specified, exports all sources. If both parameters are specified, exports the sources that match values from both parameters.
   securitySchemes:
     CookieAuth:
       type: apiKey

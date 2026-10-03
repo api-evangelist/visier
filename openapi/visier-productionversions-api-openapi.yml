@@ -134,23 +134,20 @@ paths:
                 $ref: '#/components/schemas/servicing.ProductionVersionAPIOperationResponseDTO'
 components:
   schemas:
-    servicing.ExportProductionVersionsAPIOperationResponseDTO:
-      type: object
-      properties: {}
-    servicing.ProductionVersionsAPIOperationRequestDTO:
+    servicing.ExportProductionVersionsAPIOperationParametersDTO:
       type: object
       properties:
-        operation:
-          enum:
-          - unknownProductionVersionsAPIOperation
-          - export
+        startVersion:
           type: string
-          description: "The operation to perform. Valid values:\n * `export`: Export the project changes of the requested production versions and their related files, such as any Guidebook images. If successful, a ZIP file is returned containing any relevant image files and a JSON file with the production project changes."
-          format: enum
-        exportParameters:
-          allOf:
-          - $ref: '#/components/schemas/servicing.ExportProductionVersionsAPIOperationParametersDTO'
-          description: The parameters for the `export` option, such as the production version to start exporting versions from. Required for `export` operations.
+          description: The unique identifier of the version to start exporting versions from. The range is inclusive.
+        endVersion:
+          type: string
+          description: The unique identifier of the version to stop exporting versions at. The range is inclusive.
+        excludedVersions:
+          type: array
+          items:
+            type: string
+          description: A list of versions between `startVersion` and `endVersion` to exclude.
     Status:
       type: object
       properties:
@@ -170,6 +167,23 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
+    servicing.ProductionVersionAPIOperationResponseDTO:
+      type: object
+      properties:
+        rollBackTo:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ProjectDTO'
+          description: The project created by the `rollBackTo` operation.
+    servicing.ExportProductionVersionsAPIOperationResponseDTO:
+      type: object
+      properties: {}
+    servicing.ProductionVersionsAPIOperationResponseDTO:
+      type: object
+      properties:
+        export:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ExportProductionVersionsAPIOperationResponseDTO'
+          description: The result of the `export` operation.
     servicing.ProductionVersionAPIOperationRequestDTO:
       type: object
       properties:
@@ -180,35 +194,6 @@ components:
           type: string
           description: "The operation to perform. Valid values:\n * `rollBackTo`: Create a project that rolls back the production version to the specified version. The project contains uncommitted changes that reverse the published versions after the target production version."
           format: enum
-    servicing.ProductionVersionsAPIOperationResponseDTO:
-      type: object
-      properties:
-        export:
-          allOf:
-          - $ref: '#/components/schemas/servicing.ExportProductionVersionsAPIOperationResponseDTO'
-          description: The result of the `export` operation.
-    servicing.ExportProductionVersionsAPIOperationParametersDTO:
-      type: object
-      properties:
-        startVersion:
-          type: string
-          description: The unique identifier of the version to start exporting versions from. The range is inclusive.
-        endVersion:
-          type: string
-          description: The unique identifier of the version to stop exporting versions at. The range is inclusive.
-        excludedVersions:
-          type: array
-          items:
-            type: string
-          description: A list of versions between `startVersion` and `endVersion` to exclude.
-    servicing.GetProductionVersionsAPIResponseDTO:
-      type: object
-      properties:
-        publishedVersions:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.ProjectDTO'
-          description: A list of projects that were published to production.
     servicing.ProjectDTO:
       type: object
       properties:
@@ -250,13 +235,28 @@ components:
           type: string
           description: The type of the project. Omit when creating a new project.
           format: enum
-    servicing.ProductionVersionAPIOperationResponseDTO:
+    servicing.GetProductionVersionsAPIResponseDTO:
       type: object
       properties:
-        rollBackTo:
+        publishedVersions:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ProjectDTO'
+          description: A list of projects that were published to production.
+    servicing.ProductionVersionsAPIOperationRequestDTO:
+      type: object
+      properties:
+        operation:
+          enum:
+          - unknownProductionVersionsAPIOperation
+          - export
+          type: string
+          description: "The operation to perform. Valid values:\n * `export`: Export the project changes of the requested production versions and their related files, such as any Guidebook images. If successful, a ZIP file is returned containing any relevant image files and a JSON file with the production project changes."
+          format: enum
+        exportParameters:
           allOf:
-          - $ref: '#/components/schemas/servicing.ProjectDTO'
-          description: The project created by the `rollBackTo` operation.
+          - $ref: '#/components/schemas/servicing.ExportProductionVersionsAPIOperationParametersDTO'
+          description: The parameters for the `export` option, such as the production version to start exporting versions from. Required for `export` operations.
   securitySchemes:
     CookieAuth:
       type: apiKey

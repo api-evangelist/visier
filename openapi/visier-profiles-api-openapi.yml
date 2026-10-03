@@ -363,70 +363,65 @@ paths:
                 $ref: '#/components/schemas/servicing.AllProfileAssignedForLocalTenantDTO'
 components:
   schemas:
-    servicing.ProfileAssignedForAccessibleTenantDTO:
-      type: object
-      properties:
-        profileId:
-          type: string
-          description: The unique identifier associated with the profile.
-        displayName:
-          type: string
-          description: An identifiable profile name to display in Visier such as "Partner Service Manager".
-        tenantCode:
-          type: string
-          description: The tenant code of the analytic tenant on which this profile is assigned.
-        forAllChildren:
-          type: boolean
-          description: If true, the profile is assigned for all the analytic tenants of the administrating tenant.
-        validityStartTime:
-          type: string
-          description: "An inclusive date-time when this profile is active.\n\n Note: Long.Min_Value means that startTime is undefined."
-        validityEndTime:
-          type: string
-          description: "An exclusive date-time when this profile is no longer active.\n\n Note: Long.Max_Value means that endTime is undefined and is equivalent to permanent access."
-    servicing.ReducedTenantCodeErrorDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The bad tenant code.
-        forAllChildren:
-          type: boolean
-          description: If true, the assignment is for all the analytic tenants of the specified tenant.
-        error:
-          allOf:
-          - $ref: '#/components/schemas/servicing.ReducedErrorDTO'
-          description: The details about the error.
-    servicing.AccessibleTenantProfileRevokeRequestDTO:
-      type: object
-      properties:
-        targetUserIds:
-          type: array
-          items:
-            type: string
-          description: A list of users to remove this profile from.
-        targetTenantCodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.TargetTenantCodeDTO'
-          description: A list of objects representing the  analytic tenants for removing profiles from each target user ID.
-    servicing.FailedLocalTenantProfileRevokeDTO:
+    servicing.SuccessfulAccessibleTenantProfileAssignmentDTO:
       type: object
       properties:
         userId:
           type: string
-          description: The impacted user ID.
-        message:
+          description: The user ID.
+        tenantCode:
           type: string
-          description: The details about the error.
-    servicing.LocalTenantProfileRevokeRequestDTO:
+          description: The tenant code.
+        forAllChildren:
+          type: boolean
+          description: If true, the target assignment is for all analytic tenants.
+    servicing.UserIdErrorDTO:
       type: object
       properties:
-        targetUserIds:
+        userId:
+          type: string
+          description: The bad user ID.
+        error:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ErrorDTO'
+          description: The details about the error.
+    servicing.ReducedUserIdErrorDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The bad user ID.
+        error:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ReducedErrorDTO'
+          description: The details about the error.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    servicing.AllProfileAssignedForLocalTenantDTO:
+      type: object
+      properties:
+        assignedProfiles:
           type: array
           items:
-            type: string
-          description: A list of users to remove this profile from.
+            $ref: '#/components/schemas/servicing.ProfileAssignedForLocalTenantDTO'
+          description: A list of objects representing the user profiles assigned to the user and their validity range.
     servicing.AccessibleTenantProfileRevokeResponseDTO:
       type: object
       properties:
@@ -450,60 +445,6 @@ components:
           items:
             $ref: '#/components/schemas/servicing.SuccessfulLocalTenantProfileAssignmentDTO'
           description: A list of objects representing the valid user IDs that succeeded.
-    servicing.AdditionalCapabilitiesDTO:
-      type: object
-      properties:
-        additionalCapabilities:
-          type: array
-          items:
-            type: string
-          description: The additional capabilities assigned to this profile.
-    servicing.AllProfileAssignedForAccessibleTenantDTO:
-      type: object
-      properties:
-        assignedProfilesForAccessibleTenant:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.ProfileAssignedForAccessibleTenantDTO'
-          description: A list of objects representing the user profiles assigned to the user and their validity range.
-    servicing.AllProfileAssignedForLocalTenantDTO:
-      type: object
-      properties:
-        assignedProfiles:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.ProfileAssignedForLocalTenantDTO'
-          description: A list of objects representing the user profiles assigned to the user and their validity range.
-    servicing.LocalTenantProfileAssignmentRequestDTO:
-      type: object
-      properties:
-        targetUserIds:
-          type: array
-          items:
-            type: string
-          description: A list of users to assign this profile.
-        validityStartTime:
-          type: string
-          description: An inclusive date-time when this profile is active.
-        validityEndTime:
-          type: string
-          description: An exclusive date-time when this profile is no longer active.
-    servicing.FailedAccessibleTenantProfileAssignmentDTO:
-      type: object
-      properties:
-        userId:
-          type: string
-          description: The impacted user ID.
-        tenantCode:
-          type: string
-          description: The tenant code.
-        forAllChildren:
-          type: boolean
-          description: If true, the target assignment is for all analytic tenants.
-        error:
-          allOf:
-          - $ref: '#/components/schemas/servicing.ErrorDTO'
-          description: The details about the error.
     servicing.FailedLocalTenantProfileAssignmentDTO:
       type: object
       properties:
@@ -514,69 +455,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/servicing.ErrorDTO'
           description: The details about the error.
-    servicing.SuccessfulLocalTenantProfileAssignmentDTO:
-      type: object
-      properties:
-        userId:
-          type: string
-          description: The user ID.
-    servicing.UserIdErrorDTO:
-      type: object
-      properties:
-        userId:
-          type: string
-          description: The bad user ID.
-        error:
-          allOf:
-          - $ref: '#/components/schemas/servicing.ErrorDTO'
-          description: The details about the error.
-    servicing.LocalTenantProfileRevokeResponseDTO:
-      type: object
-      properties:
-        failed:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.FailedLocalTenantProfileRevokeDTO'
-          description: A list of objects representing any errors that occurred during the assignment operation.
-        succeeded:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.SuccessfulLocalTenantProfileAssignmentDTO'
-          description: A list of the user IDs that successfully had a profile removed.
-    servicing.SuccessfulAccessibleTenantProfileAssignmentDTO:
-      type: object
-      properties:
-        userId:
-          type: string
-          description: The user ID.
-        tenantCode:
-          type: string
-          description: The tenant code.
-        forAllChildren:
-          type: boolean
-          description: If true, the target assignment is for all analytic tenants.
-    servicing.TenantCodeErrorDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The bad tenant code.
-        forAllChildren:
-          type: boolean
-          description: If true, the target assignment is for all analytic tenants.
-        error:
-          allOf:
-          - $ref: '#/components/schemas/servicing.ErrorDTO'
-          description: The details about the error.
-    servicing.TargetTenantCodeDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The tenant code.
-        forAllChildren:
-          type: boolean
-          description: If true, the assignment is for all the analytic tenants of the specified tenant.
     servicing.AccessibleTenantProfileAssignmentRequestDTO:
       type: object
       properties:
@@ -596,25 +474,55 @@ components:
         validityEndTime:
           type: string
           description: An exclusive date-time when this profile is no longer active.
-    Status:
+    servicing.LocalTenantProfileRevokeResponseDTO:
       type: object
       properties:
-        localizedMessage:
+        failed:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.FailedLocalTenantProfileRevokeDTO'
+          description: A list of objects representing any errors that occurred during the assignment operation.
+        succeeded:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.SuccessfulLocalTenantProfileAssignmentDTO'
+          description: A list of the user IDs that successfully had a profile removed.
+    servicing.FailedAccessibleTenantProfileAssignmentDTO:
+      type: object
+      properties:
+        userId:
           type: string
-          description: Localized error message describing the root cause of the error.
-        code:
+          description: The impacted user ID.
+        tenantCode:
           type: string
-          description: Error classification.
-        message:
-          type: string
-          description: Not used.
-        rci:
-          type: string
-          description: Optional root cause identifier.
-        userError:
+          description: The tenant code.
+        forAllChildren:
           type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
+          description: If true, the target assignment is for all analytic tenants.
+        error:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ErrorDTO'
+          description: The details about the error.
+    servicing.LocalTenantProfileAssignmentRequestDTO:
+      type: object
+      properties:
+        targetUserIds:
+          type: array
+          items:
+            type: string
+          description: A list of users to assign this profile.
+        validityStartTime:
+          type: string
+          description: An inclusive date-time when this profile is active.
+        validityEndTime:
+          type: string
+          description: An exclusive date-time when this profile is no longer active.
+    servicing.ReducedErrorDTO:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+          description: A meaningful message for the end user.
     servicing.AccessibleTenantProfileAssignmentResponseDTO:
       type: object
       properties:
@@ -641,38 +549,26 @@ components:
           items:
             $ref: '#/components/schemas/servicing.SuccessfulAccessibleTenantProfileAssignmentDTO'
           description: A list of user IDs that were successfully assigned the profiles.
-    servicing.ProfilesGetAPIResponseDTO:
+    servicing.AdditionalCapabilitiesDTO:
       type: object
       properties:
-        profiles:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.ProfileGetAPIResponseDTO'
-          description: A list of objects representing the available profiles.
-    servicing.ProfileAssignedForLocalTenantDTO:
-      type: object
-      properties:
-        profileId:
-          type: string
-          description: The unique identifier associated with the profile.
-        displayName:
-          type: string
-          description: An identifiable profile name to display in Visier, such as "Partner Service Manager".
-        validityStartTime:
-          type: string
-          description: An inclusive date-time when this profile is active.
-        validityEndTime:
-          type: string
-          description: An exclusive date-time when this profile is no longer active.
-        capabilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.CapabilitiesDTO'
-          description: A list of objects representing the access that this profile has for the capabilities of this profile.
         additionalCapabilities:
-          allOf:
-          - $ref: '#/components/schemas/servicing.AdditionalCapabilitiesDTO'
-          description: A list of the additional capabilities that are assigned to this profile.
+          type: array
+          items:
+            type: string
+          description: The additional capabilities assigned to this profile.
+    servicing.ErrorDTO:
+      type: object
+      properties:
+        rootCauseId:
+          type: string
+          description: The root cause identifier that allows Visier to determine the source of the problem.
+        errorCode:
+          type: string
+          description: A brief identifier of the type of error.
+        errorMessage:
+          type: string
+          description: A description of the error that occurred.
     servicing.LocalTenantProfileAssignmentResponseDTO:
       type: object
       properties:
@@ -725,34 +621,138 @@ components:
         viewLevel:
           type: string
           description: The view level of the profile for the given capability.
-    servicing.ReducedUserIdErrorDTO:
+    servicing.AccessibleTenantProfileRevokeRequestDTO:
       type: object
       properties:
-        userId:
+        targetUserIds:
+          type: array
+          items:
+            type: string
+          description: A list of users to remove this profile from.
+        targetTenantCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.TargetTenantCodeDTO'
+          description: A list of objects representing the  analytic tenants for removing profiles from each target user ID.
+    servicing.ReducedTenantCodeErrorDTO:
+      type: object
+      properties:
+        tenantCode:
           type: string
-          description: The bad user ID.
+          description: The bad tenant code.
+        forAllChildren:
+          type: boolean
+          description: If true, the assignment is for all the analytic tenants of the specified tenant.
         error:
           allOf:
           - $ref: '#/components/schemas/servicing.ReducedErrorDTO'
           description: The details about the error.
-    servicing.ErrorDTO:
+    servicing.LocalTenantProfileRevokeRequestDTO:
       type: object
       properties:
-        rootCauseId:
-          type: string
-          description: The root cause identifier that allows Visier to determine the source of the problem.
-        errorCode:
-          type: string
-          description: A brief identifier of the type of error.
-        errorMessage:
-          type: string
-          description: A description of the error that occurred.
-    servicing.ReducedErrorDTO:
+        targetUserIds:
+          type: array
+          items:
+            type: string
+          description: A list of users to remove this profile from.
+    servicing.TargetTenantCodeDTO:
       type: object
       properties:
-        errorMessage:
+        tenantCode:
           type: string
-          description: A meaningful message for the end user.
+          description: The tenant code.
+        forAllChildren:
+          type: boolean
+          description: If true, the assignment is for all the analytic tenants of the specified tenant.
+    servicing.ProfileAssignedForAccessibleTenantDTO:
+      type: object
+      properties:
+        profileId:
+          type: string
+          description: The unique identifier associated with the profile.
+        displayName:
+          type: string
+          description: An identifiable profile name to display in Visier such as "Partner Service Manager".
+        tenantCode:
+          type: string
+          description: The tenant code of the analytic tenant on which this profile is assigned.
+        forAllChildren:
+          type: boolean
+          description: If true, the profile is assigned for all the analytic tenants of the administrating tenant.
+        validityStartTime:
+          type: string
+          description: "An inclusive date-time when this profile is active.\n\n Note: Long.Min_Value means that startTime is undefined."
+        validityEndTime:
+          type: string
+          description: "An exclusive date-time when this profile is no longer active.\n\n Note: Long.Max_Value means that endTime is undefined and is equivalent to permanent access."
+    servicing.TenantCodeErrorDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The bad tenant code.
+        forAllChildren:
+          type: boolean
+          description: If true, the target assignment is for all analytic tenants.
+        error:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ErrorDTO'
+          description: The details about the error.
+    servicing.FailedLocalTenantProfileRevokeDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The impacted user ID.
+        message:
+          type: string
+          description: The details about the error.
+    servicing.AllProfileAssignedForAccessibleTenantDTO:
+      type: object
+      properties:
+        assignedProfilesForAccessibleTenant:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ProfileAssignedForAccessibleTenantDTO'
+          description: A list of objects representing the user profiles assigned to the user and their validity range.
+    servicing.ProfileAssignedForLocalTenantDTO:
+      type: object
+      properties:
+        profileId:
+          type: string
+          description: The unique identifier associated with the profile.
+        displayName:
+          type: string
+          description: An identifiable profile name to display in Visier, such as "Partner Service Manager".
+        validityStartTime:
+          type: string
+          description: An inclusive date-time when this profile is active.
+        validityEndTime:
+          type: string
+          description: An exclusive date-time when this profile is no longer active.
+        capabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.CapabilitiesDTO'
+          description: A list of objects representing the access that this profile has for the capabilities of this profile.
+        additionalCapabilities:
+          allOf:
+          - $ref: '#/components/schemas/servicing.AdditionalCapabilitiesDTO'
+          description: A list of the additional capabilities that are assigned to this profile.
+    servicing.SuccessfulLocalTenantProfileAssignmentDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The user ID.
+    servicing.ProfilesGetAPIResponseDTO:
+      type: object
+      properties:
+        profiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ProfileGetAPIResponseDTO'
+          description: A list of objects representing the available profiles.
   securitySchemes:
     CookieAuth:
       type: apiKey

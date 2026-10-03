@@ -270,148 +270,6 @@ paths:
       - api_key: []
 components:
   schemas:
-    Skill:
-      description: 'The details describing a skill.
-
-        '
-      type: object
-      properties:
-        id:
-          type: string
-          description: 'The unique ID of the skill.
-
-            '
-        name:
-          type: string
-          description: 'The localized display name of the skill.
-
-            '
-        description:
-          type: string
-          description: 'The localized description of the skill.
-
-            '
-        skillGroupId:
-          type: string
-          description: 'ID of the skill group that this skill belongs to.
-
-            '
-        skillCategoryId:
-          type: string
-          description: "ID of the skill category that this skill belongs to. \n"
-        isKnowledge:
-          type: boolean
-          description: 'Indicates whether the skill is a knowledge skill.
-
-            '
-        skillType:
-          type: string
-          description: 'The type of skill. Valid values are `Soft`, `Hard`, and `Unknown`.
-
-            '
-        alternativeTitles:
-          type: array
-          items:
-            type: string
-          description: 'List of alternative localized names for this skill.
-
-            '
-        remoteIndex:
-          type: number
-          description: 'The Remote Index represents how readily a skill can be done through remote work. The index ranges from 0 to 100, where a value of 100 means the skill can be done entirely remotely.
-
-
-            This field will be omitted if remotability is not applicable to the skill.
-
-            '
-        automationIndex:
-          type: integer
-          description: 'The Automation Index represents how readily a skill can be automated. The index ranges from 0 to 100, where a value of 100 means the skill is completely automatable.
-
-
-            This field will be omitted if automation is not applicable to the skill.
-
-            '
-      required:
-      - id
-      - name
-      - description
-      - skillGroupId
-      - skillCategoryId
-      - isKnowledge
-      - skillType
-      - alternativeTitles
-    JobStandardizationInputSkills:
-      description: 'The custom job titles to standardize.
-
-        '
-      type: object
-      properties:
-        jobs:
-          type: array
-          items:
-            type: string
-        naicsCode:
-          type: string
-          description: 'The North American Industry Classification System (NAICS) code.
-
-
-            If `naicsCode` is provided, the most relevant job titles associated with the naicsCode are returned first.
-
-            '
-      required:
-      - jobs
-    ApiError:
-      title: ApiError
-      description: 'Description of an API error.
-
-        '
-      type: object
-      properties:
-        errorCode:
-          type: string
-          description: 'A brief identifier of the type of error.
-
-            '
-        message:
-          type: string
-          description: 'The details of the error.
-
-            '
-        rci:
-          type: string
-          description: 'A root cause identifier that allows Visier to determine the source of the problem.
-
-            '
-      required:
-      - errorCode
-      - message
-      - rci
-    JobList:
-      type: array
-      items:
-        type: object
-        title: JobEntry
-        properties:
-          id:
-            type: string
-            description: 'The unique ID of the job.
-
-              '
-          name:
-            type: string
-            description: 'The localized display name of the job.
-
-              '
-          description:
-            type: string
-            description: 'The localized description of the job.
-
-              '
-        required:
-        - id
-        - name
-        - description
     Job:
       description: 'Details describing a job.
 
@@ -493,6 +351,51 @@ components:
       - alternativeTitles
       - essentialSkills
       - optionalSkills
+    JobStandardizationInputSkills:
+      description: 'The custom job titles to standardize.
+
+        '
+      type: object
+      properties:
+        jobs:
+          type: array
+          items:
+            type: string
+        naicsCode:
+          type: string
+          description: 'The North American Industry Classification System (NAICS) code.
+
+
+            If `naicsCode` is provided, the most relevant job titles associated with the naicsCode are returned first.
+
+            '
+      required:
+      - jobs
+    JobList:
+      type: array
+      items:
+        type: object
+        title: JobEntry
+        properties:
+          id:
+            type: string
+            description: 'The unique ID of the job.
+
+              '
+          name:
+            type: string
+            description: 'The localized display name of the job.
+
+              '
+          description:
+            type: string
+            description: 'The localized description of the job.
+
+              '
+        required:
+        - id
+        - name
+        - description
     JobStandardizationOutputSkills:
       type: array
       items:
@@ -540,6 +443,103 @@ components:
         required:
         - job
         - matches
+    ApiError:
+      title: ApiError
+      description: 'Description of an API error.
+
+        '
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: 'A brief identifier of the type of error.
+
+            '
+        message:
+          type: string
+          description: 'The details of the error.
+
+            '
+        rci:
+          type: string
+          description: 'A root cause identifier that allows Visier to determine the source of the problem.
+
+            '
+      required:
+      - errorCode
+      - message
+      - rci
+    Skill:
+      description: 'The details describing a skill.
+
+        '
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'The unique ID of the skill.
+
+            '
+        name:
+          type: string
+          description: 'The localized display name of the skill.
+
+            '
+        description:
+          type: string
+          description: 'The localized description of the skill.
+
+            '
+        skillGroupId:
+          type: string
+          description: 'ID of the skill group that this skill belongs to.
+
+            '
+        skillCategoryId:
+          type: string
+          description: "ID of the skill category that this skill belongs to. \n"
+        isKnowledge:
+          type: boolean
+          description: 'Indicates whether the skill is a knowledge skill.
+
+            '
+        skillType:
+          type: string
+          description: 'The type of skill. Valid values are `Soft`, `Hard`, and `Unknown`.
+
+            '
+        alternativeTitles:
+          type: array
+          items:
+            type: string
+          description: 'List of alternative localized names for this skill.
+
+            '
+        remoteIndex:
+          type: number
+          description: 'The Remote Index represents how readily a skill can be done through remote work. The index ranges from 0 to 100, where a value of 100 means the skill can be done entirely remotely.
+
+
+            This field will be omitted if remotability is not applicable to the skill.
+
+            '
+        automationIndex:
+          type: integer
+          description: 'The Automation Index represents how readily a skill can be automated. The index ranges from 0 to 100, where a value of 100 means the skill is completely automatable.
+
+
+            This field will be omitted if automation is not applicable to the skill.
+
+            '
+      required:
+      - id
+      - name
+      - description
+      - skillGroupId
+      - skillCategoryId
+      - isKnowledge
+      - skillType
+      - alternativeTitles
   securitySchemes:
     api_key:
       type: apiKey

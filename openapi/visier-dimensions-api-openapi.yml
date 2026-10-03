@@ -1098,123 +1098,6 @@ paths:
       - api_key: []
 components:
   schemas:
-    JobSearchOutput:
-      type: object
-      properties:
-        successes:
-          type: array
-          description: 'The jobs retrieved for successful inputs.
-
-            '
-          items:
-            $ref: '#/components/schemas/DimensionMember'
-        failures:
-          type: array
-          description: 'Error description for failed inputs.
-
-            '
-          items:
-            title: JobSearchFailureOutput
-            type: object
-            properties:
-              httpStatus:
-                type: string
-                description: 'A three-digit code that indicates the outcome of a request.
-
-                  '
-              message:
-                type: string
-                description: 'The details of the error.
-
-                  '
-              rci:
-                type: string
-                description: 'A root cause identifier that allows Visier to determine the source of the problem.
-
-                  '
-              errorCode:
-                type: string
-                description: 'A brief identifier of the type of error.
-
-                  '
-            required:
-            - httpStatus
-            - message
-            - rci
-            - errorCode
-      required:
-      - successes
-      - failures
-    CareerLevelSearchOutput:
-      type: object
-      properties:
-        successes:
-          type: array
-          description: 'The career levels retrieved for successful inputs.
-
-            '
-          items:
-            title: CareerLevelSearchSuccessfulOutput
-            type: object
-            properties:
-              jobID:
-                type: string
-                description: 'The jobID input.
-
-                  '
-              results:
-                type: array
-                description: 'A list of matching career level members.
-
-                  '
-                items:
-                  $ref: '#/components/schemas/DimensionMember'
-            required:
-            - jobID
-            - results
-        failures:
-          type: array
-          description: 'Error description for failed inputs.
-
-            '
-          items:
-            title: CareerLevelSearchFailureOutput
-            type: object
-            properties:
-              jobID:
-                type: string
-                description: 'The jobID input.
-
-                  '
-              httpStatus:
-                type: string
-                description: 'A three-digit code that indicates the outcome of a request.
-
-                  '
-              message:
-                type: string
-                description: 'The details of the error.
-
-                  '
-              rci:
-                type: string
-                description: 'A root cause identifier that allows Visier to determine the source of the problem.
-
-                  '
-              errorCode:
-                type: string
-                description: 'A brief identifier of the type of error.
-
-                  '
-            required:
-            - jobID
-            - httpStatus
-            - message
-            - rci
-            - errorCode
-      required:
-      - successes
-      - failures
     DimensionMember:
       title: DimensionMember
       description: 'An element of a dimension that can be organized hierarchically.
@@ -1320,88 +1203,76 @@ components:
       - hasBenchmarkValue
       - hasChildren
       - status
-    JobFeedbackInput:
-      title: JobFeedbackInput
-      description: 'The data structure used to submit negative feedback for the job match results returned by the Get jobs endpoint.
-
-        '
+    CareerLevelSearchOutput:
       type: object
       properties:
-        term:
-          type: string
-          description: 'The search term (job title) you entered when using the Get jobs endpoint. You''re providing feedback on the quality of the search results for this term. This field is required.
-
-            The minimum is 2 characters and the maximum is 100 characters.
-
-            '
-        naicsCode:
-          type: string
-          description: 'If provided, the naicsCode entered when using the Get jobs endpoint. You''re providing feedback on the quality of the results for the search term and code.
-
-            '
-        additionalComments:
-          type: string
-          description: "Additional written feedback about the job match results returned by the Get jobs endpoint. \nThe maximum is 750 characters.\n"
-      required:
-      - term
-    JobSearchInput:
-      type: object
-      properties:
-        jobIDs:
+        successes:
           type: array
-          description: 'A list of job IDs to search jobs. The maximum number of job IDs is 1000.
+          description: 'The career levels retrieved for successful inputs.
 
             '
           items:
-            type: string
-      required:
-      - jobIDs
-    ApiError:
-      title: ApiError
-      description: 'Description of an API error.
+            title: CareerLevelSearchSuccessfulOutput
+            type: object
+            properties:
+              jobID:
+                type: string
+                description: 'The jobID input.
 
-        '
-      type: object
-      properties:
-        errorCode:
-          type: string
-          description: 'A brief identifier of the type of error.
+                  '
+              results:
+                type: array
+                description: 'A list of matching career level members.
 
-            '
-        message:
-          type: string
-          description: 'The details of the error.
-
-            '
-        rci:
-          type: string
-          description: 'A root cause identifier that allows Visier to determine the source of the problem.
+                  '
+                items:
+                  $ref: '#/components/schemas/DimensionMember'
+            required:
+            - jobID
+            - results
+        failures:
+          type: array
+          description: 'Error description for failed inputs.
 
             '
-      required:
-      - errorCode
-      - message
-      - rci
-    Hierarchy:
-      title: Hierarchy
-      description: 'Information describing a hierarchy, which is used to organize members of a dimension.
+          items:
+            title: CareerLevelSearchFailureOutput
+            type: object
+            properties:
+              jobID:
+                type: string
+                description: 'The jobID input.
 
-        '
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the hierarchy.
-        name:
-          type: string
-          description: Name of the hierarchy.
-        description:
-          type: string
-          description: Description of the hierarchy.
+                  '
+              httpStatus:
+                type: string
+                description: 'A three-digit code that indicates the outcome of a request.
+
+                  '
+              message:
+                type: string
+                description: 'The details of the error.
+
+                  '
+              rci:
+                type: string
+                description: 'A root cause identifier that allows Visier to determine the source of the problem.
+
+                  '
+              errorCode:
+                type: string
+                description: 'A brief identifier of the type of error.
+
+                  '
+            required:
+            - jobID
+            - httpStatus
+            - message
+            - rci
+            - errorCode
       required:
-      - id
-      - name
-      - hasChildren
+      - successes
+      - failures
     LocationSearchOutput:
       type: object
       properties:
@@ -1472,6 +1343,53 @@ components:
       required:
       - successes
       - failures
+    JobSearchOutput:
+      type: object
+      properties:
+        successes:
+          type: array
+          description: 'The jobs retrieved for successful inputs.
+
+            '
+          items:
+            $ref: '#/components/schemas/DimensionMember'
+        failures:
+          type: array
+          description: 'Error description for failed inputs.
+
+            '
+          items:
+            title: JobSearchFailureOutput
+            type: object
+            properties:
+              httpStatus:
+                type: string
+                description: 'A three-digit code that indicates the outcome of a request.
+
+                  '
+              message:
+                type: string
+                description: 'The details of the error.
+
+                  '
+              rci:
+                type: string
+                description: 'A root cause identifier that allows Visier to determine the source of the problem.
+
+                  '
+              errorCode:
+                type: string
+                description: 'A brief identifier of the type of error.
+
+                  '
+            required:
+            - httpStatus
+            - message
+            - rci
+            - errorCode
+      required:
+      - successes
+      - failures
     CareerLevelSearchInput:
       type: object
       properties:
@@ -1487,27 +1405,44 @@ components:
           description: "Filter members based on the availability of benchmark values. If no value is specified, all members are returned.\nIf `true`, members with benchmark values are returned. \nIf `false`, members without benchmark values are returned.\n"
       required:
       - jobIDs
-    JobStandardizationOutput:
-      type: array
-      items:
-        title: OutputEntry
-        type: object
-        properties:
-          job:
-            type: string
-            description: 'The custom job title input.
+    LocationSearchInput:
+      description: 'A list of location query parameters for bulk operation. The maximum batch size is 1000.
 
-              '
-          matches:
-            type: array
-            description: 'The top standardized job matches.
+        '
+      type: object
+      properties:
+        searchInputs:
+          type: array
+          items:
+            title: LocationSearchInput
+            type: object
+            properties:
+              uuid:
+                type: string
+                description: 'A unique identifier of the individual requests.
 
-              '
-            items:
-              $ref: '#/components/schemas/DimensionMember'
-        required:
-        - job
-        - matches
+                  '
+              countryCode:
+                type: string
+                description: 'The **ISO 3166-1** country code to look up. Returns location members that match the country code.
+
+                  Currently, the only supported country code is `US`.
+
+                  '
+              postalCode:
+                type: string
+                description: 'The postal code to look up. Returns location members that match both the country code and postal code.
+
+                  '
+            required:
+            - uuid
+            - countryCode
+            - postalCode
+        hasBenchmarkValue:
+          type: boolean
+          description: "Filter members based on the availability of benchmark values. \nIf `true`, members with benchmark values are returned. \nIf `false`, members without benchmark values are returned. \nIf no value is specified, all members are returned.\n"
+      required:
+      - searchInputs
     JobStandardizationInput:
       description: 'The custom job titles to standardize.
 
@@ -1565,44 +1500,109 @@ components:
           default: false
       required:
       - terms
-    LocationSearchInput:
-      description: 'A list of location query parameters for bulk operation. The maximum batch size is 1000.
+    ApiError:
+      title: ApiError
+      description: 'Description of an API error.
 
         '
       type: object
       properties:
-        searchInputs:
-          type: array
-          items:
-            title: LocationSearchInput
-            type: object
-            properties:
-              uuid:
-                type: string
-                description: 'A unique identifier of the individual requests.
+        errorCode:
+          type: string
+          description: 'A brief identifier of the type of error.
 
-                  '
-              countryCode:
-                type: string
-                description: 'The **ISO 3166-1** country code to look up. Returns location members that match the country code.
+            '
+        message:
+          type: string
+          description: 'The details of the error.
 
-                  Currently, the only supported country code is `US`.
+            '
+        rci:
+          type: string
+          description: 'A root cause identifier that allows Visier to determine the source of the problem.
 
-                  '
-              postalCode:
-                type: string
-                description: 'The postal code to look up. Returns location members that match both the country code and postal code.
-
-                  '
-            required:
-            - uuid
-            - countryCode
-            - postalCode
-        hasBenchmarkValue:
-          type: boolean
-          description: "Filter members based on the availability of benchmark values. \nIf `true`, members with benchmark values are returned. \nIf `false`, members without benchmark values are returned. \nIf no value is specified, all members are returned.\n"
+            '
       required:
-      - searchInputs
+      - errorCode
+      - message
+      - rci
+    Hierarchy:
+      title: Hierarchy
+      description: 'Information describing a hierarchy, which is used to organize members of a dimension.
+
+        '
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the hierarchy.
+        name:
+          type: string
+          description: Name of the hierarchy.
+        description:
+          type: string
+          description: Description of the hierarchy.
+      required:
+      - id
+      - name
+      - hasChildren
+    JobFeedbackInput:
+      title: JobFeedbackInput
+      description: 'The data structure used to submit negative feedback for the job match results returned by the Get jobs endpoint.
+
+        '
+      type: object
+      properties:
+        term:
+          type: string
+          description: 'The search term (job title) you entered when using the Get jobs endpoint. You''re providing feedback on the quality of the search results for this term. This field is required.
+
+            The minimum is 2 characters and the maximum is 100 characters.
+
+            '
+        naicsCode:
+          type: string
+          description: 'If provided, the naicsCode entered when using the Get jobs endpoint. You''re providing feedback on the quality of the results for the search term and code.
+
+            '
+        additionalComments:
+          type: string
+          description: "Additional written feedback about the job match results returned by the Get jobs endpoint. \nThe maximum is 750 characters.\n"
+      required:
+      - term
+    JobStandardizationOutput:
+      type: array
+      items:
+        title: OutputEntry
+        type: object
+        properties:
+          job:
+            type: string
+            description: 'The custom job title input.
+
+              '
+          matches:
+            type: array
+            description: 'The top standardized job matches.
+
+              '
+            items:
+              $ref: '#/components/schemas/DimensionMember'
+        required:
+        - job
+        - matches
+    JobSearchInput:
+      type: object
+      properties:
+        jobIDs:
+          type: array
+          description: 'A list of job IDs to search jobs. The maximum number of job IDs is 1000.
+
+            '
+          items:
+            type: string
+      required:
+      - jobIDs
   securitySchemes:
     api_key:
       type: apiKey

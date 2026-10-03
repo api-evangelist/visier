@@ -1287,14 +1287,196 @@ paths:
                 $ref: '#/components/schemas/Status'
 components:
   schemas:
-    data_in.ExcludeDataUploadsRequest:
+    data_in.ProcessingJobAndStatusResponse:
       type: object
       properties:
+        parentJobId:
+          type: string
+          description: The ID of the dispatching job that generated the extraction jobs.
+        parentTenantCode:
+          type: string
+          description: The tenant that owns the dispatching job. This is usually the administrating tenant.
+        limit:
+          type: integer
+          description: The number of processing jobs to return. The maximum number of jobs to return is 1000.
+          format: int32
+        start:
+          type: integer
+          description: The index to start retrieving results from, also known as offset. The index begins at 0.
+          format: int32
+        processingJobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/data_in.ProcessingJob'
+          description: A list of processing job information.
+    admin.ExtractorSettingAPIDTO:
+      type: object
+      properties:
+        connectorId:
+          type: string
+          description: The unique identifier associated with the data connector.
+        displayName:
+          type: string
+          description: An identifiable data connector name that is displayed within Visier.
+        connectorSettings:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.ExtractorSettingKeyValueAPIDTO'
+          description: A list of objects representing the settings that are available for the data connector.
+    admin.AssignConnectorCredentialsByTenantResponseDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The unique identifier associated with the tenant.
+        connectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.AssignConnectorWithCredentialsResponseDTO'
+          description: A list of objects representing the assigned credentials and connectors.
+        status:
+          enum:
+          - Unknown
+          - Succeed
+          - Failed
+          type: string
+          description: The state of the credential assignment. Valid values are Succeed or Failed.
+          format: enum
+        message:
+          type: string
+    designer.RedshiftAuthParamsDTO:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        port:
+          type: string
+        database:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        tablePrefix:
+          type: string
+        schema:
+          type: string
+    designer.ServiceNowV2AuthParamsDTO:
+      type: object
+      properties:
+        hostDomainName:
+          type: string
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        authCode:
+          type: string
+        alternateDomain:
+          type: string
+    designer.DayforceV2AuthParamsDTO:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        companyId:
+          type: string
+        tokenHost:
+          type: string
+        hostDomainName:
+          type: string
+    data_in.TenantAndCredential:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The unique identifier associated with the tenant.
+        credentialId:
+          type: string
+          description: The unique identifier associated with the credential.
+    designer.ServiceNowAuthParamsDTO:
+      type: object
+      properties:
+        hostDomainName:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+    designer.GreenhouseAuthParamsDTO:
+      type: object
+      properties:
+        apiKey:
+          type: string
+    servicing.TenantDataUploadsListResponseDTO:
+      type: object
+      properties:
+        tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.TenantDataUploadsResponseDTO'
+          description: A list of objects representing analytic tenants and their data uploads.
+        limit:
+          type: integer
+          description: The number of analytic tenants to retrieve. The maximum number of analytic tenants to retrieve is 1000.
+          format: uint32
+        start:
+          type: integer
+          description: The index to start retrieving results from, also known as offset. The index begins at 0.
+          format: uint32
+    admin.jobs.ConsolidatedAnalyticsJobRequestDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant code of the consolidated analytics tenant; for example, "WFF_j1r~CAa7s".
+        runProcessingJob:
+          type: boolean
+          description: If `true`, runs a processing job after the consolidated analytics job completes. If unspecified, the default is `false`.
+    servicing.TenantDataUploadsUpdateResponseDTO:
+      type: object
+      properties:
+        totalFailures:
+          type: integer
+          description: The number of data uploads that failed during the exclusion operation.
+          format: uint32
+        totalSuccess:
+          type: integer
+          description: The number of data uploads that were excluded successfully.
+          format: uint32
         uploads:
           type: array
           items:
-            $ref: '#/components/schemas/data_in.UploadToExclude'
-          description: A list of objects representing the data uploads to exclude for a particular analytic tenant.
+            $ref: '#/components/schemas/servicing.TenantDataUploadUpdateStatusResponseDTO'
+          description: A list of objects representing the results of the data upload exclusion.
+    designer.OracleDbAuthParamsDTO:
+      type: object
+      properties:
+        host:
+          type: string
+        port:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        serviceName:
+          type: string
+    designer.WorkdayRaasAuthParamsDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+        domainName:
+          type: string
+        implementationName:
+          type: string
+        password:
+          type: string
+        testReportUrl:
+          type: string
     designer.BasicS3AuthParamsDTO:
       type: object
       properties:
@@ -1308,17 +1490,251 @@ components:
           type: string
         path:
           type: string
-    servicing.TenantDataUploadsResponseDTO:
+    designer.LeverAuthParamsDTO:
+      type: object
+      properties:
+        apiKey:
+          type: string
+    designer.EmptyAuthParamsDTO:
+      type: object
+      properties: {}
+    admin.SetConnectorSettingsRequestDTO:
+      type: object
+      properties:
+        connectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.SetConnectorSettingRequestDTO'
+          description: The settings to define for each data connector and tenant.
+    designer.EchoOAuthDTO:
+      type: object
+      properties:
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        authCode:
+          type: string
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        expireTimestamp:
+          type: string
+    admin.MultipleTenantDataVersionsListDTO:
+      type: object
+      properties:
+        tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.MultipleTenantDataVersionsDetailsDTO'
+          description: A list of analytic tenants and their latest enabled data versions.
+        limit:
+          type: integer
+          description: The number of analytic tenants to retrieve. The maximum number to retrieve is 1000.
+          format: uint32
+        start:
+          type: integer
+          description: The index to start retrieving results from, also known as offset. The index begins at 0.
+          format: uint32
+    servicing.TenantDataUploadStatusResponseDTO:
+      type: object
+      properties:
+        uploadTime:
+          type: string
+          description: The upload time of the data upload.
+        included:
+          type: boolean
+          description: If "true", the data upload is included.
+    data_in.ReceivingJobStatusResponse:
+      type: object
+      properties:
+        jobId:
+          type: string
+          description: The unique identifier associated with the receiving job.
+        status:
+          type: string
+          description: The status of the receiving job.
+        parentJobId:
+          type: string
+          description: The job ID of the receiving job that spawned this job.
+        parentTenantCode:
+          type: string
+          description: The tenant code of the receiving job that spawned this job.
+        receivingJobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/data_in.ReceivingJob'
+          description: A list of objects representing the receiving jobs to retrieve.
+    designer.DatabricksOIDCAuthParamsDTO:
+      type: object
+      properties:
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        tokenEndpoint:
+          type: string
+        endpoint:
+          type: string
+        scope:
+          type: string
+        tenantCodeColumn:
+          type: string
+    admin.MultipleTenantDataVersionsDetailsDTO:
       type: object
       properties:
         tenantCode:
           type: string
-          description: The tenant code of the analytic tenant owning the data uploads.
-        uploads:
+          description: The owner of the data versions.
+        dataVersions:
           type: array
           items:
-            $ref: '#/components/schemas/servicing.TenantDataUploadStatusResponseDTO'
-          description: The data uploads completed for the specified analytic tenant. The list is empty if no previous data uploads are found for the analytic tenant.
+            $ref: '#/components/schemas/admin.DataVersionAndDateDTO'
+          description: "The latest enabled data versions for the given analytic tenant. If the analytic tenant\n has no enabled data versions, an empty string \"\" is returned."
+    data_in.DataLoadRequestModel:
+      type: object
+      properties:
+        files:
+          type: array
+          items:
+            type: string
+          description: "A comma-separated list of file names.\n Example:\n `\"files\": \"/path/to/file1.zip.gpg,/path/to/another/file.zip.gpg\"`"
+        skipDataLoad:
+          type: boolean
+          description: If `true`, receives the files and skips data loading. Does not generate a data version.
+    designer.BigQueryServiceAccountParamsDTO:
+      type: object
+      properties:
+        serviceAccountEmail:
+          type: string
+        privateKey:
+          type: string
+    servicing.TenantSourceFilesListResponseDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant code of the analytic tenant that owns the source files.
+        sourceFiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.SourceFileResponseDTO'
+          description: The files uploaded to a source.
+      description: A list of the source's uploaded files.
+    admin.data.ImportDefinitionsAPIDTO:
+      type: object
+      properties:
+        dataConnectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.data.ImportDefinitionAPIDTO'
+          description: A list of objects representing all the available data connectors in Production.
+        limit:
+          type: integer
+          description: The number of data connectors to return. The maximum number of data connectors to return is 1000.
+          format: uint32
+        start:
+          type: integer
+          description: The index to start retrieving values from, also known as offset. The index begins at 0.
+          format: uint32
+    designer.BambooAuthParamsDTO:
+      type: object
+      properties:
+        accessKey:
+          type: string
+        tenantDomainName:
+          type: string
+    dp.JobCancellationResultsDTO:
+      type: object
+      properties:
+        jobCancellationResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/dp.JobCancellationResultDTO'
+          description: A list of objects representing the job cancellation results.
+    data_in.ExtractionJobAndStatusResponse:
+      type: object
+      properties:
+        parentJobId:
+          type: string
+          description: The ID of the dispatching job that generated the extraction jobs.
+        parentTenantCode:
+          type: string
+          description: The tenant that owns the dispatching job. This is usually the administrating tenant.
+        limit:
+          type: integer
+          description: The number of extraction jobs to return. The maximum number of jobs to return is 1000.
+          format: int32
+        start:
+          type: integer
+          description: The index to start retrieving results from, also known as offset. The index begins at 0.
+          format: int32
+        extractionJobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/data_in.ExtractionJob'
+          description: A list of extraction job information.
+    designer.WorkdayRefreshTokenParamsDTO:
+      type: object
+      properties:
+        apiClientId:
+          type: string
+        clientSecret:
+          type: string
+        refreshToken:
+          type: string
+    data_in.Result:
+      type: object
+      properties:
+        jobId:
+          type: string
+          description: If applicable, the job ID associated with the data version.
+        dataVersion:
+          type: string
+          description: If applicable, the data version that was disabled.
+        tenantCode:
+          type: string
+          description: The analytic tenant that the disable operation was conducted for.
+        status:
+          type: string
+          description: The outcome of the disabling operation.
+        message:
+          type: string
+          description: If applicable, the message explains what errors occurred while disabling data versions.
+    admin.ExtractorSettingsAPIDTO:
+      type: object
+      properties:
+        connectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.ExtractorSettingAPIDTO'
+          description: A list of all data connectors in the production environment and their settings.
+    designer.QualtricsAuthParamsDTO:
+      type: object
+      properties:
+        apiToken:
+          type: string
+        dataCenterId:
+          type: string
+    designer.DataProviderAuthInformationDTO:
+      type: object
+      properties:
+        dataProviderAuthParams:
+          allOf:
+          - $ref: '#/components/schemas/designer.DataProviderAuthParamsDTO'
+          description: The authentication information for the credential.
+        dataProviderBasicInformation:
+          allOf:
+          - $ref: '#/components/schemas/designer.DataProviderBasicInformationDTO'
+          description: The display name and description for the credential.
+        dataProviderMetadata:
+          $ref: '#/components/schemas/designer.DataProviderBasicMetadataDTO'
+    designer.NamelyAuthParamsDTO:
+      type: object
+      properties:
+        authCode:
+          type: string
     designer.MySqlAuthParamsDTO:
       type: object
       properties:
@@ -1333,6 +1749,41 @@ components:
         database:
           type: string
         sslMode:
+          type: string
+    designer.IcimsAuthParamsDTO:
+      type: object
+      properties:
+        customerId:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        region:
+          enum:
+          - US
+          - EU
+          - CA
+          - ISV
+          type: string
+          format: enum
+    designer.JiraConnectParamsDTO:
+      type: object
+      properties:
+        appKey:
+          type: string
+        clientKey:
+          type: string
+        sharedSecret:
+          type: string
+    designer.AdpAuthParamsDTO:
+      type: object
+      properties:
+        authCode:
           type: string
     data_in.ProcessingJobStatusResponse:
       type: object
@@ -1356,92 +1807,97 @@ components:
           items:
             $ref: '#/components/schemas/data_in.ProcessingJob'
           description: A list of objects representing the processing jobs to retrieve.
-    data_in.ProcessingJobAndStatusResponse:
-      type: object
-      properties:
-        parentJobId:
-          type: string
-          description: The ID of the dispatching job that generated the extraction jobs.
-        parentTenantCode:
-          type: string
-          description: The tenant that owns the dispatching job. This is usually the administrating tenant.
-        limit:
-          type: integer
-          description: The number of processing jobs to return. The maximum number of jobs to return is 1000.
-          format: int32
-        start:
-          type: integer
-          description: The index to start retrieving results from, also known as offset. The index begins at 0.
-          format: int32
-        processingJobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/data_in.ProcessingJob'
-          description: A list of processing job information.
-    servicing.DataCategoriesResponseDTO:
-      type: object
-      properties:
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.DataCategoryResponseDTO'
-      description: A list of data categories.
-    servicing.JobIdResponse:
-      type: object
-      properties:
-        jobId:
-          type: string
-      description: The unique identifier of the returned job.
-    admin.jobs.ConsolidatedAnalyticsJobRequestDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The tenant code of the consolidated analytics tenant; for example, "WFF_j1r~CAa7s".
-        runProcessingJob:
-          type: boolean
-          description: If `true`, runs a processing job after the consolidated analytics job completes. If unspecified, the default is `false`.
-    designer.CopyS3AuthParamsDTO:
-      type: object
-      properties:
-        iamRole:
-          type: string
-    designer.VivaGlintAuthParamsDTO:
-      type: object
-      properties:
-        tenantId:
-          type: string
-        clientId:
-          type: string
-        clientSecret:
-          type: string
-        clientName:
-          type: string
-    data_in.ReceivingJob:
-      type: object
-      properties:
-        receivingJobId:
-          type: string
-          description: The job ID of the receiving job for the analytic tenant.
-        tenantCode:
-          type: string
-          description: The analytic tenant code.
-        status:
-          type: string
-          description: The status of the receiving job for the analytic tenant.
-    designer.WillowAuthParamsDTO:
+    designer.JiraAuthParamsDTO:
       type: object
       properties:
         apiToken:
           type: string
         hostName:
           type: string
+        connectParams:
+          $ref: '#/components/schemas/designer.JiraConnectParamsDTO'
+        cloudId:
+          type: string
+        email:
+          type: string
+    servicing.ReceivingJobExtractedFilesListResponseDTO:
+      type: object
+      properties:
+        receivingJobId:
+          type: string
+          description: The receiving job identifier.
+        tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ReceivingJobExtractedFilesForTenantResponseDTO'
+          description: Information for each analytic tenant that received files from the receiving job.
+      description: The analytic tenants that received files from the receiving job.
     designer.InternalS3AuthParamsDTO:
       type: object
       properties:
         bucketName:
           type: string
         path:
+          type: string
+    designer.SqlServerAuthParamsDTO:
+      type: object
+      properties:
+        host:
+          type: string
+        port:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        database:
+          type: string
+        schema:
+          type: string
+    admin.DataVersionAndDateDTO:
+      type: object
+      properties:
+        dataVersion:
+          type: string
+          description: The data version ID.
+        dataVersionDate:
+          type: string
+          description: The date that the data version was created.
+    data_in.ProcessingJob:
+      type: object
+      properties:
+        jobId:
+          type: string
+          description: The job ID of the processing job for the analytic tenant.
+        tenantCode:
+          type: string
+          description: The analytic tenant code.
+        dataVersion:
+          type: string
+          description: The data version associated with the processing job.
+        status:
+          type: string
+          description: The status of the receiving job for the analytic tenant.
+        message:
+          type: string
+          description: A meaningful message about the processing job.
+    designer.Microsoft365AuthParamsDTO:
+      type: object
+      properties:
+        oAuthTenantId:
+          type: string
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        privacyMode:
+          type: string
+    designer.GongAuthParamsDTO:
+      type: object
+      properties:
+        clientId:
+          type: string
+        clientSecret:
           type: string
     dp.JobCancellationResultDTO:
       type: object
@@ -1471,116 +1927,109 @@ components:
         message:
           type: string
           description: If applicable, the message explains what errors occurred while cancelling the jobs.
-    admin.AssignConnectorWithCredentialsResponseDTO:
+    servicing.ReceivingJobExtractedFilesForTenantResponseDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant code of the analytic tenant that received files from the receiving job.
+        extractedFiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ReceivingJobExtractedFileResponseDTO'
+          description: The files transferred to the analytic tenant by the receiving job. If the tenant has no previous data uploads, this list is empty.
+      description: Information for each analytic tenant that received files from the receiving job.
+    data_in.ExcludeDataUploadsRequest:
+      type: object
+      properties:
+        uploads:
+          type: array
+          items:
+            $ref: '#/components/schemas/data_in.UploadToExclude'
+          description: A list of objects representing the data uploads to exclude for a particular analytic tenant.
+    designer.DatabricksAuthParamsDTO:
+      type: object
+      properties:
+        shareCredentialsVersion:
+          type: string
+        bearerToken:
+          type: string
+        endpoint:
+          type: string
+        expirationTime:
+          type: string
+        tenantCodeColumn:
+          type: string
+    admin.ConnectorSettingsResponseDTO:
       type: object
       properties:
         connector:
           allOf:
           - $ref: '#/components/schemas/admin.ConnectorInfoResponseDTO'
-          description: The data connector that was assigned a connector credential.
-        credential:
-          allOf:
-          - $ref: '#/components/schemas/admin.AssignedCredentialInfoResponseDTO'
-          description: A connector credential that was assigned to a data connector
-    designer.WorkdayOAuthParamsDTO:
+          description: The data connector that was updated in the API request.
+        settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.ConnectorSettingResponseDTO'
+          description: The settings that were updated for a data connector.
+    designer.VivaGlintAuthParamsDTO:
       type: object
       properties:
-        apiClientId:
+        tenantId:
           type: string
-        publicX509Cert:
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        clientName:
+          type: string
+    designer.SuccessFactorsOAuthParamsDTO:
+      type: object
+      properties:
+        apiKey:
           type: string
         privateX509Key:
           type: string
-    data_in.DisableDVResponse:
-      type: object
-      properties:
-        totalFailures:
-          type: integer
-          description: The number of data versions that failed during the disabling process.
-          format: int32
-        totalSuccess:
-          type: integer
-          description: The number of data versions that were disabled successfully.
-          format: int32
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/data_in.Result'
-          description: A list of objects representing the disabling process.
-    designer.PairDTO:
-      type: object
-      properties:
-        key:
+        publicX509Cert:
           type: string
-        value:
-          type: string
-    data_in.DataVersionObject:
+    admin.SetConnectorSettingResponseDTO:
       type: object
       properties:
         tenantCode:
           type: string
-          description: The tenant code for the analytic tenant that you are disabling a data version.
-        dataVersion:
-          type: string
-          description: "The data version to disable for a particular analytic tenant.\n If not specified, disables the latest enabled data version for the analytic tenant."
-        dataCategory:
-          type: string
-          description: "The object name of the data category. Default is the primary data category.\n For administrating tenants, the data category must exist in the requesting tenant; that is, the administrating tenant or the tenant specified in `TargetTenantID`."
-    data_in.UploadToExclude:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The tenant code of the analytic tenant you are excluding a data upload for.
-        excludeAll:
-          type: boolean
-          description: If `true`, all data uploads are excluded for the analytic tenant.
-        uploadTimes:
+          description: The unique identifier associated with the tenant.
+        connectors:
           type: array
           items:
-            type: string
-          description: A comma-separated list of ISO 8601 time strings such as `"2001-10-25T13:45:35.999"` representing the upload time of each data upload to exclude.
-        minUploadTime:
+            $ref: '#/components/schemas/admin.ConnectorSettingsResponseDTO'
+          description: A list of objects representing the assigned settings and connectors.
+        status:
+          enum:
+          - Unknown
+          - Succeed
+          - Failed
           type: string
-          description: An ISO 8601 time  for the earliest upload time. If defined, omit `uploadTimes`. If omitted and `maxUploadTime` is defined, excludes files up to earliest time available.
-        maxUploadTime:
+          description: The state of the setting assignment. Valid values are Succeed or Failed.
+          format: enum
+        message:
           type: string
-          description: An ISO 8601 time for the latest upload time. If defined, omit `uploadTimes`. If omitted and `minUploadTime` is defined, excludes files up to latest time available.
-        sources:
-          type: array
-          items:
-            type: string
-          description: A comma-separated list of strings representing the object name of each source to exclude. If `uploadTimes` is omitted, excludes files for the given sources for all `uploadTimes`.
-        fileNameRegex:
-          type: string
-          description: A regular expression to match the file names of the data uploads to exclude.
-        fileIdentifiers:
-          type: array
-          items:
-            type: string
-          description: A comma-separated list of strings representing the file identifiers of the data uploads to exclude. To get a data upload's file identifier, see `GET /v1/op/data/uploads`.
-    designer.JdbcAuthParamsDTO:
+    designer.ExtractorCredentialsAPIDTO:
       type: object
       properties:
-        jdbcConnectString:
-          type: string
-        username:
-          type: string
-        password:
-          type: string
-    admin.data.ImportDefinitionAPIDTO:
-      type: object
-      properties:
-        connectorId:
-          type: string
-          description: The ID associated with the data connector.
-        displayName:
-          type: string
-          description: An identifiable data connector name that is displayed within Visier.
-        credentialId:
-          type: string
-          description: The ID associated with the connector credentials currently assigned to this data connector.
-    designer.SnowflakeV2AuthParamsDTO:
+        connectorCredentials:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.ExtractorCredentialAPIDTO'
+          description: A list of objects representing all the available connector credentials in Production.
+        limit:
+          type: integer
+          description: The number of connector credentials to return. The maximum number of data connector credentials to return is 1000.
+          format: uint32
+        start:
+          type: integer
+          description: The index to start retrieving values from, also known as offset. The index begins at 0.
+          format: uint32
+    designer.SnowflakeAuthParamsDTO:
       type: object
       properties:
         accountIdentifier:
@@ -1597,9 +2046,19 @@ components:
           type: string
         privateKey:
           type: string
-        role:
+    admin.ExtractorSettingKeyValueAPIDTO:
+      type: object
+      properties:
+        settingKey:
           type: string
-        tenantCodeColumn:
+          description: The unique identifier associated with the setting.
+        value:
+          type: string
+          description: The current value of the setting.
+    designer.CopyS3AuthParamsDTO:
+      type: object
+      properties:
+        iamRole:
           type: string
     designer.SlackAuthParamsDTO:
       type: object
@@ -1610,54 +2069,19 @@ components:
           type: string
         clientSecret:
           type: string
-    designer.UltimateAuthParamsDTO:
+    designer.EchoAuthParamsDTO:
       type: object
       properties:
-        hostDomainName:
+        vanityName:
+          type: string
+        targetTenantID:
           type: string
         apiKey:
           type: string
-        username:
-          type: string
-        password:
-          type: string
-        userAccessKey:
-          type: string
-    designer.SuccessFactorsAuthParamsDTO:
-      type: object
-      properties:
-        hostDomainName:
-          type: string
-        companyID:
-          type: string
-        username:
-          type: string
-        password:
-          type: string
+        basicAuth:
+          $ref: '#/components/schemas/designer.EchoBasicAuthDTO'
         oAuth:
-          $ref: '#/components/schemas/designer.SuccessFactorsOAuthParamsDTO'
-    designer.DatabricksOIDCAuthParamsDTO:
-      type: object
-      properties:
-        clientId:
-          type: string
-        clientSecret:
-          type: string
-        tokenEndpoint:
-          type: string
-        endpoint:
-          type: string
-        scope:
-          type: string
-        tenantCodeColumn:
-          type: string
-    data_in.DataLoadRequest:
-      type: object
-      properties:
-        model:
-          allOf:
-          - $ref: '#/components/schemas/data_in.DataLoadRequestModel'
-          description: A form body key that contains a collection of key-value pairs.
+          $ref: '#/components/schemas/designer.EchoOAuthDTO'
     data_in.DisableDVModel:
       type: object
       properties:
@@ -1666,86 +2090,19 @@ components:
           items:
             $ref: '#/components/schemas/data_in.DataVersionObject'
           description: "A list of objects representing the data version to disable for a particular analytic tenant.\n The limit of objects to include per request is 1000."
-    designer.DataProviderAuthInformationDTO:
+    designer.WillowAuthParamsDTO:
       type: object
       properties:
-        dataProviderAuthParams:
-          allOf:
-          - $ref: '#/components/schemas/designer.DataProviderAuthParamsDTO'
-          description: The authentication information for the credential.
-        dataProviderBasicInformation:
-          allOf:
-          - $ref: '#/components/schemas/designer.DataProviderBasicInformationDTO'
-          description: The display name and description for the credential.
-        dataProviderMetadata:
-          $ref: '#/components/schemas/designer.DataProviderBasicMetadataDTO'
-    designer.DatabricksAuthParamsDTO:
+        apiToken:
+          type: string
+        hostName:
+          type: string
+    servicing.JobIdResponse:
       type: object
       properties:
-        shareCredentialsVersion:
+        jobId:
           type: string
-        bearerToken:
-          type: string
-        endpoint:
-          type: string
-        expirationTime:
-          type: string
-        tenantCodeColumn:
-          type: string
-    dp.CancelJobBatchFromJobIdDTO:
-      type: object
-      properties:
-        jobIds:
-          type: array
-          items:
-            type: string
-          description: A list of jobs to cancel. The maximum number of jobs that can be cancelled is 500.
-    designer.SuccessFactorsOAuthParamsDTO:
-      type: object
-      properties:
-        apiKey:
-          type: string
-        privateX509Key:
-          type: string
-        publicX509Cert:
-          type: string
-    admin.AssignedCredentialInfoResponseDTO:
-      type: object
-      properties:
-        credentialId:
-          type: string
-          description: The unique identifier associated with the user.
-        displayName:
-          type: string
-          description: The user's username. This is typically the user's email, such as john@visier.com.
-        message:
-          type: string
-    data_in.IncludeDataUploadsRequest:
-      type: object
-      properties:
-        uploads:
-          type: array
-          items:
-            $ref: '#/components/schemas/data_in.UploadToInclude'
-          description: A list of objects representing the data uploads to include for a particular analytic tenant.
-    designer.GongAuthParamsDTO:
-      type: object
-      properties:
-        clientId:
-          type: string
-        clientSecret:
-          type: string
-    designer.MedalliaAuthParamsDTO:
-      type: object
-      properties:
-        tenantDomainName:
-          type: string
-        instanceUrl:
-          type: string
-        clientId:
-          type: string
-        clientSecret:
-          type: string
+      description: The unique identifier of the returned job.
     designer.ExtractorCredentialAPIDTO:
       type: object
       properties:
@@ -1763,22 +2120,48 @@ components:
           description: Whether this credential is inherited from another tenant.
         authContext:
           type: string
-    designer.EchoBasicAuthDTO:
+    data_in.Connector:
       type: object
       properties:
-        username:
+        connectorId:
           type: string
-        password:
-          type: string
-        asidToken:
-          type: string
-    designer.SalesforceAuthParamsDTO:
+          description: The unique identifier associated with the data connector.
+        tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/data_in.TenantAndCredential'
+          description: A list of analytic tenants and credentials to be assigned to the connector.
+    designer.WorkdayOAuthParamsDTO:
       type: object
       properties:
-        refreshToken:
+        apiClientId:
           type: string
-        clientId:
+        publicX509Cert:
           type: string
+        privateX509Key:
+          type: string
+    servicing.TenantDataUploadUpdateStatusResponseDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The analytic tenant that the exclusion operation was conducted for.
+        uploadTime:
+          type: string
+          description: The upload time of the data upload
+        status:
+          type: string
+          description: The outcome of the exclusion operation.
+        message:
+          type: string
+          description: If applicable, the message explains why errors were encountered during the exclusion operation.
+    data_in.DisableDVRequest:
+      type: object
+      properties:
+        model:
+          allOf:
+          - $ref: '#/components/schemas/data_in.DisableDVModel'
+          description: A form body key that contains a collection of key-value pairs.
     designer.DataProviderAuthParamsDTO:
       type: object
       properties:
@@ -1947,196 +2330,121 @@ components:
           - Sql
           type: string
           format: enum
-    designer.SubjectMissingAccessDTO:
+    servicing.DataCategoryResponseDTO:
       type: object
       properties:
-        subject:
-          enum:
-          - Employee
-          - Employee_Budgeted_Compensation
-          - Employment_Start
-          - Employment_Exit
-          - Absenteeism
-          - Supervisory
-          - Organization
-          - Compensation_Payout
-          - CustomSubject
-          - TestConnectionSubject
-          - Internal_Placement
-          - Pay_Change
-          - Hire
-          - Applicant
-          - Candidate
-          - Requisition
+        name:
           type: string
-          description: The subjects that cannot be accessed.
-          format: enum
-        attributes:
+          description: The display name of the data category.
+        id:
+          type: string
+          description: The UUID of the data category.
+        objectName:
+          type: string
+          description: The object name of the data category.
+      description: The data category's details.
+    designer.CredentialCreationAPIResponseDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: The unique ID of the newly created credential.
+        symbolName:
+          type: string
+          description: The symbol name of the newly created credential.
+        objectName:
+          type: string
+          description: The object name of the newly created credential.
+        missingConnectionProperties:
           type: array
           items:
-            type: string
-          description: The attributes that cannot be accessed.
-        errorMessage:
-          type: string
-          description: The error message detailing the access issue.
-    admin.ConnectorSettingResponseDTO:
+            $ref: '#/components/schemas/designer.SubjectMissingAccessDTO'
+          description: "The properties that the credential cannot access despite successful authentication.\n This is only returned for authentications that do not grant access to all data."
+    data_in.JobStatusListResponse:
       type: object
       properties:
-        key:
+        queryStartTime:
           type: string
-          description: The unique identifier of the connector setting.
-        value:
+          description: The start time from which to retrieve job statuses.
+        queryEndTime:
           type: string
-          description: The value that was set for the connector setting.
-        message:
-          type: string
-    admin.DataVersionAndDateDTO:
+          description: The end time from which to retrieve job statuses.
+        jobStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/data_in.JobStatusWithStartTime'
+          description: The specific status to restrict the list of jobs to.
+    servicing.ReceivingJobExtractedFileResponseDTO:
       type: object
       properties:
-        dataVersion:
+        uploadTime:
           type: string
-          description: The data version ID.
-        dataVersionDate:
+          description: The upload time of the file.
+        filename:
           type: string
-          description: The date that the data version was created.
-    designer.ServiceNowV2AuthParamsDTO:
+          description: The name of the file.
+        identifier:
+          type: string
+          description: The unique identifier of the file.
+        sourceId:
+          type: string
+          description: The UUID of the source associated with the file. If the file isn't connected to a source, the UUID is a placeholder value.
+        sourceObjectName:
+          type: string
+          description: The object name of the source associated with the file. If the file isn't connected to a source, the object name is empty.
+        included:
+          type: boolean
+          description: If `true`, the file is included in data version generation.
+      description: The files transferred to the analytic tenant from the receiving job. If the tenant has no previous data uploads, this list is empty.
+    designer.DataProviderBasicMetadataDTO:
       type: object
       properties:
-        hostDomainName:
+        canChildrenInherit:
+          type: boolean
+    data_in.ExtractionJob:
+      type: object
+      properties:
+        extractionJobId:
+          type: string
+          description: The ID of the extraction job.
+        tenantCode:
+          type: string
+          description: The tenant code of the analytic tenant for the extraction job.
+        status:
+          type: string
+          description: "The current state of the job.\n - Valid values: Pending, Running, Succeeded, Failed, Error, Cancelling, Cancelled, RolledBack, Rescheduling, Rescheduled."
+        currentStage:
+          type: string
+          description: "The current stage of the job. This is not returned if the stage is \"Completed\".\n - Valid values: Initialize, Retrieve Main Subject, Retrieve Secondary Subjects, Retrieve Custom Subjects, Process Records, Publish Artifacts, Publish Records, Completed."
+    designer.ZoomAuthParamsDTO:
+      type: object
+      properties:
+        authCode:
           type: string
         clientId:
           type: string
         clientSecret:
           type: string
-        authCode:
-          type: string
-        alternateDomain:
-          type: string
-    data_in.ExtractionJobAndStatusResponse:
+    designer.CdkAuthParamsDTO:
       type: object
       properties:
-        parentJobId:
+        dockerImage:
+          type: string
+        connectorConfigJson:
+          type: string
+    data_in.StartExtractionResponse:
+      type: object
+      properties:
+        JobId:
           type: string
           description: The ID of the dispatching job that generated the extraction jobs.
-        parentTenantCode:
-          type: string
-          description: The tenant that owns the dispatching job. This is usually the administrating tenant.
-        limit:
-          type: integer
-          description: The number of extraction jobs to return. The maximum number of jobs to return is 1000.
-          format: int32
-        start:
-          type: integer
-          description: The index to start retrieving results from, also known as offset. The index begins at 0.
-          format: int32
-        extractionJobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/data_in.ExtractionJob'
-          description: A list of extraction job information.
-    designer.SnowflakeAuthParamsDTO:
+    designer.DataProviderBasicInformationDTO:
       type: object
       properties:
-        accountIdentifier:
-          type: string
-        database:
-          type: string
-        schema:
-          type: string
-        username:
-          type: string
-        password:
-          type: string
-        warehouse:
-          type: string
-        privateKey:
-          type: string
-    data_in.ProcessingJob:
-      type: object
-      properties:
-        jobId:
-          type: string
-          description: The job ID of the processing job for the analytic tenant.
-        tenantCode:
-          type: string
-          description: The analytic tenant code.
-        dataVersion:
-          type: string
-          description: The data version associated with the processing job.
-        status:
-          type: string
-          description: The status of the receiving job for the analytic tenant.
-        message:
-          type: string
-          description: A meaningful message about the processing job.
-    admin.ExtractorSettingAPIDTO:
-      type: object
-      properties:
-        connectorId:
-          type: string
-          description: The unique identifier associated with the data connector.
         displayName:
           type: string
-          description: An identifiable data connector name that is displayed within Visier.
-        connectorSettings:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.ExtractorSettingKeyValueAPIDTO'
-          description: A list of objects representing the settings that are available for the data connector.
-    designer.QualtricsAuthParamsDTO:
-      type: object
-      properties:
-        apiToken:
+        description:
           type: string
-        dataCenterId:
-          type: string
-    designer.BigQueryServiceAccountParamsDTO:
-      type: object
-      properties:
-        serviceAccountEmail:
-          type: string
-        privateKey:
-          type: string
-    designer.EmptyAuthParamsDTO:
-      type: object
-      properties: {}
-    data_in.DisableDVRequest:
-      type: object
-      properties:
-        model:
-          allOf:
-          - $ref: '#/components/schemas/data_in.DisableDVModel'
-          description: A form body key that contains a collection of key-value pairs.
-    designer.ServiceNowAuthParamsDTO:
-      type: object
-      properties:
-        hostDomainName:
-          type: string
-        username:
-          type: string
-        password:
-          type: string
-    data_in.JobStatusWithStartTime:
-      type: object
-      properties:
-        jobId:
-          type: string
-          description: The unique ID of the job.
-        tenant:
-          type: string
-          description: The tenant code.
-        status:
-          type: string
-          description: The status of the job, such as Running or Completed.
-        jobType:
-          type: string
-          description: The type of the job, such as a processing job or receiving job.
-        startTime:
-          type: string
-          description: The time that the job started.
-        parentJobId:
-          type: string
-          description: The unique ID of the parent job, if applicable.
     designer.SalesforceV2AuthParamsDTO:
       type: object
       properties:
@@ -2148,110 +2456,46 @@ components:
           type: string
         loginHost:
           type: string
-    designer.LeverAuthParamsDTO:
+    admin.data.ImportDefinitionAPIDTO:
       type: object
       properties:
-        apiKey:
+        connectorId:
           type: string
-    servicing.TenantDataUploadsListResponseDTO:
+          description: The ID associated with the data connector.
+        displayName:
+          type: string
+          description: An identifiable data connector name that is displayed within Visier.
+        credentialId:
+          type: string
+          description: The ID associated with the connector credentials currently assigned to this data connector.
+    servicing.SourceFileResponseDTO:
       type: object
       properties:
-        tenants:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.TenantDataUploadsResponseDTO'
-          description: A list of objects representing analytic tenants and their data uploads.
-        limit:
-          type: integer
-          description: The number of analytic tenants to retrieve. The maximum number of analytic tenants to retrieve is 1000.
-          format: uint32
-        start:
-          type: integer
-          description: The index to start retrieving results from, also known as offset. The index begins at 0.
-          format: uint32
-    designer.FusionAuthParamsDTO:
-      type: object
-      properties:
-        username:
+        uploadTime:
           type: string
-        password:
+          description: The upload time of the source file.
+        filename:
           type: string
-        hostDomainName:
+          description: The name of the source file.
+        identifier:
           type: string
-    designer.SqlServerAuthParamsDTO:
-      type: object
-      properties:
-        host:
+          description: The unique identifier of the file.
+        sourceId:
           type: string
-        port:
+          description: The UUID of the source associated with the file.
+        sourceObjectName:
           type: string
-        username:
-          type: string
-        password:
-          type: string
-        database:
-          type: string
-        schema:
-          type: string
-    admin.SetConnectorSettingResponseDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The unique identifier associated with the tenant.
-        connectors:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.ConnectorSettingsResponseDTO'
-          description: A list of objects representing the assigned settings and connectors.
-        status:
-          enum:
-          - Unknown
-          - Succeed
-          - Failed
-          type: string
-          description: The state of the setting assignment. Valid values are Succeed or Failed.
-          format: enum
-        message:
-          type: string
-    admin.jobs.ProcessingJobRequestDTO:
-      type: object
-      properties:
-        tenants:
-          type: array
-          items:
-            type: string
-          description: The tenant codes of the tenants to run processing jobs for. If omitted, runs a processing job for the tenant associated with the user who made the API request. Only valid for requests from an administrating tenant.
-        allTenants:
+          description: The object name of the source associated with the file.
+        included:
           type: boolean
-          description: If `true`, runs processing jobs for all accessible analytic tenants. Default is `false`. Only valid for requests from an administrating tenant.
-        dataCategoryId:
-          type: string
-          description: "The unique identifier of the data category to run the job. If omitted, runs a job using the primary data category.\n To retrieve a list of all data categories, see `GET /v1/op/data/categories`."
-        publishToProduction:
-          type: boolean
-          description: If `true`, publishes the generated data version to production. Default is `false`.
-        excludedTenants:
-          type: array
-          items:
-            type: string
-          description: The unique IDs of the tenants to exclude from the extraction job. Only valid if `allTenants` is "true". Only valid for requests from an administrating tenant.
-    data_in.DataLoadRequestModel:
+          description: If `true`, the file is included in data version generation.
+      description: Information about a file uploaded to a source.
+    data_in.DataLoadResponse:
       type: object
       properties:
-        files:
-          type: array
-          items:
-            type: string
-          description: "A comma-separated list of file names.\n Example:\n `\"files\": \"/path/to/file1.zip.gpg,/path/to/another/file.zip.gpg\"`"
-        skipDataLoad:
-          type: boolean
-          description: If `true`, receives the files and skips data loading. Does not generate a data version.
-    designer.NamelyAuthParamsDTO:
-      type: object
-      properties:
-        authCode:
+        jobId:
           type: string
+          description: The unique identifier associated with the receiving job.
     admin.jobs.ExtractDataAndLoadDTO:
       type: object
       properties:
@@ -2344,551 +2588,6 @@ components:
         outputTarget:
           type: string
           description: "The output of the extraction. Valid values:\n - `Receiving`: A receiving job. This is the default. \n - `SQL`: A SQL job for table sources."
-    data_in.DispatchingJobStatusResponse:
-      type: object
-      properties:
-        jobId:
-          type: string
-          description: The ID of the dispatching job that generated the extraction jobs.
-        tenantCode:
-          type: string
-          description: The tenant that owns the dispatching job. This is usually the administrating tenant.
-        status:
-          type: string
-          description: The current state of the job.
-        totalJobsDispatched:
-          type: integer
-          description: The number of extraction jobs that were generated by the dispatching job.
-          format: int32
-    admin.SetConnectorSettingsResponseDTO:
-      type: object
-      properties:
-        tenants:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.SetConnectorSettingResponseDTO'
-          description: The tenants and data connectors that were updated in the API request.
-    designer.GoogleWorkspaceAuthParamsDTO:
-      type: object
-      properties:
-        authCode:
-          type: string
-        clientId:
-          type: string
-        clientSecret:
-          type: string
-        serviceAccount:
-          type: string
-        privacyMode:
-          type: string
-    admin.ExtractorSettingsAPIDTO:
-      type: object
-      properties:
-        connectors:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.ExtractorSettingAPIDTO'
-          description: A list of all data connectors in the production environment and their settings.
-    designer.EchoAuthParamsDTO:
-      type: object
-      properties:
-        vanityName:
-          type: string
-        targetTenantID:
-          type: string
-        apiKey:
-          type: string
-        basicAuth:
-          $ref: '#/components/schemas/designer.EchoBasicAuthDTO'
-        oAuth:
-          $ref: '#/components/schemas/designer.EchoOAuthDTO'
-    designer.JiraConnectParamsDTO:
-      type: object
-      properties:
-        appKey:
-          type: string
-        clientKey:
-          type: string
-        sharedSecret:
-          type: string
-    designer.OracleDbAuthParamsDTO:
-      type: object
-      properties:
-        host:
-          type: string
-        port:
-          type: string
-        username:
-          type: string
-        password:
-          type: string
-        serviceName:
-          type: string
-    designer.ExtractorCredentialsAPIDTO:
-      type: object
-      properties:
-        connectorCredentials:
-          type: array
-          items:
-            $ref: '#/components/schemas/designer.ExtractorCredentialAPIDTO'
-          description: A list of objects representing all the available connector credentials in Production.
-        limit:
-          type: integer
-          description: The number of connector credentials to return. The maximum number of data connector credentials to return is 1000.
-          format: uint32
-        start:
-          type: integer
-          description: The index to start retrieving values from, also known as offset. The index begins at 0.
-          format: uint32
-    dp.JobCancellationResultsDTO:
-      type: object
-      properties:
-        jobCancellationResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/dp.JobCancellationResultDTO'
-          description: A list of objects representing the job cancellation results.
-    designer.GoogleSheetsAuthParamsDTO:
-      type: object
-      properties:
-        authCode:
-          type: string
-        configuration:
-          type: string
-        clientId:
-          type: string
-        clientSecret:
-          type: string
-    data_in.JobStatusListResponse:
-      type: object
-      properties:
-        queryStartTime:
-          type: string
-          description: The start time from which to retrieve job statuses.
-        queryEndTime:
-          type: string
-          description: The end time from which to retrieve job statuses.
-        jobStatus:
-          type: array
-          items:
-            $ref: '#/components/schemas/data_in.JobStatusWithStartTime'
-          description: The specific status to restrict the list of jobs to.
-    designer.CredentialCreationAPIResponseDTO:
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: The unique ID of the newly created credential.
-        symbolName:
-          type: string
-          description: The symbol name of the newly created credential.
-        objectName:
-          type: string
-          description: The object name of the newly created credential.
-        missingConnectionProperties:
-          type: array
-          items:
-            $ref: '#/components/schemas/designer.SubjectMissingAccessDTO'
-          description: "The properties that the credential cannot access despite successful authentication.\n This is only returned for authentications that do not grant access to all data."
-    Status:
-      type: object
-      properties:
-        localizedMessage:
-          type: string
-          description: Localized error message describing the root cause of the error.
-        code:
-          type: string
-          description: Error classification.
-        message:
-          type: string
-          description: Not used.
-        rci:
-          type: string
-          description: Optional root cause identifier.
-        userError:
-          type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
-    data_in.StartExtractionResponse:
-      type: object
-      properties:
-        JobId:
-          type: string
-          description: The ID of the dispatching job that generated the extraction jobs.
-    data_in.ExtractionJob:
-      type: object
-      properties:
-        extractionJobId:
-          type: string
-          description: The ID of the extraction job.
-        tenantCode:
-          type: string
-          description: The tenant code of the analytic tenant for the extraction job.
-        status:
-          type: string
-          description: "The current state of the job.\n - Valid values: Pending, Running, Succeeded, Failed, Error, Cancelling, Cancelled, RolledBack, Rescheduling, Rescheduled."
-        currentStage:
-          type: string
-          description: "The current stage of the job. This is not returned if the stage is \"Completed\".\n - Valid values: Initialize, Retrieve Main Subject, Retrieve Secondary Subjects, Retrieve Custom Subjects, Process Records, Publish Artifacts, Publish Records, Completed."
-    servicing.TenantDataUploadStatusResponseDTO:
-      type: object
-      properties:
-        uploadTime:
-          type: string
-          description: The upload time of the data upload.
-        included:
-          type: boolean
-          description: If "true", the data upload is included.
-    admin.AssignConnectorCredentialsByTenantResponseDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The unique identifier associated with the tenant.
-        connectors:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.AssignConnectorWithCredentialsResponseDTO'
-          description: A list of objects representing the assigned credentials and connectors.
-        status:
-          enum:
-          - Unknown
-          - Succeed
-          - Failed
-          type: string
-          description: The state of the credential assignment. Valid values are Succeed or Failed.
-          format: enum
-        message:
-          type: string
-    data_in.DataLoadResponse:
-      type: object
-      properties:
-        jobId:
-          type: string
-          description: The unique identifier associated with the receiving job.
-    designer.Microsoft365AuthParamsDTO:
-      type: object
-      properties:
-        oAuthTenantId:
-          type: string
-        clientId:
-          type: string
-        clientSecret:
-          type: string
-        privacyMode:
-          type: string
-    designer.AdpAuthParamsDTO:
-      type: object
-      properties:
-        authCode:
-          type: string
-    servicing.ReceivingJobExtractedFilesForTenantResponseDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The tenant code of the analytic tenant that received files from the receiving job.
-        extractedFiles:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.ReceivingJobExtractedFileResponseDTO'
-          description: The files transferred to the analytic tenant by the receiving job. If the tenant has no previous data uploads, this list is empty.
-      description: Information for each analytic tenant that received files from the receiving job.
-    designer.SSEAuthParamsDTO:
-      type: object
-      properties:
-        endpoint:
-          type: string
-        username:
-          type: string
-        password:
-          type: string
-        streamName:
-          type: string
-    designer.ZoomAuthParamsDTO:
-      type: object
-      properties:
-        authCode:
-          type: string
-        clientId:
-          type: string
-        clientSecret:
-          type: string
-    data_in.TenantAndCredential:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The unique identifier associated with the tenant.
-        credentialId:
-          type: string
-          description: The unique identifier associated with the credential.
-    designer.DimensionsAuthParamsDTO:
-      type: object
-      properties:
-        appKey:
-          type: string
-        clientId:
-          type: string
-        clientSecret:
-          type: string
-        vanityUrl:
-          type: string
-        username:
-          type: string
-        password:
-          type: string
-    data_in.Result:
-      type: object
-      properties:
-        jobId:
-          type: string
-          description: If applicable, the job ID associated with the data version.
-        dataVersion:
-          type: string
-          description: If applicable, the data version that was disabled.
-        tenantCode:
-          type: string
-          description: The analytic tenant that the disable operation was conducted for.
-        status:
-          type: string
-          description: The outcome of the disabling operation.
-        message:
-          type: string
-          description: If applicable, the message explains what errors occurred while disabling data versions.
-    designer.DataProviderBasicInformationDTO:
-      type: object
-      properties:
-        displayName:
-          type: string
-        description:
-          type: string
-    designer.CdkAuthParamsDTO:
-      type: object
-      properties:
-        dockerImage:
-          type: string
-        connectorConfigJson:
-          type: string
-    servicing.DataCategoryResponseDTO:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The display name of the data category.
-        id:
-          type: string
-          description: The UUID of the data category.
-        objectName:
-          type: string
-          description: The object name of the data category.
-      description: The data category's details.
-    data_in.ReceivingJobStatusResponse:
-      type: object
-      properties:
-        jobId:
-          type: string
-          description: The unique identifier associated with the receiving job.
-        status:
-          type: string
-          description: The status of the receiving job.
-        parentJobId:
-          type: string
-          description: The job ID of the receiving job that spawned this job.
-        parentTenantCode:
-          type: string
-          description: The tenant code of the receiving job that spawned this job.
-        receivingJobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/data_in.ReceivingJob'
-          description: A list of objects representing the receiving jobs to retrieve.
-    admin.AssignConnectorCredentialsResponseDTO:
-      type: object
-      properties:
-        tenants:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.AssignConnectorCredentialsByTenantResponseDTO'
-          description: A list of objects representing the tenants and data connectors that were assigned connector credentials.
-    designer.JiraAuthParamsDTO:
-      type: object
-      properties:
-        apiToken:
-          type: string
-        hostName:
-          type: string
-        connectParams:
-          $ref: '#/components/schemas/designer.JiraConnectParamsDTO'
-        cloudId:
-          type: string
-        email:
-          type: string
-    servicing.TenantDataUploadsUpdateResponseDTO:
-      type: object
-      properties:
-        totalFailures:
-          type: integer
-          description: The number of data uploads that failed during the exclusion operation.
-          format: uint32
-        totalSuccess:
-          type: integer
-          description: The number of data uploads that were excluded successfully.
-          format: uint32
-        uploads:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.TenantDataUploadUpdateStatusResponseDTO'
-          description: A list of objects representing the results of the data upload exclusion.
-    admin.ConnectorSettingsResponseDTO:
-      type: object
-      properties:
-        connector:
-          allOf:
-          - $ref: '#/components/schemas/admin.ConnectorInfoResponseDTO'
-          description: The data connector that was updated in the API request.
-        settings:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.ConnectorSettingResponseDTO'
-          description: The settings that were updated for a data connector.
-    admin.data.ImportDefinitionsAPIDTO:
-      type: object
-      properties:
-        dataConnectors:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.data.ImportDefinitionAPIDTO'
-          description: A list of objects representing all the available data connectors in Production.
-        limit:
-          type: integer
-          description: The number of data connectors to return. The maximum number of data connectors to return is 1000.
-          format: uint32
-        start:
-          type: integer
-          description: The index to start retrieving values from, also known as offset. The index begins at 0.
-          format: uint32
-    designer.EchoOAuthDTO:
-      type: object
-      properties:
-        clientId:
-          type: string
-        clientSecret:
-          type: string
-        authCode:
-          type: string
-        accessToken:
-          type: string
-        refreshToken:
-          type: string
-        expireTimestamp:
-          type: string
-    designer.WorkdayRefreshTokenParamsDTO:
-      type: object
-      properties:
-        apiClientId:
-          type: string
-        clientSecret:
-          type: string
-        refreshToken:
-          type: string
-    admin.MultipleTenantDataVersionsDetailsDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The owner of the data versions.
-        dataVersions:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.DataVersionAndDateDTO'
-          description: "The latest enabled data versions for the given analytic tenant. If the analytic tenant\n has no enabled data versions, an empty string \"\" is returned."
-    data_in.AssignConnectorCredentialRequest:
-      type: object
-      properties:
-        connectors:
-          type: array
-          items:
-            $ref: '#/components/schemas/data_in.Connector'
-          description: A list of objects representing the data connectors to be assigned with credentials.
-    admin.SetConnectorSettingRequestDTO:
-      type: object
-      properties:
-        connectorId:
-          type: string
-          description: The unique identifier associated with the data connector.
-        tenants:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.TenantConnectorSettingsRequestDTO'
-          description: The tenant codes and data connector settings to update.
-    admin.ExtractorSettingKeyValueAPIDTO:
-      type: object
-      properties:
-        settingKey:
-          type: string
-          description: The unique identifier associated with the setting.
-        value:
-          type: string
-          description: The current value of the setting.
-    designer.WorkdayRaasAuthParamsDTO:
-      type: object
-      properties:
-        userId:
-          type: string
-        domainName:
-          type: string
-        implementationName:
-          type: string
-        password:
-          type: string
-        testReportUrl:
-          type: string
-    admin.MultipleTenantDataVersionsListDTO:
-      type: object
-      properties:
-        tenants:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.MultipleTenantDataVersionsDetailsDTO'
-          description: A list of analytic tenants and their latest enabled data versions.
-        limit:
-          type: integer
-          description: The number of analytic tenants to retrieve. The maximum number to retrieve is 1000.
-          format: uint32
-        start:
-          type: integer
-          description: The index to start retrieving results from, also known as offset. The index begins at 0.
-          format: uint32
-    admin.SetConnectorSettingsRequestDTO:
-      type: object
-      properties:
-        connectors:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.SetConnectorSettingRequestDTO'
-          description: The settings to define for each data connector and tenant.
-    designer.WorkdayAuthParamsDTO:
-      type: object
-      properties:
-        userId:
-          type: string
-        domainName:
-          type: string
-        implementationName:
-          type: string
-        password:
-          type: string
-        oAuth:
-          $ref: '#/components/schemas/designer.WorkdayOAuthParamsDTO'
-        refToken:
-          $ref: '#/components/schemas/designer.WorkdayRefreshTokenParamsDTO'
-        integrationSystemId:
-          type: string
-        additionalHeaderParams:
-          type: array
-          items:
-            $ref: '#/components/schemas/designer.PairDTO'
     admin.TenantConnectorSettingsRequestDTO:
       type: object
       properties:
@@ -2900,200 +2599,27 @@ components:
           items:
             $ref: '#/components/schemas/admin.ConnectorSettingRequestDTO'
           description: The settings to update.
-    designer.RedshiftAuthParamsDTO:
+    data_in.IncludeDataUploadsRequest:
       type: object
       properties:
-        endpoint:
-          type: string
-        port:
-          type: string
-        database:
-          type: string
-        username:
-          type: string
-        password:
-          type: string
-        tablePrefix:
-          type: string
-        schema:
-          type: string
-    servicing.TenantDataUploadUpdateStatusResponseDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The analytic tenant that the exclusion operation was conducted for.
-        uploadTime:
-          type: string
-          description: The upload time of the data upload
-        status:
-          type: string
-          description: The outcome of the exclusion operation.
-        message:
-          type: string
-          description: If applicable, the message explains why errors were encountered during the exclusion operation.
-    servicing.SourceFileResponseDTO:
-      type: object
-      properties:
-        uploadTime:
-          type: string
-          description: The upload time of the source file.
-        filename:
-          type: string
-          description: The name of the source file.
-        identifier:
-          type: string
-          description: The unique identifier of the file.
-        sourceId:
-          type: string
-          description: The UUID of the source associated with the file.
-        sourceObjectName:
-          type: string
-          description: The object name of the source associated with the file.
-        included:
-          type: boolean
-          description: If `true`, the file is included in data version generation.
-      description: Information about a file uploaded to a source.
-    data_in.Connector:
-      type: object
-      properties:
-        connectorId:
-          type: string
-          description: The unique identifier associated with the data connector.
-        tenants:
+        uploads:
           type: array
           items:
-            $ref: '#/components/schemas/data_in.TenantAndCredential'
-          description: A list of analytic tenants and credentials to be assigned to the connector.
-    designer.BambooAuthParamsDTO:
+            $ref: '#/components/schemas/data_in.UploadToInclude'
+          description: A list of objects representing the data uploads to include for a particular analytic tenant.
+    designer.SuccessFactorsAuthParamsDTO:
       type: object
       properties:
-        accessKey:
-          type: string
-        tenantDomainName:
-          type: string
-    servicing.ReceivingJobExtractedFilesListResponseDTO:
-      type: object
-      properties:
-        receivingJobId:
-          type: string
-          description: The receiving job identifier.
-        tenants:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.ReceivingJobExtractedFilesForTenantResponseDTO'
-          description: Information for each analytic tenant that received files from the receiving job.
-      description: The analytic tenants that received files from the receiving job.
-    servicing.TenantSourceFilesListResponseDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The tenant code of the analytic tenant that owns the source files.
-        sourceFiles:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.SourceFileResponseDTO'
-          description: The files uploaded to a source.
-      description: A list of the source's uploaded files.
-    admin.ConnectorSettingRequestDTO:
-      type: object
-      properties:
-        settingKey:
-          type: string
-          description: The unique identifier associated with the setting.
-        value:
-          type: string
-          description: The setting's value.
-    admin.ConnectorInfoResponseDTO:
-      type: object
-      properties:
-        connectorId:
-          type: string
-          description: The unique identifier associated with the data connector.
-        displayName:
-          type: string
-          description: An identifiable data connector name that is displayed within Visier.
-        description:
-          type: string
-    servicing.ReceivingJobExtractedFileResponseDTO:
-      type: object
-      properties:
-        uploadTime:
-          type: string
-          description: The upload time of the file.
-        filename:
-          type: string
-          description: The name of the file.
-        identifier:
-          type: string
-          description: The unique identifier of the file.
-        sourceId:
-          type: string
-          description: The UUID of the source associated with the file. If the file isn't connected to a source, the UUID is a placeholder value.
-        sourceObjectName:
-          type: string
-          description: The object name of the source associated with the file. If the file isn't connected to a source, the object name is empty.
-        included:
-          type: boolean
-          description: If `true`, the file is included in data version generation.
-      description: The files transferred to the analytic tenant from the receiving job. If the tenant has no previous data uploads, this list is empty.
-    data_in.ReceivingJobAndStatusResponse:
-      type: object
-      properties:
-        parentJobId:
-          type: string
-          description: The ID of the dispatching job that generated the extraction jobs.
-        parentTenantCode:
-          type: string
-          description: The tenant that owns the dispatching job. This is usually the administrating tenant.
-        limit:
-          type: integer
-          description: The number of receiving jobs to return. The maximum number of jobs to return is 1000.
-          format: int32
-        start:
-          type: integer
-          description: The index to start retrieving results from, also known as offset. The index begins at 0.
-          format: int32
-        receivingJobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/data_in.ReceivingJob'
-          description: A list of receiving job information.
-    designer.DayforceV2AuthParamsDTO:
-      type: object
-      properties:
-        username:
-          type: string
-        password:
-          type: string
-        companyId:
-          type: string
-        tokenHost:
-          type: string
         hostDomainName:
           type: string
-    designer.IcimsAuthParamsDTO:
-      type: object
-      properties:
-        customerId:
+        companyID:
           type: string
         username:
           type: string
         password:
           type: string
-        clientId:
-          type: string
-        clientSecret:
-          type: string
-        region:
-          enum:
-          - US
-          - EU
-          - CA
-          - ISV
-          type: string
-          format: enum
+        oAuth:
+          $ref: '#/components/schemas/designer.SuccessFactorsOAuthParamsDTO'
     data_in.UploadToInclude:
       type: object
       properties:
@@ -3127,11 +2653,87 @@ components:
           items:
             type: string
           description: A comma-separated list of strings representing the file identifiers of the data uploads to include. To get a data upload's file identifier, see `GET /v1/op/data/uploads`.
-    designer.GreenhouseAuthParamsDTO:
+    data_in.ReceivingJob:
       type: object
       properties:
-        apiKey:
+        receivingJobId:
           type: string
+          description: The job ID of the receiving job for the analytic tenant.
+        tenantCode:
+          type: string
+          description: The analytic tenant code.
+        status:
+          type: string
+          description: The status of the receiving job for the analytic tenant.
+    admin.SetConnectorSettingsResponseDTO:
+      type: object
+      properties:
+        tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.SetConnectorSettingResponseDTO'
+          description: The tenants and data connectors that were updated in the API request.
+    admin.AssignedCredentialInfoResponseDTO:
+      type: object
+      properties:
+        credentialId:
+          type: string
+          description: The unique identifier associated with the user.
+        displayName:
+          type: string
+          description: The user's username. This is typically the user's email, such as john@visier.com.
+        message:
+          type: string
+    admin.AssignConnectorWithCredentialsResponseDTO:
+      type: object
+      properties:
+        connector:
+          allOf:
+          - $ref: '#/components/schemas/admin.ConnectorInfoResponseDTO'
+          description: The data connector that was assigned a connector credential.
+        credential:
+          allOf:
+          - $ref: '#/components/schemas/admin.AssignedCredentialInfoResponseDTO'
+          description: A connector credential that was assigned to a data connector
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    designer.FusionAuthParamsDTO:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        hostDomainName:
+          type: string
+    admin.SetConnectorSettingRequestDTO:
+      type: object
+      properties:
+        connectorId:
+          type: string
+          description: The unique identifier associated with the data connector.
+        tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.TenantConnectorSettingsRequestDTO'
+          description: The tenant codes and data connector settings to update.
     designer.BigQueryAuthParamsDTO:
       type: object
       properties:
@@ -3149,11 +2751,409 @@ components:
           type: string
         serviceAccountParams:
           $ref: '#/components/schemas/designer.BigQueryServiceAccountParamsDTO'
-    designer.DataProviderBasicMetadataDTO:
+    designer.JdbcAuthParamsDTO:
       type: object
       properties:
-        canChildrenInherit:
+        jdbcConnectString:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+    servicing.TenantDataUploadsResponseDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant code of the analytic tenant owning the data uploads.
+        uploads:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.TenantDataUploadStatusResponseDTO'
+          description: The data uploads completed for the specified analytic tenant. The list is empty if no previous data uploads are found for the analytic tenant.
+    data_in.UploadToExclude:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant code of the analytic tenant you are excluding a data upload for.
+        excludeAll:
           type: boolean
+          description: If `true`, all data uploads are excluded for the analytic tenant.
+        uploadTimes:
+          type: array
+          items:
+            type: string
+          description: A comma-separated list of ISO 8601 time strings such as `"2001-10-25T13:45:35.999"` representing the upload time of each data upload to exclude.
+        minUploadTime:
+          type: string
+          description: An ISO 8601 time  for the earliest upload time. If defined, omit `uploadTimes`. If omitted and `maxUploadTime` is defined, excludes files up to earliest time available.
+        maxUploadTime:
+          type: string
+          description: An ISO 8601 time for the latest upload time. If defined, omit `uploadTimes`. If omitted and `minUploadTime` is defined, excludes files up to latest time available.
+        sources:
+          type: array
+          items:
+            type: string
+          description: A comma-separated list of strings representing the object name of each source to exclude. If `uploadTimes` is omitted, excludes files for the given sources for all `uploadTimes`.
+        fileNameRegex:
+          type: string
+          description: A regular expression to match the file names of the data uploads to exclude.
+        fileIdentifiers:
+          type: array
+          items:
+            type: string
+          description: A comma-separated list of strings representing the file identifiers of the data uploads to exclude. To get a data upload's file identifier, see `GET /v1/op/data/uploads`.
+    admin.ConnectorInfoResponseDTO:
+      type: object
+      properties:
+        connectorId:
+          type: string
+          description: The unique identifier associated with the data connector.
+        displayName:
+          type: string
+          description: An identifiable data connector name that is displayed within Visier.
+        description:
+          type: string
+    designer.MedalliaAuthParamsDTO:
+      type: object
+      properties:
+        tenantDomainName:
+          type: string
+        instanceUrl:
+          type: string
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+    designer.SSEAuthParamsDTO:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        streamName:
+          type: string
+    data_in.DataVersionObject:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant code for the analytic tenant that you are disabling a data version.
+        dataVersion:
+          type: string
+          description: "The data version to disable for a particular analytic tenant.\n If not specified, disables the latest enabled data version for the analytic tenant."
+        dataCategory:
+          type: string
+          description: "The object name of the data category. Default is the primary data category.\n For administrating tenants, the data category must exist in the requesting tenant; that is, the administrating tenant or the tenant specified in `TargetTenantID`."
+    data_in.ReceivingJobAndStatusResponse:
+      type: object
+      properties:
+        parentJobId:
+          type: string
+          description: The ID of the dispatching job that generated the extraction jobs.
+        parentTenantCode:
+          type: string
+          description: The tenant that owns the dispatching job. This is usually the administrating tenant.
+        limit:
+          type: integer
+          description: The number of receiving jobs to return. The maximum number of jobs to return is 1000.
+          format: int32
+        start:
+          type: integer
+          description: The index to start retrieving results from, also known as offset. The index begins at 0.
+          format: int32
+        receivingJobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/data_in.ReceivingJob'
+          description: A list of receiving job information.
+    admin.jobs.ProcessingJobRequestDTO:
+      type: object
+      properties:
+        tenants:
+          type: array
+          items:
+            type: string
+          description: The tenant codes of the tenants to run processing jobs for. If omitted, runs a processing job for the tenant associated with the user who made the API request. Only valid for requests from an administrating tenant.
+        allTenants:
+          type: boolean
+          description: If `true`, runs processing jobs for all accessible analytic tenants. Default is `false`. Only valid for requests from an administrating tenant.
+        dataCategoryId:
+          type: string
+          description: "The unique identifier of the data category to run the job. If omitted, runs a job using the primary data category.\n To retrieve a list of all data categories, see `GET /v1/op/data/categories`."
+        publishToProduction:
+          type: boolean
+          description: If `true`, publishes the generated data version to production. Default is `false`.
+        excludedTenants:
+          type: array
+          items:
+            type: string
+          description: The unique IDs of the tenants to exclude from the extraction job. Only valid if `allTenants` is "true". Only valid for requests from an administrating tenant.
+    admin.ConnectorSettingResponseDTO:
+      type: object
+      properties:
+        key:
+          type: string
+          description: The unique identifier of the connector setting.
+        value:
+          type: string
+          description: The value that was set for the connector setting.
+        message:
+          type: string
+    admin.AssignConnectorCredentialsResponseDTO:
+      type: object
+      properties:
+        tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.AssignConnectorCredentialsByTenantResponseDTO'
+          description: A list of objects representing the tenants and data connectors that were assigned connector credentials.
+    data_in.AssignConnectorCredentialRequest:
+      type: object
+      properties:
+        connectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/data_in.Connector'
+          description: A list of objects representing the data connectors to be assigned with credentials.
+    designer.GoogleWorkspaceAuthParamsDTO:
+      type: object
+      properties:
+        authCode:
+          type: string
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        serviceAccount:
+          type: string
+        privacyMode:
+          type: string
+    admin.ConnectorSettingRequestDTO:
+      type: object
+      properties:
+        settingKey:
+          type: string
+          description: The unique identifier associated with the setting.
+        value:
+          type: string
+          description: The setting's value.
+    designer.PairDTO:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    designer.WorkdayAuthParamsDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+        domainName:
+          type: string
+        implementationName:
+          type: string
+        password:
+          type: string
+        oAuth:
+          $ref: '#/components/schemas/designer.WorkdayOAuthParamsDTO'
+        refToken:
+          $ref: '#/components/schemas/designer.WorkdayRefreshTokenParamsDTO'
+        integrationSystemId:
+          type: string
+        additionalHeaderParams:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.PairDTO'
+    designer.GoogleSheetsAuthParamsDTO:
+      type: object
+      properties:
+        authCode:
+          type: string
+        configuration:
+          type: string
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+    designer.SalesforceAuthParamsDTO:
+      type: object
+      properties:
+        refreshToken:
+          type: string
+        clientId:
+          type: string
+    designer.UltimateAuthParamsDTO:
+      type: object
+      properties:
+        hostDomainName:
+          type: string
+        apiKey:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        userAccessKey:
+          type: string
+    designer.EchoBasicAuthDTO:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        asidToken:
+          type: string
+    data_in.JobStatusWithStartTime:
+      type: object
+      properties:
+        jobId:
+          type: string
+          description: The unique ID of the job.
+        tenant:
+          type: string
+          description: The tenant code.
+        status:
+          type: string
+          description: The status of the job, such as Running or Completed.
+        jobType:
+          type: string
+          description: The type of the job, such as a processing job or receiving job.
+        startTime:
+          type: string
+          description: The time that the job started.
+        parentJobId:
+          type: string
+          description: The unique ID of the parent job, if applicable.
+    servicing.DataCategoriesResponseDTO:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.DataCategoryResponseDTO'
+      description: A list of data categories.
+    designer.SnowflakeV2AuthParamsDTO:
+      type: object
+      properties:
+        accountIdentifier:
+          type: string
+        database:
+          type: string
+        schema:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        warehouse:
+          type: string
+        privateKey:
+          type: string
+        role:
+          type: string
+        tenantCodeColumn:
+          type: string
+    designer.SubjectMissingAccessDTO:
+      type: object
+      properties:
+        subject:
+          enum:
+          - Employee
+          - Employee_Budgeted_Compensation
+          - Employment_Start
+          - Employment_Exit
+          - Absenteeism
+          - Supervisory
+          - Organization
+          - Compensation_Payout
+          - CustomSubject
+          - TestConnectionSubject
+          - Internal_Placement
+          - Pay_Change
+          - Hire
+          - Applicant
+          - Candidate
+          - Requisition
+          type: string
+          description: The subjects that cannot be accessed.
+          format: enum
+        attributes:
+          type: array
+          items:
+            type: string
+          description: The attributes that cannot be accessed.
+        errorMessage:
+          type: string
+          description: The error message detailing the access issue.
+    data_in.DispatchingJobStatusResponse:
+      type: object
+      properties:
+        jobId:
+          type: string
+          description: The ID of the dispatching job that generated the extraction jobs.
+        tenantCode:
+          type: string
+          description: The tenant that owns the dispatching job. This is usually the administrating tenant.
+        status:
+          type: string
+          description: The current state of the job.
+        totalJobsDispatched:
+          type: integer
+          description: The number of extraction jobs that were generated by the dispatching job.
+          format: int32
+    designer.DimensionsAuthParamsDTO:
+      type: object
+      properties:
+        appKey:
+          type: string
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        vanityUrl:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+    dp.CancelJobBatchFromJobIdDTO:
+      type: object
+      properties:
+        jobIds:
+          type: array
+          items:
+            type: string
+          description: A list of jobs to cancel. The maximum number of jobs that can be cancelled is 500.
+    data_in.DisableDVResponse:
+      type: object
+      properties:
+        totalFailures:
+          type: integer
+          description: The number of data versions that failed during the disabling process.
+          format: int32
+        totalSuccess:
+          type: integer
+          description: The number of data versions that were disabled successfully.
+          format: int32
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/data_in.Result'
+          description: A list of objects representing the disabling process.
+    data_in.DataLoadRequest:
+      type: object
+      properties:
+        model:
+          allOf:
+          - $ref: '#/components/schemas/data_in.DataLoadRequestModel'
+          description: A form body key that contains a collection of key-value pairs.
   securitySchemes:
     CookieAuth:
       type: apiKey

@@ -132,33 +132,14 @@ paths:
                 $ref: '#/components/schemas/servicing.UsersAPIResponseDTO'
 components:
   schemas:
-    Status:
+    servicing.UsersCreationAPIRequestDTO:
       type: object
       properties:
-        localizedMessage:
-          type: string
-          description: Localized error message describing the root cause of the error.
-        code:
-          type: string
-          description: Error classification.
-        message:
-          type: string
-          description: Not used.
-        rci:
-          type: string
-          description: Optional root cause identifier.
-        userError:
-          type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
-    servicing.UsersDeleteAPIRequestDTO:
-      type: object
-      properties:
-        userIds:
+        users:
           type: array
           items:
-            type: string
-          description: A list of objects representing users to delete. Maximum 100 users can be deleted in a single request.
+            $ref: '#/components/schemas/servicing.UserCreationAPIRequestDTO'
+          description: A list of objects representing users to create. Maximum 100 users can be created in a single request.
     servicing.UserCreationAPIRequestDTO:
       type: object
       properties:
@@ -177,14 +158,22 @@ components:
         email:
           type: string
           description: The user's email. This is used if the user's email is different from their username. For example, "john.doe@visier.com".
-    servicing.UsersUpdateAPIRequestDTO:
+    servicing.UsersAPIFailureDTO:
       type: object
       properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.UsersUpdateAPIUserDTO'
-          description: A list of objects representing users to update. Maximum 100 users can be updated in a single request.
+        userId:
+          type: string
+          description: The unique identifier associated with the user.
+        userName:
+          type: string
+          description: The user's username. This is typically the user's email, such as john@jupiter.com.
+        displayName:
+          type: string
+          description: An identifiable name to display within Visier. For example, "John Smith".
+        error:
+          allOf:
+          - $ref: '#/components/schemas/servicing.UsersAPIErrorMessageDTO'
+          description: The error thrown during creation.
     servicing.UsersAPIErrorMessageDTO:
       type: object
       properties:
@@ -194,14 +183,14 @@ components:
         rci:
           type: string
           description: The unique identifier associated to this error
-    servicing.UsersCreationAPIRequestDTO:
+    servicing.UsersDeleteAPIRequestDTO:
       type: object
       properties:
-        users:
+        userIds:
           type: array
           items:
-            $ref: '#/components/schemas/servicing.UserCreationAPIRequestDTO'
-          description: A list of objects representing users to create. Maximum 100 users can be created in a single request.
+            type: string
+          description: A list of objects representing users to delete. Maximum 100 users can be deleted in a single request.
     servicing.UsersUpdateAPIUserDTO:
       type: object
       properties:
@@ -223,6 +212,33 @@ components:
         username:
           type: string
           description: The user's username. This is typically the user's email, such as john@jupiter.com. If a user's username changes, they must authenticate using the new username.
+    servicing.UsersUpdateAPIRequestDTO:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.UsersUpdateAPIUserDTO'
+          description: A list of objects representing users to update. Maximum 100 users can be updated in a single request.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
     servicing.UsersAPISuccessDTO:
       type: object
       properties:
@@ -257,22 +273,6 @@ components:
           items:
             $ref: '#/components/schemas/servicing.UsersAPIFailureDTO'
           description: The users for which the request failed.
-    servicing.UsersAPIFailureDTO:
-      type: object
-      properties:
-        userId:
-          type: string
-          description: The unique identifier associated with the user.
-        userName:
-          type: string
-          description: The user's username. This is typically the user's email, such as john@jupiter.com.
-        displayName:
-          type: string
-          description: An identifiable name to display within Visier. For example, "John Smith".
-        error:
-          allOf:
-          - $ref: '#/components/schemas/servicing.UsersAPIErrorMessageDTO'
-          description: The error thrown during creation.
   securitySchemes:
     CookieAuth:
       type: apiKey

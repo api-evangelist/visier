@@ -146,6 +146,38 @@ paths:
                 $ref: '#/components/schemas/designer.crypto.KeyPairDeleteResponseDTO'
 components:
   schemas:
+    designer.crypto.KeyPairGenerateRequestDTO:
+      type: object
+      properties:
+        expirationDate:
+          type: string
+          description: The UTC expiration date of the key in ISO-8601 format. Must be between 2 and 10 years. Default is 2 years.
+    designer.crypto.PublicKeyDTO:
+      type: object
+      properties:
+        keyID:
+          type: string
+          description: The key ID of the generated key pair in 16-letter hexadecimal format, including leading zeros.
+        dateGenerated:
+          type: string
+          description: The UTC date that the key pair was generated in milliseconds since the Unix epoch.
+        expiryDate:
+          type: string
+          description: The UTC expiration date of the key in milliseconds since the Unix epoch.
+        recipient:
+          type: string
+          description: The tenant code and creation date in milliseconds of the PGP key; for example, WFF_j1r_13490234234.
+        publicKey:
+          type: string
+          description: The public key of the generated key pair.
+    designer.crypto.PublicKeysDTO:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.crypto.PublicKeyDTO'
+          description: A list of the tenant's public keys.
     Status:
       type: object
       properties:
@@ -171,38 +203,6 @@ components:
         keyID:
           type: string
           description: The key ID in 16-letter hexadecimal format, including leading zeros.
-    designer.crypto.PublicKeyDTO:
-      type: object
-      properties:
-        keyID:
-          type: string
-          description: The key ID of the generated key pair in 16-letter hexadecimal format, including leading zeros.
-        dateGenerated:
-          type: string
-          description: The UTC date that the key pair was generated in milliseconds since the Unix epoch.
-        expiryDate:
-          type: string
-          description: The UTC expiration date of the key in milliseconds since the Unix epoch.
-        recipient:
-          type: string
-          description: The tenant code and creation date in milliseconds of the PGP key; for example, WFF_j1r_13490234234.
-        publicKey:
-          type: string
-          description: The public key of the generated key pair.
-    designer.crypto.KeyPairGenerateRequestDTO:
-      type: object
-      properties:
-        expirationDate:
-          type: string
-          description: The UTC expiration date of the key in ISO-8601 format. Must be between 2 and 10 years. Default is 2 years.
-    designer.crypto.PublicKeysDTO:
-      type: object
-      properties:
-        keys:
-          type: array
-          items:
-            $ref: '#/components/schemas/designer.crypto.PublicKeyDTO'
-          description: A list of the tenant's public keys.
   securitySchemes:
     CookieAuth:
       type: apiKey

@@ -143,31 +143,17 @@ paths:
                 $ref: '#/components/schemas/PlanRowDataLoadResponseDTO'
 components:
   schemas:
-    PlanDataUploadResponseDTO:
+    PlanDataLoadChangeListDTO:
       type: object
       properties:
-        updatedCellsCount:
-          type: integer
-          description: The number of cells that were updated from the data load process.
-        potentialUpdatedCellsCount:
-          type: integer
-          description: The number of cells that would have been updated if all changes were saved.
-        errors:
+        planItem:
+          type: string
+          description: The ID of the plan item.
+        changes:
           type: array
-          description: The collection of errors encountered during the data load process.
+          description: The collection of changes made for the plan item.
           items:
-            $ref: '#/components/schemas/planning.PlanDataLoadErrorDTO'
-        changelists:
-          type: array
-          description: 'The collection of changes grouped by plan item made during the data load process.
-
-            This list only contains the changes specified by the load.
-
-            If you indicated in the request that the changes are to be rolled up or distributed,
-
-            the values modified as a result of the calculations are not listed here.'
-          items:
-            $ref: '#/components/schemas/PlanDataLoadChangeListDTO'
+            $ref: '#/components/schemas/PlanDataLoadChangeDTO'
     PlanDataLoadChangeDTO:
       type: object
       properties:
@@ -187,17 +173,6 @@ components:
           type: number
           format: double
           description: The new value loaded into the plan from the data load.
-    PlanDataLoadChangeListDTO:
-      type: object
-      properties:
-        planItem:
-          type: string
-          description: The ID of the plan item.
-        changes:
-          type: array
-          description: The collection of changes made for the plan item.
-          items:
-            $ref: '#/components/schemas/PlanDataLoadChangeDTO'
     PlanRowDataLoadResponseDTO:
       type: object
       properties:
@@ -223,6 +198,31 @@ components:
           description: The custom members and their corresponding IDs in the plan.
           items:
             $ref: '#/components/schemas/planning.PlanSegmentLevelMemberDTO'
+    PlanDataUploadResponseDTO:
+      type: object
+      properties:
+        updatedCellsCount:
+          type: integer
+          description: The number of cells that were updated from the data load process.
+        potentialUpdatedCellsCount:
+          type: integer
+          description: The number of cells that would have been updated if all changes were saved.
+        errors:
+          type: array
+          description: The collection of errors encountered during the data load process.
+          items:
+            $ref: '#/components/schemas/planning.PlanDataLoadErrorDTO'
+        changelists:
+          type: array
+          description: 'The collection of changes grouped by plan item made during the data load process.
+
+            This list only contains the changes specified by the load.
+
+            If you indicated in the request that the changes are to be rolled up or distributed,
+
+            the values modified as a result of the calculations are not listed here.'
+          items:
+            $ref: '#/components/schemas/PlanDataLoadChangeListDTO'
   securitySchemes:
     CookieAuth:
       type: apiKey

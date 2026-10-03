@@ -122,6 +122,19 @@ components:
             type: string
           description: The unique identifiers associated with each permission.
       description: The result of the update or insert (upsert) request.
+    servicing.ProfileAssignmentDTO:
+      type: object
+      properties:
+        profileId:
+          type: string
+          description: The unique identifier associated with the profile.
+        validityStartTime:
+          type: string
+          description: The inclusive start date and time when this profile is active. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
+        validityEndTime:
+          type: string
+          description: The exclusive end date and time when this profile is no longer active. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
+      description: The profiles associated with the user.
     Status:
       type: object
       properties:
@@ -141,19 +154,6 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
-    servicing.ProfileAssignmentDTO:
-      type: object
-      properties:
-        profileId:
-          type: string
-          description: The unique identifier associated with the profile.
-        validityStartTime:
-          type: string
-          description: The inclusive start date and time when this profile is active. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
-        validityEndTime:
-          type: string
-          description: The exclusive end date and time when this profile is no longer active. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
-      description: The profiles associated with the user.
     servicing.UserV3ApiRequestDTO:
       type: object
       properties:

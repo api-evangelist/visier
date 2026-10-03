@@ -424,6 +424,53 @@ paths:
                 $ref: '#/components/schemas/Status'
 components:
   schemas:
+    servicing.DirectDataJobStatusResponseDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant for the data load.
+        transactionId:
+          type: string
+          description: The unique identifier of the committed transaction.
+        jobId:
+          type: string
+          description: The unique identifier of the processing job.
+        status:
+          type: string
+          description: The status of the processing job.
+        message:
+          type: string
+          description: If the processing job fails, this field contains details specific to the failure.
+      description: The job status information for a committed transaction.
+    servicing.DirectDataSchemaDTO:
+      type: object
+      properties:
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.DirectDataSchemaFieldDTO'
+          description: The schema definition for loading a specific object
+      description: Public API Direct Intake schema response object
+    servicing.DirectDataTransactionDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant for the data load.
+        transactionId:
+          type: string
+          description: The transaction's unique identifier.
+        created:
+          type: string
+          description: The transaction's creation date and time. The format is YYYY-MM-DDTHH:mm:ss.SSSZ (ISO 8601).
+        updated:
+          type: string
+          description: The transaction's last update date and time. The format is YYYY-MM-DDTHH:mm:ss.SSSZ (ISO 8601).
+        status:
+          type: string
+          description: The status of the transaction, such as open, progressing, or committed.
+      description: An open transaction.
     Status:
       type: object
       properties:
@@ -443,6 +490,64 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
+    servicing.DirectDataTransactionStartResponseDTO:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: The transaction's unique identifier.
+      description: The response after successfully creating a transaction.
+    servicing.DirectDataLoadConfigDTO:
+      type: object
+      properties:
+        job:
+          allOf:
+          - $ref: '#/components/schemas/servicing.DirectDataJobConfigDTO'
+          description: The direct data intake job configuration.
+      description: The configuration for the direct data intake, such as the  direct data intake job type.
+    servicing.DirectDataListTransactionsResponseDTO:
+      type: object
+      properties:
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.DirectDataTransactionDTO'
+          description: The list of open transactions.
+      description: A list of all currently open transactions.
+    servicing.DirectDataUploadFileResponseDTO:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: The unique transaction identifier.
+        status:
+          type: string
+          description: The status of the request.
+        message:
+          type: string
+          description: Upload response message from the provisioning service
+      description: "The transaction results.\n\n If uploading a file, a success response means the upload was successful and doesn't always mean the file\n was successfully loaded into its target object."
+    servicing.DirectDataSchemaFieldDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The field's column name. Column names are case sensitive.
+        dataType:
+          type: string
+          description: The column's data type.
+        formats:
+          type: array
+          items:
+            type: string
+          description: The column's accepted formats, such as date formats like "yyyy-MM-dd".
+        isMandatory:
+          type: boolean
+          description: If true, the field must contain a value to successfully load data into the object.
+        emptyValuesAllowed:
+          type: boolean
+          description: If true, the value may be empty.
+      description: The definition of each field in an object's schema.
     servicing.DirectDataJobConfigDTO:
       type: object
       properties:
@@ -476,111 +581,6 @@ components:
 
 
         If uploading a file, a success response means the upload was successful and doesn''t always mean the file was successfully loaded into its target object.'
-    servicing.DirectDataListTransactionsResponseDTO:
-      type: object
-      properties:
-        transactions:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.DirectDataTransactionDTO'
-          description: The list of open transactions.
-      description: A list of all currently open transactions.
-    servicing.DirectDataSchemaFieldDTO:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The field's column name. Column names are case sensitive.
-        dataType:
-          type: string
-          description: The column's data type.
-        formats:
-          type: array
-          items:
-            type: string
-          description: The column's accepted formats, such as date formats like "yyyy-MM-dd".
-        isMandatory:
-          type: boolean
-          description: If true, the field must contain a value to successfully load data into the object.
-        emptyValuesAllowed:
-          type: boolean
-          description: If true, the value may be empty.
-      description: The definition of each field in an object's schema.
-    servicing.DirectDataSchemaDTO:
-      type: object
-      properties:
-        schema:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.DirectDataSchemaFieldDTO'
-          description: The schema definition for loading a specific object
-      description: Public API Direct Intake schema response object
-    servicing.DirectDataLoadConfigDTO:
-      type: object
-      properties:
-        job:
-          allOf:
-          - $ref: '#/components/schemas/servicing.DirectDataJobConfigDTO'
-          description: The direct data intake job configuration.
-      description: The configuration for the direct data intake, such as the  direct data intake job type.
-    servicing.DirectDataJobStatusResponseDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The tenant for the data load.
-        transactionId:
-          type: string
-          description: The unique identifier of the committed transaction.
-        jobId:
-          type: string
-          description: The unique identifier of the processing job.
-        status:
-          type: string
-          description: The status of the processing job.
-        message:
-          type: string
-          description: If the processing job fails, this field contains details specific to the failure.
-      description: The job status information for a committed transaction.
-    servicing.DirectDataUploadFileResponseDTO:
-      type: object
-      properties:
-        transactionId:
-          type: string
-          description: The unique transaction identifier.
-        status:
-          type: string
-          description: The status of the request.
-        message:
-          type: string
-          description: Upload response message from the provisioning service
-      description: "The transaction results.\n\n If uploading a file, a success response means the upload was successful and doesn't always mean the file\n was successfully loaded into its target object."
-    servicing.DirectDataTransactionDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The tenant for the data load.
-        transactionId:
-          type: string
-          description: The transaction's unique identifier.
-        created:
-          type: string
-          description: The transaction's creation date and time. The format is YYYY-MM-DDTHH:mm:ss.SSSZ (ISO 8601).
-        updated:
-          type: string
-          description: The transaction's last update date and time. The format is YYYY-MM-DDTHH:mm:ss.SSSZ (ISO 8601).
-        status:
-          type: string
-          description: The status of the transaction, such as open, progressing, or committed.
-      description: An open transaction.
-    servicing.DirectDataTransactionStartResponseDTO:
-      type: object
-      properties:
-        transactionId:
-          type: string
-          description: The transaction's unique identifier.
-      description: The response after successfully creating a transaction.
   securitySchemes:
     CookieAuth:
       type: apiKey
