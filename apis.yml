@@ -542,6 +542,8 @@ apis:
   humanURL: https://docs.visier.com/developer/apis/administration/projects/projects-api.htm
   baseURL: https://{vanity_name}.api.visier.io
   tags:
+  - Email Domains
+  tags_raw:
   - EmailDomains
   properties:
   - type: OpenAPI
