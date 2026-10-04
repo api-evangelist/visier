@@ -386,6 +386,52 @@ paths:
                 $ref: '#/components/schemas/servicing.SafeguardAPIResponseDTO'
 components:
   schemas:
+    servicing.VersionInformationDTO:
+      type: object
+      properties:
+        versionType:
+          enum:
+          - Unknown
+          - BP
+          - Tenant
+          - TenantOverride
+          - TenantShared
+          - Draft
+          type: string
+          description: "Indicates where the object originates from and whether the object has been modified. Valid values:\n - `Unknown`: The source is not known.\n - `BP`: The object originates from Visier's Blueprint and is not changed at the tenant level.\n - `Tenant`: The object only exists in the tenant and doesn't exist in Visier's Blueprint.\n - `TenantOverride`: The object originates from Visier's Blueprint and is changed at the tenant level.\n - `TenantShared`: The object is non-versioned, only exists in the tenant and doesn’t exist in Visier's Blueprint, and is shareable with other users in the tenant.\n - `Draft`: The object only exists in the specified draft project."
+          format: enum
+        edited:
+          type: string
+          description: The UTC time of the latest change in ISO 8601 format. For example, `2023-10-01T12:00:00Z`.
+        editor:
+          type: string
+          description: The user who made the latest change.
+      description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
+    servicing.SafeguardAPIResponseDTO:
+      type: object
+      properties:
+        safeguardId:
+          type: string
+          description: The unique identifier of the safeguard.
+        displayName:
+          type: string
+          description: The user-friendly display name for the safeguard.
+        content:
+          type: string
+          description: The safeguard text that constrains Vee's behavior.
+        customResponse:
+          type: string
+          description: The custom response text when a safeguard is triggered.
+        userGroupIds:
+          type: array
+          items:
+            type: string
+          description: The user group IDs that the safeguard applies to.
+        versionInformation:
+          allOf:
+          - $ref: '#/components/schemas/servicing.VersionInformationDTO'
+          description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
+      description: Information about a Vee safeguard.
     servicing.InstructionAPIResponseDTO:
       type: object
       properties:
@@ -416,6 +462,15 @@ components:
           - $ref: '#/components/schemas/servicing.VersionInformationDTO'
           description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
       description: Information about a Vee instruction.
+    servicing.InstructionsAPIResponseDTO:
+      type: object
+      properties:
+        instructions:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.InstructionAPIResponseDTO'
+          description: A list of instructions.
+      description: The Vee instructions.
     servicing.SafeguardsAPIResponseDTO:
       type: object
       properties:
@@ -444,61 +499,6 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
-    servicing.SafeguardAPIResponseDTO:
-      type: object
-      properties:
-        safeguardId:
-          type: string
-          description: The unique identifier of the safeguard.
-        displayName:
-          type: string
-          description: The user-friendly display name for the safeguard.
-        content:
-          type: string
-          description: The safeguard text that constrains Vee's behavior.
-        customResponse:
-          type: string
-          description: The custom response text when a safeguard is triggered.
-        userGroupIds:
-          type: array
-          items:
-            type: string
-          description: The user group IDs that the safeguard applies to.
-        versionInformation:
-          allOf:
-          - $ref: '#/components/schemas/servicing.VersionInformationDTO'
-          description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
-      description: Information about a Vee safeguard.
-    servicing.VersionInformationDTO:
-      type: object
-      properties:
-        versionType:
-          enum:
-          - Unknown
-          - BP
-          - Tenant
-          - TenantOverride
-          - TenantShared
-          - Draft
-          type: string
-          description: "Indicates where the object originates from and whether the object has been modified. Valid values:\n - `Unknown`: The source is not known.\n - `BP`: The object originates from Visier's Blueprint and is not changed at the tenant level.\n - `Tenant`: The object only exists in the tenant and doesn't exist in Visier's Blueprint.\n - `TenantOverride`: The object originates from Visier's Blueprint and is changed at the tenant level.\n - `TenantShared`: The object is non-versioned, only exists in the tenant and doesn’t exist in Visier's Blueprint, and is shareable with other users in the tenant.\n - `Draft`: The object only exists in the specified draft project."
-          format: enum
-        edited:
-          type: string
-          description: The UTC time of the latest change in ISO 8601 format. For example, `2023-10-01T12:00:00Z`.
-        editor:
-          type: string
-          description: The user who made the latest change.
-      description: The object's version information. Version information is read-only. It indicates where the object originates from and whether the object has been modified in your tenant.
-    servicing.InstructionsAPIResponseDTO:
-      type: object
-      properties:
-        instructions:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.InstructionAPIResponseDTO'
-          description: A list of instructions.
-      description: The Vee instructions.
   securitySchemes:
     CookieAuth:
       type: apiKey

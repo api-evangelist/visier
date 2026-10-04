@@ -129,6 +129,55 @@ paths:
           content: {}
 components:
   schemas:
+    servicing.MultiValueSettingDTO:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+          description: A value containing multiple strings.
+      description: A value containing multiple strings.
+    servicing.SingleValueSettingDTO:
+      type: object
+      properties:
+        value:
+          type: string
+          description: A value containing a single string.
+      description: A value containing a single string.
+    admin.SidecarSolutionRequestDTO:
+      type: object
+      properties:
+        applicationId:
+          type: string
+          description: The unique identifier of the solution to configure.
+    servicing.SidecarSolutionSettingsDTO:
+      type: object
+      properties:
+        configs:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.SettingsDTO'
+          description: The available configuration settings.
+        applicationId:
+          type: string
+          description: The unique identifier of the solution to configure.
+      description: The options to configure a sidecar solution.
+    servicing.SettingsDTO:
+      type: object
+      properties:
+        key:
+          type: string
+          description: The key of the configurable setting.
+        singleConfigItem:
+          allOf:
+          - $ref: '#/components/schemas/servicing.SingleValueSettingDTO'
+          description: A value containing a single string.
+        multiValueConfigItem:
+          allOf:
+          - $ref: '#/components/schemas/servicing.MultiValueSettingDTO'
+          description: A value containing multiple strings.
+      description: The settings to configure a sidecar solution.
     Status:
       type: object
       properties:
@@ -148,55 +197,6 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
-    servicing.SidecarSolutionSettingsDTO:
-      type: object
-      properties:
-        configs:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.SettingsDTO'
-          description: The available configuration settings.
-        applicationId:
-          type: string
-          description: The unique identifier of the solution to configure.
-      description: The options to configure a sidecar solution.
-    admin.SidecarSolutionRequestDTO:
-      type: object
-      properties:
-        applicationId:
-          type: string
-          description: The unique identifier of the solution to configure.
-    servicing.MultiValueSettingDTO:
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
-          description: A value containing multiple strings.
-      description: A value containing multiple strings.
-    servicing.SingleValueSettingDTO:
-      type: object
-      properties:
-        value:
-          type: string
-          description: A value containing a single string.
-      description: A value containing a single string.
-    servicing.SettingsDTO:
-      type: object
-      properties:
-        key:
-          type: string
-          description: The key of the configurable setting.
-        singleConfigItem:
-          allOf:
-          - $ref: '#/components/schemas/servicing.SingleValueSettingDTO'
-          description: A value containing a single string.
-        multiValueConfigItem:
-          allOf:
-          - $ref: '#/components/schemas/servicing.MultiValueSettingDTO'
-          description: A value containing multiple strings.
-      description: The settings to configure a sidecar solution.
   securitySchemes:
     CookieAuth:
       type: apiKey

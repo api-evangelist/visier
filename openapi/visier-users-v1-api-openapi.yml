@@ -1013,47 +1013,30 @@ paths:
                 $ref: '#/components/schemas/Status'
 components:
   schemas:
-    admin.TargetProjectForTenantsListDTO:
+    admin.UserGroupsGetAPIResponseDTO:
       type: object
       properties:
-        targetProjectForTenants:
+        userGroups:
           type: array
           items:
-            $ref: '#/components/schemas/admin.TargetProjectForTenantDTO'
-          description: "Administrating tenants can specify the tenants and projects in which to make assignments to users. Specify one `projectId` per `tenantCode`.\n If omitted, the request is immediately published to production or applied to the `ProjectID` in the request header, if available, for the administrating tenant or TargetTenantID, if available."
-    servicing.AllUserGroupsAssignedForLocalTenantDTO:
+            $ref: '#/components/schemas/admin.UserGroupGetAPIResponseDTO'
+          description: A list of user groups.
+        limit:
+          type: integer
+          description: The number of results to return. The maximum number of users to retrieve is 1000.
+          format: uint32
+        start:
+          type: integer
+          description: The index to start retrieving results from, also known as offset.
+          format: uint32
+    admin.PermissionsToUserGroupsRequestDTO:
       type: object
       properties:
-        assignedUserGroups:
+        userGroups:
           type: array
           items:
-            $ref: '#/components/schemas/servicing.UserGroupAssignedForLocalTenantDTO'
-          description: A list of objects representing the available user groups.
-    admin.DeleteUserResponse:
-      type: object
-      properties: {}
-    servicing.AllPermissionsAssignedForLocalTenantDTO:
-      type: object
-      properties:
-        assignedPermissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.PermissionAssignedForLocalTenantDTO'
-          description: A list of objects representing the user's permissions.
-    admin.UserSecurityAssignmentsDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier associated with the user group.
-        name:
-          type: string
-          description: The name of the user group.
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.SimpleUserDTO'
-          description: A list of objects representing the users assigned to or removed from the user group.
+            $ref: '#/components/schemas/admin.PermissionsToUserGroupRequestDTO'
+          description: A list of objects representing the user groups and permissions to assign or remove.
     admin.PermissionsToUserGroupForTenantDTO:
       type: object
       properties:
@@ -1071,49 +1054,53 @@ components:
           items:
             $ref: '#/components/schemas/admin.UserGroupGetAPIResponseDTO'
           description: A list of objects representing user groups and the permissions to assign to or remove from them.
-    admin.SecurityAssignmentResponseDTO:
+    admin.DeleteUserResponse:
+      type: object
+      properties: {}
+    servicing.AssignRevokePermissionsResponseDTO:
       type: object
       properties:
         tenants:
           type: array
           items:
-            $ref: '#/components/schemas/admin.TenantAssignmentsDTO'
-          description: A list of objects representing the tenants and users that were assigned to or removed from user groups.
-    Status:
+            $ref: '#/components/schemas/servicing.AssignRevokePermissionByTenantDTO'
+          description: A list of objects representing the users that were assigned permissions, organized by the tenants the users belong to.
+        sessionRepoId:
+          type: string
+      description: The results of the permission assignment or removal.
+    servicing.AssignRevokePermissionByUserDTO:
       type: object
       properties:
-        localizedMessage:
+        userId:
           type: string
-          description: Localized error message describing the root cause of the error.
-        code:
+          description: The unique identifier associated with the user.
+        username:
           type: string
-          description: Error classification.
+          description: The user's username. This is typically the user's email, such as john@visier.com.
         message:
           type: string
-          description: Not used.
-        rci:
+          description: A meaningful message about the user permission.
+      description: The results of the permission assignment or removal by user.
+    admin.UsersToUserGroupRequestDTO:
+      type: object
+      properties:
+        userGroupId:
           type: string
-          description: Optional root cause identifier.
-        userError:
-          type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
-    servicing.AllProfileAssignedForLocalTenantDTO:
-      type: object
-      properties:
-        assignedProfiles:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.ProfileAssignedForLocalTenantDTO'
-          description: A list of objects representing the user profiles assigned to the user and their validity range.
-    servicing.AdditionalCapabilitiesDTO:
-      type: object
-      properties:
-        additionalCapabilities:
+          description: The unique identifier associated with the user group.
+        userIds:
           type: array
           items:
             type: string
-          description: The additional capabilities assigned to this profile.
+          description: A list of strings representing unique user IDs to assign to or remove from the user group. The maximum number of `userIds` per user group is 100.
+    admin.PermissionResponseDTO:
+      type: object
+      properties:
+        permissionId:
+          type: string
+          description: The unique identifier associated with the permission.
+        displayName:
+          type: string
+          description: An identifiable permission name to display in Visier, such as "Diversity Access".
     admin.UserGroupsUsersDTO:
       type: object
       properties:
@@ -1130,15 +1117,26 @@ components:
           type: integer
           description: The index to start retrieving values from, also known as offset. The index begins at 0.
           format: uint32
-    UserCreationAPIResponseDTO:
+    servicing.PermissionAssignedUsersDTO:
       type: object
       properties:
-        userId:
-          type: string
-          description: The unique identifier associated with the user.
-        username:
-          type: string
-          description: The user's username. This is typically the user's email, such as john@jupiter.com.
+        tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.PermissionAssignedByTenantDTO'
+          description: A list of objects representing the users that are assigned the specific permission, organized by the tenants the users belong to.
+        limit:
+          type: integer
+          description: The number of results to return. The maximum number of tenants to retrieve is 100.
+          format: uint32
+        start:
+          type: integer
+          description: The index of the tenant to start retrieving results from, also known as offset. The index begins at 0.
+          format: uint32
+      description: Users that are assigned a specific permission.
+    servicing.UserUpdateAPIRequestDTO:
+      type: object
+      properties:
         displayName:
           type: string
           description: An identifiable name to display within Visier. For example, "John Smith".
@@ -1151,6 +1149,43 @@ components:
         email:
           type: string
           description: The user's email address.
+        username:
+          type: string
+          description: The user's username. This is typically the user's email, such as john@jupiter.com. If a user's username changes, they must authenticate using the new username.
+    servicing.PermissionAssignedForLocalTenantDTO:
+      type: object
+      properties:
+        permissionId:
+          type: string
+          description: The unique identifier associated with the permission.
+        displayName:
+          type: string
+          description: An identifiable permission name to display in Visier, such as "Diversity Access".
+        description:
+          type: string
+          description: A user-defined description of the permission.
+    admin.SecurityAssignmentResponseDTO:
+      type: object
+      properties:
+        tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.TenantAssignmentsDTO'
+          description: A list of objects representing the tenants and users that were assigned to or removed from user groups.
+    admin.UserSecurityAssignmentsDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier associated with the user group.
+        name:
+          type: string
+          description: The name of the user group.
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.SimpleUserDTO'
+          description: A list of objects representing the users assigned to or removed from the user group.
     servicing.AssignRevokePermissionByTenantDTO:
       type: object
       properties:
@@ -1177,58 +1212,6 @@ components:
           type: string
           description: The ID of the project that the change was made in, if applicable.
       description: The permissions organized by tenant.
-    servicing.AssignRevokePermissionsRequestDTO:
-      type: object
-      properties:
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.AssignRevokePermissionRequestDTO'
-          description: A list of objects representing the permissions to assign to or remove from users.
-        targetProjectForTenantsList:
-          allOf:
-          - $ref: '#/components/schemas/admin.TargetProjectForTenantsListDTO'
-          description: "Administrating tenants can specify the tenants and projects in which to assign permissions to users or remove permissions from users. Specify one `projectId` per `tenantCode`.\n If omitted, the request is immediately published to production or applied to the `ProjectID` in the request header, if available, for the administrating tenant or TargetTenantID, if available."
-      description: "Set permissions request\n List of permissionId with assign to user Ids"
-    servicing.UserCreationAPIRequestDTO:
-      type: object
-      properties:
-        username:
-          type: string
-          description: The user's username. This is typically the user's email, such as john@visier.com.
-        displayName:
-          type: string
-          description: An identifiable name to display within Visier. For example, "John Smith".
-        employeeId:
-          type: string
-          description: If applicable, and if available, the user employee ID in the data.
-        accountEnabled:
-          type: string
-          description: If false, the user account is disabled.
-        email:
-          type: string
-          description: The user's email. This is used if the user's email is different from their username. For example, "john.doe@visier.com".
-    admin.TargetProjectForTenantDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The tenant code.
-        projectId:
-          type: string
-          description: The project in which to make changes for the tenant.
-    servicing.CapabilitiesDTO:
-      type: object
-      properties:
-        capability:
-          type: string
-          description: The name of the capability.
-        accessLevel:
-          type: string
-          description: The access level of the profile for the given capability.
-        viewLevel:
-          type: string
-          description: The view level of the profile for the given capability.
     admin.UserGroupGetAPIResponseDTO:
       type: object
       properties:
@@ -1243,15 +1226,7 @@ components:
           items:
             $ref: '#/components/schemas/admin.PermissionResponseDTO'
           description: A list of objects representing the user's permissions.
-    admin.PermissionsToUserGroupsRequestDTO:
-      type: object
-      properties:
-        userGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.PermissionsToUserGroupRequestDTO'
-          description: A list of objects representing the user groups and permissions to assign or remove.
-    servicing.AssignRevokePermissionByUserDTO:
+    servicing.PermissionAssignedUserDTO:
       type: object
       properties:
         userId:
@@ -1260,11 +1235,17 @@ components:
         username:
           type: string
           description: The user's username. This is typically the user's email, such as john@visier.com.
-        message:
+        permissionFrom:
           type: string
-          description: A meaningful message about the user permission.
-      description: The results of the permission assignment or removal by user.
-    admin.SimpleUserDTO:
+          description: "The method through which the user was assigned the permission. The permission may be assigned through\n the following options:\n  - User: The permission was directly assigned to the user.\n  - UserGroup: The permission was assigned because the user belongs to a user group that is assigned the permission.\n  - UserAndUserGroup: The permission was directly assigned to the user and assigned because the user belongs to\n    a user group that is assigned the permission."
+      description: The user and the method through which the user was assigned the permission.
+    servicing.LastLoginDTO:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          description: The time that the user last logged into Visier.
+    UserCreationAPIResponseDTO:
       type: object
       properties:
         userId:
@@ -1272,61 +1253,27 @@ components:
           description: The unique identifier associated with the user.
         username:
           type: string
-          description: The user's username. This is typically the user's email, such as john@visier.com.
-    admin.TenantAssignmentsDTO:
+          description: The user's username. This is typically the user's email, such as john@jupiter.com.
+        displayName:
+          type: string
+          description: An identifiable name to display within Visier. For example, "John Smith".
+        employeeId:
+          type: string
+          description: If applicable, and if available, the user employee ID in the data.
+        accountEnabled:
+          type: string
+          description: If true, the user account is enabled.
+        email:
+          type: string
+          description: The user's email address.
+    servicing.AllUserGroupsAssignedForLocalTenantDTO:
       type: object
       properties:
-        tenantCode:
-          type: string
-          description: The unique identifier associated with the tenant.
-        status:
-          enum:
-          - Unknown
-          - Succeed
-          - Failed
-          type: string
-          description: The state of the user group assignment. Valid values are Succeed or Failed.
-          format: enum
-        message:
-          type: string
-          description: A detailed description of the request outcome, if available.
-        assignments:
+        assignedUserGroups:
           type: array
           items:
-            $ref: '#/components/schemas/admin.UserSecurityAssignmentsDTO'
-          description: A list of objects representing the user group and user assignments.
-        projectId:
-          type: string
-          description: The ID of the project that the change was made in, if applicable.
-    servicing.PermissionAssignedUsersDTO:
-      type: object
-      properties:
-        tenants:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.PermissionAssignedByTenantDTO'
-          description: A list of objects representing the users that are assigned the specific permission, organized by the tenants the users belong to.
-        limit:
-          type: integer
-          description: The number of results to return. The maximum number of tenants to retrieve is 100.
-          format: uint32
-        start:
-          type: integer
-          description: The index of the tenant to start retrieving results from, also known as offset. The index begins at 0.
-          format: uint32
-      description: Users that are assigned a specific permission.
-    servicing.AssignRevokePermissionRequestDTO:
-      type: object
-      properties:
-        permissionId:
-          type: string
-          description: The unique identifier associated with a permission.
-        userIds:
-          type: array
-          items:
-            type: string
-          description: A list of strings representing unique user IDs.
-      description: "Set permission detail\n permissionId with assign to userIds"
+            $ref: '#/components/schemas/servicing.UserGroupAssignedForLocalTenantDTO'
+          description: A list of objects representing the available user groups.
     servicing.UserGetAPIResponseDTO:
       type: object
       properties:
@@ -1364,6 +1311,59 @@ components:
         email:
           type: string
           description: The user's email address.
+    servicing.AssignRevokePermissionRequestDTO:
+      type: object
+      properties:
+        permissionId:
+          type: string
+          description: The unique identifier associated with a permission.
+        userIds:
+          type: array
+          items:
+            type: string
+          description: A list of strings representing unique user IDs.
+      description: "Set permission detail\n permissionId with assign to userIds"
+    admin.SimpleUserDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The unique identifier associated with the user.
+        username:
+          type: string
+          description: The user's username. This is typically the user's email, such as john@visier.com.
+    servicing.CapabilitiesDTO:
+      type: object
+      properties:
+        capability:
+          type: string
+          description: The name of the capability.
+        accessLevel:
+          type: string
+          description: The access level of the profile for the given capability.
+        viewLevel:
+          type: string
+          description: The view level of the profile for the given capability.
+    servicing.PermissionAssignedByTenantDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The unique identifier associated with the tenant.
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.PermissionAssignedUserDTO'
+          description: A list of objects representing the users that the permission is assigned to.
+      description: The users assigned a specific permission, grouped by tenant.
+    admin.TargetProjectForTenantsListDTO:
+      type: object
+      properties:
+        targetProjectForTenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.TargetProjectForTenantDTO'
+          description: "Administrating tenants can specify the tenants and projects in which to make assignments to users. Specify one `projectId` per `tenantCode`.\n If omitted, the request is immediately published to production or applied to the `ProjectID` in the request header, if available, for the administrating tenant or TargetTenantID, if available."
     servicing.AssignRevokePermissionByPermissionDTO:
       type: object
       properties:
@@ -1375,6 +1375,35 @@ components:
             $ref: '#/components/schemas/servicing.AssignRevokePermissionByUserDTO'
           description: A list of objects representing the users that was permission was assigned to or removed from.
       description: The results of the permission assignment or removal.
+    admin.UsersToUserGroupsRequestDTO:
+      type: object
+      properties:
+        userGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UsersToUserGroupRequestDTO'
+          description: A list of objects representing the user groups and users to assign or remove.
+        targetProjectForTenantsList:
+          allOf:
+          - $ref: '#/components/schemas/admin.TargetProjectForTenantsListDTO'
+          description: "Administrating tenants can specify the tenants and projects in which to assign users to user groups or remove users from user groups. Specify one `projectId` per `tenantCode`.\n If omitted, the request is immediately published to production or applied to the ProjectID in the request header, if available, for the administrating tenant or TargetTenantID, if available."
+    admin.TargetProjectForTenantDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant code.
+        projectId:
+          type: string
+          description: The project in which to make changes for the tenant.
+    servicing.AdditionalCapabilitiesDTO:
+      type: object
+      properties:
+        additionalCapabilities:
+          type: array
+          items:
+            type: string
+          description: The additional capabilities assigned to this profile.
     servicing.AllUsersGetAPIResponseDTO:
       type: object
       properties:
@@ -1391,133 +1420,14 @@ components:
           type: integer
           description: The index to start retrieving results from, also known as offset. The index begins at 0.
           format: uint32
-    servicing.AssignRevokePermissionsResponseDTO:
+    servicing.AllPermissionsAssignedForLocalTenantDTO:
       type: object
       properties:
-        tenants:
+        assignedPermissions:
           type: array
           items:
-            $ref: '#/components/schemas/servicing.AssignRevokePermissionByTenantDTO'
-          description: A list of objects representing the users that were assigned permissions, organized by the tenants the users belong to.
-        sessionRepoId:
-          type: string
-      description: The results of the permission assignment or removal.
-    servicing.PermissionAssignedForLocalTenantDTO:
-      type: object
-      properties:
-        permissionId:
-          type: string
-          description: The unique identifier associated with the permission.
-        displayName:
-          type: string
-          description: An identifiable permission name to display in Visier, such as "Diversity Access".
-        description:
-          type: string
-          description: A user-defined description of the permission.
-    admin.PermissionResponseDTO:
-      type: object
-      properties:
-        permissionId:
-          type: string
-          description: The unique identifier associated with the permission.
-        displayName:
-          type: string
-          description: An identifiable permission name to display in Visier, such as "Diversity Access".
-    servicing.UserUpdateAPIRequestDTO:
-      type: object
-      properties:
-        displayName:
-          type: string
-          description: An identifiable name to display within Visier. For example, "John Smith".
-        employeeId:
-          type: string
-          description: If applicable, and if available, the user employee ID in the data.
-        accountEnabled:
-          type: string
-          description: If true, the user account is enabled.
-        email:
-          type: string
-          description: The user's email address.
-        username:
-          type: string
-          description: The user's username. This is typically the user's email, such as john@jupiter.com. If a user's username changes, they must authenticate using the new username.
-    admin.UserGroupsGetAPIResponseDTO:
-      type: object
-      properties:
-        userGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.UserGroupGetAPIResponseDTO'
-          description: A list of user groups.
-        limit:
-          type: integer
-          description: The number of results to return. The maximum number of users to retrieve is 1000.
-          format: uint32
-        start:
-          type: integer
-          description: The index to start retrieving results from, also known as offset.
-          format: uint32
-    servicing.LastLoginDTO:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          description: The time that the user last logged into Visier.
-    servicing.UserGroupAssignedForLocalTenantDTO:
-      type: object
-      properties:
-        userGroupId:
-          type: string
-          description: The user group ID.
-        displayName:
-          type: string
-          description: An identifiable user group name to display in Visier, such as "Leadership User Group".
-    admin.UsersToUserGroupRequestDTO:
-      type: object
-      properties:
-        userGroupId:
-          type: string
-          description: The unique identifier associated with the user group.
-        userIds:
-          type: array
-          items:
-            type: string
-          description: A list of strings representing unique user IDs to assign to or remove from the user group. The maximum number of `userIds` per user group is 100.
-    servicing.PermissionAssignedByTenantDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The unique identifier associated with the tenant.
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.PermissionAssignedUserDTO'
-          description: A list of objects representing the users that the permission is assigned to.
-      description: The users assigned a specific permission, grouped by tenant.
-    admin.UsersToUserGroupsRequestDTO:
-      type: object
-      properties:
-        userGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.UsersToUserGroupRequestDTO'
-          description: A list of objects representing the user groups and users to assign or remove.
-        targetProjectForTenantsList:
-          allOf:
-          - $ref: '#/components/schemas/admin.TargetProjectForTenantsListDTO'
-          description: "Administrating tenants can specify the tenants and projects in which to assign users to user groups or remove users from user groups. Specify one `projectId` per `tenantCode`.\n If omitted, the request is immediately published to production or applied to the ProjectID in the request header, if available, for the administrating tenant or TargetTenantID, if available."
-    admin.PermissionsToUserGroupRequestDTO:
-      type: object
-      properties:
-        userGroupId:
-          type: string
-          description: The unique identifier associated with the user group.
-        permissionsIds:
-          type: array
-          items:
-            type: string
-          description: A list of strings representing the unique permission IDs to assign.
+            $ref: '#/components/schemas/servicing.PermissionAssignedForLocalTenantDTO'
+          description: A list of objects representing the user's permissions.
     servicing.ProfileAssignedForLocalTenantDTO:
       type: object
       properties:
@@ -1542,6 +1452,109 @@ components:
           allOf:
           - $ref: '#/components/schemas/servicing.AdditionalCapabilitiesDTO'
           description: A list of the additional capabilities that are assigned to this profile.
+    admin.PermissionsToUserGroupRequestDTO:
+      type: object
+      properties:
+        userGroupId:
+          type: string
+          description: The unique identifier associated with the user group.
+        permissionsIds:
+          type: array
+          items:
+            type: string
+          description: A list of strings representing the unique permission IDs to assign.
+    servicing.UserGroupAssignedForLocalTenantDTO:
+      type: object
+      properties:
+        userGroupId:
+          type: string
+          description: The user group ID.
+        displayName:
+          type: string
+          description: An identifiable user group name to display in Visier, such as "Leadership User Group".
+    servicing.UserCreationAPIRequestDTO:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The user's username. This is typically the user's email, such as john@visier.com.
+        displayName:
+          type: string
+          description: An identifiable name to display within Visier. For example, "John Smith".
+        employeeId:
+          type: string
+          description: If applicable, and if available, the user employee ID in the data.
+        accountEnabled:
+          type: string
+          description: If false, the user account is disabled.
+        email:
+          type: string
+          description: The user's email. This is used if the user's email is different from their username. For example, "john.doe@visier.com".
+    servicing.AssignRevokePermissionsRequestDTO:
+      type: object
+      properties:
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.AssignRevokePermissionRequestDTO'
+          description: A list of objects representing the permissions to assign to or remove from users.
+        targetProjectForTenantsList:
+          allOf:
+          - $ref: '#/components/schemas/admin.TargetProjectForTenantsListDTO'
+          description: "Administrating tenants can specify the tenants and projects in which to assign permissions to users or remove permissions from users. Specify one `projectId` per `tenantCode`.\n If omitted, the request is immediately published to production or applied to the `ProjectID` in the request header, if available, for the administrating tenant or TargetTenantID, if available."
+      description: "Set permissions request\n List of permissionId with assign to user Ids"
+    admin.TenantAssignmentsDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The unique identifier associated with the tenant.
+        status:
+          enum:
+          - Unknown
+          - Succeed
+          - Failed
+          type: string
+          description: The state of the user group assignment. Valid values are Succeed or Failed.
+          format: enum
+        message:
+          type: string
+          description: A detailed description of the request outcome, if available.
+        assignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.UserSecurityAssignmentsDTO'
+          description: A list of objects representing the user group and user assignments.
+        projectId:
+          type: string
+          description: The ID of the project that the change was made in, if applicable.
+    servicing.AllProfileAssignedForLocalTenantDTO:
+      type: object
+      properties:
+        assignedProfiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ProfileAssignedForLocalTenantDTO'
+          description: A list of objects representing the user profiles assigned to the user and their validity range.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
     admin.UserGroupsUsersForTenantDTO:
       type: object
       properties:
@@ -1553,19 +1566,6 @@ components:
           items:
             $ref: '#/components/schemas/admin.SimpleUserDTO'
           description: A list of objects representing the users in the user group.
-    servicing.PermissionAssignedUserDTO:
-      type: object
-      properties:
-        userId:
-          type: string
-          description: The unique identifier associated with the user.
-        username:
-          type: string
-          description: The user's username. This is typically the user's email, such as john@visier.com.
-        permissionFrom:
-          type: string
-          description: "The method through which the user was assigned the permission. The permission may be assigned through\n the following options:\n  - User: The permission was directly assigned to the user.\n  - UserGroup: The permission was assigned because the user belongs to a user group that is assigned the permission.\n  - UserAndUserGroup: The permission was directly assigned to the user and assigned because the user belongs to\n    a user group that is assigned the permission."
-      description: The user and the method through which the user was assigned the permission.
   securitySchemes:
     CookieAuth:
       type: apiKey

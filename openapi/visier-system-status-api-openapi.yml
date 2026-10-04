@@ -85,6 +85,12 @@ paths:
                 $ref: '#/components/schemas/systemstatus.SystemStatusDTO'
 components:
   schemas:
+    systemstatus.SystemStatusDTO:
+      type: object
+      properties:
+        overall:
+          type: string
+          description: The overall status of Visier's platform and services.
     Status:
       type: object
       properties:
@@ -104,12 +110,6 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
-    systemstatus.SystemStatusDTO:
-      type: object
-      properties:
-        overall:
-          type: string
-          description: The overall status of Visier's platform and services.
   securitySchemes:
     CookieAuth:
       type: apiKey

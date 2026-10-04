@@ -256,6 +256,16 @@ paths:
                 $ref: '#/components/schemas/Status'
 components:
   schemas:
+    analysis.common.ReportCreateRequestDTO:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The localized title of the report.
+        description:
+          type: string
+          description: The localized description of the report.
+      description: The request to create a new report.
     analysis.common.ReportDTO:
       type: object
       properties:
@@ -296,16 +306,15 @@ components:
           type: string
           description: The link to the report.
       description: The information of a single report.
-    analysis.common.ReportCreateRequestDTO:
+    analysis.common.ReportListResponseDTO:
       type: object
       properties:
-        title:
-          type: string
-          description: The localized title of the report.
-        description:
-          type: string
-          description: The localized description of the report.
-      description: The request to create a new report.
+        reports:
+          type: array
+          items:
+            $ref: '#/components/schemas/analysis.common.ReportDTO'
+          description: A list of reports.
+      description: The information of all the reports you have access to in your tenant.
     Status:
       type: object
       properties:
@@ -325,15 +334,6 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
-    analysis.common.ReportListResponseDTO:
-      type: object
-      properties:
-        reports:
-          type: array
-          items:
-            $ref: '#/components/schemas/analysis.common.ReportDTO'
-          description: A list of reports.
-      description: The information of all the reports you have access to in your tenant.
     analysis.common.ReportDeleteSuccessDTO:
       type: object
       properties:

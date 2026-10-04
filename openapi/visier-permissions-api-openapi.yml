@@ -927,111 +927,22 @@ paths:
                 $ref: '#/components/schemas/servicing.NonVersionedSyncResponseDTO'
 components:
   schemas:
-    servicing.InheritedAccessConfigDTO:
+    servicing.DataAccessSetFailureDTO:
       type: object
       properties:
-        analyticObjectId:
+        dataAccessSetId:
           type: string
-          description: The analytic object ID associated with the inherited access configuration.
-        removeAccess:
-          type: boolean
-          description: The flag for removing access to the inherited analytic object.
-        memberFilterConfigs:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.MemberFilterConfigDTO'
-          description: Custom filters that define population access for an inherited analytic object in the permission.
-    servicing.NonVersionedSyncResponseDTO:
-      type: object
-      properties:
-        status:
-          enum:
-          - Unknown
-          - Success
-          - Failed
-          type: string
-          description: "The status of the sync operation. Valid values:\n - `Success`: All artifacts synchronized successfully.\n - `Failed`: One or more errors occurred during synchronization."
-          format: enum
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.NonVersionedSyncErrorDTO'
-          description: "List of detailed errors that occurred during synchronization. Each error includes the artifact type, identifier, display name, and human-readable message.\n Empty if status is `Success`. Contains one or more errors if status is `Failed`.\n Common error types include: duplicate artifacts, missing parent artifacts, invalid references, and data inconsistencies."
-      description: Response from non-versioned synchronization operation.
-    servicing.DimensionFilterDTO:
-      type: object
-      properties:
-        staticDimensionFilter:
-          $ref: '#/components/schemas/servicing.StaticDimensionFilterDTO'
-        dynamicDimensionFilter:
-          $ref: '#/components/schemas/servicing.DynamicDimensionFilterDTO'
-    servicing.GetCapabilitiesAPIResponseDTO:
-      type: object
-      properties:
-        capabilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.CapabilityDTO'
-          description: A list of objects representing the available capabilities.
-    servicing.TargetsForDataCategoryDTO:
-      type: object
-      properties:
-        dataCategoryId:
-          type: string
-          description: The unique identifier of the data category for which the target access definition applies.
-        accessToAllTargets:
-          type: boolean
-          description: If `true`, the permission grants access to all targets in all data categories. Default is `false`.
-        targetIds:
-          type: array
-          items:
-            type: string
-          description: Distinct targets to grant access to. A target can be the name of an analytic object, parent-child dimension or multi-valued property. This value is ignored if `accessToAllTargets` is `true`.
-    Status:
-      type: object
-      properties:
-        localizedMessage:
-          type: string
-          description: Localized error message describing the root cause of the error.
-        code:
-          type: string
-          description: Error classification.
-        message:
-          type: string
-          description: Not used.
-        rci:
-          type: string
-          description: Optional root cause identifier.
-        userError:
-          type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
-    servicing.SecurablePropertyDTO:
-      type: object
-      properties:
-        propertyId:
-          type: string
-          description: The property ID.
+          description: The unique identifier associated with the data access set.
         displayName:
           type: string
-          description: An identifiable property name to display in Visier, such as "Job Pay Level".
-        analyticObjectId:
+          description: An identifiable data access set name to display in Visier, such as "Detailed(Employee)".
+        error:
+          allOf:
+          - $ref: '#/components/schemas/servicing.DataAccessSetErrorDTO'
+          description: The error associated with the failure.
+        correlationId:
           type: string
-          description: The property's analytic object ID.
-        isPrimaryKey:
-          type: boolean
-          description: If true, this property is the analytic object's primary key.
-        referenceSymbolName:
-          type: string
-          description: The reference symbol name.
-    servicing.BulkDataAccessSetDeleteRequestDTO:
-      type: object
-      properties:
-        shareablePropertyAccessConfigs:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.DataAccessSetIdDTO'
-          description: The data access sets to be deleted.
+          description: An identifier to associate the matching request field. Only returned if a `correlationId` was defined for the corresponding request field.
     servicing.PermissionBulkOperationResponseDTO:
       type: object
       properties:
@@ -1045,17 +956,14 @@ components:
           items:
             $ref: '#/components/schemas/servicing.PermissionFailureDTO'
           description: The permissions that did not process and any relevant error information.
-    servicing.AdminCapabilityConfigDTO:
+    servicing.GetDataSecurityObjectsAPIResponseDTO:
       type: object
       properties:
-        allCapabilitiesAccess:
-          type: boolean
-          description: If `true`, the permission has all possible capabilities.
-        capabilities:
+        analyticObjects:
           type: array
           items:
-            type: string
-          description: A list of the capabilities assigned in the permission. Not required if `allCapabilitiesAccess` is true.
+            $ref: '#/components/schemas/servicing.AnalyticObjectDTO'
+          description: A list of analytic objects and their related objects that are available to define data access to.
     servicing.ContentPackageArtifactDTO:
       type: object
       properties:
@@ -1074,120 +982,29 @@ components:
         canGroupBy:
           type: boolean
           description: If `true`, this artifact is available to group by. Only present for `dimension` and `keyGroup` artifacts.
-    servicing.HierarchyPropertyDTO:
+    servicing.DataAccessSetDTO:
       type: object
       properties:
-        hierarchyPropertyId:
+        id:
           type: string
-          description: The unique ID of the property.
+          description: The unique ID of the data access set.
         displayName:
           type: string
-          description: An identifiable property name to display in Visier, such as "Name Property".
-    servicing.DataAccessSetSuccessDTO:
-      type: object
-      properties:
-        dataAccessSetId:
+          description: An identifiable data access set name to display in Visier, such as "Aggregate(Employee)".
+        description:
           type: string
-          description: The unique identifier associated with the created data access set.
-        displayName:
-          type: string
-          description: An identifiable data access set name to display in Visier, such as "Detailed(Employee)".
-        correlationId:
-          type: string
-          description: An identifier to associate the matching request field. Only returned if a `correlationId` was defined for the corresponding request field.
-    servicing.GetPermissionsAPIResponseDTO:
-      type: object
-      properties:
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.PermissionDTO'
-          description: A list of objects representing the available permissions.
-      description: List of available permissions
-    servicing.BulkDataAccessSetRevertRequestDTO:
-      type: object
-      properties:
-        shareablePropertyAccessConfigs:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.DataAccessSetIdDTO'
-          description: The data access sets to be reverted.
-    servicing.InheritedReferenceMemberFilterConfigDTO:
-      type: object
-      properties:
-        targetAnalyticObjectId:
-          type: string
-          description: 'The unique ID of the analytic object that the source
-
-            analytic object should inherit filters from. The target analytic object must have a binding (strong) reference from the source analytic object.'
-        analyticObjectReference:
-          type: string
-          description: 'The optional object name of a binding (strong) reference to the target analytic object. If not specified, uses the first binding reference from the source
-
-            to the target analytic object.'
-    servicing.GetDataAccessSetsAPIResponseDTO:
-      type: object
-      properties:
-        dataAccessSets:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.DataAccessSetDTO'
-          description: A list of objects representing the shareable data access sets.
-    servicing.SourceSecurityProfileDTO:
-      type: object
-      properties:
-        sourceId:
-          type: string
-          description: The unique identifier of the source. Required to update source security. To retrieve source IDs, see `GET /v1/op/data-sources`.
-    servicing.NonVersionedSyncRequestDTO:
-      type: object
-      properties:
-        syncTypes:
-          type: array
-          items:
-            enum:
-            - UserGroups
-            - UserDirectAssignments
-            type: string
-            format: enum
-          description: "Optional types to synchronize. Specify which artifact types to include in the sync operation. Valid values:\n - `UserGroups`: Synchronizes user group assignments.\n - `UserDirectAssignments`: Synchronizes direct permission assignments to users.\n\n Data Access Sets and Permissions are always synchronized regardless of this setting."
-      description: "Request to copy permissions, data access sets, user groups, and user direct assignments from the versioned environment to the non-versioned environment. This operation immediately applies the security configurations, independent of data versioning.\n This endpoint always synchronizes permissions and data access sets. You can optionally synchronize user group assignments and direct permissions assignments to users."
-    servicing.RevertPermissionsRequestDTO:
-      type: object
-      properties:
-        permissionIds:
-          type: array
-          items:
-            type: string
-          description: The identifiers of the permissions to revert.
-    servicing.RelatedAnalyticObjectDTO:
-      type: object
-      properties:
+          description: A description of the data access set.
         analyticObjectId:
           type: string
-          description: The analytic object ID.
-        displayName:
+          description: The unique ID of the analytic object that the data access set is for.
+        propertyAccessConfigs:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.PropertyAccessConfigDTO'
+          description: The data access assigned to properties in the data access set.
+        correlationId:
           type: string
-          description: An identifiable analytic object name to display in Visier, such as "Recognition".
-    servicing.DynamicPropertyMappingDTO:
-      type: object
-      properties:
-        hierarchyPropertyId:
-          type: string
-          description: The unique ID of the property.
-        userProperty:
-          allOf:
-          - $ref: '#/components/schemas/servicing.UserPropertyDTO'
-          description: The user property that you want to link the name property or organization head to.
-        hierarchyPropertyStatus:
-          enum:
-          - Unset
-          - Valid
-          - NoData
-          - NotFound
-          type: string
-          description: "The property's validity status. Valid values: `Valid`, `NotFound`.\n * **Valid**: The object exists and has loaded data.\n * **NotFound**: The object doesn't exist."
-          format: enum
+          description: "An optional identifier to associate bulk request fields with their corresponding response fields. Correlation IDs may be between 3 and 64 characters long and\n consist of alphanumeric characters, `-`, and `_`.\n\n **Note**:\n - Each request field must have a unique `correlationId`.\n - Cannot reuse a `correlationId` in subsequent `POST` requests while the ID is still active. A `correlationId` is active for 7 days after creation."
     servicing.TargetSecurityConfigDTO:
       type: object
       properties:
@@ -1200,6 +1017,47 @@ components:
           items:
             $ref: '#/components/schemas/servicing.TargetsForDataCategoryDTO'
           description: The data security for targets in specific data categories in the permission.
+    servicing.UserPropertyDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name property to map to in the dynamic filter. Valid values are one of `username`, `email`, `employeeId`.
+    servicing.DataAccessSetIdDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the data access set.
+    servicing.PropertySetConfigDTO:
+      type: object
+      properties:
+        propertyAccessConfigs:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.PropertyAccessConfigDTO'
+          description: The data access for a property.
+        shareableDataAccessSet:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ShareableDataAccessSet'
+          description: A shareable data access set. Shareable data access sets may be linked in multiple permissions.
+    servicing.NonVersionedSyncResponseDTO:
+      type: object
+      properties:
+        status:
+          enum:
+          - Unknown
+          - Success
+          - Failed
+          type: string
+          description: "The status of the sync operation. Valid values:\n - `Success`: All artifacts synchronized successfully.\n - `Failed`: One or more errors occurred during synchronization."
+          format: enum
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.NonVersionedSyncErrorDTO'
+          description: "List of detailed errors that occurred during synchronization. Each error includes the artifact type, identifier, display name, and human-readable message.\n Empty if status is `Success`. Contains one or more errors if status is `Failed`.\n Common error types include: duplicate artifacts, missing parent artifacts, invalid references, and data inconsistencies."
+      description: Response from non-versioned synchronization operation.
     admin.PermissionsListDTO:
       type: object
       properties:
@@ -1208,6 +1066,14 @@ components:
           items:
             $ref: '#/components/schemas/servicing.PermissionDTO'
           description: The list of permissions that will be created or updated
+    servicing.BulkDataAccessSetRequestDTO:
+      type: object
+      properties:
+        shareablePropertyAccessConfigs:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.DataAccessSetDTO'
+          description: The data access sets to be created or updated.
     servicing.ContentPackageDTO:
       type: object
       properties:
@@ -1225,38 +1091,50 @@ components:
           items:
             $ref: '#/components/schemas/servicing.ContentPackageArtifactTypeDTO'
           description: The artifacts explicitly included in the content package, grouped by artifact type. Only populated when the request includes `with=details`.
-    servicing.BulkDataAccessSetResponseDTO:
+    servicing.BulkDataAccessSetDeleteRequestDTO:
       type: object
       properties:
-        successes:
+        shareablePropertyAccessConfigs:
           type: array
           items:
-            $ref: '#/components/schemas/servicing.DataAccessSetSuccessDTO'
-          description: The successfully created data access sets.
-        failures:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.DataAccessSetFailureDTO'
-          description: The data access sets that failed to be created and any relevant error information.
-    servicing.SecurableDimensionDTO:
+            $ref: '#/components/schemas/servicing.DataAccessSetIdDTO'
+          description: The data access sets to be deleted.
+    servicing.DataAccessSetSuccessDTO:
       type: object
       properties:
-        dimensionId:
+        dataAccessSetId:
           type: string
-          description: The dimension ID.
+          description: The unique identifier associated with the created data access set.
         displayName:
           type: string
-          description: An identifiable dimension name to display in Visier, such as "Contract Type".
-        analyticObjectIds:
+          description: An identifiable data access set name to display in Visier, such as "Detailed(Employee)".
+        correlationId:
+          type: string
+          description: An identifier to associate the matching request field. Only returned if a `correlationId` was defined for the corresponding request field.
+    servicing.AdminCapabilityConfigDTO:
+      type: object
+      properties:
+        allCapabilitiesAccess:
+          type: boolean
+          description: If `true`, the permission has all possible capabilities.
+        capabilities:
           type: array
           items:
             type: string
-          description: A list of analytic object IDs.
-        hierarchyProperties:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.HierarchyPropertyDTO'
-          description: The list of hierarchies you can map to a user in a permission's dynamic filter.
+          description: A list of the capabilities assigned in the permission. Not required if `allCapabilitiesAccess` is true.
+    servicing.InheritedReferenceMemberFilterConfigDTO:
+      type: object
+      properties:
+        targetAnalyticObjectId:
+          type: string
+          description: 'The unique ID of the analytic object that the source
+
+            analytic object should inherit filters from. The target analytic object must have a binding (strong) reference from the source analytic object.'
+        analyticObjectReference:
+          type: string
+          description: 'The optional object name of a binding (strong) reference to the target analytic object. If not specified, uses the first binding reference from the source
+
+            to the target analytic object.'
     servicing.PermissionSuccessDTO:
       type: object
       properties:
@@ -1269,284 +1147,6 @@ components:
         correlationId:
           type: string
           description: An identifier to associate the matching request field. Only returned if a `correlationId` was defined for the corresponding request field.
-    servicing.DeletePermissionsRequestDTO:
-      type: object
-      properties:
-        permissionIds:
-          type: array
-          items:
-            type: string
-          description: The identifiers of the permissions to delete.
-    servicing.BulkDataAccessSetRequestDTO:
-      type: object
-      properties:
-        shareablePropertyAccessConfigs:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.DataAccessSetDTO'
-          description: The data access sets to be created or updated.
-    servicing.DynamicDimensionFilterDTO:
-      type: object
-      properties:
-        dimensionId:
-          type: string
-          description: The dimension ID associated with the filter.
-        subjectReferencePath:
-          type: array
-          items:
-            type: string
-          description: The subject reference path.
-        dynamicPropertyMappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.DynamicPropertyMappingDTO'
-          description: The properties assigned population access in the dynamic filter.
-        dimensionStatus:
-          enum:
-          - Unset
-          - Valid
-          - NoData
-          - NotFound
-          type: string
-          description: "The dimension's validity status. Valid values: Valid, NoData, NotFound.\n * **Valid**: The object exists and has loaded data.\n * **NoData**: The object exists but doesn't have loaded data.\n * **NotFound**: The object doesn't exist."
-          format: enum
-    servicing.TargetsForAllDataCategoriesDTO:
-      type: object
-      properties:
-        accessToAllTargets:
-          type: boolean
-          description: If `true`, the permission grants access to all targets in all data categories. Default is `false`.
-        targetIds:
-          type: array
-          items:
-            type: string
-          description: Distinct targets to grant access to. A target can be the name of an analytic object, parent-child dimension or multi-valued property. This value is ignored if `accessToAllTargets` is `true`.
-    servicing.ShareableDataAccessSet:
-      type: object
-      properties:
-        dataAccessSetId:
-          type: string
-          description: The unique identifier of the shareable data access set.
-    servicing.CapabilityDTO:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The unique name of the capability.
-        displayName:
-          type: string
-          description: An identifiable capability name to display in Visier, such as "Schedule Analysis".
-        description:
-          type: string
-          description: A description of the capability.
-    servicing.PermissionErrorDTO:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error message
-        rci:
-          type: string
-          description: A root cause identifier that allows Visier to determine the source of the problem.
-    servicing.GetDataSecurityObjectsAPIResponseDTO:
-      type: object
-      properties:
-        analyticObjects:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.AnalyticObjectDTO'
-          description: A list of analytic objects and their related objects that are available to define data access to.
-    servicing.UserPropertyDTO:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name property to map to in the dynamic filter. Valid values are one of `username`, `email`, `employeeId`.
-    servicing.PropertySetConfigDTO:
-      type: object
-      properties:
-        propertyAccessConfigs:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.PropertyAccessConfigDTO'
-          description: The data access for a property.
-        shareableDataAccessSet:
-          allOf:
-          - $ref: '#/components/schemas/servicing.ShareableDataAccessSet'
-          description: A shareable data access set. Shareable data access sets may be linked in multiple permissions.
-    servicing.PropertyAccessConfigDTO:
-      type: object
-      properties:
-        propertyId:
-          type: string
-          description: The property ID associated with the property access configuration.
-        analyticObjectId:
-          type: string
-          description: The analytic object ID of the property.
-        analyticObjectReferencePaths:
-          type: array
-          items:
-            type: string
-          description: The path to the analytic object reference. Empty if the configuration is not a reference.
-        accessLevel:
-          enum:
-          - None
-          - Aggregate
-          - Detailed
-          type: string
-          description: "The access level of the property. Valid values are: `Aggregate`, `Detailed`.\n * **Aggregate**: The property can only be accessed as part of an aggregate.\n * **Detailed**: The property can be accessed at a detailed level."
-          format: enum
-        propertyStatus:
-          enum:
-          - Unset
-          - Valid
-          - NoData
-          - NotFound
-          type: string
-          description: "The property's validity status. Valid values: `Valid`, `NoData`, `NotFound`.\n * **Valid**: The object exists and has loaded data.\n * **NoData**: The object exists but doesn't have loaded data.\n * **NotFound**: The object doesn't exist."
-          format: enum
-    servicing.NonVersionedSyncErrorDTO:
-      type: object
-      properties:
-        type:
-          enum:
-          - UserGroups
-          - UserDirectAssignments
-          - DataAccessSets
-          - Permissions
-          - Unknown
-          type: string
-          description: The type of artifact that failed to synchronize.
-          format: enum
-        objectId:
-          type: string
-          description: The unique identifier of the artifact that failed, for example permission ID, user group ID, and user ID. Not provided for system-level errors.
-        displayName:
-          type: string
-          description: The display name of the artifact that failed, for example `Diversity Access` and `Leadership Group`. Not provided for system-level errors or user direct assignments.
-        message:
-          type: string
-          description: Human-readable error message describing what went wrong.
-      description: Detailed error information for a synchronization failure.
-    servicing.PermissionDTO:
-      type: object
-      properties:
-        permissionId:
-          type: string
-          description: The unique identifier associated with the permission.
-        displayName:
-          type: string
-          description: An identifiable permission name to display in Visier, such as "Diversity Access".
-        description:
-          type: string
-          description: A user-defined description of the permission.
-        dataSecurityProfiles:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.DataSecurityProfileDTO'
-          description: A list of objects representing the data security for each item in a permission.
-        adminCapabilityConfig:
-          allOf:
-          - $ref: '#/components/schemas/servicing.AdminCapabilityConfigDTO'
-          description: The capabilities assigned in the permission.
-        roleModulesConfig:
-          allOf:
-          - $ref: '#/components/schemas/servicing.RoleModulesConfigDTO'
-          description: A list of content packages assigned to the permission.
-        sourceSecurityConfig:
-          allOf:
-          - $ref: '#/components/schemas/servicing.SourceSecurityConfigDTO'
-          description: "The sources assigned in the permission.\n <br>**Note:** <em>This field is in **limited availability**. If you are interested in using it, please contact your Customer Success Manager (CSM).</em>"
-        targetSecurityConfig:
-          allOf:
-          - $ref: '#/components/schemas/servicing.TargetSecurityConfigDTO'
-          description: "A list of data categories and their targets assigned in the permission.\n <br>**Note:** <em>This field is in **limited availability**. If you are interested in using it, please contact your Customer Success Manager (CSM).</em>"
-        correlationId:
-          type: string
-          description: "An optional identifier to associate bulk request fields with their corresponding response fields. Correlation IDs may be between 3 and 64 characters long and\n consist of alphanumeric characters, `-`, and `_`.\n\n **Note**:\n - Each request field must have a unique `correlationId`.\n - Cannot reuse a `correlationId` in subsequent POST requests while the ID is still active. A `correlationId` is active for 7 days after creation."
-    servicing.PermissionFailureDTO:
-      type: object
-      properties:
-        permissionId:
-          type: string
-          description: The unique identifier associated with the permission.
-        displayName:
-          type: string
-          description: An identifiable permission name to display in Visier, such as "Diversity Access".
-        error:
-          allOf:
-          - $ref: '#/components/schemas/servicing.PermissionErrorDTO'
-          description: The error associated with the failure.
-        correlationId:
-          type: string
-          description: An identifier to associate the matching request field. Only returned if a `correlationId` was defined for the corresponding request field.
-    servicing.StaticDimensionFilterDTO:
-      type: object
-      properties:
-        dimensionId:
-          type: string
-          description: The dimension ID associated with the filter.
-        subjectReferencePath:
-          type: array
-          items:
-            type: string
-          description: The subject reference path.
-        memberSelections:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.MemberSelectionDTO'
-          description: A list of objects representing the dimension members assigned population access in the member filter.
-        dimensionStatus:
-          enum:
-          - Unset
-          - Valid
-          - NoData
-          - NotFound
-          type: string
-          description: "The dimension's validity status. Valid values: Valid, NoData, NotFound.\n * **Valid**: The object exists and has loaded data.\n * **NoData**: The object exists but doesn't have loaded data.\n * **NotFound**: The object doesn't exist."
-          format: enum
-    servicing.MemberSelectionDTO:
-      type: object
-      properties:
-        namePath:
-          type: array
-          items:
-            type: string
-          description: The member name path.
-        excluded:
-          type: boolean
-          description: If `true`, population access is granted for all members except this member.
-        dimensionMemberStatus:
-          enum:
-          - Unset
-          - Valid
-          - NoData
-          - NotFound
-          type: string
-          description: "The dimension member's validity status. Valid values: Valid, NotFound.\n * **Valid**: The object exists and has loaded data.\n * **NotFound**: The object doesn't exist."
-          format: enum
-    servicing.SourceSecurityConfigDTO:
-      type: object
-      properties:
-        sourceSecurityProfiles:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.SourceSecurityProfileDTO'
-          description: The sources this permission grants access to.
-        hasWriteAccessToAllSources:
-          type: boolean
-          description: If `true`, the permission grants the ability to create, read, update, and delete all sources. Default is `false`.
-    servicing.ContentPackageArtifactTypeDTO:
-      type: object
-      properties:
-        artifactType:
-          type: string
-          description: The category of the content package item, such as `metric`, `dimension`, `keyGroup`, `planModel`, `guidebookTopic`, `analysis`, `report`, or `dataConnector`.
-        artifacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.ContentPackageArtifactDTO'
-          description: The items of this category included in the content package.
     servicing.DataSecurityProfileDTO:
       type: object
       properties:
@@ -1583,6 +1183,421 @@ components:
           type: string
           description: "The analytic object's validity status. Valid values: Valid, NoData, NotFound.\n * **Valid**: The object exists and has loaded data.\n * **NoData**: The object exists but doesn't have loaded data.\n * **NotFound**: The object doesn't exist."
           format: enum
+    servicing.InheritedAccessConfigDTO:
+      type: object
+      properties:
+        analyticObjectId:
+          type: string
+          description: The analytic object ID associated with the inherited access configuration.
+        removeAccess:
+          type: boolean
+          description: The flag for removing access to the inherited analytic object.
+        memberFilterConfigs:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.MemberFilterConfigDTO'
+          description: Custom filters that define population access for an inherited analytic object in the permission.
+    servicing.TargetsForAllDataCategoriesDTO:
+      type: object
+      properties:
+        accessToAllTargets:
+          type: boolean
+          description: If `true`, the permission grants access to all targets in all data categories. Default is `false`.
+        targetIds:
+          type: array
+          items:
+            type: string
+          description: Distinct targets to grant access to. A target can be the name of an analytic object, parent-child dimension or multi-valued property. This value is ignored if `accessToAllTargets` is `true`.
+    servicing.RevertPermissionsRequestDTO:
+      type: object
+      properties:
+        permissionIds:
+          type: array
+          items:
+            type: string
+          description: The identifiers of the permissions to revert.
+    servicing.SourceSecurityProfileDTO:
+      type: object
+      properties:
+        sourceId:
+          type: string
+          description: The unique identifier of the source. Required to update source security. To retrieve source IDs, see `GET /v1/op/data-sources`.
+    servicing.SecurablePropertyDTO:
+      type: object
+      properties:
+        propertyId:
+          type: string
+          description: The property ID.
+        displayName:
+          type: string
+          description: An identifiable property name to display in Visier, such as "Job Pay Level".
+        analyticObjectId:
+          type: string
+          description: The property's analytic object ID.
+        isPrimaryKey:
+          type: boolean
+          description: If true, this property is the analytic object's primary key.
+        referenceSymbolName:
+          type: string
+          description: The reference symbol name.
+    servicing.PermissionFailureDTO:
+      type: object
+      properties:
+        permissionId:
+          type: string
+          description: The unique identifier associated with the permission.
+        displayName:
+          type: string
+          description: An identifiable permission name to display in Visier, such as "Diversity Access".
+        error:
+          allOf:
+          - $ref: '#/components/schemas/servicing.PermissionErrorDTO'
+          description: The error associated with the failure.
+        correlationId:
+          type: string
+          description: An identifier to associate the matching request field. Only returned if a `correlationId` was defined for the corresponding request field.
+    servicing.DataAccessSetErrorDTO:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+        rci:
+          type: string
+          description: A root cause identifier that allows Visier to determine the source of the problem.
+    servicing.ShareableDataAccessSet:
+      type: object
+      properties:
+        dataAccessSetId:
+          type: string
+          description: The unique identifier of the shareable data access set.
+    servicing.GetPermissionsAPIResponseDTO:
+      type: object
+      properties:
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.PermissionDTO'
+          description: A list of objects representing the available permissions.
+      description: List of available permissions
+    servicing.GetDataAccessSetsAPIResponseDTO:
+      type: object
+      properties:
+        dataAccessSets:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.DataAccessSetDTO'
+          description: A list of objects representing the shareable data access sets.
+    servicing.PermissionDTO:
+      type: object
+      properties:
+        permissionId:
+          type: string
+          description: The unique identifier associated with the permission.
+        displayName:
+          type: string
+          description: An identifiable permission name to display in Visier, such as "Diversity Access".
+        description:
+          type: string
+          description: A user-defined description of the permission.
+        dataSecurityProfiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.DataSecurityProfileDTO'
+          description: A list of objects representing the data security for each item in a permission.
+        adminCapabilityConfig:
+          allOf:
+          - $ref: '#/components/schemas/servicing.AdminCapabilityConfigDTO'
+          description: The capabilities assigned in the permission.
+        roleModulesConfig:
+          allOf:
+          - $ref: '#/components/schemas/servicing.RoleModulesConfigDTO'
+          description: A list of content packages assigned to the permission.
+        sourceSecurityConfig:
+          allOf:
+          - $ref: '#/components/schemas/servicing.SourceSecurityConfigDTO'
+          description: "The sources assigned in the permission.\n <br>**Note:** <em>This field is in **limited availability**. If you are interested in using it, please contact your Customer Success Manager (CSM).</em>"
+        targetSecurityConfig:
+          allOf:
+          - $ref: '#/components/schemas/servicing.TargetSecurityConfigDTO'
+          description: "A list of data categories and their targets assigned in the permission.\n <br>**Note:** <em>This field is in **limited availability**. If you are interested in using it, please contact your Customer Success Manager (CSM).</em>"
+        correlationId:
+          type: string
+          description: "An optional identifier to associate bulk request fields with their corresponding response fields. Correlation IDs may be between 3 and 64 characters long and\n consist of alphanumeric characters, `-`, and `_`.\n\n **Note**:\n - Each request field must have a unique `correlationId`.\n - Cannot reuse a `correlationId` in subsequent POST requests while the ID is still active. A `correlationId` is active for 7 days after creation."
+    servicing.GetCapabilitiesAPIResponseDTO:
+      type: object
+      properties:
+        capabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.CapabilityDTO'
+          description: A list of objects representing the available capabilities.
+    servicing.PropertyAccessConfigDTO:
+      type: object
+      properties:
+        propertyId:
+          type: string
+          description: The property ID associated with the property access configuration.
+        analyticObjectId:
+          type: string
+          description: The analytic object ID of the property.
+        analyticObjectReferencePaths:
+          type: array
+          items:
+            type: string
+          description: The path to the analytic object reference. Empty if the configuration is not a reference.
+        accessLevel:
+          enum:
+          - None
+          - Aggregate
+          - Detailed
+          type: string
+          description: "The access level of the property. Valid values are: `Aggregate`, `Detailed`.\n * **Aggregate**: The property can only be accessed as part of an aggregate.\n * **Detailed**: The property can be accessed at a detailed level."
+          format: enum
+        propertyStatus:
+          enum:
+          - Unset
+          - Valid
+          - NoData
+          - NotFound
+          type: string
+          description: "The property's validity status. Valid values: `Valid`, `NoData`, `NotFound`.\n * **Valid**: The object exists and has loaded data.\n * **NoData**: The object exists but doesn't have loaded data.\n * **NotFound**: The object doesn't exist."
+          format: enum
+    servicing.SourceSecurityConfigDTO:
+      type: object
+      properties:
+        sourceSecurityProfiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.SourceSecurityProfileDTO'
+          description: The sources this permission grants access to.
+        hasWriteAccessToAllSources:
+          type: boolean
+          description: If `true`, the permission grants the ability to create, read, update, and delete all sources. Default is `false`.
+    servicing.NonVersionedSyncErrorDTO:
+      type: object
+      properties:
+        type:
+          enum:
+          - UserGroups
+          - UserDirectAssignments
+          - DataAccessSets
+          - Permissions
+          - Unknown
+          type: string
+          description: The type of artifact that failed to synchronize.
+          format: enum
+        objectId:
+          type: string
+          description: The unique identifier of the artifact that failed, for example permission ID, user group ID, and user ID. Not provided for system-level errors.
+        displayName:
+          type: string
+          description: The display name of the artifact that failed, for example `Diversity Access` and `Leadership Group`. Not provided for system-level errors or user direct assignments.
+        message:
+          type: string
+          description: Human-readable error message describing what went wrong.
+      description: Detailed error information for a synchronization failure.
+    servicing.DimensionFilterDTO:
+      type: object
+      properties:
+        staticDimensionFilter:
+          $ref: '#/components/schemas/servicing.StaticDimensionFilterDTO'
+        dynamicDimensionFilter:
+          $ref: '#/components/schemas/servicing.DynamicDimensionFilterDTO'
+    servicing.PermissionErrorDTO:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+        rci:
+          type: string
+          description: A root cause identifier that allows Visier to determine the source of the problem.
+    servicing.TargetsForDataCategoryDTO:
+      type: object
+      properties:
+        dataCategoryId:
+          type: string
+          description: The unique identifier of the data category for which the target access definition applies.
+        accessToAllTargets:
+          type: boolean
+          description: If `true`, the permission grants access to all targets in all data categories. Default is `false`.
+        targetIds:
+          type: array
+          items:
+            type: string
+          description: Distinct targets to grant access to. A target can be the name of an analytic object, parent-child dimension or multi-valued property. This value is ignored if `accessToAllTargets` is `true`.
+    servicing.BulkDataAccessSetRevertRequestDTO:
+      type: object
+      properties:
+        shareablePropertyAccessConfigs:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.DataAccessSetIdDTO'
+          description: The data access sets to be reverted.
+    servicing.HierarchyPropertyDTO:
+      type: object
+      properties:
+        hierarchyPropertyId:
+          type: string
+          description: The unique ID of the property.
+        displayName:
+          type: string
+          description: An identifiable property name to display in Visier, such as "Name Property".
+    servicing.StaticDimensionFilterDTO:
+      type: object
+      properties:
+        dimensionId:
+          type: string
+          description: The dimension ID associated with the filter.
+        subjectReferencePath:
+          type: array
+          items:
+            type: string
+          description: The subject reference path.
+        memberSelections:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.MemberSelectionDTO'
+          description: A list of objects representing the dimension members assigned population access in the member filter.
+        dimensionStatus:
+          enum:
+          - Unset
+          - Valid
+          - NoData
+          - NotFound
+          type: string
+          description: "The dimension's validity status. Valid values: Valid, NoData, NotFound.\n * **Valid**: The object exists and has loaded data.\n * **NoData**: The object exists but doesn't have loaded data.\n * **NotFound**: The object doesn't exist."
+          format: enum
+    servicing.DynamicDimensionFilterDTO:
+      type: object
+      properties:
+        dimensionId:
+          type: string
+          description: The dimension ID associated with the filter.
+        subjectReferencePath:
+          type: array
+          items:
+            type: string
+          description: The subject reference path.
+        dynamicPropertyMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.DynamicPropertyMappingDTO'
+          description: The properties assigned population access in the dynamic filter.
+        dimensionStatus:
+          enum:
+          - Unset
+          - Valid
+          - NoData
+          - NotFound
+          type: string
+          description: "The dimension's validity status. Valid values: Valid, NoData, NotFound.\n * **Valid**: The object exists and has loaded data.\n * **NoData**: The object exists but doesn't have loaded data.\n * **NotFound**: The object doesn't exist."
+          format: enum
+    servicing.DeletePermissionsRequestDTO:
+      type: object
+      properties:
+        permissionIds:
+          type: array
+          items:
+            type: string
+          description: The identifiers of the permissions to delete.
+    servicing.BulkDataAccessSetResponseDTO:
+      type: object
+      properties:
+        successes:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.DataAccessSetSuccessDTO'
+          description: The successfully created data access sets.
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.DataAccessSetFailureDTO'
+          description: The data access sets that failed to be created and any relevant error information.
+    servicing.MemberSelectionDTO:
+      type: object
+      properties:
+        namePath:
+          type: array
+          items:
+            type: string
+          description: The member name path.
+        excluded:
+          type: boolean
+          description: If `true`, population access is granted for all members except this member.
+        dimensionMemberStatus:
+          enum:
+          - Unset
+          - Valid
+          - NoData
+          - NotFound
+          type: string
+          description: "The dimension member's validity status. Valid values: Valid, NotFound.\n * **Valid**: The object exists and has loaded data.\n * **NotFound**: The object doesn't exist."
+          format: enum
+    servicing.RoleModulesConfigDTO:
+      type: object
+      properties:
+        contentPackageIds:
+          type: array
+          items:
+            type: string
+          description: The unique IDs of the content packages assigned to the permission.
+    servicing.CapabilityDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The unique name of the capability.
+        displayName:
+          type: string
+          description: An identifiable capability name to display in Visier, such as "Schedule Analysis".
+        description:
+          type: string
+          description: A description of the capability.
+    servicing.SecurableDimensionDTO:
+      type: object
+      properties:
+        dimensionId:
+          type: string
+          description: The dimension ID.
+        displayName:
+          type: string
+          description: An identifiable dimension name to display in Visier, such as "Contract Type".
+        analyticObjectIds:
+          type: array
+          items:
+            type: string
+          description: A list of analytic object IDs.
+        hierarchyProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.HierarchyPropertyDTO'
+          description: The list of hierarchies you can map to a user in a permission's dynamic filter.
+    servicing.ContentPackageArtifactTypeDTO:
+      type: object
+      properties:
+        artifactType:
+          type: string
+          description: The category of the content package item, such as `metric`, `dimension`, `keyGroup`, `planModel`, `guidebookTopic`, `analysis`, `report`, or `dataConnector`.
+        artifacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ContentPackageArtifactDTO'
+          description: The items of this category included in the content package.
+    servicing.NonVersionedSyncRequestDTO:
+      type: object
+      properties:
+        syncTypes:
+          type: array
+          items:
+            enum:
+            - UserGroups
+            - UserDirectAssignments
+            type: string
+            format: enum
+          description: "Optional types to synchronize. Specify which artifact types to include in the sync operation. Valid values:\n - `UserGroups`: Synchronizes user group assignments.\n - `UserDirectAssignments`: Synchronizes direct permission assignments to users.\n\n Data Access Sets and Permissions are always synchronized regardless of this setting."
+      description: "Request to copy permissions, data access sets, user groups, and user direct assignments from the versioned environment to the non-versioned environment. This operation immediately applies the security configurations, independent of data versioning.\n This endpoint always synchronizes permissions and data access sets. You can optionally synchronize user group assignments and direct permissions assignments to users."
     servicing.AnalyticObjectDTO:
       type: object
       properties:
@@ -1622,12 +1637,6 @@ components:
           items:
             $ref: '#/components/schemas/servicing.SecurableDimensionDTO'
           description: A list of dimensions that are available to define population access filters in the permission.
-    servicing.DataAccessSetIdDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID of the data access set.
     servicing.GetContentPackagesAPIResponseDTO:
       type: object
       properties:
@@ -1636,46 +1645,6 @@ components:
           items:
             $ref: '#/components/schemas/servicing.ContentPackageDTO'
           description: A list of objects representing the available content packages.
-    servicing.DataAccessSetDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID of the data access set.
-        displayName:
-          type: string
-          description: An identifiable data access set name to display in Visier, such as "Aggregate(Employee)".
-        description:
-          type: string
-          description: A description of the data access set.
-        analyticObjectId:
-          type: string
-          description: The unique ID of the analytic object that the data access set is for.
-        propertyAccessConfigs:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.PropertyAccessConfigDTO'
-          description: The data access assigned to properties in the data access set.
-        correlationId:
-          type: string
-          description: "An optional identifier to associate bulk request fields with their corresponding response fields. Correlation IDs may be between 3 and 64 characters long and\n consist of alphanumeric characters, `-`, and `_`.\n\n **Note**:\n - Each request field must have a unique `correlationId`.\n - Cannot reuse a `correlationId` in subsequent `POST` requests while the ID is still active. A `correlationId` is active for 7 days after creation."
-    servicing.RoleModulesConfigDTO:
-      type: object
-      properties:
-        contentPackageIds:
-          type: array
-          items:
-            type: string
-          description: The unique IDs of the content packages assigned to the permission.
-    servicing.DataAccessSetErrorDTO:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error message
-        rci:
-          type: string
-          description: A root cause identifier that allows Visier to determine the source of the problem.
     servicing.MemberFilterConfigDTO:
       type: object
       properties:
@@ -1684,22 +1653,53 @@ components:
           items:
             $ref: '#/components/schemas/servicing.DimensionFilterDTO'
           description: "A list of objects representing the custom filters that define population access for the item. \n A custom filter can be a \"member filter\" (`staticDimensionFilter`) or a \"dynamic filter\" (`dynamicDimensionFilter`)."
-    servicing.DataAccessSetFailureDTO:
+    Status:
       type: object
       properties:
-        dataAccessSetId:
+        localizedMessage:
           type: string
-          description: The unique identifier associated with the data access set.
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    servicing.DynamicPropertyMappingDTO:
+      type: object
+      properties:
+        hierarchyPropertyId:
+          type: string
+          description: The unique ID of the property.
+        userProperty:
+          allOf:
+          - $ref: '#/components/schemas/servicing.UserPropertyDTO'
+          description: The user property that you want to link the name property or organization head to.
+        hierarchyPropertyStatus:
+          enum:
+          - Unset
+          - Valid
+          - NoData
+          - NotFound
+          type: string
+          description: "The property's validity status. Valid values: `Valid`, `NotFound`.\n * **Valid**: The object exists and has loaded data.\n * **NotFound**: The object doesn't exist."
+          format: enum
+    servicing.RelatedAnalyticObjectDTO:
+      type: object
+      properties:
+        analyticObjectId:
+          type: string
+          description: The analytic object ID.
         displayName:
           type: string
-          description: An identifiable data access set name to display in Visier, such as "Detailed(Employee)".
-        error:
-          allOf:
-          - $ref: '#/components/schemas/servicing.DataAccessSetErrorDTO'
-          description: The error associated with the failure.
-        correlationId:
-          type: string
-          description: An identifier to associate the matching request field. Only returned if a `correlationId` was defined for the corresponding request field.
+          description: An identifiable analytic object name to display in Visier, such as "Recognition".
   securitySchemes:
     CookieAuth:
       type: apiKey

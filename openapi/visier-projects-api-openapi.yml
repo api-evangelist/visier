@@ -280,112 +280,6 @@ paths:
                 $ref: '#/components/schemas/Status'
 components:
   schemas:
-    servicing.CommitDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID of the committed change.
-        name:
-          type: string
-          description: An identifiable name of the committed change to display in Visier.
-        description:
-          type: string
-          description: A description of the committed change.
-    ProjectCommitsAPIResponseDTO:
-      type: object
-      properties:
-        commits:
-          type: array
-          description: A list of committed changes in the project.
-          items:
-            $ref: '#/components/schemas/ProjectCommitDTO'
-    ProjectCommitDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique ID of the committed change.
-        name:
-          type: string
-          description: An identifiable name of the committed change to display in Visier.
-        description:
-          type: string
-          description: A description of the committed change.
-    servicing.CommitAndPublishOperationResponseDTO:
-      type: object
-      properties:
-        publishedVersion:
-          allOf:
-          - $ref: '#/components/schemas/servicing.ProjectDTO'
-          description: The project version that was published to production.
-    servicing.GetProjectsAPIResponseDTO:
-      type: object
-      properties:
-        openProjects:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.ProjectDTO'
-          description: A list of objects representing the accessible open projects for the user.
-        approvalProjects:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.ProjectDTO'
-          description: A list of objects representing the accessible approval projects for the user.
-        rejectedProjects:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.ProjectDTO'
-          description: A list of objects representing the accessible rejected projects for the user.
-        archivedProjects:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.ProjectDTO'
-          description: A list of objects representing the accessible archived projects for the user.
-    servicing.ProjectCommitsAPIResponseDTO:
-      type: object
-      properties:
-        commits:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.CommitDTO'
-          description: A list of committed changes in the project.
-    Status:
-      type: object
-      properties:
-        localizedMessage:
-          type: string
-          description: Localized error message describing the root cause of the error.
-        code:
-          type: string
-          description: Error classification.
-        message:
-          type: string
-          description: Not used.
-        rci:
-          type: string
-          description: Optional root cause identifier.
-        userError:
-          type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
-    servicing.ProjectOperationRequestDTO:
-      type: object
-      properties:
-        operation:
-          enum:
-          - unknown
-          - commitAndPublish
-          type: string
-          description: "The operation to perform on a draft project. Valid values:\n * `commitAndPublish`: Commits the requesting user's changes and publishes the draft project to production."
-          format: enum
-    servicing.ProjectOperationResponseDTO:
-      type: object
-      properties:
-        commitAndPublish:
-          allOf:
-          - $ref: '#/components/schemas/servicing.CommitAndPublishOperationResponseDTO'
-          description: The result of the `commitAndPublish` operation.
     servicing.ProjectDTO:
       type: object
       properties:
@@ -427,6 +321,112 @@ components:
           type: string
           description: The type of the project. Omit when creating a new project.
           format: enum
+    servicing.ProjectCommitsAPIResponseDTO:
+      type: object
+      properties:
+        commits:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.CommitDTO'
+          description: A list of committed changes in the project.
+    ProjectCommitsAPIResponseDTO:
+      type: object
+      properties:
+        commits:
+          type: array
+          description: A list of committed changes in the project.
+          items:
+            $ref: '#/components/schemas/ProjectCommitDTO'
+    ProjectCommitDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the committed change.
+        name:
+          type: string
+          description: An identifiable name of the committed change to display in Visier.
+        description:
+          type: string
+          description: A description of the committed change.
+    servicing.CommitDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the committed change.
+        name:
+          type: string
+          description: An identifiable name of the committed change to display in Visier.
+        description:
+          type: string
+          description: A description of the committed change.
+    servicing.CommitAndPublishOperationResponseDTO:
+      type: object
+      properties:
+        publishedVersion:
+          allOf:
+          - $ref: '#/components/schemas/servicing.ProjectDTO'
+          description: The project version that was published to production.
+    servicing.ProjectOperationRequestDTO:
+      type: object
+      properties:
+        operation:
+          enum:
+          - unknown
+          - commitAndPublish
+          type: string
+          description: "The operation to perform on a draft project. Valid values:\n * `commitAndPublish`: Commits the requesting user's changes and publishes the draft project to production."
+          format: enum
+    servicing.ProjectOperationResponseDTO:
+      type: object
+      properties:
+        commitAndPublish:
+          allOf:
+          - $ref: '#/components/schemas/servicing.CommitAndPublishOperationResponseDTO'
+          description: The result of the `commitAndPublish` operation.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    servicing.GetProjectsAPIResponseDTO:
+      type: object
+      properties:
+        openProjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ProjectDTO'
+          description: A list of objects representing the accessible open projects for the user.
+        approvalProjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ProjectDTO'
+          description: A list of objects representing the accessible approval projects for the user.
+        rejectedProjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ProjectDTO'
+          description: A list of objects representing the accessible rejected projects for the user.
+        archivedProjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ProjectDTO'
+          description: A list of objects representing the accessible archived projects for the user.
   securitySchemes:
     CookieAuth:
       type: apiKey

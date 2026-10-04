@@ -107,20 +107,16 @@ paths:
                 $ref: '#/components/schemas/Status'
 components:
   schemas:
-    servicing.ExportSourcesParametersDTO:
+    servicing.DateRangeDTO:
       type: object
       properties:
-        sourceUuids:
-          type: array
-          items:
-            type: string
-          description: The UUIDs of the sources to export. If specified, exports only the listed sources.
-        sourceObjectNames:
-          type: array
-          items:
-            type: string
-          description: The object names of the sources to export. If specified, exports only the listed sources.
-      description: The parameters for the `exportSources` option. If neither parameter is specified, exports all sources. If both parameters are specified, exports the sources that match values from both parameters.
+        start:
+          type: string
+          description: The start date in ISO 8601 format.
+        end:
+          type: string
+          description: The end date in ISO 8601 format. If undefined, the end date is the current date.
+      description: The range of dates for the request.
     servicing.SourcesAPIOperationRequestDTO:
       type: object
       properties:
@@ -140,6 +136,44 @@ components:
           allOf:
           - $ref: '#/components/schemas/servicing.CloneFilesIntoSourceParametersDTO'
           description: The parameters for the `cloneFilesIntoSource` option, such as the source to clone files from, the source to clone files into, and the date range of the files to clone.
+    servicing.ExportSourcesParametersDTO:
+      type: object
+      properties:
+        sourceUuids:
+          type: array
+          items:
+            type: string
+          description: The UUIDs of the sources to export. If specified, exports only the listed sources.
+        sourceObjectNames:
+          type: array
+          items:
+            type: string
+          description: The object names of the sources to export. If specified, exports only the listed sources.
+      description: The parameters for the `exportSources` option. If neither parameter is specified, exports all sources. If both parameters are specified, exports the sources that match values from both parameters.
+    SourcesAPIPutResponseDTO:
+      type: object
+      properties:
+        summary:
+          allOf:
+          - $ref: '#/components/schemas/SourceImportResultSummaryDTO'
+          description: The changes made to the sources during the operation.
+    servicing.ExportSourcesAPIOperationResponseDTO:
+      type: object
+      properties: {}
+    servicing.CloneFilesIntoSourceParametersDTO:
+      type: object
+      properties:
+        originSource:
+          type: string
+          description: The unique identifier of the source to clone files from.
+        targetSource:
+          type: string
+          description: The unique identifier of the source to clone files into.
+        dateRange:
+          allOf:
+          - $ref: '#/components/schemas/servicing.DateRangeDTO'
+          description: The date range of the files to clone. If undefined, clones all files.
+      description: The parameters for the `cloneFilesIntoSource` option, such as the source to clone files from, the source to clone files into, and the date range of the files to clone.
     Status:
       type: object
       properties:
@@ -159,30 +193,6 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
-    SourcesAPIPutResponseDTO:
-      type: object
-      properties:
-        summary:
-          allOf:
-          - $ref: '#/components/schemas/SourceImportResultSummaryDTO'
-          description: The changes made to the sources during the operation.
-    servicing.CloneFilesIntoSourceParametersDTO:
-      type: object
-      properties:
-        originSource:
-          type: string
-          description: The unique identifier of the source to clone files from.
-        targetSource:
-          type: string
-          description: The unique identifier of the source to clone files into.
-        dateRange:
-          allOf:
-          - $ref: '#/components/schemas/servicing.DateRangeDTO'
-          description: The date range of the files to clone. If undefined, clones all files.
-      description: The parameters for the `cloneFilesIntoSource` option, such as the source to clone files from, the source to clone files into, and the date range of the files to clone.
-    servicing.ExportSourcesAPIOperationResponseDTO:
-      type: object
-      properties: {}
     SourceImportResultSummaryDTO:
       type: object
       properties:
@@ -202,16 +212,6 @@ components:
           type: integer
           description: The number of imported sources that existed in the target tenant prior to the import and were deleted during the import.
           format: int32
-    servicing.DateRangeDTO:
-      type: object
-      properties:
-        start:
-          type: string
-          description: The start date in ISO 8601 format.
-        end:
-          type: string
-          description: The end date in ISO 8601 format. If undefined, the end date is the current date.
-      description: The range of dates for the request.
   securitySchemes:
     CookieAuth:
       type: apiKey

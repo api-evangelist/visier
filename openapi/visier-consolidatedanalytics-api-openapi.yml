@@ -477,6 +477,22 @@ paths:
                 $ref: '#/components/schemas/admin.ConsolidatedAnalyticsAPISourceTenantListDTO'
 components:
   schemas:
+    admin.ConsolidatedAnalyticsAPITenantWithDetails:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The CA tenant's code.
+        sourceTenantsList:
+          type: array
+          items:
+            type: string
+          description: A list of the CA tenant's source tenants.
+        excludedSourcesList:
+          type: array
+          items:
+            type: string
+          description: A list of the CA tenant's excluded sources.
     admin.ConsolidatedAnalyticsAPIExcludedSourceListDTO:
       type: object
       properties:
@@ -485,6 +501,20 @@ components:
           items:
             type: string
           description: A list of the CA tenant's excluded sources.
+    admin.ConsolidatedAnalyticsAPITenantCreateRequestDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: "The ID of the tenant. For example, WFF_{XXX}~CA{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the consolidated analytic tenant code."
+    admin.TenantCodeBody:
+      type: object
+      properties:
+        tenantCodes:
+          type: array
+          items:
+            type: string
+          description: A list of a CA tenant's source tenants codes. The maximum length is 1000.
     admin.ConsolidatedAnalyticsAPITenantWithDetailsListResponseDTO:
       type: object
       properties:
@@ -493,14 +523,6 @@ components:
           items:
             $ref: '#/components/schemas/admin.ConsolidatedAnalyticsAPITenantWithDetails'
           description: A list of CA tenants and their details.
-    admin.ExcludedSourcesBody:
-      type: object
-      properties:
-        excludedSources:
-          type: array
-          items:
-            type: string
-          description: A list of a CA tenant's excluded sources.
     Status:
       type: object
       properties:
@@ -528,28 +550,6 @@ components:
           items:
             type: string
           description: A list of CA tenant codes.
-    admin.ConsolidatedAnalyticsAPITenantCreateRequestDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: "The ID of the tenant. For example, WFF_{XXX}~CA{YYY} where {XXX} is the administrating tenant code and {YYY}\n is the consolidated analytic tenant code."
-    admin.ConsolidatedAnalyticsAPITenantWithDetails:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The CA tenant's code.
-        sourceTenantsList:
-          type: array
-          items:
-            type: string
-          description: A list of the CA tenant's source tenants.
-        excludedSourcesList:
-          type: array
-          items:
-            type: string
-          description: A list of the CA tenant's excluded sources.
     admin.ConsolidatedAnalyticsAPISourceTenantListDTO:
       type: object
       properties:
@@ -558,14 +558,14 @@ components:
           items:
             type: string
           description: A list of the CA tenant's source tenants.
-    admin.TenantCodeBody:
+    admin.ExcludedSourcesBody:
       type: object
       properties:
-        tenantCodes:
+        excludedSources:
           type: array
           items:
             type: string
-          description: A list of a CA tenant's source tenants codes. The maximum length is 1000.
+          description: A list of a CA tenant's excluded sources.
   securitySchemes:
     CookieAuth:
       type: apiKey

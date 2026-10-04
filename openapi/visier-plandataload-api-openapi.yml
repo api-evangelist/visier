@@ -143,17 +143,6 @@ paths:
                 $ref: '#/components/schemas/PlanRowDataLoadResponseDTO'
 components:
   schemas:
-    PlanDataLoadChangeListDTO:
-      type: object
-      properties:
-        planItem:
-          type: string
-          description: The ID of the plan item.
-        changes:
-          type: array
-          description: The collection of changes made for the plan item.
-          items:
-            $ref: '#/components/schemas/PlanDataLoadChangeDTO'
     PlanDataLoadChangeDTO:
       type: object
       properties:
@@ -173,31 +162,6 @@ components:
           type: number
           format: double
           description: The new value loaded into the plan from the data load.
-    PlanRowDataLoadResponseDTO:
-      type: object
-      properties:
-        addedRowsCount:
-          type: integer
-          description: The number of rows added to the plan.
-        removedRowsCount:
-          type: integer
-          description: The number of rows removed from the plan.
-        potentialAddedRowsCount:
-          type: integer
-          description: The number of rows that could have been added to the plan.
-        potentialRemovedRowsCount:
-          type: integer
-          description: The number of rows that could have been removed from the plan.
-        errors:
-          type: array
-          description: The errors that occurred while loading the data.
-          items:
-            $ref: '#/components/schemas/planning.PlanDataLoadErrorDTO'
-        customMembers:
-          type: array
-          description: The custom members and their corresponding IDs in the plan.
-          items:
-            $ref: '#/components/schemas/planning.PlanSegmentLevelMemberDTO'
     PlanDataUploadResponseDTO:
       type: object
       properties:
@@ -223,6 +187,42 @@ components:
             the values modified as a result of the calculations are not listed here.'
           items:
             $ref: '#/components/schemas/PlanDataLoadChangeListDTO'
+    PlanDataLoadChangeListDTO:
+      type: object
+      properties:
+        planItem:
+          type: string
+          description: The ID of the plan item.
+        changes:
+          type: array
+          description: The collection of changes made for the plan item.
+          items:
+            $ref: '#/components/schemas/PlanDataLoadChangeDTO'
+    PlanRowDataLoadResponseDTO:
+      type: object
+      properties:
+        addedRowsCount:
+          type: integer
+          description: The number of rows added to the plan.
+        removedRowsCount:
+          type: integer
+          description: The number of rows removed from the plan.
+        potentialAddedRowsCount:
+          type: integer
+          description: The number of rows that could have been added to the plan.
+        potentialRemovedRowsCount:
+          type: integer
+          description: The number of rows that could have been removed from the plan.
+        errors:
+          type: array
+          description: The errors that occurred while loading the data.
+          items:
+            $ref: '#/components/schemas/planning.PlanDataLoadErrorDTO'
+        customMembers:
+          type: array
+          description: The custom members and their corresponding IDs in the plan.
+          items:
+            $ref: '#/components/schemas/planning.PlanSegmentLevelMemberDTO'
   securitySchemes:
     CookieAuth:
       type: apiKey

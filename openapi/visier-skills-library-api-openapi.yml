@@ -669,21 +669,37 @@ components:
         - id
         - name
         - description
-    SkillMatchOutput:
+    SkillExtractionOutput:
       type: array
-      minItems: 1
-      description: 'Ranked list of the skill sets (targets) with the best match appearing at the top of the list. The integer value indicates the position of the target in the request body.
-
-        list. The groups are ranked by the best matched skill set to worst matched skill set to the input ''skills'' candidate.
-
-        '
-      example:
-      - 0
-      - 2
-      - 1
       items:
-        type: integer
-        description: The position of the target skill set in the request body. The number sequence starts at 0.
+        title: ExtractedSkill
+        type: object
+        properties:
+          id:
+            type: string
+            description: 'The unique ID of the skill.
+
+              '
+          name:
+            type: string
+            description: 'The localized display name of the skill.
+
+              '
+          description:
+            type: string
+            description: 'The localized description of the skill.
+
+              '
+          score:
+            type: integer
+            description: 'The score representing the confidence level of the match between the extracted skill and the standardized skill in Visier’s Skills Library. The score ranges from 0 to 100.
+
+              '
+        required:
+        - id
+        - name
+        - description
+        - score
     SkillCategory:
       description: 'Details describing a skill category.
 
@@ -717,6 +733,32 @@ components:
       - name
       - description
       - skillGroups
+    ApiError:
+      title: ApiError
+      description: 'Description of an API error.
+
+        '
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: 'A brief identifier of the type of error.
+
+            '
+        message:
+          type: string
+          description: 'The details of the error.
+
+            '
+        rci:
+          type: string
+          description: 'A root cause identifier that allows Visier to determine the source of the problem.
+
+            '
+      required:
+      - errorCode
+      - message
+      - rci
     SkillCategoryList:
       type: array
       items:
@@ -742,6 +784,45 @@ components:
         - id
         - name
         - description
+    SkillGroup:
+      description: 'Details describing a skill group.
+
+        '
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'The unique ID of the skill group.
+
+            '
+        name:
+          type: string
+          description: 'The localized display name of the skill group.
+
+            '
+        description:
+          type: string
+          description: 'The localized description of the skill group.
+
+            '
+        skillCategoryId:
+          type: string
+          description: 'ID of the parent skill category.
+
+            '
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/Skill'
+          description: 'List of skills under this skill group.
+
+            '
+      required:
+      - id
+      - name
+      - description
+      - skillCategoryId
+      - skills
     SkillMatchInput:
       description: 'The skill set and the group of skill sets (targets) to be matched.
 
@@ -816,71 +897,21 @@ components:
               - 66
       required:
       - content
-    SkillGroup:
-      description: 'Details describing a skill group.
+    SkillMatchOutput:
+      type: array
+      minItems: 1
+      description: 'Ranked list of the skill sets (targets) with the best match appearing at the top of the list. The integer value indicates the position of the target in the request body.
+
+        list. The groups are ranked by the best matched skill set to worst matched skill set to the input ''skills'' candidate.
 
         '
-      type: object
-      properties:
-        id:
-          type: string
-          description: 'The unique ID of the skill group.
-
-            '
-        name:
-          type: string
-          description: 'The localized display name of the skill group.
-
-            '
-        description:
-          type: string
-          description: 'The localized description of the skill group.
-
-            '
-        skillCategoryId:
-          type: string
-          description: 'ID of the parent skill category.
-
-            '
-        skills:
-          type: array
-          items:
-            $ref: '#/components/schemas/Skill'
-          description: 'List of skills under this skill group.
-
-            '
-      required:
-      - id
-      - name
-      - description
-      - skillCategoryId
-      - skills
-    ApiError:
-      title: ApiError
-      description: 'Description of an API error.
-
-        '
-      type: object
-      properties:
-        errorCode:
-          type: string
-          description: 'A brief identifier of the type of error.
-
-            '
-        message:
-          type: string
-          description: 'The details of the error.
-
-            '
-        rci:
-          type: string
-          description: 'A root cause identifier that allows Visier to determine the source of the problem.
-
-            '
-      required:
-      - errorCode
-      - message
-      - rci
+      example:
+      - 0
+      - 2
+      - 1
+      items:
+        type: integer
+        description: The position of the target skill set in the request body. The number sequence starts at 0.
     Skill:
       description: 'The details describing a skill.
 
@@ -952,37 +983,6 @@ components:
       - isKnowledge
       - skillType
       - alternativeTitles
-    SkillExtractionOutput:
-      type: array
-      items:
-        title: ExtractedSkill
-        type: object
-        properties:
-          id:
-            type: string
-            description: 'The unique ID of the skill.
-
-              '
-          name:
-            type: string
-            description: 'The localized display name of the skill.
-
-              '
-          description:
-            type: string
-            description: 'The localized description of the skill.
-
-              '
-          score:
-            type: integer
-            description: 'The score representing the confidence level of the match between the extracted skill and the standardized skill in Visier’s Skills Library. The score ranges from 0 to 100.
-
-              '
-        required:
-        - id
-        - name
-        - description
-        - score
     SkillExtractionInput:
       description: 'The text to extract skills from, such as a job description or course outline.
 

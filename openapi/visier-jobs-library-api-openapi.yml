@@ -270,6 +270,79 @@ paths:
       - api_key: []
 components:
   schemas:
+    JobStandardizationOutputSkills:
+      type: array
+      items:
+        title: OutputEntry
+        type: object
+        properties:
+          job:
+            type: string
+            description: 'The custom job title input.
+
+              '
+          matches:
+            type: array
+            description: 'The top standardized job matches.
+
+              '
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: 'The unique ID of the job.
+
+                    '
+                name:
+                  type: string
+                  description: 'The localized display name of the job.
+
+                    '
+                description:
+                  type: string
+                  description: 'The localized description of the job.
+
+                    '
+                score:
+                  type: integer
+                  description: 'The score representing the confidence level of the match between the standardized job and the custom job title input. The score ranges from 0 to 100.
+
+                    '
+              required:
+              - id
+              - name
+              - description
+              - score
+        required:
+        - job
+        - matches
+    ApiError:
+      title: ApiError
+      description: 'Description of an API error.
+
+        '
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: 'A brief identifier of the type of error.
+
+            '
+        message:
+          type: string
+          description: 'The details of the error.
+
+            '
+        rci:
+          type: string
+          description: 'A root cause identifier that allows Visier to determine the source of the problem.
+
+            '
+      required:
+      - errorCode
+      - message
+      - rci
     Job:
       description: 'Details describing a job.
 
@@ -396,79 +469,6 @@ components:
         - id
         - name
         - description
-    JobStandardizationOutputSkills:
-      type: array
-      items:
-        title: OutputEntry
-        type: object
-        properties:
-          job:
-            type: string
-            description: 'The custom job title input.
-
-              '
-          matches:
-            type: array
-            description: 'The top standardized job matches.
-
-              '
-            items:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: 'The unique ID of the job.
-
-                    '
-                name:
-                  type: string
-                  description: 'The localized display name of the job.
-
-                    '
-                description:
-                  type: string
-                  description: 'The localized description of the job.
-
-                    '
-                score:
-                  type: integer
-                  description: 'The score representing the confidence level of the match between the standardized job and the custom job title input. The score ranges from 0 to 100.
-
-                    '
-              required:
-              - id
-              - name
-              - description
-              - score
-        required:
-        - job
-        - matches
-    ApiError:
-      title: ApiError
-      description: 'Description of an API error.
-
-        '
-      type: object
-      properties:
-        errorCode:
-          type: string
-          description: 'A brief identifier of the type of error.
-
-            '
-        message:
-          type: string
-          description: 'The details of the error.
-
-            '
-        rci:
-          type: string
-          description: 'A root cause identifier that allows Visier to determine the source of the problem.
-
-            '
-      required:
-      - errorCode
-      - message
-      - rci
     Skill:
       description: 'The details describing a skill.
 

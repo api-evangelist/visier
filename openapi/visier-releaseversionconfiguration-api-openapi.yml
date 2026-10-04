@@ -114,6 +114,24 @@ paths:
                 $ref: '#/components/schemas/admin.ProductVersionsUpdateResponseDTO'
 components:
   schemas:
+    admin.ProductReleasesDTO:
+      type: object
+      properties:
+        releases:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.ProductReleaseDTO'
+          description: A list of products and details about their available release versions.
+      description: A collection of products and details about their available release versions.
+    admin.ProductVersionsDTO:
+      type: object
+      properties:
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.ProductVersionDTO'
+          description: A list of products and their current release versions for a tenant.
+      description: A collection of products and their current release version for a tenant.
     admin.ProductVersionsUpdateFailureTenantResponseDTO:
       type: object
       properties:
@@ -147,6 +165,51 @@ components:
             type: string
           description: The tenants you want to execute the API call on. Retrieve or activate the product release versions on these tenants.
       description: Provides information about the product release version of a tenant. It is used when retrieving the active product release version and activating the product release version.
+    admin.ProductVersionsUpdateSuccessfulTenantResponseDTO:
+      type: object
+      properties:
+        productId:
+          type: string
+          description: The unique ID of the product that was successfully activated.
+        version:
+          type: string
+          description: The release version of the product that was activated.
+        tenantCodes:
+          type: array
+          items:
+            type: string
+          description: The tenants where the specified release version was succesfully activated.
+      description: Provides confirmation details about the successful activation of a product release version.
+    admin.ProductReleaseDTO:
+      type: object
+      properties:
+        productId:
+          type: string
+          description: The unique ID of the product.
+        previousVersion:
+          type: string
+          description: The release version being replaced by the latest version.
+        previousVersionEndDate:
+          type: string
+          description: The end-of-life date for the previous release version. Once this date has passed, the latest version will be automatically activated on all tenants. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
+        latestVersion:
+          type: string
+          description: The release version that replaces previous versions.
+      description: Details about the available release versions for a specific product.
+    admin.ProductVersionsUpdateResponseDTO:
+      type: object
+      properties:
+        successes:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.ProductVersionsUpdateSuccessfulTenantResponseDTO'
+          description: The products that were successfully activated.
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.ProductVersionsUpdateFailureTenantResponseDTO'
+          description: The products that failed to activate.
+      description: A collection of responses indicating the success or failure of a product release version activation request, including lists of tenants with successful or failed activations.
     Status:
       type: object
       properties:
@@ -166,69 +229,6 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
-    admin.ProductVersionsUpdateSuccessfulTenantResponseDTO:
-      type: object
-      properties:
-        productId:
-          type: string
-          description: The unique ID of the product that was successfully activated.
-        version:
-          type: string
-          description: The release version of the product that was activated.
-        tenantCodes:
-          type: array
-          items:
-            type: string
-          description: The tenants where the specified release version was succesfully activated.
-      description: Provides confirmation details about the successful activation of a product release version.
-    admin.ProductVersionsUpdateResponseDTO:
-      type: object
-      properties:
-        successes:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.ProductVersionsUpdateSuccessfulTenantResponseDTO'
-          description: The products that were successfully activated.
-        failures:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.ProductVersionsUpdateFailureTenantResponseDTO'
-          description: The products that failed to activate.
-      description: A collection of responses indicating the success or failure of a product release version activation request, including lists of tenants with successful or failed activations.
-    admin.ProductReleasesDTO:
-      type: object
-      properties:
-        releases:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.ProductReleaseDTO'
-          description: A list of products and details about their available release versions.
-      description: A collection of products and details about their available release versions.
-    admin.ProductReleaseDTO:
-      type: object
-      properties:
-        productId:
-          type: string
-          description: The unique ID of the product.
-        previousVersion:
-          type: string
-          description: The release version being replaced by the latest version.
-        previousVersionEndDate:
-          type: string
-          description: The end-of-life date for the previous release version. Once this date has passed, the latest version will be automatically activated on all tenants. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
-        latestVersion:
-          type: string
-          description: The release version that replaces previous versions.
-      description: Details about the available release versions for a specific product.
-    admin.ProductVersionsDTO:
-      type: object
-      properties:
-        versions:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.ProductVersionDTO'
-          description: A list of products and their current release versions for a tenant.
-      description: A collection of products and their current release version for a tenant.
   securitySchemes:
     CookieAuth:
       type: apiKey

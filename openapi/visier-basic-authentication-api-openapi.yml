@@ -96,13 +96,6 @@ paths:
         CookieAuth: []
 components:
   schemas:
-    GenerateImpersonationTokenRequest:
-      description: The details of the user to impersonate.
-      type: object
-      properties:
-        TargetUsername:
-          type: string
-          description: The username of the user to impersonate.
     Status:
       type: object
       properties:
@@ -132,6 +125,13 @@ components:
           type: string
           description: The password that corresponds to the user making the request.
       description: Your username and password credentials to request an authentication token.
+    GenerateImpersonationTokenRequest:
+      description: The details of the user to impersonate.
+      type: object
+      properties:
+        TargetUsername:
+          type: string
+          description: The username of the user to impersonate.
   securitySchemes:
     CookieAuth:
       type: apiKey
