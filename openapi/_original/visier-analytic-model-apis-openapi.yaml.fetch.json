@@ -1,0 +1,12 @@
+{
+ "url": "https://raw.githubusercontent.com/visier/openapi-clients/HEAD/res/analytic-model-apis.yaml",
+ "requested_url": "https://raw.githubusercontent.com/visier/openapi-clients/HEAD/res/analytic-model-apis.yaml",
+ "status": 200,
+ "content_type": "text/plain; charset=utf-8",
+ "bytes": 358774,
+ "sha256": "d06d508766dac74e635e059f2c9e4f6bc33722eb0228f5b8de421fcc4feb415f",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.935), but the bytes differ, so the archive is an earlier or reformatted copy."
+}

@@ -1,0 +1,12 @@
+{
+ "url": "https://raw.githubusercontent.com/visier/openapi-clients/HEAD/res/data-in-apis.yaml",
+ "requested_url": "https://raw.githubusercontent.com/visier/openapi-clients/HEAD/res/data-in-apis.yaml",
+ "status": 200,
+ "content_type": "text/plain; charset=utf-8",
+ "bytes": 221429,
+ "sha256": "4d5a97882d7dd3701493f8a51d505b2b86f0c228a264f85c2b3e3f665524b269",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
