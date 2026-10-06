@@ -42,7 +42,7 @@ x-type: company
 x-source: harvest:secondary-market
 specificationVersion: '0.23'
 created: '2026-08-02'
-modified: '2026-09-16'
+modified: '2026-10-06'
 x-enrichment:
   date: '2026-08-02'
   status: enriched
@@ -2008,6 +2008,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- url: https://www.visier.com/blog/rss.xml
+  type: BlogRSS
 - type: CapabilityMap
   url: capabilities/visier-capability-edges.yml
   name: Visier Business Capability Map
