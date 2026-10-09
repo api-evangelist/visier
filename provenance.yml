@@ -28,11 +28,11 @@ artifacts:
     method: derived
     evidence: openapi/visier-analyticobjectsv2-api
   collections/visier-basicauthentication-api.opencollection.json:
-    method: derived
-    evidence: openapi/visier-basicauthentication-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-basicauthentication-api.postman_collection.json:
-    method: derived
-    evidence: openapi/visier-basicauthentication-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-benchmarks-api.opencollection.json:
     method: derived
     evidence: openapi/visier-benchmarks-api
@@ -70,23 +70,23 @@ artifacts:
     method: derived
     evidence: openapi/visier-dataintake-api
   collections/visier-datamodel-api.opencollection.json:
-    method: derived
-    evidence: openapi/visier-datamodel-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-datamodel-api.postman_collection.json:
-    method: derived
-    evidence: openapi/visier-datamodel-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-dataquery-api.opencollection.json:
-    method: derived
-    evidence: openapi/visier-dataquery-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-dataquery-api.postman_collection.json:
-    method: derived
-    evidence: openapi/visier-dataquery-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-dataupload-api.opencollection.json:
-    method: derived
-    evidence: openapi/visier-dataupload-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-dataupload-api.postman_collection.json:
-    method: derived
-    evidence: openapi/visier-dataupload-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-dataversionexport-api.opencollection.json:
     method: derived
     evidence: openapi/visier-dataversionexport-api
@@ -118,11 +118,11 @@ artifacts:
     method: derived
     evidence: openapi/visier-emaildomains-api
   collections/visier-encryptionkeys-api.opencollection.json:
-    method: derived
-    evidence: openapi/visier-encryptionkeys-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-encryptionkeys-api.postman_collection.json:
-    method: derived
-    evidence: openapi/visier-encryptionkeys-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-jobs-library-api.opencollection.json:
     method: derived
     evidence: openapi/visier-jobs-library-api
@@ -136,11 +136,11 @@ artifacts:
     method: derived
     evidence: openapi/visier-metricsv2-api
   collections/visier-networksubnets-api.opencollection.json:
-    method: derived
-    evidence: openapi/visier-networksubnets-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-networksubnets-api.postman_collection.json:
-    method: derived
-    evidence: openapi/visier-networksubnets-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-oauth2-api.opencollection.json:
     method: derived
     evidence: openapi/visier-oauth2-api
@@ -250,11 +250,11 @@ artifacts:
     method: derived
     evidence: openapi/visier-sources-api
   collections/visier-systemstatus-api.opencollection.json:
-    method: derived
-    evidence: openapi/visier-systemstatus-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-systemstatus-api.postman_collection.json:
-    method: derived
-    evidence: openapi/visier-systemstatus-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-tablesource-api.opencollection.json:
     method: derived
     evidence: openapi/visier-tablesource-api
@@ -274,29 +274,29 @@ artifacts:
     method: derived
     evidence: openapi/visier-tenantsv2-api
   collections/visier-usergroupsv2-api.opencollection.json:
-    method: derived
-    evidence: openapi/visier-usergroupsv2-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-usergroupsv2-api.postman_collection.json:
-    method: derived
-    evidence: openapi/visier-usergroupsv2-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-usersv1-api.opencollection.json:
-    method: derived
-    evidence: openapi/visier-usersv1-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-usersv1-api.postman_collection.json:
-    method: derived
-    evidence: openapi/visier-usersv1-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-usersv2-api.opencollection.json:
-    method: derived
-    evidence: openapi/visier-usersv2-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-usersv2-api.postman_collection.json:
-    method: derived
-    evidence: openapi/visier-usersv2-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-usersv3-api.opencollection.json:
-    method: derived
-    evidence: openapi/visier-usersv3-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-usersv3-api.postman_collection.json:
-    method: derived
-    evidence: openapi/visier-usersv3-api
+    method: unknown
+    evidence: no authorship recorded
   collections/visier-veeconfiguration-api.opencollection.json:
     method: derived
     evidence: openapi/visier-veeconfiguration-api
@@ -336,55 +336,10 @@ artifacts:
   errors/visier-problem-types.yml:
     method: searched
     evidence: declared in the artifact
-  kin/checks-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-06T210741.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-07T135032.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-10T093022.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-10T111628.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-11T211707.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-12T193225.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-17T064519.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-19T080027.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-19T082702.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-19T114122.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-20T165047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-20T191845.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-20T205517.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-21T110057.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-24T064859.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-24T171257.yml:
+  front-door-ai/2026-09-17.yml:
+    method: unknown
+    evidence: no authorship recorded
+  kin/checks-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-08-25T125852.yml:
@@ -471,6 +426,123 @@ artifacts:
   kin/score-2026-09-05T072335.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-05T144739.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-05T195450.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-05T211839.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-06T011047.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-06T211804.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-06T224210.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-07T200636.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-07T213054.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-08T214843.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-08T232836.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-10T204815.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-10T222408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-12T062655.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-12T080032.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-12T204651.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-12T221936.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-13T214537.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-14T064754.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-14T210656.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-14T225847.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-15T211329.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-15T230249.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-16T210549.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-16T225339.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-17T211151.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-17T233623.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-18T205255.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-18T231945.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-19T165737.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-19T193153.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-20T205903.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-20T232958.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-21T211425.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-21T233935.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-22T213221.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-23T000603.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-24T064009.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-24T090406.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-24T161608.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   lifecycle/visier-lifecycle.yml:
     method: searched
     evidence: declared in the artifact
@@ -485,35 +557,44 @@ artifacts:
     evidence: declared in the artifact
   openapi/_original/visier-administration-apis-openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/visier-analytic-model-apis-openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/visier-authentication-apis-openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/visier-compensation-benchmarks-openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/visier-data-in-apis-openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/visier-data-out-apis-openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/visier-planning-openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/visier-skills-intelligence-engine-openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/visier-webhooks-openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/visier-analyticobjectsv2-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/visier-basicauthentication-api-openapi.yml:
+  openapi/visier-basic-authentication-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/visier-benchmarks-api-openapi.yml:
@@ -525,6 +606,15 @@ artifacts:
   openapi/visier-consolidatedanalytics-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/visier-data-model-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/visier-data-query-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/visier-data-upload-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/visier-dataandjobhandling-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
@@ -532,15 +622,6 @@ artifacts:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/visier-dataintake-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/visier-datamodel-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/visier-dataquery-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/visier-dataupload-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/visier-dataversionexport-api-openapi.yml:
@@ -558,7 +639,7 @@ artifacts:
   openapi/visier-emaildomains-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/visier-encryptionkeys-api-openapi.yml:
+  openapi/visier-encryption-keys-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/visier-jobs-library-api-openapi.yml:
@@ -567,7 +648,7 @@ artifacts:
   openapi/visier-metricsv2-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/visier-networksubnets-api-openapi.yml:
+  openapi/visier-network-subnets-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/visier-oauth2-api-openapi.yml:
@@ -624,7 +705,7 @@ artifacts:
   openapi/visier-sources-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/visier-systemstatus-api-openapi.yml:
+  openapi/visier-system-status-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/visier-tablesource-api-openapi.yml:
@@ -636,16 +717,16 @@ artifacts:
   openapi/visier-tenantsv2-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/visier-usergroupsv2-api-openapi.yml:
+  openapi/visier-user-groups-v2-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/visier-usersv1-api-openapi.yml:
+  openapi/visier-users-v1-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/visier-usersv2-api-openapi.yml:
+  openapi/visier-users-v2-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/visier-usersv3-api-openapi.yml:
+  openapi/visier-users-v3-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/visier-veeconfiguration-api-openapi.yml:
