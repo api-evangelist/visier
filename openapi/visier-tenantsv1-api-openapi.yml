@@ -403,49 +403,34 @@ paths:
                 $ref: '#/components/schemas/dp_automation.TenantPreviewEntriesSummaryDTO'
 components:
   schemas:
-    dp_automation.MetricValidationSummaryDTO:
+    admin.AllTenantsStatusAPIDTO:
       type: object
       properties:
-        symbolName:
-          type: string
-          description: The symbol name of the metric. For example, "employeeCount".
-        displayName:
-          type: string
-          description: An identifiable name that is displayed within Visier. For example, "Headcount".
-        value:
-          type: number
-          description: The current value of the metric expressed as an integer.
-          format: double
-    admin.UpdateTenantModel:
-      type: object
-      properties:
-        tenantDisplayName:
-          type: string
-          description: A display name that is assigned to the new analytic tenant.
-        industryCode:
+        tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.TenantDetailAPIDTO'
+          description: A list of objects representing all the analytic tenants.
+        limit:
           type: integer
-          description: "The 6-digit NAICS code for the industry to which the analytic tenant belongs. If the code is unknown, type 0.\n\n For 2-digit codes, add trailing zeros at the end to reach 6 digits, such as 620000."
-          format: int32
-        purchasedModules:
-          type: array
-          items:
-            type: string
-          description: A comma-separated collection of strings that represent the Visier modules assigned to the new analytic tenant.
-        embeddableDomains:
-          type: array
-          items:
-            type: string
-          description: "A comma-separated list of strings that represent the URLs, or domains, in which Visier can be embedded. If\n domains at the administrating tenant level match the domains at the analytic tenant level, you do not need\n to include a domain for each analytic tenant."
-        customProperties:
-          type: object
-          additionalProperties:
-            type: string
-          description: A set of key-value pairs that represent different customizable properties for the analytic tenant.
-        ssoInstanceIssuers:
-          type: array
-          items:
-            type: string
-          description: A comma-separated list of strings that represent the issuers for the SSO providers that can authenticate this tenant.
+          description: The limit of analytic tenants to return. The maximum value is 1000.
+          format: uint32
+        start:
+          type: integer
+          description: The index to start retrieving values from, also known as offset. The index begins at 0.
+          format: uint32
+    designer.ModuleSettingsDTO:
+      type: object
+      properties:
+        unavailableForAssignment:
+          type: boolean
+          description: If true, the module cannot be assigned to tenants.
+        specialHandlingInstruction:
+          type: string
+          description: An instruction message in the module selection dialog. This can be a note for administrators such as "Don't assign this module" or "Assign Module B instead".
+        locale:
+          type: string
+          description: The language of the module. For example, a module that is in English will have the locale "en".
     admin.TenantDetailAPIDTO:
       type: object
       properties:
@@ -507,33 +492,36 @@ components:
           items:
             $ref: '#/components/schemas/designer.TenantModuleDTO'
           description: The modules manually added to the analytic tenant. Manually added modules are not part of a purchased module bundle.
-    designer.ModuleSettingsDTO:
+    admin.UpdateTenantModel:
       type: object
       properties:
-        unavailableForAssignment:
-          type: boolean
-          description: If true, the module cannot be assigned to tenants.
-        specialHandlingInstruction:
+        tenantDisplayName:
           type: string
-          description: An instruction message in the module selection dialog. This can be a note for administrators such as "Don't assign this module" or "Assign Module B instead".
-        locale:
-          type: string
-          description: The language of the module. For example, a module that is in English will have the locale "en".
-    admin.CustomTenantPropertyDTO:
-      type: object
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-    admin.BatchTenantProvisionAPIDTO:
-      type: object
-      properties:
-        tenants:
+          description: A display name that is assigned to the new analytic tenant.
+        industryCode:
+          type: integer
+          description: "The 6-digit NAICS code for the industry to which the analytic tenant belongs. If the code is unknown, type 0.\n\n For 2-digit codes, add trailing zeros at the end to reach 6 digits, such as 620000."
+          format: int32
+        purchasedModules:
           type: array
           items:
-            $ref: '#/components/schemas/admin.TenantProvisionAPIDTO'
-          description: An array of tenants to create. The maximum number of tenants to create in one request is 200.
+            type: string
+          description: A comma-separated collection of strings that represent the Visier modules assigned to the new analytic tenant.
+        embeddableDomains:
+          type: array
+          items:
+            type: string
+          description: "A comma-separated list of strings that represent the URLs, or domains, in which Visier can be embedded. If\n domains at the administrating tenant level match the domains at the analytic tenant level, you do not need\n to include a domain for each analytic tenant."
+        customProperties:
+          type: object
+          additionalProperties:
+            type: string
+          description: A set of key-value pairs that represent different customizable properties for the analytic tenant.
+        ssoInstanceIssuers:
+          type: array
+          items:
+            type: string
+          description: A comma-separated list of strings that represent the issuers for the SSO providers that can authenticate this tenant.
     dp_automation.TenantPreviewEntriesSummaryListDTO:
       type: object
       properties:
@@ -550,54 +538,6 @@ components:
           type: integer
           description: The index to start retrieving results from, also known as offset. The index begins at 0.
           format: uint32
-    dp_automation.TenantPreviewEntriesSummaryDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The tenant code of the analytic tenant. For example, "WFF_j1r~i1o".
-        dataVersion:
-          type: string
-          description: The data version ID.
-        dataVersionDate:
-          type: string
-          description: The date that the data version was created.
-        metrics:
-          type: array
-          items:
-            $ref: '#/components/schemas/dp_automation.MetricValidationSummaryDTO'
-          description: A list of metrics and their values.
-    admin.AllTenantsStatusAPIDTO:
-      type: object
-      properties:
-        tenants:
-          type: array
-          items:
-            $ref: '#/components/schemas/admin.TenantDetailAPIDTO'
-          description: A list of objects representing all the analytic tenants.
-        limit:
-          type: integer
-          description: The limit of analytic tenants to return. The maximum value is 1000.
-          format: uint32
-        start:
-          type: integer
-          description: The index to start retrieving values from, also known as offset. The index begins at 0.
-          format: uint32
-    admin.TenantStatusAPIDTO:
-      type: object
-      properties:
-        tenantCode:
-          type: string
-          description: The unique identifier for the analytic tenant.
-        status:
-          type: string
-          description: Whether the tenant is enabled or disabled.
-        tenantDisplayName:
-          type: string
-          description: The identifiable tenant name that is displayed within Visier. For example, "Callisto".
-        canAdministerOtherTenants:
-          type: boolean
-          description: If true, the tenant is an administrating tenant.
     admin.TenantProvisionAPIDTO:
       required:
       - tenantCode
@@ -643,19 +583,66 @@ components:
           items:
             type: string
           description: "A comma-separated list of strings that represent the URLs, or domains, which can be used as values for the idp_url\n OAuth parameter."
-    designer.TenantModuleDTO:
+    dp_automation.MetricValidationSummaryDTO:
       type: object
       properties:
-        displayName:
-          type: string
-          description: An identifiable name that is displayed within Visier. For example, "TALENT".
         symbolName:
           type: string
-          description: The symbol name of the module. For example, "Talent_Management".
-        moduleSettings:
-          allOf:
-          - $ref: '#/components/schemas/designer.ModuleSettingsDTO'
-          description: The settings associated with the module.
+          description: The symbol name of the metric. For example, "employeeCount".
+        displayName:
+          type: string
+          description: An identifiable name that is displayed within Visier. For example, "Headcount".
+        value:
+          type: number
+          description: The current value of the metric expressed as an integer.
+          format: double
+    admin.BatchTenantProvisionAPIDTO:
+      type: object
+      properties:
+        tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/admin.TenantProvisionAPIDTO'
+          description: An array of tenants to create. The maximum number of tenants to create in one request is 200.
+    admin.TenantStatusAPIDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The unique identifier for the analytic tenant.
+        status:
+          type: string
+          description: Whether the tenant is enabled or disabled.
+        tenantDisplayName:
+          type: string
+          description: The identifiable tenant name that is displayed within Visier. For example, "Callisto".
+        canAdministerOtherTenants:
+          type: boolean
+          description: If true, the tenant is an administrating tenant.
+    admin.CustomTenantPropertyDTO:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    dp_automation.TenantPreviewEntriesSummaryDTO:
+      type: object
+      properties:
+        tenantCode:
+          type: string
+          description: The tenant code of the analytic tenant. For example, "WFF_j1r~i1o".
+        dataVersion:
+          type: string
+          description: The data version ID.
+        dataVersionDate:
+          type: string
+          description: The date that the data version was created.
+        metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/dp_automation.MetricValidationSummaryDTO'
+          description: A list of metrics and their values.
     Status:
       type: object
       properties:
@@ -675,6 +662,19 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
+    designer.TenantModuleDTO:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: An identifiable name that is displayed within Visier. For example, "TALENT".
+        symbolName:
+          type: string
+          description: The symbol name of the module. For example, "Talent_Management".
+        moduleSettings:
+          allOf:
+          - $ref: '#/components/schemas/designer.ModuleSettingsDTO'
+          description: The settings associated with the module.
   securitySchemes:
     CookieAuth:
       type: apiKey

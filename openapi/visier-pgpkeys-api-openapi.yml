@@ -146,6 +146,20 @@ paths:
                 $ref: '#/components/schemas/designer.crypto.KeyPairDeleteResponseDTO'
 components:
   schemas:
+    designer.crypto.PublicKeysDTO:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/designer.crypto.PublicKeyDTO'
+          description: A list of the tenant's public keys.
+    designer.crypto.KeyPairGenerateRequestDTO:
+      type: object
+      properties:
+        expirationDate:
+          type: string
+          description: The UTC expiration date of the key in ISO-8601 format. Must be between 2 and 10 years. Default is 2 years.
     designer.crypto.PublicKeyDTO:
       type: object
       properties:
@@ -170,12 +184,6 @@ components:
         keyID:
           type: string
           description: The key ID in 16-letter hexadecimal format, including leading zeros.
-    designer.crypto.KeyPairGenerateRequestDTO:
-      type: object
-      properties:
-        expirationDate:
-          type: string
-          description: The UTC expiration date of the key in ISO-8601 format. Must be between 2 and 10 years. Default is 2 years.
     Status:
       type: object
       properties:
@@ -195,14 +203,6 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
-    designer.crypto.PublicKeysDTO:
-      type: object
-      properties:
-        keys:
-          type: array
-          items:
-            $ref: '#/components/schemas/designer.crypto.PublicKeyDTO'
-          description: A list of the tenant's public keys.
   securitySchemes:
     CookieAuth:
       type: apiKey

@@ -127,6 +127,29 @@ paths:
                 $ref: '#/components/schemas/Status'
 components:
   schemas:
+    planning.BulkPromotionDemotionEventData:
+      type: object
+      properties:
+        promotedRows:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.PromotedRowDTO'
+          description: The rows that were promoted. Each entry represents one promoted row with its dimension members.
+        demotedRows:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.PromotedRowDTO'
+          description: The rows that were demoted. Each entry represents one demoted row with its dimension members.
+      description: Event data for bulkPromotionDemotionEvent events.
+    planning.PromotionEventData:
+      type: object
+      properties:
+        promotedRows:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.PromotedRowDTO'
+          description: The rows that were promoted. Each entry represents one promoted row with its dimension members.
+      description: Event data for memberPromoted and autoPromotion events.
     planning.ErrorSummary:
       type: object
       properties:
@@ -265,46 +288,27 @@ components:
           type: string
           description: The username of the user who triggered the event.
       description: Summary of a single planning event without type-specific payload.
-    planning.BulkPromotionDemotionEventData:
+    planning.MemberDTO:
       type: object
       properties:
-        promotedRows:
+        dimensionId:
+          type: string
+          description: The unique identifier of the dimension. For example, `Location`.
+        levelId:
+          type: string
+          description: The dimension level this member belongs to. For example, `Location_2`.
+        memberId:
+          type: string
+          description: The unique identifier of the member. For example, `[Location].[Canada].[BC]`.
+        displayName:
+          type: string
+          description: The display name of the member. For example, `BC`.
+        namePath:
           type: array
           items:
-            $ref: '#/components/schemas/planning.PromotedRowDTO'
-          description: The rows that were promoted. Each entry represents one promoted row with its dimension members.
-        demotedRows:
-          type: array
-          items:
-            $ref: '#/components/schemas/planning.PromotedRowDTO'
-          description: The rows that were demoted. Each entry represents one demoted row with its dimension members.
-      description: Event data for bulkPromotionDemotionEvent events.
-    planning.PromotionEventData:
-      type: object
-      properties:
-        promotedRows:
-          type: array
-          items:
-            $ref: '#/components/schemas/planning.PromotedRowDTO'
-          description: The rows that were promoted. Each entry represents one promoted row with its dimension members.
-      description: Event data for memberPromoted and autoPromotion events.
-    planning.GetEventsResponse:
-      type: object
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/planning.EventSummaryDTO'
-          description: The list of events matching the query filters.
-        limit:
-          type: integer
-          description: The maximum number of events returned. Maximum is 50.
-          format: int32
-        start:
-          type: integer
-          description: The index to start retrieving events from, also known as offset. The index begins at 0.
-          format: int32
-      description: Response for the bulk events listing endpoint.
+            type: string
+          description: The path of member names from the root member down to the current member. For example, `[Canada, BC]`.
+      description: A single member at a specific dimension level within the plan's context path.
     planning.PlanningEventResponse:
       type: object
       properties:
@@ -437,6 +441,15 @@ components:
         bulkPromotionDemotionData:
           $ref: '#/components/schemas/planning.BulkPromotionDemotionEventData'
       description: Response for a single planning event.
+    planning.PromotedRowDTO:
+      type: object
+      properties:
+        memberPath:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning.MemberDTO'
+          description: One entry per hierarchy level and dimension included in the plan's analysis context.
+      description: The member path for a single promoted row.
     Status:
       type: object
       properties:
@@ -456,36 +469,23 @@ components:
           type: boolean
           description: Indicates whether the error is a user error.
       description: The response structure for errors.
-    planning.PromotedRowDTO:
+    planning.GetEventsResponse:
       type: object
       properties:
-        memberPath:
+        events:
           type: array
           items:
-            $ref: '#/components/schemas/planning.MemberDTO'
-          description: One entry per hierarchy level and dimension included in the plan's analysis context.
-      description: The member path for a single promoted row.
-    planning.MemberDTO:
-      type: object
-      properties:
-        dimensionId:
-          type: string
-          description: The unique identifier of the dimension. For example, `Location`.
-        levelId:
-          type: string
-          description: The dimension level this member belongs to. For example, `Location_2`.
-        memberId:
-          type: string
-          description: The unique identifier of the member. For example, `[Location].[Canada].[BC]`.
-        displayName:
-          type: string
-          description: The display name of the member. For example, `BC`.
-        namePath:
-          type: array
-          items:
-            type: string
-          description: The path of member names from the root member down to the current member. For example, `[Canada, BC]`.
-      description: A single member at a specific dimension level within the plan's context path.
+            $ref: '#/components/schemas/planning.EventSummaryDTO'
+          description: The list of events matching the query filters.
+        limit:
+          type: integer
+          description: The maximum number of events returned. Maximum is 50.
+          format: int32
+        start:
+          type: integer
+          description: The index to start retrieving events from, also known as offset. The index begins at 0.
+          format: int32
+      description: Response for the bulk events listing endpoint.
   securitySchemes:
     CookieAuth:
       type: apiKey

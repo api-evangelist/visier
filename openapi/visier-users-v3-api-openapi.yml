@@ -85,6 +85,72 @@ paths:
                 $ref: '#/components/schemas/servicing.UserV3ApiResponseDTO'
 components:
   schemas:
+    servicing.UserV3ApiRequestDTO:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The user's username. This is typically the user's email, such as john@jupiter.com. If a user's username changes, they must authenticate using the new username.
+        displayName:
+          type: string
+          description: An identifiable name to display within Visier. For example, "John Smith".
+        employeeId:
+          type: string
+          description: If applicable, and if available, the user employee ID in the data.
+        accountEnabled:
+          type: string
+          description: If true, the user account is enabled.
+        email:
+          type: string
+          description: The user's email address.
+        userGroupIds:
+          type: array
+          items:
+            type: string
+          description: The user groups to assign to the user.
+        permissionIds:
+          type: array
+          items:
+            type: string
+          description: The permissions to assign to the user.
+        profileAssignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/servicing.ProfileAssignmentDTO'
+          description: The profiles to assign to the user.
+      description: The updates to make to a user, or the user to create.
+    Status:
+      type: object
+      properties:
+        localizedMessage:
+          type: string
+          description: Localized error message describing the root cause of the error.
+        code:
+          type: string
+          description: Error classification.
+        message:
+          type: string
+          description: Not used.
+        rci:
+          type: string
+          description: Optional root cause identifier.
+        userError:
+          type: boolean
+          description: Indicates whether the error is a user error.
+      description: The response structure for errors.
+    servicing.ProfileAssignmentDTO:
+      type: object
+      properties:
+        profileId:
+          type: string
+          description: The unique identifier associated with the profile.
+        validityStartTime:
+          type: string
+          description: The inclusive start date and time when this profile is active. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
+        validityEndTime:
+          type: string
+          description: The exclusive end date and time when this profile is no longer active. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
+      description: The profiles associated with the user.
     servicing.UserV3ApiResponseDTO:
       type: object
       properties:
@@ -122,72 +188,6 @@ components:
             type: string
           description: The unique identifiers associated with each permission.
       description: The result of the update or insert (upsert) request.
-    Status:
-      type: object
-      properties:
-        localizedMessage:
-          type: string
-          description: Localized error message describing the root cause of the error.
-        code:
-          type: string
-          description: Error classification.
-        message:
-          type: string
-          description: Not used.
-        rci:
-          type: string
-          description: Optional root cause identifier.
-        userError:
-          type: boolean
-          description: Indicates whether the error is a user error.
-      description: The response structure for errors.
-    servicing.UserV3ApiRequestDTO:
-      type: object
-      properties:
-        username:
-          type: string
-          description: The user's username. This is typically the user's email, such as john@jupiter.com. If a user's username changes, they must authenticate using the new username.
-        displayName:
-          type: string
-          description: An identifiable name to display within Visier. For example, "John Smith".
-        employeeId:
-          type: string
-          description: If applicable, and if available, the user employee ID in the data.
-        accountEnabled:
-          type: string
-          description: If true, the user account is enabled.
-        email:
-          type: string
-          description: The user's email address.
-        userGroupIds:
-          type: array
-          items:
-            type: string
-          description: The user groups to assign to the user.
-        permissionIds:
-          type: array
-          items:
-            type: string
-          description: The permissions to assign to the user.
-        profileAssignments:
-          type: array
-          items:
-            $ref: '#/components/schemas/servicing.ProfileAssignmentDTO'
-          description: The profiles to assign to the user.
-      description: The updates to make to a user, or the user to create.
-    servicing.ProfileAssignmentDTO:
-      type: object
-      properties:
-        profileId:
-          type: string
-          description: The unique identifier associated with the profile.
-        validityStartTime:
-          type: string
-          description: The inclusive start date and time when this profile is active. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
-        validityEndTime:
-          type: string
-          description: The exclusive end date and time when this profile is no longer active. The format is the number of milliseconds since midnight 01 January, 1970 UTC as a string.
-      description: The profiles associated with the user.
   securitySchemes:
     CookieAuth:
       type: apiKey

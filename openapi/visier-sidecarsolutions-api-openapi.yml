@@ -138,19 +138,6 @@ components:
             type: string
           description: A value containing multiple strings.
       description: A value containing multiple strings.
-    servicing.SingleValueSettingDTO:
-      type: object
-      properties:
-        value:
-          type: string
-          description: A value containing a single string.
-      description: A value containing a single string.
-    admin.SidecarSolutionRequestDTO:
-      type: object
-      properties:
-        applicationId:
-          type: string
-          description: The unique identifier of the solution to configure.
     servicing.SidecarSolutionSettingsDTO:
       type: object
       properties:
@@ -163,6 +150,13 @@ components:
           type: string
           description: The unique identifier of the solution to configure.
       description: The options to configure a sidecar solution.
+    servicing.SingleValueSettingDTO:
+      type: object
+      properties:
+        value:
+          type: string
+          description: A value containing a single string.
+      description: A value containing a single string.
     servicing.SettingsDTO:
       type: object
       properties:
@@ -178,6 +172,12 @@ components:
           - $ref: '#/components/schemas/servicing.MultiValueSettingDTO'
           description: A value containing multiple strings.
       description: The settings to configure a sidecar solution.
+    admin.SidecarSolutionRequestDTO:
+      type: object
+      properties:
+        applicationId:
+          type: string
+          description: The unique identifier of the solution to configure.
     Status:
       type: object
       properties:
