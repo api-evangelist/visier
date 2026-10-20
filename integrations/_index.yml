@@ -102,3 +102,59 @@
     detected: '2026-10-20'
   status: not-a-workflow
   arazzo: null
+- slug: visier-databricks-marketplace
+  label: Databricks Marketplace
+  partner: databricks
+  partner_name: Databricks Marketplace
+  category: data product listing
+  type: marketplace
+  marketplace: databricks-marketplace
+  channel: distribution
+  evidence: https://marketplace.databricks.com/provider/d0cefe18-5a9c-4881-bba0-6a9a34122922
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Databricks Marketplace (marketplace.databricks.com/api/2.0/public-marketplace-providers + public-marketplace-listings)
+    spec_file: null
+    role: data-marketplace-seller
+    registered_name: Visier Inc.
+    matched_domain: visier.com
+    matched_by: domain
+    listings: 1
+    sample_listings:
+    - Visier Workforce Intelligence
+    signal_note: 'participation: the provider lists data products on this marketplace; counts are context'
+    detected_by: sweep-data-marketplaces.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
+- slug: visier-aws-data-exchange
+  label: AWS Data Exchange
+  partner: amazon-data-exchange
+  partner_name: AWS Data Exchange
+  category: data product listing
+  type: marketplace
+  marketplace: amazon-data-exchange-marketplace
+  channel: distribution
+  evidence: https://aws.amazon.com/marketplace/seller-profile?id=b9765945-035d-4ec8-adcc-d742cd7b1c9a
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: AWS Data Exchange (AWS Marketplace discovery search, FULFILLMENT_OPTION_TYPE=DATA_EXCHANGE + seller-profile
+      sellerWebsiteUrl)
+    spec_file: null
+    role: data-marketplace-seller
+    registered_name: Visier
+    matched_domain: visier.com
+    matched_by: domain
+    listings: 4
+    sample_listings:
+    - Free Career Benchmarks - Labor/Economic/Workforce Data
+    - Free Demographic Benchmarks - All Industry 2018-2020
+    - Free Exit Benchmarks - Select and All Industry 2018-2020
+    - Free Manager Benchmarks - Labor/Economic Data - 2018-2020
+    signal_note: 'participation: the provider lists data products on this marketplace; counts are context'
+    detected_by: sweep-data-marketplaces.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null

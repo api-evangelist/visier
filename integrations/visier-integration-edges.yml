@@ -13,6 +13,8 @@ checked:
 - https://rubygems.org/api/v1
 - microsoft-teams/integrations/microsoft-teams-integration-edges.yml
 - slack/integrations/slack-integration-edges.yml
+- https://aws.amazon.com/marketplace/search/results?FULFILLMENT_OPTION_TYPE=DATA_EXCHANGE
+- https://marketplace.databricks.com/
 source:
 - greenhouse/integrations/greenhouse-integration-edges.yml
 edges:
@@ -126,3 +128,59 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-compliance-assurance.py
   first_seen: '2026-10-20'
+- partner_name: Databricks Marketplace
+  partner: databricks
+  partner_match: aggregator
+  type: marketplace
+  marketplace: databricks-marketplace
+  channel: distribution
+  relationship: distribution-channel
+  direction: third-party
+  evidence: https://marketplace.databricks.com/provider/d0cefe18-5a9c-4881-bba0-6a9a34122922
+  category: data product listing
+  contract_reference:
+    register: Databricks Marketplace (marketplace.databricks.com/api/2.0/public-marketplace-providers + public-marketplace-listings)
+    spec_file: null
+    role: data-marketplace-seller
+    registered_name: Visier Inc.
+    matched_domain: visier.com
+    matched_by: domain
+    listings: 1
+    sample_listings:
+    - Visier Workforce Intelligence
+    signal_note: 'participation: the provider lists data products on this marketplace; counts are context'
+    detected_by: sweep-data-marketplaces.py
+    detected: '2026-10-20'
+  detected_by: sweep-data-marketplaces.py
+  detected: '2026-10-20'
+- partner_name: AWS Data Exchange
+  partner: amazon-data-exchange
+  partner_match: aggregator
+  type: marketplace
+  marketplace: amazon-data-exchange-marketplace
+  channel: distribution
+  relationship: distribution-channel
+  direction: third-party
+  evidence: https://aws.amazon.com/marketplace/seller-profile?id=b9765945-035d-4ec8-adcc-d742cd7b1c9a
+  category: data product listing
+  contract_reference:
+    register: AWS Data Exchange (AWS Marketplace discovery search, FULFILLMENT_OPTION_TYPE=DATA_EXCHANGE + seller-profile
+      sellerWebsiteUrl)
+    spec_file: null
+    role: data-marketplace-seller
+    registered_name: Visier
+    matched_domain: visier.com
+    matched_by: domain
+    listings: 4
+    sample_listings:
+    - Free Career Benchmarks - Labor/Economic/Workforce Data
+    - Free Demographic Benchmarks - All Industry 2018-2020
+    - Free Exit Benchmarks - Select and All Industry 2018-2020
+    - Free Manager Benchmarks - Labor/Economic Data - 2018-2020
+    signal_note: 'participation: the provider lists data products on this marketplace; counts are context'
+    detected_by: sweep-data-marketplaces.py
+    detected: '2026-10-20'
+  detected_by: sweep-data-marketplaces.py
+  detected: '2026-10-20'
+  publisher_verified:
+  - Deployed on AWS
