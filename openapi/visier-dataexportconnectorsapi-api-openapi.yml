@@ -668,3 +668,9 @@ x-tagGroups:
   - SourceFilesDownload
   - Reporting
   - DataExportConnectorsAPI
+x-provenance:
+  method: harvested
+  publisher: Visier
+  source: https://raw.githubusercontent.com/visier/openapi-clients/HEAD/res/data-out-apis.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
